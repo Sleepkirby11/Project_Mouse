@@ -18,6 +18,7 @@ public class FlyingEnemy : MonoBehaviour
     [Header("배회 설정")]
     [SerializeField] private float patrolRange = 3f; // 배회 범위
     [SerializeField] private float patrolSpeed = 2f; // 배회 속도
+    private float patrolTimer;
 
     [Header("움직임 설정")]
     [SerializeField] private float diveSpeed = 18f; // 급강하 속도
@@ -71,8 +72,10 @@ public class FlyingEnemy : MonoBehaviour
 
     private void UpdatePatrol() // 배회 움직임 업데이트
     {
-        float xOffset = Mathf.Cos(Time.time * patrolSpeed) * patrolRange; // 시간에 따라 좌우로 이동하는 오프셋 계산
-        rb.MovePosition(new Vector2(originPos.x + xOffset, originPos.y)); // 초기 위치에 오프셋을 더해 새로운 위치로 이동
+        patrolTimer += Time.deltaTime * patrolSpeed;
+        float xOffset = Mathf.Cos(patrolTimer) * patrolRange;
+
+        rb.MovePosition(new Vector2(originPos.x + xOffset, originPos.y));
     }
 
     private void CheckPlayerBox() // 플레이어 감지
@@ -97,7 +100,8 @@ public class FlyingEnemy : MonoBehaviour
     private void StartDive() // 급강하 시작
     {
        state = EnemyState.Dive;  // 상태 변경
-        rb.linearVelocity = Vector2.down * diveSpeed; // 아래 방향으로 급강하 속도 설정
+        rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.down * diveSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -124,6 +128,11 @@ public class FlyingEnemy : MonoBehaviour
 
         if (Vector2.SqrMagnitude(originPos - nextPos) < 0.001f) // 원래 위치에 거의 도달하면 배회 상태로 전환
         {
+            rb.position = originPos; 
+            rb.linearVelocity = Vector2.zero; // 물리 초기화
+
+            // 배회 타이머를 중앙(0)에서 시작하도록 설정 (Cos 90도 = 0)
+            patrolTimer = Mathf.PI * 0.5f;
             state = EnemyState.Patrol;
         }
     }
