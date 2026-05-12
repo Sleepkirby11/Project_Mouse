@@ -4,8 +4,8 @@
 public class JumpAttackEnemy : EnemyManager
 {
     [Header("Enemy Status")]
-    [SerializeField] private float maxHP;   //최대체력
-    [SerializeField] private float currentHP;   //현재체력
+    [SerializeField] private float maxHP = 100f;   //최대체력
+    [SerializeField] private float currentHP = 100f;   //현재체력
     [SerializeField] private float attackDamege;    //공격력  
     [SerializeField] private float moveSpeed;   //이동속도
     [SerializeField] private float jumpHeight;   //도약 최고 높이 
@@ -91,10 +91,10 @@ public class JumpAttackEnemy : EnemyManager
         }
     }
 
-    private void Attack()
-    {
+    //private void Attack()
+    //{
 
-    }
+    //}
 
     private void Die()
     {
@@ -105,11 +105,4 @@ public class JumpAttackEnemy : EnemyManager
 
         Destroy(gameObject);    //오브젝트 파괴, 애니메이션 넣은 후 수정 필요함
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
 }
