@@ -38,7 +38,14 @@ public class Player : MonoBehaviour
     //점프 횟수
     int jumpCount;
 
+    //마우스
     Vector2 mouse;
+
+    //플레이어 잉크 게이지
+    [SerializeField]
+    float ink;
+    [SerializeField]
+    float maxInk;
 
 
     //초기화
@@ -50,6 +57,8 @@ public class Player : MonoBehaviour
 
         maxHp = 5;
         hp = maxHp;
+
+        ink = maxInk;
     }
 
 
@@ -121,7 +130,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (context.started && jumpCount > 0)
+        if (context.started && jumpCount == 1)
         {
             //마우스 방향 구하기
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -133,8 +142,7 @@ public class Player : MonoBehaviour
             //키 입력 영향 임시 제한
             isCanMove = false;
 
-            if(rigid.linearVelocityY <= 0)
-                return;
+            
             jumpCount--;
         }
     }
@@ -158,18 +166,20 @@ public class Player : MonoBehaviour
         {
             cursor.lifeTime = 0.5f;
             cursor.SetColliderPointsFromTrail();
+            ink = maxInk;
         }
     }
 
     //착지 판정 검사
     void GroundCheck()
     {
-        if( rigid.linearVelocityY < 0 &&
+        if( rigid.linearVelocityY <= 0 &&
         Physics2D.BoxCast
-                (transform.position, col.size, 0f, Vector2.down, 0.2f, LayerMask.GetMask("Ground")))
+                (transform.position, col.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground")))
         {
-            rigid.linearVelocityX = 0;
+            rigid.linearVelocityX = inputVec.x;
             jumpCount = 2;
+            isCanMove = true;
         }
     }
 
@@ -184,8 +194,9 @@ public class Player : MonoBehaviour
             {
                 if (contact.normal.y > 0.5f) //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
                 {
-                    rigid.linearVelocityX = 0;
+                    rigid.linearVelocityX = inputVec.x;
                     jumpCount = 2;
+                    isCanMove = true;
                     break;
                 }
             }
