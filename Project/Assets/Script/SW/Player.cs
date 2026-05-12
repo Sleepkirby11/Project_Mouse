@@ -173,4 +173,22 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    //점프 후 착지 판정 보완
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (contact.normal.y > 0.5f) //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
+                {
+                    rigid.linearVelocityX = 0;
+                    jumpCount = 2;
+                    break;
+                }
+            }
+        }
+    }
 }
