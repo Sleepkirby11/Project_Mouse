@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
 
@@ -15,7 +16,7 @@ using static UnityEngine.GraphicsBuffer;
  */
 public class Player : MonoBehaviour
 {
-    public GameObject cursor;
+    public GameObject cursorObject;
 
     //보안을 위해 hp와 maxHp를 private로 설정
     private int hp;
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
 
 
     Rigidbody2D rigid;
+    BoxCollider2D col;
 
     //이동값 변수
     public float speed;
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        col = GetComponent<BoxCollider2D>();
         jumpCount = 2;
 
         maxHp = 5;
@@ -57,6 +60,7 @@ public class Player : MonoBehaviour
         {
             rigid.linearVelocityX = inputVec.x;
         }
+        GroundCheck();
     }
 
     //플레이어 이동
@@ -129,6 +133,8 @@ public class Player : MonoBehaviour
             //키 입력 영향 임시 제한
             isCanMove = false;
 
+            if(rigid.linearVelocityY <= 0)
+                return;
             jumpCount--;
         }
     }
@@ -137,36 +143,33 @@ public class Player : MonoBehaviour
     {
         if (hp <= 0)
             return;
+
+        TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
+        Cursor cursor = cursorObject.GetComponent<Cursor>();
         if(context.started)
         {
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            cursor.transform.position = mouse;
-            cursor.GetComponent<TrailRenderer>().startWidth = 0.25f;
-            cursor.GetComponent<TrailRenderer>().Clear();
-            cursor.GetComponent<Cursor>().lifeTime = 0;
+            cursorObject.transform.position = mouse;
+            trail.startWidth = 0.25f;
+            trail.Clear();
+            cursor.lifeTime = 0;
         }
         if(context.canceled)
         {
-            cursor.GetComponent<Cursor>().lifeTime = 0.5f;
-            cursor.GetComponent<Cursor>().SetColliderPointsFromTrail();
+            cursor.lifeTime = 0.5f;
+            cursor.SetColliderPointsFromTrail();
         }
     }
 
     //착지 판정 검사
-    private void OnCollisionEnter2D(Collision2D collision)
+    void GroundCheck()
     {
-
-        if (collision.gameObject.CompareTag("Ground"))
+        if( rigid.linearVelocityY < 0 &&
+        Physics2D.BoxCast
+                (transform.position, col.size, 0f, Vector2.down, 0.2f, LayerMask.GetMask("Ground")))
         {
-            //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                if (contact.normal.y > 0.5f)
-                {
-                    jumpCount = 2;
-                    break;
-                }
-            }
+            rigid.linearVelocityX = 0;
+            jumpCount = 2;
         }
     }
 
