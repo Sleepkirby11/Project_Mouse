@@ -16,49 +16,46 @@ using static UnityEngine.GraphicsBuffer;
  */
 public class Player : MonoBehaviour
 {
+    PlayerStatus status;
+
+    [Header("스킬 공격")]
     public GameObject cursorObject;
 
-    //보안을 위해 hp와 maxHp를 private로 설정
-    private int hp;
-    private int maxHp;
+    [Header("일반 공격")]
+    public GameObject normalAttackObject;
 
-    //public getter 프로퍼티로 hp, maxHp 참조
-    public int HP => hp;
-    public int MaxHP => maxHp;
 
 
     Rigidbody2D rigid;
     BoxCollider2D col;
 
     //이동값 변수
-    public float speed;
+    float speed;
     Vector2 inputVec;
     bool isCanMove;
+    bool isMove;
 
     //점프 횟수
     int jumpCount;
 
     //마우스
     Vector2 mouse;
-
-    //플레이어 잉크 게이지
-    [SerializeField]
-    float ink;
-    [SerializeField]
-    float maxInk;
+    Vector2 mouseDist;
+    public float maxDist;
+    bool isSkill;
 
 
     //초기화
     void Start()
     {
+        status = GetComponent<PlayerStatus>();
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         jumpCount = 2;
 
-        maxHp = 5;
-        hp = maxHp;
+        speed = status.speed;
 
-        ink = maxInk;
+        isSkill = false;
     }
 
 
@@ -67,7 +64,7 @@ public class Player : MonoBehaviour
         //linearVelocity 기반 이동
         if (isCanMove)
         {
-            rigid.linearVelocityX = inputVec.x;
+            Move();
         }
         GroundCheck();
     }
@@ -78,7 +75,7 @@ public class Player : MonoBehaviour
         //이동 키 변화 감지 시 true
         isCanMove = true;
         //이동 제한 조건식
-        if (hp <= 0)
+        if (status.HP <= 0)
         {
             return;
         }
@@ -98,7 +95,7 @@ public class Player : MonoBehaviour
     public void ActionJump(InputAction.CallbackContext context)
     {
         //점프 제한 조건식
-        if (hp <= 0)
+        if (status.HP <= 0)
         {
             return;
         }
@@ -125,7 +122,7 @@ public class Player : MonoBehaviour
 
     public void ActionDash(InputAction.CallbackContext context)
     {
-        if (hp <= 0)
+        if (status.HP <= 0)
         {
             return;
         }
@@ -142,38 +139,54 @@ public class Player : MonoBehaviour
             //키 입력 영향 임시 제한
             isCanMove = false;
 
-            
             jumpCount--;
         }
     }
 
     public void ActionAttack(InputAction.CallbackContext context)
     {
-        if (hp <= 0)
+        if (status.HP <= 0)
             return;
 
         TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
         Cursor cursor = cursorObject.GetComponent<Cursor>();
-        if(context.started)
+        if (isSkill)
         {
-            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            cursorObject.transform.position = mouse;
-            trail.startWidth = 0.25f;
-            trail.Clear();
-            cursor.lifeTime = 0;
+            if (context.started)
+            {
+                mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                cursorObject.transform.position = mouse;
+                trail.startWidth = 0.25f;
+                trail.Clear();
+                cursor.lifeTime = 0;
+            }
+            if (context.canceled)
+            {
+                cursor.lifeTime = 0.5f;
+                cursor.SetColliderPointsFromTrail();
+                status.ink = status.maxInk;
+            }
         }
-        if(context.canceled)
+        else
         {
-            cursor.lifeTime = 0.5f;
-            cursor.SetColliderPointsFromTrail();
-            ink = maxInk;
+            isCanMove = true;
+            if (context.started)
+            {
+                isMove = true;
+            }
+            if (context.canceled)
+            {
+                inputVec.x = 0;
+                rigid.linearVelocityX = 0;
+                isMove = false;
+            }
         }
     }
 
     //착지 판정 검사
     void GroundCheck()
     {
-        if( rigid.linearVelocityY <= 0 &&
+        if (rigid.linearVelocityY <= 0 &&
         Physics2D.BoxCast
                 (transform.position, col.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground")))
         {
@@ -183,6 +196,26 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    void Move()
+    {
+        mouseDist =
+        (Vector2)normalAttackObject.transform.position - (Vector2)transform.position;
+        float clampDist = Mathf.Clamp(mouseDist.x, -1, 1);
+        if (isMove)
+        {
+            if (mouseDist.magnitude < maxDist)
+            {
+                inputVec.x = 0;
+            }
+            else
+            {
+                inputVec.x = clampDist * speed;
+            }
+            rigid.linearVelocityX = inputVec.x;
+        }
+
+    }
 
     //점프 후 착지 판정 보완
     private void OnCollisionEnter2D(Collision2D collision)
