@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 1304645360692395455}
   - component: {fileID: 3990407374526616085}
   - component: {fileID: 4130670807602071078}
+  - component: {fileID: 160537204799830685}
   m_Layer: 0
   m_Name: ArcherEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3540639986238268416
 Transform:
   m_ObjectHideFlags: 0
@@ -126,14 +127,26 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  backstepSpeed: 8
+  backstepDuration: 0.3
+  backstepCooldown: 2
+--- !u!114 &160537204799830685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738235730334658934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50afb8eca7049834189c6b261b07262c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   arrowPrefab: {fileID: 1618385924406531736, guid: 2c73065b31eb5624f8dec5c6d2cdc66d, type: 3}
   firePoint: {fileID: 8203052514352534440}
   attackCooldown: 2
   arrowHeight: 3
   arrowDuration: 1.2
-  backstepSpeed: 8
-  backstepDuration: 0.3
-  backstepCooldown: 2
 --- !u!1 &7697180847478146246
 GameObject:
   m_ObjectHideFlags: 0
