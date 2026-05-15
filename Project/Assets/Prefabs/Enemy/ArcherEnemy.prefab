@@ -13,13 +13,13 @@ GameObject:
   - component: {fileID: 3990407374526616085}
   - component: {fileID: 4130670807602071078}
   - component: {fileID: 160537204799830685}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ArcherEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3540639986238268416
 Transform:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2894486811649243390}
   - component: {fileID: 169541774767142881}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8203052514352534440}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

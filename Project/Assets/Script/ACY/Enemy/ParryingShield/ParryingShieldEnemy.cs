@@ -3,34 +3,23 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 /*
-행동패턴 1. 좌우배회 2. 플레이어를 인식하면 플레이어 방향으로 이동 3. 인식 후 일정 시간마다 패링 시도(패링 시도중엔 멈춤)
-공격패턴: 플레이어와 접촉 시 플레이어에게 대미지를 주고 살짝 밀쳐냄(공중으로 뜨는 효과)
-특징[패링]: 패링 시도 중 플레이어로부터 공격받을 시 대미지를 무효화하고 플레이어의 위치로 빠른 돌진.
-히트 성공 시 플레이어는 공중에 떠오르며(일반 공격보다 더 높게) 잠시동안 조작불능 상태
+행동패턴 
+1. 좌우배회 (Patrol)
+2. 플레이어를 인식하면 플레이어 방향으로 이동 (Tracking)
+3. 인식 후 일정 시간마다 패링 시도 (Parrying) 패링중엔 멈춤
+
+공격패턴
+1. 일반 접촉 : 플레이어에게 데미지 + 약한 넉백(공중으로 살짝)
+2. 카운터 히트(패링): 패링 중 피격 시 돌진 → 높은 공중부양 + 스턴 (현재 플레이어 공격이 없어서 테스트 못함)
+
+IHittable  : 일반 접촉 데미지·넉백 전달
+IStunnable : 카운터 히트 시 스턴 전달
+OnHitByPlayer() : 플레이어 공격 스크립트에서 직접 호출 예정
  */
 
-/// <summary>
-/// 패링 방패 적 AI
-///
-/// 행동패턴
-///   1. Patrol  : 좌우 배회
-///   2. Tracking: 플레이어 감지 후 추적
-///   3. Parrying: 일정 주기마다 멈추고 패링 판정 활성화
-///
-/// 공격패턴
-///   - 일반 접촉 : 플레이어에게 데미지 + 약한 넉백(공중으로 살짝)
-///   - 카운터 히트: 패링 중 피격 시 돌진 → 높은 공중부양 + 스턴
-///
-/// 플레이어 연동
-///   IHittable  : 일반 접촉 데미지·넉백 전달
-///   IStunnable : 카운터 히트 시 스턴 전달
-///   OnHitByPlayer() : 플레이어 공격 스크립트에서 직접 호출
-/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class ParryingShieldEnemy : MonoBehaviour
 {
-    // ───────────────────────────── Inspector ─────────────────────────────
-
     [Header("이동")]
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float patrolDistance = 4f;   // 배회 반경
@@ -55,17 +44,14 @@ public class ParryingShieldEnemy : MonoBehaviour
     [SerializeField] private float counterLaunchY = 18f;  // 카운터 히트 공중부양 힘
     [SerializeField] private float counterStunTime = 1.5f; // 스턴 지속 시간
 
-    // ───────────────────────────── 내부 상태 ─────────────────────────────
-
-    private enum State { Patrol, Tracking, Parrying, Countering }
+    private enum State { Patrol, Tracking, Parrying, Countering } 
 
     private Rigidbody2D rb;
     private Transform target;
-    private State state = State.Patrol;
+    private State state = State.Patrol; // 초기 상태는 배회
 
-    // Patrol
-    private Vector2 patrolOrigin;
-    private float patrolDir = 1f;
+    private Vector2 patrolOrigin; // 배회 시작 위치
+    private float patrolDir = 1f; // 배회 방향 (1: 오른쪽, -1: 왼쪽)
 
     // 접촉 공격 쿨다운
     private float lastContactTime = -99f;
@@ -76,38 +62,45 @@ public class ParryingShieldEnemy : MonoBehaviour
     private ContactFilter2D contactFilter;
     private readonly List<Collider2D> overlapBuffer = new List<Collider2D>(1);
 
-    // ───────────────────────────── Unity ─────────────────────────────────
-
     private void Awake()
     {
+        //리지드바디 설정
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
+        // 패링 타이머 캐싱
         parryWait = new WaitForSeconds(parryDuration);
         parryIntervalWait = new WaitForSeconds(parryInterval);
 
+        // 접촉 감지 필터 설정
         contactFilter.useLayerMask = true;
         contactFilter.layerMask = playerLayer;
 
+        // 배회 원점 설정
         patrolOrigin = transform.position;
     }
 
-    private void Start() => StartCoroutine(ParryRoutine());
+    private void Start() => StartCoroutine(ParryRoutine()); // 패링 루틴 시작
 
     private void Update()
     {
-        if (state == State.Parrying || state == State.Countering) return;
+        if (state == State.Parrying || state == State.Countering) // 패링 또는 카운터 중에는 행동 일시 정지
+        {
+            return;
+        }
 
-        DetectPlayer();
+        DetectPlayer(); // 플레이어 감지 및 상태 전환
 
-        if (state == State.Tracking && target != null)
-            MoveToward(target.position);
+        if (state == State.Tracking && target != null) // 플레이어 추적 상태면 이동
+        {
+            MoveToward(target.position); 
+        }
         else
-            Patrol();
+        {
+            Patrol(); // 배회 
+        }
     }
-
-    // ───────────────────────────── 감지 ──────────────────────────────────
 
     private void DetectPlayer()
     {
@@ -123,20 +116,18 @@ public class ParryingShieldEnemy : MonoBehaviour
         }
         else
         {
-            if (Physics2D.OverlapCircle(transform.position, detectRange, contactFilter, overlapBuffer) > 0)
+            if (Physics2D.OverlapCircle(transform.position, detectRange, contactFilter, overlapBuffer) > 0) // 플레이어 감지 시 추적 시작
             {
-                target = overlapBuffer[0].transform;
-                state = State.Tracking;
+                target = overlapBuffer[0].transform; // 가장 가까운 콜라이더의 위치를 타겟으로 설정
+                state = State.Tracking; // 추적 상태로 전환
             }
         }
     }
 
-    // ───────────────────────────── 이동 ──────────────────────────────────
-
-    private void MoveToward(Vector3 destination)
+    private void MoveToward(Vector3 destination) // 플레이어 방향으로 이동
     {
-        float dirX = destination.x > transform.position.x ? 1f : -1f;
-        rb.linearVelocity = new Vector2(dirX * moveSpeed, rb.linearVelocity.y);
+        float dirX = destination.x > transform.position.x ? 1f : -1f; // 이동 방향 계산
+        rb.linearVelocity = new Vector2(dirX * moveSpeed, rb.linearVelocity.y); 
     }
 
     private void Patrol()
@@ -149,9 +140,7 @@ public class ParryingShieldEnemy : MonoBehaviour
         rb.linearVelocity = new Vector2(patrolDir * moveSpeed * 0.6f, rb.linearVelocity.y);
     }
 
-    // ───────────────────────────── 패링 루틴 ─────────────────────────────
-
-    private IEnumerator ParryRoutine()
+    private IEnumerator ParryRoutine() // 일정 간격으로 패링 시도
     {
         while (true)
         {
@@ -171,13 +160,8 @@ public class ParryingShieldEnemy : MonoBehaviour
         }
     }
 
-    // ───────────────────────────── 외부 호출 API ─────────────────────────
-
-    /// <summary>
-    /// 플레이어 공격 스크립트에서 이 적을 타격할 때 호출하세요.
-    /// 패링 상태면 카운터를 발동하고, 아니면 false를 반환합니다.
-    /// </summary>
-    /// <returns>패링 성공(true) / 일반 피격(false)</returns>
+    // 플레이어 공격 스크립트에서 이 적을 타격할 때 호출
+    // 패링 상태면 카운터를 발동하고, 아니면 false 반환
     public bool OnHitByPlayer(Transform attacker)
     {
         if (state != State.Parrying) return false;
@@ -186,9 +170,7 @@ public class ParryingShieldEnemy : MonoBehaviour
         return true;
     }
 
-    // ───────────────────────────── 카운터 ────────────────────────────────
-
-    private IEnumerator CounterRoutine(Transform attacker)
+    private IEnumerator CounterRoutine(Transform attacker) //카운터
     {
         state = State.Countering;
 
@@ -203,20 +185,22 @@ public class ParryingShieldEnemy : MonoBehaviour
         state = State.Tracking;
     }
 
-    // ───────────────────────────── 충돌 처리 ─────────────────────────────
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) //충돌처리
     {
-        if (!collision.gameObject.CompareTag("Player")) return;
+        if (!collision.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
 
         if (state == State.Countering)
         {
-            // 카운터 히트: 높이 뜨게 + 스턴
+            state = State.Tracking;
+            rb.linearVelocity = Vector2.zero; // 충돌 시 제동력 부여
+
             ApplyCounterHit(collision.gameObject);
         }
         else if (Time.time - lastContactTime > contactCooldown)
         {
-            // 일반 접촉 공격
             ApplyContactHit(collision.gameObject);
         }
     }
@@ -225,31 +209,44 @@ public class ParryingShieldEnemy : MonoBehaviour
     {
         lastContactTime = Time.time;
 
-        // 플레이어가 이 적의 어느 방향에 있는지 계산
         float dirX = player.transform.position.x > transform.position.x ? 1f : -1f;
         Vector2 knockback = new Vector2(dirX * contactKnockbackX, contactKnockbackY);
 
-        // IHittable 인터페이스로 전달
-       // if (player.TryGetComponent(out IHittable hittable))
-           // hittable.TakeHit(contactDamage, knockback);
+        // 대미지 감소 
+        if (player.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.TakeDamage(contactDamage);
+        }
+
+        // 넉백 
+        if (player.TryGetComponent(out IHittable hittable))
+        {
+            hittable.TakeHit(knockback);
+        }
     }
 
-    private void ApplyCounterHit(GameObject player)
+    private void ApplyCounterHit(GameObject player) //카운터 성공 시 호출
     {
         float dirX = player.transform.position.x > transform.position.x ? 1f : -1f;
         Vector2 launchForce = new Vector2(dirX * contactKnockbackX, counterLaunchY);
 
-        // IHittable + IStunnable 둘 다 전달
-      //  if (player.TryGetComponent(out IHittable hittable))
-         //   hittable.TakeHit(contactDamage, launchForce);
+        // 카운터 공격 성공 시 대미지 + 넉백 + 스턴
+        if (player.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.TakeDamage(contactDamage);
+        }
 
-      //  if (player.TryGetComponent(out IStunnable stunnable))
-       //     stunnable.ApplyStun(counterStunTime, launchForce);
+        if (player.TryGetComponent(out IHittable hittable))
+        {
+            hittable.TakeHit(launchForce);
+        }
+
+        if (player.TryGetComponent(out IStunnable stunnable))
+        {
+            stunnable.ApplyStun(counterStunTime);
+        }
     }
 
-    // ───────────────────────────── Gizmos ────────────────────────────────
-
-#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         // 감지 범위
@@ -262,5 +259,4 @@ public class ParryingShieldEnemy : MonoBehaviour
         Gizmos.DrawLine(origin + Vector3.left * patrolDistance,
                         origin + Vector3.right * patrolDistance);
     }
-#endif
 }
