@@ -47,6 +47,8 @@ public class ParryingShieldEnemy : MonoBehaviour
     private enum State { Patrol, Tracking, Parrying, Countering } 
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
     private Transform target;
     private State state = State.Patrol; // 초기 상태는 배회
 
@@ -68,6 +70,12 @@ public class ParryingShieldEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
 
         // 패링 타이머 캐싱
         parryWait = new WaitForSeconds(parryDuration);
@@ -149,14 +157,26 @@ public class ParryingShieldEnemy : MonoBehaviour
             // 플레이어를 추적 중일 때만 패링 시도
             if (target != null)
             {
+                Debug.Log("패링 시도");
+                SetEnemyColor(Color.blue); //파란색으로 나타냄(임시코드)
                 state = State.Parrying;
                 rb.linearVelocity = Vector2.zero;
                 yield return parryWait;
 
                 // 카운터가 발동되지 않았다면 추적으로 복귀
                 if (state == State.Parrying)
+                {
+                    SetEnemyColor(originalColor); //원래 색으로 복귀
                     state = State.Tracking;
+                }
             }
+        }
+    }
+    private void SetEnemyColor(Color color)
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = color;
         }
     }
 
@@ -224,7 +244,7 @@ public class ParryingShieldEnemy : MonoBehaviour
             hittable.TakeHit(knockback);
         }
     }
-
+ 
     private void ApplyCounterHit(GameObject player) //카운터 성공 시 호출
     {
         float dirX = player.transform.position.x > transform.position.x ? 1f : -1f;
