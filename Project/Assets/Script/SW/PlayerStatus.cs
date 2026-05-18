@@ -21,7 +21,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     private Rigidbody2D rb;
     private bool isKnockbacked; // 넉백 상태 여부
     private bool isStunned; // 스턴 상태 여부
-
+    private bool isPossessed; // 빙의 상태 여부
+    public bool IsPossessed => isPossessed;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); 
@@ -40,7 +41,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         ink = maxInk;
     }
 
-    public bool CanMove => !isKnockbacked && !isStunned; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
+    public bool CanMove => !isKnockbacked && !isStunned && !isPossessed; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
 
     public void TakeDamage(int damage) // IDamageable 인터페이스 구현
     {
@@ -102,6 +103,17 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
 
         isStunned = false;
         Debug.Log("[PlayerStatus] 플레이어 스턴 해제");
+    }
+    public void SetPossessed(bool value)
+    {
+        isPossessed = value;
+
+        if (rb != null && value)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        Debug.Log(value ? "[PlayerStatus] 빙의 상태" : "[PlayerStatus] 빙의 해제");
     }
     void Die()
     {
