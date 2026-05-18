@@ -23,6 +23,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     private bool isStunned; // 스턴 상태 여부
     private bool isPossessed; // 빙의 상태 여부
     public bool IsPossessed => isPossessed;
+    public bool IsKnockbacked => isKnockbacked;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); 

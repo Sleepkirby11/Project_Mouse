@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         {
             Move();
         }
-        else if (!status.CanMove && !status.IsPossessed)
+        else if (!status.CanMove && !status.IsPossessed && !status.IsKnockbacked)
         {
             rigid.linearVelocityX = 0;
         }
