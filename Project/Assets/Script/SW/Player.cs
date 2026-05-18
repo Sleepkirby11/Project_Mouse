@@ -62,10 +62,20 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         //linearVelocity 기반 이동
-        if (isCanMove)
+        if (isCanMove && status.CanMove) //status 스크립트에서 움직임 가능 여부 받아오게 수정
         {
             Move();
         }
+        else if (!status.CanMove && !status.IsPossessed)
+        {
+            rigid.linearVelocityX = 0;
+        }
+
+        // 아래가 수정 전
+        //if (isCanMove)
+        //{
+        //    Move();
+        //}
         GroundCheck();
     }
 
@@ -75,10 +85,15 @@ public class Player : MonoBehaviour
         //이동 키 변화 감지 시 true
         isCanMove = true;
         //이동 제한 조건식
-        if (status.HP <= 0)
+        if (status.HP <= 0 || !status.CanMove) 
         {
             return;
         }
+        //아래가 수정 전
+        //if (status.HP <= 0)
+        //{
+        //    return;
+        //}
         //키 입력 시작
         if (context.started)
         {
@@ -95,10 +110,15 @@ public class Player : MonoBehaviour
     public void ActionJump(InputAction.CallbackContext context)
     {
         //점프 제한 조건식
-        if (status.HP <= 0)
+        if (status.HP <= 0 || !status.CanMove)
         {
             return;
         }
+        //아래가 수정 전
+        //if (status.HP <= 0)
+        //{
+        //    return;
+        //}
 
         if (context.started)
         {
@@ -122,10 +142,15 @@ public class Player : MonoBehaviour
 
     public void ActionDash(InputAction.CallbackContext context)
     {
-        if (status.HP <= 0)
+        if (status.HP <= 0 || !status.CanMove)
         {
             return;
         }
+        //아래가 수정 전
+        //if (status.HP <= 0)
+        //{
+        //    return;
+        //}
 
         if (context.started && jumpCount == 1)
         {
@@ -145,8 +170,13 @@ public class Player : MonoBehaviour
 
     public void ActionAttack(InputAction.CallbackContext context)
     {
-        if (status.HP <= 0)
+        if (status.HP <= 0 || !status.CanMove)
+        {
             return;
+        }
+        //아래가 수정 전
+        //if (status.HP <= 0)
+        //    return;
 
         TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
         Cursor cursor = cursorObject.GetComponent<Cursor>();
@@ -186,6 +216,11 @@ public class Player : MonoBehaviour
     //착지 판정 검사
     void GroundCheck()
     {
+        if (!status.CanMove) //추가함
+        {
+            return;
+        }
+
         if (rigid.linearVelocityY <= 0 &&
         Physics2D.BoxCast
                 (transform.position, col.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground")))
@@ -220,6 +255,10 @@ public class Player : MonoBehaviour
     //점프 후 착지 판정 보완
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!status.CanMove) //추가함
+        {
+            return;
+        }
 
         if (collision.gameObject.CompareTag("Ground"))
         {

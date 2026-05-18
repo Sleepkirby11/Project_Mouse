@@ -38,7 +38,7 @@ public class WizardEnemyController : MonoBehaviour
     [Header("공격 설정")]
     [SerializeField] private MagicBall projectilePrefab; // 마법구
     [SerializeField] private Transform firePoint; // 발사 위치
-    [SerializeField] private float projectileSpeed = 6f; // 마법구 속도
+   // [SerializeField] private float projectileSpeed = 6f; // 마법구 속도
     [SerializeField] private float attackDelayAfterTeleport = 0.3f; // 텔레포트 후 공격까지 대기 시간
     [SerializeField] private float attackEndDelay = 1f; // 공격 후 대기 시간
 
