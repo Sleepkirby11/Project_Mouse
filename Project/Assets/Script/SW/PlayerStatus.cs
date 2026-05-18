@@ -18,6 +18,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     [Header("플레이어 이동 속도")]
     public float speed;
 
+    [Header("플레이어 공격력")]
+    public int damage;
+
+
     private Rigidbody2D rb;
     private bool isKnockbacked; // 넉백 상태 여부
     private bool isStunned; // 스턴 상태 여부
@@ -105,7 +109,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         isStunned = false;
         Debug.Log("[PlayerStatus] 플레이어 스턴 해제");
     }
-    public void SetPossessed(bool value)
+    public void SetPossessed(bool value)    //빙의
     {
         isPossessed = value;
 

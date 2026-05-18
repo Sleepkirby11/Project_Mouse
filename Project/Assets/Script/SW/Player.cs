@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     [Header("일반 공격")]
     public GameObject normalAttackObject;
 
+    [Header("공격 표시 커서")]
+    public GameObject attackCursor;
+
 
 
     Rigidbody2D rigid;
@@ -33,13 +36,12 @@ public class Player : MonoBehaviour
     float speed;
     Vector2 inputVec;
     bool isCanMove;
-    bool isMove;
 
     //점프 횟수
     int jumpCount;
 
     //마우스
-    Vector2 mouse;
+    Transform mouse;
     Vector2 mouseDist;
     public float maxDist;
     bool isSkill;
@@ -85,7 +87,7 @@ public class Player : MonoBehaviour
         //이동 키 변화 감지 시 true
         isCanMove = true;
         //이동 제한 조건식
-        if (status.HP <= 0 || !status.CanMove) 
+        if (status.HP <= 0 || !status.CanMove)
         {
             return;
         }
@@ -155,8 +157,8 @@ public class Player : MonoBehaviour
         if (context.started && jumpCount == 1)
         {
             //마우스 방향 구하기
-            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 dir = mouse - (Vector2)transform.position;
+            mouse.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 dir = (Vector2)(mouse.transform.position - transform.position);
 
             //normalized된 방향으로 AddForce
             rigid.linearVelocity = Vector2.zero;
@@ -178,37 +180,58 @@ public class Player : MonoBehaviour
         //if (status.HP <= 0)
         //    return;
 
-        TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
-        Cursor cursor = cursorObject.GetComponent<Cursor>();
+        //스킬과 일반 공격 구분
+        //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         if (isSkill)
         {
+            //스킬 오브젝트 Component 호출
+            TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
+            Cursor cursor = cursorObject.GetComponent<Cursor>();
             if (context.started)
             {
-                mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                cursorObject.transform.position = mouse;
+                //초기화
+                mouse.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                cursorObject.transform.position = mouse.transform.position;
                 trail.startWidth = 0.25f;
+                cursor.mouse = mouse;
+                cursor.isMove = true;
                 trail.Clear();
                 cursor.lifeTime = 0;
             }
             if (context.canceled)
             {
+                //스킬 발동, Collider 입히기
+                cursor.isMove = false;
                 cursor.lifeTime = 0.5f;
+                cursor.damage = status.damage;
                 cursor.SetColliderPointsFromTrail();
                 status.ink = status.maxInk;
             }
         }
         else
         {
-            isCanMove = true;
+            //일반 공격 오브젝트 Component 호출
+            TrailRenderer trail = normalAttackObject.GetComponent<TrailRenderer>();
+            NormalAttack cursor = normalAttackObject.GetComponent<NormalAttack>();
             if (context.started)
             {
-                isMove = true;
+                //초기화
+                mouse = attackCursor.gameObject.transform;
+                normalAttackObject.transform.position = mouse.transform.position;
+                trail.startWidth = 0.25f;
+                cursor.mouse = mouse;
+                cursor.isMove = true;
+                trail.Clear();
+                cursor.lifeTime = 0;
             }
             if (context.canceled)
             {
-                inputVec.x = 0;
-                rigid.linearVelocityX = 0;
-                isMove = false;
+                //일반 공격, Collider 입히기
+                cursor.isMove = false;
+                cursor.lifeTime = 0.5f;
+                cursor.damage = status.damage;
+                cursor.SetColliderPointsFromTrail();
+                status.ink = status.maxInk;
             }
         }
     }
@@ -221,10 +244,13 @@ public class Player : MonoBehaviour
             return;
         }
 
+        //낙하중 + BoxCast로 착지 판정 검사
         if (rigid.linearVelocityY <= 0 &&
         Physics2D.BoxCast
                 (transform.position, col.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground")))
         {
+
+            //이동 가능 + input 값 이어서 받기
             rigid.linearVelocityX = inputVec.x;
             jumpCount = 2;
             isCanMove = true;
@@ -234,22 +260,7 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        mouseDist =
-        (Vector2)normalAttackObject.transform.position - (Vector2)transform.position;
-        float clampDist = Mathf.Clamp(mouseDist.x, -1, 1);
-        if (isMove)
-        {
-            if (mouseDist.magnitude < maxDist)
-            {
-                inputVec.x = 0;
-            }
-            else
-            {
-                inputVec.x = clampDist * speed;
-            }
-            rigid.linearVelocityX = inputVec.x;
-        }
-
+        rigid.linearVelocityX = inputVec.x;
     }
 
     //점프 후 착지 판정 보완
@@ -266,6 +277,7 @@ public class Player : MonoBehaviour
             {
                 if (contact.normal.y > 0.5f) //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
                 {
+                    //이동 가능 + input 값 이어서 받기
                     rigid.linearVelocityX = inputVec.x;
                     jumpCount = 2;
                     isCanMove = true;

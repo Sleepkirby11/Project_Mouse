@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class Cursor : MonoBehaviour
     //Trail의 지속시간
     public float lifeTime;
 
+    //드로잉 가능 여부
+    public bool isMove;
+
     TrailRenderer trail;
     EdgeCollider2D col;
 
@@ -20,7 +24,9 @@ public class Cursor : MonoBehaviour
     List<Vector2> points = new List<Vector2>();
 
     //마우스 좌표 저장
-    Vector2 mouse;
+    public Transform mouse;
+
+    public int damage;
 
 
     //초기화
@@ -50,10 +56,9 @@ public class Cursor : MonoBehaviour
         }
 
         //그리는 중 마우스 좌표 따라 이동
-        if(trail.startWidth == 0.25f)
+        if(isMove)
         {
-            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mouse;
+            transform.position = mouse.transform.position;
         }
 
 
@@ -78,5 +83,13 @@ public class Cursor : MonoBehaviour
         }
 
         col.points = points.ToArray();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<EnemyStatus>().TakeDamage(damage);
+        }
     }
 }
