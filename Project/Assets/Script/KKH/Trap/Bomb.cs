@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour
+public class Bomb : MonoBehaviour, IDamageable
 {
+    TrapManager trapManager;
+
     [Header("폭탄 체력 설정")]
     [SerializeField] private int maxHealth = 1;
     private int currentHealth;
@@ -19,12 +21,24 @@ public class Bomb : MonoBehaviour
 
     private void Start()
     {
+        trapManager = GetComponent<TrapManager>();
+
         currentHealth = maxHealth;
     }
 
-    public void BombTakeDamage(int damage)
+    private void Update()
+    {
+        if(trapManager.isActInteract)
+        {
+            TakeDamage(1);
+            trapManager.isActInteract = false;
+        }
+    }
+
+    public void TakeDamage(int damage)
     {
         if (isExploded) return;
+        IHitReaction hitReaction = GetComponent<IHitReaction>();
 
         currentHealth -= damage;
         Debug.Log($"폭탄이 공격받음! 현재 체력: {currentHealth}");

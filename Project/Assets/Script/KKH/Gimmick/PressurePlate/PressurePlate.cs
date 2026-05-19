@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class PressurePlate : MonoBehaviour
 {
     [Header("연동할 장치 이벤트")]
     [SerializeField] private UnityEvent onPlatePressed;  // 발판 눌렸을 때
     [SerializeField] private UnityEvent onPlateReleased; // 발판에서 발 뗐을 때
+    [SerializeField] private  float pressedDelay = 0.2f; // 발판이 눌리는 딜레이
 
     private BoxCollider2D myCollider;
     private bool isPressed = false;
@@ -24,15 +26,20 @@ public class PressurePlate : MonoBehaviour
     // 트리거가 꺼져있을 때 (단단한 바닥 상태일 때) 플레이어가 밟으면 실행됨
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !isPressed)
+        foreach (ContactPoint2D contact in collision.contacts)
         {
-            // 위에서 아래로 밟았는지 체크 (옆면 충돌 방지)
-            // 플레이어의 아래쪽 방향과 충돌 표면의 법선(Normal)을 비교
-            if (collision.contacts[0].normal.y < -0.7f)
+            if (collision.gameObject.CompareTag("Player") && !isPressed)
             {
-                PlateActivate();
+                // 위에서 아래로 밟았는지 체크 (옆면 충돌 방지)
+                // 플레이어의 아래쪽 방향과 충돌 표면의 법선(Normal)을 비교
+                if (contact.normal.y < -0.7f)
+                {
+                    isPressed = true;
+                    StartCoroutine(PlateActivate());
+                }
             }
         }
+
     }
 
     // 트리거가 켜졌을 때 (눌려 들어간 상태일 때) 플레이어가 나갔는지 감시
@@ -44,9 +51,9 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    private void PlateActivate()
+    private IEnumerator PlateActivate()
     {
-        isPressed = true;
+        yield return new WaitForSeconds(pressedDelay);
         myCollider.isTrigger = true; // 트리거 활성화 (푹 가라앉는 느낌 유도)
 
         Debug.Log("발판 작동!");

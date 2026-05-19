@@ -26,7 +26,7 @@ public class Cursor : MonoBehaviour
     int positionCount;
     public float trailLength;
 
-    private Vector3[] trailPositions = new Vector3[20];
+    private Vector3[] trailPositions = new Vector3[100];
 
     //마우스 좌표 저장
     public Transform mouse;
@@ -50,11 +50,6 @@ public class Cursor : MonoBehaviour
         //지속 시간에 따른 trail의 크기 변화 및 collider의 enabled 여부
         if (lifeTime > 0)
         {
-            if(positionCount >= 2)
-            {
-                col.enabled = true;
-            }
-
             lifeTime -= Time.deltaTime;
             trail.startWidth = lifeTime * 2;
         }
@@ -117,17 +112,23 @@ public class Cursor : MonoBehaviour
         }
 
         col.points = points.ToArray();
+        if (positionCount >= 2)
+        {
+            col.enabled = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("호출");
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyStatus>().TakeDamage(damage);
         }
-        else if (collision.gameObject.CompareTag("AttackableTrap"))
+        if (collision.gameObject.CompareTag("AttackableTrap"))
         {
-            collision.gameObject.GetComponent<EnemyStatus>().TakeDamage(damage);
+            Debug.Log("폭탄");
+            collision.gameObject.GetComponent<TrapManager>().TakeDamage(damage);
         }
     }
 }
