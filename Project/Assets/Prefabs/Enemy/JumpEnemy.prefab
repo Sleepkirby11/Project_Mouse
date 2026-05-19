@@ -151,6 +151,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  cancelFallSpeed: 12
 --- !u!114 &4055180174601223183
 MonoBehaviour:
   m_ObjectHideFlags: 0

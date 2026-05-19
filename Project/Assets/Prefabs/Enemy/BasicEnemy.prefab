@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5614976229096343319}
   - component: {fileID: 8301876688534522025}
   - component: {fileID: 4848669538979294272}
+  - component: {fileID: 5495363164581017507}
   m_Layer: 7
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -171,6 +172,20 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &5495363164581017507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5988464360397360385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 10
+  dieAnimationLength: 1
 --- !u!1 &7128169409195291579
 GameObject:
   m_ObjectHideFlags: 0
