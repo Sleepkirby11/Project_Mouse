@@ -19,6 +19,11 @@ public class JumpEnemyAttack : MonoBehaviour
     [SerializeField] private float shockwaveRadius = 2.5f; // 충격파 공격 범위
     [SerializeField] private LayerMask playerLayer;
 
+    [Header("착지 체크")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius = 0.15f;
+    [SerializeField] private LayerMask groundLayer;
+
     private Rigidbody2D rb;
     private JumpEnemyMove moveScript;
     private SpriteRenderer spriteRenderer;
@@ -84,11 +89,13 @@ public class JumpEnemyAttack : MonoBehaviour
         // anim?.SetTrigger("Jump");
 
         Vector2 startPos = transform.position;
-        Vector2 targetPos = player.position; // 기 모으기가 끝난 시점의 플레이어 위치 타겟팅
+        Vector2 targetPos = player.position;
 
         float elapsed = 0f;
         float originGravity = rb.gravityScale;
-        rb.gravityScale = 0f; // 잠시 중력 끄기
+
+        // 포물선 이동 중에는 직접 위치 제어
+        rb.gravityScale = 0f;
 
         while (elapsed < jumpDuration)
         {
@@ -102,10 +109,20 @@ public class JumpEnemyAttack : MonoBehaviour
             yield return null;
         }
 
-        // 착지 시 물리 법칙 복구
+        // 점프 이동 끝난 뒤 중력 복구
         rb.gravityScale = originGravity;
-        rb.linearVelocity = Vector2.zero;
 
+        // X 속도만 제거하고 Y 낙하는 자연스럽게 유지
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+
+        // 실제 착지할 때까지 기다림
+        while (!IsGrounded())
+        {
+            yield return null;
+        }
+
+        // 착지 후 완전히 정지
+        rb.linearVelocity = Vector2.zero;
         // 충격파 (범위 공격_
         ExecuteShockwave();
 
@@ -130,7 +147,15 @@ public class JumpEnemyAttack : MonoBehaviour
             }
         }
     }
+    private bool IsGrounded()
+    {
+        if (groundCheck == null)
+        {
+            return false;
+        }
 
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
     //공격 범위 빨강, 충격파 범위 마젠타(보라)
     private void OnDrawGizmosSelected()
     {
@@ -139,6 +164,12 @@ public class JumpEnemyAttack : MonoBehaviour
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, shockwaveRadius);
+
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
     }
 }
 

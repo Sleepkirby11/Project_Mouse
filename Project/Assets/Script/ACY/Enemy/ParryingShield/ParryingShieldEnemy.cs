@@ -18,7 +18,7 @@ OnHitByPlayer() : 플레이어 공격 스크립트에서 직접 호출 예정
  */
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class ParryingShieldEnemy : MonoBehaviour
+public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 {
     [Header("이동")]
     [SerializeField] private float moveSpeed = 3f;
@@ -30,7 +30,7 @@ public class ParryingShieldEnemy : MonoBehaviour
 
     [Header("패링")]
     [SerializeField] private float parryDuration = 1.2f;  // 패링 판정 유지 시간
-    [SerializeField] private float parryInterval = 4f;    // 패링 시도 주기
+    [SerializeField] private float parryInterval = 1f;    // 패링 시도 주기
 
     [Header("일반 접촉 공격")]
     [SerializeField] private int contactDamage = 1;
@@ -40,11 +40,12 @@ public class ParryingShieldEnemy : MonoBehaviour
 
     [Header("카운터 공격")]
     [SerializeField] private float counterDashForce = 22f;  // 돌진 힘
-    [SerializeField] private float counterDashTime = 0.4f; // 돌진 유지 시간
+    [SerializeField] private float counterDashTime = 0.6f; // 돌진 유지 시간
     [SerializeField] private float counterLaunchY = 18f;  // 카운터 히트 공중부양 힘
     [SerializeField] private float counterStunTime = 1.5f; // 스턴 지속 시간
+    [SerializeField] private float counterRecoverTime = 0.3f;
 
-    private enum State { Patrol, Tracking, Parrying, Countering } 
+    private enum State { Patrol, Tracking, Parrying, Countering,  Recovering } 
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -93,7 +94,7 @@ public class ParryingShieldEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (state == State.Parrying || state == State.Countering) // 패링 또는 카운터 중에는 행동 일시 정지
+        if (state == State.Parrying || state == State.Countering || state == State.Recovering) // 패링 또는 카운터 중에는 행동 일시 정지
         {
             return;
         }
@@ -180,32 +181,48 @@ public class ParryingShieldEnemy : MonoBehaviour
         }
     }
 
-    // 플레이어 공격 스크립트에서 이 적을 타격할 때 호출
+    public bool OnBeforeTakeDamage(EnemyStatus enemyStatus, int damage)
+    {
+        return OnHitByPlayer(); // 패링 성공 시 데미지 무효화
+    }
+
+    public void OnAfterTakeDamage(EnemyStatus enemyStatus, int damage)
+    {
+        // 방패병은 데미지 받은 뒤 반응 없음
+    }
+
     // 패링 상태면 카운터를 발동하고, 아니면 false 반환
-    public bool OnHitByPlayer(Transform attacker)
+    public bool OnHitByPlayer()
     {
         if (state != State.Parrying)
         {
             return false;
         }
-
-        StartCoroutine(CounterRoutine(attacker));
+        if (target == null)
+        {
+            return false;
+        }
+        StartCoroutine(CounterRoutine());
         return true;
     }
 
-    private IEnumerator CounterRoutine(Transform attacker) //카운터
+    private IEnumerator CounterRoutine() //카운터
     {
         state = State.Countering;
 
         // 플레이어 방향으로 즉각 돌진
-        Vector2 dashDir = ((Vector2)(attacker.position - transform.position)).normalized;
+        Vector2 dashDir = ((Vector2)(target.position - transform.position)).normalized;
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(dashDir * counterDashForce, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(counterDashTime);
 
         rb.linearVelocity = Vector2.zero;
-        state = State.Tracking;
+        SetEnemyColor(originalColor); // 카운터 후 색상 복귀
+        if (state == State.Countering)
+        {
+            state = State.Tracking;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) //충돌처리
@@ -217,17 +234,24 @@ public class ParryingShieldEnemy : MonoBehaviour
 
         if (state == State.Countering)
         {
-            state = State.Tracking;
             rb.linearVelocity = Vector2.zero; // 충돌 시 제동력 부여
 
             ApplyCounterHit(collision.gameObject);
+            StartCoroutine(CounterRecoverRoutine());
         }
         else if (Time.time - lastContactTime > contactCooldown)
         {
             ApplyContactHit(collision.gameObject);
         }
     }
+    private IEnumerator CounterRecoverRoutine()
+    {
+        state = State.Recovering;
 
+        yield return new WaitForSeconds(counterRecoverTime);
+
+        state = State.Tracking;
+    }
     private void ApplyContactHit(GameObject player)
     {
         lastContactTime = Time.time;
