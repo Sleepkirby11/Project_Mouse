@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
 
         speed = status.speed;
 
+        attackCursor.GetComponent<AttackCursor>().target = transform;
+
         isSkill = false;
     }
 
