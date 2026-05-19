@@ -5,7 +5,7 @@ using UnityEngine;
  * 플레이어의 Y축이 낮게 변했을때
  * 점프 공격이 끝난 후 땅으로 내려갈때 움직임 부자연스러운 문제 있음
  */
-public class JumpEnemyAttack : MonoBehaviour
+public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 {
     [Header("점프 공격 설정")]
     [SerializeField] private float attackRange = 3f;       // 공격 시전 사거리
@@ -35,6 +35,10 @@ public class JumpEnemyAttack : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.15f;
     [SerializeField] private LayerMask groundLayer;
 
+    private Coroutine jumpRoutine;
+    private float originGravity;
+    [SerializeField] private float cancelFallSpeed = 12f;
+
     private Rigidbody2D rb;
     private JumpEnemyMove moveScript;
     private SpriteRenderer spriteRenderer;
@@ -51,6 +55,7 @@ public class JumpEnemyAttack : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        originGravity = rb.gravityScale;
         moveScript = GetComponent<JumpEnemyMove>();
 
         // 자식 객체(스프라이트)에서 컴포넌트들을 찾음
@@ -77,7 +82,7 @@ public class JumpEnemyAttack : MonoBehaviour
         // 사거리 이내 진입 && 쿨타임 만료 시 공격 시작
         if (distanceToPlayer <= attackRange && Time.time - lastAttackTime >= attackCooldown)
         {
-            StartCoroutine(JumpAttackComboRoutine(player));
+            jumpRoutine = StartCoroutine(JumpAttackComboRoutine(player));
         }
     }
 
@@ -109,7 +114,6 @@ public class JumpEnemyAttack : MonoBehaviour
         Vector2 targetPos = player.position;
 
         float elapsed = 0f;
-        float originGravity = rb.gravityScale;
 
         // 진행 방향 저장
         float fallDirectionX = Mathf.Sign(targetPos.x - startPos.x);
@@ -161,8 +165,43 @@ public class JumpEnemyAttack : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         isAttackingOrReady = false;
+        jumpRoutine = null;
+    }
+    public bool OnBeforeTakeDamage(EnemyStatus enemyStatus, int damage)
+    {
+        return false; // 대미지는 그대로 받음
     }
 
+    public void OnAfterTakeDamage(EnemyStatus enemyStatus, int damage)
+    {
+        CancelJumpAttackByHit();
+    }
+    public void CancelJumpAttackByHit()
+    {
+        if (!isAttackingOrReady)
+        {
+            return;
+        }
+
+        if (jumpRoutine != null)
+        {
+            StopCoroutine(jumpRoutine);
+            jumpRoutine = null;
+        }
+
+        rb.gravityScale = originGravity;
+        rb.linearVelocity = new Vector2(0f, -cancelFallSpeed);
+
+        lastAttackTime = Time.time;
+
+        isAttackingOrReady = false;
+        hasDirectHit = false;
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.white;
+        }
+    }
     private void CheckDirectHit()
     {
         if (hasDirectHit)
