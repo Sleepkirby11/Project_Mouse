@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8826500373280412492
 Transform:
   m_ObjectHideFlags: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   lifeTime: 0.5
   isMove: 0
   mouse: {fileID: 0}
+  damage: 0
 --- !u!68 &3601384600695390484
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -163,7 +164,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129140456250158127}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

@@ -789,6 +789,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4311625636127181569, guid: 6fa95ab5984f9f643a1749254bc4f0f3, type: 3}
+      propertyPath: m_MinVertexDistance
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5127931237211646810, guid: 6fa95ab5984f9f643a1749254bc4f0f3, type: 3}
       propertyPath: m_Name
       value: NormalAttack

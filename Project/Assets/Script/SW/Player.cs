@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
         if (context.started && jumpCount == 1)
         {
             //마우스 방향 구하기
-            mouse.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouse = attackCursor.gameObject.transform;
             Vector2 dir = (Vector2)(mouse.transform.position - transform.position);
 
             //normalized된 방향으로 AddForce
@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
             if (context.started)
             {
                 //초기화
-                mouse.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mouse = attackCursor.gameObject.transform;
                 cursorObject.transform.position = mouse.transform.position;
                 trail.startWidth = 0.25f;
                 cursor.mouse = mouse;
