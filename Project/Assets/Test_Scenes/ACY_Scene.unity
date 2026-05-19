@@ -7316,6 +7316,10 @@ PrefabInstance:
       propertyPath: groundLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4055180174601223183, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
+      propertyPath: findPlayerRange
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.57
