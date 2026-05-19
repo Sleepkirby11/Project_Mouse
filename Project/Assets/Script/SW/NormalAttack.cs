@@ -15,6 +15,7 @@ public class NormalAttack : MonoBehaviour
 
     //Trail의 정점 변수
     List<Vector2> points = new List<Vector2>();
+    public int positionCount;
 
     //마우스 좌표 저장
     public Transform mouse;
@@ -43,6 +44,11 @@ public class NormalAttack : MonoBehaviour
             lifeTime -= Time.deltaTime;
             trail.startWidth = lifeTime * 2;
         }
+        else if (lifeTime < 0)
+        {
+            lifeTime = 0;
+            trail.startWidth = 0;
+        }
         else
         {
             col.enabled = false;
@@ -61,7 +67,7 @@ public class NormalAttack : MonoBehaviour
     public void SetColliderPointsFromTrail()
     {
         // 트레일의 정점 개수(2개 이상) 확인
-        int positionCount = trail.positionCount;
+        positionCount = trail.positionCount;
         if (positionCount < 2) return;
 
         Vector3[] trailPositions = new Vector3[positionCount];
