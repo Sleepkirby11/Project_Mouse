@@ -121,9 +121,15 @@ public class Cursor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if (damageable != null)
         {
-            collision.gameObject.GetComponent<EnemyStatus>().TakeDamage(damage);
+            damageable.TakeDamage(damage);
         }
+        //if (collision.gameObject.CompareTag("Enemy"))
+        //{
+        //    collision.gameObject.GetComponent<EnemyStatus>().TakeDamage(damage);
+        //}
     }
 }

@@ -9,7 +9,7 @@ public class FireArrow : MonoBehaviour, IDamageable
     public float lifeTime = 6f;
 
     [Header("데미지")]
-    public int damage = 10;
+    public int damage = 1;
 
     [Header("폭발 설정")]
     public float bombDuration = 0.3f;
@@ -38,13 +38,21 @@ public class FireArrow : MonoBehaviour, IDamageable
 
     void OnEnable()
     {
+        StopAllCoroutines();
         isExploding = false;
+        target = null;
         timer = 0f;
 
-        if (col != null) col.enabled = true;
+        if (col != null)
+        {
+            col.enabled = true;
+        }
 
         var sr = GetComponent<SpriteRenderer>();
-        if (sr != null) sr.enabled = true;
+        if (sr != null)
+        {
+            sr.enabled = true;
+        }
 
         if (audioSource != null && flightSound != null)
         {
@@ -60,7 +68,10 @@ public class FireArrow : MonoBehaviour, IDamageable
         this.angleOffset = angleOffset;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null) target = player.transform;
+        if (player != null)
+        {
+            target = player.transform;
+        }
 
         timer = 0f;
         isExploding = false;
@@ -76,7 +87,10 @@ public class FireArrow : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (isExploding) return;
+        if (isExploding)
+        {
+            return;
+        }
 
         timer += Time.deltaTime;
         if (timer >= lifeTime)
@@ -92,7 +106,7 @@ public class FireArrow : MonoBehaviour, IDamageable
         }
 
         Vector2 dir = (target.position - transform.position).normalized;
-        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleOffset;
         float currentAngle = transform.eulerAngles.z;
 
         float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, rotateSpeed * Time.deltaTime);
@@ -102,7 +116,10 @@ public class FireArrow : MonoBehaviour, IDamageable
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (isExploding) return;
+        if (isExploding)
+        {
+            return;
+        }
 
         if (other.CompareTag("Player"))
         {
@@ -122,7 +139,10 @@ public class FireArrow : MonoBehaviour, IDamageable
 
     public void Explode()
     {
-        if (isExploding) return;
+        if (isExploding)
+        {
+            return;
+        }
         isExploding = true;
 
         transform.rotation = Quaternion.identity;
@@ -132,29 +152,32 @@ public class FireArrow : MonoBehaviour, IDamageable
             audioSource.Stop();
             audioSource.loop = false;
             if (explosionSound != null)
+            {
                 audioSource.PlayOneShot(explosionSound);
+            }
         }
 
         if (col != null) col.enabled = false;
 
         if (anim != null)
         {
-            anim.SetTrigger("Bomb");
-            anim.Play("arrow_bomb", 0, 0f);
+            //anim.SetTrigger("Bomb");
+            //anim.Play("arrow_bomb", 0, 0f);
         }
 
-        StartCoroutine(DelayedReturn());
-    }
-
-    IEnumerator DelayedReturn()
-    {
-        yield return new WaitForSeconds(bombDuration);
-
-        var sr = GetComponent<SpriteRenderer>();
-        if (sr != null) sr.enabled = false;
-
-        yield return new WaitForSeconds(bombSound - bombDuration);
-
         PoolingManager.Instance.Return(POOL_KEY, gameObject);
+        //StartCoroutine(DelayedReturn());
     }
+
+    //IEnumerator DelayedReturn()
+    //{
+    //    yield return new WaitForSeconds(bombDuration);
+
+    //    var sr = GetComponent<SpriteRenderer>();
+    //    if (sr != null) sr.enabled = false;
+
+    //    yield return new WaitForSeconds(bombSound - bombDuration);
+
+    //    PoolingManager.Instance.Return(POOL_KEY, gameObject);
+    //}
 }
