@@ -50,7 +50,10 @@ public class Cursor : MonoBehaviour
         //지속 시간에 따른 trail의 크기 변화 및 collider의 enabled 여부
         if (lifeTime > 0)
         {
-            col.enabled = true;
+            if(positionCount >= 2)
+            {
+                col.enabled = true;
+            }
 
             lifeTime -= Time.deltaTime;
             trail.startWidth = lifeTime * 2;
@@ -72,12 +75,17 @@ public class Cursor : MonoBehaviour
             // 트레일의 정점 개수 업데이트 확인
             if(positionCount != trail.positionCount)
             {
-                positionCount = trail.positionCount;
+                trailUpdate();
                 trailLength = GetTrailLength();
             }
         }
 
 
+    }
+
+    public void trailUpdate()
+    {
+        positionCount = trail.positionCount;
     }
 
     float GetTrailLength()
