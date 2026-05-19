@@ -16,50 +16,70 @@ using static UnityEngine.GraphicsBuffer;
  */
 public class Player : MonoBehaviour
 {
+    PlayerStatus status;
+
+    [Header("스킬 공격")]
     public GameObject cursorObject;
 
-    //보안을 위해 hp와 maxHp를 private로 설정
-    private int hp;
-    private int maxHp;
+    [Header("일반 공격")]
+    public GameObject normalAttackObject;
 
-    //public getter 프로퍼티로 hp, maxHp 참조
-    public int HP => hp;
-    public int MaxHP => maxHp;
+    [Header("공격 표시 커서")]
+    public GameObject attackCursor;
+
 
 
     Rigidbody2D rigid;
     BoxCollider2D col;
 
     //이동값 변수
-    public float speed;
+    float speed;
     Vector2 inputVec;
     bool isCanMove;
 
     //점프 횟수
     int jumpCount;
 
-    Vector2 mouse;
+    //마우스
+    Transform mouse;
+    Vector2 mouseDist;
+    public float maxDist;
+    bool isSkill;
 
 
     //초기화
     void Start()
     {
+        status = GetComponent<PlayerStatus>();
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         jumpCount = 2;
 
-        maxHp = 5;
-        hp = maxHp;
+        speed = status.speed;
+
+        attackCursor.GetComponent<AttackCursor>().target = transform;
+
+        isSkill = false;
     }
 
 
     void FixedUpdate()
     {
         //linearVelocity 기반 이동
-        if (isCanMove)
+        if (isCanMove && status.CanMove) //status 스크립트에서 움직임 가능 여부 받아오게 수정
         {
-            rigid.linearVelocityX = inputVec.x;
+            Move();
         }
+        else if (!status.CanMove && !status.IsPossessed && !status.IsKnockbacked)
+        {
+            rigid.linearVelocityX = 0;
+        }
+
+        // 아래가 수정 전
+        //if (isCanMove)
+        //{
+        //    Move();
+        //}
         GroundCheck();
     }
 
@@ -69,10 +89,15 @@ public class Player : MonoBehaviour
         //이동 키 변화 감지 시 true
         isCanMove = true;
         //이동 제한 조건식
-        if (hp <= 0)
+        if (status.HP <= 0 || !status.CanMove)
         {
             return;
         }
+        //아래가 수정 전
+        //if (status.HP <= 0)
+        //{
+        //    return;
+        //}
         //키 입력 시작
         if (context.started)
         {
@@ -89,10 +114,15 @@ public class Player : MonoBehaviour
     public void ActionJump(InputAction.CallbackContext context)
     {
         //점프 제한 조건식
-        if (hp <= 0)
+        if (status.HP <= 0 || !status.CanMove)
         {
             return;
         }
+        //아래가 수정 전
+        //if (status.HP <= 0)
+        //{
+        //    return;
+        //}
 
         if (context.started)
         {
@@ -116,16 +146,21 @@ public class Player : MonoBehaviour
 
     public void ActionDash(InputAction.CallbackContext context)
     {
-        if (hp <= 0)
+        if (status.HP <= 0 || !status.CanMove)
         {
             return;
         }
+        //아래가 수정 전
+        //if (status.HP <= 0)
+        //{
+        //    return;
+        //}
 
-        if (context.started && jumpCount > 0)
+        if (context.started && jumpCount == 1)
         {
             //마우스 방향 구하기
-            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 dir = mouse - (Vector2)transform.position;
+            mouse.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 dir = (Vector2)(mouse.transform.position - transform.position);
 
             //normalized된 방향으로 AddForce
             rigid.linearVelocity = Vector2.zero;
@@ -133,50 +168,110 @@ public class Player : MonoBehaviour
             //키 입력 영향 임시 제한
             isCanMove = false;
 
-            if(rigid.linearVelocityY <= 0)
-                return;
             jumpCount--;
         }
     }
 
     public void ActionAttack(InputAction.CallbackContext context)
     {
-        if (hp <= 0)
+        if (status.HP <= 0 || !status.CanMove)
+        {
             return;
-
-        TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
-        Cursor cursor = cursorObject.GetComponent<Cursor>();
-        if(context.started)
-        {
-            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            cursorObject.transform.position = mouse;
-            trail.startWidth = 0.25f;
-            trail.Clear();
-            cursor.lifeTime = 0;
         }
-        if(context.canceled)
+        //아래가 수정 전
+        //if (status.HP <= 0)
+        //    return;
+
+        //스킬과 일반 공격 구분
+        //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
+        if (isSkill)
         {
-            cursor.lifeTime = 0.5f;
-            cursor.SetColliderPointsFromTrail();
+            //스킬 오브젝트 Component 호출
+            TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
+            Cursor cursor = cursorObject.GetComponent<Cursor>();
+            if (context.started)
+            {
+                //초기화
+                mouse.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                cursorObject.transform.position = mouse.transform.position;
+                trail.startWidth = 0.25f;
+                cursor.mouse = mouse;
+                cursor.isMove = true;
+                trail.Clear();
+                cursor.lifeTime = 0;
+            }
+            if (context.canceled)
+            {
+                //스킬 발동, Collider 입히기
+                cursor.isMove = false;
+                cursor.lifeTime = 0.5f;
+                cursor.damage = status.damage;
+                cursor.SetColliderPointsFromTrail();
+                status.ink = status.maxInk;
+            }
+        }
+        else
+        {
+            //일반 공격 오브젝트 Component 호출
+            TrailRenderer trail = normalAttackObject.GetComponent<TrailRenderer>();
+            NormalAttack cursor = normalAttackObject.GetComponent<NormalAttack>();
+            if (context.started)
+            {
+                //초기화
+                mouse = attackCursor.gameObject.transform;
+                normalAttackObject.transform.position = mouse.transform.position;
+                trail.startWidth = 0.25f;
+                cursor.mouse = mouse;
+                cursor.isMove = true;
+                trail.Clear();
+                cursor.lifeTime = 0;
+            }
+            if (context.canceled)
+            {
+                //일반 공격, Collider 입히기
+                cursor.isMove = false;
+                cursor.lifeTime = 0.5f;
+                cursor.damage = status.damage;
+                cursor.SetColliderPointsFromTrail();
+                status.ink = status.maxInk;
+            }
         }
     }
 
     //착지 판정 검사
     void GroundCheck()
     {
-        if( rigid.linearVelocityY < 0 &&
-        Physics2D.BoxCast
-                (transform.position, col.size, 0f, Vector2.down, 0.2f, LayerMask.GetMask("Ground")))
+        if (!status.CanMove) //추가함
         {
-            rigid.linearVelocityX = 0;
+            return;
+        }
+
+        //낙하중 + BoxCast로 착지 판정 검사
+        if (rigid.linearVelocityY <= 0 &&
+        Physics2D.BoxCast
+                (transform.position, col.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground")))
+        {
+
+            //이동 가능 + input 값 이어서 받기
+            rigid.linearVelocityX = inputVec.x;
             jumpCount = 2;
+            isCanMove = true;
         }
     }
 
 
+    void Move()
+    {
+        rigid.linearVelocityX = inputVec.x;
+    }
+
     //점프 후 착지 판정 보완
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!status.CanMove) //추가함
+        {
+            return;
+        }
 
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -184,8 +279,10 @@ public class Player : MonoBehaviour
             {
                 if (contact.normal.y > 0.5f) //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
                 {
-                    rigid.linearVelocityX = 0;
+                    //이동 가능 + input 값 이어서 받기
+                    rigid.linearVelocityX = inputVec.x;
                     jumpCount = 2;
+                    isCanMove = true;
                     break;
                 }
             }

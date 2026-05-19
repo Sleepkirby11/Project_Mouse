@@ -1,15 +1,8 @@
-using JetBrains.Annotations;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-/*
- * Cursor: 마우스를 따라 Trail을 생성하고 collider를 입히는 과정
- * trail의 width가 0.25f이면 그리는 중
- * lifeTime이 0이 아니면 공격 실행
- * 공격 실행 시 SetColliderPointsFromTrail()로 Collider를 Trail에 입힘
- */
-
-public class Cursor : MonoBehaviour
+public class NormalAttack : MonoBehaviour
 {
     //Trail의 지속시간
     public float lifeTime;
@@ -56,7 +49,7 @@ public class Cursor : MonoBehaviour
         }
 
         //그리는 중 마우스 좌표 따라 이동
-        if(isMove)
+        if (isMove)
         {
             transform.position = mouse.transform.position;
         }
@@ -87,9 +80,10 @@ public class Cursor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if(collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyStatus>().TakeDamage(damage);
         }
     }
 }
+
