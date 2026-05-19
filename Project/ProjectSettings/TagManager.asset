@@ -7,7 +7,7 @@ TagManager:
   - Ground
   - Cursor
   - Enemy
-  - Lever
+  - Interactable
   layers:
   - Default
   - TransparentFX
