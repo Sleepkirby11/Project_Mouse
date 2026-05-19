@@ -437,17 +437,12 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &1408047175 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2217059573266368985, guid: 24f0a3ee46424084ebf30d5bd5973bbf, type: 3}
-  m_PrefabInstance: {fileID: 8050978001599740789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1408047179 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 510661055554372995, guid: 24f0a3ee46424084ebf30d5bd5973bbf, type: 3}
   m_PrefabInstance: {fileID: 8050978001599740789}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1408047175}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63f3f67b52e9e6343bd9b5d7f505a999, type: 3}
@@ -760,37 +755,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5625244240855389198, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
-      propertyPath: targetGimmick
-      value: 
-      objectReference: {fileID: 1408047175}
-    - target: {fileID: 5625244240855389198, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
-      propertyPath: onLeverActivate.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5625244240855389198, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
-      propertyPath: onLeverActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5625244240855389198, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
       propertyPath: onLeverActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1408047179}
-    - target: {fileID: 5625244240855389198, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
-      propertyPath: onLeverActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5625244240855389198, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
-      propertyPath: onLeverActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Collapse
-      objectReference: {fileID: 0}
-    - target: {fileID: 5625244240855389198, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
-      propertyPath: onLeverActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Wall, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5625244240855389198, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
-      propertyPath: onLeverActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6733503852633890548, guid: 33260645213076c48bc37d6e2c92f619, type: 3}
       propertyPath: m_Name
       value: Lever
