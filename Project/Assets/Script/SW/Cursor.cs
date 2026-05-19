@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /*
  * Cursor: 마우스를 따라 Trail을 생성하고 collider를 입히는 과정
@@ -22,6 +23,10 @@ public class Cursor : MonoBehaviour
 
     //Trail의 정점 변수
     List<Vector2> points = new List<Vector2>();
+    int positionCount;
+    public float trailLength;
+
+    private Vector3[] trailPositions = new Vector3[20];
 
     //마우스 좌표 저장
     public Transform mouse;
@@ -50,28 +55,49 @@ public class Cursor : MonoBehaviour
             lifeTime -= Time.deltaTime;
             trail.startWidth = lifeTime * 2;
         }
+        else if (lifeTime < 0)
+        {
+            lifeTime = 0;
+            trail.startWidth = 0;
+        }
         else
         {
             col.enabled = false;
         }
 
         //그리는 중 마우스 좌표 따라 이동
-        if(isMove)
+        if (isMove)
         {
             transform.position = mouse.transform.position;
+            // 트레일의 정점 개수 업데이트 확인
+            if(positionCount != trail.positionCount)
+            {
+                positionCount = trail.positionCount;
+                trailLength = GetTrailLength();
+            }
         }
 
 
     }
 
+    float GetTrailLength()
+    {
+        float length = 0f;
+        if (positionCount < 2) return length;
+
+        trail.GetPositions(trailPositions);
+        for (int i = 1; i < positionCount; i++)
+        {
+            length += Vector3.Distance(trailPositions[i - 1], trailPositions[i]);
+        }
+        return length;
+    }
+
     //Trail에 Collider를 입히는 과정
     public void SetColliderPointsFromTrail()
     {
-        // 트레일의 정점 개수(2개 이상) 확인
-        int positionCount = trail.positionCount;
         if (positionCount < 2) return;
 
-        Vector3[] trailPositions = new Vector3[positionCount];
         trail.GetPositions(trailPositions);
 
         points.Clear();
