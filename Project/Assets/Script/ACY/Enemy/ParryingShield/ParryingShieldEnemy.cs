@@ -184,7 +184,10 @@ public class ParryingShieldEnemy : MonoBehaviour
     // 패링 상태면 카운터를 발동하고, 아니면 false 반환
     public bool OnHitByPlayer(Transform attacker)
     {
-        if (state != State.Parrying) return false;
+        if (state != State.Parrying)
+        {
+            return false;
+        }
 
         StartCoroutine(CounterRoutine(attacker));
         return true;
