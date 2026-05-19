@@ -22,11 +22,11 @@ public class Bomb : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damageAmount)
+    public void BombTakeDamage(int damage)
     {
         if (isExploded) return;
 
-        currentHealth -= damageAmount;
+        currentHealth -= damage;
         Debug.Log($"폭탄이 공격받음! 현재 체력: {currentHealth}");
 
         if (currentHealth <= 0)

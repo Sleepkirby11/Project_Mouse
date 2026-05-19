@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -122,6 +122,10 @@ public class Cursor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<EnemyStatus>().TakeDamage(damage);
+        }
+        else if (collision.gameObject.CompareTag("AttackableTrap"))
         {
             collision.gameObject.GetComponent<EnemyStatus>().TakeDamage(damage);
         }
