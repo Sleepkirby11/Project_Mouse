@@ -834,30 +834,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &741460911 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1114137132973608061, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-  m_PrefabInstance: {fileID: 3684231606283955788}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &741460916 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-  m_PrefabInstance: {fileID: 3684231606283955788}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &741460917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741460911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 10
-  dieAnimationLength: 1
 --- !u!1 &833256145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,37 +1085,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
   m_PrefabInstance: {fileID: 1762049002}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1581345504
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1581345505}
-  m_Layer: 7
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1581345505
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581345504}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.46, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 741460916}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1762049002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7300,26 +7245,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 1114137132973608061, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2112761510537771925, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3711272758253090591, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      propertyPath: groundCheck
-      value: 
-      objectReference: {fileID: 1581345505}
-    - target: {fileID: 3711272758253090591, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4055180174601223183, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      propertyPath: findPlayerRange
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.57
@@ -7362,14 +7287,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1581345505}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1114137132973608061, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 741460917}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
 --- !u!4 &4746982243418912233
 Transform:
