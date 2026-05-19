@@ -22,9 +22,24 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         {
             return;
         }
+        IHitReaction hitReaction = GetComponent<IHitReaction>();
 
+        if (hitReaction != null)
+        {
+            bool blocked = hitReaction.OnBeforeTakeDamage(this, damage);
+
+            if (blocked)
+            {
+                return;
+            }
+        }
         currentHP -= damage; //적이 피해를 입을 때마다 체력 감소
         Debug.Log($"{gameObject.name}이 피해를 {damage}만큼 입음. 남은 HP : {currentHP}/{maxHP}");
+
+        if (hitReaction != null)
+        {
+            hitReaction.OnAfterTakeDamage(this, damage);
+        }
 
         if (currentHP <= 0)
         {
