@@ -54,15 +54,15 @@ public class FireArrow : MonoBehaviour, IDamageable
             sr.enabled = true;
         }
 
-        if (audioSource != null && flightSound != null)
-        {
-            audioSource.clip = flightSound;
-            audioSource.loop = true;
-            audioSource.Play();
-        }
+        //if (audioSource != null && flightSound != null)
+        //{
+        //    audioSource.clip = flightSound;
+        //    audioSource.loop = true;
+        //    audioSource.Play();
+        //}
     }
 
-    // 발사 시 초기화 (angleOffset: 3연발 각도 차이)
+    // 발사 시 초기화
     public void Init(float angleOffset = 0f)
     {
         this.angleOffset = angleOffset;

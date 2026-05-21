@@ -60,7 +60,7 @@ public class Meteor : MonoBehaviour
     {
         isFalling = false;
 
-        // 나중에 여기서 장판 생성
+        // 나중에 여기서 장판 생성 
         PoolingManager.Instance.Return(METEOR_KEY, gameObject);
     }
 }

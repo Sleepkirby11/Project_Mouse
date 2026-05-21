@@ -14,9 +14,11 @@ public class RedBossMove : MonoBehaviour
     [SerializeField] private GameObject appearVFX;      // 등장할 때 이펙트
 
     private int currentPointIndex = -1;
+    private RedBossAttack bossAttack;
 
     private void Start()
     {
+        bossAttack = GetComponent<RedBossAttack>();
         StartCoroutine(TeleportRoutine());
     }
 
@@ -25,6 +27,11 @@ public class RedBossMove : MonoBehaviour
         while (this != null && gameObject != null)
         {
             yield return new WaitForSeconds(teleportInterval);
+
+            if (bossAttack != null && bossAttack.IsStunned)
+            {
+                continue;
+            }
             if (this == null || gameObject == null)
             {
                 yield break;

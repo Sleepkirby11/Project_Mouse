@@ -12,9 +12,11 @@ public class ArcherEnemyAttack : MonoBehaviour
     private ArcherEnemyMove archerMove;
     private float nextAttackTime; // 다음 공격 가능 시간
 
+    private const string ARROW_KEY = "Arrow";
+
     private void Awake()
     {
-        // 같은 오브젝트 내 이동 컨트롤러 캐싱
+        //캐싱
         archerMove = GetComponent<ArcherEnemyMove>();
     }
 
@@ -22,7 +24,7 @@ public class ArcherEnemyAttack : MonoBehaviour
     {
         Transform target = archerMove.TargetPlayer;
 
-        // 타겟이 있고, 백스텝 중이 아닐 때만 공격 시도
+        // 타겟이 있고 백스텝 중이 아닐 때만 공격 시도
         if (target != null && !archerMove.IsBackstepping)
         {
             if (Time.time >= nextAttackTime)
@@ -35,7 +37,13 @@ public class ArcherEnemyAttack : MonoBehaviour
 
     private void Fire(Vector3 targetPos)
     {
-        GameObject arrowObj = Instantiate(arrowPrefab, firePoint.position, Quaternion.identity);
+        GameObject arrowObj = PoolingManager.Instance.Get(ARROW_KEY, firePoint.position, Quaternion.identity);
+
+        if (arrowObj == null)
+        {
+            return;
+        }
+
         if (arrowObj.TryGetComponent<Arrow>(out var arrow))
         {
             arrow.Initialize(firePoint.position, targetPos, arrowHeight, arrowDuration);
