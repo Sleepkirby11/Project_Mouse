@@ -2585,6 +2585,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 3689845271912533494, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: appearVFX
       value: 
@@ -2613,6 +2617,10 @@ PrefabInstance:
       propertyPath: 'teleportPoints.Array.data[4]'
       value: 
       objectReference: {fileID: 842367732}
+    - target: {fileID: 6985218642751753356, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7047756458394531367, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.17
@@ -2652,6 +2660,18 @@ PrefabInstance:
     - target: {fileID: 7047756458394531367, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: waveInterval
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: meteorSpawnYRange.x
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: meteorSpawnYRange.y
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
