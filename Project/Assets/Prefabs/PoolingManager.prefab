@@ -50,4 +50,16 @@ MonoBehaviour:
     initialSize: 10
   - key: RedBossMeteor
     prefab: {fileID: 2983593613088629823, guid: 6b4a0a588a1510e4fb3d501fa6f3a426, type: 3}
+    initialSize: 30
+  - key: Arrow
+    prefab: {fileID: 1618385924406531736, guid: 2c73065b31eb5624f8dec5c6d2cdc66d, type: 3}
+    initialSize: 5
+  - key: RedBossClone
+    prefab: {fileID: 6307684664467451572, guid: a9548e03c84e6354b8f5952804475b33, type: 3}
     initialSize: 10
+  - key: RedBossLaser
+    prefab: {fileID: 2214707613065288430, guid: 39eb1a22691993f45bb0c0266a835624, type: 3}
+    initialSize: 5
+  - key: RedBossOrb
+    prefab: {fileID: 4993334597026480835, guid: 5221524ee33460945b18265cdf2a7325, type: 3}
+    initialSize: 5

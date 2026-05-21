@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//차후 파티클 사용이 확정된다면 풀링으로 처리
 public class PoolingManager : MonoBehaviour
 {
     public static PoolingManager Instance { get; private set; }
@@ -19,8 +20,14 @@ public class PoolingManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else { Destroy(gameObject); return; }
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else 
+        { 
+            Destroy(gameObject); return; 
+        }
 
         DontDestroyOnLoad(gameObject);
         InitializePools();

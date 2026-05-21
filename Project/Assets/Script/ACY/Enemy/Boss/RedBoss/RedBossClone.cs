@@ -75,11 +75,7 @@ public class RedBossClone : MonoBehaviour, IDamageable
         {
             ps.Play();
 
-            Destroy
-            (
-                vfx,
-                ps.main.duration + ps.main.startLifetime.constantMax
-            );
+            Destroy(vfx, ps.main.duration + ps.main.startLifetime.constantMax);
         }
     }
 }

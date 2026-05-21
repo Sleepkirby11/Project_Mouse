@@ -1,40 +1,49 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class LaserCross : MonoBehaviour
 {
-    [Header("°æ°í¼±")]
+    [Header("ê²½ê³ ì„ ")]
     [SerializeField] private SpriteRenderer[] warningLines;
 
-    [Header("·¹ÀÌÀú")]
+    [Header("ë ˆì´ì €")]
     [SerializeField] private Transform[] laserLines;
 
-    [Header("·¹ÀÌÀú ½ºÇÁ¶óÀÌÆ®")]
+    [Header("ë ˆì´ì € ìŠ¤í”„ë¼ì´íŠ¸")]
     [SerializeField] private SpriteRenderer[] laserRenderers;
 
-    [Header("»ç¿îµå")]
+    [Header("ì‚¬ìš´ë“œ")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip laserSFX;
 
-    [Header("È¸Àü")]
+    [Header("íšŒì „")]
     [SerializeField] private float startRotateSpeed = 8f;
     [SerializeField] private float maxRotateSpeed = 45f;
     [SerializeField] private float acceleration = 12f;
 
-    [Header("·¹ÀÌÀú ±½±â")]
+    [Header("ë ˆì´ì € êµµê¸°")]
     [SerializeField] private float laserThickness = 1.5f;
 
     private const string LASER_KEY = "RedBossLaser";
     private float duration;
 
     private float rotateSpeed;
-    private float rotateDirection; // Ãß°¡: +1(½Ã°è) ¶Ç´Â -1(¹İ½Ã°è)
+    private float rotateDirection; // ì¶”ê°€: +1(ì‹œê³„) ë˜ëŠ” -1(ë°˜ì‹œê³„)
     private Coroutine laserRoutine;
+    private void OnDisable()
+    {
+        if (laserRoutine != null)
+        {
+            StopCoroutine(laserRoutine);
+            laserRoutine = null;
+        }
+    }
     public void Init(float warningTime, float laserDuration)
     {
         duration = laserDuration;
 
-        // ---------- »óÅÂ ÃÊ±âÈ­ ----------
+        // ---------- ìƒíƒœ ì´ˆê¸°í™” ----------
+
         transform.rotation = Quaternion.identity;
 
         rotateSpeed = startRotateSpeed;
@@ -46,7 +55,7 @@ public class LaserCross : MonoBehaviour
         SetWarningAlpha(0.15f);
         SetLaserAlpha(1f);
 
-        // ·¹ÀÌÀú µÎ²² ÃÊ±âÈ­
+        // ë ˆì´ì € ë‘ê»˜ ì´ˆê¸°í™”
         for (int i = 0; i < laserLines.Length; i++)
         {
             Vector3 scale = laserLines[i].localScale;
@@ -56,41 +65,40 @@ public class LaserCross : MonoBehaviour
             laserLines[i].localScale = scale;
         }
 
-        // ±âÁ¸ ÄÚ·çÆ¾ Á¦°Å
+        // ê¸°ì¡´ ì½”ë£¨í‹´ ì œê±°
         if (laserRoutine != null)
         {
             StopCoroutine(laserRoutine);
         }
 
-        laserRoutine =
-            StartCoroutine(LaserRoutine(warningTime));
+        laserRoutine = StartCoroutine(LaserRoutine(warningTime));
     }
 
     private IEnumerator LaserRoutine(float warningTime)
     {
         SetLaser(false);
 
-        // ---------------- °æ°í¼± ----------------
+        // ---------------- ê²½ê³ ì„  ----------------
         SetWarning(true);
 
         SetWarningAlpha(0.15f);
 
         yield return new WaitForSeconds(warningTime * 0.5f);
 
-        // ÇÑ¹ø °­ÇÏ°Ô Á¡¸ê
+        // í•œë²ˆ ê°•í•˜ê²Œ ì ë©¸
         SetWarningAlpha(0.6f);
 
         yield return new WaitForSeconds(warningTime * 0.5f);
 
         SetWarning(false);
 
-        // ---------------- ·¹ÀÌÀú µîÀå ----------------
+        // ---------------- ë ˆì´ì € ë“±ì¥ ----------------
         SetLaser(true);
 
-        // ½ÃÀÛ Åõ¸íµµ
+        // ì‹œì‘ íˆ¬ëª…ë„
         SetLaserAlpha(1f);
 
-        // ½ÃÀÛ ±½±â 0
+        // ì‹œì‘ êµµê¸° 0
         for (int i = 0; i < laserLines.Length; i++)
         {
             Vector3 scale = laserLines[i].localScale;
@@ -100,13 +108,13 @@ public class LaserCross : MonoBehaviour
             laserLines[i].localScale = scale;
         }
 
-        // »ç¿îµå
+        // ì‚¬ìš´ë“œ
         if (audioSource != null && laserSFX != null)
         {
             audioSource.PlayOneShot(laserSFX);
         }
 
-        // Ä«¸Ş¶ó Èçµé¸²
+        // ì¹´ë©”ë¼ í”ë“¤ë¦¼
         /*
         if (CameraShake.Instance != null)
         {
@@ -114,7 +122,7 @@ public class LaserCross : MonoBehaviour
         }
         */
 
-        // ---------------- ±½¾îÁö´Â ¿¬Ãâ ----------------
+        // ---------------- êµµì–´ì§€ëŠ” ì—°ì¶œ ----------------
         float growTime = 0.2f;
         float growTimer = 0f;
 
@@ -122,13 +130,7 @@ public class LaserCross : MonoBehaviour
         {
             growTimer += Time.deltaTime;
 
-            float value =
-                Mathf.Lerp
-                (
-                    0f,
-                    laserThickness,
-                    growTimer / growTime
-                );
+            float value = Mathf.Lerp(0f, laserThickness, growTimer / growTime);
 
             for (int i = 0; i < laserLines.Length; i++)
             {
@@ -142,20 +144,14 @@ public class LaserCross : MonoBehaviour
             yield return null;
         }
 
-        // ---------------- È¸Àü ----------------
+        // ---------------- íšŒì „ ----------------
         float rotateTimer = 0f;
 
         while (rotateTimer < duration)
         {
             rotateSpeed += acceleration * Time.deltaTime;
 
-            rotateSpeed =
-                Mathf.Clamp
-                (
-                    rotateSpeed,
-                    startRotateSpeed,
-                    maxRotateSpeed
-                );
+            rotateSpeed = Mathf.Clamp(rotateSpeed, startRotateSpeed, maxRotateSpeed);
 
             transform.Rotate(0f, 0f, rotateDirection * rotateSpeed * Time.deltaTime);
 
@@ -164,7 +160,7 @@ public class LaserCross : MonoBehaviour
             yield return null;
         }
 
-        // ---------------- ¼­¼­È÷ »ç¶óÁü ----------------
+        // ---------------- ì„œì„œíˆ ì‚¬ë¼ì§ ----------------
         float fadeTimer = 0f;
         float fadeDuration = 0.5f;
 
@@ -172,13 +168,7 @@ public class LaserCross : MonoBehaviour
         {
             fadeTimer += Time.deltaTime;
 
-            float alpha =
-                Mathf.Lerp
-                (
-                    1f,
-                    0f,
-                    fadeTimer / fadeDuration
-                );
+            float alpha = Mathf.Lerp(1f, 0f, fadeTimer / fadeDuration);
 
             SetLaserAlpha(alpha);
 

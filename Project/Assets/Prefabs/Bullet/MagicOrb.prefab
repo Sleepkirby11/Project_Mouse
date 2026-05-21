@@ -114,7 +114,7 @@ MonoBehaviour:
   bobSpeed: 2
   bobAmount: 0.2
   launchSpeed: 15
-  arrivalDistance: 1
+  arrivalDistance: 0.05
   damage: 1
 --- !u!1 &7530916628140950511
 GameObject:

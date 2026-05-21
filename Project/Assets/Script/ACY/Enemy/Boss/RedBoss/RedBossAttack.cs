@@ -35,10 +35,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [SerializeField] private Transform[] teleportPoints;
     [SerializeField] private GameObject cloneDisappearVFX;
     [SerializeField] private GameObject cloneSpawnVFX;
+    private bool hasClones = false;
 
     [Header("레이저 설정")]
     [SerializeField] private GameObject laserCrossPrefab;
     [SerializeField] private Transform laserSpawnPoint;
+    private const string LASER_KEY = "RedBossLaser";
 
     [SerializeField] private float laserWarningTime = 1.5f;
     [SerializeField] private float laserDuration = 4f;
@@ -79,19 +81,23 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     // 일정 간격으로 화살 발사
     private IEnumerator AttackRoutine()
     {
-        //while (true)
-        //{
-        //    yield return new WaitForSeconds(attackCooldown); // 대기
-        //    yield return StartCoroutine(AttackArrow());      // 3연발 발사
-        //}
         while (true)
         {
-            yield return new WaitForSeconds(attackCooldown); // 대기
-            yield return StartCoroutine(AttackOrb());     
+            yield return new WaitForSeconds(attackCooldown);
+            yield return StartCoroutine(AttackArrow());
+
+            yield return new WaitForSeconds(attackCooldown);
+            yield return StartCoroutine(AttackOrb());
+
+            yield return new WaitForSeconds(attackCooldown);
+            yield return StartCoroutine(AttackMeteor());
+
+            yield return new WaitForSeconds(attackCooldown);
+            yield return StartCoroutine(AttackLaser());
         }
     }
 
-    // ------------------------공격패턴 1 : 화살 3연발-------------------------
+    // ------------------------공격패턴 1 : 유도 화살-------------------------
     public IEnumerator AttackArrow()
     {
         SpawnArrow(0f);              // 가운데
@@ -111,8 +117,59 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         obj.GetComponent<FireArrow>()?.Init(angleOffset);
     }
+    //---------------공격 패턴 2 : 마법 구체 -------------------
+    public IEnumerator AttackOrb()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            yield break;
+        }
 
-    // ----------------------공격패턴 2 : 메테오 ---------------------------
+        // 구체 3개를 120도 간격으로 소환
+        MagicOrb[] orbs = new MagicOrb[3];
+
+        for (int i = 0; i < orbCount; i++)
+        {
+            float angle = i * (360f / orbCount);
+
+            GameObject obj = PoolingManager.Instance.Get
+            (
+                ORB_KEY,
+                transform.position,
+                Quaternion.identity
+            );
+
+            if (obj == null)
+            {
+                continue;
+            }
+
+            MagicOrb orb = obj.GetComponent<MagicOrb>();
+            orb?.Init(transform, angle, orbOrbitRadius);
+            orbs[i] = orb;
+        }
+
+        // 대기 (공전 연출)
+        yield return new WaitForSeconds(orbWaitTime);
+
+        // 발사 시점의 플레이어 위치 고정 후 동시 발사
+        Vector3 targetPos = player.transform.position;
+
+        for (int i = 0; i < orbs.Length; i++)
+        {
+            if (orbs[i] == null)
+            {
+                continue;
+            }
+            orbs[i].Launch(targetPos);
+        }
+
+        // 구체 비행 시간만큼 대기 후 다음 패턴
+        yield return new WaitForSeconds(2f);
+    }
+
+    // ----------------------공격패턴 3 : 메테오 ---------------------------
     public IEnumerator AttackMeteor()
     {
         isCastingMeteor = true;
@@ -232,7 +289,10 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         {
             return;
         }
-
+        if (!hasClones)
+        {
+            return;
+        }
         ApplyStun(stunDuration);
     }
     public bool OnBeforeTakeDamage(EnemyStatus enemy, int damage)
@@ -252,18 +312,15 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             return;
         }
 
+        hasClones = true;
+
         currentClones.Clear();
 
         for (int i = 0; i < teleportPoints.Length; i++)
         {
             Vector3 spawnPos = teleportPoints[i].position;
 
-            GameObject cloneObj = PoolingManager.Instance.Get
-            (
-                "RedBossClone",
-                spawnPos,
-                Quaternion.identity
-            );
+            GameObject cloneObj = PoolingManager.Instance.Get("RedBossClone", spawnPos, Quaternion.identity);
 
             if (cloneObj == null)
             {
@@ -290,8 +347,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
                 continue;
             }
 
-            RedBossClone clone =
-                currentClones[i].GetComponent<RedBossClone>();
+            RedBossClone clone = currentClones[i].GetComponent<RedBossClone>();
 
             if (clone != null)
             {
@@ -300,74 +356,21 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         }
 
         currentClones.Clear();
+
+        hasClones = false;
     }
-    // ---------------------공격패턴 3 : 레이저-----------------------
+    // ---------------------공격패턴 4 : 레이저-----------------------
     public IEnumerator AttackLaser()
     {
-        GameObject laserObj = Instantiate
-        (
-            laserCrossPrefab,
-            laserSpawnPoint.position,
-            Quaternion.identity
-        );
+        GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, laserSpawnPoint.position, Quaternion.identity);
 
-        LaserCross laser =
-            laserObj.GetComponent<LaserCross>();
+        LaserCross laser = laserObj.GetComponent<LaserCross>();
 
         if (laser != null)
         {
-            laser.Init
-            (
-                laserWarningTime,
-                laserDuration
-            );
+            laser.Init(laserWarningTime, laserDuration);
         }
 
-        yield return new WaitForSeconds
-        (
-            laserWarningTime + laserDuration
-        );
-    }
-    //---------------구체 패턴-------------------
-    public IEnumerator AttackOrb()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null) yield break;
-
-        // 구체 3개를 120도 간격으로 소환
-        MagicOrb[] orbs = new MagicOrb[3];
-
-        for (int i = 0; i < orbCount; i++)
-        {
-            float angle = i * (360f / orbCount);
-
-            GameObject obj = PoolingManager.Instance.Get
-            (
-                ORB_KEY,
-                transform.position,
-                Quaternion.identity
-            );
-
-            if (obj == null) continue;
-
-            MagicOrb orb = obj.GetComponent<MagicOrb>();
-            orb?.Init(transform, angle, orbOrbitRadius);
-            orbs[i] = orb;
-        }
-
-        // 대기 (공전 연출)
-        yield return new WaitForSeconds(orbWaitTime);
-
-        // 발사 시점의 플레이어 위치 고정 후 동시 발사
-        Vector3 targetPos = player.transform.position;
-
-        for (int i = 0; i < orbs.Length; i++)
-        {
-            if (orbs[i] == null) continue;
-            orbs[i].Launch(targetPos);
-        }
-
-        // 구체 비행 시간만큼 대기 후 다음 패턴
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(laserWarningTime + laserDuration);
     }
 }

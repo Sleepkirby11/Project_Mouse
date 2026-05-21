@@ -12,8 +12,7 @@ public class LaserDamage : MonoBehaviour
             return;
         }
 
-        IDamageable damageable =
-            collision.GetComponent<IDamageable>();
+        IDamageable damageable = collision.GetComponent<IDamageable>();
 
         if (damageable != null)
         {

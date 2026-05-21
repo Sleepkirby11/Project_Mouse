@@ -85,7 +85,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -127,7 +127,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 756666306752146170}
-  fireInterval: 0.3
   angleSpread: 15
   attackCooldown: 3
   meteorCastSlider: {fileID: 780655685047742581}
@@ -193,6 +192,22 @@ MonoBehaviour:
   meteorSpawnXRange: {x: -25, y: 25}
   meteorSpawnYRange: {x: 23, y: 18}
   meteorTargetY: -15
+  stunDuration: 3
+  teleportPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cloneDisappearVFX: {fileID: 0}
+  cloneSpawnVFX: {fileID: 3268619075305744560, guid: 771cca234fa3d5e4080958e572a7f350, type: 3}
+  laserCrossPrefab: {fileID: 2214707613065288430, guid: 39eb1a22691993f45bb0c0266a835624, type: 3}
+  laserSpawnPoint: {fileID: 0}
+  laserWarningTime: 1.5
+  laserDuration: 4
+  orbOrbitRadius: 2
+  orbCount: 3
+  orbWaitTime: 2
 --- !u!1 &2409019058995000748
 GameObject:
   m_ObjectHideFlags: 0
