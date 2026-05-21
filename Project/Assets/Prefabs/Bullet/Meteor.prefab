@@ -83,7 +83,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4070ad311a9ebce4c8d6e91ab470f729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 8
+  minfallSpeed: 8
+  maxfallSpeed: 10
   damage: 1
 --- !u!50 &2558072380318425221
 Rigidbody2D:

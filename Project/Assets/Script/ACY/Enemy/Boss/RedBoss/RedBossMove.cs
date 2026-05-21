@@ -25,7 +25,10 @@ public class RedBossMove : MonoBehaviour
         while (this != null && gameObject != null)
         {
             yield return new WaitForSeconds(teleportInterval);
-            if (this == null || gameObject == null) yield break;
+            if (this == null || gameObject == null)
+            {
+                yield break;
+            }
             yield return StartCoroutine(TeleportSequence());
         }
     }
@@ -34,17 +37,17 @@ public class RedBossMove : MonoBehaviour
     {
         int newIndex = GetRandomDifferentIndex();
 
-        // 1. 사라지는 이펙트 재생
+        // 사라지는 이펙트 재생
         SpawnVFX(disappearVFX, transform.position);
 
-        // 2. 잠깐 대기 (이펙트 연출 시간)
+        // 잠깐 대기 (이펙트 연출 시간)
         yield return new WaitForSeconds(0.2f);
 
-        // 3. 보스 이동
+        // 보스 이동
         currentPointIndex = newIndex;
         transform.position = teleportPoints[currentPointIndex].position;
 
-        // 4. 등장 이펙트 재생
+        // 등장 이펙트 재생
         SpawnVFX(appearVFX, transform.position);
 
         Debug.Log($"[RedBoss] 순간이동 → Point {currentPointIndex} {transform.position}");
@@ -57,13 +60,18 @@ public class RedBossMove : MonoBehaviour
 
     private int GetRandomDifferentIndex()
     {
-        if (teleportPoints.Length == 1) return 0;
+        if (teleportPoints.Length == 1)
+        {
+            return 0;
+        }
 
         List<int> candidates = new List<int>();
         for (int i = 0; i < teleportPoints.Length; i++)
         {
             if (i != currentPointIndex)
+            {
                 candidates.Add(i);
+            }
         }
 
         return candidates[Random.Range(0, candidates.Count)];
@@ -71,7 +79,10 @@ public class RedBossMove : MonoBehaviour
 
     private void SpawnVFX(GameObject vfxPrefab, Vector3 position)
     {
-        if (vfxPrefab == null) return;
+        if (vfxPrefab == null)
+        {
+            return;
+        }
 
         GameObject vfx = Instantiate(vfxPrefab, position, Quaternion.identity);
 

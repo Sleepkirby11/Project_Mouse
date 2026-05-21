@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RedBossAttack : MonoBehaviour
+public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 {
     [Header("공통")]
     [SerializeField] private Transform firePoint;
@@ -28,14 +28,30 @@ public class RedBossAttack : MonoBehaviour
     [SerializeField] private float meteorTargetY = -2.5f;
     private const string METEOR_KEY = "RedBossMeteor";
 
+    [Header("스턴 설정")]
+    [SerializeField] private float stunDuration = 2f;
+
+    private bool isCastingMeteor = false;
+    private bool isStunned = false;
+
+    private SpriteRenderer sr;
+    private Color originalColor;
+
     private void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+
+        if (sr != null)
+        {
+            originalColor = sr.color;
+        }
+
         if (meteorCastSlider != null)
         {
             meteorCastSlider.gameObject.SetActive(false);
         }
 
-        StartCoroutine(AttackRoutine()); // 시작하자마자 공격 시작
+        StartCoroutine(AttackRoutine());
     }
 
     // 일정 간격으로 화살 발사
@@ -77,7 +93,16 @@ public class RedBossAttack : MonoBehaviour
     // ----------------------공격패턴 2 : 메테오 ---------------------------
     public IEnumerator AttackMeteor()
     {
+        isCastingMeteor = true;
+
         yield return StartCoroutine(ShowMeteorCastUI());
+
+        // 캐스팅 중 스턴당했으면 취소
+        if (isStunned)
+        {
+            isCastingMeteor = false;
+            yield break;
+        }
 
         for (int wave = 0; wave < meteorWaveCount; wave++)
         {
@@ -85,6 +110,7 @@ public class RedBossAttack : MonoBehaviour
 
             yield return new WaitForSeconds(waveInterval);
         }
+        isCastingMeteor = false;
     }
 
     private void SpawnMeteorWave()
@@ -113,7 +139,9 @@ public class RedBossAttack : MonoBehaviour
     private IEnumerator ShowMeteorCastUI()
     {
         if (meteorCastSlider == null)
+        {
             yield break;
+        }
 
         meteorCastSlider.gameObject.SetActive(true);
         meteorCastSlider.maxValue = meteorCastTime;
@@ -130,6 +158,60 @@ public class RedBossAttack : MonoBehaviour
 
         meteorCastSlider.value = meteorCastTime;
         meteorCastSlider.gameObject.SetActive(false);
+    }
+    public void ApplyStun(float duration)
+    {
+        if (isStunned)
+        {
+            return;
+        }
+
+        StopAllCoroutines();
+        StartCoroutine(StunRoutine(duration));
+    }
+    private IEnumerator StunRoutine(float duration)
+    {
+        isStunned = true;
+        isCastingMeteor = false;
+
+        if (meteorCastSlider != null)
+        {
+            meteorCastSlider.gameObject.SetActive(false);
+        }
+
+        if (sr != null)
+        {
+            sr.color = Color.yellow;
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        if (sr != null)
+        {
+            sr.color = originalColor;
+        }
+
+        isStunned = false;
+
+        StartCoroutine(AttackRoutine());
+    }
+    public void OnHitDuringCast()
+    {
+        if (!isCastingMeteor || isStunned)
+        {
+            return;
+        }
+
+        ApplyStun(stunDuration);
+    }
+    public bool OnBeforeTakeDamage(EnemyStatus enemy, int damage)
+    {
+        return false;
+    }
+
+    public void OnAfterTakeDamage(EnemyStatus enemy, int damage)
+    {
+        OnHitDuringCast();
     }
     // ---------------------공격패턴 3 : 레이저 (나중에 구현)-----------------------
     public IEnumerator AttackLaser()
