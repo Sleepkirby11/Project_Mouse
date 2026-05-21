@@ -11,7 +11,7 @@ using UnityEngine;
 
 특이사항: 플레이어 감지 시 반투명 상태가 됨, 벽과 땅을 무시하고 이동 
  */
-public class GhostEnemyMove : MonoBehaviour
+public class GhostEnemyMove : MonoBehaviour, IHitReaction
 {
     private enum GhostState
     {
@@ -93,7 +93,10 @@ public class GhostEnemyMove : MonoBehaviour
 
     private void Update()
     {
-        if (isDead) return;
+        if (isDead)
+        {
+            return;
+        }
 
         if (!hasDetectedPlayer)
         {
@@ -103,7 +106,10 @@ public class GhostEnemyMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (isDead)
+        {
+            return;
+        }
 
         switch (currentState)
         {
@@ -137,7 +143,10 @@ public class GhostEnemyMove : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRange, playerLayer);
 
-        if (hit == null) return;
+        if (hit == null)
+        {
+            return;
+        }
 
         player = hit.transform;
         hasDetectedPlayer = true;
@@ -355,7 +364,15 @@ public class GhostEnemyMove : MonoBehaviour
             EndPossessionAndRetreat();
         }
     }
+    public bool OnBeforeTakeDamage(EnemyStatus enemyStatus, int damage) // 돌진 준비 자세, 돌진 중에는 무적
+    {
+        return currentState == GhostState.ChargeReady ||
+               currentState == GhostState.Charge;
+    }
 
+    public void OnAfterTakeDamage(EnemyStatus enemyStatus, int damage)
+    {
+    }
     public void Die()
     {
         isDead = true;

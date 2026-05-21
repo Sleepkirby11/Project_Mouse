@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
 /*
- * 포물선으로 이동하는 화살
- * 차후 풀링으로 변경 예정
+ 포물선으로 이동하는 화살
  */
 public class Arrow : MonoBehaviour
 {
@@ -12,7 +11,11 @@ public class Arrow : MonoBehaviour
     private float duration;
     private float elapsed;
     private bool isInitialized;
+
+    [Header("대미지")]
     public int damage = 1;
+
+    private const string POOL_KEY = "Arrow";
 
     public void Initialize(Vector2 start, Vector2 target, float arrowHeight, float arrowDuration)
     {
@@ -26,17 +29,20 @@ public class Arrow : MonoBehaviour
 
     void Update()
     {
-        if (!isInitialized) return;
-
-        elapsed += Time.deltaTime;
-        float t = elapsed / duration;
-
-        if (t >= 1f)
+        if (!isInitialized)
         {
-            // 목표 도달 시 제거
-            Destroy(gameObject);
             return;
         }
+
+        elapsed += Time.deltaTime;
+        float t = elapsed / duration; 
+
+            // 목표 도달 시 제거
+            if (t >= 1f)
+            {
+                ReturnToPool();
+                return;
+            }
 
         // 포물선 이동
         Vector2 linear = Vector2.Lerp(startPos, targetPos, t);
@@ -67,7 +73,12 @@ public class Arrow : MonoBehaviour
             {
                 damageable.TakeDamage(damage);
             }
-        Destroy(gameObject);
+        ReturnToPool();
         }
+    }
+    private void ReturnToPool()
+    {
+        isInitialized = false;
+        PoolingManager.Instance.Return(POOL_KEY, gameObject);
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8819538079366794310}
   - component: {fileID: 4185205211514501276}
   m_Layer: 0
-  m_Name: MagicBall
+  m_Name: MagicOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,9 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4350bad9b09fc147b3ad3cd8088c710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  orbitSpeed: 90
+  bobSpeed: 2
+  bobAmount: 0.2
+  launchSpeed: 15
+  arrivalDistance: 1
   damage: 1
-  lifeTime: 5
 --- !u!1 &7530916628140950511
 GameObject:
   m_ObjectHideFlags: 0

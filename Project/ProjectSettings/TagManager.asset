@@ -17,7 +17,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - ParryingShieldEnemy
+  - ParryingShield
   - Wall
   - Meteor
   - 
