@@ -101,7 +101,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(force, ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         isKnockbacked = false;
     }

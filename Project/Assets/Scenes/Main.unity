@@ -3975,6 +3975,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1894236140630538368, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
+      propertyPath: contactCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3868120746790778872, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
       propertyPath: m_Name
       value: ParryingShieldEnemy
