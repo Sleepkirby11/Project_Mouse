@@ -50,8 +50,15 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
 
     public void TakeDamage(int damage) // IDamageable 인터페이스 구현
     {
+        if (hp <= 0) return;
+
         hp -= damage;
         Debug.Log($"[PlayerStatus] 플레이어 피격 현재 HP: {hp}/{maxHp}");
+
+        if (UI.Instance != null)
+        {
+            UI.Instance.TakeDamage(hp);
+        }
 
         if (hp <= 0)
         {
