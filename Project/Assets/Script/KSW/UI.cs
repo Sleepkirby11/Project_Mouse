@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;          // UI(Slider) 제어용 추가
 using UnityEngine.SceneManagement; // 씬 이동
+using TMPro;
 
 public class UI : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class UI : MonoBehaviour
     //체력바
     [Header("체력바 설정")]
     [SerializeField] private Slider hpSlider;
+    [SerializeField] private TMP_Text hpText;
     [SerializeField] private float maxHP = 100f;
     private float currentHP;
 
@@ -87,6 +89,10 @@ public class UI : MonoBehaviour
         if (hpSlider != null)
         {
             hpSlider.value = currentHP;
+        }
+        if (hpText != null)
+        {
+            hpText.text = $"{(int)currentHP} / {(int)maxHP}";
         }
     }
 

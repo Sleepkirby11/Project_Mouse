@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1675098129144152127}
   - component: {fileID: 481719762046887240}
   - component: {fileID: 8854847022435032799}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: FlyingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
-  dieAnimationLength: 1
+  maxHP: 1
+  dieAnimationLength: 0
 --- !u!1 &8624189645729721287
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6603869619893880285}
   - component: {fileID: 4129885080996418599}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
