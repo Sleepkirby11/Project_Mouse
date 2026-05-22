@@ -86,7 +86,7 @@ MonoBehaviour:
   contactDamage: 1
   contactKnockbackX: 6
   contactKnockbackY: 5
-  contactCooldown: 0.8
+  contactCooldown: 0.5
   counterDashForce: 22
   counterDashTime: 0.6
   counterLaunchY: 18
