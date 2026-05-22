@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TrapManager : MonoBehaviour
+public class TrapManager : MonoBehaviour, IDamageable
 {
 
     public bool isActInteract;
