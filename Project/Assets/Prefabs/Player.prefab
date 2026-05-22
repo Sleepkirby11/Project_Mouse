@@ -338,8 +338,8 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.8, y: 0.8}
+  m_EdgeRadius: 0.1
 --- !u!50 &1608361483271829096
 Rigidbody2D:
   serializedVersion: 5
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorObject: {fileID: 0}
-  normalAttackObject: {fileID: 0}
+  attackCursor: {fileID: 0}
   maxDist: 7.5
 --- !u!114 &7994187737598852400
 MonoBehaviour:
@@ -399,6 +399,7 @@ MonoBehaviour:
   maxInk: 5
   ink: 0
   speed: 5
+  damage: 1
 --- !u!1 &4407140826386702890
 GameObject:
   m_ObjectHideFlags: 0
