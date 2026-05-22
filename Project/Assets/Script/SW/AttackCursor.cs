@@ -11,6 +11,7 @@ public class AttackCursor : MonoBehaviour
     Vector2 mouse;
     public Transform target;
     float distance;
+    Vector2 distanceVec;
     float range = 15f;
 
     //초기화
@@ -27,11 +28,12 @@ public class AttackCursor : MonoBehaviour
             //mouse, distance 업데이트
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             distance = Vector2.Distance(target.position, mouse);
+            distanceVec = mouse - (Vector2)target.position;
         }
 
         //AttackCursor의 position 최대 값 range로 지정
         if (distance > range)
-            rigid.position = (Vector2)(target.position) + (mouse.normalized * range);
+            rigid.position = (Vector2)(target.position) + (distanceVec.normalized * range);
         else
             rigid.position = (Vector2)mouse;
     }

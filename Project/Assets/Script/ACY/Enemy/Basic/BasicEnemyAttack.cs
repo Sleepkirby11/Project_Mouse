@@ -78,11 +78,7 @@ public class BasicEnemyAttack : MonoBehaviour
     // Animation Event로 호출할 함수
     public void AttackHit()
     {
-        Collider2D hit = Physics2D.OverlapCircle(
-            attackPoint.position,
-            attackRadius,
-            playerLayer
-        );
+        Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);
 
         if (hit != null)
         {

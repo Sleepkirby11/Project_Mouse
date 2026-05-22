@@ -18,11 +18,9 @@ public class Player : MonoBehaviour
 {
     PlayerStatus status;
 
-    [Header("스킬 공격")]
+    [Header("공격")]
     public GameObject cursorObject;
-
-    [Header("일반 공격")]
-    public GameObject normalAttackObject;
+    Cursor cursor;
 
     [Header("공격 표시 커서")]
     public GameObject attackCursor;
@@ -48,7 +46,7 @@ public class Player : MonoBehaviour
 
 
     //초기화
-    void Start()
+    private void Start()
     {
         status = GetComponent<PlayerStatus>();
         rigid = GetComponent<Rigidbody2D>();
@@ -59,11 +57,13 @@ public class Player : MonoBehaviour
 
         attackCursor.GetComponent<AttackCursor>().target = transform;
 
+        cursor = cursorObject.GetComponent<Cursor>();
+
         isSkill = false;
     }
 
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         //linearVelocity 기반 이동
         if (isCanMove && status.CanMove) //status 스크립트에서 움직임 가능 여부 받아오게 수정
@@ -74,6 +74,8 @@ public class Player : MonoBehaviour
         {
             rigid.linearVelocityX = 0;
         }
+
+        Attack();
 
         // 아래가 수정 전
         //if (isCanMove)
@@ -159,7 +161,7 @@ public class Player : MonoBehaviour
         if (context.started && jumpCount == 1)
         {
             //마우스 방향 구하기
-            mouse.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouse = attackCursor.gameObject.transform;
             Vector2 dir = (Vector2)(mouse.transform.position - transform.position);
 
             //normalized된 방향으로 AddForce
@@ -184,59 +186,27 @@ public class Player : MonoBehaviour
 
         //스킬과 일반 공격 구분
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
-        if (isSkill)
+        //스킬 오브젝트 Component 호출
+        TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
+        if (context.started)
         {
-            //스킬 오브젝트 Component 호출
-            TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
-            Cursor cursor = cursorObject.GetComponent<Cursor>();
-            if (context.started)
-            {
-                //초기화
-                mouse.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                cursorObject.transform.position = mouse.transform.position;
-                trail.startWidth = 0.25f;
-                cursor.mouse = mouse;
-                cursor.isMove = true;
-                trail.Clear();
-                cursor.lifeTime = 0;
-            }
-            if (context.canceled)
-            {
-                //스킬 발동, Collider 입히기
-                cursor.isMove = false;
-                cursor.lifeTime = 0.5f;
-                cursor.damage = status.damage;
-                cursor.SetColliderPointsFromTrail();
-                status.ink = status.maxInk;
-            }
+            //초기화
+            mouse = attackCursor.gameObject.transform;
+            cursorObject.transform.position = mouse.transform.position;
+            trail.startWidth = 0.25f;
+            cursor.mouse = mouse;
+            trail.Clear();
+            cursor.isMove = true;
+            cursor.lifeTime = 0;
         }
-        else
+        if (context.canceled && cursor.isMove)
         {
-            //일반 공격 오브젝트 Component 호출
-            TrailRenderer trail = normalAttackObject.GetComponent<TrailRenderer>();
-            NormalAttack cursor = normalAttackObject.GetComponent<NormalAttack>();
-            if (context.started)
-            {
-                //초기화
-                mouse = attackCursor.gameObject.transform;
-                normalAttackObject.transform.position = mouse.transform.position;
-                trail.startWidth = 0.25f;
-                cursor.mouse = mouse;
-                cursor.isMove = true;
-                trail.Clear();
-                cursor.lifeTime = 0;
-            }
-            if (context.canceled)
-            {
-                //일반 공격, Collider 입히기
-                cursor.isMove = false;
-                cursor.lifeTime = 0.5f;
-                cursor.damage = status.damage;
-                cursor.SetColliderPointsFromTrail();
-                status.ink = status.maxInk;
-            }
+            ActiveAttack();
         }
+
     }
+
+
 
     //착지 판정 검사
     void GroundCheck()
@@ -259,6 +229,33 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Attack()
+    {
+        if (cursor.isMove)
+        {
+            status.ink = status.maxInk - cursor.trailLength / 4;
+        }
+
+        if (status.ink <= 0)
+        {
+            status.ink = 0;
+            ActiveAttack();
+        }
+    }
+
+    void ActiveAttack()
+    {
+        //스킬 발동, Collider 입히기
+            cursor.isMove = false;
+            cursor.lifeTime = 0.5f;
+            cursor.damage = status.damage;
+            cursor.SetColliderPointsFromTrail();
+            status.ink = status.maxInk;
+            if (isSkill)
+            {
+                Debug.Log("스킬 발동");
+            }
+    }
 
     void Move()
     {
