@@ -143,8 +143,14 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     {
         // 배회 반경 도달 시 방향 전환
         float distFromOrigin = transform.position.x - patrolOrigin.x;
-        if (distFromOrigin > patrolDistance) patrolDir = -1f;
-        if (distFromOrigin < -patrolDistance) patrolDir = 1f;
+        if (distFromOrigin > patrolDistance)
+        {
+            patrolDir = -1f;
+        }
+        if (distFromOrigin < -patrolDistance)
+        {
+            patrolDir = 1f;
+        }
 
         rb.linearVelocity = new Vector2(patrolDir * moveSpeed * 0.6f, rb.linearVelocity.y);
     }

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2745340641527822589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6906194015661884017}
+  - component: {fileID: 3514653046451890726}
+  m_Layer: 0
+  m_Name: PoolingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6906194015661884017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2745340641527822589}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.574744, y: 2.3007193, z: -0.12831996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3514653046451890726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2745340641527822589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61849b2a4d2c974aa94ec299ece78e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - key: RedBossArrow
+    prefab: {fileID: 1582195347710664461, guid: ea85f8cce0a9b5849a1977a092d11d78, type: 3}
+    initialSize: 10
+  - key: RedBossMeteor
+    prefab: {fileID: 2983593613088629823, guid: 6b4a0a588a1510e4fb3d501fa6f3a426, type: 3}
+    initialSize: 30
+  - key: Arrow
+    prefab: {fileID: 1618385924406531736, guid: 2c73065b31eb5624f8dec5c6d2cdc66d, type: 3}
+    initialSize: 5
+  - key: RedBossClone
+    prefab: {fileID: 6307684664467451572, guid: a9548e03c84e6354b8f5952804475b33, type: 3}
+    initialSize: 10
+  - key: RedBossLaser
+    prefab: {fileID: 2214707613065288430, guid: 39eb1a22691993f45bb0c0266a835624, type: 3}
+    initialSize: 5
+  - key: RedBossOrb
+    prefab: {fileID: 4993334597026480835, guid: 5221524ee33460945b18265cdf2a7325, type: 3}
+    initialSize: 5

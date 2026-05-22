@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
 /*
- * 포물선으로 이동하는 화살
- * 차후 풀링으로 변경 예정
+ 포물선으로 이동하는 화살
  */
 public class Arrow : MonoBehaviour
 {
@@ -12,7 +11,11 @@ public class Arrow : MonoBehaviour
     private float duration;
     private float elapsed;
     private bool isInitialized;
+
+    [Header("대미지")]
     public int damage = 1;
+
+    private const string POOL_KEY = "Arrow";
 
     public void Initialize(Vector2 start, Vector2 target, float arrowHeight, float arrowDuration)
     {
@@ -26,21 +29,24 @@ public class Arrow : MonoBehaviour
 
     void Update()
     {
-        if (!isInitialized) return;
+        if (!isInitialized)
+        {
+            return;
+        }
 
         elapsed += Time.deltaTime;
-        float t = elapsed / duration;
+        float t = elapsed / duration; 
 
+        // 목표 도달 시 제거
         if (t >= 1f)
         {
-            // 목표 도달 시 제거
-            Destroy(gameObject);
+            ReturnToPool();
             return;
         }
 
         // 포물선 이동
         Vector2 linear = Vector2.Lerp(startPos, targetPos, t);
-        float arc = height * Mathf.Sin(Mathf.PI * t); // 포물선 높이
+        float arc = height * Mathf.Sin(Mathf.PI * t); // 높이
         transform.position = new Vector2(linear.x, linear.y + arc);
 
         // 화살 방향 회전
@@ -62,12 +68,16 @@ public class Arrow : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            // 앞서 만들어둔 IDamageable 인터페이스가 있는지 확인 후 타격
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage(damage);
             }
-        Destroy(gameObject);
+        ReturnToPool();
         }
+    }
+    private void ReturnToPool()
+    {
+        isInitialized = false;
+        PoolingManager.Instance.Return(POOL_KEY, gameObject);
     }
 }
