@@ -126,10 +126,5 @@ public class Cursor : MonoBehaviour
         {
             damageable.TakeDamage(damage);
         }
-        if (collision.gameObject.CompareTag("AttackableTrap"))
-        {
-            Debug.Log("폭탄");
-            collision.gameObject.GetComponent<TrapManager>().TakeDamage(damage);
-        }
     }
 }
