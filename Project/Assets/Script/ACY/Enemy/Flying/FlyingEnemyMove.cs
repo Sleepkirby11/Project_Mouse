@@ -46,7 +46,6 @@ public class FlyingEnemyMove : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 
         rb.freezeRotation = true; // 회전 방지
 
-        // 필터 초기화: 가비지 컬렉션을 피하기 위해 미리 설정
         playerFilter.useLayerMask = true;
         playerFilter.layerMask = playerLayer;
     }
@@ -71,7 +70,6 @@ public class FlyingEnemyMove : MonoBehaviour
     }
     private void CheckPlayerBelow()
     {
-        // 최적화된 BoxCast: 리스트 재사용으로 GC 방지
         if (Physics2D.BoxCast(rb.position, new Vector2(detectionWidth, 0.1f), 0f, Vector2.down, playerFilter, hitResults, detectionHeight) > 0)
         {
             state = EnemyState.Action;

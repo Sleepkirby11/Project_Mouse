@@ -366,8 +366,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     }
     public bool OnBeforeTakeDamage(EnemyStatus enemyStatus, int damage) // 돌진 준비 자세, 돌진 중에는 무적
     {
-        return currentState == GhostState.ChargeReady ||
-               currentState == GhostState.Charge;
+        return currentState == GhostState.ChargeReady || currentState == GhostState.Charge;
     }
 
     public void OnAfterTakeDamage(EnemyStatus enemyStatus, int damage)

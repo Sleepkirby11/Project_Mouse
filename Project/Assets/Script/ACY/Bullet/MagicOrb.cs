@@ -72,7 +72,7 @@ public class MagicOrb : MonoBehaviour
         }
     }
 
-    // 공전 + 둥실
+    // 공전 + 둥실거리는 효과
     private void UpdateOrbit()
     {
         if (pivot == null)

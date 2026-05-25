@@ -62,12 +62,7 @@ public class RedBossClone : MonoBehaviour, IDamageable
             return;
         }
 
-        GameObject vfx = Instantiate
-        (
-            vfxPrefab,
-            transform.position,
-            Quaternion.identity
-        );
+        GameObject vfx = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
 
         ParticleSystem ps = vfx.GetComponentInChildren<ParticleSystem>();
 

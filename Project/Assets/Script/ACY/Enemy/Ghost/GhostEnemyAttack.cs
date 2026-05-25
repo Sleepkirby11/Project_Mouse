@@ -140,11 +140,7 @@ public class GhostEnemyAttack : MonoBehaviour
             return;
         }
 
-        playerRb.linearVelocity = new Vector2
-         (
-        forceMoveDirection.x * possessionMoveSpeed,
-        playerRb.linearVelocity.y
-         );
+        playerRb.linearVelocity = new Vector2(forceMoveDirection.x * possessionMoveSpeed, playerRb.linearVelocity.y);
     }
     private void EndPossession() // ºùÀÇ Á¾·á
     {

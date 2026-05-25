@@ -247,11 +247,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             return false;
         }
 
-        return Physics2D.OverlapCircle(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
-        );
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     // 공격 범위 빨강

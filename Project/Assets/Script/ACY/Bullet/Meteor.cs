@@ -30,11 +30,7 @@ public class Meteor : MonoBehaviour
             return;
         }
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            targetPos,
-            fallSpeed * Time.deltaTime
-        );
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, fallSpeed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, targetPos) <= 0.05f)
         {
@@ -59,8 +55,6 @@ public class Meteor : MonoBehaviour
     private void Explode()
     {
         isFalling = false;
-
-        // 나중에 여기서 장판 생성 
         PoolingManager.Instance.Return(METEOR_KEY, gameObject);
     }
 }

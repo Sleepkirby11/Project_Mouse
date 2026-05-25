@@ -28,7 +28,7 @@ public class LaserCross : MonoBehaviour
     private float duration;
 
     private float rotateSpeed;
-    private float rotateDirection; // 추가: +1(시계) 또는 -1(반시계)
+    private float rotateDirection; // 1(시계) -1(반시계) 방향
     private Coroutine laserRoutine;
     private void OnDisable()
     {
@@ -175,11 +175,7 @@ public class LaserCross : MonoBehaviour
             yield return null;
         }
 
-        PoolingManager.Instance.Return
-        (
-            LASER_KEY,
-            gameObject
-        );
+        PoolingManager.Instance.Return(LASER_KEY, gameObject);
     }
 
     private void SetWarning(bool value)

@@ -36,12 +36,7 @@ public class BasicEnemyAttack : MonoBehaviour
             return;
         }
 
-        Collider2D hit = Physics2D.OverlapCircle
-        (
-            attackPoint.position,
-            attackRadius,
-            playerLayer
-        );
+        Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);
 
         if (hit != null)
         {

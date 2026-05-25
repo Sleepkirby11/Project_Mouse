@@ -124,12 +124,7 @@ public class BasicEnemyMove : MonoBehaviour
             return;
         }
 
-        Vector3 targetPos = new Vector3
-        ( //x축으로만 이동
-            targetTransform.position.x,
-            myTransform.position.y,
-            myTransform.position.z
-        );
+        Vector3 targetPos = new Vector3(targetTransform.position.x, myTransform.position.y, myTransform.position.z); //x 축으로만 이동
 
         myTransform.position = Vector3.MoveTowards // 타겟을 향해 이동
         ( 

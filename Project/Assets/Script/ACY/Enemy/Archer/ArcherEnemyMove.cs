@@ -27,7 +27,7 @@ public class ArcherEnemyMove : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); //리지드바디 기초 설정
+        rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
@@ -39,7 +39,7 @@ public class ArcherEnemyMove : MonoBehaviour
             backstepCooldownTimer -= Time.deltaTime;
         }
 
-        // 백스텝 타이머 제어 (Invoke 대체)
+        // 백스텝 타이머 제어
         if (isBackstepping)
         {
             backstepEndTimer -= Time.deltaTime;
@@ -54,7 +54,7 @@ public class ArcherEnemyMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        // 백스텝 상태일 때만 이동, 나머지는 정지
+        // 백스텝 상태일 때만 이동
         if (isBackstepping && player != null)
         {
             float moveDirX = transform.position.x > player.position.x ? 1f : -1f;
@@ -71,10 +71,10 @@ public class ArcherEnemyMove : MonoBehaviour
 
     private void CheckDetection()
     {
-        // 플레이어 유효성 및 거리 체크 (sqrMagnitude로 최적화)
+        // 플레이어 유효성 및 거리 체크
         if (player != null)
         {
-            float sqrDist = (player.position - transform.position).sqrMagnitude; // 제곱 거리 계산
+            float sqrDist = (player.position - transform.position).sqrMagnitude; // 거리 계산
 
             if (sqrDist > detectRange * detectRange) // 감지 범위를 벗어나면 플레이어 초기화
             {
