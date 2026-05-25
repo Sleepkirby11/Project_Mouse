@@ -3606,7 +3606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -269.57
+      value: -101.6
       objectReference: {fileID: 0}
     - target: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3857,6 +3857,10 @@ PrefabInstance:
       propertyPath: disappearVFX
       value: 
       objectReference: {fileID: 6572539932450378063}
+    - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: teleportInterval
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: 'teleportPoints.Array.data[0]'
       value: 

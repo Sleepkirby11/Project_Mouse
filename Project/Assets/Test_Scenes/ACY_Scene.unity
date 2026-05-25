@@ -3379,17 +3379,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 1114137132973608061, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6425096678983798487, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
-      propertyPath: maxHP
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -108.5
+      value: -278.77
       objectReference: {fileID: 0}
     - target: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_LocalPosition.y

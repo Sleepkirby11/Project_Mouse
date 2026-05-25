@@ -128,20 +128,24 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             CheckDirectHit();
             yield return null;
         }
-
-        // 중력 복구
-        float velX = (targetPos.x - startPos.x) / jumpDuration;
-        float velY = jumpHeight * Mathf.PI / jumpDuration * Mathf.Cos(Mathf.PI * 1f);
-        rb.gravityScale = originGravity;
-        rb.linearVelocity = new Vector2(velX, velY);
-        // 자연스러운 전진 낙하
-
-        // 착지 대기
+        Vector2 landingStart = rb.position;
+        float landingElapsed = 0f;
+        float landingSpeedY = jumpHeight * Mathf.PI / jumpDuration; // 포물선 끝 하강 속도
+        float landingSpeedX = (targetPos.x - startPos.x) / jumpDuration; // 포물선 X 속도 유지
+        // 포물선을 착지할 때까지 계속 연장
         while (!IsGrounded())
         {
-            CheckDirectHit(); // 낙하 중에도 직접 충돌 가능
+            landingElapsed += Time.deltaTime;
+            float dx = landingSpeedX * landingElapsed;
+            float dy = -landingSpeedY * landingElapsed - 0.5f * 9.8f * rb.gravityScale * landingElapsed * landingElapsed;
+
+            rb.MovePosition(landingStart + new Vector2(dx, dy));
+
+            CheckDirectHit();
             yield return null;
         }
+
+        rb.gravityScale = originGravity;
 
         // 착지 정지
         rb.linearVelocity = Vector2.zero;
