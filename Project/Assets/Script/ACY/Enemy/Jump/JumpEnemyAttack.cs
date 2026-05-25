@@ -2,8 +2,9 @@
 using UnityEngine;
 
 /*
- * 플레이어의 Y축이 낮게 변했을때
- * 점프 공격이 끝난 후 땅으로 내려갈때 움직임 부자연스러운 문제 있음
+플레이어 감지 시 준비자세 (빨갛게 물듬)
+플레이어의 위치로 점프
+(몸체 및 착지 시 충격파에 공격 판정)
  */
 public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 {
@@ -44,7 +45,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     private bool hasDirectHit = false;
     private float lastAttackTime = -99f;
 
-    // 이동 스크립트가 멈춰야 할 타이밍을 알려주기 위한 프로퍼티
+    // 이동 스크립트에서 읽음
     public float AttackRange => attackRange;
     public bool IsAttackingOrReady => isAttackingOrReady;
 
