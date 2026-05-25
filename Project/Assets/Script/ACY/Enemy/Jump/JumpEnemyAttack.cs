@@ -203,11 +203,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             return;
         }
 
-        Collider2D playerCollider = Physics2D.OverlapCircle(
-            transform.position,
-            directHitRadius,
-            playerLayer
-        );
+        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, directHitRadius, playerLayer);
 
         if (playerCollider != null)
         {

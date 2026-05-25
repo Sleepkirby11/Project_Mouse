@@ -10,7 +10,7 @@ using UnityEngine;
 
 공격패턴
 1. 일반 접촉 : 플레이어에게 데미지 + 약한 넉백(공중으로 살짝)
-2. 카운터 히트(패링): 패링 중 피격 시 돌진 → 높은 공중부양 + 스턴 (현재 플레이어 공격이 없어서 테스트 못함)
+2. 카운터 히트(패링): 패링 중 피격 시 돌진 → 높은 공중부양 + 스턴
 
 IHittable  : 일반 접촉 데미지·넉백 전달
 IStunnable : 카운터 히트 시 스턴 전달
@@ -309,7 +309,6 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         // 배회 범위
         Gizmos.color = Color.cyan;
         Vector3 origin = Application.isPlaying ? (Vector3)patrolOrigin : transform.position;
-        Gizmos.DrawLine(origin + Vector3.left * patrolDistance,
-                        origin + Vector3.right * patrolDistance);
+        Gizmos.DrawLine(origin + Vector3.left * patrolDistance, origin + Vector3.right * patrolDistance);
     }
 }
