@@ -6,8 +6,6 @@ public class ArcherEnemyAttack : MonoBehaviour
     [SerializeField] private GameObject arrowPrefab; // 화살 프리팹
     [SerializeField] private Transform firePoint; // 화살 발사 위치
     [SerializeField] private float attackCooldown = 2f; // 공격 간격
-    [SerializeField] private float arrowHeight = 3f; // 화살 포물선 높이
-    [SerializeField] private float arrowDuration = 1.2f; // 화살 이동 시간
 
     private ArcherEnemyMove archerMove;
     private float nextAttackTime; // 다음 공격 가능 시간
@@ -46,7 +44,7 @@ public class ArcherEnemyAttack : MonoBehaviour
 
         if (arrowObj.TryGetComponent<Arrow>(out var arrow))
         {
-            arrow.Initialize(firePoint.position, targetPos, arrowHeight, arrowDuration);
+            arrow.Initialize(firePoint.position, targetPos);
         }
     }
 }
