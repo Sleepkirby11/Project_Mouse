@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a20a6141e0bca0c4aad755d57127587c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Scenes/AssetGallery/KnightSpritesheet_13.controller
+  uploadId: 706910

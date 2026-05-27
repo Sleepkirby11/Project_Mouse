@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 91945a7829d60204bab9d3dff9d187ed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Goblin/GoblinIdle.anim
+  uploadId: 706910

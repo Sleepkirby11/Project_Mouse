@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a345a353740c1aa47a7a77f8dd98228f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Scenes/AssetGallery/SkeletonSwordSpritesheet_11.controller
+  uploadId: 706910

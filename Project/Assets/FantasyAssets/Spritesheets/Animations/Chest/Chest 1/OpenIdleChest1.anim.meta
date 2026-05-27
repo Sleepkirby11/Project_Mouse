@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b4f73a90b00f862469b1601fc93c1e25
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Chest/Chest 1/OpenIdleChest1.anim
+  uploadId: 706910

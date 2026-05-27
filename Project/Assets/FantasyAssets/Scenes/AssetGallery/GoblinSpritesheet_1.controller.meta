@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4e1232f77bd51724497d88f5ca598c7f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Scenes/AssetGallery/GoblinSpritesheet_1.controller
+  uploadId: 706910

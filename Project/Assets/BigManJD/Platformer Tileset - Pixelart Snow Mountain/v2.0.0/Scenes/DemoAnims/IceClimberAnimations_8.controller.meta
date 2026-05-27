@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d7cd9fc3ae7cfcc42903d35c47af79f3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220095
+  packageName: Platformer Tileset - Pixelart Snow Mountain
+  packageVersion: 2.0.0
+  assetPath: Assets/BigManJD/Platformer Tileset - Pixelart Snow Mountain/v2.0.0/Scenes/DemoAnims/IceClimberAnimations_8.controller
+  uploadId: 601658

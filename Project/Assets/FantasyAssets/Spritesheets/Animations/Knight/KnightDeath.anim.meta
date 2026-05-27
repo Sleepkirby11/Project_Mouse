@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bb08051f069912940a37e437259c7954
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Knight/KnightDeath.anim
+  uploadId: 706910

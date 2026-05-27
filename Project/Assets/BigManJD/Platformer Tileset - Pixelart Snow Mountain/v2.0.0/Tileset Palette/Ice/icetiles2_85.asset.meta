@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a5a9d0388cc1ee647b3374f0c02eb93e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220095
+  packageName: Platformer Tileset - Pixelart Snow Mountain
+  packageVersion: 2.0.0
+  assetPath: Assets/BigManJD/Platformer Tileset - Pixelart Snow Mountain/v2.0.0/Tileset
+    Palette/Ice/icetiles2_85.asset
+  uploadId: 601658

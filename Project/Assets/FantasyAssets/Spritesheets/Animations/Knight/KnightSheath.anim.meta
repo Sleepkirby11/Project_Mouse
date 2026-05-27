@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f8e17a207f275eb4eb8a5da07959ee76
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Knight/KnightSheath.anim
+  uploadId: 706910

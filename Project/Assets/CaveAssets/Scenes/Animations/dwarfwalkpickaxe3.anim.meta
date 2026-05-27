@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 131404fa6a98988449f9bcfcc43da12f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/dwarfwalkpickaxe3.anim
+  uploadId: 807122
