@@ -1,83 +1,113 @@
 ﻿using UnityEngine;
 
 /*
- 포물선으로 이동하는 화살
+ 실제 투사체 방식 화살
  */
 public class Arrow : MonoBehaviour
 {
-    private Vector2 startPos;
-    private Vector2 targetPos;
-    private float height;
-    private float duration;
-    private float elapsed;
-    private bool isInitialized;
+    [Header("설정")]
+    [SerializeField] private float gravity = -20f;
+
+    [SerializeField] private float timeToTarget = 0.8f;
+
+    [SerializeField] private float maxLifeTime = 3f;
 
     [Header("대미지")]
-    public int damage = 1;
+    [SerializeField] private int damage = 1;
+
+    [Header("바닥 체크")]
+    [SerializeField] private LayerMask groundLayer;
+
+    private Vector2 velocity;
+
+    private float timer;
+
+    private bool isInitialized;
 
     private const string POOL_KEY = "Arrow";
 
-    public void Initialize(Vector2 start, Vector2 target, float arrowHeight, float arrowDuration)
+    public void Initialize(Vector2 start, Vector2 target)
     {
-        startPos = start;
-        targetPos = target;
-        height = arrowHeight;
-        duration = arrowDuration;
-        elapsed = 0f;
+        transform.position = start;
+
+        Vector2 diff = target - start;
+
+        // 목표 위치까지 가는 초기 속도 계산
+        velocity.x = diff.x / timeToTarget;
+
+        velocity.y =
+            (diff.y - (0.5f * gravity * timeToTarget * timeToTarget))
+            / timeToTarget;
+
+        timer = 0f;
+
         isInitialized = true;
+
+        RotateArrow();
     }
 
-    void Update()
+    private void Update()
     {
         if (!isInitialized)
         {
             return;
         }
 
-        elapsed += Time.deltaTime;
-        float t = elapsed / duration; 
+        timer += Time.deltaTime;
 
-        // 목표 도달 시 제거
-        if (t >= 1f)
+        // 중력 적용
+        velocity.y += gravity * Time.deltaTime;
+
+        // 이동
+        transform.position += (Vector3)(velocity * Time.deltaTime);
+
+        // 회전
+        RotateArrow();
+
+        // 너무 오래 날아가면 제거
+        if (timer >= maxLifeTime)
         {
+            ReturnToPool();
+        }
+    }
+
+    private void RotateArrow()
+    {
+        float angle =
+            Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+
+        transform.rotation =
+            Quaternion.Euler(0f, 0f, angle);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!isInitialized)
+        {
+            return;
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            if (other.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(damage);
+            }
+
             ReturnToPool();
             return;
         }
 
-        // 포물선 이동
-        Vector2 linear = Vector2.Lerp(startPos, targetPos, t);
-        float arc = height * Mathf.Sin(Mathf.PI * t); // 높이
-        transform.position = new Vector2(linear.x, linear.y + arc);
-
-        // 화살 방향 회전
-        if (elapsed > Time.deltaTime)
+        if (((1 << other.gameObject.layer) & groundLayer) != 0)
         {
-            Vector2 prevPos = transform.position;
-            Vector2 nextLinear = Vector2.Lerp(startPos, targetPos, t + 0.01f);
-            float nextArc = height * Mathf.Sin(Mathf.PI * (t + 0.01f));
-            Vector2 nextPos = new Vector2(nextLinear.x, nextLinear.y + nextArc);
-
-            Vector2 dir = (nextPos - prevPos).normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            ReturnToPool();
         }
     }
 
-    // 플레이어 충돌 처리
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if (other.gameObject.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(damage);
-            }
-        ReturnToPool();
-        }
-    }
     private void ReturnToPool()
     {
         isInitialized = false;
+
         PoolingManager.Instance.Return(POOL_KEY, gameObject);
     }
 }
