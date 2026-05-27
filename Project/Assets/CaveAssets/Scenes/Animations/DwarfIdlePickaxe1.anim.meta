@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4100bf0f02e9e8a42a54ab1be190b9ea
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/DwarfIdlePickaxe1.anim
+  uploadId: 807122

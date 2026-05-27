@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 84f13f4c5892d4f4796a05879891755f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Skeleton/Sword/SwordHit.anim
+  uploadId: 706910

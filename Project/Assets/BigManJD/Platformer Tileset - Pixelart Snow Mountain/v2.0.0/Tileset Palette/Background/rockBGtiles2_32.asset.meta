@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 70f6928241467f54ca7e20fedf272149
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220095
+  packageName: Platformer Tileset - Pixelart Snow Mountain
+  packageVersion: 2.0.0
+  assetPath: Assets/BigManJD/Platformer Tileset - Pixelart Snow Mountain/v2.0.0/Tileset
+    Palette/Background/rockBGtiles2_32.asset
+  uploadId: 601658

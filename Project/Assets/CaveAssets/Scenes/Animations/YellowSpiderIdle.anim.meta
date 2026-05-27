@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fb3ca8fe1dfc5c04aa19be5b9434e9f3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/YellowSpiderIdle.anim
+  uploadId: 807122

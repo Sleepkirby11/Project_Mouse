@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 13464c38a7bdda6419bf0496c0b78ba0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/DwarfIdle2.anim
+  uploadId: 807122

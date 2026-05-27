@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b94a53935def3d147ae06f7c40fdae16
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Knight/KnightIdle.anim
+  uploadId: 706910

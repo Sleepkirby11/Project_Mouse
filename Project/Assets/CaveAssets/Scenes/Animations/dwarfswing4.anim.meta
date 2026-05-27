@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c995d20ab4a5bd84e9b4101d46785c11
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/dwarfswing4.anim
+  uploadId: 807122

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a65effb002bb5444dab0c2b09d8b0934
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Tile Palette/Tiles/FoliageTiles_144.asset
+  uploadId: 706910

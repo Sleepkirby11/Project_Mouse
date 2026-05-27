@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a11c81ecb958a8f4bacc90457eb84fef
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Skeleton/Sword/SwordJump.anim
+  uploadId: 706910

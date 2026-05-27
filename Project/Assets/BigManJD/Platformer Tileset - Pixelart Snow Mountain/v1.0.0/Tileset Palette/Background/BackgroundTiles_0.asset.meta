@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 30c1d91d8312de44b9c283d7c5cee7d3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220095
+  packageName: Platformer Tileset - Pixelart Snow Mountain
+  packageVersion: 2.0.0
+  assetPath: Assets/BigManJD/Platformer Tileset - Pixelart Snow Mountain/v1.0.0/Tileset
+    Palette/Background/BackgroundTiles_0.asset
+  uploadId: 601658

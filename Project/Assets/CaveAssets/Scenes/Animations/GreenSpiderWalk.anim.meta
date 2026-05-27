@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: be7b3aac790f88e4581d294d58b9b257
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/GreenSpiderWalk.anim
+  uploadId: 807122

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4a9216b07c037ff418f400665f0e65bf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220095
+  packageName: Platformer Tileset - Pixelart Snow Mountain
+  packageVersion: 2.0.0
+  assetPath: Assets/BigManJD/Platformer Tileset - Pixelart Snow Mountain/v1.0.0/Character/Animations/ClimberIdle_0.controller
+  uploadId: 601658
