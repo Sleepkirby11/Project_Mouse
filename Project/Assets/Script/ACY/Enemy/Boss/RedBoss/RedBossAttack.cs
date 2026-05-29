@@ -1,24 +1,25 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 {
-    [Header("°øÅë")]
+    [Header("ê³µí†µ")]
     [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform pivotPoint;
 
-    [Header("È­»ì ¼³Á¤")]
-    [SerializeField] private float angleSpread = 15f;     // °¢µµ Â÷ÀÌ
-    [SerializeField] private float attackCooldown = 3f;   // °ø°İ °£°İ 
+    [Header("í™”ì‚´ ì„¤ì •")]
+    [SerializeField] private float angleSpread = 15f;     // ê°ë„ ì°¨ì´
+    [SerializeField] private float attackCooldown = 3f;   // ê³µê²© ê°„ê²© 
 
     private const string ARROW_KEY = "RedBossArrow";
 
 
-    [Header("Ä³½ºÆÃ UI")]
+    [Header("ìºìŠ¤íŒ… UI")]
     [SerializeField] private Slider meteorCastSlider;
 
-    [Header("¸ŞÅ×¿À ¼³Á¤")]
+    [Header("ë©”í…Œì˜¤ ì„¤ì •")]
     [SerializeField] private int meteorWaveCount = 3;
     [SerializeField] private int meteorPerWave = 5;
     [SerializeField] private float waveInterval = 0.5f;
@@ -28,16 +29,16 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [SerializeField] private float meteorTargetY = -2.5f;
     private const string METEOR_KEY = "RedBossMeteor";
 
-    [Header("½ºÅÏ ¼³Á¤")]
+    [Header("ìŠ¤í„´ ì„¤ì •")]
     [SerializeField] private float stunDuration = 2f;
 
-    [Header("ºĞ½Å ¼³Á¤")]
+    [Header("ë¶„ì‹  ì„¤ì •")]
     [SerializeField] private Transform[] teleportPoints;
     [SerializeField] private GameObject cloneDisappearVFX;
     [SerializeField] private GameObject cloneSpawnVFX;
     private bool hasClones = false;
 
-    [Header("·¹ÀÌÀú ¼³Á¤")]
+    [Header("ë ˆì´ì € ì„¤ì •")]
     [SerializeField] private GameObject laserCrossPrefab;
     [SerializeField] private Transform laserSpawnPoint;
     private const string LASER_KEY = "RedBossLaser";
@@ -45,10 +46,10 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [SerializeField] private float laserWarningTime = 1.5f;
     [SerializeField] private float laserDuration = 4f;
 
-    [Header("±¸Ã¼ ¼³Á¤")]
-    [SerializeField] private float orbOrbitRadius = 2f;    // °øÀü ¹İÁö¸§
+    [Header("êµ¬ì²´ ì„¤ì •")]
+    [SerializeField] private float orbOrbitRadius = 2f;    // ê³µì „ ë°˜ì§€ë¦„
     [SerializeField] private int orbCount = 3;
-    [SerializeField] private float orbWaitTime = 2f;       // ¹ß»ç Àü ´ë±â
+    [SerializeField] private float orbWaitTime = 2f;       // ë°œì‚¬ ì „ ëŒ€ê¸°
     private const string ORB_KEY = "RedBossOrb";
 
     private List<GameObject> currentClones = new List<GameObject>();
@@ -60,10 +61,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
     private SpriteRenderer sr;
     private Color originalColor;
+    private Animator anim;
 
     private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
 
         if (sr != null)
         {
@@ -78,7 +81,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         StartCoroutine(AttackRoutine());
     }
 
-    // ÀÏÁ¤ °£°İÀ¸·Î È­»ì ¹ß»ç
+    // ì¼ì • ê°„ê²©ìœ¼ë¡œ í™”ì‚´ ë°œì‚¬
     private IEnumerator AttackRoutine()
     {
         while (true)
@@ -97,12 +100,18 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         }
     }
 
-    // ------------------------°ø°İÆĞÅÏ 1 : À¯µµ È­»ì-------------------------
+    // ------------------------ê³µê²©íŒ¨í„´ 1 : ìœ ë„ í™”ì‚´-------------------------
     public IEnumerator AttackArrow()
     {
-        SpawnArrow(0f);              // °¡¿îµ¥
-        SpawnArrow(-angleSpread);    // ¾Æ·¡ÂÊ/¿ŞÂÊ ¹æÇâ
-        SpawnArrow(angleSpread);     // À§ÂÊ/¿À¸¥ÂÊ ¹æÇâ
+        if (anim != null)
+        {
+            anim.SetTrigger("Shoot");
+        }
+
+        yield return new WaitForSeconds(1.2f);
+        SpawnArrow(0f);              // ê°€ìš´ë°
+        SpawnArrow(-angleSpread);    // ì•„ë˜ìª½/ì™¼ìª½ ë°©í–¥
+        SpawnArrow(angleSpread);     // ìœ„ìª½/ì˜¤ë¥¸ìª½ ë°©í–¥
 
         yield break;
     }
@@ -117,28 +126,31 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         obj.GetComponent<FireArrow>()?.Init(angleOffset);
     }
-    //---------------°ø°İ ÆĞÅÏ 2 : ¸¶¹ı ±¸Ã¼ -------------------
+    //---------------ê³µê²© íŒ¨í„´ 2 : ë§ˆë²• êµ¬ì²´ -------------------
     public IEnumerator AttackOrb()
     {
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+        }
+
+        yield return new WaitForSeconds(0.9f); 
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
             yield break;
         }
 
-        // ±¸Ã¼ 3°³¸¦ 120µµ °£°İÀ¸·Î ¼ÒÈ¯
+        // êµ¬ì²´ 3ê°œë¥¼ 120ë„ ê°„ê²©ìœ¼ë¡œ ì†Œí™˜
         MagicOrb[] orbs = new MagicOrb[3];
+        Vector3 spawnPos = pivotPoint != null ? pivotPoint.position : transform.position;
 
         for (int i = 0; i < orbCount; i++)
         {
             float angle = i * (360f / orbCount);
 
-            GameObject obj = PoolingManager.Instance.Get
-            (
-                ORB_KEY,
-                transform.position,
-                Quaternion.identity
-            );
+            GameObject obj = PoolingManager.Instance.Get(ORB_KEY, spawnPos, Quaternion.identity);
 
             if (obj == null)
             {
@@ -146,16 +158,20 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             }
 
             MagicOrb orb = obj.GetComponent<MagicOrb>();
-            orb?.Init(transform, angle, orbOrbitRadius);
+            orb?.Init(pivotPoint != null ? pivotPoint : transform, angle, orbOrbitRadius);
             orbs[i] = orb;
         }
 
-        // ´ë±â (°øÀü ¿¬Ãâ)
+        // ëŒ€ê¸° (ê³µì „ ì—°ì¶œ)
         yield return new WaitForSeconds(orbWaitTime);
 
-        // ¹ß»ç ½ÃÁ¡ÀÇ ÇÃ·¹ÀÌ¾î À§Ä¡ °íÁ¤ ÈÄ µ¿½Ã ¹ß»ç
+        // ë°œì‚¬ ì‹œì ì˜ í”Œë ˆì´ì–´ ìœ„ì¹˜ ê³ ì • í›„ ë™ì‹œ ë°œì‚¬
         Vector3 targetPos = player.transform.position;
 
+        if (anim != null)
+        {
+            anim.SetTrigger("Shoot");
+        }
         for (int i = 0; i < orbs.Length; i++)
         {
             if (orbs[i] == null)
@@ -165,28 +181,43 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             orbs[i].Launch(targetPos);
         }
 
-        // ±¸Ã¼ ºñÇà ½Ã°£¸¸Å­ ´ë±â ÈÄ ´ÙÀ½ ÆĞÅÏ
+        // êµ¬ì²´ ë¹„í–‰ ì‹œê°„ë§Œí¼ ëŒ€ê¸° í›„ ë‹¤ìŒ íŒ¨í„´
         yield return new WaitForSeconds(2f);
     }
 
-    // ----------------------°ø°İÆĞÅÏ 3 : ¸ŞÅ×¿À ---------------------------
+    // ----------------------ê³µê²©íŒ¨í„´ 3 : ë©”í…Œì˜¤ ---------------------------
     public IEnumerator AttackMeteor()
     {
         isCastingMeteor = true;
+
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", true);
+        }
 
         SpawnClone();
 
         yield return StartCoroutine(ShowMeteorCastUI());
 
-        // Ä³½ºÆÃ Áß ½ºÅÏ´çÇßÀ¸¸é Ãë¼Ò
+        // ìºìŠ¤íŒ… ì¤‘ ìŠ¤í„´ë‹¹í–ˆìœ¼ë©´ ì·¨ì†Œ
         if (isStunned)
         {
             isCastingMeteor = false;
+            if (anim != null)
+            {
+                anim.SetBool("IsCasting", false);
+            }
             RemoveClone();
             yield break;
         }
 
         RemoveClone();
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", false);
+        }
+
+        yield return null;
 
         for (int wave = 0; wave < meteorWaveCount; wave++)
         {
@@ -195,12 +226,15 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             yield return new WaitForSeconds(waveInterval);
         }
         isCastingMeteor = false;
+
     }
 
     private void SpawnMeteorWave()
     {
         float totalWidth = meteorSpawnXRange.y - meteorSpawnXRange.x;
         float sectionWidth = totalWidth / meteorPerWave;
+
+        float diagonalOffset = 3f;
 
         for (int i = 0; i < meteorPerWave; i++)
         {
@@ -210,8 +244,9 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             float randomX = Random.Range(sectionMinX, sectionMaxX);
             float randomY = Random.Range(meteorSpawnYRange.x, meteorSpawnYRange.y);
 
-            Vector3 spawnPos = new Vector3(randomX, randomY, 0f);
             Vector3 targetPos = new Vector3(randomX, meteorTargetY, 0f);
+
+            Vector3 spawnPos = new Vector3(randomX - diagonalOffset, randomY, 0f);
 
             GameObject obj = PoolingManager.Instance.Get(METEOR_KEY, spawnPos, Quaternion.identity);
             if (obj != null)
@@ -243,7 +278,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         meteorCastSlider.value = meteorCastTime;
         meteorCastSlider.gameObject.SetActive(false);
     }
-    //---------------Ä³½ºÆÃ Áß ÆÄÈÑ --------------
+    //---------------ìºìŠ¤íŒ… ì¤‘ íŒŒí›¼ --------------
     public void ApplyStun(float duration)
     {
         if (isStunned)
@@ -253,8 +288,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         isStunned = true;
         isCastingMeteor = false;
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", false);
+        }
 
-        // ³²Àº ºĞ½Å Á¦°Å
+        // ë‚¨ì€ ë¶„ì‹  ì œê±°
         RemoveClone();
 
         StopAllCoroutines();
@@ -304,7 +343,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     {
         OnHitDuringCast();
     }
-    //-------------Ä³½ºÆÃ Áß ºĞ½Å------------
+    //-------------ìºìŠ¤íŒ… ì¤‘ ë¶„ì‹ ------------
     private void SpawnClone()
     {
         if (teleportPoints.Length == 0)
@@ -359,7 +398,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         hasClones = false;
     }
-    // ---------------------°ø°İÆĞÅÏ 4 : ·¹ÀÌÀú-----------------------
+    // ---------------------ê³µê²©íŒ¨í„´ 4 : ë ˆì´ì €-----------------------
     public IEnumerator AttackLaser()
     {
         GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, laserSpawnPoint.position, Quaternion.identity);
