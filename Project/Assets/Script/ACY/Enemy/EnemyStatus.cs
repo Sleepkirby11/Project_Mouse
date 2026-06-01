@@ -15,7 +15,14 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         anim = GetComponentInChildren<Animator>();
         currentHP = maxHP;
     }
-
+    public float GetHPRatio() // 보스 페이즈 용 체력 비율 반환
+    {
+        if (maxHP <= 0)
+        {
+            return 0f;
+        }
+        return (float)currentHP / maxHP;
+    }
     public void TakeDamage(int damage) //IDamageable 인터페이스 구현
     {
         if (anim != null)

@@ -52,13 +52,20 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [SerializeField] private float orbWaitTime = 2f;       // 발사 전 대기
     private const string ORB_KEY = "RedBossOrb";
 
+    [Header("분노 설정")]
+    [SerializeField] private GameObject enrageVFX; // 분노 이펙트
+    [SerializeField] private float enrageTransitionTime = 2f; //이펙트 길이
+    private bool isEnraged = false;
+    private bool isEnrageTransitioning = false; // 분노 연출 중인지 체크
+
     private GameObject[] currentClones;
 
     private bool isCastingMeteor = false;
     private bool isStunned = false;
-
+    private bool isInvincible = false;
     public bool IsStunned => isStunned;
     public bool IsCastingMeteor => isCastingMeteor;
+    public bool IsInvincible => isInvincible;
 
     private SpriteRenderer sr;
     private Color originalColor;
@@ -135,21 +142,20 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             anim.SetTrigger("Attack");
         }
 
-        yield return new WaitForSeconds(0.9f); 
+        yield return new WaitForSeconds(0.5f); 
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
             yield break;
         }
-
-        // 구체 3개를 120도 간격으로 소환
-        MagicOrb[] orbs = new MagicOrb[3];
+        int currentOrbCount = isEnraged ? 4 : orbCount;
+        MagicOrb[] orbs = new MagicOrb[currentOrbCount];
         Vector3 spawnPos = pivotPoint != null ? pivotPoint.position : transform.position;
 
-        for (int i = 0; i < orbCount; i++)
+        for (int i = 0; i < currentOrbCount; i++)
         {
-            float angle = i * (360f / orbCount);
+            float angle = i * (360f / currentOrbCount);
 
             GameObject obj = PoolingManager.Instance.Get(ORB_KEY, spawnPos, Quaternion.identity);
 
@@ -338,12 +344,71 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     }
     public bool OnBeforeTakeDamage(EnemyStatus enemy, int damage)
     {
+        if (isInvincible)
+        {
+            return true;
+        }
+
         return false;
     }
 
     public void OnAfterTakeDamage(EnemyStatus enemy, int damage)
     {
-        OnHitDuringCast();
+        OnHitDuringCast(); // 메테오 캐스팅 중 피격 시 스턴
+
+        if(!isEnraged && !isEnrageTransitioning && enemy != null)
+        {
+            if (enemy.GetHPRatio() <= 0.5f)
+            {
+                StopAllCoroutines();
+                StartCoroutine(EnrageTransitionRoutine());
+            }
+        }
+    }
+
+    private IEnumerator EnrageTransitionRoutine()
+    {
+
+        isEnrageTransitioning = true;
+        isEnraged = true;    // 분노 상태 
+        isInvincible = true; // 무적
+
+        // 혹시 메테오 캐스팅 중이거나 레이저 때문에 투명해진 상태였다면 원래대로 복구
+        isCastingMeteor = false;
+        isStunned = false;
+        ToggleVisibility(true);
+        RemoveClone();
+
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", false);
+            anim.Play("Idle"); // 강제로 대기 모션 적용
+        }
+
+        // 분노 이펙트 생성
+        if (enrageVFX != null)
+        {
+            Vector3 spawnPos = pivotPoint != null ? pivotPoint.position : transform.position;
+            GameObject vfx = Instantiate(enrageVFX, spawnPos, Quaternion.identity);
+            Destroy(vfx, enrageTransitionTime); // 연출 시간에 맞춰 이펙트 삭제
+        }
+
+        yield return new WaitForSeconds(enrageTransitionTime);
+
+        isInvincible = false;
+        isEnrageTransitioning = false;
+
+        StartCoroutine(AttackRoutine()); // 공격 루틴 처음부터 다시 시작
+    }
+    // 보스 숨기기 및 나타내기 강제 적용 함수 (분노 연출 시 보스가 투명해져있으면 강제로 나타냄)
+    private void ToggleVisibility(bool isVisible)
+    {
+        if (sr != null)
+        {
+            Color color = sr.color;
+            color.a = isVisible ? 1f : 0f;
+            sr.color = color;
+        }
     }
     //-------------캐스팅 중 분신------------
     private void SpawnClone()
@@ -441,15 +506,53 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     // ---------------------공격패턴 4 : 레이저-----------------------
     public IEnumerator AttackLaser()
     {
-        GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, laserSpawnPoint.position, Quaternion.identity);
+        isInvincible = true;
+        yield return StartCoroutine(FadeRoutine(0f, 0.5f));
 
+        GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, laserSpawnPoint.position, Quaternion.identity);
         LaserCross laser = laserObj.GetComponent<LaserCross>();
 
         if (laser != null)
         {
-            laser.Init(laserWarningTime, laserDuration);
+            laser.Init(laserWarningTime, laserDuration, isEnraged);
         }
 
-        yield return new WaitForSeconds(laserWarningTime + laserDuration);
+        float totalWaitTime = laserWarningTime + laserDuration + 0.5f;
+
+        if (isEnraged)
+        {
+            totalWaitTime += 0.5f + laserDuration;
+        }
+
+        yield return new WaitForSeconds(totalWaitTime);
+
+        yield return StartCoroutine(FadeRoutine(1f, 0.5f));
+        isInvincible = false;
+
+        ApplyStun(3f);
+    }
+
+    private IEnumerator FadeRoutine(float targetAlpha, float duration)
+    {
+        if (sr == null)
+        {
+            yield break;
+        }
+
+        Color color = sr.color;
+        float startAlpha = color.a;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, targetAlpha, timer / duration);
+            sr.color = color;
+            yield return null;
+        }
+
+        // 마지막에 목표값으로 확실하게 고정
+        color.a = targetAlpha;
+        sr.color = color;
     }
 }
