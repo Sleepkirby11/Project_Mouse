@@ -2447,18 +2447,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GhostEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4834161149477849590, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834161149477849590, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6841908936778725946, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2475,18 +2463,6 @@ PrefabInstance:
     - target: {fileID: 1823950582210720561, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_Name
       value: RedBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 3191931018660831823, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3191931018660831823, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3191931018660831823, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3372036266355469166, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2561,10 +2537,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: enrageVFX
-      value: 
-      objectReference: {fileID: 2786589076493437136, guid: e598733ed45012c4db65f367f2d4ffe9, type: 3}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: laserSpawnPoint
       value: 
       objectReference: {fileID: 1962638956}
@@ -2572,10 +2544,6 @@ PrefabInstance:
       propertyPath: cloneDisappearVFX
       value: 
       objectReference: {fileID: 644590863095711222}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: enrageTransitionTime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: 'teleportPoints.Array.data[0]'
       value: 
@@ -2614,17 +2582,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 945727930035866876, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
-      propertyPath: maxHP
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 3868120746790778872, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
       propertyPath: m_Name
       value: ParryingShieldEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3868120746790778872, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4492551149636952784, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2683,14 +2643,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 3126618990052436673, guid: c2ebfbdc895d6164eb431c444d338e48, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3126618990052436673, guid: c2ebfbdc895d6164eb431c444d338e48, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6913978031860569879, guid: c2ebfbdc895d6164eb431c444d338e48, type: 3}
       propertyPath: m_LocalPosition.x
       value: -137
@@ -2730,14 +2682,6 @@ PrefabInstance:
     - target: {fileID: 6913978031860569879, guid: c2ebfbdc895d6164eb431c444d338e48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8624189645729721287, guid: c2ebfbdc895d6164eb431c444d338e48, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8854847022435032799, guid: c2ebfbdc895d6164eb431c444d338e48, type: 3}
-      propertyPath: maxHP
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

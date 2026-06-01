@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4ebb7e244f0c64bbdcfb3be7de1ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  isFacingRight: 1
   teleportPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -210,6 +212,8 @@ MonoBehaviour:
   orbOrbitRadius: 2
   orbCount: 3
   orbWaitTime: 2
+  enrageVFX: {fileID: 2786589076493437136, guid: e598733ed45012c4db65f367f2d4ffe9, type: 3}
+  enrageTransitionTime: 1
 --- !u!1 &2409019058995000748
 GameObject:
   m_ObjectHideFlags: 0
