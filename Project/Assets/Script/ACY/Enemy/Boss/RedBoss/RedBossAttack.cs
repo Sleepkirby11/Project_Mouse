@@ -56,9 +56,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
     private bool isCastingMeteor = false;
     private bool isStunned = false;
+    private bool isInvincible = false;
 
     public bool IsStunned => isStunned;
     public bool IsCastingMeteor => isCastingMeteor;
+    public bool IsInvincible => isInvincible;
 
     private SpriteRenderer sr;
     private Color originalColor;
@@ -338,6 +340,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     }
     public bool OnBeforeTakeDamage(EnemyStatus enemy, int damage)
     {
+        if (isInvincible)
+        {
+            return true;
+        }
+
         return false;
     }
 
@@ -441,15 +448,48 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     // ---------------------공격패턴 4 : 레이저-----------------------
     public IEnumerator AttackLaser()
     {
+        isInvincible = true;
+        // 투명
+        yield return StartCoroutine(FadeRoutine(0f, 0.5f));
+
+        // 레이저 발사
         GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, laserSpawnPoint.position, Quaternion.identity);
-
         LaserCross laser = laserObj.GetComponent<LaserCross>();
-
         if (laser != null)
         {
             laser.Init(laserWarningTime, laserDuration);
         }
 
         yield return new WaitForSeconds(laserWarningTime + laserDuration);
+
+        // 나타나기 & 스턴 상태
+        yield return StartCoroutine(FadeRoutine(1f, 0.5f));
+        isInvincible = false;
+
+        ApplyStun(3f);
+    }
+
+    private IEnumerator FadeRoutine(float targetAlpha, float duration)
+    {
+        if (sr == null)
+        {
+            yield break;
+        }
+
+        Color color = sr.color;
+        float startAlpha = color.a;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, targetAlpha, timer / duration);
+            sr.color = color;
+            yield return null;
+        }
+
+        // 마지막에 목표값으로 확실하게 고정
+        color.a = targetAlpha;
+        sr.color = color;
     }
 }

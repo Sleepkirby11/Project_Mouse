@@ -44,7 +44,7 @@ public class RedBossMove : MonoBehaviour
         {
             yield return new WaitForSeconds(teleportInterval);
 
-            if (bossAttack != null && bossAttack.IsStunned)
+            if (bossAttack != null && (bossAttack.IsStunned || bossAttack.IsInvincible))
             {
                 continue;
             }
