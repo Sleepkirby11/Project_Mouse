@@ -21,7 +21,7 @@ public class BasicEnemyAttack : MonoBehaviour
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -48,7 +48,12 @@ public class BasicEnemyAttack : MonoBehaviour
     {
         canAttack = false;
 
-        Debug.Log("적 공격 시도");
+        if (anim != null)
+            {
+                anim.SetTrigger("Attack");
+            }
+
+            Debug.Log("적 공격 시도");
         yield return new WaitForSeconds(0.5f); //약간 딜레이
         AttackHit();
 

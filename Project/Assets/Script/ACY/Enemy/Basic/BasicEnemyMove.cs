@@ -31,6 +31,10 @@ public class BasicEnemyMove : MonoBehaviour
     private Vector3 patrolTarget;
     private float detectionRadiusSqr;
 
+    private Animator animator; // 추가
+    private static readonly int IsMoving = Animator.StringToHash("IsMoving");   // 추가
+    private static readonly int IsChasing = Animator.StringToHash("IsChasing"); // 추가
+
     private WaitForSeconds scanIntervalWFS;
 
     private void Awake()
@@ -41,6 +45,7 @@ public class BasicEnemyMove : MonoBehaviour
         detectionRadiusSqr = detectionRadius * detectionRadius;
 
         scanIntervalWFS = new WaitForSeconds(0.2f); // 0.2초 주기 스캔
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -62,6 +67,14 @@ public class BasicEnemyMove : MonoBehaviour
                 break;
         }
     }
+    private void SetState(EnemyState newState)
+    {
+        currentState = newState;
+
+        bool isChasing = newState == EnemyState.Chase;
+        animator.SetBool(IsMoving, !isChasing);   // Patrol일 때만 IsMoving
+        animator.SetBool(IsChasing, isChasing);    // Chase일 때만 IsChasing
+    }
 
     private IEnumerator EnvironmentScanRoutine()
     {
@@ -76,8 +89,8 @@ public class BasicEnemyMove : MonoBehaviour
                 Collider2D hit = Physics2D.OverlapCircle(myTransform.position, detectionRadius, targetLayer); 
                 if (hit != null) // 감지되면 추적
                 {
-                    targetTransform = hit.transform; 
-                    currentState = EnemyState.Chase;
+                    targetTransform = hit.transform;
+                    SetState(EnemyState.Chase);
                 }
             }
             else
@@ -87,8 +100,8 @@ public class BasicEnemyMove : MonoBehaviour
                 if (sqrDistance > detectionRadiusSqr) // 감지 범위를 벗어나면 배회 상태로
                 {
                     targetTransform = null;
-                    currentState = EnemyState.Patrol;
-                    UpdatePatrolTarget(); // 복귀 시 새로운 배회 지점 갱신
+                    SetState(EnemyState.Patrol); 
+                    UpdatePatrolTarget();
                 }
             }
         }
@@ -96,6 +109,16 @@ public class BasicEnemyMove : MonoBehaviour
 
     private void PatrolMovement()
     {
+        float direction = patrolTarget.x - myTransform.position.x;
+
+        if (direction > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (direction < 0 && isFacingRight)
+        {
+            Flip();
+        }
         myTransform.position = Vector3.MoveTowards(myTransform.position, patrolTarget, moveSpeed * Time.deltaTime); // 배회 목표 지점으로 이동
 
         // 목표 지점에 도달했는지 확인
