@@ -52,12 +52,13 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [SerializeField] private float orbWaitTime = 2f;       // 발사 전 대기
     private const string ORB_KEY = "RedBossOrb";
 
-    private List<GameObject> currentClones = new List<GameObject>();
+    private GameObject[] currentClones;
 
     private bool isCastingMeteor = false;
     private bool isStunned = false;
 
     public bool IsStunned => isStunned;
+    public bool IsCastingMeteor => isCastingMeteor;
 
     private SpriteRenderer sr;
     private Color originalColor;
@@ -77,7 +78,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         {
             meteorCastSlider.gameObject.SetActive(false);
         }
-
+        currentClones = new GameObject[teleportPoints.Length];
         StartCoroutine(AttackRoutine());
     }
 
@@ -210,8 +211,9 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             RemoveClone();
             yield break;
         }
-
         RemoveClone();
+        isCastingMeteor = false;
+
         if (anim != null)
         {
             anim.SetBool("IsCasting", false);
@@ -353,11 +355,16 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         hasClones = true;
 
-        currentClones.Clear();
+        System.Array.Clear(currentClones, 0, currentClones.Length);
 
         for (int i = 0; i < teleportPoints.Length; i++)
         {
             Vector3 spawnPos = teleportPoints[i].position;
+
+            if (Vector3.Distance(spawnPos, transform.position) < 0.5f)
+            {
+                continue;
+            }
 
             GameObject cloneObj = PoolingManager.Instance.Get("RedBossClone", spawnPos, Quaternion.identity);
 
@@ -371,30 +378,63 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             if (clone != null)
             {
                 clone.Init(this, cloneSpawnVFX, cloneDisappearVFX);
+                clone.PlayCastAnimation();
             }
 
-            currentClones.Add(cloneObj);
+            currentClones[i] = cloneObj;
+        }
+    }
+    public void SwapCloneAndBoss(int oldIndex, int newIndex)
+    {
+        if (!isCastingMeteor || currentClones == null) // 분신이 없는 상태면 스왑 불가
+        {
+            return;
+        }
+
+        if (newIndex >= 0 && newIndex < currentClones.Length && currentClones[newIndex] != null) // 이동할 위치에 분신이 있으면 제거
+        {
+            currentClones[newIndex].GetComponent<RedBossClone>()?.DestroyClone(); // 분신 제거
+            currentClones[newIndex] = null; // 배열에서 제거
+        }
+
+        if (oldIndex >= 0 && oldIndex < teleportPoints.Length)
+        {
+            Vector3 spawnPos = teleportPoints[oldIndex].position;
+            GameObject cloneObj = PoolingManager.Instance.Get("RedBossClone", spawnPos, Quaternion.identity);
+
+            if (cloneObj != null)
+            {
+                RedBossClone clone = cloneObj.GetComponent<RedBossClone>();
+                clone?.Init(this, cloneSpawnVFX, cloneDisappearVFX);
+
+                if (anim != null)
+                {
+                    AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+                    clone?.SyncAnimation(stateInfo.fullPathHash, stateInfo.normalizedTime);
+                }
+                else
+                {
+                    clone?.PlayCastAnimation();
+                }
+
+                currentClones[oldIndex] = cloneObj;
+            }
         }
     }
 
     public void RemoveClone()
     {
-        for (int i = 0; i < currentClones.Count; i++)
+        if (currentClones == null)
         {
-            if (currentClones[i] == null)
-            {
-                continue;
-            }
-
-            RedBossClone clone = currentClones[i].GetComponent<RedBossClone>();
-
-            if (clone != null)
-            {
-                clone.DestroyClone();
-            }
+            return;
         }
+        for (int i = 0; i < currentClones.Length; i++)
+        {
+            if (currentClones[i] == null) continue;
 
-        currentClones.Clear();
+            currentClones[i].GetComponent<RedBossClone>()?.DestroyClone();
+            currentClones[i] = null;
+        }
 
         hasClones = false;
     }
