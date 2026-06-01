@@ -26,6 +26,7 @@ public class LaserCross : MonoBehaviour
 
     private const string LASER_KEY = "RedBossLaser";
     private float duration;
+    private bool isEnraged = false;
 
     private float rotateSpeed;
     private float rotateDirection; // 1(시계) -1(반시계) 방향
@@ -38,9 +39,10 @@ public class LaserCross : MonoBehaviour
             laserRoutine = null;
         }
     }
-    public void Init(float warningTime, float laserDuration)
+    public void Init(float warningTime, float laserDuration, bool enraged = false)
     {
         duration = laserDuration;
+        isEnraged = enraged;
 
         // ---------- 상태 초기화 ----------
 
@@ -146,18 +148,40 @@ public class LaserCross : MonoBehaviour
 
         // ---------------- 회전 ----------------
         float rotateTimer = 0f;
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = startRotation * Quaternion.Euler(0f, 0f, 90f * rotateDirection);
 
         while (rotateTimer < duration)
         {
-            rotateSpeed += acceleration * Time.deltaTime;
-
-            rotateSpeed = Mathf.Clamp(rotateSpeed, startRotateSpeed, maxRotateSpeed);
-
-            transform.Rotate(0f, 0f, rotateDirection * rotateSpeed * Time.deltaTime);
-
             rotateTimer += Time.deltaTime;
+            float t = rotateTimer / duration;
+            t = t * t * (3f - 2f * t);
 
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
             yield return null;
+        }
+        transform.rotation = targetRotation; 
+
+        // ---------------- 분노 시 역회전 추가 ----------------
+        if (isEnraged)
+        {
+            yield return new WaitForSeconds(0.5f); // 0.5초 정지
+
+            rotateTimer = 0f;
+            Quaternion reverseStartRot = transform.rotation;
+            // 기존 각도로 복귀
+            Quaternion reverseTargetRot = startRotation;
+
+            while (rotateTimer < duration)
+            {
+                rotateTimer += Time.deltaTime;
+                float t = rotateTimer / duration;
+                t = t * t * (3f - 2f * t); 
+
+                transform.rotation = Quaternion.Lerp(reverseStartRot, reverseTargetRot, t);
+                yield return null;
+            }
+            transform.rotation = reverseTargetRot;
         }
 
         // ---------------- 서서히 사라짐 ----------------
