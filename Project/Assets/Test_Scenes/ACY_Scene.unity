@@ -2377,6 +2377,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3298864769083811923, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6568432
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298864769083811923, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.58312416
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773862176804746005, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773862176804746005, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.86
+      objectReference: {fileID: 0}
     - target: {fileID: 5988464360397360385, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
       propertyPath: m_Name
       value: BasicEnemy
