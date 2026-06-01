@@ -33,8 +33,8 @@ public class AttackCursor : MonoBehaviour
 
         //AttackCursor의 position 최대 값 range로 지정
         if (distance > range)
-            rigid.position = (Vector2)(target.position) + (distanceVec.normalized * range);
+            transform.position = (Vector2)(target.position) + (distanceVec.normalized * range);
         else
-            rigid.position = (Vector2)mouse;
+            transform.position = (Vector2)mouse;
     }
 }
