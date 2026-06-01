@@ -16,11 +16,14 @@ public class ArcherEnemyMove : MonoBehaviour
     [SerializeField] private float backstepCooldown = 2f; // 백스텝 재사용 대기 시간
 
     private Rigidbody2D rb; 
-    private Transform player; 
+    private Transform player;
+    private Animator anim;
     private float backstepCooldownTimer = 0f; // 백스텝 쿨타임 타이머
     private float backstepEndTimer;
     private bool isBackstepping = false; // 백스텝 여부
+    private bool isFacingRight = true;
 
+    private static readonly int BackstepHash = Animator.StringToHash("Backstep");
     // 공격 컴포넌트에서 참조
     public Transform TargetPlayer => player;
     public bool IsBackstepping => isBackstepping;
@@ -30,6 +33,7 @@ public class ArcherEnemyMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -50,6 +54,7 @@ public class ArcherEnemyMove : MonoBehaviour
         }
 
         CheckDetection();
+        UpdateFacing();
     }
 
     void FixedUpdate()
@@ -88,6 +93,11 @@ public class ArcherEnemyMove : MonoBehaviour
                 isBackstepping = true;
                 backstepEndTimer = backstepDuration;
                 backstepCooldownTimer = backstepCooldown;
+
+                if (anim != null)
+                {
+                    anim.SetTrigger(BackstepHash);
+                }
             }
         }
         else
@@ -99,6 +109,33 @@ public class ArcherEnemyMove : MonoBehaviour
                 player = col.transform;
             }
         }
+    }
+
+    private void UpdateFacing()
+    {
+        if (player == null)
+        {
+            return;
+        }
+
+        float dirX = player.position.x - transform.position.x;
+
+        if (dirX > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (dirX < 0 && isFacingRight)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 
     private void OnDrawGizmosSelected() // 디버그용 코드
