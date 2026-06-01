@@ -817,6 +817,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
   m_PrefabInstance: {fileID: 1762049002}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1239781235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7697180847478146246, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
+  m_PrefabInstance: {fileID: 1353676653974036253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1239781238
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239781235}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 36f2923402041d7418ded72808ed3947, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1418627749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,17 +2063,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 169541774767142881, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7950320164446702114, guid: ad9be702ca52e95498901036d439885e, type: 3}
     - target: {fileID: 1738235730334658934, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_Name
       value: ArcherEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 1738235730334658934, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894486811649243390, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894486811649243390, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
+      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3540639986238268416, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -192.9
+      value: 4.91
       objectReference: {fileID: 0}
     - target: {fileID: 3540639986238268416, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2096,10 +2135,21 @@ PrefabInstance:
       propertyPath: maxHP
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8203052514352534440, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203052514352534440, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.33
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7697180847478146246, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1239781238}
   m_SourcePrefab: {fileID: 100100000, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
 --- !u!1001 &2047951902938178260
 PrefabInstance:
@@ -2397,6 +2447,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5988464360397360385, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2502,11 +2556,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1823950582210720561, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3372036266355469166, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: appearVFX
