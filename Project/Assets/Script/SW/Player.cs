@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         if (groundCursor.isMove == true)
             Attack(groundCursor);
 
-        if (isDashReady)
+        if (isDashReady && jumpCount == 1)
             DashLine();
         GroundCheck();
     }
@@ -188,28 +188,31 @@ public class Player : MonoBehaviour
         //    return;
         //}
 
-        if (context.started && jumpCount == 1)
+        if (context.started)
         {
             isDashReady = true;
         }
 
-        if (context.canceled && jumpCount == 1)
+        if (context.canceled)
         {
             isDashReady = false;
             DashLine();
-            //마우스 방향 구하기
-            Vector2 dir = (Vector2)(mouse.transform.position - transform.position);
+            if (jumpCount == 1)
+            {
+                //마우스 방향 구하기
+                Vector2 dir = (Vector2)(mouse.transform.position - transform.position);
 
-            //normalized된 방향으로 AddForce
-            rigid.linearVelocity = Vector2.zero;
-            rigid.AddForce(dir.normalized * 20, ForceMode2D.Impulse);
-            //키 입력 영향 임시 제한
-            isCanMove = false;
+                //normalized된 방향으로 AddForce
+                rigid.linearVelocity = Vector2.zero;
+                rigid.AddForce(dir.normalized * 20, ForceMode2D.Impulse);
+                //키 입력 영향 임시 제한
+                isCanMove = false;
 
-            SpriteFlip();
-            anim.SetBool("IsJump", true);
+                SpriteFlip();
+                anim.SetBool("IsJump", true);
 
-            jumpCount--;
+                jumpCount--;
+            }
         }
     }
 
@@ -290,6 +293,11 @@ public class Player : MonoBehaviour
     void DashLine()
     {
         dashLine.enabled = isDashReady;
+        if(jumpCount != 1)
+        {
+            dashLine.enabled = false;
+            return;
+        }
         if (isDashReady)
         {
             Vector3[] positions = new Vector3[2];
@@ -373,16 +381,17 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ground"))
         {
+            anim.SetBool("IsFalling", false);
+            anim.SetBool("IsJump", false);
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 if (contact.normal.y > 0.5f) //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
                 {
                     //이동 가능 + input 값 이어서 받기
                     rigid.linearVelocityX = inputVec.x;
+                    SpriteFlip();
                     jumpCount = 2;
                     isCanMove = true;
-                    anim.SetBool("IsFalling", false);
-                    isDashReady = false;
                     DashLine();
                     break;
                 }

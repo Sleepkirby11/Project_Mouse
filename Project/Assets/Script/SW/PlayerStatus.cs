@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
 {
+    public enum Stance
+    {
+        Red,
+        Green,
+        Blue,
+        white
+    }
+
     [Header("플레이어 HP")]
     [SerializeField] private int maxHp;
     [SerializeField] private int hp;
@@ -20,6 +28,12 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
 
     [Header("플레이어 공격력")]
     public int damage;
+
+    [Header("플레이어 스탠스")]
+    [SerializeField] private Gradient redStance;
+    [SerializeField] private Gradient greenStance;
+    [SerializeField] private Gradient blueStance;
+    [SerializeField] private Gradient whiteStance;
 
 
     private Rigidbody2D rb;
@@ -148,6 +162,28 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     {
         isInvincible = value;
         Debug.Log(value ? "[PlayerStatus] 무적 상태" : "[PlayerStatus] 무적 해제");
+    }
+
+    public Gradient ChangeStance(Stance newStance)   //스탠스 체인지
+    {
+        Gradient selectedGradient = whiteStance; // 기본값으로 whiteStance 설정
+
+        switch (newStance)
+        {
+            case Stance.Red:
+                selectedGradient = redStance;
+                break;
+            case Stance.Green:
+                selectedGradient = greenStance;
+                break;
+            case Stance.Blue:
+                selectedGradient = blueStance;
+                break;
+            case Stance.white:
+                selectedGradient = whiteStance;
+                break;
+        }
+        return selectedGradient;
     }
     void Die()
     {
