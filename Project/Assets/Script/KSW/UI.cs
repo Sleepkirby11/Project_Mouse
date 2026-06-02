@@ -32,7 +32,7 @@ public class UI : MonoBehaviour
 
     void Awake()
     {
-        // 💡 [추가] 싱글톤 초기화
+        // 싱글톤 초기화
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
@@ -49,9 +49,9 @@ public class UI : MonoBehaviour
         }
     }
 
+    //테스트용: 스페이스바 누르면 데미지 15, H키 누르면 회복 15
     //void Update()
     //{
-    //    //테스트용: 스페이스바 누르면 데미지 15, H키 누르면 회복 15
     //    if (Input.GetKeyDown(KeyCode.Space))
     //    {
     //        TakeDamage(15f);
@@ -81,7 +81,6 @@ public class UI : MonoBehaviour
         UpdateHPBar();
     }
 
-    // UI 업데이트 담당 함수를 하나로 분리 (유지보수성 향상)
     private void UpdateHPBar()
     {
         if (hpSlider != null)
