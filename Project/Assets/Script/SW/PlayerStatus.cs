@@ -77,7 +77,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
 
         if (UI.Instance != null)
         {
-            UI.Instance.TakeDamage(hp);
+            UI.Instance.TakeDamage(damage);
         }
 
         //플레이어 애니메이션 초기화

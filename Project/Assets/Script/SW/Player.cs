@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -335,7 +335,6 @@ public class Player : MonoBehaviour
         {
             return;
         }
-
         //낙하중 + BoxCast로 착지 판정 검사
 
         if (rigid.linearVelocityY <= 0)
@@ -350,6 +349,13 @@ public class Player : MonoBehaviour
                 anim.SetBool("IsFalling", false);
                 return;
             }
+            else if(jumpCount == 2) //Falling 상태 중 점프 카운트 조정
+            {
+                jumpCount = 1;
+                anim.SetBool("IsJump", true);
+                return;
+            }
+
             anim.SetBool("IsJump", false);
             anim.SetBool("IsFalling", true);
         }
@@ -361,6 +367,7 @@ public class Player : MonoBehaviour
         if (cursor.isMove)
         {
             status.ink = status.maxInk - cursor.trailLength / 4;
+            UI.Instance.UseInk(status.ink);
         }
 
         if (status.ink <= 0)
@@ -381,6 +388,7 @@ public class Player : MonoBehaviour
         }
         cursor.SetColliderPointsFromTrail();
         status.ink = status.maxInk;
+        UI.Instance.ChargeInk(status.ink);
         if (isSkill)
         {
             Debug.Log("스킬 발동");
@@ -411,7 +419,10 @@ public class Player : MonoBehaviour
                     //이동 가능 + input 값 이어서 받기
                     rigid.linearVelocityX = inputVec.x;
                     SpriteFlip();
-                    jumpCount = 2;
+                    if(jumpCount < 2)
+                    {
+                        jumpCount = 2;
+                    }
                     isCanMove = true;
                     DashLine();
                     break;
