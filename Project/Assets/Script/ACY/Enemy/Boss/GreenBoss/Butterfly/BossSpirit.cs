@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BossSpirit : MonoBehaviour
+public class BossSpirit : MonoBehaviour, IHitReaction
 {
     private GreenBossAttack bossAttack;
     private EnemyStatus enemyStatus;
@@ -16,22 +16,31 @@ public class BossSpirit : MonoBehaviour
         bossAttack = attack;
         isDead = false;
 
+        if (enemyStatus != null)
+        {
+            enemyStatus.Heal(9999);
+        }
     }
 
-    private void Update()
+    public bool OnBeforeTakeDamage(EnemyStatus status, int damage) => false;
+
+    public void OnAfterTakeDamage(EnemyStatus status, int damage)
     {
-        if (isDead || enemyStatus == null)
+        if (isDead || status == null)
         {
             return;
         }
-        if (enemyStatus.GetHPRatio() <= 0)
+
+        if (status.GetHPRatio() <= 0)
         {
-            isDead = true; // 중복 호출 방지를 위해 플래그를 가장 먼저 true로 만듭니다.
+            isDead = true;
 
             if (bossAttack != null)
             {
                 bossAttack.OnSpiritDestroyed(); // 보스에게 사망 보고
             }
+
+            gameObject.SetActive(false); // 오브젝트 비활성화
         }
     }
 }

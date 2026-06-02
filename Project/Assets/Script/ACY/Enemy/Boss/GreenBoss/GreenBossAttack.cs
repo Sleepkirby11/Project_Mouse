@@ -126,7 +126,19 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         while (true)
         {
+            if (activeSpiritsCount > 0)
+            {
+                yield return new WaitForSeconds(spiritPatternInterval);
+                continue;
+            }
+
             int spiritCount = spiritPoolKeys.Length;
+
+            if (spiritSpawnPoints.Length < spiritCount)
+            {
+                yield break;
+            }
+
             activeSpiritsCount = spiritCount;
             remainderHeal = 0f;
 
@@ -161,10 +173,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
                         spirit.Init(this);
                     }
                 }
-                else
-                {
-                    Debug.LogError($"키 오류");
-                }
+                 else
+                    {
+                        Debug.LogError($"[정령 소환 실패] PoolingManager에 '{currentSpiritKey}'라는 Key가 등록되어 있는지 확인하세요!");
+                    }
             }
 
             yield return new WaitForSeconds(spiritPatternInterval);
@@ -203,7 +215,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         if (activeSpiritsCount > 0)
         {
-            return true; // 대미지 연산 무효화
+            return true; // 대미지 무효
         }
         return false;
     }
@@ -212,9 +224,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         if (!hasTriggeredSpiritPattern && status != null)
         {
-            if (status.GetHPRatio() <= 0.5f)
+            float hpRatio = status.GetHPRatio();
+            if (hpRatio > 0f && hpRatio <= 0.5f)
             {
-                hasTriggeredSpiritPattern = true; 
+                hasTriggeredSpiritPattern = true;
                 StartSpiritAttack();
             }
         }
