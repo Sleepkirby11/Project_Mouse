@@ -193,7 +193,7 @@ public class Player : MonoBehaviour
             isDashReady = true;
         }
 
-        if (context.canceled && jumpCount == 1)
+        if (context.canceled && jumpCount == 1 && isDashReady)
         {
             isDashReady = false;
             DashLine();
@@ -373,15 +373,17 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ground"))
         {
+            anim.SetBool("IsFalling", false);
+            anim.SetBool("IsJump", false);
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 if (contact.normal.y > 0.5f) //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
                 {
                     //이동 가능 + input 값 이어서 받기
                     rigid.linearVelocityX = inputVec.x;
+                    SpriteFlip();
                     jumpCount = 2;
                     isCanMove = true;
-                    anim.SetBool("IsFalling", false);
                     isDashReady = false;
                     DashLine();
                     break;
