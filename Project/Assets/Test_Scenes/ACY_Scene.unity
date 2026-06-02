@@ -1829,9 +1829,9 @@ MonoBehaviour:
   - {fileID: 1068113293}
   - {fileID: 912234797}
   spiritPoolKeys:
-  - Spirit1
-  - Spirit2
-  - Spirit3
+  - GreenSpirit
+  - MintSpirit
+  - YellowGreenSpirit
 --- !u!114 &1912981618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2675,7 +2675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738235730334658934, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3540639986238268416, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2752,7 +2752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.size
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[6].key
@@ -2760,11 +2760,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[7].key
-      value: GreenBossBird
+      value: GreenSpirit
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[8].key
-      value: GreenSpirit
+      value: MintSpirit
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[9].key
@@ -2781,15 +2781,15 @@ PrefabInstance:
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[7].prefab
       value: 
-      objectReference: {fileID: 4726387216337282260, guid: 933b3913881a33345a2d1577e9f74c79, type: 3}
+      objectReference: {fileID: 4651221095943832990, guid: 595b02ad59ca9e64688d503a6d84a904, type: 3}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[8].prefab
       value: 
-      objectReference: {fileID: 8719655243952914985, guid: 945647be7cb32874598218e8b3402fa6, type: 3}
+      objectReference: {fileID: 2280118641728592142, guid: eb3a0c451c566e6428ce21549d2d8520, type: 3}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[9].prefab
       value: 
-      objectReference: {fileID: 5651416672115081090, guid: b049cf14716833b4ab262d5bc453164d, type: 3}
+      objectReference: {fileID: 5663733794253972570, guid: 53f1df4fc5c6d7048955ad7118713f37, type: 3}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[10].prefab
       value: 
