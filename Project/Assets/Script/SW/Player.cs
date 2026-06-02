@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -367,6 +367,7 @@ public class Player : MonoBehaviour
         if (cursor.isMove)
         {
             status.ink = status.maxInk - cursor.trailLength / 4;
+            UI.Instance.UseInk(status.ink);
         }
 
         if (status.ink <= 0)
@@ -387,6 +388,7 @@ public class Player : MonoBehaviour
         }
         cursor.SetColliderPointsFromTrail();
         status.ink = status.maxInk;
+        UI.Instance.ChargeInk(status.ink);
         if (isSkill)
         {
             Debug.Log("스킬 발동");
