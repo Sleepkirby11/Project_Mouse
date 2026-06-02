@@ -5,7 +5,7 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
-    // 💡 [추가] 어디서나 UI에 접근할 수 있도록 싱글톤 인스턴스 생성
+    // 어디서나 UI에 접근할 수 있도록 싱글톤 인스턴스 생성
     public static UI Instance { get; private set; }
 
     // 다음 발표 때 실행
@@ -17,13 +17,13 @@ public class UI : MonoBehaviour
 
     ////설정(구현 예정)
 
-    //// 종료 버튼 누를 때 호출
-    //public void ExitGame()
-    //{
-    //    Debug.Log("게임 종료!"); // 에디터에서는 안 꺼지므로 로그로 확인
-    //    Application.Quit();     // 실제 빌드된 게임에서는 프로그램 종료
-    //}
-    
+    // 종료 버튼 누를 때 호출
+    public void ExitGame()
+    {
+        Debug.Log("게임 종료!"); // 에디터에서는 안 꺼지므로 로그로 확인
+        Application.Quit();     // 실제 빌드된 게임에서는 프로그램 종료
+    }
+
 
     //체력바
     [Header("체력바 설정")]
@@ -34,7 +34,7 @@ public class UI : MonoBehaviour
 
     void Awake()
     {
-        // 💡 [추가] 싱글톤 초기화
+        // 싱글톤 초기화
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
@@ -51,9 +51,9 @@ public class UI : MonoBehaviour
         }
     }
 
+    //테스트용: 스페이스바 누르면 데미지 15, H키 누르면 회복 15
     //void Update()
     //{
-    //    //테스트용: 스페이스바 누르면 데미지 15, H키 누르면 회복 15
     //    if (Input.GetKeyDown(KeyCode.Space))
     //    {
     //        TakeDamage(15f);
@@ -71,8 +71,6 @@ public class UI : MonoBehaviour
         currentHP = Mathf.Clamp(currentHP, 0f, maxHP);
 
         UpdateHPBar();
-
-        //플레이어 자체에 Die가 있으므로 UI 내부의 Die() 호출은 제거하여 중복 방지
     }
 
     public void Heal(float amount)
@@ -83,7 +81,6 @@ public class UI : MonoBehaviour
         UpdateHPBar();
     }
 
-    // UI 업데이트 담당 함수를 하나로 분리 (유지보수성 향상)
     private void UpdateHPBar()
     {
         if (hpSlider != null)

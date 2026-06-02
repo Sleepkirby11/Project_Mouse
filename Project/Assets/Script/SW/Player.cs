@@ -30,9 +30,12 @@ public class Player : MonoBehaviour
     public GameObject attackCursor;
 
 
-
+    //유니티 컴포넌트
     Rigidbody2D rigid;
     BoxCollider2D col;
+    Animator anim;
+    SpriteRenderer sprite;
+    LineRenderer dashLine;
 
     //이동값 변수
     float speed;
@@ -41,6 +44,9 @@ public class Player : MonoBehaviour
 
     //점프 횟수
     int jumpCount;
+
+    //대시 준비 여부
+    bool isDashReady;
 
     //마우스
     Transform mouse;
@@ -55,21 +61,27 @@ public class Player : MonoBehaviour
         status = GetComponent<PlayerStatus>();
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+        anim = GetComponentInChildren<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
+        dashLine = GetComponentInChildren<LineRenderer>();
         jumpCount = 2;
 
         speed = status.speed;
 
         attackCursor.GetComponent<AttackCursor>().target = transform;
+        mouse = attackCursor.gameObject.transform;
 
         cursor = cursorObject.GetComponent<Cursor>();
         groundCursor = groundLine.GetComponent<Cursor>();
 
         isSkill = false;
+        isDashReady = false;
     }
 
 
     private void FixedUpdate()
     {
+
         //linearVelocity 기반 이동
         if (isCanMove && status.CanMove) //status 스크립트에서 움직임 가능 여부 받아오게 수정
         {
@@ -80,16 +92,13 @@ public class Player : MonoBehaviour
             rigid.linearVelocityX = 0;
         }
 
-        if(cursor.isMove == true)
+        if (cursor.isMove == true)
             Attack(cursor);
-        if(groundCursor.isMove == true)
+        if (groundCursor.isMove == true)
             Attack(groundCursor);
 
-        // 아래가 수정 전
-        //if (isCanMove)
-        //{
-        //    Move();
-        //}
+        if (isDashReady)
+            DashLine();
         GroundCheck();
     }
 
@@ -106,16 +115,16 @@ public class Player : MonoBehaviour
         //키 입력 시작
         if (context.started)
         {
+            anim.SetBool("IsWalk", true);
             inputVec.x = context.ReadValue<Vector2>().x * speed;
-            Debug.Log(context.ReadValue<Vector2>().y);
-            if (context.ReadValue<Vector2>().y < 0)
-            {
-                rigid.linearVelocityY = context.ReadValue<Vector2>().y * speed * 2;
-            }
+
+            rigid.linearVelocityX = inputVec.x;
+            SpriteFlip();
         }
         //키 입력 종료
         if (context.canceled)
         {
+            anim.SetBool("IsWalk", false);
             inputVec.x = 0;
         }
     }
@@ -129,7 +138,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        //키 입력 시작
+
         if (context.started)
         {
             rigid.linearVelocityY = -speed * 2;
@@ -144,11 +153,6 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        //아래가 수정 전
-        //if (status.HP <= 0)
-        //{
-        //    return;
-        //}
 
         if (context.started)
         {
@@ -159,6 +163,8 @@ public class Player : MonoBehaviour
                 rigid.linearVelocityY = 0;
 
                 rigid.AddForceY(10, ForceMode2D.Impulse);
+
+                anim.SetBool("IsJump", true);
                 jumpCount--;
             }
         }
@@ -184,8 +190,14 @@ public class Player : MonoBehaviour
 
         if (context.started && jumpCount == 1)
         {
+            isDashReady = true;
+        }
+
+        if (context.canceled && jumpCount == 1)
+        {
+            isDashReady = false;
+            DashLine();
             //마우스 방향 구하기
-            mouse = attackCursor.gameObject.transform;
             Vector2 dir = (Vector2)(mouse.transform.position - transform.position);
 
             //normalized된 방향으로 AddForce
@@ -193,6 +205,9 @@ public class Player : MonoBehaviour
             rigid.AddForce(dir.normalized * 20, ForceMode2D.Impulse);
             //키 입력 영향 임시 제한
             isCanMove = false;
+
+            SpriteFlip();
+            anim.SetBool("IsJump", true);
 
             jumpCount--;
         }
@@ -215,7 +230,6 @@ public class Player : MonoBehaviour
         if (context.started)
         {
             //초기화
-            mouse = attackCursor.gameObject.transform;
             cursorObject.transform.position = mouse.transform.position;
             trail.startWidth = 0.25f;
             cursor.mouse = mouse;
@@ -246,7 +260,6 @@ public class Player : MonoBehaviour
         if (context.started)
         {
             //초기화
-            mouse = attackCursor.gameObject.transform;
             groundLine.transform.position = mouse.transform.position;
             trail.startWidth = 0.25f;
             groundCursor.mouse = mouse;
@@ -261,7 +274,30 @@ public class Player : MonoBehaviour
 
     }
 
+    void SpriteFlip()
+    {
+        //플레이어 이동 방향에 따른 스프라이트 반전
+        if (rigid.linearVelocityX > 0)
+        {
+            sprite.flipX = false;
+        }
+        else if (rigid.linearVelocityX < 0)
+        {
+            sprite.flipX = true;
+        }
+    }
 
+    void DashLine()
+    {
+        dashLine.enabled = isDashReady;
+        if (isDashReady)
+        {
+            Vector3[] positions = new Vector3[2];
+            positions[0] = transform.position;
+            positions[1] = mouse.position;
+            dashLine.SetPositions(positions);
+        }
+    }
 
     //착지 판정 검사
     void GroundCheck()
@@ -272,18 +308,25 @@ public class Player : MonoBehaviour
         }
 
         //낙하중 + BoxCast로 착지 판정 검사
-        if (rigid.linearVelocityY <= 0 &&
-        Physics2D.BoxCast
-                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground")))
-        {
 
-            //이동 가능 + input 값 이어서 받기
-            rigid.linearVelocityX = inputVec.x;
-            jumpCount = 2;
-            isCanMove = true;
+        if (rigid.linearVelocityY <= 0)
+        {
+            if (Physics2D.BoxCast
+                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground")))
+            {
+                //이동 가능 + input 값 이어서 받기
+                rigid.linearVelocityX = inputVec.x;
+                jumpCount = 2;
+                isCanMove = true;
+                anim.SetBool("IsFalling", false);
+                return;
+            }
+            anim.SetBool("IsJump", false);
+            anim.SetBool("IsFalling", true);
         }
     }
 
+    //잉크 소모량 계산 및 공격 발동
     void Attack(Cursor cursor)
     {
         if (cursor.isMove)
@@ -303,7 +346,10 @@ public class Player : MonoBehaviour
         //스킬 발동, Collider 입히기
         cursor.isMove = false;
         cursor.lifeTime = 0.5f;
-        cursor.damage = status.damage;
+        if (cursor.gameObject.GetComponent<EdgeCollider2D>().isTrigger == true)
+        {
+            cursor.damage = status.damage;
+        }
         cursor.SetColliderPointsFromTrail();
         status.ink = status.maxInk;
         if (isSkill)
@@ -335,6 +381,9 @@ public class Player : MonoBehaviour
                     rigid.linearVelocityX = inputVec.x;
                     jumpCount = 2;
                     isCanMove = true;
+                    anim.SetBool("IsFalling", false);
+                    isDashReady = false;
+                    DashLine();
                     break;
                 }
             }
