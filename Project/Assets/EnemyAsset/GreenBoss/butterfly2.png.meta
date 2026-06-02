@@ -1,0 +1,1167 @@
+fileFormatVersion: 2
+guid: f2e857ba881083347900bfd117aeae12
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3647800588686652441
+    second: butterfly2_0
+  - first:
+      213: 3549460554100621024
+    second: butterfly2_1
+  - first:
+      213: 1484070109802822477
+    second: butterfly2_2
+  - first:
+      213: 3525268461532655633
+    second: butterfly2_3
+  - first:
+      213: -5914542841040104914
+    second: butterfly2_4
+  - first:
+      213: -595933494829855539
+    second: butterfly2_5
+  - first:
+      213: -369528537056434124
+    second: butterfly2_6
+  - first:
+      213: 4768480327842031267
+    second: butterfly2_7
+  - first:
+      213: 546897520113889371
+    second: butterfly2_8
+  - first:
+      213: -4620207390071065611
+    second: butterfly2_9
+  - first:
+      213: -4095408770761412017
+    second: butterfly2_10
+  - first:
+      213: 2094936615194721036
+    second: butterfly2_11
+  - first:
+      213: 6233405655793306209
+    second: butterfly2_12
+  - first:
+      213: 1004137431388986121
+    second: butterfly2_13
+  - first:
+      213: 4935460134959459748
+    second: butterfly2_14
+  - first:
+      213: 8212015360374367448
+    second: butterfly2_15
+  - first:
+      213: -6151556269612037112
+    second: butterfly2_16
+  - first:
+      213: 8145689332888656704
+    second: butterfly2_17
+  - first:
+      213: 8404178497822925328
+    second: butterfly2_18
+  - first:
+      213: -223288535712290531
+    second: butterfly2_19
+  - first:
+      213: -4057210228438321625
+    second: butterfly2_20
+  - first:
+      213: -8522273583053490635
+    second: butterfly2_21
+  - first:
+      213: -3967451468432410230
+    second: butterfly2_22
+  - first:
+      213: 5635289367785301808
+    second: butterfly2_23
+  - first:
+      213: -478923029815929612
+    second: butterfly2_24
+  - first:
+      213: 3099629942249023774
+    second: butterfly2_25
+  - first:
+      213: -1673299662941506110
+    second: butterfly2_26
+  - first:
+      213: -6943987814030633031
+    second: butterfly2_27
+  - first:
+      213: -6662756379609589220
+    second: butterfly2_28
+  - first:
+      213: 3481104856800500418
+    second: butterfly2_29
+  - first:
+      213: -1478027312289146734
+    second: butterfly2_30
+  - first:
+      213: 729780415230285689
+    second: butterfly2_31
+  - first:
+      213: 1862764508713749170
+    second: butterfly2_32
+  - first:
+      213: 7984753528277192583
+    second: butterfly2_33
+  - first:
+      213: 4037805732656424197
+    second: butterfly2_34
+  - first:
+      213: 4883571819291456214
+    second: butterfly2_35
+  - first:
+      213: -1053952635184144030
+    second: butterfly2_36
+  - first:
+      213: 1632578112396556435
+    second: butterfly2_37
+  - first:
+      213: 8953378297729243944
+    second: butterfly2_38
+  - first:
+      213: 6071423989619435641
+    second: butterfly2_39
+  - first:
+      213: -7054488773649780099
+    second: butterfly2_40
+  - first:
+      213: 725096044747332506
+    second: butterfly2_41
+  - first:
+      213: 3455761094509265466
+    second: butterfly2_42
+  - first:
+      213: -6374718103884900226
+    second: butterfly2_43
+  - first:
+      213: 2000605837861438354
+    second: butterfly2_44
+  - first:
+      213: -552833403344340451
+    second: butterfly2_45
+  - first:
+      213: 2767790272491290922
+    second: butterfly2_46
+  - first:
+      213: -7616584684068921327
+    second: butterfly2_47
+  - first:
+      213: 7824936675548659164
+    second: butterfly2_48
+  - first:
+      213: 1467619255288143728
+    second: butterfly2_49
+  - first:
+      213: -4052345503780843028
+    second: butterfly2_50
+  - first:
+      213: 2755820169630589238
+    second: butterfly2_51
+  - first:
+      213: -1747027975710828210
+    second: butterfly2_52
+  - first:
+      213: -4571947570460106088
+    second: butterfly2_53
+  - first:
+      213: -8586309894122110676
+    second: butterfly2_54
+  - first:
+      213: -3050669454562997603
+    second: butterfly2_55
+  - first:
+      213: 17982716950498479
+    second: butterfly2_56
+  - first:
+      213: -2717747691621463290
+    second: butterfly2_57
+  - first:
+      213: 1716838484323646287
+    second: butterfly2_58
+  - first:
+      213: 8847490700540490240
+    second: butterfly2_59
+  - first:
+      213: 1474891185487339966
+    second: butterfly2_60
+  - first:
+      213: -7225387168356767604
+    second: butterfly2_61
+  - first:
+      213: -7431910929999963698
+    second: butterfly2_62
+  - first:
+      213: 2466434910230040422
+    second: butterfly2_63
+  - first:
+      213: -2211359042019324508
+    second: butterfly2_64
+  - first:
+      213: 2045850286914361253
+    second: butterfly2_65
+  - first:
+      213: -2730325821089752073
+    second: butterfly2_66
+  - first:
+      213: 3596798327525239805
+    second: butterfly2_67
+  - first:
+      213: 6843194043496383308
+    second: butterfly2_68
+  - first:
+      213: 9003690788749154362
+    second: butterfly2_69
+  - first:
+      213: -3141644532281144853
+    second: butterfly2_70
+  - first:
+      213: -4520948014813521784
+    second: butterfly2_71
+  - first:
+      213: -517759541867032061
+    second: butterfly2_72
+  - first:
+      213: -5020988647334570926
+    second: butterfly2_73
+  - first:
+      213: -8474884613110379765
+    second: butterfly2_74
+  - first:
+      213: 4683902471074658096
+    second: butterfly2_75
+  - first:
+      213: 7415316575911871848
+    second: butterfly2_76
+  - first:
+      213: 2338193887007544455
+    second: butterfly2_77
+  - first:
+      213: -7257577413555714590
+    second: butterfly2_78
+  - first:
+      213: 803801105383206769
+    second: butterfly2_79
+  - first:
+      213: -5623950036937524971
+    second: butterfly2_80
+  - first:
+      213: 1834663953504984518
+    second: butterfly2_81
+  - first:
+      213: -6254907753030413330
+    second: butterfly2_82
+  - first:
+      213: 5297070052247049082
+    second: butterfly2_83
+  - first:
+      213: 7470799178225441702
+    second: butterfly2_84
+  - first:
+      213: -7193527360429198062
+    second: butterfly2_85
+  - first:
+      213: 6921411111964269586
+    second: butterfly2_86
+  - first:
+      213: -3397519482776139237
+    second: butterfly2_87
+  - first:
+      213: 2890874093927617453
+    second: butterfly2_88
+  - first:
+      213: 6856860977378955992
+    second: butterfly2_89
+  - first:
+      213: 790484505776945630
+    second: butterfly2_90
+  - first:
+      213: -6038126487224637768
+    second: butterfly2_91
+  - first:
+      213: -7907841392187878205
+    second: butterfly2_92
+  - first:
+      213: 8546204260071834358
+    second: butterfly2_93
+  - first:
+      213: 6615285921541233727
+    second: butterfly2_94
+  - first:
+      213: -4288527736154954967
+    second: butterfly2_95
+  - first:
+      213: -1095343919287700455
+    second: butterfly2_96
+  - first:
+      213: -7466491144412068925
+    second: butterfly2_97
+  - first:
+      213: 3515600456037460378
+    second: butterfly2_98
+  - first:
+      213: 7603017091729782879
+    second: butterfly2_99
+  - first:
+      213: 2365107728081342514
+    second: butterfly2_100
+  - first:
+      213: -5354532624454893980
+    second: butterfly2_101
+  - first:
+      213: -9199476723988838212
+    second: butterfly2_102
+  - first:
+      213: 4080035287048863230
+    second: butterfly2_103
+  - first:
+      213: 4403204880457297532
+    second: butterfly2_104
+  - first:
+      213: -8661513541807146684
+    second: butterfly2_105
+  - first:
+      213: -9165279521491342704
+    second: butterfly2_106
+  - first:
+      213: -5296125616277505958
+    second: butterfly2_107
+  - first:
+      213: 8785440722726851616
+    second: butterfly2_108
+  - first:
+      213: 6200767056068377493
+    second: butterfly2_109
+  - first:
+      213: 8877991803783159413
+    second: butterfly2_110
+  - first:
+      213: 8980191662478751085
+    second: butterfly2_111
+  - first:
+      213: -7840869432062913268
+    second: butterfly2_112
+  - first:
+      213: -8615410575579919771
+    second: butterfly2_113
+  - first:
+      213: 7067313566309416841
+    second: butterfly2_114
+  - first:
+      213: -1269552379092785113
+    second: butterfly2_115
+  - first:
+      213: -1660696053979400380
+    second: butterfly2_116
+  - first:
+      213: 8200157971386590834
+    second: butterfly2_117
+  - first:
+      213: -8879019571594523763
+    second: butterfly2_118
+  - first:
+      213: -6983552356215320911
+    second: butterfly2_119
+  - first:
+      213: -7878107428168067218
+    second: butterfly2_120
+  - first:
+      213: -9024633378350660471
+    second: butterfly2_121
+  - first:
+      213: -451145588799767573
+    second: butterfly2_122
+  - first:
+      213: -1605950247092722976
+    second: butterfly2_123
+  - first:
+      213: -304832457208833834
+    second: butterfly2_124
+  - first:
+      213: -3004441439261009390
+    second: butterfly2_125
+  - first:
+      213: -6127653156630908798
+    second: butterfly2_126
+  - first:
+      213: -6745903827274026612
+    second: butterfly2_127
+  - first:
+      213: 5046258556093825563
+    second: butterfly2_128
+  - first:
+      213: -772149190611855972
+    second: butterfly2_129
+  - first:
+      213: 5502632399588822014
+    second: butterfly2_130
+  - first:
+      213: 3847149524053040685
+    second: butterfly2_131
+  - first:
+      213: 5739177981757940169
+    second: butterfly2_132
+  - first:
+      213: -7813739644985319285
+    second: butterfly2_133
+  - first:
+      213: -5436272148444915778
+    second: butterfly2_134
+  - first:
+      213: -7359242085169321873
+    second: butterfly2_135
+  - first:
+      213: -846198546344343596
+    second: butterfly2_136
+  - first:
+      213: 7727836235252935670
+    second: butterfly2_137
+  - first:
+      213: 3667014422782640127
+    second: butterfly2_138
+  - first:
+      213: 325664151735557996
+    second: butterfly2_139
+  - first:
+      213: -6655841505650144025
+    second: butterfly2_140
+  - first:
+      213: -6703510018708343059
+    second: butterfly2_141
+  - first:
+      213: -7102149217147571069
+    second: butterfly2_142
+  - first:
+      213: 7389378110015045243
+    second: butterfly2_143
+  - first:
+      213: 3619467168720386805
+    second: butterfly2_144
+  - first:
+      213: 4311299037633744524
+    second: butterfly2_145
+  - first:
+      213: 5712466315790657684
+    second: butterfly2_146
+  - first:
+      213: -6195035349470414542
+    second: butterfly2_147
+  - first:
+      213: -36436463598302937
+    second: butterfly2_148
+  - first:
+      213: 3199330754474350680
+    second: butterfly2_149
+  - first:
+      213: 6706146485329989801
+    second: butterfly2_150
+  - first:
+      213: -6125956181339982338
+    second: butterfly2_151
+  - first:
+      213: 873455114515295673
+    second: butterfly2_152
+  - first:
+      213: -9022257855830510108
+    second: butterfly2_153
+  - first:
+      213: -5467258270568827415
+    second: butterfly2_154
+  - first:
+      213: -268290200902574531
+    second: butterfly2_155
+  - first:
+      213: -2836764854100445485
+    second: butterfly2_156
+  - first:
+      213: -621950882547641361
+    second: butterfly2_157
+  - first:
+      213: 3341293357937921229
+    second: butterfly2_158
+  - first:
+      213: -7344286463799721567
+    second: butterfly2_159
+  - first:
+      213: -762521077612820183
+    second: butterfly2_160
+  - first:
+      213: -7206042276417338987
+    second: butterfly2_161
+  - first:
+      213: 2322479918334736578
+    second: butterfly2_162
+  - first:
+      213: 9123480097420281071
+    second: butterfly2_163
+  - first:
+      213: -7630025017797035198
+    second: butterfly2_164
+  - first:
+      213: 7080369972636016346
+    second: butterfly2_165
+  - first:
+      213: -2369989946989699085
+    second: butterfly2_166
+  - first:
+      213: -3350464304408255781
+    second: butterfly2_167
+  - first:
+      213: 6595908339361998893
+    second: butterfly2_168
+  - first:
+      213: 5600865103027566350
+    second: butterfly2_169
+  - first:
+      213: -8996744250778693520
+    second: butterfly2_170
+  - first:
+      213: 5966866094265874974
+    second: butterfly2_171
+  - first:
+      213: -272874234665985579
+    second: butterfly2_172
+  - first:
+      213: 7170574539549359227
+    second: butterfly2_173
+  - first:
+      213: -3114451960163879484
+    second: butterfly2_174
+  - first:
+      213: 2114671305300828866
+    second: butterfly2_175
+  - first:
+      213: 6357766705743820007
+    second: butterfly2_176
+  - first:
+      213: 2478869831426944810
+    second: butterfly2_177
+  - first:
+      213: 7031484269818237457
+    second: butterfly2_178
+  - first:
+      213: 8980093060692640585
+    second: butterfly2_179
+  - first:
+      213: -3126079878751297250
+    second: butterfly2_180
+  - first:
+      213: -8388583841375740863
+    second: butterfly2_181
+  - first:
+      213: 5344271022532975927
+    second: butterfly2_182
+  - first:
+      213: -8478418575090773463
+    second: butterfly2_183
+  - first:
+      213: -6961031911336176122
+    second: butterfly2_184
+  - first:
+      213: -3855819091753347037
+    second: butterfly2_185
+  - first:
+      213: 6614095892870280819
+    second: butterfly2_186
+  - first:
+      213: -8730698007881021579
+    second: butterfly2_187
+  - first:
+      213: -7691473820675134631
+    second: butterfly2_188
+  - first:
+      213: -150369657843633898
+    second: butterfly2_189
+  - first:
+      213: 4481343162074327412
+    second: butterfly2_190
+  - first:
+      213: -4954192620626027277
+    second: butterfly2_191
+  - first:
+      213: 422064494190718831
+    second: butterfly2_192
+  - first:
+      213: -3740757715667350687
+    second: butterfly2_193
+  - first:
+      213: -8750045288896402873
+    second: butterfly2_194
+  - first:
+      213: -7114918939624357465
+    second: butterfly2_195
+  - first:
+      213: -7556584849505379182
+    second: butterfly2_196
+  - first:
+      213: -3622448463220709648
+    second: butterfly2_197
+  - first:
+      213: 949123469848534868
+    second: butterfly2_198
+  - first:
+      213: 420235287814322981
+    second: butterfly2_199
+  - first:
+      213: 1633253264577332911
+    second: butterfly2_200
+  - first:
+      213: -945154198550148591
+    second: butterfly2_201
+  - first:
+      213: -8239682627155403734
+    second: butterfly2_202
+  - first:
+      213: -7655692077697152552
+    second: butterfly2_203
+  - first:
+      213: -6249085455786244431
+    second: butterfly2_204
+  - first:
+      213: 8574327461310339738
+    second: butterfly2_205
+  - first:
+      213: 8002297183992703367
+    second: butterfly2_206
+  - first:
+      213: 5315739283228307840
+    second: butterfly2_207
+  - first:
+      213: -6493434924833165686
+    second: butterfly2_208
+  - first:
+      213: -1008688043258715400
+    second: butterfly2_209
+  - first:
+      213: -4545342498751765440
+    second: butterfly2_210
+  - first:
+      213: -7330818526362514835
+    second: butterfly2_211
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: butterfly2_0
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 683
+        width: 200
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eb0fd301b8606dc0800000000000000
+      internalID: -3647800588686652441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_1
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 683
+        width: 213
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eebd6f6197324130800000000000000
+      internalID: 3549460554100621024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 683
+        width: 256
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4b7294e6e9789410800000000000000
+      internalID: 1484070109802822477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 683
+        width: 256
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 110ba83fcf44ce030800000000000000
+      internalID: 3525268461532655633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 683
+        width: 256
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2299f66f925beda0800000000000000
+      internalID: -5914542841040104914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 683
+        width: 256
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dccc8e2d4a1dab7f0800000000000000
+      internalID: -595933494829855539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_6
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 377
+        width: 197
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 438a16ed0cb2fdaf0800000000000000
+      internalID: -369528537056434124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_7
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 375
+        width: 212
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a6667bf79b0d2240800000000000000
+      internalID: 4768480327842031267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 394
+        width: 256
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b503eee9568f69700800000000000000
+      internalID: 546897520113889371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_9
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 403
+        width: 256
+        height: 280
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f3fd2e8bd9b1efb0800000000000000
+      internalID: -4620207390071065611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_10
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 399
+        width: 256
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f423fb0eb6f2a27c0800000000000000
+      internalID: -4095408770761412017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_11
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 402
+        width: 256
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0bf3a780c5b21d10800000000000000
+      internalID: 2094936615194721036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_12
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 1
+        width: 196
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16a887efa61818650800000000000000
+      internalID: 6233405655793306209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_13
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 1
+        width: 209
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90b1d977ca96fed00800000000000000
+      internalID: 1004137431388986121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_14
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1
+        width: 256
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ad2c53f7d64e7440800000000000000
+      internalID: 4935460134959459748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_15
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1
+        width: 256
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d46a2d0670f6f170800000000000000
+      internalID: 8212015360374367448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1
+        width: 256
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80c82f54a2841aaa0800000000000000
+      internalID: -6151556269612037112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: butterfly2_17
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1
+        width: 256
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04b54816a4d4b0170800000000000000
+      internalID: 8145689332888656704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b6088af58c680f749873866ae9b97813
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      butterfly2_0: -3647800588686652441
+      butterfly2_1: 3549460554100621024
+      butterfly2_10: -4095408770761412017
+      butterfly2_11: 2094936615194721036
+      butterfly2_12: 6233405655793306209
+      butterfly2_13: 1004137431388986121
+      butterfly2_14: 4935460134959459748
+      butterfly2_15: 8212015360374367448
+      butterfly2_16: -6151556269612037112
+      butterfly2_17: 8145689332888656704
+      butterfly2_2: 1484070109802822477
+      butterfly2_3: 3525268461532655633
+      butterfly2_4: -5914542841040104914
+      butterfly2_5: -595933494829855539
+      butterfly2_6: -369528537056434124
+      butterfly2_7: 4768480327842031267
+      butterfly2_8: 546897520113889371
+      butterfly2_9: -4620207390071065611
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

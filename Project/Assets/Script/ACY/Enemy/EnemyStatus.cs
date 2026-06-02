@@ -33,6 +33,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         {
             return;
         }
+
+
         IHitReaction hitReaction = GetComponent<IHitReaction>();
 
         if (hitReaction != null)
@@ -79,5 +81,14 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         }
 
         Destroy(gameObject, dieAnimationLength); //사망 애니메이션 대기 후 삭제
+    }
+    public void Heal(int amount)
+    {
+        if (currentHP <= 0)
+        {
+            return; // 이미 죽은 적은 회복 불가
+        }
+        currentHP = Mathf.Min(currentHP + amount, maxHP);
+        Debug.Log($"{gameObject.name} 회복. 현재 HP : {currentHP}/{maxHP}");
     }
 }

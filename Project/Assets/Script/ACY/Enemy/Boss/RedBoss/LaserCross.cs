@@ -16,11 +16,6 @@ public class LaserCross : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip laserSFX;
 
-    [Header("회전")]
-    [SerializeField] private float startRotateSpeed = 8f;
-    [SerializeField] private float maxRotateSpeed = 45f;
-    [SerializeField] private float acceleration = 12f;
-
     [Header("레이저 굵기")]
     [SerializeField] private float laserThickness = 1.5f;
 
@@ -28,7 +23,6 @@ public class LaserCross : MonoBehaviour
     private float duration;
     private bool isEnraged = false;
 
-    private float rotateSpeed;
     private float rotateDirection; // 1(시계) -1(반시계) 방향
     private Coroutine laserRoutine;
     private void OnDisable()
@@ -48,7 +42,6 @@ public class LaserCross : MonoBehaviour
 
         transform.rotation = Quaternion.identity;
 
-        rotateSpeed = startRotateSpeed;
         rotateDirection = Random.value < 0.5f ? 1f : -1f;
 
         SetWarning(true);
