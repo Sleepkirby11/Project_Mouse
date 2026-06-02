@@ -26,8 +26,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     private bool isKnockbacked; // 넉백 상태 여부
     private bool isStunned; // 스턴 상태 여부
     private bool isPossessed; // 빙의 상태 여부
+    private bool isInvincible; // 무적 상태 여부
     public bool IsPossessed => isPossessed;
     public bool IsKnockbacked => isKnockbacked;
+    public bool IsInvincible => isInvincible;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); 
@@ -44,25 +46,39 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     {
         hp = maxHp;
         ink = maxInk;
+
+        isInvincible = false;
     }
 
     public bool CanMove => !isKnockbacked && !isStunned && !isPossessed; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
 
-    public void TakeDamage(int damage) // IDamageable 인터페이스 구현
+    // IDamageable 인터페이스 구현을 통한 대미지 처리
+    public void TakeDamage(int damage)
     {
-        if (hp <= 0) return;
+        if (hp <= 0 || isInvincible) return;
 
         hp -= damage;
         Debug.Log($"[PlayerStatus] 플레이어 피격 현재 HP: {hp}/{maxHp}");
+        Animator playerAnim = GetComponentInChildren<Animator>();
 
         if (UI.Instance != null)
         {
             UI.Instance.TakeDamage(hp);
         }
 
+        //플레이어 애니메이션 초기화
+        playerAnim.SetBool("IsJump", false);
+        playerAnim.SetBool("IsFalling", false);
+
+        //플레이어의 체력에 따른 애니메이션 트리거 설정
         if (hp <= 0)
         {
+            playerAnim.SetTrigger("Dead");
             Die();
+        }
+        else
+        {
+            playerAnim.SetTrigger("Hit");
         }
     }
 
@@ -126,6 +142,12 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         }
 
         Debug.Log(value ? "[PlayerStatus] 빙의 상태" : "[PlayerStatus] 빙의 해제");
+    }
+
+    public void SetInvincible(bool value)   //무적
+    {
+        isInvincible = value;
+        Debug.Log(value ? "[PlayerStatus] 무적 상태" : "[PlayerStatus] 무적 해제");
     }
     void Die()
     {
