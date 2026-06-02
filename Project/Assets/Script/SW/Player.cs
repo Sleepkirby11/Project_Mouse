@@ -246,6 +246,27 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    public void ActionStance(InputAction.CallbackContext context)
+    {
+        if (status.HP <= 0 || !status.CanMove)
+        {
+            return;
+        }
+
+        if (context.started)
+        {
+            TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
+            TrailRenderer groundTrail = groundLine.GetComponent<TrailRenderer>();
+
+            trail.Clear();
+            groundTrail.Clear();
+
+            trail.colorGradient = status.ChangeStance(PlayerStatus.Stance.Red);
+            groundTrail.colorGradient = status.ChangeStance(PlayerStatus.Stance.Red);
+        }
+    }
+
     public void ActionMakeGround(InputAction.CallbackContext context)
     {
         if (status.HP <= 0 || !status.CanMove)
