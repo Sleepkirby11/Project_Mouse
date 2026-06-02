@@ -68,18 +68,18 @@ public class UI : MonoBehaviour
     // --- 잉크 제어 (공격 스크립트에서 호출) ---
     public void UseInk(float amount)
     {
-        currentInk = Mathf.Clamp(currentInk - amount, 0f, maxInk);
-        UpdateInkBar();
+        currentInk = Mathf.Clamp(amount, 0f, maxInk);
+        UpdateInkBar(amount);
     }
 
     public void ChargeInk(float amount)
     {
-        currentInk = Mathf.Clamp(currentInk + amount, 0f, maxInk);
-        UpdateInkBar();
+        currentInk = Mathf.Clamp(amount, 0f, maxInk);
+        UpdateInkBar(amount);
     }
 
-    private void UpdateInkBar()
+    private void UpdateInkBar(float amount)
     {
-        if (inkSlider != null) inkSlider.value = currentInk;
+        if (inkSlider != null) inkSlider.value = amount;
     }
 }
