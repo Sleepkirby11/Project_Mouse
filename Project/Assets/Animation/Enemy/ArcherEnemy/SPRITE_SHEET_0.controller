@@ -185,7 +185,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
+  - m_ConditionMode: 1
     m_ConditionEvent: Hurt
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -359,7 +359,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: tst
+  m_Name: Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -398,7 +398,7 @@ AnimatorStateMachine:
     m_Position: {x: 390, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9117529984318053890}
-    m_Position: {x: 483.4054, y: -41.081078, z: 0}
+    m_Position: {x: 480, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9156472711543174174}
     m_Position: {x: 650, y: 70, z: 0}
