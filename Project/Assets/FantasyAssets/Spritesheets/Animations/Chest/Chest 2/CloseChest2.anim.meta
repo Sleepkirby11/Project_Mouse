@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a914df21ace38154699b7991e31aa66f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Chest/Chest 2/CloseChest2.anim
+  uploadId: 706910

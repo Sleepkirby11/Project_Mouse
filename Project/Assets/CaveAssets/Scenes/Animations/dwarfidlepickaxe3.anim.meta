@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 65af46ceb20c50e4db9b213e4bd3bf06
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/dwarfidlepickaxe3.anim
+  uploadId: 807122

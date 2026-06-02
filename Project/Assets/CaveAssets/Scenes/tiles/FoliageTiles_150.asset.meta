@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f201f6072a700cb438a9f1a0f5ea421a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/tiles/FoliageTiles_150.asset
+  uploadId: 807122

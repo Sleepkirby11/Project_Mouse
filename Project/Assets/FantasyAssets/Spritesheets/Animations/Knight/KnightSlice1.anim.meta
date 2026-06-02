@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 524b43f923aa85849a7fb00ae11afa0f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Knight/KnightSlice1.anim
+  uploadId: 706910

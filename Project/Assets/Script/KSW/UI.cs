@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;          // UI(Slider) 제어용 추가
 using UnityEngine.SceneManagement; // 씬 이동
+using TMPro;
 
 public class UI : MonoBehaviour
 {
     // 💡 [추가] 어디서나 UI에 접근할 수 있도록 싱글톤 인스턴스 생성
     public static UI Instance { get; private set; }
 
-    /* 다음 발표 때 실행
+    // 다음 발표 때 실행
     // 게임 시작 버튼 누를 때 호출 
-    //public void StartGame()
-    //{
-    //    SceneManager.LoadScene(1); //시작 씬 이름 넣을 것
-    //}
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Main"); //시작 씬 이름 넣을 것
+    }
 
     ////설정(구현 예정)
 
@@ -22,11 +23,12 @@ public class UI : MonoBehaviour
     //    Debug.Log("게임 종료!"); // 에디터에서는 안 꺼지므로 로그로 확인
     //    Application.Quit();     // 실제 빌드된 게임에서는 프로그램 종료
     //}
-    */
+    
 
     //체력바
     [Header("체력바 설정")]
     [SerializeField] private Slider hpSlider;
+    [SerializeField] private TMP_Text hpText;
     [SerializeField] private float maxHP = 100f;
     private float currentHP;
 
@@ -86,6 +88,10 @@ public class UI : MonoBehaviour
         if (hpSlider != null)
         {
             hpSlider.value = currentHP;
+        }
+        if (hpText != null)
+        {
+            hpText.text = $"{(int)currentHP} / {(int)maxHP}";
         }
     }
 

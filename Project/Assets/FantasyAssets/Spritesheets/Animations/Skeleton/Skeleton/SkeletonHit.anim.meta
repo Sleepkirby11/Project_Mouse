@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3831c6480d5d1ba41acee4a7421bbb50
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Skeleton/Skeleton/SkeletonHit.anim
+  uploadId: 706910

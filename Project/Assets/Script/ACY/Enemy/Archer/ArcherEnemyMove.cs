@@ -16,20 +16,24 @@ public class ArcherEnemyMove : MonoBehaviour
     [SerializeField] private float backstepCooldown = 2f; // 백스텝 재사용 대기 시간
 
     private Rigidbody2D rb; 
-    private Transform player; 
+    private Transform player;
+    private Animator anim;
     private float backstepCooldownTimer = 0f; // 백스텝 쿨타임 타이머
     private float backstepEndTimer;
     private bool isBackstepping = false; // 백스텝 여부
+    private bool isFacingRight = true;
 
+    private static readonly int BackstepHash = Animator.StringToHash("Backstep");
     // 공격 컴포넌트에서 참조
     public Transform TargetPlayer => player;
     public bool IsBackstepping => isBackstepping;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); //리지드바디 기초 설정
+        rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -39,7 +43,7 @@ public class ArcherEnemyMove : MonoBehaviour
             backstepCooldownTimer -= Time.deltaTime;
         }
 
-        // 백스텝 타이머 제어 (Invoke 대체)
+        // 백스텝 타이머 제어
         if (isBackstepping)
         {
             backstepEndTimer -= Time.deltaTime;
@@ -50,11 +54,12 @@ public class ArcherEnemyMove : MonoBehaviour
         }
 
         CheckDetection();
+        UpdateFacing();
     }
 
     void FixedUpdate()
     {
-        // 백스텝 상태일 때만 이동, 나머지는 정지
+        // 백스텝 상태일 때만 이동
         if (isBackstepping && player != null)
         {
             float moveDirX = transform.position.x > player.position.x ? 1f : -1f;
@@ -71,10 +76,10 @@ public class ArcherEnemyMove : MonoBehaviour
 
     private void CheckDetection()
     {
-        // 플레이어 유효성 및 거리 체크 (sqrMagnitude로 최적화)
+        // 플레이어 유효성 및 거리 체크
         if (player != null)
         {
-            float sqrDist = (player.position - transform.position).sqrMagnitude; // 제곱 거리 계산
+            float sqrDist = (player.position - transform.position).sqrMagnitude; // 거리 계산
 
             if (sqrDist > detectRange * detectRange) // 감지 범위를 벗어나면 플레이어 초기화
             {
@@ -88,6 +93,11 @@ public class ArcherEnemyMove : MonoBehaviour
                 isBackstepping = true;
                 backstepEndTimer = backstepDuration;
                 backstepCooldownTimer = backstepCooldown;
+
+                if (anim != null)
+                {
+                    anim.SetTrigger(BackstepHash);
+                }
             }
         }
         else
@@ -99,6 +109,33 @@ public class ArcherEnemyMove : MonoBehaviour
                 player = col.transform;
             }
         }
+    }
+
+    private void UpdateFacing()
+    {
+        if (player == null)
+        {
+            return;
+        }
+
+        float dirX = player.position.x - transform.position.x;
+
+        if (dirX > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (dirX < 0 && isFacingRight)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 
     private void OnDrawGizmosSelected() // 디버그용 코드

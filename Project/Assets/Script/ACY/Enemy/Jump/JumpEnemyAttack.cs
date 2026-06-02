@@ -2,8 +2,9 @@
 using UnityEngine;
 
 /*
- * 플레이어의 Y축이 낮게 변했을때
- * 점프 공격이 끝난 후 땅으로 내려갈때 움직임 부자연스러운 문제 있음
+플레이어 감지 시 준비자세 (빨갛게 물듬)
+플레이어의 위치로 점프
+(몸체 및 착지 시 충격파에 공격 판정)
  */
 public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 {
@@ -15,10 +16,6 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     [SerializeField] private float jumpHeight = 4f;        // 포물선 최고 높이
     [SerializeField] private float jumpDuration = 1f;      // 점프 소요 시간
     [SerializeField] private float readyDuration = 0.6f;   // 빨갛게 기 모으는 시간
-
-    [Header("낙하 설정")]
-    [SerializeField] private float fallStartSpeed = 10f;   // 점프 종료 후 아래로 떨어지는 시작 속도
-    [SerializeField] private float fallForwardSpeed = 3f;  // 낙하 중 앞으로 유지할 속도
 
     [Header("접촉 공격 설정")]
     [SerializeField] private int directHitDamage = 1;      // 몸통박치기 대미지
@@ -48,7 +45,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     private bool hasDirectHit = false;
     private float lastAttackTime = -99f;
 
-    // 이동 스크립트가 멈춰야 할 타이밍을 알려주기 위한 프로퍼티
+    // 이동 스크립트에서 읽음
     public float AttackRange => attackRange;
     public bool IsAttackingOrReady => isAttackingOrReady;
 
@@ -115,9 +112,6 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 
         float elapsed = 0f;
 
-        // 진행 방향 저장
-        float fallDirectionX = Mathf.Sign(targetPos.x - startPos.x);
-
         // 포물선 이동 중 직접 제어
         rb.gravityScale = 0f;
         rb.linearVelocity = Vector2.zero;
@@ -125,34 +119,34 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         while (elapsed < jumpDuration)
         {
             elapsed += Time.deltaTime;
-            float t = elapsed / jumpDuration;
+            float t = Mathf.Clamp01(elapsed / jumpDuration);
 
             Vector2 linearPos = Vector2.Lerp(startPos, targetPos, t);
             float arc = jumpHeight * Mathf.Sin(Mathf.PI * t);
 
             rb.MovePosition(new Vector2(linearPos.x, linearPos.y + arc));
 
-            // 점프 중 몸통박치기 판정
             CheckDirectHit();
-
             yield return null;
         }
-
-        // 중력 복구
-        rb.gravityScale = originGravity;
-
-        // 자연스러운 전진 낙하
-        rb.linearVelocity = new Vector2(
-            fallDirectionX * fallForwardSpeed,
-            -fallStartSpeed
-        );
-
-        // 착지 대기
+        Vector2 landingStart = rb.position;
+        float landingElapsed = 0f;
+        float landingSpeedY = jumpHeight * Mathf.PI / jumpDuration; // 포물선 끝 하강 속도
+        float landingSpeedX = (targetPos.x - startPos.x) / jumpDuration; // 포물선 X 속도 유지
+        // 포물선을 착지할 때까지 계속 연장
         while (!IsGrounded())
         {
-            CheckDirectHit(); // 낙하 중에도 직접 충돌 가능
+            landingElapsed += Time.deltaTime;
+            float dx = landingSpeedX * landingElapsed;
+            float dy = -landingSpeedY * landingElapsed - 0.5f * 9.8f * rb.gravityScale * landingElapsed * landingElapsed;
+
+            rb.MovePosition(landingStart + new Vector2(dx, dy));
+
+            CheckDirectHit();
             yield return null;
         }
+
+        rb.gravityScale = originGravity;
 
         // 착지 정지
         rb.linearVelocity = Vector2.zero;
@@ -209,11 +203,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             return;
         }
 
-        Collider2D playerCollider = Physics2D.OverlapCircle(
-            transform.position,
-            directHitRadius,
-            playerLayer
-        );
+        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, directHitRadius, playerLayer);
 
         if (playerCollider != null)
         {
@@ -254,11 +244,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             return false;
         }
 
-        return Physics2D.OverlapCircle(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
-        );
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     // 공격 범위 빨강

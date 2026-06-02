@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2ab23dafee6f4d042890fc3da0341057
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Tile Palette/Tiles/TerrainBGTiles_160.asset
+  uploadId: 706910

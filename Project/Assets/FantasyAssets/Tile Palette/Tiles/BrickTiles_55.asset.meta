@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 719b3a502f13b0f44b53b833968ac27b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Tile Palette/Tiles/BrickTiles_55.asset
+  uploadId: 706910

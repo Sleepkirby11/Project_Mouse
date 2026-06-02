@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c660993aef0b7a34f815a8027d77af08
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/spiderSpritesheet_6.controller
+  uploadId: 807122

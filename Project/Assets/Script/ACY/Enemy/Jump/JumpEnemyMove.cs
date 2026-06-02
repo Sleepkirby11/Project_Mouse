@@ -53,7 +53,7 @@ public class JumpEnemyMove : MonoBehaviour
 
     private void Update()
     {
-        // 공격 스크립트가 준비(기모으기) 중이거나 점프 중이면 이동 연산 정지
+        //  준비 중이거나 점프 중이면 멈춤
         if (attackScript != null && attackScript.IsAttackingOrReady)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -75,7 +75,10 @@ public class JumpEnemyMove : MonoBehaviour
 
     private void FindPlayer()
     {
-        if (foundPlayer) return;
+        if (foundPlayer)
+        {
+            return;
+        }
 
         Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, findPlayerRange, playerLayer);
         if (playerCollider != null)
@@ -88,10 +91,16 @@ public class JumpEnemyMove : MonoBehaviour
     private void Patrol()
     {
         float distFromOrigin = transform.position.x - patrolOrigin.x;
-        if (distFromOrigin > patrolDistance) patrolDir = -1f;
-        if (distFromOrigin < -patrolDistance) patrolDir = 1f;
+        if (distFromOrigin > patrolDistance)
+        {
+            patrolDir = -1f;
+        }
+        if (distFromOrigin < -patrolDistance)
+        {
+            patrolDir = 1f;
+        }
 
-        rb.linearVelocity = new Vector2(patrolDir * moveSpeed * 0.6f, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(patrolDir * moveSpeed * 0.6f, rb.linearVelocity.y);
         FlipSprite(patrolDir);
         // anim?.SetBool("isMoving", true);
     }

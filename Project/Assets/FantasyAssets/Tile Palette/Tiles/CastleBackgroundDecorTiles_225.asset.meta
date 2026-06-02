@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 283fb3b0f9dfbf148b5764ae72ebe3af
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Tile Palette/Tiles/CastleBackgroundDecorTiles_225.asset
+  uploadId: 706910

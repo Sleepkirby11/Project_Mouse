@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 67c408ab4a267ba4999cea53b26f1ced
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Scenes/AssetGallery/ChestSpritesheet_20.controller
+  uploadId: 706910

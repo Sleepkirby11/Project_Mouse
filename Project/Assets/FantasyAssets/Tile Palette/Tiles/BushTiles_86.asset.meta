@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 25d0a3bf919569d4bae8a8de5f57d351
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Tile Palette/Tiles/BushTiles_86.asset
+  uploadId: 706910

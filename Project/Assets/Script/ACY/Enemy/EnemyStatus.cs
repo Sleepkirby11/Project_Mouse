@@ -15,9 +15,20 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         anim = GetComponentInChildren<Animator>();
         currentHP = maxHP;
     }
-
+    public float GetHPRatio() // 보스 페이즈 용 체력 비율 반환
+    {
+        if (maxHP <= 0)
+        {
+            return 0f;
+        }
+        return (float)currentHP / maxHP;
+    }
     public void TakeDamage(int damage) //IDamageable 인터페이스 구현
     {
+        if (anim != null)
+        {
+             anim.SetTrigger("Hurt"); //피격 애니메이션 트리거
+        }
         if (currentHP <= 0) //이미 사망한 적은 피해를 입지 않음
         {
             return;
@@ -53,7 +64,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable
 
         if (anim != null)
         {
-            anim.SetTrigger("Die"); //사망 애니메이션 트리거
+            anim.SetTrigger("Death"); //사망 애니메이션 트리거
         }
      
         if (TryGetComponent(out Collider2D col)) //죽으면 콜라이더 비활성화

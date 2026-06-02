@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2e9905138a6d92440a44a74ba20033c7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/tiles/CaveRailsPlatformsTiles_22.asset
+  uploadId: 807122

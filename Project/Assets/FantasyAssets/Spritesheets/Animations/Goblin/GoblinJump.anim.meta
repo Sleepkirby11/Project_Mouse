@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7cce9eeaf495dff46a448d1e92eae67b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Goblin/GoblinJump.anim
+  uploadId: 706910

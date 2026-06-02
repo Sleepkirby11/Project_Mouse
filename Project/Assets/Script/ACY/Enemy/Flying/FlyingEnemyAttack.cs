@@ -10,7 +10,7 @@ public class FlyingEnemyAttack : MonoBehaviour
 
     private Rigidbody2D rb;
     private FlyingEnemyMove FlyingMove;
-    private WaitForSeconds waitInstruction; // [최적화] 캐싱
+    private WaitForSeconds waitInstruction;
     private bool isDiving;
 
     void Awake()
@@ -46,7 +46,7 @@ public class FlyingEnemyAttack : MonoBehaviour
     private IEnumerator WaitRoutine()
     {
         rb.linearVelocity = Vector2.zero;
-        yield return waitInstruction; // 캐싱된 객체 사용으로 GC 방지
+        yield return waitInstruction; 
 
         // 이동 스크립트에게 공격 끝났다고 알림
         FlyingMove.OnAttackProcessFinished();

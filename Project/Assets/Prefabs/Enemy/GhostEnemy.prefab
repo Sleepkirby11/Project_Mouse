@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2196911329696525700}
   - component: {fileID: 6024035146927147381}
   - component: {fileID: 4814064938279372456}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: GhostEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 2
-  dieAnimationLength: 1
+  dieAnimationLength: 0
 --- !u!1 &6841908936778725946
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 910604201463933298}
   - component: {fileID: 1383748885323869681}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

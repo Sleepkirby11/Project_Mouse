@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1e59f04240a4f52428d0d1cacee9eea6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Skeleton/Helmet/HelmetRun.anim
+  uploadId: 706910

@@ -1,24 +1,25 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 {
-    [Header("°øÅë")]
+    [Header("ê³µí†µ")]
     [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform pivotPoint;
 
-    [Header("È­»ì ¼³Á¤")]
-    [SerializeField] private float angleSpread = 15f;     // °¢µµ Â÷ÀÌ
-    [SerializeField] private float attackCooldown = 3f;   // °ø°İ °£°İ 
+    [Header("í™”ì‚´ ì„¤ì •")]
+    [SerializeField] private float angleSpread = 15f;     // ê°ë„ ì°¨ì´
+    [SerializeField] private float attackCooldown = 3f;   // ê³µê²© ê°„ê²© 
 
     private const string ARROW_KEY = "RedBossArrow";
 
 
-    [Header("Ä³½ºÆÃ UI")]
+    [Header("ìºìŠ¤íŒ… UI")]
     [SerializeField] private Slider meteorCastSlider;
 
-    [Header("¸ŞÅ×¿À ¼³Á¤")]
+    [Header("ë©”í…Œì˜¤ ì„¤ì •")]
     [SerializeField] private int meteorWaveCount = 3;
     [SerializeField] private int meteorPerWave = 5;
     [SerializeField] private float waveInterval = 0.5f;
@@ -28,16 +29,16 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [SerializeField] private float meteorTargetY = -2.5f;
     private const string METEOR_KEY = "RedBossMeteor";
 
-    [Header("½ºÅÏ ¼³Á¤")]
+    [Header("ìŠ¤í„´ ì„¤ì •")]
     [SerializeField] private float stunDuration = 2f;
 
-    [Header("ºĞ½Å ¼³Á¤")]
+    [Header("ë¶„ì‹  ì„¤ì •")]
     [SerializeField] private Transform[] teleportPoints;
     [SerializeField] private GameObject cloneDisappearVFX;
     [SerializeField] private GameObject cloneSpawnVFX;
     private bool hasClones = false;
 
-    [Header("·¹ÀÌÀú ¼³Á¤")]
+    [Header("ë ˆì´ì € ì„¤ì •")]
     [SerializeField] private GameObject laserCrossPrefab;
     [SerializeField] private Transform laserSpawnPoint;
     private const string LASER_KEY = "RedBossLaser";
@@ -45,25 +46,35 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [SerializeField] private float laserWarningTime = 1.5f;
     [SerializeField] private float laserDuration = 4f;
 
-    [Header("±¸Ã¼ ¼³Á¤")]
-    [SerializeField] private float orbOrbitRadius = 2f;    // °øÀü ¹İÁö¸§
+    [Header("êµ¬ì²´ ì„¤ì •")]
+    [SerializeField] private float orbOrbitRadius = 2f;    // ê³µì „ ë°˜ì§€ë¦„
     [SerializeField] private int orbCount = 3;
-    [SerializeField] private float orbWaitTime = 2f;       // ¹ß»ç Àü ´ë±â
+    [SerializeField] private float orbWaitTime = 2f;       // ë°œì‚¬ ì „ ëŒ€ê¸°
     private const string ORB_KEY = "RedBossOrb";
 
-    private List<GameObject> currentClones = new List<GameObject>();
+    [Header("ë¶„ë…¸ ì„¤ì •")]
+    [SerializeField] private GameObject enrageVFX; // ë¶„ë…¸ ì´í™íŠ¸
+    [SerializeField] private float enrageTransitionTime = 2f; //ì´í™íŠ¸ ê¸¸ì´
+    private bool isEnraged = false;
+    private bool isEnrageTransitioning = false; // ë¶„ë…¸ ì—°ì¶œ ì¤‘ì¸ì§€ ì²´í¬
+
+    private GameObject[] currentClones;
 
     private bool isCastingMeteor = false;
     private bool isStunned = false;
-
+    private bool isInvincible = false;
     public bool IsStunned => isStunned;
+    public bool IsCastingMeteor => isCastingMeteor;
+    public bool IsInvincible => isInvincible;
 
     private SpriteRenderer sr;
     private Color originalColor;
+    private Animator anim;
 
     private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
 
         if (sr != null)
         {
@@ -74,11 +85,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         {
             meteorCastSlider.gameObject.SetActive(false);
         }
-
+        currentClones = new GameObject[teleportPoints.Length];
         StartCoroutine(AttackRoutine());
     }
 
-    // ÀÏÁ¤ °£°İÀ¸·Î È­»ì ¹ß»ç
+    // ì¼ì • ê°„ê²©ìœ¼ë¡œ í™”ì‚´ ë°œì‚¬
     private IEnumerator AttackRoutine()
     {
         while (true)
@@ -97,12 +108,18 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         }
     }
 
-    // ------------------------°ø°İÆĞÅÏ 1 : À¯µµ È­»ì-------------------------
+    // ------------------------ê³µê²©íŒ¨í„´ 1 : ìœ ë„ í™”ì‚´-------------------------
     public IEnumerator AttackArrow()
     {
-        SpawnArrow(0f);              // °¡¿îµ¥
-        SpawnArrow(-angleSpread);    // ¾Æ·¡ÂÊ/¿ŞÂÊ ¹æÇâ
-        SpawnArrow(angleSpread);     // À§ÂÊ/¿À¸¥ÂÊ ¹æÇâ
+        if (anim != null)
+        {
+            anim.SetTrigger("Shoot");
+        }
+
+        yield return new WaitForSeconds(1.2f);
+        SpawnArrow(0f);              // ê°€ìš´ë°
+        SpawnArrow(-angleSpread);    // ì•„ë˜ìª½/ì™¼ìª½ ë°©í–¥
+        SpawnArrow(angleSpread);     // ìœ„ìª½/ì˜¤ë¥¸ìª½ ë°©í–¥
 
         yield break;
     }
@@ -117,28 +134,30 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         obj.GetComponent<FireArrow>()?.Init(angleOffset);
     }
-    //---------------°ø°İ ÆĞÅÏ 2 : ¸¶¹ı ±¸Ã¼ -------------------
+    //---------------ê³µê²© íŒ¨í„´ 2 : ë§ˆë²• êµ¬ì²´ -------------------
     public IEnumerator AttackOrb()
     {
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+        }
+
+        yield return new WaitForSeconds(0.5f); 
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
             yield break;
         }
+        int currentOrbCount = isEnraged ? 4 : orbCount;
+        MagicOrb[] orbs = new MagicOrb[currentOrbCount];
+        Vector3 spawnPos = pivotPoint != null ? pivotPoint.position : transform.position;
 
-        // ±¸Ã¼ 3°³¸¦ 120µµ °£°İÀ¸·Î ¼ÒÈ¯
-        MagicOrb[] orbs = new MagicOrb[3];
-
-        for (int i = 0; i < orbCount; i++)
+        for (int i = 0; i < currentOrbCount; i++)
         {
-            float angle = i * (360f / orbCount);
+            float angle = i * (360f / currentOrbCount);
 
-            GameObject obj = PoolingManager.Instance.Get
-            (
-                ORB_KEY,
-                transform.position,
-                Quaternion.identity
-            );
+            GameObject obj = PoolingManager.Instance.Get(ORB_KEY, spawnPos, Quaternion.identity);
 
             if (obj == null)
             {
@@ -146,16 +165,20 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             }
 
             MagicOrb orb = obj.GetComponent<MagicOrb>();
-            orb?.Init(transform, angle, orbOrbitRadius);
+            orb?.Init(pivotPoint != null ? pivotPoint : transform, angle, orbOrbitRadius);
             orbs[i] = orb;
         }
 
-        // ´ë±â (°øÀü ¿¬Ãâ)
+        // ëŒ€ê¸° (ê³µì „ ì—°ì¶œ)
         yield return new WaitForSeconds(orbWaitTime);
 
-        // ¹ß»ç ½ÃÁ¡ÀÇ ÇÃ·¹ÀÌ¾î À§Ä¡ °íÁ¤ ÈÄ µ¿½Ã ¹ß»ç
+        // ë°œì‚¬ ì‹œì ì˜ í”Œë ˆì´ì–´ ìœ„ì¹˜ ê³ ì • í›„ ë™ì‹œ ë°œì‚¬
         Vector3 targetPos = player.transform.position;
 
+        if (anim != null)
+        {
+            anim.SetTrigger("Shoot");
+        }
         for (int i = 0; i < orbs.Length; i++)
         {
             if (orbs[i] == null)
@@ -165,28 +188,44 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             orbs[i].Launch(targetPos);
         }
 
-        // ±¸Ã¼ ºñÇà ½Ã°£¸¸Å­ ´ë±â ÈÄ ´ÙÀ½ ÆĞÅÏ
+        // êµ¬ì²´ ë¹„í–‰ ì‹œê°„ë§Œí¼ ëŒ€ê¸° í›„ ë‹¤ìŒ íŒ¨í„´
         yield return new WaitForSeconds(2f);
     }
 
-    // ----------------------°ø°İÆĞÅÏ 3 : ¸ŞÅ×¿À ---------------------------
+    // ----------------------ê³µê²©íŒ¨í„´ 3 : ë©”í…Œì˜¤ ---------------------------
     public IEnumerator AttackMeteor()
     {
         isCastingMeteor = true;
+
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", true);
+        }
 
         SpawnClone();
 
         yield return StartCoroutine(ShowMeteorCastUI());
 
-        // Ä³½ºÆÃ Áß ½ºÅÏ´çÇßÀ¸¸é Ãë¼Ò
+        // ìºìŠ¤íŒ… ì¤‘ ìŠ¤í„´ë‹¹í–ˆìœ¼ë©´ ì·¨ì†Œ
         if (isStunned)
         {
             isCastingMeteor = false;
+            if (anim != null)
+            {
+                anim.SetBool("IsCasting", false);
+            }
             RemoveClone();
             yield break;
         }
-
         RemoveClone();
+        isCastingMeteor = false;
+
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", false);
+        }
+
+        yield return null;
 
         for (int wave = 0; wave < meteorWaveCount; wave++)
         {
@@ -195,12 +234,15 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             yield return new WaitForSeconds(waveInterval);
         }
         isCastingMeteor = false;
+
     }
 
     private void SpawnMeteorWave()
     {
         float totalWidth = meteorSpawnXRange.y - meteorSpawnXRange.x;
         float sectionWidth = totalWidth / meteorPerWave;
+
+        float diagonalOffset = 3f;
 
         for (int i = 0; i < meteorPerWave; i++)
         {
@@ -210,8 +252,9 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             float randomX = Random.Range(sectionMinX, sectionMaxX);
             float randomY = Random.Range(meteorSpawnYRange.x, meteorSpawnYRange.y);
 
-            Vector3 spawnPos = new Vector3(randomX, randomY, 0f);
             Vector3 targetPos = new Vector3(randomX, meteorTargetY, 0f);
+
+            Vector3 spawnPos = new Vector3(randomX - diagonalOffset, randomY, 0f);
 
             GameObject obj = PoolingManager.Instance.Get(METEOR_KEY, spawnPos, Quaternion.identity);
             if (obj != null)
@@ -243,7 +286,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         meteorCastSlider.value = meteorCastTime;
         meteorCastSlider.gameObject.SetActive(false);
     }
-    //---------------Ä³½ºÆÃ Áß ÆÄÈÑ --------------
+    //---------------ìºìŠ¤íŒ… ì¤‘ íŒŒí›¼ --------------
     public void ApplyStun(float duration)
     {
         if (isStunned)
@@ -253,8 +296,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         isStunned = true;
         isCastingMeteor = false;
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", false);
+        }
 
-        // ³²Àº ºĞ½Å Á¦°Å
+        // ë‚¨ì€ ë¶„ì‹  ì œê±°
         RemoveClone();
 
         StopAllCoroutines();
@@ -297,14 +344,73 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     }
     public bool OnBeforeTakeDamage(EnemyStatus enemy, int damage)
     {
+        if (isInvincible)
+        {
+            return true;
+        }
+
         return false;
     }
 
     public void OnAfterTakeDamage(EnemyStatus enemy, int damage)
     {
-        OnHitDuringCast();
+        OnHitDuringCast(); // ë©”í…Œì˜¤ ìºìŠ¤íŒ… ì¤‘ í”¼ê²© ì‹œ ìŠ¤í„´
+
+        if(!isEnraged && !isEnrageTransitioning && enemy != null)
+        {
+            if (enemy.GetHPRatio() <= 0.5f)
+            {
+                StopAllCoroutines();
+                StartCoroutine(EnrageTransitionRoutine());
+            }
+        }
     }
-    //-------------Ä³½ºÆÃ Áß ºĞ½Å------------
+
+    private IEnumerator EnrageTransitionRoutine()
+    {
+
+        isEnrageTransitioning = true;
+        isEnraged = true;    // ë¶„ë…¸ ìƒíƒœ 
+        isInvincible = true; // ë¬´ì 
+
+        // í˜¹ì‹œ ë©”í…Œì˜¤ ìºìŠ¤íŒ… ì¤‘ì´ê±°ë‚˜ ë ˆì´ì € ë•Œë¬¸ì— íˆ¬ëª…í•´ì§„ ìƒíƒœì˜€ë‹¤ë©´ ì›ë˜ëŒ€ë¡œ ë³µêµ¬
+        isCastingMeteor = false;
+        isStunned = false;
+        ToggleVisibility(true);
+        RemoveClone();
+
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", false);
+            anim.Play("Idle"); // ê°•ì œë¡œ ëŒ€ê¸° ëª¨ì…˜ ì ìš©
+        }
+
+        // ë¶„ë…¸ ì´í™íŠ¸ ìƒì„±
+        if (enrageVFX != null)
+        {
+            Vector3 spawnPos = pivotPoint != null ? pivotPoint.position : transform.position;
+            GameObject vfx = Instantiate(enrageVFX, spawnPos, Quaternion.identity);
+            Destroy(vfx, enrageTransitionTime); // ì—°ì¶œ ì‹œê°„ì— ë§ì¶° ì´í™íŠ¸ ì‚­ì œ
+        }
+
+        yield return new WaitForSeconds(enrageTransitionTime);
+
+        isInvincible = false;
+        isEnrageTransitioning = false;
+
+        StartCoroutine(AttackRoutine()); // ê³µê²© ë£¨í‹´ ì²˜ìŒë¶€í„° ë‹¤ì‹œ ì‹œì‘
+    }
+    // ë³´ìŠ¤ ìˆ¨ê¸°ê¸° ë° ë‚˜íƒ€ë‚´ê¸° ê°•ì œ ì ìš© í•¨ìˆ˜ (ë¶„ë…¸ ì—°ì¶œ ì‹œ ë³´ìŠ¤ê°€ íˆ¬ëª…í•´ì ¸ìˆìœ¼ë©´ ê°•ì œë¡œ ë‚˜íƒ€ëƒ„)
+    private void ToggleVisibility(bool isVisible)
+    {
+        if (sr != null)
+        {
+            Color color = sr.color;
+            color.a = isVisible ? 1f : 0f;
+            sr.color = color;
+        }
+    }
+    //-------------ìºìŠ¤íŒ… ì¤‘ ë¶„ì‹ ------------
     private void SpawnClone()
     {
         if (teleportPoints.Length == 0)
@@ -314,11 +420,16 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         hasClones = true;
 
-        currentClones.Clear();
+        System.Array.Clear(currentClones, 0, currentClones.Length);
 
         for (int i = 0; i < teleportPoints.Length; i++)
         {
             Vector3 spawnPos = teleportPoints[i].position;
+
+            if (Vector3.Distance(spawnPos, transform.position) < 0.5f)
+            {
+                continue;
+            }
 
             GameObject cloneObj = PoolingManager.Instance.Get("RedBossClone", spawnPos, Quaternion.identity);
 
@@ -332,45 +443,116 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             if (clone != null)
             {
                 clone.Init(this, cloneSpawnVFX, cloneDisappearVFX);
+                clone.PlayCastAnimation();
             }
 
-            currentClones.Add(cloneObj);
+            currentClones[i] = cloneObj;
+        }
+    }
+    public void SwapCloneAndBoss(int oldIndex, int newIndex)
+    {
+        if (!isCastingMeteor || currentClones == null) // ë¶„ì‹ ì´ ì—†ëŠ” ìƒíƒœë©´ ìŠ¤ì™‘ ë¶ˆê°€
+        {
+            return;
+        }
+
+        if (newIndex >= 0 && newIndex < currentClones.Length && currentClones[newIndex] != null) // ì´ë™í•  ìœ„ì¹˜ì— ë¶„ì‹ ì´ ìˆìœ¼ë©´ ì œê±°
+        {
+            currentClones[newIndex].GetComponent<RedBossClone>()?.DestroyClone(); // ë¶„ì‹  ì œê±°
+            currentClones[newIndex] = null; // ë°°ì—´ì—ì„œ ì œê±°
+        }
+
+        if (oldIndex >= 0 && oldIndex < teleportPoints.Length)
+        {
+            Vector3 spawnPos = teleportPoints[oldIndex].position;
+            GameObject cloneObj = PoolingManager.Instance.Get("RedBossClone", spawnPos, Quaternion.identity);
+
+            if (cloneObj != null)
+            {
+                RedBossClone clone = cloneObj.GetComponent<RedBossClone>();
+                clone?.Init(this, cloneSpawnVFX, cloneDisappearVFX);
+
+                if (anim != null)
+                {
+                    AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+                    clone?.SyncAnimation(stateInfo.fullPathHash, stateInfo.normalizedTime);
+                }
+                else
+                {
+                    clone?.PlayCastAnimation();
+                }
+
+                currentClones[oldIndex] = cloneObj;
+            }
         }
     }
 
     public void RemoveClone()
     {
-        for (int i = 0; i < currentClones.Count; i++)
+        if (currentClones == null)
         {
-            if (currentClones[i] == null)
-            {
-                continue;
-            }
-
-            RedBossClone clone = currentClones[i].GetComponent<RedBossClone>();
-
-            if (clone != null)
-            {
-                clone.DestroyClone();
-            }
+            return;
         }
+        for (int i = 0; i < currentClones.Length; i++)
+        {
+            if (currentClones[i] == null) continue;
 
-        currentClones.Clear();
+            currentClones[i].GetComponent<RedBossClone>()?.DestroyClone();
+            currentClones[i] = null;
+        }
 
         hasClones = false;
     }
-    // ---------------------°ø°İÆĞÅÏ 4 : ·¹ÀÌÀú-----------------------
+    // ---------------------ê³µê²©íŒ¨í„´ 4 : ë ˆì´ì €-----------------------
     public IEnumerator AttackLaser()
     {
-        GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, laserSpawnPoint.position, Quaternion.identity);
+        isInvincible = true;
+        yield return StartCoroutine(FadeRoutine(0f, 0.5f));
 
+        GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, laserSpawnPoint.position, Quaternion.identity);
         LaserCross laser = laserObj.GetComponent<LaserCross>();
 
         if (laser != null)
         {
-            laser.Init(laserWarningTime, laserDuration);
+            laser.Init(laserWarningTime, laserDuration, isEnraged);
         }
 
-        yield return new WaitForSeconds(laserWarningTime + laserDuration);
+        float totalWaitTime = laserWarningTime + laserDuration + 0.5f;
+
+        if (isEnraged)
+        {
+            totalWaitTime += 0.5f + laserDuration;
+        }
+
+        yield return new WaitForSeconds(totalWaitTime);
+
+        yield return StartCoroutine(FadeRoutine(1f, 0.5f));
+        isInvincible = false;
+
+        ApplyStun(3f);
+    }
+
+    private IEnumerator FadeRoutine(float targetAlpha, float duration)
+    {
+        if (sr == null)
+        {
+            yield break;
+        }
+
+        Color color = sr.color;
+        float startAlpha = color.a;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, targetAlpha, timer / duration);
+            sr.color = color;
+            yield return null;
+        }
+
+        // ë§ˆì§€ë§‰ì— ëª©í‘œê°’ìœ¼ë¡œ í™•ì‹¤í•˜ê²Œ ê³ ì •
+        color.a = targetAlpha;
+        sr.color = color;
     }
 }

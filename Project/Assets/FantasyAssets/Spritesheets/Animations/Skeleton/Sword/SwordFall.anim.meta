@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 72e35d109d9a1554b9ca2402a6f4eb40
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284719
+  packageName: Platformer Tileset - Pixelart Fantasy
+  packageVersion: 1.0
+  assetPath: Assets/FantasyAssets/Spritesheets/Animations/Skeleton/Sword/SwordFall.anim
+  uploadId: 706910

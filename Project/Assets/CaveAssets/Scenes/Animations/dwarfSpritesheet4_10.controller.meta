@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a1d6035ce0107d748b2f2d713b975d58
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330017
+  packageName: Platformer Tileset - Pixelart Caves
+  packageVersion: 1.0
+  assetPath: Assets/CaveAssets/Scenes/Animations/dwarfSpritesheet4_10.controller
+  uploadId: 807122
