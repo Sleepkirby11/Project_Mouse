@@ -111,17 +111,27 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     // ------------------------공격패턴 1 : 유도 화살-------------------------
     public IEnumerator AttackArrow()
     {
-        if (anim != null)
+        // 분노 상태면 3연발, 아니면 1발
+        int shootCount = isEnraged ? 3 : 1;
+
+        // 연속 발사 간격
+        float burstDelay = 0.5f;
+
+        for (int i = 0; i < shootCount; i++)
         {
-            anim.SetTrigger("Shoot");
+            if (anim != null)
+            {
+                anim.SetTrigger("Shoot");
+            }
+
+            // 첫 번째 발사는 1.2초, 이후 발사는 0.5초
+            float waitTime = (i == 0) ? 1.2f : burstDelay;
+            yield return new WaitForSeconds(waitTime);
+
+            SpawnArrow(0f);              // 가운데
+            SpawnArrow(-angleSpread);    // 아래쪽/왼쪽 방향
+            SpawnArrow(angleSpread);     // 위쪽/오른쪽 방향
         }
-
-        yield return new WaitForSeconds(1.2f);
-        SpawnArrow(0f);              // 가운데
-        SpawnArrow(-angleSpread);    // 아래쪽/왼쪽 방향
-        SpawnArrow(angleSpread);     // 위쪽/오른쪽 방향
-
-        yield break;
     }
 
     private void SpawnArrow(float angleOffset)
