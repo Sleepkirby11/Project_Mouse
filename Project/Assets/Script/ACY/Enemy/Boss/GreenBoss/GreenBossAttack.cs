@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-// IHitReaction을 상속받아 EnemyStatus의 피격을 정상적으로 가로챕니다.
 public class GreenBossAttack : MonoBehaviour, IHitReaction
 {
     [Header("새 소환 설정")]
@@ -134,11 +133,6 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
             int spiritCount = spiritPoolKeys.Length;
 
-            if (spiritSpawnPoints.Length < spiritCount)
-            {
-                yield break;
-            }
-
             activeSpiritsCount = spiritCount;
             remainderHeal = 0f;
 
@@ -151,17 +145,30 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
             for (int i = 0; i < spiritCount; i++)
             {
-                if (i >= spiritSpawnPoints.Length) break;
+                Vector3 spawnPosition = transform.position; // 예외 대비 기본값 (보스 위치)
 
-                int randomIndex;
-                do
+                if (spiritSpawnPoints.Length > 0)
                 {
-                    randomIndex = Random.Range(0, spiritSpawnPoints.Length);
-                } while (usedIndices[randomIndex]);
+                    // 스폰 포인트가 정령 수보다 많거나 같으면 기존처럼 랜덤 배치
+                    if (spiritSpawnPoints.Length >= spiritCount)
+                    {
+                        int randomIndex;
+                        do
+                        {
+                            randomIndex = Random.Range(0, spiritSpawnPoints.Length);
+                        } while (usedIndices[randomIndex]);
 
-                usedIndices[randomIndex] = true;
-                Vector3 spawnPosition = spiritSpawnPoints[randomIndex].position;
-
+                        usedIndices[randomIndex] = true;
+                        spawnPosition = spiritSpawnPoints[randomIndex].position;
+                    }
+                    else
+                    {
+                        // 💡 만약 스폰 포인트가 1개라면 무조건 그 1개 위치[0]를 공동 사용합니다.
+                        // (인덱스 아웃 오브 바운드 에러 방지)
+                        int safeIndex = i % spiritSpawnPoints.Length;
+                        spawnPosition = spiritSpawnPoints[safeIndex].position;
+                    }
+                }
                 string currentSpiritKey = spiritPoolKeys[i];
                 GameObject spiritObj = PoolingManager.Instance.Get(currentSpiritKey, spawnPosition, Quaternion.identity);
 
@@ -170,7 +177,8 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
                     BossSpirit spirit = spiritObj.GetComponent<BossSpirit>();
                     if (spirit != null)
                     {
-                        spirit.Init(this);
+                        BossSpirit.SpiritType typeToSet = (BossSpirit.SpiritType)i;
+                        spirit.Init(this, typeToSet);
                     }
                 }
                  else
