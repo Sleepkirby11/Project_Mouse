@@ -48,6 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc93c1edd135094f8f2a5e83efbc1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spiritType: 0
+  moveSpeed: 4
+  waveSpeed: 3
+  waveAmount: 0.3
+  arrivalDistance: 0.5
+  mapCenter: {x: 64, y: -8}
+  mapRange: {x: 10, y: 8}
+  spawnInvincibleTime: 1.5
 --- !u!58 &4744815911619806977
 CircleCollider2D:
   m_ObjectHideFlags: 0
