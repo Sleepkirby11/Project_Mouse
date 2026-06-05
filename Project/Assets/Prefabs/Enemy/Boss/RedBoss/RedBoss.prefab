@@ -214,6 +214,16 @@ MonoBehaviour:
   orbWaitTime: 2
   enrageVFX: {fileID: 2786589076493437136, guid: e598733ed45012c4db65f367f2d4ffe9, type: 3}
   enrageTransitionTime: 1
+  centerPoint: {fileID: 0}
+  normalWeights:
+  - patternName: Arrow
+    weight: 40
+  - patternName: Orb
+    weight: 35
+  - patternName: Meteor
+    weight: 15
+  - patternName: Laser
+    weight: 10
 --- !u!1 &2409019058995000748
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.22}
+  m_AnchoredPosition: {x: 0, y: 0.13}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2664385735117127304

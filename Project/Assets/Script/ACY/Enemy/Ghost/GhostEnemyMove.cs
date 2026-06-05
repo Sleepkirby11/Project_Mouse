@@ -58,10 +58,15 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     [Header("은신 투명도")]
     public float transparentAlpha = 0.35f;
 
+    [Header("타겟 설정")]
+    [SerializeField] private Transform playerTransform;
+    public bool isFacingRight = true;
+
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private GhostEnemyAttack ghostEnemyAttack;
     private Collider2D ghostCollider;
+    private Animator animator;
 
     private Vector2 originPosition;
     private Vector2 chargeDirection;
@@ -81,10 +86,19 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         ghostEnemyAttack = GetComponent<GhostEnemyAttack>();
         ghostCollider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
+        if (playerTransform == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                playerTransform = player.transform;
+            }
+        }
         originPosition = transform.position;
         cooldownTimer = 0f;
 
@@ -102,6 +116,8 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         {
             CheckPlayerDetection();
         }
+        HandleFacingDirection();
+        UpdateMovementAnimation();
     }
 
     private void FixedUpdate()
@@ -139,6 +155,23 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         }
     }
 
+    private void UpdateMovementAnimation()
+    {
+        if (animator == null)
+        {
+            return;
+        }
+
+        if (currentState == GhostState.Possessing)
+        {
+            animator.SetBool("IsMoving", false);
+            return;
+        }
+
+        bool isMoving = rb.linearVelocity.magnitude > 0.1f;
+
+        animator.SetBool("IsMoving", isMoving);
+    }
     private void CheckPlayerDetection()
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRange, playerLayer);
@@ -388,6 +421,41 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
 
     public void OnAfterTakeDamage(EnemyStatus enemyStatus, int damage)
     {
+    }
+    private void HandleFacingDirection()
+    {
+        float directionX = 0f;
+
+        if (currentState == GhostState.SlowChase || currentState == GhostState.ChargeReady || currentState == GhostState.Charge)
+        {
+            if (playerTransform != null)
+            {
+                directionX = playerTransform.position.x - transform.position.x;
+            }
+        }
+        else
+        {
+            directionX = rb.linearVelocity.x;
+        }
+
+        if (directionX > 0.01f && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (directionX < -0.01f && isFacingRight)
+        {
+            Flip();
+        }
+    }
+
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
     public void Die()
     {
