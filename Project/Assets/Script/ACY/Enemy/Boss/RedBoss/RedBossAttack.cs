@@ -58,6 +58,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     private bool isEnraged = false;
     private bool isEnrageTransitioning = false; // 분노 연출 중인지 체크
 
+    [Header("발악 패턴 설정")]
+    [SerializeField] private Transform centerPoint; // 고정될 화면 중앙 위치
+    private bool isLastStand = false;
+    private bool isLastStandTransitioning = false;
+    private bool hasDoneLastStand = false;
+
     [System.Serializable]
     public struct PatternWeight
     {
@@ -76,6 +82,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
     private string lastExecutedPattern = "";
     private GameObject[] currentClones;
+    private List<GameObject> activeOrbs = new List<GameObject>();
 
     private bool isCastingMeteor = false;
     private bool isStunned = false;
@@ -110,9 +117,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     {
         while (true)
         {
+            if (isLastStand) yield break;
             // 공격 간격 대기
             yield return new WaitForSeconds(attackCooldown);
 
+            if (isLastStand) yield break;
             // 가중치 기반으로 다음 패턴 선택
             string nextPattern = ChooseNextPattern();
 
@@ -134,6 +143,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
                     yield return StartCoroutine(AttackLaser());
                     break;
             }
+            if (isLastStand) yield break;
         }
     }
     // 가중치 계산 및 선택
@@ -230,6 +240,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             yield break;
         }
         int currentOrbCount = isEnraged ? 4 : orbCount;
+        activeOrbs.Clear();
         MagicOrb[] orbs = new MagicOrb[currentOrbCount];
         Vector3 spawnPos = pivotPoint != null ? pivotPoint.position : transform.position;
 
@@ -243,6 +254,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             {
                 continue;
             }
+            activeOrbs.Add(obj);
 
             MagicOrb orb = obj.GetComponent<MagicOrb>();
             orb?.Init(pivotPoint != null ? pivotPoint : transform, angle, orbOrbitRadius);
@@ -270,8 +282,27 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         // 구체 비행 시간만큼 대기 후 다음 패턴
         yield return new WaitForSeconds(2f);
+        activeOrbs.Clear();
     }
+    //남아있는 구체 제거 함수
+    public void RemoveCurrentOrbs()
+    {
+        if (activeOrbs == null || activeOrbs.Count == 0)
+        {
+            return;
+        }
+        for (int i = 0; i < activeOrbs.Count; i++)
+        {
+            if (activeOrbs[i] == null)
+            {
+                continue;
+            }
 
+            PoolingManager.Instance.Return(ORB_KEY, activeOrbs[i]);
+        }
+
+        activeOrbs.Clear();
+    }
     // ----------------------공격패턴 3 : 메테오 ---------------------------
     public IEnumerator AttackMeteor()
     {
@@ -436,9 +467,24 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     {
         OnHitDuringCast(); // 메테오 캐스팅 중 피격 시 스턴
 
-        if(!isEnraged && !isEnrageTransitioning && enemy != null)
+        if (enemy == null)
         {
-            if (enemy.GetHPRatio() <= 0.5f)
+            return;
+        }
+
+        float currentHPRatio = enemy.GetHPRatio();
+
+        if (!hasDoneLastStand && !isLastStandTransitioning && currentHPRatio <= 0.1f)
+        {
+            hasDoneLastStand = true; // 다시는 이 조건문에 들어오지 않음
+            StopAllCoroutines();     // 현재 하던 공격 취소
+            StartCoroutine(LastStandTransitionRoutine()); // 발악 패턴 돌입
+            return;
+        }
+
+        if (!isEnraged && !isEnrageTransitioning && !isLastStandTransitioning)
+        {
+            if (currentHPRatio <= 0.5f)
             {
                 StopAllCoroutines();
                 StartCoroutine(EnrageTransitionRoutine());
@@ -458,11 +504,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         isStunned = false;
         ToggleVisibility(true);
         RemoveClone();
+        RemoveCurrentOrbs();
 
         if (anim != null)
         {
             anim.SetBool("IsCasting", false);
-            anim.Play("Idle"); // 강제로 대기 모션 적용
+            anim.Play("RedBossIdle1"); // 강제로 대기 모션 적용
         }
 
         // 분노 이펙트 생성
@@ -634,5 +681,96 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         // 마지막에 목표값으로 확실하게 고정
         color.a = targetAlpha;
         sr.color = color;
+    }
+    // ------------- 마지막 발악 패턴 ---------------
+    private IEnumerator LastStandTransitionRoutine()
+    {
+        isLastStandTransitioning = true;
+        isLastStand = true;
+        isInvincible = true;
+
+        isCastingMeteor = false;
+        isStunned = false;
+        ToggleVisibility(true);
+        RemoveClone();
+        RemoveCurrentOrbs();
+
+        if (meteorCastSlider != null)
+        {
+            meteorCastSlider.gameObject.SetActive(false);
+        }
+        if (anim != null)
+        {
+            anim.Play("RedBossIdle1");
+        }
+
+        if (centerPoint != null)
+        {
+            transform.position = centerPoint.position;
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        isLastStandTransitioning = false;
+
+        yield return StartCoroutine(LastStandAttackRoutine());
+
+        isLastStand = false; 
+        isInvincible = false; 
+
+        StartCoroutine(AttackRoutine());
+    }
+    private IEnumerator LastStandAttackRoutine()
+    {
+        // 지속 시간
+        float duration = 4f;
+        float timer = 0f;
+
+        // 탄 간격(짧으면 촘촘함)
+        float spawnInterval = 0.08f;
+        float spawnTimer = 0f;
+
+        // 회오리 현재 각도
+        float currentSpiralAngle = 0f;
+
+        // 회전할 각도 (클수록 빠름)
+        float rotateSpeedPerShot = 15f;
+
+        // 뻗어나갈 줄기 수
+        int streamCount = 4;
+        float angleStep = 360f / streamCount;
+
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+        }
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            spawnTimer += Time.deltaTime;
+
+            if (spawnTimer >= spawnInterval)
+            {
+                spawnTimer = 0f;
+
+                currentSpiralAngle += rotateSpeedPerShot;
+
+                for (int i = 0; i < streamCount; i++)
+                {
+                    float finalAngle = (i * angleStep) + currentSpiralAngle;
+
+                    GameObject obj = PoolingManager.Instance.Get(ARROW_KEY, firePoint.position, Quaternion.identity);
+                    if (obj != null)
+                    {
+                        obj.GetComponent<FireArrow>()?.Init(finalAngle, false);
+                    }
+                }
+            }
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(attackCooldown);
     }
 }

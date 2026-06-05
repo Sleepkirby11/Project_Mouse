@@ -26,6 +26,7 @@ public class FireArrow : MonoBehaviour, IDamageable
     private Collider2D col;
     private bool isExploding = false;
     private float angleOffset = 0f;    // 각도 오프셋 (3연발 각도 차이)
+    private bool isHoming = true; //유도 여부
 
     private const string POOL_KEY = "RedBossArrow";
 
@@ -63,25 +64,32 @@ public class FireArrow : MonoBehaviour, IDamageable
     }
 
     // 발사 시 초기화
-    public void Init(float angleOffset = 0f)
+    public void Init(float angleOffset = 0f, bool enableHoming = true)
     {
         this.angleOffset = angleOffset;
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            target = player.transform;
-        }
-
+        this.isHoming = enableHoming;
         timer = 0f;
         isExploding = false;
 
-        // 플레이어 방향 + 각도 오프셋 적용
-        if (target != null)
+        if (isHoming)
         {
-            Vector2 dir = (target.position - transform.position).normalized;
-            float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleOffset;
-            transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                target = player.transform;
+            }
+
+            if (target != null)
+            {
+                Vector2 dir = (target.position - transform.position).normalized;
+                float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleOffset;
+                transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
+            }
+        }
+        else
+        {
+            target = null;
+            transform.rotation = Quaternion.Euler(0f, 0f, angleOffset);
         }
     }
 
@@ -91,11 +99,17 @@ public class FireArrow : MonoBehaviour, IDamageable
         {
             return;
         }
-
         timer += Time.deltaTime;
         if (timer >= lifeTime)
         {
             Explode();
+            return;
+        }
+
+
+        if (!isHoming)
+        {
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
             return;
         }
 
@@ -157,27 +171,10 @@ public class FireArrow : MonoBehaviour, IDamageable
             }
         }
 
-        if (col != null) col.enabled = false;
-
-        if (anim != null)
+        if (col != null)
         {
-            //anim.SetTrigger("Bomb");
-            //anim.Play("arrow_bomb", 0, 0f);
+            col.enabled = false;
         }
-
         PoolingManager.Instance.Return(POOL_KEY, gameObject);
-        //StartCoroutine(DelayedReturn());
     }
-
-    //IEnumerator DelayedReturn()
-    //{
-    //    yield return new WaitForSeconds(bombDuration);
-
-    //    var sr = GetComponent<SpriteRenderer>();
-    //    if (sr != null) sr.enabled = false;
-
-    //    yield return new WaitForSeconds(bombSound - bombDuration);
-
-    //    PoolingManager.Instance.Return(POOL_KEY, gameObject);
-    //}
 }

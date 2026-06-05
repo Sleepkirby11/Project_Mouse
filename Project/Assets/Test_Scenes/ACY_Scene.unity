@@ -662,7 +662,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.6, y: -8.4, z: -10}
+  m_LocalPosition: {x: -9.93, y: -8.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1083,7 +1083,7 @@ Transform:
   m_GameObject: {fileID: 1122307858}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.6, y: -8.4, z: -10}
+  m_LocalPosition: {x: -9.93, y: -8.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1247,6 +1247,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1513704727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1513704728}
+  m_Layer: 7
+  m_Name: CenterPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1513704728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513704727}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.46, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1663646999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,7 +1428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.6
+      value: -9.93
       objectReference: {fileID: 0}
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1616,7 +1647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1912981614
 Rigidbody2D:
   serializedVersion: 5
@@ -1652,14 +1683,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912981613}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 73.55787, y: -0.0069904327, z: -8.674764}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 74.74, y: -8.260002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 244482192}
   - {fileID: 1678609391}
-  m_Father: {fileID: 5176017652371291990}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1912981616
 BoxCollider2D:
@@ -2929,17 +2960,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6519091210785684903, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1912981615}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
---- !u!4 &5176017652371291990 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6519091210785684903, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
-  m_PrefabInstance: {fileID: 5176017652371291989}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6453651207365692980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3184,6 +3207,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: centerPoint
+      value: 
+      objectReference: {fileID: 1513704728}
+    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: laserSpawnPoint
       value: 
       objectReference: {fileID: 1962638956}
@@ -3362,3 +3389,5 @@ SceneRoots:
   - {fileID: 1962638956}
   - {fileID: 1418627750}
   - {fileID: 1001599603}
+  - {fileID: 1912981615}
+  - {fileID: 1513704728}
