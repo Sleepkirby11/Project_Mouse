@@ -163,8 +163,6 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
                     }
                     else
                     {
-                        // 💡 만약 스폰 포인트가 1개라면 무조건 그 1개 위치[0]를 공동 사용합니다.
-                        // (인덱스 아웃 오브 바운드 에러 방지)
                         int safeIndex = i % spiritSpawnPoints.Length;
                         spawnPosition = spiritSpawnPoints[safeIndex].position;
                     }
@@ -183,7 +181,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
                 }
                  else
                     {
-                        Debug.LogError($"[정령 소환 실패] PoolingManager에 '{currentSpiritKey}'라는 Key가 등록되어 있는지 확인하세요!");
+                        Debug.LogError($"정령 소환 실패");
                     }
             }
 
