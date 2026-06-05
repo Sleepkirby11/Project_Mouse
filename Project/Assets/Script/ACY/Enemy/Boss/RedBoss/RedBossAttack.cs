@@ -58,6 +58,23 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     private bool isEnraged = false;
     private bool isEnrageTransitioning = false; // 분노 연출 중인지 체크
 
+    [System.Serializable]
+    public struct PatternWeight
+    {
+        public string patternName;
+        public int weight;
+    }
+    [Header("가중치 설정")]
+    [SerializeField]
+    private List<PatternWeight> normalWeights = new List<PatternWeight>()
+    {
+        new PatternWeight { patternName = "Arrow", weight = 40 },  // 자주 사용 (40%)
+        new PatternWeight { patternName = "Orb",   weight = 35 },  // 자주 사용 (35%)
+        new PatternWeight { patternName = "Meteor", weight = 15 },  // 덜 사용 (15%)
+        new PatternWeight { patternName = "Laser",  weight = 10 }   // 덜 사용 (10%)
+    };
+
+    private string lastExecutedPattern = "";
     private GameObject[] currentClones;
 
     private bool isCastingMeteor = false;
@@ -89,25 +106,78 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         StartCoroutine(AttackRoutine());
     }
 
-    // 일정 간격으로 화살 발사
     private IEnumerator AttackRoutine()
     {
         while (true)
         {
+            // 공격 간격 대기
             yield return new WaitForSeconds(attackCooldown);
-            yield return StartCoroutine(AttackArrow());
 
-            yield return new WaitForSeconds(attackCooldown);
-            yield return StartCoroutine(AttackOrb());
+            // 가중치 기반으로 다음 패턴 선택
+            string nextPattern = ChooseNextPattern();
 
-            yield return new WaitForSeconds(attackCooldown);
-            yield return StartCoroutine(AttackMeteor());
+            // 선택된 패턴 실행 및 종료 대기 (직전 패턴 저장)
+            lastExecutedPattern = nextPattern;
 
-            yield return new WaitForSeconds(attackCooldown);
-            yield return StartCoroutine(AttackLaser());
+            switch (nextPattern)
+            {
+                case "Arrow":
+                    yield return StartCoroutine(AttackArrow());
+                    break;
+                case "Orb":
+                    yield return StartCoroutine(AttackOrb());
+                    break;
+                case "Meteor":
+                    yield return StartCoroutine(AttackMeteor());
+                    break;
+                case "Laser":
+                    yield return StartCoroutine(AttackLaser());
+                    break;
+            }
         }
     }
+    // 가중치 계산 및 선택
+    private string ChooseNextPattern()
+    {
+        int totalWeight = 0;
+        List<PatternWeight> validPatterns = new List<PatternWeight>();
 
+        // 현재 선택 가능한 패턴 필터링 (연속 사용 방지)
+        foreach (var pattern in normalWeights)
+        {
+            // 직전에 실행한 패턴은 이번 선택에서 제외 (가중치 계산 안 함)
+            if (pattern.patternName == lastExecutedPattern)
+            {
+                continue;
+            }
+
+            validPatterns.Add(pattern);
+            totalWeight += pattern.weight;
+        }
+
+        // 만약 모든 패턴이 배제되는 예외 상황이 발생하면 전체 패턴으로 롤백
+        if (validPatterns.Count == 0)
+        {
+            validPatterns = normalWeights;
+            foreach (var pattern in validPatterns) totalWeight += pattern.weight;
+        }
+
+        // 0 ~ totalWeight 사이의 랜덤 값 생성
+        int randomValue = Random.Range(0, totalWeight);
+        int cumulativeWeight = 0;
+
+        // 누적 가중치 비교를 통한 최종 패턴 결정
+        foreach (var pattern in validPatterns)
+        {
+            cumulativeWeight += pattern.weight;
+            if (randomValue < cumulativeWeight)
+            {
+                return pattern.patternName;
+            }
+        }
+
+        return "Arrow"; // 예외 처리용 기본값
+    }
     // ------------------------공격패턴 1 : 유도 화살-------------------------
     public IEnumerator AttackArrow()
     {
