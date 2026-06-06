@@ -25,6 +25,7 @@ public class Cursor : MonoBehaviour
     List<Vector2> points = new List<Vector2>();
     int positionCount;
     public float trailLength;
+    public float lastLength;
 
     private Vector3[] trailPositions = new Vector3[100];
 
@@ -42,7 +43,7 @@ public class Cursor : MonoBehaviour
         trail.time = 9999;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //endWidth는 항상 startWidth와 동일시
         trail.endWidth = trail.startWidth;
@@ -72,6 +73,7 @@ public class Cursor : MonoBehaviour
             {
                 trailUpdate();
                 trailLength = GetTrailLength();
+                lastLength = GetLastTrailUpdate();
             }
         }
 
@@ -93,6 +95,17 @@ public class Cursor : MonoBehaviour
         {
             length += Vector3.Distance(trailPositions[i - 1], trailPositions[i]);
         }
+        return length;
+    }
+
+    float GetLastTrailUpdate()
+    {
+        float length = 0f;
+        if(positionCount < 2) return length;
+        trail.GetPositions(trailPositions);
+        
+        length = Vector3.Distance(trailPositions[positionCount - 1], trailPositions[positionCount - 2]);
+
         return length;
     }
 

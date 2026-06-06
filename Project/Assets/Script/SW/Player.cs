@@ -54,6 +54,8 @@ public class Player : MonoBehaviour
     public float maxDist;
     bool isSkill;
 
+    float usedInk;
+
 
     //초기화
     private void Start()
@@ -230,7 +232,7 @@ public class Player : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
-        if (context.started)
+        if (context.started && status.ink > 0)
         {
             //초기화
             cursorObject.transform.position = mouse.transform.position;
@@ -281,7 +283,7 @@ public class Player : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = groundLine.GetComponent<TrailRenderer>();
-        if (context.started)
+        if (context.started && status.ink > 0)
         {
             //초기화
             groundLine.transform.position = mouse.transform.position;
@@ -364,10 +366,12 @@ public class Player : MonoBehaviour
     //잉크 소모량 계산 및 공격 발동
     void Attack(Cursor cursor)
     {
-        if (cursor.isMove)
+        if (cursor.isMove && usedInk != cursor.lastLength)
         {
-            status.ink = status.maxInk - cursor.trailLength / 4;
+            status.ink -= cursor.lastLength / 4;
             UI.Instance.UseInk(status.ink);
+            usedInk = 0;
+            cursor.lastLength = 0;
         }
 
         if (status.ink <= 0)
@@ -387,8 +391,8 @@ public class Player : MonoBehaviour
             cursor.damage = status.damage;
         }
         cursor.SetColliderPointsFromTrail();
-        status.ink = status.maxInk;
-        UI.Instance.ChargeInk(status.ink);
+        //status.ink = status.maxInk;
+        //UI.Instance.ChargeInk(status.ink);
         if (isSkill)
         {
             Debug.Log("스킬 발동");
