@@ -1374,26 +1374,6 @@ PrefabInstance:
       propertyPath: cursorObject
       value: 
       objectReference: {fileID: 1964608236}
-    - target: {fileID: 6404161621859968284, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
-      propertyPath: normalAttackObject
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6916706020980489987, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
-      propertyPath: maxHp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
-      propertyPath: damage
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48.17
@@ -1433,10 +1413,6 @@ PrefabInstance:
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9012527160306741583, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
