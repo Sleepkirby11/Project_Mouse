@@ -392,8 +392,8 @@ public class Player : MonoBehaviour
             cursor.damage = status.damage;
         }
         cursor.SetColliderPointsFromTrail();
-        //status.ink = status.maxInk;
-        //UI.Instance.ChargeInk(status.ink);
+        status.ink = status.maxInk;
+        UI.Instance.ChargeInk(status.ink);
         if (isSkill)
         {
             Debug.Log("스킬 발동");
