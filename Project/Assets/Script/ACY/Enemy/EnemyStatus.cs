@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour, IDamageable
 {
@@ -15,6 +16,23 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         anim = GetComponentInChildren<Animator>();
         currentHP = maxHP;
     }
+
+    // 파라미터가 있는지 확인하는 함수 (Hurt, Death 확인 용)
+    private bool HasParameter(string paramName)
+    {
+        if (anim == null)
+        {
+            return false;
+        }
+        foreach (AnimatorControllerParameter param in anim.parameters)
+        {
+            if (param.name == paramName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public float GetHPRatio() // 보스 페이즈 용 체력 비율 반환
     {
         if (maxHP <= 0)
@@ -27,7 +45,14 @@ public class EnemyStatus : MonoBehaviour, IDamageable
     {
         if (anim != null)
         {
-             anim.SetTrigger("Hurt"); //피격 애니메이션 트리거
+            if (HasParameter("Hurt"))
+            {
+                anim.SetTrigger("Hurt");
+            }
+            else
+            {
+                StartCoroutine(FlashRoutine()); // 깜빡임
+            }
         }
         if (currentHP <= 0) //이미 사망한 적은 피해를 입지 않음
         {
@@ -59,16 +84,39 @@ public class EnemyStatus : MonoBehaviour, IDamageable
             Die();
         }
     }
+    private IEnumerator FlashRoutine()
+    {
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr == null)
+        {
+            yield break;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            sr.enabled = false;
+            yield return new WaitForSeconds(0.05f);
+            sr.enabled = true;
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
 
     private void Die()
     {
-        Debug.Log($"{gameObject.name} 사망");
 
         if (anim != null)
         {
-            anim.SetTrigger("Death"); //사망 애니메이션 트리거
+            if (HasParameter("Death"))
+            {
+                anim.SetTrigger("Death");
+            }
+            else
+            {
+                StartCoroutine(FadeRoutine()); // 투명해짐
+            }
         }
-     
+
         if (TryGetComponent(out Collider2D col)) //죽으면 콜라이더 비활성화
         {
             col.enabled = false;
@@ -81,6 +129,25 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         }
 
         Destroy(gameObject, dieAnimationLength); //사망 애니메이션 대기 후 삭제
+    }
+    private IEnumerator FadeRoutine()
+    {
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr == null)
+        {
+            yield break;
+        }
+
+        float elapsed = 0f;
+        Color original = sr.color;
+
+        while (elapsed < dieAnimationLength)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / dieAnimationLength);
+            sr.color = new Color(original.r, original.g, original.b, alpha);
+            yield return null;
+        }
     }
     public void Heal(int amount)
     {

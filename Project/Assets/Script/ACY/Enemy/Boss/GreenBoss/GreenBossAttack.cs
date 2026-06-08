@@ -1,6 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/*
+ * 공격패턴1 : 경고선 후 새를 세마리 소환하여 직선으로 돌진 
+ * 공격패턴2 : 개구리를 플레이어 위에 소환하여 공격
+ * 방어패턴 : 체력이 50% 미만이 되면 정령을 3체 소환(나비) 후 배리어 생성
+ * 배리어가 있는 동안 보스는 체력 회복 + 무적
+ * 정령을 모두 삭제해야 배리어가 사라짐
+ */
+
 public class GreenBossAttack : MonoBehaviour, IHitReaction
 {
     [Header("새 소환 설정")]
@@ -18,22 +26,28 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     [SerializeField] private Transform[] spiritSpawnPoints;
 
-    [Header("정령 3개 key 설정")]
+    [Header("정령 key")]
     [SerializeField] private string[] spiritPoolKeys = new string[3] { "GreenSpirit", "MintSpirit", "YellowGreenSpirit" };
 
-    [Header("근접대응: 절대 영역 바람 밀쳐내기")]
+    [Header("바람 설정")]
     [SerializeField] private float detectRange = 3.5f;       // 플레이어 접근 감지 거리
     [SerializeField] private float pushCooldown = 6.0f;      // 패턴 재사용 대기시간
     [SerializeField] private float pushForce = 25f;          // 밀어내는 힘
     [SerializeField] private float lockDuration = 0.6f;      // 스턴 시간
     [SerializeField] private string windPoolKey = "BossWindBlast"; // 연출용 바람 이펙트 키
 
+    [Header("개구리 소환 설정")]
+    [SerializeField] private string frogPoolKey = "GreenBossFrog";
+    [SerializeField] private Vector2 frogSpawnOffset = new Vector2(0f, 4f); // 플레이어 위 오프셋
+    [SerializeField] private float frogPatternInterval = 10f;
+
     private float currentPushCooldown = 0f;
     private bool isPushing = false; // 현재 밀어내는 패턴이 진행 중인지 체크
 
-    // 코루틴 관리 변수 통합 및 정리
+    // 코루틴 관리 변수
     private Coroutine birdRoutine;
     private Coroutine spiritRoutine;
+    private Coroutine frogRoutine;
 
     private int activeSpiritsCount = 0;       // 현재 살아있는 정령 수
     private float remainderHeal = 0f;         // 정수 회복을 위한 소수점 누적 변수
@@ -66,6 +80,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private void Start()
     {
         StartBirdAttack();
+        StartFrogAttack();
     }
 
     private void Update()
@@ -91,6 +106,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         StopBirdAttack();
         StopSpiritAttack();
+        StopFrogAttack();
     }
 
     public void StartBirdAttack()
@@ -139,7 +155,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void CheckPlayerDistanceAndPushInstant()
     {
-        if (playerTransform == null) return;
+        if (playerTransform == null)
+        {
+            return;
+        }
 
         float distance = Vector3.Distance(transform.position, playerTransform.position);
         if (distance <= detectRange)
@@ -198,7 +217,38 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             spiritRoutine = null;
         }
     }
+    public void StartFrogAttack()
+    {
+        if (frogRoutine == null)
+        {
+            frogRoutine = StartCoroutine(SpawnFrogRoutine());
+        }
+    }
 
+    public void StopFrogAttack()
+    {
+        if (frogRoutine != null)
+        {
+            StopCoroutine(frogRoutine);
+            frogRoutine = null;
+        }
+    }
+
+    private IEnumerator SpawnFrogRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(frogPatternInterval);
+
+            if (playerTransform == null)
+            {
+                continue;
+            }
+
+            Vector3 spawnPos = playerTransform.position + (Vector3)frogSpawnOffset;
+            PoolingManager.Instance.Get(frogPoolKey, spawnPos, Quaternion.identity);
+        }
+    }
     private IEnumerator SpawnSpiritRoutine()
     {
         while (true)
