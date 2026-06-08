@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
+ * 일정시간마다 정해진 위치로 순간이동
+ */
 public class RedBossMove : MonoBehaviour
 {
     [Header("타겟 설정")]

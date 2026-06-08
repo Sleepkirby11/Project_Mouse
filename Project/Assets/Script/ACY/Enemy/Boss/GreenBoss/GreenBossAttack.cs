@@ -1,6 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/*
+ * 공격패턴1 : 경고선 후 새를 세마리 소환하여 직선으로 돌진 
+ * 공격패턴2 : 개구리를 플레이어 위에 소환하여 공격
+ * 방어패턴 : 체력이 50% 미만이 되면 정령을 3체 소환(나비) 후 배리어 생성
+ * 배리어가 있는 동안 보스는 체력 회복 + 무적
+ * 정령을 모두 삭제해야 배리어가 사라짐
+ */
+
 public class GreenBossAttack : MonoBehaviour, IHitReaction
 {
     [Header("새 소환 설정")]

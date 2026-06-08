@@ -3,6 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+/*
+ * 공격패턴1 : 화살을 3갈래로 발사. 화살은 플레이어를 추격하며 생존시간이 다 되거나 공격받은 경우 사라짐
+ * 공격패턴2 : 보스 주변을 원형으로 도는 마법구체 생성 후 플레이어 방향으로 일직선으로 날려보냄
+ * 공격패턴3 : 보스가 분신을 소환하며 캐스팅 시작. 캐스팅 중 공격받으면 캔슬 후 일정시간 경직.
+ * 캐스팅 성공 시 하늘에서 메테오를 생성해 떨어트림
+ * 공격패턴4 : 보스가 사라진 후 십자 모양의 경고선 표시 + 레이저 발사 후 90도로 회전
+ * 특성 : 체력이 50% 이하로 하락 시 분노 연출 후 패턴 강화
+ * 강화패턴 : 화살 3연속 발사, 마법구체 개수 증가, 레이저 역회전 추가
+ * 발악패턴 : HP가 10%이하로 떨어질 시 일정시간 무적 + 원형 탄환 방출 및 회전 패턴 끝난 후 무적 해제
+ */
 public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 {
     [Header("공통")]
@@ -143,7 +153,10 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
                     yield return StartCoroutine(AttackLaser());
                     break;
             }
-            if (isLastStand) yield break;
+            if (isLastStand)
+            {
+                yield break;
+            }
         }
     }
     // 가중치 계산 및 선택
