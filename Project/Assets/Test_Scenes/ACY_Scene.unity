@@ -2031,6 +2031,9 @@ MonoBehaviour:
   pushForce: 60
   lockDuration: 0.6
   windPoolKey: BossWindBlast
+  frogPoolKey: GreenBossFrog
+  frogSpawnOffset: {x: 0, y: 4}
+  frogPatternInterval: 10
 --- !u!114 &1912981618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2951,7 +2954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.size
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[6].key
@@ -2974,6 +2977,10 @@ PrefabInstance:
       value: BossWindBlast
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
+      propertyPath: pools.Array.data[11].key
+      value: GreenBossFrog
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[6].prefab
       value: 
       objectReference: {fileID: 4726387216337282260, guid: 933b3913881a33345a2d1577e9f74c79, type: 3}
@@ -2994,6 +3001,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4323674500630155973, guid: 86edbcb61e394e94eb6d36c91bb3d0f8, type: 3}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
+      propertyPath: pools.Array.data[11].prefab
+      value: 
+      objectReference: {fileID: 1448805901235176327, guid: d01cfc8ecc4f5c44f93ad82c054cac93, type: 3}
+    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[6].initialSize
       value: 10
       objectReference: {fileID: 0}
@@ -3011,6 +3022,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[10].initialSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
+      propertyPath: pools.Array.data[11].initialSize
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6906194015661884017, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
