@@ -2398,10 +2398,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArcherEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 1738235730334658934, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3540639986238268416, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 66.18
@@ -2441,22 +2437,6 @@ PrefabInstance:
     - target: {fileID: 3540639986238268416, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3990407374526616085, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
-      propertyPath: m_Size.x
-      value: 1.1303787
-      objectReference: {fileID: 0}
-    - target: {fileID: 3990407374526616085, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
-      propertyPath: m_Size.y
-      value: 1.6951551
-      objectReference: {fileID: 0}
-    - target: {fileID: 3990407374526616085, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.15745926
-      objectReference: {fileID: 0}
-    - target: {fileID: 3990407374526616085, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.2561822
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2779,6 +2759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 3986874546270545098, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9003603150043872871, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 74.74
@@ -2898,7 +2882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988464360397360385, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3127,7 +3111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4492551149636952784, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -38.7
+      value: 39.06
       objectReference: {fileID: 0}
     - target: {fileID: 4492551149636952784, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
       propertyPath: m_LocalPosition.y

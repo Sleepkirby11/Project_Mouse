@@ -345,6 +345,7 @@ public class Player : MonoBehaviour
                 (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground")))
             {
                 //이동 가능 + input 값 이어서 받기
+                if (!status.IsKnockbacked) 
                 rigid.linearVelocityX = inputVec.x;
                 jumpCount = 2;
                 isCanMove = true;
@@ -401,7 +402,28 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        if (status.IsKnockbacked) //추가함
+        {
+            return;
+        }
         rigid.linearVelocityX = inputVec.x;
+    }
+
+    public void OnKnockbackEnd()
+    {
+        // 현재 키가 눌려있으면 그 값 그대로 복원, 안눌려있으면 0
+        inputVec.x = Keyboard.current != null
+            ? (Keyboard.current.dKey.isPressed ? speed : 0)
+            + (Keyboard.current.aKey.isPressed ? -speed : 0)
+            : 0;
+        if (inputVec.x > 0)
+        {
+            sprite.flipX = false;
+        }
+        else if (inputVec.x < 0)
+        {
+            sprite.flipX = true;
+        }
     }
 
     //점프 후 착지 판정 보완
@@ -421,7 +443,8 @@ public class Player : MonoBehaviour
                 if (contact.normal.y > 0.5f) //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
                 {
                     //이동 가능 + input 값 이어서 받기
-                    rigid.linearVelocityX = inputVec.x;
+                    if (!status.IsKnockbacked)
+                        rigid.linearVelocityX = inputVec.x;
                     SpriteFlip();
                     if(jumpCount < 2)
                     {
