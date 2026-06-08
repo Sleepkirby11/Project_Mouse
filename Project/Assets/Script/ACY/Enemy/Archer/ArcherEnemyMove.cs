@@ -15,6 +15,10 @@ public class ArcherEnemyMove : MonoBehaviour
     [SerializeField] private float backstepDuration = 0.3f; // 백스텝 지속 시간
     [SerializeField] private float backstepCooldown = 2f; // 백스텝 재사용 대기 시간
 
+    [Header("지형 체크")]
+    [SerializeField] private float groundCheckDistance = 1.5f; // 체크 거리
+    [SerializeField] private float groundCheckDropY = 0.5f;    // 발 아래 체크 오프셋
+
     private Rigidbody2D rb; 
     private Transform player;
     private Animator anim;
@@ -63,9 +67,17 @@ public class ArcherEnemyMove : MonoBehaviour
         if (isBackstepping && player != null)
         {
             float moveDirX = transform.position.x > player.position.x ? 1f : -1f;
+
+            if (!CheckGround(moveDirX))
+            {
+                isBackstepping = false;
+                rb.linearVelocity = Vector2.zero;
+                return;
+            }
+
             rb.linearVelocity = new Vector2(moveDirX * backstepSpeed, rb.linearVelocity.y);
         }
-        else
+        else 
         {
             if (rb.linearVelocity.x != 0)
             {
@@ -88,7 +100,8 @@ public class ArcherEnemyMove : MonoBehaviour
             }
 
             // 백스텝 트리거 체크
-            if (!isBackstepping && backstepCooldownTimer <= 0f && sqrDist < escapeRange * escapeRange) 
+            float moveDirX = transform.position.x > player.position.x ? 1f : -1f;
+            if (!isBackstepping && backstepCooldownTimer <= 0f && sqrDist < escapeRange * escapeRange && CheckGround(moveDirX))
             {
                 isBackstepping = true;
                 backstepEndTimer = backstepDuration;
@@ -109,6 +122,13 @@ public class ArcherEnemyMove : MonoBehaviour
                 player = col.transform;
             }
         }
+    }
+
+    private bool CheckGround(float dirX)
+    {
+        Vector2 checkOrigin = new Vector2(transform.position.x + dirX * groundCheckDistance, transform.position.y - groundCheckDropY);
+        RaycastHit2D hit = Physics2D.Raycast(checkOrigin, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+        return hit.collider != null;
     }
 
     private void UpdateFacing()
@@ -147,5 +167,14 @@ public class ArcherEnemyMove : MonoBehaviour
         // 백스텝 범위 — 빨간색
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, escapeRange);
+
+        // 땅 감지 범위 - 흰색
+        if (player != null)
+        {
+            float dir = transform.position.x > player.position.x ? 1f : -1f;
+            Vector3 origin = transform.position + new Vector3(dir * groundCheckDistance, -groundCheckDropY, 0);
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(origin, origin + Vector3.down * 1f);
+        }
     }
 }

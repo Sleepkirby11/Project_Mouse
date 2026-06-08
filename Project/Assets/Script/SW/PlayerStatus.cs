@@ -134,6 +134,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         yield return new WaitForSeconds(0.5f);
 
         isKnockbacked = false;
+        rb.linearVelocityX = 0;// 넉백 종료 시 잔여 속도 제거
+        GetComponent<Player>().OnKnockbackEnd();
     }
 
     private IEnumerator StunRoutine(float duration) // 스턴

@@ -93,6 +93,12 @@ public class FlyingEnemyMove : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        // 배회 범위 — 파란색
+        Gizmos.color = Color.blue;
+        Vector3 patrolCenter = Application.isPlaying ? new Vector3(originPos.x, originPos.y, 0) : transform.position;
+        Gizmos.DrawLine(patrolCenter + Vector3.left * patrolRange, patrolCenter + Vector3.right * patrolRange);
+
+        // 감지 범위 - 빨간색
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position + Vector3.down * detectionHeight * 0.5f, new Vector3(detectionWidth, detectionHeight, 0));
     }
