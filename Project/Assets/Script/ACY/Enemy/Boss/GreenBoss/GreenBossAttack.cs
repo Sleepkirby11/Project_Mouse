@@ -21,6 +21,16 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     [Header("정령 3개 key 설정")]
     [SerializeField] private string[] spiritPoolKeys = new string[3] { "GreenSpirit", "MintSpirit", "YellowGreenSpirit" };
 
+    [Header("근접대응: 절대 영역 바람 밀쳐내기")]
+    [SerializeField] private float detectRange = 3.5f;       // 플레이어 접근 감지 거리
+    [SerializeField] private float pushCooldown = 6.0f;      // 패턴 재사용 대기시간
+    [SerializeField] private float pushForce = 25f;          // 밀어내는 힘
+    [SerializeField] private float lockDuration = 0.6f;      // 스턴 시간
+    [SerializeField] private string windPoolKey = "BossWindBlast"; // 연출용 바람 이펙트 키
+
+    private float currentPushCooldown = 0f;
+    private bool isPushing = false; // 현재 밀어내는 패턴이 진행 중인지 체크
+
     // 코루틴 관리 변수 통합 및 정리
     private Coroutine birdRoutine;
     private Coroutine spiritRoutine;
@@ -30,6 +40,9 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private bool hasTriggeredSpiritPattern = false; // 체력 50% 이하 패턴 발동 체크
     private EnemyStatus enemyStatus;
 
+    // 플레이어 감지 관련 변수
+    private Transform playerTransform;
+
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
@@ -37,6 +50,16 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         if (shieldObject != null)
         {
             shieldObject.SetActive(false);
+        }
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            playerTransform = playerObj.transform;
+        }
+        else
+        {
+            Debug.Log("Player 태그 없음");
         }
     }
 
@@ -51,6 +74,16 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         {
             float totalHeal = healAmountPerSpirit * activeSpiritsCount * Time.deltaTime;
             RestoreHealth(totalHeal);
+        }
+
+        if (currentPushCooldown > 0f)
+        {
+            currentPushCooldown -= Time.deltaTime;
+        }
+
+        if (currentPushCooldown <= 0f && activeSpiritsCount == 0 && !isPushing)
+        {
+            CheckPlayerDistanceAndPushInstant();
         }
     }
 
@@ -102,6 +135,51 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+
+    private void CheckPlayerDistanceAndPushInstant()
+    {
+        if (playerTransform == null) return;
+
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
+        if (distance <= detectRange)
+        {
+            currentPushCooldown = pushCooldown;
+
+            PlayerStatus pStatus = playerTransform.GetComponent<PlayerStatus>();
+            if (pStatus != null)
+            {
+                StartCoroutine(PushAndLockPlayerRoutine(pStatus));
+            }
+        }
+    }
+
+    private IEnumerator PushAndLockPlayerRoutine(PlayerStatus status)
+    {
+        isPushing = true;
+
+        // 바람 이펙트 소환
+        Vector3 effectPos = transform.position + new Vector3(-2f, 0f, 0f);
+        PoolingManager.Instance.Get(windPoolKey, effectPos, Quaternion.identity);
+
+        // 왼쪽 넉백
+        IHittable hittable = status.GetComponent<IHittable>();
+        if (hittable != null)
+        {
+            hittable.TakeHit(Vector2.left * pushForce);
+        }
+
+        // 넉백이 어느 정도 적용된 직후 스턴
+        yield return new WaitForSeconds(0.1f);
+
+        // 스턴
+        IStunnable stunnable = status.GetComponent<IStunnable>();
+        if (stunnable != null)
+        {
+            stunnable.ApplyStun(lockDuration);
+        }
+
+        isPushing = false;
     }
 
     public void StartSpiritAttack()
