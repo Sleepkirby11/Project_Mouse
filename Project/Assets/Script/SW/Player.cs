@@ -211,7 +211,7 @@ public class Player : MonoBehaviour
                 isCanMove = false;
 
                 SpriteFlip();
-                anim.SetBool("IsJump", true);
+                JumpAnimUpdate(true);
 
                 jumpCount--;
             }
