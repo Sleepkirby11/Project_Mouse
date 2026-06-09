@@ -88,9 +88,11 @@ public class JumpEnemyMove : MonoBehaviour
         }
         bool isJumping = attackScript != null && attackScript.IsAttackingOrReady && !attackScript.IsCharging;
         bool isCharging = attackScript != null && attackScript.IsCharging;
+        bool isAirborne = attackScript != null && !attackScript.IsGrounded();
 
         anim.SetBool("IsCharging", isCharging);
         anim.SetBool("IsJumping", isJumping);
+        anim.SetBool("IsAirborne", isAirborne);
     }
 
     private void FindPlayer()
@@ -158,6 +160,22 @@ public class JumpEnemyMove : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+    public void PlayHurtJump() //점프 중 공격당했을때 특수 애니메이션 재생
+    {
+        if (anim == null)
+        {
+            return;
+        }
+        anim.ResetTrigger("Hurt");
+        if (attackScript != null && attackScript.IsGrounded())
+        {
+            anim.SetTrigger("Hurt");
+        }
+        else
+        {
+            anim.SetTrigger("Hurt_Jump");
+        }
     }
     // 감지 범위 노랑으로 표시
     private void OnDrawGizmosSelected()

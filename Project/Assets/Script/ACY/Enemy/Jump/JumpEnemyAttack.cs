@@ -183,10 +183,11 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 
         lastAttackTime = Time.time;
 
-        isAttackingOrReady = false;
         hasDirectHit = false;
         isCharging = false;
 
+        moveScript?.PlayHurtJump();
+        isAttackingOrReady = false;
     }
     private void CheckDirectHit()
     {
@@ -224,7 +225,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         if (groundCheck == null)
         {
