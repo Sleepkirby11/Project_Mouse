@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
                 //점프 가속 초기화
                 rigid.linearVelocityY = 0;
 
-                rigid.AddForceY(10, ForceMode2D.Impulse);
+                rigid.AddForceY(status.jumpForce, ForceMode2D.Impulse);
 
                 JumpAnimUpdate(true);
                 jumpCount--;
@@ -206,7 +206,7 @@ public class Player : MonoBehaviour
 
                 //normalized된 방향으로 AddForce
                 rigid.linearVelocity = Vector2.zero;
-                rigid.AddForce(dir.normalized * 20, ForceMode2D.Impulse);
+                rigid.AddForce(dir.normalized * status.dashForce, ForceMode2D.Impulse);
                 //키 입력 영향 임시 제한
                 isCanMove = false;
 

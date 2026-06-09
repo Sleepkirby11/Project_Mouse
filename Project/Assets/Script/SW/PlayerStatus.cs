@@ -29,6 +29,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     [Header("플레이어 공격력")]
     public int damage;
 
+    [Header("플레이어 점프 및 대시력")]
+    public int jumpForce;
+    public int dashForce;
+
     [Header("플레이어 스탠스")]
     [SerializeField] private Gradient redStance;
     [SerializeField] private Gradient greenStance;
