@@ -17,6 +17,7 @@ public class GhostEnemyAttack : MonoBehaviour
     public float possessionDuration = 4f; // 빙의 지속 시간 
     public float possessionMoveSpeed = 2.5f; // 강제 이동 속도
     public int possessionDamage = 1; // 대미지
+    public float damageInterval = 0.5f; //대미지 간격
 
     [Header("저항 수치")]
     public float keyReduceTime = 0.35f; // 방향키 입력 시 빙의 시간 감소량
@@ -97,7 +98,6 @@ public class GhostEnemyAttack : MonoBehaviour
         }
 
         playerStatus.SetPossessed(true); // 빙의 true
-        playerStatus.TakeDamage(possessionDamage); // HP 감소
 
         SetGauge(true); // 게이지 표시
         UpdateGauge();
@@ -107,9 +107,29 @@ public class GhostEnemyAttack : MonoBehaviour
 
     private IEnumerator PossessionRoutine()
     {
+        float damageTimer = 0f;
+
+        if (playerStatus != null)
+        {
+            playerStatus.TakeDamage(possessionDamage);
+        }
+
         while (possessionTimer > 0f) // 빙의 지속 시간 동안 반복
         {
-            possessionTimer -= Time.deltaTime; // 타이머 감소
+            possessionTimer -= Time.deltaTime; // 전체 타이머 감소
+            damageTimer += Time.deltaTime;     // 지속딜 타이머 증가
+
+            if (damageTimer >= damageInterval)
+            {
+                if (playerStatus != null)
+                {
+                    playerStatus.SetInvincible(false);
+                    playerStatus.TakeDamage(possessionDamage);
+                }
+
+                damageTimer -= damageInterval;
+            }
+
             yield return null; // 다음 프레임까지 대기
         }
 
