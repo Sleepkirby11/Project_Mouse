@@ -9,11 +9,12 @@ public class GameManager : MonoBehaviour
 
     public int sceneIndex;
 
-    //대화창
+
+    [Header("대화창")]
     public int id;
     public bool isNPC;
 
-    //대화 데이터 관리
+    //대화 데이터 관리 인스펙터 연결 잊지 말것
     Dictionary<int, string[]> talkData;
 
     void Awake()
@@ -28,14 +29,17 @@ public class GameManager : MonoBehaviour
         GenerateTalkData();
     }
 
-    void GenerateTalkData()
+    void GenerateTalkData() // 대화 데이터 생성 함수
     {
         talkData.Add(1000, new string[] { "안녕!" });
     }
 
-    public string GetTalk(int id, int talkIndex)
+    public string GetTalk(int id, int talkIndex) // 대화 데이터 반환 함수
     {
-        return talkData[id][talkIndex];
+        if(talkIndex == talkData[id].Length)
+            return null;
+        else
+            return talkData[id][talkIndex];
     }
     
     public void LoadScene(int index)
