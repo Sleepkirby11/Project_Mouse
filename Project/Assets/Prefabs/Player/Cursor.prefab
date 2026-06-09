@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1129140456250158127}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2439411, y: 3.3062637, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -156,8 +156,9 @@ MonoBehaviour:
   lifeTime: 0.5
   isMove: 0
   trailLength: 0
-  mouse: {fileID: 0}
-  damage: 0
+  lastLength: 0
+  mouse: {fileID: 7354637404276066719, guid: bfca6e5d9defd654ab8a081997886f5c, type: 3}
+  damage: 1
 --- !u!68 &3601384600695390484
 EdgeCollider2D:
   m_ObjectHideFlags: 0
