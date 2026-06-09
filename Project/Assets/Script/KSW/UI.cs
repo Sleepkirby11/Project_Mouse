@@ -91,13 +91,44 @@ public class UI : MonoBehaviour
         if (inkSlider != null) inkSlider.value = amount;
     }
 
-    //대화창
+    [Header("대화창")]
+    public GameManager talkManager;
+    public GameObject talkPanel;
     public Text talkText;
     public GameObject scanObject;
+    public bool isAction;
+    public int talkIndex;
 
     public void Action(GameObject scanObj)
     {
-        scanObj = scanObject;
-        talkText.text = scanObj.name; //앞 뒤에 출력할 텍스트 추가 예정
+        isAction = true;
+        scanObject = scanObj;
+        GameManager objData = scanObject.GetComponent<GameManager>();
+        Talk(objData.id, objData.isNPC);
+        
+        talkPanel.SetActive(isAction);
+    }
+
+    void Talk(int id, bool isNPC)
+    {
+        string talkData = talkManager.GetTalk(id, talkIndex);
+
+        if(talkData == null)
+        {
+            isAction = false;
+            return;
+        }
+
+        if (isNPC)
+        {
+            talkText.text = talkData;
+        }
+        else
+        {
+            talkText.text = talkData;
+        }
+
+        isAction = true;
+        talkIndex++;
     }
 }
