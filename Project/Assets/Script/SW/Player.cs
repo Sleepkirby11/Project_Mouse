@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
@@ -17,6 +19,8 @@ using static UnityEngine.GraphicsBuffer;
 public class Player : MonoBehaviour
 {
     PlayerStatus status;
+
+    public GameObject cam;
 
     [Header("공격")]
     public GameObject cursorObject;
@@ -36,6 +40,7 @@ public class Player : MonoBehaviour
     Animator anim;
     SpriteRenderer sprite;
     LineRenderer dashLine;
+    ParticleSystem particle;
 
     //이동값 변수
     float speed;
@@ -56,25 +61,34 @@ public class Player : MonoBehaviour
 
     float usedInk;
 
-
-    //초기화
-    private void Start()
+    //씬 이동 시 초기화 방지
+    void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(cursorObject);
+        DontDestroyOnLoad(groundLine);
+        DontDestroyOnLoad(attackCursor);
+        DontDestroyOnLoad(cam);
+
         status = GetComponent<PlayerStatus>();
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         anim = GetComponentInChildren<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         dashLine = GetComponentInChildren<LineRenderer>();
-        jumpCount = 2;
-
-        speed = status.speed;
+        particle = GetComponentInChildren<ParticleSystem>();
 
         attackCursor.GetComponent<AttackCursor>().target = transform;
-        mouse = attackCursor.gameObject.transform;
-
         cursor = cursorObject.GetComponent<Cursor>();
         groundCursor = groundLine.GetComponent<Cursor>();
+    }
+
+    //초기화
+    private void Start()
+    {
+        jumpCount = 2;
+        speed = status.speed;
+        mouse = attackCursor.gameObject.transform;
 
         isSkill = false;
         isDashReady = false;
@@ -164,7 +178,7 @@ public class Player : MonoBehaviour
                 //점프 가속 초기화
                 rigid.linearVelocityY = 0;
 
-                rigid.AddForceY(10, ForceMode2D.Impulse);
+                rigid.AddForceY(status.jumpForce, ForceMode2D.Impulse);
 
                 JumpAnimUpdate(true);
                 jumpCount--;
@@ -206,7 +220,7 @@ public class Player : MonoBehaviour
 
                 //normalized된 방향으로 AddForce
                 rigid.linearVelocity = Vector2.zero;
-                rigid.AddForce(dir.normalized * 20, ForceMode2D.Impulse);
+                rigid.AddForce(dir.normalized * status.dashForce, ForceMode2D.Impulse);
                 //키 입력 영향 임시 제한
                 isCanMove = false;
 
@@ -258,14 +272,20 @@ public class Player : MonoBehaviour
 
         if (context.started)
         {
+
+        }
+        if (context.canceled)
+        {
             TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
             TrailRenderer groundTrail = groundLine.GetComponent<TrailRenderer>();
 
             trail.Clear();
             groundTrail.Clear();
+            var main = particle.main;
 
-            trail.colorGradient = status.ChangeStance(PlayerStatus.Stance.Red);
-            groundTrail.colorGradient = status.ChangeStance(PlayerStatus.Stance.Red);
+            trail.colorGradient = status.ChangeStance(status.currentStance);
+            groundTrail.colorGradient = status.ChangeStance(status.currentStance);
+            main.startColor = status.ChangeStance(status.currentStance);
         }
     }
 
@@ -316,7 +336,7 @@ public class Player : MonoBehaviour
     void DashLine()
     {
         dashLine.enabled = isDashReady;
-        if(jumpCount != 1)
+        if (jumpCount != 1)
         {
             dashLine.enabled = false;
             return;
@@ -345,14 +365,14 @@ public class Player : MonoBehaviour
                 (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground")))
             {
                 //이동 가능 + input 값 이어서 받기
-                if (!status.IsKnockbacked) 
-                rigid.linearVelocityX = inputVec.x;
+                if (!status.IsKnockbacked)
+                    rigid.linearVelocityX = inputVec.x;
                 jumpCount = 2;
                 isCanMove = true;
                 anim.SetBool("IsFalling", false);
                 return;
             }
-            else if(jumpCount == 2) //Falling 상태 중 점프 카운트 조정
+            else if (jumpCount == 2) //Falling 상태 중 점프 카운트 조정
             {
                 jumpCount = 1;
                 JumpAnimUpdate(true);
@@ -366,7 +386,7 @@ public class Player : MonoBehaviour
 
     void JumpAnimUpdate(bool isUpate)
     {
-        if(!status.IsInvincible)
+        if (!status.IsInvincible)
         {
             anim.SetBool("IsJump", isUpate);
         }
@@ -418,7 +438,7 @@ public class Player : MonoBehaviour
 
     void InkUIUpdate()
     {
-        if(UI.Instance != null)
+        if (UI.Instance != null)
             UI.Instance.ChargeInk(status.ink);
     }
 
@@ -470,7 +490,7 @@ public class Player : MonoBehaviour
                     if (!status.IsKnockbacked)
                         rigid.linearVelocityX = inputVec.x;
                     SpriteFlip();
-                    if(jumpCount < 2)
+                    if (jumpCount < 2)
                     {
                         jumpCount = 2;
                     }

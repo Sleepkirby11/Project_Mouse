@@ -12,7 +12,8 @@ public class AttackCursor : MonoBehaviour
     public Transform target;
     float distance;
     Vector2 distanceVec;
-    float range = 15f;
+    public float range = 15f;
+
 
     //초기화
     private void Start()
