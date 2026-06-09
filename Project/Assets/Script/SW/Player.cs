@@ -2,6 +2,7 @@
 using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
@@ -271,16 +272,20 @@ public class Player : MonoBehaviour
 
         if (context.started)
         {
+
+        }
+        if (context.canceled)
+        {
             TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
             TrailRenderer groundTrail = groundLine.GetComponent<TrailRenderer>();
 
             trail.Clear();
             groundTrail.Clear();
-
-            trail.colorGradient = status.ChangeStance(PlayerStatus.Stance.Red);
-            groundTrail.colorGradient = status.ChangeStance(PlayerStatus.Stance.Red);
             var main = particle.main;
-            main.startColor = Color.red;
+
+            trail.colorGradient = status.ChangeStance(status.currentStance);
+            groundTrail.colorGradient = status.ChangeStance(status.currentStance);
+            main.startColor = status.ChangeStance(status.currentStance);
         }
     }
 
@@ -331,7 +336,7 @@ public class Player : MonoBehaviour
     void DashLine()
     {
         dashLine.enabled = isDashReady;
-        if(jumpCount != 1)
+        if (jumpCount != 1)
         {
             dashLine.enabled = false;
             return;
@@ -360,14 +365,14 @@ public class Player : MonoBehaviour
                 (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground")))
             {
                 //이동 가능 + input 값 이어서 받기
-                if (!status.IsKnockbacked) 
-                rigid.linearVelocityX = inputVec.x;
+                if (!status.IsKnockbacked)
+                    rigid.linearVelocityX = inputVec.x;
                 jumpCount = 2;
                 isCanMove = true;
                 anim.SetBool("IsFalling", false);
                 return;
             }
-            else if(jumpCount == 2) //Falling 상태 중 점프 카운트 조정
+            else if (jumpCount == 2) //Falling 상태 중 점프 카운트 조정
             {
                 jumpCount = 1;
                 JumpAnimUpdate(true);
@@ -381,7 +386,7 @@ public class Player : MonoBehaviour
 
     void JumpAnimUpdate(bool isUpate)
     {
-        if(!status.IsInvincible)
+        if (!status.IsInvincible)
         {
             anim.SetBool("IsJump", isUpate);
         }
@@ -433,7 +438,7 @@ public class Player : MonoBehaviour
 
     void InkUIUpdate()
     {
-        if(UI.Instance != null)
+        if (UI.Instance != null)
             UI.Instance.ChargeInk(status.ink);
     }
 
@@ -485,7 +490,7 @@ public class Player : MonoBehaviour
                     if (!status.IsKnockbacked)
                         rigid.linearVelocityX = inputVec.x;
                     SpriteFlip();
-                    if(jumpCount < 2)
+                    if (jumpCount < 2)
                     {
                         jumpCount = 2;
                     }
