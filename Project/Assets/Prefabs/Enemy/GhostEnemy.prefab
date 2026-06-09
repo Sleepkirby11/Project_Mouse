@@ -112,6 +112,7 @@ MonoBehaviour:
   possessionDuration: 4
   possessionMoveSpeed: 2.5
   possessionDamage: 1
+  damageInterval: 0.5
   keyReduceTime: 0.35
   possessionGaugeObject: {fileID: 0}
   possessionSlider: {fileID: 0}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BossSpirit : MonoBehaviour, IHitReaction
 {
@@ -21,6 +22,10 @@ public class BossSpirit : MonoBehaviour, IHitReaction
     [Header("소환 연출 설정")] //소환 후 무적 시간
     [SerializeField] private float spawnInvincibleTime = 1.5f;
 
+    [Header("페이드 설정")]
+    [SerializeField] private float fadeTime = 1f;
+
+    private string myPoolKey;
     private GreenBossAttack bossAttack;
     private EnemyStatus enemyStatus;
     private bool isDead = false;
@@ -54,13 +59,19 @@ public class BossSpirit : MonoBehaviour, IHitReaction
         bossAttack = attack;
         spiritType = type;
         isDead = false;
-
         invincibleTimer = spawnInvincibleTime;
-
-        SetNewRandomTarget();
-
         waveTimer = Random.Range(0f, 10f);
 
+        myPoolKey = type switch
+        {
+            SpiritType.Green => "GreenSpirit",
+            SpiritType.Mint => "MintSpirit",
+            SpiritType.YellowGreen => "YellowGreenSpirit",
+            _ => null
+        };
+
+
+        SetNewRandomTarget();
         if (enemyStatus != null)
         {
             enemyStatus.Heal(9999);
@@ -114,9 +125,13 @@ public class BossSpirit : MonoBehaviour, IHitReaction
     }
     public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
     {
-        if (invincibleTimer > 0f)
+        if (isDead)
         {
             return true;
+        }
+        if (invincibleTimer > 0f)
+        {
+             return true;
         }
         return false;
     }
@@ -140,7 +155,32 @@ public class BossSpirit : MonoBehaviour, IHitReaction
                 bossAttack.OnSpiritDestroyed(); // 보스에게 사망 보고
             }
 
-            gameObject.SetActive(false); // 오브젝트 비활성화
+            StartCoroutine(FadeAndReturn());
+        }
+    }
+    private IEnumerator FadeAndReturn()
+    {
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
+        {
+            float elapsed = 0f;
+            Color original = sr.color;
+            while (elapsed < fadeTime)
+            {
+                elapsed += Time.deltaTime;
+                sr.color = new Color(original.r, original.g, original.b,  Mathf.Lerp(1f, 0f, elapsed / fadeTime));
+                yield return null;
+            }
+            sr.color = original; // 반납 전 색상 복원
+        }
+
+        if (myPoolKey != null)
+        {
+            PoolingManager.Instance.Return(myPoolKey, gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 }

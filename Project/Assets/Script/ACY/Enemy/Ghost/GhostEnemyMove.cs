@@ -72,6 +72,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     private Vector2 chargeDirection;
     private Vector2 retreatDirection;
 
+
     private float patrolTime;
     private float chargeTimer;
     private float cooldownTimer;
@@ -389,7 +390,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         spriteRenderer.color = color;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (currentState != GhostState.Charge)
         {
