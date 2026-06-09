@@ -1,16 +1,45 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager instance;
+
+    public int sceneIndex;
+
+    //대화창
+    public int id;
+    public bool isNPC;
+
+    //대화 데이터 관리
+    Dictionary<int, string[]> talkData;
+
+    void Awake()
     {
-        
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        talkData = new Dictionary<int, string[]>();
+        GenerateTalkData();
     }
 
-    // Update is called once per frame
-    void Update()
+    void GenerateTalkData()
     {
-        
+        talkData.Add(1000, new string[] { "안녕!" });
+    }
+
+    public string GetTalk(int id, int talkIndex)
+    {
+        return talkData[id][talkIndex];
+    }
+    
+    public void LoadScene(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 }

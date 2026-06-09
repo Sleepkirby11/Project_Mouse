@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System.Collections;
 using TMPro;
 
 public class UI : MonoBehaviour
@@ -87,5 +89,15 @@ public class UI : MonoBehaviour
     private void UpdateInkBar(float amount)
     {
         if (inkSlider != null) inkSlider.value = amount;
+    }
+
+    //대화창
+    public Text talkText;
+    public GameObject scanObject;
+
+    public void Action(GameObject scanObj)
+    {
+        scanObj = scanObject;
+        talkText.text = scanObj.name; //앞 뒤에 출력할 텍스트 추가 예정
     }
 }
