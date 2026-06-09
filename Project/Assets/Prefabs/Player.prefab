@@ -433,6 +433,8 @@ MonoBehaviour:
   ink: 0
   speed: 5
   damage: 1
+  jumpForce: 10
+  dashForce: 20
   redStance:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
