@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
 {
     PlayerStatus status;
 
+    public GameObject cam;
+
     [Header("공격")]
     public GameObject cursorObject;
     Cursor cursor;
@@ -36,6 +39,7 @@ public class Player : MonoBehaviour
     Animator anim;
     SpriteRenderer sprite;
     LineRenderer dashLine;
+    ParticleSystem particle;
 
     //이동값 변수
     float speed;
@@ -56,25 +60,34 @@ public class Player : MonoBehaviour
 
     float usedInk;
 
-
-    //초기화
-    private void Start()
+    //씬 이동 시 초기화 방지
+    void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(cursorObject);
+        DontDestroyOnLoad(groundLine);
+        DontDestroyOnLoad(attackCursor);
+        DontDestroyOnLoad(cam);
+
         status = GetComponent<PlayerStatus>();
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         anim = GetComponentInChildren<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         dashLine = GetComponentInChildren<LineRenderer>();
-        jumpCount = 2;
-
-        speed = status.speed;
+        particle = GetComponentInChildren<ParticleSystem>();
 
         attackCursor.GetComponent<AttackCursor>().target = transform;
-        mouse = attackCursor.gameObject.transform;
-
         cursor = cursorObject.GetComponent<Cursor>();
         groundCursor = groundLine.GetComponent<Cursor>();
+    }
+
+    //초기화
+    private void Start()
+    {
+        jumpCount = 2;
+        speed = status.speed;
+        mouse = attackCursor.gameObject.transform;
 
         isSkill = false;
         isDashReady = false;
@@ -266,6 +279,8 @@ public class Player : MonoBehaviour
 
             trail.colorGradient = status.ChangeStance(PlayerStatus.Stance.Red);
             groundTrail.colorGradient = status.ChangeStance(PlayerStatus.Stance.Red);
+            var main = particle.main;
+            main.startColor = Color.red;
         }
     }
 
