@@ -38,6 +38,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     [SerializeField] private Gradient greenStance;
     [SerializeField] private Gradient blueStance;
     [SerializeField] private Gradient whiteStance;
+    public Stance currentStance;
 
 
     private Rigidbody2D rb;
