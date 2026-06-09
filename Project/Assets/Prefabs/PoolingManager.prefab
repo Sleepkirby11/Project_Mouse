@@ -81,3 +81,6 @@ MonoBehaviour:
   - key: GreenBossFrog
     prefab: {fileID: 1448805901235176327, guid: d01cfc8ecc4f5c44f93ad82c054cac93, type: 3}
     initialSize: 5
+  - key: Shockwave
+    prefab: {fileID: 6334322862548045781, guid: 812e58b2cb9b57047b42162b6cba6dad, type: 3}
+    initialSize: 5
