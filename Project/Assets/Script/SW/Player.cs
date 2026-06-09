@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
 
                 rigid.AddForceY(10, ForceMode2D.Impulse);
 
-                anim.SetBool("IsJump", true);
+                JumpAnimUpdate(true);
                 jumpCount--;
             }
         }
@@ -355,12 +355,20 @@ public class Player : MonoBehaviour
             else if(jumpCount == 2) //Falling 상태 중 점프 카운트 조정
             {
                 jumpCount = 1;
-                anim.SetBool("IsJump", true);
+                JumpAnimUpdate(true);
                 return;
             }
 
-            anim.SetBool("IsJump", false);
+            JumpAnimUpdate(false);
             anim.SetBool("IsFalling", true);
+        }
+    }
+
+    void JumpAnimUpdate(bool isUpate)
+    {
+        if(!status.IsInvincible)
+        {
+            anim.SetBool("IsJump", isUpate);
         }
     }
 
@@ -370,7 +378,7 @@ public class Player : MonoBehaviour
         if (cursor.isMove && usedInk != cursor.lastLength)
         {
             status.ink -= cursor.lastLength / 4;
-            UI.Instance.UseInk(status.ink);
+            InkUIUpdate();
             usedInk = 0;
             cursor.lastLength = 0;
         }
@@ -392,13 +400,29 @@ public class Player : MonoBehaviour
             cursor.damage = status.damage;
         }
         cursor.SetColliderPointsFromTrail();
-        //status.ink = status.maxInk;
-        //UI.Instance.ChargeInk(status.ink);
+        status.ink = status.maxInk;
+        InkUIUpdate();
         if (isSkill)
         {
             Debug.Log("스킬 발동");
         }
     }
+
+    public void CursorCancle()
+    {
+        if (cursor.isMove == true)
+            ActiveAttack(cursor);
+        if (groundCursor.isMove == true)
+            ActiveAttack(groundCursor);
+    }
+
+    void InkUIUpdate()
+    {
+        if(UI.Instance != null)
+            UI.Instance.ChargeInk(status.ink);
+    }
+
+
 
     void Move()
     {

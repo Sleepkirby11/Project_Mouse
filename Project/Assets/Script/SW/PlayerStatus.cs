@@ -80,6 +80,9 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
             UI.Instance.TakeDamage(damage);
         }
 
+        //점프 애니메이션 실행 이전 Invincible 활성화
+        SetInvincible(true);
+
         //플레이어 애니메이션 초기화
         playerAnim.SetBool("IsJump", false);
         playerAnim.SetBool("IsFalling", false);
@@ -126,6 +129,9 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     private IEnumerator KnockbackRoutine(Vector2 force) // 넉백
     {
         isKnockbacked = true;
+
+        //넉백 전 행동 캔슬
+        GetComponent<Player>().CursorCancle();
 
         // 순간 관성 제거 후 방패병의 충격량 대입
         rb.linearVelocity = Vector2.zero;
