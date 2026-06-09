@@ -27,6 +27,9 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     [SerializeField] private Vector2 shockwaveBoxOffset = new Vector2(0f, -0.4f); // 발밑 위치 보정
     [SerializeField] private LayerMask playerLayer;
 
+    [Header("충격파 VFX")]
+    [SerializeField] private string shockwavePoolKey = "Shockwave";
+
     [Header("착지 체크")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.15f;
@@ -44,10 +47,12 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     private bool isAttackingOrReady = false;
     private bool hasDirectHit = false;
     private float lastAttackTime = -99f;
+    private bool isCharging = false;
 
     // 이동 스크립트에서 읽음
     public float AttackRange => attackRange;
     public bool IsAttackingOrReady => isAttackingOrReady;
+    public bool IsCharging => isCharging;
 
     private void Awake()
     {
@@ -86,24 +91,14 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     private IEnumerator JumpAttackComboRoutine(Transform player)
     {
         isAttackingOrReady = true;
+        isCharging = true;
         hasDirectHit = false;
 
-        // 준비 자세 (색상 변경)
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = Color.red;
-        }
-
-        // anim?.SetTrigger("Ready");
         yield return new WaitForSeconds(readyDuration);
 
         // 점프 시작
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = Color.white;
-        }
+        isCharging = false;
 
-        // anim?.SetTrigger("Jump");
 
         Vector2 startPos = transform.position;
 
@@ -156,7 +151,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 
         lastAttackTime = Time.time;
 
-        yield return new WaitForSeconds(0.4f);
+       // yield return new WaitForSeconds(0.4f);
 
         isAttackingOrReady = false;
         jumpRoutine = null;
@@ -188,13 +183,11 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 
         lastAttackTime = Time.time;
 
-        isAttackingOrReady = false;
         hasDirectHit = false;
+        isCharging = false;
 
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = Color.white;
-        }
+        moveScript?.PlayHurtJump();
+        isAttackingOrReady = false;
     }
     private void CheckDirectHit()
     {
@@ -220,13 +213,8 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         Debug.Log($"{gameObject.name} 충격파 공격");
 
         Vector2 shockwaveCenter = (Vector2)transform.position + shockwaveBoxOffset;
-
-        Collider2D playerCollider = Physics2D.OverlapBox(
-            shockwaveCenter,
-            shockwaveBoxSize,
-            0f,
-            playerLayer
-        );
+        PoolingManager.Instance.Get(shockwavePoolKey, shockwaveCenter, Quaternion.identity); 
+        Collider2D playerCollider = Physics2D.OverlapBox(shockwaveCenter,  shockwaveBoxSize, 0f,  playerLayer);
 
         if (playerCollider != null)
         {
@@ -237,7 +225,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         if (groundCheck == null)
         {

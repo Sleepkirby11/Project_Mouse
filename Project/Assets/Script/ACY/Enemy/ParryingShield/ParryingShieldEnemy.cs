@@ -45,10 +45,15 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     [SerializeField] private float counterStunTime = 1.5f; // 스턴 지속 시간
     [SerializeField] private float counterRecoverTime = 0.3f;
 
+    [Header("타겟 설정")]
+    [SerializeField] private Transform playerTransform;
+    public bool isFacingRight = true;
+
     private enum State { Patrol, Tracking, Parrying, Countering,  Recovering } 
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator anim;
     private Color originalColor;
     private Transform target;
     private State state = State.Patrol; // 초기 상태는 배회
@@ -72,6 +77,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
 
         if (spriteRenderer != null)
         {
@@ -90,24 +96,42 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         patrolOrigin = transform.position;
     }
 
-    private void Start() => StartCoroutine(ParryRoutine()); // 패링 루틴 시작
+    private void Start()
+    {
+        if (playerTransform == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                playerTransform = player.transform;
+            }
+        }
+        StartCoroutine(ParryRoutine()); // 패링 루틴 시작
+    }
 
     private void Update()
     {
-        if (state == State.Parrying || state == State.Countering || state == State.Recovering) // 패링 또는 카운터 중에는 행동 일시 정지
+        if (state != State.Patrol)
+        {
+            FlipToTarget();
+        }
+
+        UpdateAnimator();
+
+        if (state == State.Parrying || state == State.Countering || state == State.Recovering)
         {
             return;
         }
 
-        DetectPlayer(); // 플레이어 감지 및 상태 전환
+        DetectPlayer();
 
-        if (state == State.Tracking && target != null) // 플레이어 추적 상태면 이동
+        if (state == State.Tracking && target != null)
         {
-            MoveToward(target.position); 
+            MoveToward(target.position);
         }
         else
         {
-            Patrol(); // 배회 
+            Patrol();
         }
     }
 
@@ -121,6 +145,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             {
                 target = null;
                 state = State.Patrol;
+                patrolOrigin = transform.position; // 현재 위치를 배회 기준점으로 설정
             }
         }
         else
@@ -136,20 +161,22 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     private void MoveToward(Vector3 destination) // 플레이어 방향으로 이동
     {
         float dirX = destination.x > transform.position.x ? 1f : -1f; // 이동 방향 계산
-        rb.linearVelocity = new Vector2(dirX * moveSpeed, rb.linearVelocity.y); 
+        rb.linearVelocity = new Vector2(dirX * moveSpeed, rb.linearVelocity.y);
     }
 
     private void Patrol()
     {
         // 배회 반경 도달 시 방향 전환
         float distFromOrigin = transform.position.x - patrolOrigin.x;
-        if (distFromOrigin > patrolDistance)
+        if (distFromOrigin > patrolDistance && patrolDir == 1f)
         {
             patrolDir = -1f;
+            Flip();
         }
-        if (distFromOrigin < -patrolDistance)
+        if (distFromOrigin < -patrolDistance && patrolDir == -1f)
         {
             patrolDir = 1f;
+            Flip();
         }
 
         rb.linearVelocity = new Vector2(patrolDir * moveSpeed * 0.6f, rb.linearVelocity.y);
@@ -165,7 +192,6 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             if (target != null)
             {
                 Debug.Log("패링 시도");
-                SetEnemyColor(Color.blue); //파란색으로 나타냄(임시코드)
                 state = State.Parrying;
                 rb.linearVelocity = Vector2.zero;
                 yield return parryWait;
@@ -173,17 +199,9 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
                 // 카운터가 발동되지 않았다면 추적으로 복귀
                 if (state == State.Parrying)
                 {
-                    SetEnemyColor(originalColor); //원래 색으로 복귀
                     state = State.Tracking;
                 }
             }
-        }
-    }
-    private void SetEnemyColor(Color color)
-    {
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = color;
         }
     }
 
@@ -215,7 +233,11 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     private IEnumerator CounterRoutine() //카운터
     {
         state = State.Countering;
-
+        if (anim != null)
+        {
+            anim.SetBool("IsParrying", false); // 패링 해제
+            anim.SetTrigger("Counter");
+        }
         // 플레이어 방향으로 즉각 돌진
         Vector2 dashDir = ((Vector2)(target.position - transform.position)).normalized;
         rb.linearVelocity = Vector2.zero;
@@ -224,7 +246,6 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         yield return new WaitForSeconds(counterDashTime);
 
         rb.linearVelocity = Vector2.zero;
-        SetEnemyColor(originalColor); // 카운터 후 색상 복귀
         if (state == State.Countering)
         {
             state = State.Tracking;
@@ -262,6 +283,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     {
         lastContactTime = Time.time;
 
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+        }
         float dirX = player.transform.position.x > transform.position.x ? 1f : -1f;
         Vector2 knockback = new Vector2(dirX * contactKnockbackX, contactKnockbackY);
 
@@ -299,7 +324,43 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             stunnable.ApplyStun(counterStunTime);
         }
     }
+    private void UpdateAnimator()
+    {
+        if (anim == null)
+        {
+            return;
+        }
+        anim.SetBool("IsParrying", state == State.Parrying);
+        anim.SetBool("IsMoving", state == State.Tracking || state == State.Patrol);
+        anim.SetBool("IsFalling", rb.linearVelocity.y < -0.1f);
+    }
+    private void FlipToTarget()
+    {
+        if (playerTransform == null)
+        {
+            return;
+        }
 
+        float direction = playerTransform.position.x - transform.position.x;
+
+        if (direction > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (direction < 0 && isFacingRight)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
     private void OnDrawGizmosSelected()
     {
         // 감지 범위
