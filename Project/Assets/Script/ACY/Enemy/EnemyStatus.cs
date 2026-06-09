@@ -43,17 +43,6 @@ public class EnemyStatus : MonoBehaviour, IDamageable
     }
     public void TakeDamage(int damage) //IDamageable 인터페이스 구현
     {
-        if (anim != null)
-        {
-            if (HasParameter("Hurt"))
-            {
-                anim.SetTrigger("Hurt");
-            }
-            else
-            {
-                StartCoroutine(FlashRoutine()); // 깜빡임
-            }
-        }
         if (currentHP <= 0) //이미 사망한 적은 피해를 입지 않음
         {
             return;
@@ -69,6 +58,17 @@ public class EnemyStatus : MonoBehaviour, IDamageable
             if (blocked)
             {
                 return;
+            }
+        }
+        if (anim != null)
+        {
+            if (HasParameter("Hurt"))
+            {
+                anim.SetTrigger("Hurt");
+            }
+            else
+            {
+                StartCoroutine(FlashRoutine()); // 깜빡임
             }
         }
         currentHP -= damage; //적이 피해를 입을 때마다 체력 감소
