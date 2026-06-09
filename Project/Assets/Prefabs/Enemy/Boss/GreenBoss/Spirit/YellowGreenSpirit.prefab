@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 1
-  dieAnimationLength: 0
+  dieAnimationLength: 0.5
 --- !u!1 &6234149662983438217
 GameObject:
   m_ObjectHideFlags: 0

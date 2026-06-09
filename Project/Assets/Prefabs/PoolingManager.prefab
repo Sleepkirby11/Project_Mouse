@@ -63,3 +63,21 @@ MonoBehaviour:
   - key: RedBossOrb
     prefab: {fileID: 4993334597026480835, guid: 5221524ee33460945b18265cdf2a7325, type: 3}
     initialSize: 5
+  - key: GreenBossBird
+    prefab: {fileID: 4726387216337282260, guid: 933b3913881a33345a2d1577e9f74c79, type: 3}
+    initialSize: 10
+  - key: GreenSpirit
+    prefab: {fileID: 4651221095943832990, guid: 595b02ad59ca9e64688d503a6d84a904, type: 3}
+    initialSize: 5
+  - key: MintSpirit
+    prefab: {fileID: 2280118641728592142, guid: eb3a0c451c566e6428ce21549d2d8520, type: 3}
+    initialSize: 5
+  - key: YellowGreenSpirit
+    prefab: {fileID: 5663733794253972570, guid: 53f1df4fc5c6d7048955ad7118713f37, type: 3}
+    initialSize: 5
+  - key: BossWindBlast
+    prefab: {fileID: 4323674500630155973, guid: 86edbcb61e394e94eb6d36c91bb3d0f8, type: 3}
+    initialSize: 5
+  - key: GreenBossFrog
+    prefab: {fileID: 1448805901235176327, guid: d01cfc8ecc4f5c44f93ad82c054cac93, type: 3}
+    initialSize: 5

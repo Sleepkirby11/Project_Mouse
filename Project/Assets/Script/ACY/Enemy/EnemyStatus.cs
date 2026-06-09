@@ -104,6 +104,10 @@ public class EnemyStatus : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if (GetComponent<BossSpirit>() != null)
+        {
+            return;
+        }
 
         if (anim != null)
         {

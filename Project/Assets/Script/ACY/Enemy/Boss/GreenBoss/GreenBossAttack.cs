@@ -21,7 +21,6 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     [Header("정령 소환 보호막 설정")]
     [SerializeField] private GameObject shieldObject;     // 보스 자식 배리어 오브젝트
-    [SerializeField] private float spiritPatternInterval = 15f; // 정령 소환 주기
     [SerializeField] private int healAmountPerSpirit = 5; // 정령 1마리당 초당 회복량
 
     [SerializeField] private Transform[] spiritSpawnPoints;
@@ -46,7 +45,6 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     // 코루틴 관리 변수
     private Coroutine birdRoutine;
-    private Coroutine spiritRoutine;
     private Coroutine frogRoutine;
 
     private int activeSpiritsCount = 0;       // 현재 살아있는 정령 수
@@ -105,7 +103,6 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private void OnDisable()
     {
         StopBirdAttack();
-        StopSpiritAttack();
         StopFrogAttack();
     }
 
@@ -203,18 +200,59 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     public void StartSpiritAttack()
     {
-        if (spiritRoutine == null)
+        if (activeSpiritsCount > 0)
         {
-            spiritRoutine = StartCoroutine(SpawnSpiritRoutine());
+            return;
         }
-    }
+        int spiritCount = spiritPoolKeys.Length;
+        activeSpiritsCount = spiritCount;
+        remainderHeal = 0f;
 
-    public void StopSpiritAttack()
-    {
-        if (spiritRoutine != null)
+        if (shieldObject != null)
         {
-            StopCoroutine(spiritRoutine);
-            spiritRoutine = null;
+            shieldObject.SetActive(true);
+        }
+
+        bool[] usedIndices = new bool[spiritSpawnPoints.Length];
+
+        for (int i = 0; i < spiritCount; i++)
+        {
+            Vector3 spawnPosition = transform.position;
+
+            if (spiritSpawnPoints.Length > 0)
+            {
+                if (spiritSpawnPoints.Length >= spiritCount)
+                {
+                    int randomIndex;
+                    do
+                    { 
+                        randomIndex = Random.Range(0, spiritSpawnPoints.Length);
+                    }while (usedIndices[randomIndex]);
+
+                    usedIndices[randomIndex] = true;
+                    spawnPosition = spiritSpawnPoints[randomIndex].position;
+                }
+                else
+                {
+                    spawnPosition = spiritSpawnPoints[i % spiritSpawnPoints.Length].position;
+                }
+            }
+
+            string currentSpiritKey = spiritPoolKeys[i];
+            GameObject spiritObj = PoolingManager.Instance.Get(currentSpiritKey, spawnPosition, Quaternion.identity);
+
+            if (spiritObj != null)
+            {
+                BossSpirit spirit = spiritObj.GetComponent<BossSpirit>();
+                if (spirit != null)
+                {
+                    spirit.Init(this, (BossSpirit.SpiritType)i);
+                }
+            }
+            else
+            {
+                Debug.LogError($"정령 소환 실패");
+            }
         }
     }
     public void StartFrogAttack()
@@ -247,73 +285,6 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
             Vector3 spawnPos = playerTransform.position + (Vector3)frogSpawnOffset;
             PoolingManager.Instance.Get(frogPoolKey, spawnPos, Quaternion.identity);
-        }
-    }
-    private IEnumerator SpawnSpiritRoutine()
-    {
-        while (true)
-        {
-            if (activeSpiritsCount > 0)
-            {
-                yield return new WaitForSeconds(spiritPatternInterval);
-                continue;
-            }
-
-            int spiritCount = spiritPoolKeys.Length;
-
-            activeSpiritsCount = spiritCount;
-            remainderHeal = 0f;
-
-            if (shieldObject != null)
-            {
-                shieldObject.SetActive(true);
-            }
-
-            bool[] usedIndices = new bool[spiritSpawnPoints.Length];
-
-            for (int i = 0; i < spiritCount; i++)
-            {
-                Vector3 spawnPosition = transform.position; // 예외 대비 기본값 (보스 위치)
-
-                if (spiritSpawnPoints.Length > 0)
-                {
-                    // 스폰 포인트가 정령 수보다 많거나 같으면 기존처럼 랜덤 배치
-                    if (spiritSpawnPoints.Length >= spiritCount)
-                    {
-                        int randomIndex;
-                        do
-                        {
-                            randomIndex = Random.Range(0, spiritSpawnPoints.Length);
-                        } while (usedIndices[randomIndex]);
-
-                        usedIndices[randomIndex] = true;
-                        spawnPosition = spiritSpawnPoints[randomIndex].position;
-                    }
-                    else
-                    {
-                        int safeIndex = i % spiritSpawnPoints.Length;
-                        spawnPosition = spiritSpawnPoints[safeIndex].position;
-                    }
-                }
-                string currentSpiritKey = spiritPoolKeys[i];
-                GameObject spiritObj = PoolingManager.Instance.Get(currentSpiritKey, spawnPosition, Quaternion.identity);
-
-                if (spiritObj != null)
-                {
-                    BossSpirit spirit = spiritObj.GetComponent<BossSpirit>();
-                    if (spirit != null)
-                    {
-                        BossSpirit.SpiritType typeToSet = (BossSpirit.SpiritType)i;
-                        spirit.Init(this, typeToSet);
-                    }
-                }
-                 else
-                    {
-                        Debug.LogError($"정령 소환 실패");
-                    }
-            }
-
-            yield return new WaitForSeconds(spiritPatternInterval);
         }
     }
 
