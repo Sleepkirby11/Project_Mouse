@@ -21,11 +21,12 @@ public class FlyingEnemyMove : MonoBehaviour
     [SerializeField] private float returnSpeed = 4f;
 
     private Vector2 originPos; // 초기 위치 저장
-    private Rigidbody2D rb; 
+    private Rigidbody2D rb;
+    private Animator anim;
     private float patrolTimer;
     private EnemyState state = EnemyState.Patrol; // 초기 상태는 배회
+    private float prevX;
 
-    // 캐싱 (최적화)
     private ContactFilter2D playerFilter; // 플레이어 감지용 필터
     private readonly List<RaycastHit2D> hitResults = new List<RaycastHit2D>(1); // BoxCast 결과 저장용 리스트 
     private FlyingEnemyAttack FlyingAttack;
@@ -39,6 +40,7 @@ public class FlyingEnemyMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         FlyingAttack = GetComponent<FlyingEnemyAttack>();
+        anim = GetComponentInChildren<Animator>();
         originPos = rb.position;
 
         // 물리 설정 최적화
@@ -46,12 +48,15 @@ public class FlyingEnemyMove : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 
         rb.freezeRotation = true; // 회전 방지
 
+        prevX = originPos.x + Mathf.Cos(0) * patrolRange;  //방향 계산
         playerFilter.useLayerMask = true;
         playerFilter.layerMask = playerLayer;
     }
 
     void Update() 
     {
+        UpdateAnimator();
+
         if (state == EnemyState.Patrol)
         {
             UpdatePatrol();
@@ -63,10 +68,26 @@ public class FlyingEnemyMove : MonoBehaviour
         }
     }
 
+    private void UpdateAnimator()
+    {
+        if (anim == null)
+        {
+            return;
+        }
+        anim.SetBool("IsMoving", state == EnemyState.Patrol);
+        anim.SetBool("IsDiving", state == EnemyState.Action);
+        anim.SetBool("IsReturning", state == EnemyState.Return);
+    }
+
     private void UpdatePatrol()
     {
         patrolTimer += Time.deltaTime * patrolSpeed;
-        rb.MovePosition(new Vector2(originPos.x + Mathf.Cos(patrolTimer) * patrolRange, originPos.y));
+        float newX = originPos.x + Mathf.Cos(patrolTimer) * patrolRange;
+
+        Flip(newX - prevX);
+
+        prevX = newX;
+        rb.MovePosition(new Vector2(newX, originPos.y));
     }
     private void CheckPlayerBelow()
     {
@@ -77,7 +98,11 @@ public class FlyingEnemyMove : MonoBehaviour
         }
     }
 
-    private void UpdateReturn() // 원래 위치로 돌아가는 움직임 업데이트
+    public void OnAttackProcessFinished()
+    {
+        state = EnemyState.Return;
+    }
+    private void UpdateReturn()
     {
         Vector2 nextPos = Vector2.MoveTowards(rb.position, originPos, returnSpeed * Time.deltaTime);
         rb.MovePosition(nextPos);
@@ -85,11 +110,22 @@ public class FlyingEnemyMove : MonoBehaviour
         if (Vector2.SqrMagnitude(originPos - nextPos) < 0.001f)
         {
             rb.position = originPos;
-            patrolTimer = Mathf.PI * 0.5f; // 중앙에서 시작하도록 보정
+            patrolTimer = Mathf.PI * 0.5f;
             state = EnemyState.Patrol;
+            Flip(Mathf.Cos(patrolTimer)); // 원점 도착 후 패트롤 시작 방향으로 플립
         }
     }
-    public void OnAttackProcessFinished() => state = EnemyState.Return;
+    private void Flip(float dirX)
+    {
+        if (dirX > 0.001f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (dirX < -0.001f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+    }
 
     void OnDrawGizmosSelected()
     {

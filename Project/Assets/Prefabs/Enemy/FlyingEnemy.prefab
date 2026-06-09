@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d0097b978c03e448d70ed61a356ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diveSpeed: 18
+  diveSpeed: 20
   waitTime: 1
   damage: 1
 --- !u!114 &8854847022435032799
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 1
-  dieAnimationLength: 0
+  dieAnimationLength: 0.4
 --- !u!1 &8624189645729721287
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6603869619893880285}
   - component: {fileID: 4129885080996418599}
+  - component: {fileID: 7244892774453119829}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -225,7 +226,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 8889585205050195683, guid: 37afed20dc0daaa4ab774aae767138f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -236,3 +237,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7244892774453119829
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8624189645729721287}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40a85ec16bb6bad4aa650de57692923b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
