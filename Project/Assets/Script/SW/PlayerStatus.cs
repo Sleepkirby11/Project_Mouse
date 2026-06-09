@@ -23,6 +23,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     public float maxInk;
     public float ink;
 
+    [Header("플레이어 특수 잉크 게이지")]
+    public float maxSpecialInk;
+    public float specialInk;
+
     [Header("플레이어 이동 속도")]
     public float speed;
 
@@ -38,6 +42,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     [SerializeField] private Gradient greenStance;
     [SerializeField] private Gradient blueStance;
     [SerializeField] private Gradient whiteStance;
+    public Stance currentStance;
 
 
     private Rigidbody2D rb;
@@ -59,11 +64,12 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
-
+    //상태 초기화
     void Start()
     {
         hp = maxHp;
         ink = maxInk;
+        specialInk = maxSpecialInk;
 
         isInvincible = false;
     }
@@ -197,7 +203,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         }
         return selectedGradient;
     }
-    void Die()
+
+    void Die()  //사망
     {
         Debug.Log("Die");
     }
