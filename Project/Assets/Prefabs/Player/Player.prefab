@@ -203,7 +203,19 @@ MonoBehaviour:
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6404161621859968284}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: ActionSkill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
@@ -445,6 +457,8 @@ MonoBehaviour:
   hp: 0
   maxInk: 5
   ink: 0
+  maxSpecialInk: 10
+  specialInk: 0
   speed: 5
   damage: 1
   jumpForce: 10
@@ -886,7 +900,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 0.0001
       minScalar: 5
       maxCurve:
         serializedVersion: 2
