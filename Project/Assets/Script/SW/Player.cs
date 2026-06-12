@@ -10,10 +10,13 @@ using static UnityEngine.GraphicsBuffer;
 /*
  * class Player: 플레이어의 기본 시스템
  * 플레이어의 이동, 점프, 체력 등을 구현
+ * 이동 방향에 따라 sprite 반전
  * 점프: 이단 점프 가능, 땅을 밟으면 카운트 초기화
  * 키 입력 시간에 따라 점프 높이 조절 가능
  * 이동은 linearVelocity
- * 공격은 Cursor에서
+ * 공격, 스킬은 Cursor에서
+ * 발판 생성은 groundCursor
+ * 스킬 발동 여부는 함수에서 구분
  * 
  */
 public class Player : MonoBehaviour
@@ -52,6 +55,9 @@ public class Player : MonoBehaviour
 
     //대시 준비 여부
     bool isDashReady;
+
+    private bool isChargeInk;
+    private bool isChargeSpecial;
 
     //마우스
     Transform mouse;
@@ -192,6 +198,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //대시 키 받아오기
     public void ActionDash(InputAction.CallbackContext context)
     {
         if (status.HP <= 0 || !status.CanMove)
@@ -232,6 +239,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //공격 키 받아오기
     public void ActionAttack(InputAction.CallbackContext context)
     {
         if (status.HP <= 0 || !status.CanMove)
@@ -263,6 +271,7 @@ public class Player : MonoBehaviour
 
     }
 
+    //키 입력 종료 시 UI의 상태에 따른 스탠스 변환
     public void ActionStance(InputAction.CallbackContext context)
     {
         if (status.HP <= 0 || !status.CanMove)
@@ -286,6 +295,23 @@ public class Player : MonoBehaviour
             trail.colorGradient = status.ChangeStance(status.currentStance);
             groundTrail.colorGradient = status.ChangeStance(status.currentStance);
             main.startColor = status.ChangeStance(status.currentStance);
+        }
+    }
+
+    //원 버튼으로 On/Off
+    public void ActionSkill(InputAction.CallbackContext context)
+    {
+        if (status.HP <= 0 || !status.CanMove)
+        {
+            return;
+        }
+
+        if (context.started)
+        {
+            if(!isSkill)
+                SkillBool(true);
+            else
+                SkillBool(false);
         }
     }
 
@@ -333,6 +359,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Dash 방향 미리보기 표시
     void DashLine()
     {
         dashLine.enabled = isDashReady;
@@ -384,6 +411,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //매개변수 상태와 무적 판정에 따른 Animation 전환
     void JumpAnimUpdate(bool isUpate)
     {
         if (!status.IsInvincible)
@@ -397,7 +425,13 @@ public class Player : MonoBehaviour
     {
         if (cursor.isMove && usedInk != cursor.lastLength)
         {
-            status.ink -= cursor.lastLength / 4;
+            //스킬 | 커서 | 일반 공격 종류 걸러내기
+            if (isSkill)
+                status.specialInk -= cursor.lastLength / 6;
+            else if(groundCursor.isMove)
+                status.specialInk -= cursor.lastLength / 8;
+            else
+                status.ink -= cursor.lastLength / 4;
             InkUIUpdate();
             usedInk = 0;
             cursor.lastLength = 0;
@@ -407,27 +441,113 @@ public class Player : MonoBehaviour
         {
             status.ink = 0;
             ActiveAttack(cursor);
+            return;
+        }
+        else if (status.specialInk <= 0)
+        {
+            status.specialInk = 0;
+            ActiveAttack(cursor);
+            return;
         }
     }
 
+    //매개변수 상태에 따른 particle, isSkill 변환
+    void SkillBool(bool Skill)
+    {
+        var main = particle.main;
+        isSkill = Skill;
+        if (Skill)
+        {
+            main.startLifetime = 0.25f;
+        }
+        else
+        {
+            main.startLifetime = 0;
+        }
+    }
+
+    //공격 발동
     void ActiveAttack(Cursor cursor)
     {
-        //스킬 발동, Collider 입히기
+        bool isGroundCursor = false;
+        if (cursor.gameObject.CompareTag("Ground"))
+        {
+            isGroundCursor = true;
+        }
+
+        //발동, Collider 입히기
         cursor.isMove = false;
         cursor.lifeTime = 0.5f;
+
+        //isTrigger = 여기선 공격인가에 대한 여부
         if (cursor.gameObject.GetComponent<EdgeCollider2D>().isTrigger == true)
         {
-            cursor.damage = status.damage;
+            DamageCalculate(cursor);
         }
+
         cursor.SetColliderPointsFromTrail();
-        status.ink = status.maxInk;
+
+        //잉크 초기화
+        if (isSkill || isGroundCursor)
+        {
+            status.specialInk = status.maxSpecialInk;
+        }
+        else
+        {
+            status.ink = status.maxInk;
+        }
         InkUIUpdate();
+
+        //후처리
+        if (isGroundCursor)
+            isGroundCursor = false;
+        if(isSkill)
+            SkillBool(false);
+    }
+
+    //공격 | 스킬의 대미지 계산 함수
+    void DamageCalculate(Cursor cursor)
+    {
+        float nowDamage = status.damage;
+        float calculateNum = 0;
+        float inkBonus;
         if (isSkill)
         {
             Debug.Log("스킬 발동");
+            if (status.currentStance == PlayerStatus.Stance.Red)
+            {
+                calculateNum += 1;
+            }
+            //잉크 소모량에 비례한 공격 보너스 계산
+            inkBonus = status.specialInk / status.maxSpecialInk;
+            switch (inkBonus)
+            {
+                case float f when f <= 1f && f > 0.8f:    //ink 잔여량 100%
+                    inkBonus = 1;
+                    break;
+                case float f when f <= 0.8f && f > 0.6f:
+                    inkBonus = 0.7f;
+                    break;
+                case float f when f <= 0.6f && f > 0.4f:
+                    inkBonus = 0.5f;
+                    break;
+                case float f when f <= 0.4f && f > 0.2f:
+                    inkBonus = 0.35f;
+                    break;
+                case float f when f <= 0.2f && f > 0:
+                    inkBonus = 0.2f;
+                    break;
+                case float f when f <= 0:
+                    inkBonus = 0.1f;
+                    break;
+            }
+            calculateNum += inkBonus;
+            nowDamage = nowDamage * calculateNum;
         }
+        cursor.damage = (int)nowDamage;
     }
 
+    //외부 참조가 가능하게 한 선 그리기 캔슬
     public void CursorCancle()
     {
         if (cursor.isMove == true)
@@ -436,6 +556,7 @@ public class Player : MonoBehaviour
             ActiveAttack(groundCursor);
     }
 
+    //Ink UI를 업데이트하는 함수
     void InkUIUpdate()
     {
         if (UI.Instance != null)
@@ -443,7 +564,7 @@ public class Player : MonoBehaviour
     }
 
 
-
+    //이동 함수
     void Move()
     {
         if (status.IsKnockbacked) //추가함
@@ -453,6 +574,7 @@ public class Player : MonoBehaviour
         rigid.linearVelocityX = inputVec.x;
     }
 
+    //넉백 상태 종료 후 처리 함수
     public void OnKnockbackEnd()
     {
         // 현재 키가 눌려있으면 그 값 그대로 복원, 안눌려있으면 0
