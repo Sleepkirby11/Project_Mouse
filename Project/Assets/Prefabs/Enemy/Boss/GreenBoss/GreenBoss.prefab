@@ -193,7 +193,6 @@ GameObject:
   - component: {fileID: 4792473616297398474}
   - component: {fileID: 4624539507042879024}
   - component: {fileID: 6311063857778916828}
-  - component: {fileID: 605276336016454692}
   m_Layer: 7
   m_Name: GreenBoss
   m_TagString: Enemy
@@ -310,7 +309,6 @@ MonoBehaviour:
   minY: -8.4
   maxY: 0
   shieldObject: {fileID: 1400492813834309669}
-  spiritPatternInterval: 15
   healAmountPerSpirit: 5
   spiritSpawnPoints:
   - {fileID: 9003603150043872871}
@@ -321,11 +319,25 @@ MonoBehaviour:
   detectRange: 4
   pushCooldown: 3
   pushForce: 60
-  lockDuration: 0.6
+  lockDuration: 0.65
   windPoolKey: BossWindBlast
   frogPoolKey: GreenBossFrog
   frogSpawnOffset: {x: 0, y: 4}
   frogPatternInterval: 10
+  flowerTrapPoolKey: FlowerTrap
+  flowerSpawnCount: 3
+  flowerSpawnInterval: 0.4
+  flowerPatternInterval: 12
+  flowerMinX: 45
+  flowerMaxX: 65
+  flowerMinGap: 2
+  flowerSpawnOffsetY: 0.7
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  finalEffectPrefab: {fileID: 4819108403631408140, guid: ffa440a0637c5d54abfc6b08286523e6, type: 3}
+  finalMonsterPrefab: {fileID: 0}
+  fadeOutDuration: 2
 --- !u!114 &4624539507042879024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,19 +366,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 10
   dieAnimationLength: 1
---- !u!114 &605276336016454692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3986874546270545098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a4bea26b5b6bec44b51e25a882ae4f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shieldObject: {fileID: 1400492813834309669}
 --- !u!1 &6280919845566060893
 GameObject:
   m_ObjectHideFlags: 0

@@ -146,14 +146,6 @@ public class FlowerTrap : MonoBehaviour
         {
             yield return new WaitForSeconds(dotInterval);
 
-            if (playerAnim != null)
-            {
-                playerAnim.speed = 1f;
-                playerAnim.SetTrigger("Hit");
-                yield return new WaitForSeconds(0.2f); // Hurt 애니 살짝 재생
-                playerAnim.speed = 0f;
-            }
-
             damageable.TakeDamage(dotDamage);
         }
     }
