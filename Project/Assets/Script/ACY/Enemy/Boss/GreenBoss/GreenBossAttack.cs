@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -40,12 +41,24 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     [SerializeField] private Vector2 frogSpawnOffset = new Vector2(0f, 4f); // 플레이어 위 오프셋
     [SerializeField] private float frogPatternInterval = 10f;
 
+    [Header("꽃 함정 설정")]
+    [SerializeField] private string flowerTrapPoolKey = "FlowerTrap"; // PoolingManager 키
+    [SerializeField] private int flowerSpawnCount = 3;                // 한 번에 소환할 꽃 개수
+    [SerializeField] private float flowerSpawnInterval = 0.4f;        // 꽃 사이 소환 간격(초)
+    [SerializeField] private float flowerPatternInterval = 12f;       // 패턴 반복 주기(초)
+    [SerializeField] private float flowerMinX = -8f;   // 소환 범위 최솟값
+    [SerializeField] private float flowerMaxX = 8f;    // 소환 범위 최댓값
+    [SerializeField] private float flowerMinGap = 2f;  // 꽃 사이 최소 간격
+    [SerializeField] private float flowerSpawnOffsetY = 0.6f;         // 꽃 오프셋
+    [SerializeField] private LayerMask groundLayer;
+
     private float currentPushCooldown = 0f;
     private bool isPushing = false; // 현재 밀어내는 패턴이 진행 중인지 체크
 
     // 코루틴 관리 변수
     private Coroutine birdRoutine;
     private Coroutine frogRoutine;
+    private Coroutine flowerRoutine;
 
     private int activeSpiritsCount = 0;       // 현재 살아있는 정령 수
     private float remainderHeal = 0f;         // 정수 회복을 위한 소수점 누적 변수
@@ -77,8 +90,9 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void Start()
     {
-        StartBirdAttack();
-        StartFrogAttack();
+        //StartBirdAttack();
+        //StartFrogAttack();
+        StartFlowerAttack();
     }
 
     private void Update()
@@ -301,6 +315,80 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             {
                 shieldObject.SetActive(false);
             }
+        }
+    }
+    public void StartFlowerAttack()
+    {
+        if (flowerRoutine == null)
+        {
+            flowerRoutine = StartCoroutine(SpawnFlowerRoutine());
+        }
+    }
+
+    public void StopFlowerAttack()
+    {
+        if (flowerRoutine != null)
+        {
+            StopCoroutine(flowerRoutine);
+            flowerRoutine = null;
+        }
+    }
+
+    private IEnumerator SpawnFlowerRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(flowerPatternInterval);
+
+            List<float> spawnXList = GetSpawnXPositions();
+
+            foreach (float x in spawnXList)
+            {
+                SpawnOneFlower(x);
+                yield return new WaitForSeconds(flowerSpawnInterval);
+            }
+        }
+    }
+    private List<float> GetSpawnXPositions()
+    {
+        List<float> positions = new List<float>();
+        int maxTry = 30; // 무한루프 방지
+
+        while (positions.Count < flowerSpawnCount && maxTry-- > 0)
+        {
+            float randomX = Random.Range(flowerMinX, flowerMaxX);
+
+            // 기존 위치들과 간격 체크
+            bool tooClose = false;
+            foreach (float existing in positions)
+            {
+                if (Mathf.Abs(randomX - existing) < flowerMinGap)
+                {
+                    tooClose = true;
+                    break;
+                }
+            }
+
+            if (!tooClose)
+                positions.Add(randomX);
+        }
+
+        return positions;
+    }
+    private void SpawnOneFlower(float x)
+    {
+        Vector2 rayOrigin = new Vector2(x, 10f);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 30f, groundLayer);
+
+        if (hit.collider == null) return;
+
+        Vector3 spawnPos = new Vector3(x, hit.point.y + flowerSpawnOffsetY, 0f);
+
+        GameObject flowerObj = PoolingManager.Instance.Get(flowerTrapPoolKey, spawnPos, Quaternion.identity);
+        if (flowerObj != null)
+        {
+            FlowerTrap trap = flowerObj.GetComponent<FlowerTrap>();
+            if (trap != null) trap.Init(flowerTrapPoolKey);
         }
     }
 
