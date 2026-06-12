@@ -52,6 +52,11 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     [SerializeField] private float flowerSpawnOffsetY = 0.6f;         // 꽃 오프셋
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("10% 페이즈")]
+    [SerializeField] private GameObject finalEffectPrefab;
+    [SerializeField] private GameObject finalMonsterPrefab;
+    [SerializeField] private float fadeOutDuration = 2f;
+
     private float currentPushCooldown = 0f;
     private bool isPushing = false; // 현재 밀어내는 패턴이 진행 중인지 체크
 
@@ -63,6 +68,8 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private int activeSpiritsCount = 0;       // 현재 살아있는 정령 수
     private float remainderHeal = 0f;         // 정수 회복을 위한 소수점 누적 변수
     private bool hasTriggeredSpiritPattern = false; // 체력 50% 이하 패턴 발동 체크
+    private bool hasTriggeredFinalPhase = false;
+    private SpriteRenderer sr;
     private EnemyStatus enemyStatus;
 
     // 플레이어 감지 관련 변수
@@ -71,6 +78,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
+        sr = GetComponentInChildren<SpriteRenderer>();
 
         if (shieldObject != null)
         {
@@ -391,7 +399,67 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             if (trap != null) trap.Init(flowerTrapPoolKey);
         }
     }
+    private IEnumerator FinalPhaseRoutine()
+    {
+        // 모든 패턴 정지
+        StopBirdAttack();
+        StopFrogAttack();
+        StopFlowerAttack();
 
+        // 페이드 아웃
+        yield return StartCoroutine(FadeRoutine(0f, fadeOutDuration));
+
+        if (finalEffectPrefab != null)
+        {
+            GameObject effect = Instantiate(finalEffectPrefab, transform.position, Quaternion.identity);
+            CastingSpell castingSpell = effect.GetComponent<CastingSpell>();
+
+            if (castingSpell != null)
+            {
+                castingSpell.Init(() =>
+                {
+                    // 마법진 끝나면 몬스터 소환
+                    if (finalMonsterPrefab != null)
+                    {
+                        Instantiate(finalMonsterPrefab, transform.position, Quaternion.identity);
+                    }
+                });
+            }
+            else
+            {
+                // 스크립트 없으면 그냥 바로 소환
+                if (finalMonsterPrefab != null)
+                {
+                    Instantiate(finalMonsterPrefab, transform.position, Quaternion.identity);
+                }
+            }
+        }
+
+        gameObject.SetActive(false);
+    }
+
+    private IEnumerator FadeRoutine(float targetAlpha, float duration)
+    {
+        if (sr == null)
+        {
+            yield break;
+        }
+
+        Color color = sr.color;
+        float startAlpha = color.a;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, targetAlpha, timer / duration);
+            sr.color = color;
+            yield return null;
+        }
+
+        color.a = targetAlpha;
+        sr.color = color;
+    }
     private void RestoreHealth(float amount)
     {
         remainderHeal += amount;
@@ -422,6 +490,15 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             {
                 hasTriggeredSpiritPattern = true;
                 StartSpiritAttack();
+            }
+        }
+        if (!hasTriggeredFinalPhase && status != null)
+        {
+            float hpRatio = status.GetHPRatio();
+            if (hpRatio > 0f && hpRatio <= 0.1f)
+            {
+                hasTriggeredFinalPhase = true;
+                StartCoroutine(FinalPhaseRoutine());
             }
         }
     }
