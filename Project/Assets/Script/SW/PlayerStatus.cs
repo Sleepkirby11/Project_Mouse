@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
+public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, IBindable
 {
     public enum Stance
     {
@@ -46,6 +47,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
     private bool isStunned; // 스턴 상태 여부
     private bool isPossessed; // 빙의 상태 여부
     private bool isInvincible; // 무적 상태 여부
+    private bool isBound; //속박 여부
     public bool IsPossessed => isPossessed;
     public bool IsKnockbacked => isKnockbacked;
     public bool IsInvincible => isInvincible;
@@ -69,7 +71,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         isInvincible = false;
     }
 
-    public bool CanMove => !isKnockbacked && !isStunned && !isPossessed; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
+    public bool CanMove => !isKnockbacked && !isStunned && !isPossessed && !isBound; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
 
     // IDamageable 인터페이스 구현을 통한 대미지 처리
     public void TakeDamage(int damage)
@@ -111,7 +113,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         {
             return;
         }
-
+        if (isBound)
+        {
+            return;
+        }
         if (gameObject.activeInHierarchy)
         {
             StartCoroutine(KnockbackRoutine(knockbackForce));
@@ -125,7 +130,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         {
             return;
         }
-
+        if (isBound)
+        {
+            return;
+        }
         if (gameObject.activeInHierarchy)
         {
             StartCoroutine(StunRoutine(duration));
@@ -169,6 +177,39 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable
         }
 
         Debug.Log(value ? "[PlayerStatus] 빙의 상태" : "[PlayerStatus] 빙의 해제");
+    }
+    public void ApplyBind(float duration) //속박
+    {
+        if (hp <= 0)
+        {
+            return;
+        }
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(BindRoutine(duration));
+        }
+    }
+    private IEnumerator BindRoutine(float duration)
+    {
+        isBound = true;
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = 0f;
+
+        Animator playerAnim = GetComponentInChildren<Animator>();
+        if (playerAnim != null)
+        {
+            playerAnim.SetBool("IsWalk", false);
+            playerAnim.SetBool("IsJump", false);
+            playerAnim.SetBool("IsFalling", false);
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        rb.gravityScale = 1f;
+        isBound = false;
+        rb.linearVelocityX = 0;
+
+        GetComponent<Player>().OnKnockbackEnd();
     }
 
     public void SetInvincible(bool value)   //무적
