@@ -590,6 +590,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1766277477}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &418364432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 418364433}
+  m_Layer: 7
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &418364433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418364432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.76, y: 2.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1565998970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,7 +753,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.34, y: -6.3999996, z: -10}
+  m_LocalPosition: {x: 54.25, y: -6.3999996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1018,7 +1049,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4599902366801354418, guid: 40fe4c95246ceb94f8e9c61def05b622, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 60.34
+      value: 54.25
       objectReference: {fileID: 0}
     - target: {fileID: 4599902366801354418, guid: 40fe4c95246ceb94f8e9c61def05b622, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1132,9 +1163,11 @@ GameObject:
   - component: {fileID: 1565998970}
   - component: {fileID: 1565998971}
   - component: {fileID: 1565998972}
-  m_Layer: 0
-  m_Name: KillerPlants
-  m_TagString: Untagged
+  - component: {fileID: 1565998974}
+  - component: {fileID: 1565998973}
+  m_Layer: 7
+  m_Name: KillerPlant
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1148,11 +1181,12 @@ Transform:
   m_GameObject: {fileID: 1565998969}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 57.2, y: -9.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1742592571}
+  - {fileID: 418364433}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1565998971
@@ -1228,6 +1262,51 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.3533752, y: 2.2647114}
   m_EdgeRadius: 0
+--- !u!114 &1565998973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565998969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1a7243e96aeb244858a9fe82c8341c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangedRange: 6
+  meleeRange: 1.8
+  walkSpeed: 2
+  runSpeed: 5
+  stopDistance: 1.2
+  runChance: 0.3
+  runDuration: 2
+  runCooldown: 5
+  rangedAttackChance: 0.4
+  playerTransform: {fileID: 0}
+  isFacingRight: 1
+  intent: 0
+  isAttacking: 0
+--- !u!114 &1565998974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565998969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53d6ad36d1635143918b627ddc844fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeDamage: 15
+  meleeRate: 1.2
+  meleeHitDelay: 0.4
+  projectilePoolKey: KillerPlantBullet
+  projectileSpeed: 6
+  rangedRate: 2
+  rangedFireDelay: 0.4
+  firePoint: {fileID: 418364433}
 --- !u!1 &1663646999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,7 +1482,7 @@ PrefabInstance:
       objectReference: {fileID: 1964608236}
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 60.34
+      value: 54.25
       objectReference: {fileID: 0}
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2469,7 +2548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[13].key
@@ -2480,6 +2559,10 @@ PrefabInstance:
       value: FlowerTrap
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
+      propertyPath: pools.Array.data[15].key
+      value: KillerPlantBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[13].prefab
       value: 
       objectReference: {fileID: 8575637050091287450, guid: 87b1f7a9dfbc8c94397eab93fc524554, type: 3}
@@ -2488,11 +2571,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8522541369801760802, guid: dd2fa82868fb53341be9317068664858, type: 3}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
+      propertyPath: pools.Array.data[15].prefab
+      value: 
+      objectReference: {fileID: 3739273753223816140, guid: 3ca2e0ac1e4212b4889002884040db14, type: 3}
+    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[13].initialSize
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[14].initialSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
+      propertyPath: pools.Array.data[15].initialSize
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6906194015661884017, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
@@ -2787,6 +2878,10 @@ PrefabInstance:
     - target: {fileID: 3986874546270545098, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
       propertyPath: m_Name
       value: GreenBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986874546270545098, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9003603150043872871, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
       propertyPath: m_LocalPosition.x
