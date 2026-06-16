@@ -9,7 +9,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         Red,
         Green,
         Blue,
-        white
+        White
     }
 
     [Header("플레이어 HP")]
@@ -149,7 +149,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isKnockbacked = true;
 
         //넉백 전 행동 캔슬
-        GetComponent<Player>().CursorCancle();
+        GetComponent<Player>().CancleCursor();
 
         // 순간 관성 제거 후 방패병의 충격량 대입
         rb.linearVelocity = Vector2.zero;
@@ -238,7 +238,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             case Stance.Blue:
                 selectedGradient = blueStance;
                 break;
-            case Stance.white:
+            case Stance.White:
                 selectedGradient = whiteStance;
                 break;
         }
