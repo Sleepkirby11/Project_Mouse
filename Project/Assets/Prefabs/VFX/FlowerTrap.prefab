@@ -166,3 +166,4 @@ MonoBehaviour:
   grownOffsetY: 0.7
   dotDamage: 1
   dotInterval: 0.5
+  flowerIdleTimeout: 5

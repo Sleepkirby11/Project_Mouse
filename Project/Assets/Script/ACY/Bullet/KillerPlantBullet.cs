@@ -8,7 +8,8 @@ public class KillerPlantBullet : MonoBehaviour
     public float lifetime = 4f;
 
     private Rigidbody2D rb;
-    private Collider2D col;   
+    private Collider2D col;
+    private SpriteRenderer sr;
     private Animator anim;    
     private float timer;
     private bool isDestroying;  // 중복 충돌 및 중복 소멸 방지용 플래그
@@ -17,6 +18,7 @@ public class KillerPlantBullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -48,12 +50,13 @@ public class KillerPlantBullet : MonoBehaviour
         }
     }
 
-    public void Launch(Vector2 dir, float speed)
+    public void Launch(float directionX, float speed)
     {
+        Vector2 dir = new Vector2(Mathf.Sign(directionX), 0f);
         rb.linearVelocity = dir * speed;
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        // 스프라이트 좌우 반전 
+        sr.flipX = directionX < 0f;
     }
 
     void OnTriggerEnter2D(Collider2D other)

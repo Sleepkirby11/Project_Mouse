@@ -118,20 +118,20 @@ public class KillerPlantAttack : MonoBehaviour
             return;
         }
 
-        Vector2 dir = ((Vector2)player.position - (Vector2)firePoint.position).normalized;
+        float dirX = player.position.x - firePoint.position.x;
 
-        // 플레이어가 발사위치보다 아래에 있다면
-        if (dir.y < 0f)
-        {
-            dir.y = 0f; // 0으로 고정
-            dir = dir.normalized;
-        }
         GameObject obj = PoolingManager.Instance.Get(projectilePoolKey, firePoint.position, Quaternion.identity);
-
         if (obj == null)
         {
             return;
         }
-        obj.GetComponent<KillerPlantBullet>()?.Launch(dir, projectileSpeed);
+
+        obj.GetComponent<KillerPlantBullet>()?.Launch(dirX, projectileSpeed);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (firePoint == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(firePoint.position, 0.2f);
     }
 }
