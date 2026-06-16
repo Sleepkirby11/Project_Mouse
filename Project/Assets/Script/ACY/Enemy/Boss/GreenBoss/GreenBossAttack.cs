@@ -5,9 +5,12 @@ using UnityEngine;
 /*
  * 공격패턴1 : 경고선 후 새를 세마리 소환하여 직선으로 돌진 
  * 공격패턴2 : 개구리를 플레이어 위에 소환하여 공격
- * 방어패턴 : 체력이 50% 미만이 되면 정령을 3체 소환(나비) 후 배리어 생성
+ * 공격패턴3 : 바닥에 플레이어를 속박하는 꽃 함정을 생성
+ * 방어패턴1 : 플레이어가 자신에게 근접할 시 바람을 일으켜 플레이어를 강하게 밀어냄
+ * 방어패턴2 : 체력이 50% 미만이 되면 정령을 3체 소환(나비) 후 배리어 생성
  * 배리어가 있는 동안 보스는 체력 회복 + 무적
  * 정령을 모두 삭제해야 배리어가 사라짐
+ * 공격패턴3 : 체력이 10% 미만이 되면 소환수(KillerPlant)를 소환하며 자신은 투명화상태 
  */
 
 public class GreenBossAttack : MonoBehaviour, IHitReaction
@@ -103,8 +106,8 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void Start()
     {
-        //StartBirdAttack();
-        //StartFrogAttack();
+        StartBirdAttack();
+        StartFrogAttack();
         StartFlowerAttack();
     }
 
@@ -128,6 +131,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         StopFrogAttack();
     }
 
+    // -----------------------새 패턴----------------------------
     public void StartBirdAttack()
     {
         if (birdRoutine == null)
@@ -172,6 +176,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         }
     }
 
+    //------------------바람 패턴----------------------
     private void CheckPlayerDistanceAndPushInstant()
     {
         if (playerTransform == null)
@@ -220,6 +225,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         isPushing = false;
     }
 
+    //------------------------정령 패턴-----------------------------
     public void StartSpiritAttack()
     {
         if (activeSpiritsCount > 0)
@@ -290,6 +296,27 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             }
         }
     }
+
+    // 정령이 죽었을 때 정령 스크립트에서 호출해 줄 콜백 함수
+    public void OnSpiritDestroyed()
+    {
+        activeSpiritsCount--;
+
+        // 모든 정령이 사라지면 무적 배리어 해제
+        if (activeSpiritsCount <= 0)
+        {
+            activeSpiritsCount = 0;
+            if (shieldObject != null)
+            {
+                shieldObject.SetActive(false);
+            }
+            if (bossAnim != null)
+            {
+                bossAnim.SetTrigger("Idle");
+            }
+        }
+    }
+    // --------------------------개구리 패턴-------------------------------
     public void StartFrogAttack()
     {
         if (frogRoutine == null)
@@ -323,25 +350,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         }
     }
 
-    // 정령이 죽었을 때 정령 스크립트에서 호출해 줄 콜백 함수
-    public void OnSpiritDestroyed()
-    {
-        activeSpiritsCount--;
-
-        // 모든 정령이 사라지면 무적 배리어 해제
-        if (activeSpiritsCount <= 0)
-        {
-            activeSpiritsCount = 0;
-            if (shieldObject != null)
-            {
-                shieldObject.SetActive(false);
-            }
-            if (bossAnim != null)
-            {
-                bossAnim.SetTrigger("Idle");
-            }
-        }
-    }
+    //----------------------꽃 트랩 패턴-------------------------
     public void StartFlowerAttack()
     {
         if (flowerRoutine == null)
@@ -424,18 +433,20 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             }
         }
     }
+    //-------------------------------마지막 소환수 패턴------------------------------------
     private IEnumerator FinalPhaseRoutine()
     {
-        isFinalPhase = true; //무적 
+        isFinalPhase = true; // 무적
 
         // 모든 패턴 정지
         StopBirdAttack();
         StopFrogAttack();
         StopFlowerAttack();
 
-        // 페이드 아웃
+        // 보스 투명화 페이드 아웃
         yield return StartCoroutine(FadeRoutine(0f, fadeOutDuration));
 
+        // 마법진 프리팹이 있다면 생성
         if (finalEffectPrefab != null)
         {
             GameObject effect = Instantiate(finalEffectPrefab, transform.position + Vector3.up * effectOffset, Quaternion.identity);
@@ -443,28 +454,56 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
             if (castingSpell != null)
             {
+                // 마법진 이펙트가 끝나는 타이밍에 소환수 소환
                 castingSpell.Init(() =>
                 {
-                    // 마법진 끝나면 몬스터 소환
-                    if (finalMonsterPrefab != null)
-                    {
-                        Instantiate(finalMonsterPrefab, transform.position, Quaternion.identity);
-                    }
+                    SpawnKillerPlant();
                 });
             }
             else
             {
-                // 스크립트 없으면 그냥 바로 소환
-                if (finalMonsterPrefab != null)
-                {
-                    Instantiate(finalMonsterPrefab, transform.position + Vector3.down * kpOffset, Quaternion.identity);
-                }
+                // 마법진 스크립트가 없다면 즉시 소환
+                SpawnKillerPlant();
             }
         }
+        else
+        {
+            // 마법진 프리팹 자체가 없다면 즉시 소환
+            SpawnKillerPlant();
+        }
 
+        // 보스 제거
+        yield return new WaitForSeconds(0.1f);
         gameObject.SetActive(false);
     }
 
+    private void SpawnKillerPlant()
+    {
+        if (finalMonsterPrefab == null)
+        {
+            return;
+        }
+
+        // 소환수(KillerPlant) 생성
+        GameObject spawnedKP = Instantiate(finalMonsterPrefab, transform.position + Vector3.down * kpOffset, Quaternion.identity);
+
+        // 소환수의 EnemyStatus 보스 복귀 함수 연결!
+        if (spawnedKP.TryGetComponent(out EnemyStatus kpStatus))
+        {
+            kpStatus.OnEnemyDeath += RevealBossAfterKP;
+        }
+    }
+
+    // 보스 복귀 함수
+    public void RevealBossAfterKP()
+    {
+        gameObject.SetActive(true);
+        isFinalPhase = false;
+        StartCoroutine(FadeRoutine(1f, 1f));
+
+        StartBirdAttack();
+        StartFlowerAttack();
+    }
     private IEnumerator FadeRoutine(float targetAlpha, float duration)
     {
         if (sr == null)

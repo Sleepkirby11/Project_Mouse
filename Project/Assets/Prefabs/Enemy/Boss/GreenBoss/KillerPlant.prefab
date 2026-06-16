@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4403449614437879116}
   - component: {fileID: 1918042987880198255}
   - component: {fileID: 3519355393474639022}
+  - component: {fileID: 6758516219791491583}
   m_Layer: 7
   m_Name: KillerPlant
   m_TagString: Enemy
@@ -157,7 +158,7 @@ MonoBehaviour:
   meleeRate: 1.2
   meleeHitDelay: 0.4
   projectilePoolKey: KillerPlantBullet
-  projectileSpeed: 6
+  projectileSpeed: 13
   rangedRate: 2
   rangedFireDelay: 0.4
   firePoint: {fileID: 1481009711472971593}
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangedRange: 6
-  meleeRange: 1.8
+  meleeRange: 3
   walkSpeed: 2
   runSpeed: 5
   stopDistance: 1.2
@@ -186,6 +187,20 @@ MonoBehaviour:
   isFacingRight: 1
   intent: 0
   isAttacking: 0
+--- !u!114 &6758516219791491583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3875869934082963179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 10
+  dieAnimationLength: 1
 --- !u!1 &7678791527145004352
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +212,7 @@ GameObject:
   - component: {fileID: 3820440370446299148}
   - component: {fileID: 1197019469839752787}
   - component: {fileID: 3738800141059258251}
+  - component: {fileID: 2794729463767656367}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -296,3 +312,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2794729463767656367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7678791527145004352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528073851c0e9144596a84380b1628d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

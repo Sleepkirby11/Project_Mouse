@@ -2646,15 +2646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986874546270545098, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4792473616297398474, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: finalMonsterPrefab
-      value: 
-      objectReference: {fileID: 3875869934082963179, guid: a1fd9e17d11c9ef41bb311a31b09180e, type: 3}
-    - target: {fileID: 4792473616297398474, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: healPerReturnedSpirit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9003603150043872871, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
       propertyPath: m_LocalPosition.x

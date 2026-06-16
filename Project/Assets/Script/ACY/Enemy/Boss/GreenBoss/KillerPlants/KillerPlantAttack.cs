@@ -1,20 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class KillerPlantAttack : MonoBehaviour
 {
-    [Header("���� ����")]
+    [Header("근접 공격")]
     public int meleeDamage = 15;
     public float meleeRate = 1.2f;
-    public float meleeHitDelay = 0.4f;
 
-    [Header("���Ÿ� ����")]
+    [Header("원거리 공격")]
     public string projectilePoolKey = "KillerPlantBullet";
     public float projectileSpeed = 6f;
     public float rangedRate = 2f;
     public float rangedFireDelay = 0.4f;
 
-    [Header("�߻� ��ġ")]
+    [Header("발사 위치")]
     [SerializeField] private Transform firePoint;
 
     private KillerPlantMove movement;
@@ -51,16 +50,25 @@ public class KillerPlantAttack : MonoBehaviour
 
     void Update()
     {
+        // 쿨타임 계산
+        if (meleeTimer > 0f)
+        {
+            meleeTimer -= Time.deltaTime;
+        }
+        if (rangedTimer > 0f)
+        {
+            rangedTimer -= Time.deltaTime;
+        }
+        // 공격 중이라면 아래의 공격 트리거 조건문들을 실행하지 않고 리턴
         if (actionRunning || player == null)
         {
             return;
         }
-        meleeTimer = Mathf.Max(meleeTimer - Time.deltaTime, -1f);
-        rangedTimer = Mathf.Max(rangedTimer - Time.deltaTime, -1f);
 
+        // 공격 발동 조건
         if (movement.intent == PlantIntent.InMeleeRange && meleeTimer <= 0f)
         {
-            StartCoroutine(DoMelee());
+            DoMelee();
         }
         else if (movement.intent == PlantIntent.InRangedRange && rangedTimer <= 0f)
         {
@@ -68,28 +76,38 @@ public class KillerPlantAttack : MonoBehaviour
         }
     }
 
-    IEnumerator DoMelee()
+    void DoMelee()
     {
         actionRunning = true;
         movement.isAttacking = true;
         meleeTimer = meleeRate;
 
         anim.SetTrigger("Attack");
-        yield return new WaitForSeconds(meleeHitDelay);
+    }
 
-        if (player != null)
+    public void OnMeleeHit() // 애니메이션 이벤트로 호출
+    {
+        if (player == null)
         {
-            float dist = Vector2.Distance(transform.position, player.position);
-            if (dist <= meleeRange)
-            {
-                player.GetComponent<IDamageable>()?.TakeDamage(meleeDamage);
-            }
+            return;
         }
 
-        yield return new WaitForSeconds(0.3f);
+        float dist = Vector2.Distance(transform.position, player.position);
+        if (dist <= meleeRange)
+        {
+            player.GetComponent<IDamageable>()?.TakeDamage(meleeDamage);
+        }
+    }
 
-        movement.isAttacking = false;
+    public void OnMeleeEnd()
+    {
+        movement.isAttacking = false; 
         actionRunning = false;
+
+        if (movement != null)
+        {
+            movement.intent = PlantIntent.Approach;
+        }
     }
 
     IEnumerator DoRanged()
@@ -119,7 +137,6 @@ public class KillerPlantAttack : MonoBehaviour
         }
 
         float dirX = player.position.x - firePoint.position.x;
-
         GameObject obj = PoolingManager.Instance.Get(projectilePoolKey, firePoint.position, Quaternion.identity);
         if (obj == null)
         {
@@ -127,11 +144,5 @@ public class KillerPlantAttack : MonoBehaviour
         }
 
         obj.GetComponent<KillerPlantBullet>()?.Launch(dirX, projectileSpeed);
-    }
-    private void OnDrawGizmosSelected()
-    {
-        if (firePoint == null) return;
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(firePoint.position, 0.2f);
     }
 }
