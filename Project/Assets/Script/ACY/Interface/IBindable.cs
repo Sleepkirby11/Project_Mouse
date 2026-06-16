@@ -1,4 +1,4 @@
-public interface IBindable
+﻿public interface IBindable
 {
     void ApplyBind(float duration);
 }

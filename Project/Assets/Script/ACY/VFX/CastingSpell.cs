@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 public class CastingSpell : MonoBehaviour
@@ -12,7 +12,7 @@ public class CastingSpell : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // ¾Ö´Ï¸ÞÀÌ¼Ç ¸¶Áö¸· ÇÁ·¹ÀÓ¿¡ ÀÌº¥Æ®·Î È£Ãâ
+    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ È£ï¿½ï¿½
     public void OnEffectEnd()
     {
         onComplete?.Invoke();

@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
-    [Header("ÀÌµ¿ ¼³Á¤")]
+    [Header("ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float minfallSpeed = 6f;
     [SerializeField] private float maxfallSpeed = 10f;
 
-    [Header("µ¥¹ÌÁö")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private int damage = 1;
 
     float fallSpeed;

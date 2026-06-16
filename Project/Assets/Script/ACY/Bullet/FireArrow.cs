@@ -1,21 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class FireArrow : MonoBehaviour, IDamageable
 {
-    [Header("ÀÌµ¿ ¼³Á¤")]
+    [Header("ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½")]
     public float speed = 8f;
     public float rotateSpeed = 180f;
     public float lifeTime = 6f;
 
-    [Header("µ¥¹ÌÁö")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public int damage = 1;
 
-    [Header("Æø¹ß ¼³Á¤")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     public float bombDuration = 0.3f;
     public float bombSound = 2f;
 
-    [Header("È¿°úÀ½")]
+    [Header("È¿ï¿½ï¿½ï¿½ï¿½")]
     public AudioClip flightSound;
     public AudioClip explosionSound;
 
@@ -25,8 +25,8 @@ public class FireArrow : MonoBehaviour, IDamageable
     private Animator anim;
     private Collider2D col;
     private bool isExploding = false;
-    private float angleOffset = 0f;    // °¢µµ ¿ÀÇÁ¼Â (3¿¬¹ß °¢µµ Â÷ÀÌ)
-    private bool isHoming = true; //À¯µµ ¿©ºÎ
+    private float angleOffset = 0f;    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    private bool isHoming = true; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private const string POOL_KEY = "RedBossArrow";
 
@@ -63,7 +63,7 @@ public class FireArrow : MonoBehaviour, IDamageable
         //}
     }
 
-    // ¹ß»ç ½Ã ÃÊ±âÈ­
+    // ï¿½ß»ï¿½ ï¿½ï¿½ ï¿½Ê±ï¿½È­
     public void Init(float angleOffset = 0f, bool enableHoming = true)
     {
         this.angleOffset = angleOffset;

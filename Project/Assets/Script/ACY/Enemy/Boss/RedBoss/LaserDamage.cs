@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class LaserDamage : MonoBehaviour
 {
@@ -6,7 +6,7 @@ public class LaserDamage : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        // º¸½º´Â ¹«½Ã
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (collision.GetComponent<RedBossAttack>() != null)
         {
             return;
