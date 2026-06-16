@@ -86,6 +86,26 @@ public class UI : MonoBehaviour
         UpdateInkBar(amount);
     }
 
+    public void ChangeStance(int amount)
+    {
+        PlayerStatus player = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
+        switch (amount)
+        {
+            case 0:
+                player.currentStance = PlayerStatus.Stance.White;
+                break;
+            case 1:
+                player.currentStance = PlayerStatus.Stance.Red;
+                break;
+            case 2:
+                player.currentStance = PlayerStatus.Stance.Blue;
+                break;
+            case 3:
+                player.currentStance = PlayerStatus.Stance.Green;
+                break;
+        }
+    }
+
     private void UpdateInkBar(float amount)
     {
         if (inkSlider != null) inkSlider.value = amount;
