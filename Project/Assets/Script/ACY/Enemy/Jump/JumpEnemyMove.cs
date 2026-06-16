@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 /*
  * 점프형 적
  * 평소엔 멈춰있음
@@ -52,7 +52,7 @@ public class JumpEnemyMove : MonoBehaviour
     {
         if (playerTransform == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {
                 playerTransform = player.transform;

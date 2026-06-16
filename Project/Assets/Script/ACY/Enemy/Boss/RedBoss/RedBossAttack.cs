@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -247,7 +247,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         yield return new WaitForSeconds(0.5f); 
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindWithTag("Player");
         if (player == null)
         {
             yield break;

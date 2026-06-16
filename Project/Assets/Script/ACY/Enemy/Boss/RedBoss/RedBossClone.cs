@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class RedBossClone : MonoBehaviour, IDamageable
 {
@@ -33,7 +33,7 @@ public class RedBossClone : MonoBehaviour, IDamageable
 
         if (playerTransform == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {
                 playerTransform = player.transform;

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class FireArrow : MonoBehaviour, IDamageable
@@ -73,7 +73,7 @@ public class FireArrow : MonoBehaviour, IDamageable
 
         if (isHoming)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {
                 target = player.transform;

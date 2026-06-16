@@ -61,7 +61,6 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     [SerializeField] private GameObject finalEffectPrefab;
     [SerializeField] private GameObject finalMonsterPrefab;
     [SerializeField] private float effectOffset = 2f;
-    [SerializeField] private float kpOffset = 2f;
     [SerializeField] private float fadeOutDuration = 2f;
 
     private float currentPushCooldown = 0f;
@@ -485,9 +484,9 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         }
 
         // 소환수(KillerPlant) 생성
-        GameObject spawnedKP = Instantiate(finalMonsterPrefab, transform.position + Vector3.down * kpOffset, Quaternion.identity);
+        GameObject spawnedKP = Instantiate(finalMonsterPrefab, transform.position, Quaternion.identity);
 
-        // 소환수의 EnemyStatus 보스 복귀 함수 연결!
+        // 소환수의 EnemyStatus 보스 복귀 함수 연결
         if (spawnedKP.TryGetComponent(out EnemyStatus kpStatus))
         {
             kpStatus.OnEnemyDeath += RevealBossAfterKP;
