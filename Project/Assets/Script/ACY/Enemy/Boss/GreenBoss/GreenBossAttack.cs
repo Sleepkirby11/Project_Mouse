@@ -5,9 +5,12 @@ using UnityEngine;
 /*
  * 공격패턴1 : 경고선 후 새를 세마리 소환하여 직선으로 돌진 
  * 공격패턴2 : 개구리를 플레이어 위에 소환하여 공격
- * 방어패턴 : 체력이 50% 미만이 되면 정령을 3체 소환(나비) 후 배리어 생성
+ * 공격패턴3 : 바닥에 플레이어를 속박하는 꽃 함정을 생성
+ * 방어패턴1 : 플레이어가 자신에게 근접할 시 바람을 일으켜 플레이어를 강하게 밀어냄
+ * 방어패턴2 : 체력이 50% 미만이 되면 정령을 3체 소환(나비) 후 배리어 생성
  * 배리어가 있는 동안 보스는 체력 회복 + 무적
  * 정령을 모두 삭제해야 배리어가 사라짐
+ * 공격패턴3 : 체력이 10% 미만이 되면 소환수(KillerPlant)를 소환하며 자신은 투명화상태 
  */
 
 public class GreenBossAttack : MonoBehaviour, IHitReaction
@@ -22,7 +25,9 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     [Header("정령 소환 보호막 설정")]
     [SerializeField] private GameObject shieldObject;     // 보스 자식 배리어 오브젝트
-    [SerializeField] private int healAmountPerSpirit = 5; // 정령 1마리당 초당 회복량
+    [SerializeField] private int healPerReturnedSpirit = 20; // 귀환 정령 1마리당 회복량
+    [SerializeField] private float castingDuration = 1f;     // Cast 애니메이션 길이
+    private Animator bossAnim;
 
     [SerializeField] private Transform[] spiritSpawnPoints;
 
@@ -55,6 +60,8 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     [Header("10% 페이즈")]
     [SerializeField] private GameObject finalEffectPrefab;
     [SerializeField] private GameObject finalMonsterPrefab;
+    [SerializeField] private float effectOffset = 2f;
+    [SerializeField] private float kpOffset = 2f;
     [SerializeField] private float fadeOutDuration = 2f;
 
     private float currentPushCooldown = 0f;
@@ -66,9 +73,9 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private Coroutine flowerRoutine;
 
     private int activeSpiritsCount = 0;       // 현재 살아있는 정령 수
-    private float remainderHeal = 0f;         // 정수 회복을 위한 소수점 누적 변수
     private bool hasTriggeredSpiritPattern = false; // 체력 50% 이하 패턴 발동 체크
     private bool hasTriggeredFinalPhase = false;
+    private bool isFinalPhase = false; // 마지막 패턴때 무적 플래그
     private SpriteRenderer sr;
     private EnemyStatus enemyStatus;
 
@@ -79,6 +86,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         enemyStatus = GetComponent<EnemyStatus>();
         sr = GetComponentInChildren<SpriteRenderer>();
+        bossAnim = GetComponentInChildren<Animator>();
 
         if (shieldObject != null)
         {
@@ -98,18 +106,13 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void Start()
     {
-        //StartBirdAttack();
-        //StartFrogAttack();
+        StartBirdAttack();
+        StartFrogAttack();
         StartFlowerAttack();
     }
 
     private void Update()
     {
-        if (activeSpiritsCount > 0 && enemyStatus != null)
-        {
-            float totalHeal = healAmountPerSpirit * activeSpiritsCount * Time.deltaTime;
-            RestoreHealth(totalHeal);
-        }
 
         if (currentPushCooldown > 0f)
         {
@@ -128,6 +131,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         StopFrogAttack();
     }
 
+    // -----------------------새 패턴----------------------------
     public void StartBirdAttack()
     {
         if (birdRoutine == null)
@@ -172,6 +176,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         }
     }
 
+    //------------------바람 패턴----------------------
     private void CheckPlayerDistanceAndPushInstant()
     {
         if (playerTransform == null)
@@ -220,63 +225,98 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         isPushing = false;
     }
 
+    //------------------------정령 패턴-----------------------------
     public void StartSpiritAttack()
     {
         if (activeSpiritsCount > 0)
         {
             return;
         }
-        int spiritCount = spiritPoolKeys.Length;
-        activeSpiritsCount = spiritCount;
-        remainderHeal = 0f;
+        StartCoroutine(SpiritAttackRoutine());
+    }
+
+    private IEnumerator SpiritAttackRoutine()
+    {
+        // Cast 애니메이션
+        if (bossAnim != null)
+        {
+            bossAnim.SetTrigger("Cast");
+        }
+
+        yield return new WaitForSeconds(castingDuration);
+
+        // 9마리 소환 (각 타입 3마리씩)
+        activeSpiritsCount = spiritPoolKeys.Length * 3; // 9
 
         if (shieldObject != null)
         {
             shieldObject.SetActive(true);
         }
 
-        bool[] usedIndices = new bool[spiritSpawnPoints.Length];
-
-        for (int i = 0; i < spiritCount; i++)
+        for (int i = 0; i < spiritPoolKeys.Length; i++)
         {
-            Vector3 spawnPosition = transform.position;
-
-            if (spiritSpawnPoints.Length > 0)
+            for (int j = 0; j < 3; j++)
             {
-                if (spiritSpawnPoints.Length >= spiritCount)
-                {
-                    int randomIndex;
-                    do
-                    { 
-                        randomIndex = Random.Range(0, spiritSpawnPoints.Length);
-                    }while (usedIndices[randomIndex]);
+                Vector3 spawnPos = spiritSpawnPoints.Length > 0
+                    ? spiritSpawnPoints[Random.Range(0, spiritSpawnPoints.Length)].position
+                    : transform.position;
 
-                    usedIndices[randomIndex] = true;
-                    spawnPosition = spiritSpawnPoints[randomIndex].position;
-                }
-                else
+                GameObject spiritObj = PoolingManager.Instance.Get(spiritPoolKeys[i], spawnPos, Quaternion.identity);
+                if (spiritObj != null)
                 {
-                    spawnPosition = spiritSpawnPoints[i % spiritSpawnPoints.Length].position;
+                    BossSpirit spirit = spiritObj.GetComponent<BossSpirit>();
+                    if (spirit != null)
+                    {
+                        spirit.Init(this, (BossSpirit.SpiritType)i, transform);
+                    }
                 }
-            }
-
-            string currentSpiritKey = spiritPoolKeys[i];
-            GameObject spiritObj = PoolingManager.Instance.Get(currentSpiritKey, spawnPosition, Quaternion.identity);
-
-            if (spiritObj != null)
-            {
-                BossSpirit spirit = spiritObj.GetComponent<BossSpirit>();
-                if (spirit != null)
-                {
-                    spirit.Init(this, (BossSpirit.SpiritType)i);
-                }
-            }
-            else
-            {
-                Debug.LogError($"정령 소환 실패");
             }
         }
     }
+    public void OnSpiritReturned()
+    {
+        // 귀환한 정령 수 비례 회복
+        if (enemyStatus != null)
+        {
+            enemyStatus.Heal(healPerReturnedSpirit);
+        }
+
+        activeSpiritsCount--;
+
+        if (activeSpiritsCount <= 0)
+        {
+            activeSpiritsCount = 0;
+            if (shieldObject != null)
+            {
+                shieldObject.SetActive(false);
+            }
+            if (bossAnim != null)
+            {
+                bossAnim.SetTrigger("Idle"); // Idle 복귀
+            }
+        }
+    }
+
+    // 정령이 죽었을 때 정령 스크립트에서 호출해 줄 콜백 함수
+    public void OnSpiritDestroyed()
+    {
+        activeSpiritsCount--;
+
+        // 모든 정령이 사라지면 무적 배리어 해제
+        if (activeSpiritsCount <= 0)
+        {
+            activeSpiritsCount = 0;
+            if (shieldObject != null)
+            {
+                shieldObject.SetActive(false);
+            }
+            if (bossAnim != null)
+            {
+                bossAnim.SetTrigger("Idle");
+            }
+        }
+    }
+    // --------------------------개구리 패턴-------------------------------
     public void StartFrogAttack()
     {
         if (frogRoutine == null)
@@ -310,21 +350,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         }
     }
 
-    // 정령이 죽었을 때 정령 스크립트에서 호출해 줄 콜백 함수
-    public void OnSpiritDestroyed()
-    {
-        activeSpiritsCount--;
-
-        // 모든 정령이 사라지면 무적 배리어 해제
-        if (activeSpiritsCount <= 0)
-        {
-            activeSpiritsCount = 0;
-            if (shieldObject != null)
-            {
-                shieldObject.SetActive(false);
-            }
-        }
-    }
+    //----------------------꽃 트랩 패턴-------------------------
     public void StartFlowerAttack()
     {
         if (flowerRoutine == null)
@@ -378,7 +404,9 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             }
 
             if (!tooClose)
+            {
                 positions.Add(randomX);
+            }
         }
 
         return positions;
@@ -388,7 +416,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         Vector2 rayOrigin = new Vector2(x, 10f);
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 30f, groundLayer);
 
-        if (hit.collider == null) return;
+        if (hit.collider == null)
+        {
+            return;
+        }
 
         Vector3 spawnPos = new Vector3(x, hit.point.y + flowerSpawnOffsetY, 0f);
 
@@ -396,48 +427,83 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         if (flowerObj != null)
         {
             FlowerTrap trap = flowerObj.GetComponent<FlowerTrap>();
-            if (trap != null) trap.Init(flowerTrapPoolKey);
+            if (trap != null)
+            {
+                trap.Init(flowerTrapPoolKey);
+            }
         }
     }
+    //-------------------------------마지막 소환수 패턴------------------------------------
     private IEnumerator FinalPhaseRoutine()
     {
+        isFinalPhase = true; // 무적
+
         // 모든 패턴 정지
         StopBirdAttack();
         StopFrogAttack();
         StopFlowerAttack();
 
-        // 페이드 아웃
+        // 보스 투명화 페이드 아웃
         yield return StartCoroutine(FadeRoutine(0f, fadeOutDuration));
 
+        // 마법진 프리팹이 있다면 생성
         if (finalEffectPrefab != null)
         {
-            GameObject effect = Instantiate(finalEffectPrefab, transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(finalEffectPrefab, transform.position + Vector3.up * effectOffset, Quaternion.identity);
             CastingSpell castingSpell = effect.GetComponent<CastingSpell>();
 
             if (castingSpell != null)
             {
+                // 마법진 이펙트가 끝나는 타이밍에 소환수 소환
                 castingSpell.Init(() =>
                 {
-                    // 마법진 끝나면 몬스터 소환
-                    if (finalMonsterPrefab != null)
-                    {
-                        Instantiate(finalMonsterPrefab, transform.position, Quaternion.identity);
-                    }
+                    SpawnKillerPlant();
                 });
             }
             else
             {
-                // 스크립트 없으면 그냥 바로 소환
-                if (finalMonsterPrefab != null)
-                {
-                    Instantiate(finalMonsterPrefab, transform.position, Quaternion.identity);
-                }
+                // 마법진 스크립트가 없다면 즉시 소환
+                SpawnKillerPlant();
             }
         }
+        else
+        {
+            // 마법진 프리팹 자체가 없다면 즉시 소환
+            SpawnKillerPlant();
+        }
 
+        // 보스 제거
+        yield return new WaitForSeconds(0.1f);
         gameObject.SetActive(false);
     }
 
+    private void SpawnKillerPlant()
+    {
+        if (finalMonsterPrefab == null)
+        {
+            return;
+        }
+
+        // 소환수(KillerPlant) 생성
+        GameObject spawnedKP = Instantiate(finalMonsterPrefab, transform.position + Vector3.down * kpOffset, Quaternion.identity);
+
+        // 소환수의 EnemyStatus 보스 복귀 함수 연결!
+        if (spawnedKP.TryGetComponent(out EnemyStatus kpStatus))
+        {
+            kpStatus.OnEnemyDeath += RevealBossAfterKP;
+        }
+    }
+
+    // 보스 복귀 함수
+    public void RevealBossAfterKP()
+    {
+        gameObject.SetActive(true);
+        isFinalPhase = false;
+        StartCoroutine(FadeRoutine(1f, 1f));
+
+        StartBirdAttack();
+        StartFlowerAttack();
+    }
     private IEnumerator FadeRoutine(float targetAlpha, float duration)
     {
         if (sr == null)
@@ -460,21 +526,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         color.a = targetAlpha;
         sr.color = color;
     }
-    private void RestoreHealth(float amount)
-    {
-        remainderHeal += amount;
-        int healToInt = Mathf.FloorToInt(remainderHeal);
-
-        if (healToInt > 0)
-        {
-            remainderHeal -= healToInt;
-            enemyStatus.Heal(healToInt); 
-        }
-    }
 
     public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
     {
-        if (activeSpiritsCount > 0)
+        if (activeSpiritsCount > 0 || isFinalPhase)
         {
             return true; // 대미지 무효
         }

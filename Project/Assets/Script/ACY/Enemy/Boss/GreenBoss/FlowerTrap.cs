@@ -27,11 +27,15 @@ public class FlowerTrap : MonoBehaviour
     [SerializeField] private int dotDamage = 1;        // 틱당 데미지
     [SerializeField] private float dotInterval = 0.5f;
 
+    [Header("꽃 대기 설정")]
+    [SerializeField] private float flowerIdleTimeout = 5f;
+
     // PoolingManager 반납용 키 (Init()에서 받음)
     private string myPoolKey;
 
     private Animator anim;
     private bool isDetecting = false;
+    private bool isReturning = false;
     private GameObject lockIconInstance;
 
     // 애니메이션 State 
@@ -42,6 +46,7 @@ public class FlowerTrap : MonoBehaviour
     private const string S_VANISH = "vanish";
     private const string S_LOCK = "Lock";
     private const string S_LOCKOFF = "LockOff";
+    private const string S_FLOWERVANISH = "flowerVanish"; // 꽃 상태에서 사라짐
 
     private void Awake()
     {
@@ -64,6 +69,20 @@ public class FlowerTrap : MonoBehaviour
         StartCoroutine(BloomSequence());
     }
 
+    private IEnumerator VanishSequence(bool isFlower = false)
+    {
+        if (isReturning)
+        {
+            yield break;
+        }
+        isReturning = true;
+
+        string vanishClip = isFlower ? S_FLOWERVANISH : S_VANISH;
+        anim.Play(vanishClip);
+        yield return new WaitForSeconds(GetClipLength(vanishClip));
+        ReturnToPool();
+    }
+
     // ────────────────────────────────────────────
     // 시퀀스
     // ────────────────────────────────────────────
@@ -77,6 +96,15 @@ public class FlowerTrap : MonoBehaviour
         // 꽃 Idle — 감지 시작
         anim.Play(S_FLOWERIDL);
         isDetecting = true;
+
+        yield return new WaitForSeconds(flowerIdleTimeout);
+
+        // 아직 감지 중이면 꽃 상태로 사라짐
+        if (isDetecting)
+        {
+            isDetecting = false;
+            StartCoroutine(VanishSequence(true));
+        }
     }
 
     private IEnumerator TriggerSequence(Transform playerTransform)

@@ -4,6 +4,7 @@ using UnityEngine;
 public class BossSpirit : MonoBehaviour, IHitReaction
 {
     public enum SpiritType { Green, Mint, YellowGreen}
+    public enum SpiritState { Roaming, Returning }
 
     [Header("정령 타입")]
     [SerializeField] private SpiritType spiritType;
@@ -21,6 +22,9 @@ public class BossSpirit : MonoBehaviour, IHitReaction
 
     [Header("소환 연출 설정")] //소환 후 무적 시간
     [SerializeField] private float spawnInvincibleTime = 1.5f;
+    [SerializeField] private float roamDuration = 8f;   // 배회 시간
+    [SerializeField] private float returnSpeed = 6f;    // 귀환 속도
+    [SerializeField] private float returnArrivalDistance = 0.3f;
 
     [Header("페이드 설정")]
     [SerializeField] private float fadeTime = 1f;
@@ -30,6 +34,9 @@ public class BossSpirit : MonoBehaviour, IHitReaction
     private EnemyStatus enemyStatus;
     private bool isDead = false;
     private float invincibleTimer = 0f; //무적 타이머
+    private float roamTimer;
+    private SpiritState state = SpiritState.Roaming;
+    private Transform bossTransform;
 
     private Vector3 currentTargetPosition; // 현재 날아가고 있는 목적지
     private float waveTimer;
@@ -51,10 +58,23 @@ public class BossSpirit : MonoBehaviour, IHitReaction
             invincibleTimer -= Time.deltaTime;
         }
 
-        RoamAroundMap();
+        if (state == SpiritState.Roaming)
+        {
+            roamTimer -= Time.deltaTime;
+            RoamAroundMap();
+
+            if (roamTimer <= 0f)
+            {
+                state = SpiritState.Returning;
+            }
+        }
+        else if (state == SpiritState.Returning)
+        {
+            ReturnToBoss();
+        }
     }
 
-    public void Init(GreenBossAttack attack, SpiritType type)
+    public void Init(GreenBossAttack attack, SpiritType type, Transform boss)
     {
         bossAttack = attack;
         spiritType = type;
@@ -76,6 +96,10 @@ public class BossSpirit : MonoBehaviour, IHitReaction
         {
             enemyStatus.Heal(9999);
         }
+
+        bossTransform = boss;
+        state = SpiritState.Roaming;
+        roamTimer = roamDuration;
     }
 
     private void SetNewRandomTarget()
@@ -181,6 +205,42 @@ public class BossSpirit : MonoBehaviour, IHitReaction
         else
         {
             gameObject.SetActive(false);
+        }
+    }
+    private void ReturnToBoss()
+    {
+        if (bossTransform == null)
+        {
+            return;
+        }
+
+        Vector3 dir = (bossTransform.position - transform.position).normalized;
+
+        // 좌우 반전
+        if (dir.x > 0.05f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (dir.x < -0.05f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, bossTransform.position, returnSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, bossTransform.position) <= returnArrivalDistance)
+        {
+            // 보스에게 귀환 보고
+            bossAttack?.OnSpiritReturned();
+
+            if (myPoolKey != null)
+            {
+                PoolingManager.Instance.Return(myPoolKey, gameObject);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

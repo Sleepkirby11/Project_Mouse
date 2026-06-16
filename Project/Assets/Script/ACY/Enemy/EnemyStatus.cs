@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour, IDamageable
@@ -9,8 +10,9 @@ public class EnemyStatus : MonoBehaviour, IDamageable
 
     [Header("사망 연출 설정")]
     [SerializeField] private float dieAnimationLength = 1f; //사망 애니메이션 차후 적마다 인스펙터창에서 애니메이션 길이에 맞춰 설정 
-    private Animator anim; 
+    private Animator anim;
 
+    public event Action OnEnemyDeath; // GreenBoss 구독용
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -108,6 +110,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         {
             return;
         }
+
+        OnEnemyDeath?.Invoke(); // 사망 이벤트를 넘겨줌
 
         if (anim != null)
         {

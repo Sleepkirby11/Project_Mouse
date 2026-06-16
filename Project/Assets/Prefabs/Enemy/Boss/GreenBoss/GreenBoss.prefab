@@ -309,7 +309,8 @@ MonoBehaviour:
   minY: -8.4
   maxY: 0
   shieldObject: {fileID: 1400492813834309669}
-  healAmountPerSpirit: 5
+  healPerReturnedSpirit: 1
+  castingDuration: 1
   spiritSpawnPoints:
   - {fileID: 9003603150043872871}
   spiritPoolKeys:
@@ -336,8 +337,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   finalEffectPrefab: {fileID: 4819108403631408140, guid: ffa440a0637c5d54abfc6b08286523e6, type: 3}
-  finalMonsterPrefab: {fileID: 0}
-  fadeOutDuration: 2
+  finalMonsterPrefab: {fileID: 3875869934082963179, guid: a1fd9e17d11c9ef41bb311a31b09180e, type: 3}
+  effectOffset: 0.8
+  kpOffset: 2
+  fadeOutDuration: 1
 --- !u!114 &4624539507042879024
 MonoBehaviour:
   m_ObjectHideFlags: 0
