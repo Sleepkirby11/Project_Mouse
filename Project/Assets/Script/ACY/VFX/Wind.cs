@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Wind : MonoBehaviour
 {
-    [Header("¹Ù¶÷ ¿¬Ãâ ¼³Á¤")]
+    [Header("ï¿½Ù¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float speed = 5f;        
     [SerializeField] private float lifeTime = 1.5f;    
 

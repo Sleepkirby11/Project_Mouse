@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
-    [Header("´ë¹ÌÁö ¼³Á¤")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private int damage = 1;
-    [SerializeField] private float hitboxActivateDelay = 0.5f;  // Ä§ °ø°Ý Å¸ÀÌ¹Ö
-    [SerializeField] private float hitboxDuration = 0.3f;       // ÆÇÁ¤ À¯Áö ½Ã°£
+    [SerializeField] private float hitboxActivateDelay = 0.5f;  // Ä§ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ì¹ï¿½
+    [SerializeField] private float hitboxDuration = 0.3f;       // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
     [SerializeField] private float animDuration = 2.0f;
 
 
@@ -24,9 +24,9 @@ public class Frog : MonoBehaviour
     {
         if (anim != null)
         {
-            anim.Play("Frog", 0, 0f); // ¹ÝÈ¯ ½Ã ¾Ö´Ï¸ÞÀÌ¼Ç Ã³À½À¸·Î ¸®¼Â
+            anim.Play("Frog", 0, 0f); // ï¿½ï¿½È¯ ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             anim.Update(0f);
-            anim.enabled = false;     // ¾Ö´Ï¸ÞÀÌÅÍ ºñÈ°¼ºÈ­
+            anim.enabled = false;     // ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         }
     }
 
@@ -46,19 +46,19 @@ public class Frog : MonoBehaviour
 
     private IEnumerator FrogRoutine()
     {
-        // °ø°Ý Å¸ÀÌ¹Ö¿¡ ÆÇÁ¤ ON
+        // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ì¹Ö¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ON
         yield return new WaitForSeconds(hitboxActivateDelay);
         if (hitbox != null)
         {
             hitbox.enabled = true;
         }
-        // ÆÇÁ¤ À¯Áö
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(hitboxDuration);
         if (hitbox != null)
         {
             hitbox.enabled = false;
         }
-        // ¾Ö´Ï¸ÞÀÌ¼Ç ³¡±îÁö ´ë±â
+        // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(animDuration - hitboxActivateDelay - hitboxDuration);
 
         PoolingManager.Instance.Return(POOL_KEY, gameObject);

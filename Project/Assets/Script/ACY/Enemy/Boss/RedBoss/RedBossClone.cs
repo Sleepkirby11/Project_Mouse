@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class RedBossClone : MonoBehaviour, IDamageable
 {
     private RedBossAttack owner;
 
-    [Header("Å¸°Ù ¼³Á¤")]
+    [Header("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     private Transform playerTransform;
     public bool isFacingRight = true;
 
-    [Header("ÆÄÆ¼Å¬")]
+    [Header("ï¿½ï¿½Æ¼Å¬")]
     private GameObject spawnVFX;
     private GameObject disappearVFX;
 
@@ -42,12 +42,12 @@ public class RedBossClone : MonoBehaviour, IDamageable
         }
         gameObject.SetActive(true);
 
-        // »ý¼º ÀÌÆåÆ®
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
         PlayVFX(spawnVFX);
         FlipToTarget();
         if (animator != null)
         {
-            animator.SetBool(CastTrigger, false); // ÃÊ±âÈ­
+            animator.SetBool(CastTrigger, false); // ï¿½Ê±ï¿½È­
         }
     }
 
@@ -74,8 +74,8 @@ public class RedBossClone : MonoBehaviour, IDamageable
         {
             return;
         }
-        animator.SetBool(CastTrigger, true); // Ä³½ºÆÃ ¾Ö´Ï¸ÞÀÌ¼ÇÀ¸·Î ÀüÈ¯
-        animator.Play(stateHash, 0, normalizedTime); // º¸½º¿Í ¾Ö´Ï¸ÞÀÌ¼Ç µ¿±âÈ­
+        animator.SetBool(CastTrigger, true); // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+        animator.Play(stateHash, 0, normalizedTime); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½È­
     }
 
     public void TakeDamage(int damage)
@@ -96,12 +96,12 @@ public class RedBossClone : MonoBehaviour, IDamageable
         }
 
         isDead = true;
-        // Á¦°Å ÀÌÆåÆ®
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
         PlayVFX(disappearVFX);
 
         owner = null;
 
-        // Ç®·Î ¹ÝÈ¯
+        // Ç®ï¿½ï¿½ ï¿½ï¿½È¯
         PoolingManager.Instance.Return(CLONE_KEY, gameObject);
     }
 

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class KpAnimationEvent : MonoBehaviour
 {
@@ -6,11 +6,11 @@ public class KpAnimationEvent : MonoBehaviour
 
     void Start()
     {
-        // ºÎ¸ð ¿ÀºêÁ§Æ®¿¡ ÀÖ´Â KillerPlantAttack¸¦ °¡Á®¿È
+        // ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ KillerPlantAttackï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         parentAttack = GetComponentInParent<KillerPlantAttack>();
     }
 
-    // ÀÚ½ÄÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®°¡ ÀÌ ÇÔ¼öµéÀ» È£ÃâÇÏ¸é ºÎ¸ð¿¡°Ô º¸³¿
+    // ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Î¸ð¿¡°ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void OnMeleeHit()
     {
         if (parentAttack != null)
