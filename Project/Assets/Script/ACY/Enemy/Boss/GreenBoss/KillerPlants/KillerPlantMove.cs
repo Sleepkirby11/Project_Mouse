@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum PlantIntent { Approach, InMeleeRange, InRangedRange } // Idle 상태 제거
 
