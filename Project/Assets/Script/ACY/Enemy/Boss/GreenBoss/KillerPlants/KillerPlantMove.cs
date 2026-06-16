@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public enum PlantIntent { Approach, InMeleeRange, InRangedRange } // Idle 상태 제거
 
@@ -44,7 +44,7 @@ public class KillerPlantMove : MonoBehaviour
 
         if (playerTransform == null)
         {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            GameObject playerObj = GameObject.FindWithTag("Player");
             if (playerObj != null)
             {
                 playerTransform = playerObj.transform;

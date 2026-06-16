@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -100,7 +100,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     {
         if (playerTransform == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {
                 playerTransform = player.transform;

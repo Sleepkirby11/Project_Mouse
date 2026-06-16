@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 /*
 유령 이동 스크립트
@@ -94,7 +94,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     {
         if (playerTransform == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {
                 playerTransform = player.transform;

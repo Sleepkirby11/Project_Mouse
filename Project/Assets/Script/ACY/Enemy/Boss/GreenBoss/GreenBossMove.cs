@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class GreenBossMove : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class GreenBossMove : MonoBehaviour
     {
         if (playerTransform == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {
                 playerTransform = player.transform;
