@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 /*
  * 점프형 적
  * 평소엔 멈춰있음
