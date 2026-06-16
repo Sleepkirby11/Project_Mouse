@@ -22,7 +22,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Player : MonoBehaviour
 {
     PlayerStatus status;
-
+ 
     public GameObject cam;
 
     [Header("공격")]
@@ -281,7 +281,7 @@ public class Player : MonoBehaviour
 
         if (context.started)
         {
-
+                
         }
         if (context.canceled)
         {
@@ -548,7 +548,7 @@ public class Player : MonoBehaviour
     }
 
     //외부 참조가 가능하게 한 선 그리기 캔슬
-    public void CursorCancle()
+    public void CancleCursor()
     {
         if (cursor.isMove == true)
             ActiveAttack(cursor);
