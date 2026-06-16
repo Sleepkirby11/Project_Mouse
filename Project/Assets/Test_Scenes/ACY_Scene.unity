@@ -2646,6 +2646,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986874546270545098, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792473616297398474, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
+      propertyPath: kpOffset
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9003603150043872871, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
