@@ -3,26 +3,28 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    [Header("Components")]
     private Animator animator;
     private Rigidbody2D rb;
     private EnemyStatus enemyStatus;
 
-    [Header("Stats")]
+    [Header("상태 설정")]
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private float clawRange = 2f;
     [SerializeField] private float patternCooldown = 1.5f;
 
-    [Header("Hitboxes")]
+    [Header("휴식 패턴")]
+    [SerializeField] private Transform[] restPoints;
+    [SerializeField] private Transform airPoint;
+
+    [Header("히트박스 설정")]
     [SerializeField] private Collider2D clawHitbox;
     [SerializeField] private Collider2D sonicHitbox;
 
     private Transform player;
     private bool isPhase2 = false;
     private bool isDead = false;
-    private Coroutine currentLoop;
-    private bool isTransitioning = false;
 
+    private Coroutine currentLoop;
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
     private static readonly int AnimSonic = Animator.StringToHash("Sonic");
     private static readonly int AnimDashStart = Animator.StringToHash("DashStart");
@@ -53,16 +55,12 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
-        if (isDead || isPhase2 || isTransitioning)
+        if (isDead || isPhase2)
             return;
 
         if (enemyStatus.GetHPRatio() <= 0.5f)
         {
             isPhase2 = true;
-            isTransitioning = true;
-
-            StopAllCoroutines();
-            StartCoroutine(PhaseTransition());
         }
     }
 
@@ -72,13 +70,27 @@ public class BossController : MonoBehaviour
 
     private IEnumerator Phase1Loop()
     {
-        while (!isDead)
+        while (!isDead && !isPhase2)
         {
             int roll = Random.Range(0, 2);
-            if (roll == 0) yield return StartCoroutine(PatternClaw());
-            else yield return StartCoroutine(PatternDash());
+
+            if (roll == 0)
+            {
+                yield return StartCoroutine(PatternClaw());
+            }
+            else
+            {
+                yield return StartCoroutine(PatternDash());
+
+                yield return StartCoroutine(RestRoutine());
+            }
 
             yield return new WaitForSeconds(patternCooldown);
+        }
+
+        if (!isDead)
+        {
+            currentLoop = StartCoroutine(Phase2Loop());
         }
     }
 
@@ -87,9 +99,22 @@ public class BossController : MonoBehaviour
         while (!isDead)
         {
             int roll = Random.Range(0, 3);
-            if (roll == 0) yield return StartCoroutine(PatternClaw());
-            else if (roll == 1) yield return StartCoroutine(PatternDash());
-            else yield return StartCoroutine(PatternSonic());
+
+            if (roll == 0)
+            {
+                yield return StartCoroutine(PatternClaw());
+            }
+            else if (roll == 1)
+            {
+                yield return StartCoroutine(PatternSonic());
+            }
+            else
+            {
+                yield return StartCoroutine(PatternDash());
+                yield return StartCoroutine(PatternDash());
+
+                yield return StartCoroutine(RestRoutine());
+            }
 
             yield return new WaitForSeconds(patternCooldown);
         }
@@ -151,19 +176,22 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(GetAnimLength("Sonic"));
     }
-
-    // ───────────────────────────────────────────
-    // 페이즈 전환
-    // ───────────────────────────────────────────
-
-    private IEnumerator PhaseTransition()
+    private IEnumerator RestRoutine()
     {
+        if (restPoints == null || restPoints.Length == 0)
+            yield break;
+
+        Transform restPoint =
+            restPoints[Random.Range(0, restPoints.Length)];
+
+        yield return MoveToPosition(
+            restPoint.position,
+            3f);
+
         animator.SetTrigger(AnimRestStart);
 
-        Vector2 groundPos =
-            new Vector2(transform.position.x, -3f);
-
-        yield return MoveToPosition(groundPos, 3f);
+        yield return new WaitForSeconds(
+            GetAnimLength("RestStart"));
 
         int restCount = Random.Range(2, 4);
 
@@ -179,14 +207,15 @@ public class BossController : MonoBehaviour
 
         animator.SetTrigger(AnimRestEnd);
 
-        Vector2 airPos =
-            new Vector2(transform.position.x, 2f);
+        yield return new WaitForSeconds(
+            GetAnimLength("RestEnd"));
 
-        yield return MoveToPosition(airPos, 3f);
-
-        isTransitioning = false;
-
-        currentLoop = StartCoroutine(Phase2Loop());
+        if (airPoint != null)
+        {
+            yield return MoveToPosition(
+                airPoint.position,
+                3f);
+        }
     }
 
     // ───────────────────────────────────────────
