@@ -12,7 +12,7 @@ public class CastingSpell : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // �ִϸ��̼� ������ �����ӿ� �̺�Ʈ�� ȣ��
+    // 애니메이션 마지막 프레임에 이벤트로 호출
     public void OnEffectEnd()
     {
         onComplete?.Invoke();

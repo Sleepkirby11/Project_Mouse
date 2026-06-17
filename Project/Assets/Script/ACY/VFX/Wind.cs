@@ -2,7 +2,7 @@
 
 public class Wind : MonoBehaviour
 {
-    [Header("�ٶ� ���� ����")]
+    [Header("바람 연출 설정")]
     [SerializeField] private float speed = 5f;        
     [SerializeField] private float lifeTime = 1.5f;    
 

@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class FireArrow : MonoBehaviour, IDamageable
 {
-    [Header("�̵� ����")]
+    [Header("이동 설정")]
     public float speed = 8f;
     public float rotateSpeed = 180f;
     public float lifeTime = 6f;
 
-    [Header("������")]
+    [Header("데미지")]
     public int damage = 1;
 
-    [Header("���� ����")]
+    [Header("폭발 설정")]
     public float bombDuration = 0.3f;
     public float bombSound = 2f;
 
-    [Header("ȿ����")]
+    [Header("효과음")]
     public AudioClip flightSound;
     public AudioClip explosionSound;
 
@@ -25,8 +25,8 @@ public class FireArrow : MonoBehaviour, IDamageable
     private Animator anim;
     private Collider2D col;
     private bool isExploding = false;
-    private float angleOffset = 0f;    // ���� ������ (3���� ���� ����)
-    private bool isHoming = true; //���� ����
+    private float angleOffset = 0f;    // 각도 오프셋 (3연발 각도 차이)
+    private bool isHoming = true; //유도 여부
 
     private const string POOL_KEY = "RedBossArrow";
 
@@ -63,7 +63,7 @@ public class FireArrow : MonoBehaviour, IDamageable
         //}
     }
 
-    // �߻� �� �ʱ�ȭ
+    // 발사 시 초기화
     public void Init(float angleOffset = 0f, bool enableHoming = true)
     {
         this.angleOffset = angleOffset;

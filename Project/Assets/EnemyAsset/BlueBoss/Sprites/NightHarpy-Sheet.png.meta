@@ -1,0 +1,4329 @@
+fileFormatVersion: 2
+guid: 1a24536e921ec7e4bac8ca820a435bdb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8582378315342318483
+    second: NightHarpy-Sheet_0
+  - first:
+      213: 533498173662133609
+    second: NightHarpy-Sheet_1
+  - first:
+      213: 4173641079981253712
+    second: NightHarpy-Sheet_2
+  - first:
+      213: -9104950987082930296
+    second: NightHarpy-Sheet_3
+  - first:
+      213: -5157705958130187325
+    second: NightHarpy-Sheet_4
+  - first:
+      213: 343407516083862179
+    second: NightHarpy-Sheet_5
+  - first:
+      213: -3842526171491457699
+    second: NightHarpy-Sheet_6
+  - first:
+      213: 4797043659819091584
+    second: NightHarpy-Sheet_7
+  - first:
+      213: 1549018938994848213
+    second: NightHarpy-Sheet_8
+  - first:
+      213: -243336908224200937
+    second: NightHarpy-Sheet_9
+  - first:
+      213: -6514431773506907849
+    second: NightHarpy-Sheet_10
+  - first:
+      213: -1630127471102087907
+    second: NightHarpy-Sheet_11
+  - first:
+      213: 948109331895787231
+    second: NightHarpy-Sheet_12
+  - first:
+      213: 4554328019668390556
+    second: NightHarpy-Sheet_13
+  - first:
+      213: -8013545530586838412
+    second: NightHarpy-Sheet_14
+  - first:
+      213: -3886783793012758913
+    second: NightHarpy-Sheet_15
+  - first:
+      213: 5820637759515463052
+    second: NightHarpy-Sheet_16
+  - first:
+      213: -5927893571165512691
+    second: NightHarpy-Sheet_17
+  - first:
+      213: -6702084746137986969
+    second: NightHarpy-Sheet_18
+  - first:
+      213: -3631781424565063483
+    second: NightHarpy-Sheet_19
+  - first:
+      213: 7427764303198352538
+    second: NightHarpy-Sheet_20
+  - first:
+      213: 5351472619245305239
+    second: NightHarpy-Sheet_21
+  - first:
+      213: 5410116625583330735
+    second: NightHarpy-Sheet_22
+  - first:
+      213: 1673522570547050822
+    second: NightHarpy-Sheet_23
+  - first:
+      213: 1064837198788706685
+    second: NightHarpy-Sheet_24
+  - first:
+      213: -7523801695055249537
+    second: NightHarpy-Sheet_25
+  - first:
+      213: -5670764314035273958
+    second: NightHarpy-Sheet_26
+  - first:
+      213: 3947412770951565603
+    second: NightHarpy-Sheet_27
+  - first:
+      213: 7901865987816048431
+    second: NightHarpy-Sheet_28
+  - first:
+      213: 3570371434175131227
+    second: NightHarpy-Sheet_29
+  - first:
+      213: 3588357431570739731
+    second: NightHarpy-Sheet_30
+  - first:
+      213: 8115338989278786101
+    second: NightHarpy-Sheet_31
+  - first:
+      213: 4726211014299664835
+    second: NightHarpy-Sheet_32
+  - first:
+      213: -5230943785773743137
+    second: NightHarpy-Sheet_33
+  - first:
+      213: 51129809649808143
+    second: NightHarpy-Sheet_34
+  - first:
+      213: 6250133701555910461
+    second: NightHarpy-Sheet_35
+  - first:
+      213: 7196775969936159462
+    second: NightHarpy-Sheet_36
+  - first:
+      213: -3771981200078480684
+    second: NightHarpy-Sheet_37
+  - first:
+      213: -4263046966609626847
+    second: NightHarpy-Sheet_38
+  - first:
+      213: 1749118121973727145
+    second: NightHarpy-Sheet_39
+  - first:
+      213: 6712298560852818335
+    second: NightHarpy-Sheet_40
+  - first:
+      213: -1841452242231322875
+    second: NightHarpy-Sheet_41
+  - first:
+      213: 3431494119027810369
+    second: NightHarpy-Sheet_42
+  - first:
+      213: -557484882860127086
+    second: NightHarpy-Sheet_43
+  - first:
+      213: 3757978477621471002
+    second: NightHarpy-Sheet_44
+  - first:
+      213: -2095843315091950459
+    second: NightHarpy-Sheet_45
+  - first:
+      213: 8932480051363333707
+    second: NightHarpy-Sheet_46
+  - first:
+      213: -9019332751318732856
+    second: NightHarpy-Sheet_47
+  - first:
+      213: 241085555734995997
+    second: NightHarpy-Sheet_48
+  - first:
+      213: -153664346548635071
+    second: NightHarpy-Sheet_49
+  - first:
+      213: 3892284037550913201
+    second: NightHarpy-Sheet_50
+  - first:
+      213: 7910282762440899914
+    second: NightHarpy-Sheet_51
+  - first:
+      213: 3210970066276786048
+    second: NightHarpy-Sheet_52
+  - first:
+      213: 2366325271686887770
+    second: NightHarpy-Sheet_53
+  - first:
+      213: 7220672606863202669
+    second: NightHarpy-Sheet_54
+  - first:
+      213: 1571865815342018322
+    second: NightHarpy-Sheet_55
+  - first:
+      213: -2185856868915000211
+    second: NightHarpy-Sheet_56
+  - first:
+      213: 2003197749208962191
+    second: NightHarpy-Sheet_57
+  - first:
+      213: 1761313115143814841
+    second: NightHarpy-Sheet_58
+  - first:
+      213: 6179024009451072489
+    second: NightHarpy-Sheet_59
+  - first:
+      213: -4652507502350282176
+    second: NightHarpy-Sheet_60
+  - first:
+      213: 5085871020809279371
+    second: NightHarpy-Sheet_61
+  - first:
+      213: -3627953511475807411
+    second: NightHarpy-Sheet_62
+  - first:
+      213: -6185288428164818678
+    second: NightHarpy-Sheet_63
+  - first:
+      213: -5417594556118224612
+    second: NightHarpy-Sheet_64
+  - first:
+      213: -8578484445782199586
+    second: NightHarpy-Sheet_65
+  - first:
+      213: 1386117457017409227
+    second: NightHarpy-Sheet_66
+  - first:
+      213: -2532853903999866624
+    second: NightHarpy-Sheet_67
+  - first:
+      213: 5192876496771014643
+    second: NightHarpy-Sheet_68
+  - first:
+      213: 6445375894746666556
+    second: NightHarpy-Sheet_69
+  - first:
+      213: 1087322629911301514
+    second: NightHarpy-Sheet_70
+  - first:
+      213: -6187941374653887094
+    second: NightHarpy-Sheet_71
+  - first:
+      213: 7587297559146169443
+    second: NightHarpy-Sheet_72
+  - first:
+      213: -1188158640046810419
+    second: NightHarpy-Sheet_73
+  - first:
+      213: -6559867174850645207
+    second: NightHarpy-Sheet_74
+  - first:
+      213: -7232123691474746902
+    second: NightHarpy-Sheet_75
+  - first:
+      213: 3721394534219520376
+    second: NightHarpy-Sheet_76
+  - first:
+      213: -8763190072634646404
+    second: NightHarpy-Sheet_77
+  - first:
+      213: 4940036262766000704
+    second: NightHarpy-Sheet_78
+  - first:
+      213: -4956397840150438210
+    second: NightHarpy-Sheet_79
+  - first:
+      213: 3879798703953469725
+    second: NightHarpy-Sheet_80
+  - first:
+      213: 1270466824970724195
+    second: NightHarpy-Sheet_81
+  - first:
+      213: 3121088849304055505
+    second: NightHarpy-Sheet_82
+  - first:
+      213: -5207080181129932539
+    second: NightHarpy-Sheet_83
+  - first:
+      213: 1561092001507865210
+    second: NightHarpy-Sheet_84
+  - first:
+      213: -4466938001682529954
+    second: NightHarpy-Sheet_85
+  - first:
+      213: 857502945702657317
+    second: NightHarpy-Sheet_86
+  - first:
+      213: 5031040179588789265
+    second: NightHarpy-Sheet_87
+  - first:
+      213: 4952330825193327548
+    second: NightHarpy-Sheet_88
+  - first:
+      213: 8505846572757605807
+    second: NightHarpy-Sheet_89
+  - first:
+      213: -2390975266249880134
+    second: NightHarpy-Sheet_90
+  - first:
+      213: 4526308709512673341
+    second: NightHarpy-Sheet_91
+  - first:
+      213: 45550017831217374
+    second: NightHarpy-Sheet_92
+  - first:
+      213: 5941510888376667166
+    second: NightHarpy-Sheet_93
+  - first:
+      213: -2782130364410410895
+    second: NightHarpy-Sheet_94
+  - first:
+      213: -1425346333881847053
+    second: NightHarpy-Sheet_95
+  - first:
+      213: 2041783132318046326
+    second: NightHarpy-Sheet_96
+  - first:
+      213: 5582907188368957812
+    second: NightHarpy-Sheet_97
+  - first:
+      213: 8533816930507574361
+    second: NightHarpy-Sheet_98
+  - first:
+      213: 2953054667346970346
+    second: NightHarpy-Sheet_99
+  - first:
+      213: -8214269607513848092
+    second: NightHarpy-Sheet_100
+  - first:
+      213: 2059560666755797699
+    second: NightHarpy-Sheet_101
+  - first:
+      213: 2140898537511463595
+    second: NightHarpy-Sheet_102
+  - first:
+      213: -606078547357408288
+    second: NightHarpy-Sheet_103
+  - first:
+      213: 8602616361022223914
+    second: NightHarpy-Sheet_104
+  - first:
+      213: 2059168200241967588
+    second: NightHarpy-Sheet_105
+  - first:
+      213: -5392242372700281072
+    second: NightHarpy-Sheet_106
+  - first:
+      213: -67276231479446796
+    second: NightHarpy-Sheet_107
+  - first:
+      213: -2482350509092404067
+    second: NightHarpy-Sheet_108
+  - first:
+      213: -3021010673226953986
+    second: NightHarpy-Sheet_109
+  - first:
+      213: 8374643219420597223
+    second: NightHarpy-Sheet_110
+  - first:
+      213: -1997870795639828036
+    second: NightHarpy-Sheet_111
+  - first:
+      213: 8343997981086755629
+    second: NightHarpy-Sheet_112
+  - first:
+      213: -146897198526163811
+    second: NightHarpy-Sheet_113
+  - first:
+      213: 6602020535007110264
+    second: NightHarpy-Sheet_114
+  - first:
+      213: -7669450880860455965
+    second: NightHarpy-Sheet_115
+  - first:
+      213: -2500099746096987153
+    second: NightHarpy-Sheet_116
+  - first:
+      213: -9118484683093708122
+    second: NightHarpy-Sheet_117
+  - first:
+      213: 241851625398435953
+    second: NightHarpy-Sheet_118
+  - first:
+      213: -8541816259649997744
+    second: NightHarpy-Sheet_119
+  - first:
+      213: 6843703218155805795
+    second: NightHarpy-Sheet_120
+  - first:
+      213: 57510844947287887
+    second: NightHarpy-Sheet_121
+  - first:
+      213: -4499690984267417179
+    second: NightHarpy-Sheet_122
+  - first:
+      213: -1206920593671761539
+    second: NightHarpy-Sheet_123
+  - first:
+      213: 8359148850968295931
+    second: NightHarpy-Sheet_124
+  - first:
+      213: -4184356931742416797
+    second: NightHarpy-Sheet_125
+  - first:
+      213: -5174999252422665964
+    second: NightHarpy-Sheet_126
+  - first:
+      213: -1638049157551458757
+    second: NightHarpy-Sheet_127
+  - first:
+      213: -5407504465972200222
+    second: NightHarpy-Sheet_128
+  - first:
+      213: -1391727052675806704
+    second: NightHarpy-Sheet_129
+  - first:
+      213: -8428778288859050007
+    second: NightHarpy-Sheet_130
+  - first:
+      213: 3127512628253751940
+    second: NightHarpy-Sheet_131
+  - first:
+      213: 6609457070656028988
+    second: NightHarpy-Sheet_132
+  - first:
+      213: -3178802251337591148
+    second: NightHarpy-Sheet_133
+  - first:
+      213: -7756458916807776636
+    second: NightHarpy-Sheet_134
+  - first:
+      213: -6581172648178508486
+    second: NightHarpy-Sheet_135
+  - first:
+      213: -6188360083217751816
+    second: NightHarpy-Sheet_136
+  - first:
+      213: -4475106296852164138
+    second: NightHarpy-Sheet_137
+  - first:
+      213: 9131153259191601761
+    second: NightHarpy-Sheet_138
+  - first:
+      213: -7203270983503977218
+    second: NightHarpy-Sheet_139
+  - first:
+      213: -3699235061459157965
+    second: NightHarpy-Sheet_140
+  - first:
+      213: -7868447482762541095
+    second: NightHarpy-Sheet_141
+  - first:
+      213: 8919659162318529118
+    second: NightHarpy-Sheet_142
+  - first:
+      213: -4367777785878219942
+    second: NightHarpy-Sheet_143
+  - first:
+      213: -4503131503395892910
+    second: NightHarpy-Sheet_144
+  - first:
+      213: 8399820148592675060
+    second: NightHarpy-Sheet_145
+  - first:
+      213: -2216078984037269484
+    second: NightHarpy-Sheet_146
+  - first:
+      213: -2997210751896647169
+    second: NightHarpy-Sheet_147
+  - first:
+      213: 7250706588149992540
+    second: NightHarpy-Sheet_148
+  - first:
+      213: 1801988899453750622
+    second: NightHarpy-Sheet_149
+  - first:
+      213: 1606899541041164078
+    second: NightHarpy-Sheet_150
+  - first:
+      213: -2132772371818562118
+    second: NightHarpy-Sheet_151
+  - first:
+      213: -13105265255453252
+    second: NightHarpy-Sheet_152
+  - first:
+      213: -7152100935238975072
+    second: NightHarpy-Sheet_153
+  - first:
+      213: 9173255652438487116
+    second: NightHarpy-Sheet_154
+  - first:
+      213: -2760680856282706458
+    second: NightHarpy-Sheet_155
+  - first:
+      213: 2253092004869602785
+    second: NightHarpy-Sheet_156
+  - first:
+      213: -2070523093602449884
+    second: NightHarpy-Sheet_157
+  - first:
+      213: 5943884486647642526
+    second: NightHarpy-Sheet_158
+  - first:
+      213: -7095264552858564608
+    second: NightHarpy-Sheet_159
+  - first:
+      213: 199079460883314414
+    second: NightHarpy-Sheet_160
+  - first:
+      213: 4670255627436311145
+    second: NightHarpy-Sheet_161
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 942
+        width: 50
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d647102c46445e880800000000000000
+      internalID: -8582378315342318483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 942
+        width: 43
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96d737923cd576700800000000000000
+      internalID: 533498173662133609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 942
+        width: 47
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 054a2480370cbe930800000000000000
+      internalID: 4173641079981253712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 942
+        width: 45
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 887649d3157b4a180800000000000000
+      internalID: -9104950987082930296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 941
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c30cbdf1c52c68b0800000000000000
+      internalID: -5157705958130187325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 941
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aab061015704c400800000000000000
+      internalID: 343407516083862179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d552c1c3eca9caac0800000000000000
+      internalID: -3842526171491457699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0868e83fac5829240800000000000000
+      internalID: 4797043659819091584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d1f32994883f7510800000000000000
+      internalID: 1549018938994848213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71ffd880f5e7f9cf0800000000000000
+      internalID: -243336908224200937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7315a9221d61895a0800000000000000
+      internalID: -6514431773506907849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 869
+        width: 52
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1daa5aa3bf9069e0800000000000000
+      internalID: -1630127471102087907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 869
+        width: 52
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fde91eff96c582d00800000000000000
+      internalID: 948109331895787231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 869
+        width: 46
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9251fa3439343f30800000000000000
+      internalID: 4554328019668390556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47ac3f92cca2ac090800000000000000
+      internalID: -8013545530586838412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f76aababbbe5f0ac0800000000000000
+      internalID: -3886783793012758913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8d0526043f07c050800000000000000
+      internalID: 5820637759515463052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0c9b505434ebbda0800000000000000
+      internalID: -5927893571165512691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 869
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76891ebbe696df2a0800000000000000
+      internalID: -6702084746137986969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 797
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c0ffee4902599dc0800000000000000
+      internalID: -3631781424565063483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 797
+        width: 45
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a94f67f9748b41760800000000000000
+      internalID: 7427764303198352538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 797
+        width: 45
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79d785f6eff344a40800000000000000
+      internalID: 5351472619245305239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 725
+        width: 45
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa5545d2868941b40800000000000000
+      internalID: 5410116625583330735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 725
+        width: 45
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6493e0549eb893710800000000000000
+      internalID: 1673522570547050822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 725
+        width: 45
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d714c616acf07ce00800000000000000
+      internalID: 1064837198788706685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 653
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7fffbd9836169790800000000000000
+      internalID: -7523801695055249537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 653
+        width: 52
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1f37f0c6e56d41b0800000000000000
+      internalID: -5670764314035273958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 653
+        width: 52
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 321986a300708c630800000000000000
+      internalID: 3947412770951565603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 653
+        width: 46
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f274482004119ad60800000000000000
+      internalID: 7901865987816048431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 653
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5ee53a17e18c8130800000000000000
+      internalID: 3570371434175131227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 653
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31238e372186cc130800000000000000
+      internalID: 3588357431570739731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 653
+        width: 45
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 532f6d750d97f9070800000000000000
+      internalID: 8115338989278786101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 653
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c1ced080efd69140800000000000000
+      internalID: 4726211014299664835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 653
+        width: 45
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd34be07754f767b0800000000000000
+      internalID: -5230943785773743137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 653
+        width: 45
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f033c9d7a46a5b000800000000000000
+      internalID: 51129809649808143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 653
+        width: 45
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d37ffe7ac7fecb650800000000000000
+      internalID: 6250133701555910461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 653
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e2bc105d9510e360800000000000000
+      internalID: 7196775969936159462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 653
+        width: 45
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4daded5551b37abc0800000000000000
+      internalID: -3771981200078480684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 653
+        width: 45
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1293d66de5d96d4c0800000000000000
+      internalID: -4263046966609626847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 653
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9af317a2aad164810800000000000000
+      internalID: 1749118121973727145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 582
+        width: 47
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f997ff15affd62d50800000000000000
+      internalID: 6712298560852818335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 582
+        width: 44
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50794fe21f8d176e0800000000000000
+      internalID: -1841452242231322875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 582
+        width: 54
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 140ae7d68bd1f9f20800000000000000
+      internalID: 3431494119027810369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 582
+        width: 60
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29cc875e37a6348f0800000000000000
+      internalID: -557484882860127086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 582
+        width: 61
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a17e038c385072430800000000000000
+      internalID: 3757978477621471002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_45
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 575
+        width: 43
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5843113fb911ae2e0800000000000000
+      internalID: -2095843315091950459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_46
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 578
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4646c8c74b86fb70800000000000000
+      internalID: 8932480051363333707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_47
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 575
+        width: 35
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cfa99e26a4e4d280800000000000000
+      internalID: -9019332751318732856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_48
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 578
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d14ef0e1902885300800000000000000
+      internalID: 241085555734995997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_49
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 576
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14a735947131eddf0800000000000000
+      internalID: -153664346548635071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_50
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 576
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b6352fb5bb240630800000000000000
+      internalID: 3892284037550913201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_51
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 513
+        width: 58
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4d7f201348f6cd60800000000000000
+      internalID: 7910282762440899914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_52
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 512
+        width: 58
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08f17d84348af8c20800000000000000
+      internalID: 3210970066276786048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_53
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 512
+        width: 60
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a593de91c40e6d020800000000000000
+      internalID: 2366325271686887770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_54
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 513
+        width: 64
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69997baa7bf43460800000000000000
+      internalID: 7220672606863202669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_55
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 514
+        width: 35
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21f6a0681a360d510800000000000000
+      internalID: 1571865815342018322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_56
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 515
+        width: 34
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6c497642c64aa1e0800000000000000
+      internalID: -2185856868915000211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_57
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 514
+        width: 54
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8456705db9cccb10800000000000000
+      internalID: 2003197749208962191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_58
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 513
+        width: 58
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9be326642f0717810800000000000000
+      internalID: 1761313115143814841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_59
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 512
+        width: 58
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ebe0f5499d40c550800000000000000
+      internalID: 6179024009451072489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_60
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 512
+        width: 60
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 042529f9319fe6fb0800000000000000
+      internalID: -4652507502350282176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_61
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 513
+        width: 64
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b875ac05fb4a49640800000000000000
+      internalID: 5085871020809279371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_62
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 514
+        width: 35
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4b7ad6c08be6adc0800000000000000
+      internalID: -3627953511475807411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_63
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 515
+        width: 34
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a09d6e512f0792aa0800000000000000
+      internalID: -6185288428164818678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_64
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 514
+        width: 54
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c11bb717476d0d4b0800000000000000
+      internalID: -5417594556118224612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_65
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 441
+        width: 58
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed230f9e8d913f880800000000000000
+      internalID: -8578484445782199586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_66
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 445
+        width: 62
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bce8d72bb7a7c3310800000000000000
+      internalID: 1386117457017409227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_67
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 448
+        width: 67
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00960204bce79dcd0800000000000000
+      internalID: -2532853903999866624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_68
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 376
+        width: 59
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ffd28829adc01840800000000000000
+      internalID: 5192876496771014643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_69
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 376
+        width: 59
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c369d3a2a33927950800000000000000
+      internalID: 6445375894746666556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_70
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 376
+        width: 58
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8d4b18cb22f61f00800000000000000
+      internalID: 1087322629911301514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_71
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 302
+        width: 56
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8d00d8da14002aa0800000000000000
+      internalID: -6187941374653887094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_72
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 301
+        width: 58
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 364881a4eee7b4960800000000000000
+      internalID: 7587297559146169443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_73
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 304
+        width: 43
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcad2331300d28fe0800000000000000
+      internalID: -1188158640046810419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_74
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 301
+        width: 40
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92338456f8ba6f4a0800000000000000
+      internalID: -6559867174850645207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_75
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 302
+        width: 54
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae106fde1d552ab90800000000000000
+      internalID: -7232123691474746902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_76
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 225
+        width: 58
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8791c31bc9c05a330800000000000000
+      internalID: 3721394534219520376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_77
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 229
+        width: 56
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c70e16dee05e26680800000000000000
+      internalID: -8763190072634646404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_78
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 237
+        width: 58
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04a37bbbec88e8440800000000000000
+      internalID: 4940036262766000704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_79
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 237
+        width: 54
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebed15cac66573bb0800000000000000
+      internalID: -4956397840150438210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_80
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 234
+        width: 51
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d11ea2d7d50d7d530800000000000000
+      internalID: 3879798703953469725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_81
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 232
+        width: 83
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3636c4998da91a110800000000000000
+      internalID: 1270466824970724195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_82
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 223
+        width: 80
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1de633fa5c5505b20800000000000000
+      internalID: 3121088849304055505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_83
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 225
+        width: 56
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50116ced92cbcb7b0800000000000000
+      internalID: -5207080181129932539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_84
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 222
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72749387ec1aa510800000000000000
+      internalID: 1561092001507865210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_85
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 153
+        width: 58
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e510508ed8f3202c0800000000000000
+      internalID: -4466938001682529954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_86
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 154
+        width: 44
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d3578c26676eb00800000000000000
+      internalID: 857502945702657317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_87
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 151
+        width: 44
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1147b134368d1d540800000000000000
+      internalID: 5031040179588789265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_88
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 152
+        width: 50
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbb8ddd95a63ab440800000000000000
+      internalID: 4952330825193327548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_89
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 154
+        width: 52
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fadd03b5466da0670800000000000000
+      internalID: 8505846572757605807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_90
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 154
+        width: 52
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abd4e6cc9ac81ded0800000000000000
+      internalID: -2390975266249880134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_91
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 153
+        width: 51
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3872463acda0de30800000000000000
+      internalID: 4526308709512673341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_92
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 156
+        width: 58
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed8a758ff73d1a000800000000000000
+      internalID: 45550017831217374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_93
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 155
+        width: 64
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1c8eca6cac747250800000000000000
+      internalID: 5941510888376667166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_94
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 155
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1784d768c23e369d0800000000000000
+      internalID: -2782130364410410895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_95
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 155
+        width: 55
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f23117af07283ce0800000000000000
+      internalID: -1425346333881847053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_96
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 155
+        width: 55
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6789336e0fed55c10800000000000000
+      internalID: 2041783132318046326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_97
+      rect:
+        serializedVersion: 2
+        x: 1017
+        y: 153
+        width: 59
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 471e4b022887a7d40800000000000000
+      internalID: 5582907188368957812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_98
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 154
+        width: 60
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95c4e11c8453e6670800000000000000
+      internalID: 8533816930507574361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_99
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 155
+        width: 67
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae68681f29b5bf820800000000000000
+      internalID: 2953054667346970346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_100
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 153
+        width: 58
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e689d2205d010e80800000000000000
+      internalID: -8214269607513848092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_101
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 81
+        width: 60
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c2985fa387059c10800000000000000
+      internalID: 2059560666755797699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_102
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 82
+        width: 57
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baa268c70eff5bd10800000000000000
+      internalID: 2140898537511463595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_103
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 81
+        width: 60
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e3e6c6b5c6c697f0800000000000000
+      internalID: -606078547357408288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_104
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 17
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2671b17002a26770800000000000000
+      internalID: 8602616361022223914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_105
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 7
+        width: 27
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e1f3347192a39c10800000000000000
+      internalID: 2059168200241967588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_106
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 8
+        width: 28
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 017e360a128ea25b0800000000000000
+      internalID: -5392242372700281072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_107
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 7
+        width: 26
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f237d8bf9cf01ff0800000000000000
+      internalID: -67276231479446796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_108
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 6
+        width: 42
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9489813d5bec8dd0800000000000000
+      internalID: -2482350509092404067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_109
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 4
+        width: 61
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efac4a77cc63316d0800000000000000
+      internalID: -3021010673226953986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_110
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 6
+        width: 46
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ebc23623a5b83470800000000000000
+      internalID: 8374643219420597223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_111
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 5
+        width: 53
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb1d2c6b8132644e0800000000000000
+      internalID: -1997870795639828036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_112
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 5
+        width: 53
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2ba04594f5dbc370800000000000000
+      internalID: 8343997981086755629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_113
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 5
+        width: 54
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d941957b6cd16fdf0800000000000000
+      internalID: -146897198526163811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_114
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 5
+        width: 55
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 874eee492b61f9b50800000000000000
+      internalID: 6602020535007110264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_115
+      rect:
+        serializedVersion: 2
+        x: 1790
+        y: 4
+        width: 42
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eb7100fe03a09590800000000000000
+      internalID: -7669450880860455965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_116
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 4
+        width: 33
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe348dae68cdd4dd0800000000000000
+      internalID: -2500099746096987153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_117
+      rect:
+        serializedVersion: 2
+        x: 1975
+        y: 4
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a2fb561e72a47180800000000000000
+      internalID: -9118484683093708122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_118
+      rect:
+        serializedVersion: 2
+        x: 2057
+        y: 4
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 170893c95ca3b5300800000000000000
+      internalID: 241851625398435953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_119
+      rect:
+        serializedVersion: 2
+        x: 2146
+        y: 4
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 054f7ea4e5f557980800000000000000
+      internalID: -8541816259649997744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_120
+      rect:
+        serializedVersion: 2
+        x: 2234
+        y: 4
+        width: 19
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36cdf5241d7b9fe50800000000000000
+      internalID: 6843703218155805795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_121
+      rect:
+        serializedVersion: 2
+        x: 2314
+        y: 4
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4fc0db0fc15cc000800000000000000
+      internalID: 57510844947287887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_122
+      rect:
+        serializedVersion: 2
+        x: 2406
+        y: 17
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a976b3e3e2ed81c0800000000000000
+      internalID: -4499690984267417179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_123
+      rect:
+        serializedVersion: 2
+        x: 2488
+        y: 12
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7157165d18204fe0800000000000000
+      internalID: -1206920593671761539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_124
+      rect:
+        serializedVersion: 2
+        x: 2573
+        y: 13
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf9749e5799a10470800000000000000
+      internalID: 8359148850968295931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_125
+      rect:
+        serializedVersion: 2
+        x: 2577
+        y: 17
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 360cc0e4a8d2ee5c0800000000000000
+      internalID: -4184356931742416797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_126
+      rect:
+        serializedVersion: 2
+        x: 2654
+        y: 10
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4195f662995be28b0800000000000000
+      internalID: -5174999252422665964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_127
+      rect:
+        serializedVersion: 2
+        x: 2743
+        y: 23
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b36748f48fa7449e0800000000000000
+      internalID: -1638049157551458757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_128
+      rect:
+        serializedVersion: 2
+        x: 2750
+        y: 17
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec7360a65fa4f4b0800000000000000
+      internalID: -5407504465972200222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_129
+      rect:
+        serializedVersion: 2
+        x: 2827
+        y: 19
+        width: 97
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01a05f88e979face0800000000000000
+      internalID: -1391727052675806704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_130
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 5
+        width: 56
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ef080acdc6f60b80800000000000000
+      internalID: -8428778288859050007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_131
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 5
+        width: 58
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48afc954a28276b20800000000000000
+      internalID: 3127512628253751940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_132
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 5
+        width: 62
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3185a6ff2289bb50800000000000000
+      internalID: 6609457070656028988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_133
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 5
+        width: 65
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4969fc5c130a2e3d0800000000000000
+      internalID: -3178802251337591148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_134
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 5
+        width: 67
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 486e2cce5b58b5490800000000000000
+      internalID: -7756458916807776636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_135
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 5
+        width: 70
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3d9dc3585afaa4a0800000000000000
+      internalID: -6581172648178508486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_136
+      rect:
+        serializedVersion: 2
+        x: 1431
+        y: 5
+        width: 69
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f06999aa478e1aa0800000000000000
+      internalID: -6188360083217751816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_137
+      rect:
+        serializedVersion: 2
+        x: 1515
+        y: 6
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d1530c788a35e1c0800000000000000
+      internalID: -4475106296852164138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_138
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 4
+        width: 64
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16a04c3a28f58be70800000000000000
+      internalID: 9131153259191601761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_139
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 6
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef4ed5f7437d80c90800000000000000
+      internalID: -7203270983503977218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_140
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 4
+        width: 53
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33c7e0d9f4da9acc0800000000000000
+      internalID: -3699235061459157965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_141
+      rect:
+        serializedVersion: 2
+        x: 1690
+        y: 5
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d74f1804b8adc290800000000000000
+      internalID: -7868447482762541095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_142
+      rect:
+        serializedVersion: 2
+        x: 1705
+        y: 4
+        width: 46
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e52ed8fefbef8cb70800000000000000
+      internalID: 8919659162318529118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_143
+      rect:
+        serializedVersion: 2
+        x: 1780
+        y: 5
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a53f2e6ce398263c0800000000000000
+      internalID: -4367777785878219942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_144
+      rect:
+        serializedVersion: 2
+        x: 1863
+        y: 5
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 251973b91c9a181c0800000000000000
+      internalID: -4503131503395892910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_145
+      rect:
+        serializedVersion: 2
+        x: 1879
+        y: 5
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f80906cbe7229470800000000000000
+      internalID: 8399820148592675060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_146
+      rect:
+        serializedVersion: 2
+        x: 1956
+        y: 4
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4100042c7e7ee31e0800000000000000
+      internalID: -2216078984037269484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_147
+      rect:
+        serializedVersion: 2
+        x: 1967
+        y: 6
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff9083873b4c766d0800000000000000
+      internalID: -2997210751896647169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_148
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 6
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5cc34dd93faf9460800000000000000
+      internalID: 7250706588149992540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_149
+      rect:
+        serializedVersion: 2
+        x: 2137
+        y: 4
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5d43215b53f10910800000000000000
+      internalID: 1801988899453750622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_150
+      rect:
+        serializedVersion: 2
+        x: 2141
+        y: 12
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2f2f7d6e9adc4610800000000000000
+      internalID: 1606899541041164078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_151
+      rect:
+        serializedVersion: 2
+        x: 2224
+        y: 12
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abdbcf6e3ded662e0800000000000000
+      internalID: -2132772371818562118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_152
+      rect:
+        serializedVersion: 2
+        x: 2224
+        y: 4
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbde2c7a4d071dff0800000000000000
+      internalID: -13105265255453252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_153
+      rect:
+        serializedVersion: 2
+        x: 2230
+        y: 6
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a18755c712aebc90800000000000000
+      internalID: -7152100935238975072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_154
+      rect:
+        serializedVersion: 2
+        x: 2307
+        y: 12
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c40b075f963fd4f70800000000000000
+      internalID: 9173255652438487116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_155
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 6
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ed4c0f436710b9d0800000000000000
+      internalID: -2760680856282706458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_156
+      rect:
+        serializedVersion: 2
+        x: 2391
+        y: 6
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ed7684bd37944f10800000000000000
+      internalID: 2253092004869602785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_157
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 4
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 426459a67360443e0800000000000000
+      internalID: -2070523093602449884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_158
+      rect:
+        serializedVersion: 2
+        x: 2484
+        y: 6
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e997694d27bec7250800000000000000
+      internalID: 5943884486647642526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_159
+      rect:
+        serializedVersion: 2
+        x: 2491
+        y: 7
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 008c1734b7e888d90800000000000000
+      internalID: -7095264552858564608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_160
+      rect:
+        serializedVersion: 2
+        x: 2567
+        y: 7
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee6b60407b543c200800000000000000
+      internalID: 199079460883314414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightHarpy-Sheet_161
+      rect:
+        serializedVersion: 2
+        x: 1873
+        y: 4
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9624c93cfb410d040800000000000000
+      internalID: 4670255627436311145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      NightHarpy-Sheet_0: -8582378315342318483
+      NightHarpy-Sheet_1: 533498173662133609
+      NightHarpy-Sheet_10: -6514431773506907849
+      NightHarpy-Sheet_100: -8214269607513848092
+      NightHarpy-Sheet_101: 2059560666755797699
+      NightHarpy-Sheet_102: 2140898537511463595
+      NightHarpy-Sheet_103: -606078547357408288
+      NightHarpy-Sheet_104: 8602616361022223914
+      NightHarpy-Sheet_105: 2059168200241967588
+      NightHarpy-Sheet_106: -5392242372700281072
+      NightHarpy-Sheet_107: -67276231479446796
+      NightHarpy-Sheet_108: -2482350509092404067
+      NightHarpy-Sheet_109: -3021010673226953986
+      NightHarpy-Sheet_11: -1630127471102087907
+      NightHarpy-Sheet_110: 8374643219420597223
+      NightHarpy-Sheet_111: -1997870795639828036
+      NightHarpy-Sheet_112: 8343997981086755629
+      NightHarpy-Sheet_113: -146897198526163811
+      NightHarpy-Sheet_114: 6602020535007110264
+      NightHarpy-Sheet_115: -7669450880860455965
+      NightHarpy-Sheet_116: -2500099746096987153
+      NightHarpy-Sheet_117: -9118484683093708122
+      NightHarpy-Sheet_118: 241851625398435953
+      NightHarpy-Sheet_119: -8541816259649997744
+      NightHarpy-Sheet_12: 948109331895787231
+      NightHarpy-Sheet_120: 6843703218155805795
+      NightHarpy-Sheet_121: 57510844947287887
+      NightHarpy-Sheet_122: -4499690984267417179
+      NightHarpy-Sheet_123: -1206920593671761539
+      NightHarpy-Sheet_124: 8359148850968295931
+      NightHarpy-Sheet_125: -4184356931742416797
+      NightHarpy-Sheet_126: -5174999252422665964
+      NightHarpy-Sheet_127: -1638049157551458757
+      NightHarpy-Sheet_128: -5407504465972200222
+      NightHarpy-Sheet_129: -1391727052675806704
+      NightHarpy-Sheet_13: 4554328019668390556
+      NightHarpy-Sheet_130: -8428778288859050007
+      NightHarpy-Sheet_131: 3127512628253751940
+      NightHarpy-Sheet_132: 6609457070656028988
+      NightHarpy-Sheet_133: -3178802251337591148
+      NightHarpy-Sheet_134: -7756458916807776636
+      NightHarpy-Sheet_135: -6581172648178508486
+      NightHarpy-Sheet_136: -6188360083217751816
+      NightHarpy-Sheet_137: -4475106296852164138
+      NightHarpy-Sheet_138: 9131153259191601761
+      NightHarpy-Sheet_139: -7203270983503977218
+      NightHarpy-Sheet_14: -8013545530586838412
+      NightHarpy-Sheet_140: -3699235061459157965
+      NightHarpy-Sheet_141: -7868447482762541095
+      NightHarpy-Sheet_142: 8919659162318529118
+      NightHarpy-Sheet_143: -4367777785878219942
+      NightHarpy-Sheet_144: -4503131503395892910
+      NightHarpy-Sheet_145: 8399820148592675060
+      NightHarpy-Sheet_146: -2216078984037269484
+      NightHarpy-Sheet_147: -2997210751896647169
+      NightHarpy-Sheet_148: 7250706588149992540
+      NightHarpy-Sheet_149: 1801988899453750622
+      NightHarpy-Sheet_15: -3886783793012758913
+      NightHarpy-Sheet_150: 1606899541041164078
+      NightHarpy-Sheet_151: -2132772371818562118
+      NightHarpy-Sheet_152: -13105265255453252
+      NightHarpy-Sheet_153: -7152100935238975072
+      NightHarpy-Sheet_154: 9173255652438487116
+      NightHarpy-Sheet_155: -2760680856282706458
+      NightHarpy-Sheet_156: 2253092004869602785
+      NightHarpy-Sheet_157: -2070523093602449884
+      NightHarpy-Sheet_158: 5943884486647642526
+      NightHarpy-Sheet_159: -7095264552858564608
+      NightHarpy-Sheet_16: 5820637759515463052
+      NightHarpy-Sheet_160: 199079460883314414
+      NightHarpy-Sheet_161: 4670255627436311145
+      NightHarpy-Sheet_17: -5927893571165512691
+      NightHarpy-Sheet_18: -6702084746137986969
+      NightHarpy-Sheet_19: -3631781424565063483
+      NightHarpy-Sheet_2: 4173641079981253712
+      NightHarpy-Sheet_20: 7427764303198352538
+      NightHarpy-Sheet_21: 5351472619245305239
+      NightHarpy-Sheet_22: 5410116625583330735
+      NightHarpy-Sheet_23: 1673522570547050822
+      NightHarpy-Sheet_24: 1064837198788706685
+      NightHarpy-Sheet_25: -7523801695055249537
+      NightHarpy-Sheet_26: -5670764314035273958
+      NightHarpy-Sheet_27: 3947412770951565603
+      NightHarpy-Sheet_28: 7901865987816048431
+      NightHarpy-Sheet_29: 3570371434175131227
+      NightHarpy-Sheet_3: -9104950987082930296
+      NightHarpy-Sheet_30: 3588357431570739731
+      NightHarpy-Sheet_31: 8115338989278786101
+      NightHarpy-Sheet_32: 4726211014299664835
+      NightHarpy-Sheet_33: -5230943785773743137
+      NightHarpy-Sheet_34: 51129809649808143
+      NightHarpy-Sheet_35: 6250133701555910461
+      NightHarpy-Sheet_36: 7196775969936159462
+      NightHarpy-Sheet_37: -3771981200078480684
+      NightHarpy-Sheet_38: -4263046966609626847
+      NightHarpy-Sheet_39: 1749118121973727145
+      NightHarpy-Sheet_4: -5157705958130187325
+      NightHarpy-Sheet_40: 6712298560852818335
+      NightHarpy-Sheet_41: -1841452242231322875
+      NightHarpy-Sheet_42: 3431494119027810369
+      NightHarpy-Sheet_43: -557484882860127086
+      NightHarpy-Sheet_44: 3757978477621471002
+      NightHarpy-Sheet_45: -2095843315091950459
+      NightHarpy-Sheet_46: 8932480051363333707
+      NightHarpy-Sheet_47: -9019332751318732856
+      NightHarpy-Sheet_48: 241085555734995997
+      NightHarpy-Sheet_49: -153664346548635071
+      NightHarpy-Sheet_5: 343407516083862179
+      NightHarpy-Sheet_50: 3892284037550913201
+      NightHarpy-Sheet_51: 7910282762440899914
+      NightHarpy-Sheet_52: 3210970066276786048
+      NightHarpy-Sheet_53: 2366325271686887770
+      NightHarpy-Sheet_54: 7220672606863202669
+      NightHarpy-Sheet_55: 1571865815342018322
+      NightHarpy-Sheet_56: -2185856868915000211
+      NightHarpy-Sheet_57: 2003197749208962191
+      NightHarpy-Sheet_58: 1761313115143814841
+      NightHarpy-Sheet_59: 6179024009451072489
+      NightHarpy-Sheet_6: -3842526171491457699
+      NightHarpy-Sheet_60: -4652507502350282176
+      NightHarpy-Sheet_61: 5085871020809279371
+      NightHarpy-Sheet_62: -3627953511475807411
+      NightHarpy-Sheet_63: -6185288428164818678
+      NightHarpy-Sheet_64: -5417594556118224612
+      NightHarpy-Sheet_65: -8578484445782199586
+      NightHarpy-Sheet_66: 1386117457017409227
+      NightHarpy-Sheet_67: -2532853903999866624
+      NightHarpy-Sheet_68: 5192876496771014643
+      NightHarpy-Sheet_69: 6445375894746666556
+      NightHarpy-Sheet_7: 4797043659819091584
+      NightHarpy-Sheet_70: 1087322629911301514
+      NightHarpy-Sheet_71: -6187941374653887094
+      NightHarpy-Sheet_72: 7587297559146169443
+      NightHarpy-Sheet_73: -1188158640046810419
+      NightHarpy-Sheet_74: -6559867174850645207
+      NightHarpy-Sheet_75: -7232123691474746902
+      NightHarpy-Sheet_76: 3721394534219520376
+      NightHarpy-Sheet_77: -8763190072634646404
+      NightHarpy-Sheet_78: 4940036262766000704
+      NightHarpy-Sheet_79: -4956397840150438210
+      NightHarpy-Sheet_8: 1549018938994848213
+      NightHarpy-Sheet_80: 3879798703953469725
+      NightHarpy-Sheet_81: 1270466824970724195
+      NightHarpy-Sheet_82: 3121088849304055505
+      NightHarpy-Sheet_83: -5207080181129932539
+      NightHarpy-Sheet_84: 1561092001507865210
+      NightHarpy-Sheet_85: -4466938001682529954
+      NightHarpy-Sheet_86: 857502945702657317
+      NightHarpy-Sheet_87: 5031040179588789265
+      NightHarpy-Sheet_88: 4952330825193327548
+      NightHarpy-Sheet_89: 8505846572757605807
+      NightHarpy-Sheet_9: -243336908224200937
+      NightHarpy-Sheet_90: -2390975266249880134
+      NightHarpy-Sheet_91: 4526308709512673341
+      NightHarpy-Sheet_92: 45550017831217374
+      NightHarpy-Sheet_93: 5941510888376667166
+      NightHarpy-Sheet_94: -2782130364410410895
+      NightHarpy-Sheet_95: -1425346333881847053
+      NightHarpy-Sheet_96: 2041783132318046326
+      NightHarpy-Sheet_97: 5582907188368957812
+      NightHarpy-Sheet_98: 8533816930507574361
+      NightHarpy-Sheet_99: 2953054667346970346
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
