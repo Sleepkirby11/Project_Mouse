@@ -4,13 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Zone : MonoBehaviour
 {
-    [Header("���� ����")]
+    [Header("구역 설정")]
     public int zoneId;
 
-    [Header("���� ����")]
+    [Header("스폰 설정")]
     public Transform spawnPoint;
 
-    [Header("����� ������")]
+    [Header("연결된 구역들")]
     public List<int> connectedZoneIds = new List<int>();
 
     private void Awake()

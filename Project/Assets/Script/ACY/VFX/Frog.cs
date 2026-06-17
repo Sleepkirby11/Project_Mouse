@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
-    [Header("����� ����")]
+    [Header("대미지 설정")]
     [SerializeField] private int damage = 1;
-    [SerializeField] private float hitboxActivateDelay = 0.5f;  // ħ ���� Ÿ�̹�
-    [SerializeField] private float hitboxDuration = 0.3f;       // ���� ���� �ð�
+    [SerializeField] private float hitboxActivateDelay = 0.5f;  // 침 공격 타이밍
+    [SerializeField] private float hitboxDuration = 0.3f;       // 판정 유지 시간
     [SerializeField] private float animDuration = 2.0f;
 
 
@@ -24,9 +24,9 @@ public class Frog : MonoBehaviour
     {
         if (anim != null)
         {
-            anim.Play("Frog", 0, 0f); // ��ȯ �� �ִϸ��̼� ó������ ����
+            anim.Play("Frog", 0, 0f); // 반환 시 애니메이션 처음으로 리셋
             anim.Update(0f);
-            anim.enabled = false;     // �ִϸ����� ��Ȱ��ȭ
+            anim.enabled = false;     // 애니메이터 비활성화
         }
     }
 
@@ -46,19 +46,19 @@ public class Frog : MonoBehaviour
 
     private IEnumerator FrogRoutine()
     {
-        // ���� Ÿ�ֿ̹� ���� ON
+        // 공격 타이밍에 판정 ON
         yield return new WaitForSeconds(hitboxActivateDelay);
         if (hitbox != null)
         {
             hitbox.enabled = true;
         }
-        // ���� ����
+        // 판정 유지
         yield return new WaitForSeconds(hitboxDuration);
         if (hitbox != null)
         {
             hitbox.enabled = false;
         }
-        // �ִϸ��̼� ������ ���
+        // 애니메이션 끝까지 대기
         yield return new WaitForSeconds(animDuration - hitboxActivateDelay - hitboxDuration);
 
         PoolingManager.Instance.Return(POOL_KEY, gameObject);

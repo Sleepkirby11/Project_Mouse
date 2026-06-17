@@ -6,11 +6,11 @@ public class KpAnimationEvent : MonoBehaviour
 
     void Start()
     {
-        // �θ� ������Ʈ�� �ִ� KillerPlantAttack�� ������
+        // 부모 오브젝트에 있는 KillerPlantAttack를 가져옴
         parentAttack = GetComponentInParent<KillerPlantAttack>();
     }
 
-    // �ڽ��� �ִϸ��̼� �̺�Ʈ�� �� �Լ����� ȣ���ϸ� �θ𿡰� ����
+    // 자식의 애니메이션 이벤트가 이 함수들을 호출하면 부모에게 보냄
     public void OnMeleeHit()
     {
         if (parentAttack != null)
