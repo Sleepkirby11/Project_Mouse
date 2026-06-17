@@ -1,0 +1,663 @@
+fileFormatVersion: 2
+guid: 5b8db1bc7d61d0a4e81346523e8d73a3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6513622684763726446
+    second: FrontHeavyAtk(FX)12_0
+  - first:
+      213: 8205048179108406638
+    second: FrontHeavyAtk(FX)12_1
+  - first:
+      213: -8359046664952191934
+    second: FrontHeavyAtk(FX)12_2
+  - first:
+      213: 5225445132906110694
+    second: FrontHeavyAtk(FX)12_3
+  - first:
+      213: -1735951175188556082
+    second: FrontHeavyAtk(FX)12_4
+  - first:
+      213: 1793015229748586691
+    second: FrontHeavyAtk(FX)12_5
+  - first:
+      213: -1559570971000943121
+    second: FrontHeavyAtk(FX)12_6
+  - first:
+      213: -5587542597546171817
+    second: FrontHeavyAtk(FX)12_7
+  - first:
+      213: -2051495638351265441
+    second: FrontHeavyAtk(FX)12_8
+  - first:
+      213: 6538989551978513399
+    second: FrontHeavyAtk(FX)12_9
+  - first:
+      213: 4970237834288020383
+    second: FrontHeavyAtk(FX)12_10
+  - first:
+      213: -8456807998479795745
+    second: FrontHeavyAtk(FX)12_11
+  - first:
+      213: -6223629573632114566
+    second: FrontHeavyAtk(FX)12_12
+  - first:
+      213: 1178628084482223640
+    second: FrontHeavyAtk(FX)12_13
+  - first:
+      213: 8746851820348745329
+    second: FrontHeavyAtk(FX)12_14
+  - first:
+      213: -2927099417298954149
+    second: FrontHeavyAtk(FX)12_15
+  - first:
+      213: -8005716622749793779
+    second: FrontHeavyAtk(FX)12_16
+  - first:
+      213: -3371115307695304681
+    second: FrontHeavyAtk(FX)12_17
+  - first:
+      213: 8851787828615343929
+    second: FrontHeavyAtk(FX)12_18
+  - first:
+      213: -6965647549797220380
+    second: FrontHeavyAtk(FX)12_19
+  - first:
+      213: -7295014245696126949
+    second: FrontHeavyAtk(FX)12_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_0
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 35
+        width: 55
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29d5bb9cda6fa95a0800000000000000
+      internalID: -6513622684763726446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 42
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e65e8b0c8df2ed170800000000000000
+      internalID: 8205048179108406638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_2
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 42
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2446c9aa853befb80800000000000000
+      internalID: -8359046664952191934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_3
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 55
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ee992ca9a2848840800000000000000
+      internalID: 5225445132906110694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_4
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 37
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec6d6778a99a8e7e0800000000000000
+      internalID: -1735951175188556082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_5
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 53
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c8a7060ad112e810800000000000000
+      internalID: 1793015229748586691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_6
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 46
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fed4a7ff67a4b5ae0800000000000000
+      internalID: -1559570971000943121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_7
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 46
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 752a5e19c9f0572b0800000000000000
+      internalID: -5587542597546171817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_8
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 41
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f514fc1169f9783e0800000000000000
+      internalID: -2051495638351265441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_9
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 37
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f38bab3a582fba50800000000000000
+      internalID: 6538989551978513399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_10
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 27
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9bb1f11af4d9f440800000000000000
+      internalID: 4970237834288020383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_11
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 34
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9fde47ee163aa80800000000000000
+      internalID: -8456807998479795745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_12
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 31
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a70ca0280e931a9a0800000000000000
+      internalID: -6223629573632114566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_13
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 11
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81eacd98ff35b5010800000000000000
+      internalID: 1178628084482223640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_14
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 24
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 176add6436f036970800000000000000
+      internalID: 8746851820348745329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_15
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 25
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5894a1a69ad067d0800000000000000
+      internalID: -2927099417298954149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_16
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 19
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d020f80d52bf5e090800000000000000
+      internalID: -8005716622749793779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_17
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 19
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71090f31d746731d0800000000000000
+      internalID: -3371115307695304681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_18
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 6
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93f6ebf912ed7da70800000000000000
+      internalID: 8851787828615343929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_19
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 0
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ef34c3857c055f90800000000000000
+      internalID: -6965647549797220380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrontHeavyAtk(FX)12_20
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 11
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b104ed5b137e2ca90800000000000000
+      internalID: -7295014245696126949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FrontHeavyAtk(FX)12_0: -6513622684763726446
+      FrontHeavyAtk(FX)12_1: 8205048179108406638
+      FrontHeavyAtk(FX)12_10: 4970237834288020383
+      FrontHeavyAtk(FX)12_11: -8456807998479795745
+      FrontHeavyAtk(FX)12_12: -6223629573632114566
+      FrontHeavyAtk(FX)12_13: 1178628084482223640
+      FrontHeavyAtk(FX)12_14: 8746851820348745329
+      FrontHeavyAtk(FX)12_15: -2927099417298954149
+      FrontHeavyAtk(FX)12_16: -8005716622749793779
+      FrontHeavyAtk(FX)12_17: -3371115307695304681
+      FrontHeavyAtk(FX)12_18: 8851787828615343929
+      FrontHeavyAtk(FX)12_19: -6965647549797220380
+      FrontHeavyAtk(FX)12_2: -8359046664952191934
+      FrontHeavyAtk(FX)12_20: -7295014245696126949
+      FrontHeavyAtk(FX)12_3: 5225445132906110694
+      FrontHeavyAtk(FX)12_4: -1735951175188556082
+      FrontHeavyAtk(FX)12_5: 1793015229748586691
+      FrontHeavyAtk(FX)12_6: -1559570971000943121
+      FrontHeavyAtk(FX)12_7: -5587542597546171817
+      FrontHeavyAtk(FX)12_8: -2051495638351265441
+      FrontHeavyAtk(FX)12_9: 6538989551978513399
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
