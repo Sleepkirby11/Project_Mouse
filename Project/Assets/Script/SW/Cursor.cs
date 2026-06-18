@@ -145,13 +145,17 @@ public class Cursor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        IStunnable stunnable = collision.gameObject.GetComponent<IStunnable>();
 
         if (damageable != null && !collision.gameObject.CompareTag("Player"))
         {
             damageable.TakeDamage(damage);
             Debug.Log(isSkill);
-            if(isSkill && playerStatus.currentStance == PlayerStatus.Stance.Green)
-                playerStatus.Heal(2);
+            if(isSkill)
+            {
+                if(playerStatus.currentStance == PlayerStatus.Stance.Green) playerStatus.Heal(2);
+                if(playerStatus.currentStance == PlayerStatus.Stance.Blue && stunnable != null) stunnable.ApplyStun(5); 
+            }
         }
     }
 }
