@@ -3,26 +3,30 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    private Animator animator;
+    private Animator anim;
     private Rigidbody2D rb;
     private EnemyStatus enemyStatus;
+    private BlueBossFlip bossFlip;
 
     [Header("상태 설정")]
-    [SerializeField] private float dashSpeed = 10f;
-    [SerializeField] private float clawRange = 2f;
-    [SerializeField] private float patternCooldown = 1.5f;
+    [SerializeField] private float dashSpeed = 10f; // 대시 속도
+    [SerializeField] private float patternCooldown = 1.5f; // 패턴 쿨타임
+    [SerializeField] private float moveSpeed = 6f; // 이동속도
 
-    [Header("휴식 패턴")]
-    [SerializeField] private Transform[] restPoints;
-    [SerializeField] private Transform airPoint;
+    [Header("휴식 패턴")] 
+    [SerializeField] private Transform[] restPoints; //휴식 포인트
+    [SerializeField] private Vector2 restPointOffset = Vector2.zero; //오프셋
+    [SerializeField] private float restJumpHeight = 5f; // 휴식 끝난 후 점프 높이
 
     [Header("히트박스 설정")]
-    [SerializeField] private Collider2D clawHitbox;
-    [SerializeField] private Collider2D sonicHitbox;
+    [SerializeField] private Collider2D clawHitbox;  // 할퀴기
+    [SerializeField] private Collider2D sonicHitbox; // 음파
+    [SerializeField] private Collider2D dashHitbox; // 대시
 
     private Transform player;
     private bool isPhase2 = false;
     private bool isDead = false;
+    private bool restJumpTriggered;
 
     private Coroutine currentLoop;
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
@@ -33,17 +37,19 @@ public class BossController : MonoBehaviour
     private static readonly int AnimRestStart = Animator.StringToHash("RestStart");
     private static readonly int AnimRest = Animator.StringToHash("Rest");
     private static readonly int AnimRest2 = Animator.StringToHash("Rest2");
-    private static readonly int AnimRestEnd = Animator.StringToHash("RestEnd");
 
     private void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        bossFlip = GetComponent<BlueBossFlip>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         enemyStatus = GetComponent<EnemyStatus>();
 
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
+        {
             player = playerObj.transform;
+        }
 
         clawHitbox.enabled = false;
         sonicHitbox.enabled = false;
@@ -56,7 +62,9 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         if (isDead || isPhase2)
+        {
             return;
+        }
 
         if (enemyStatus.GetHPRatio() <= 0.5f)
         {
@@ -125,97 +133,107 @@ public class BossController : MonoBehaviour
     // ───────────────────────────────────────────
 
     private IEnumerator PatternClaw()
+{
+    if (player == null)
+        yield break;
+
+    Vector2 dir =
+        ((Vector2)player.position - rb.position).normalized;
+
+    Vector2 targetPos =
+        (Vector2)player.position - dir * 0.4f;
+
+    bool attackStarted = false;
+
+    while (!isDead && Vector2.Distance(rb.position, targetPos) > 0.1f)
     {
-        if (player == null)
-            yield break;
+        float distance = Vector2.Distance(rb.position, targetPos);
 
-        Vector2 targetPos = (Vector2)player.position + Vector2.up * clawRange;
+        // 목표에 거의 도착했을 때 공격 시작
+        if (!attackStarted && distance < 2.5f)
+        {
+            attackStarted = true;
+            anim.SetTrigger(AnimClaw);
+        }
 
-        yield return MoveToPosition(targetPos, 4f);
+        rb.MovePosition(
+            Vector2.MoveTowards(
+                rb.position,
+                targetPos,
+                moveSpeed * 2f * Time.fixedDeltaTime));
 
-        animator.SetTrigger(AnimClaw);
-
-        yield return new WaitForSeconds(GetAnimLength("Claw"));
+        yield return new WaitForFixedUpdate();
     }
+
+    rb.MovePosition(targetPos);
+
+    // 혹시 너무 가까워서 위 조건을 못 탔을 경우
+    if (!attackStarted)
+    {
+        anim.SetTrigger(AnimClaw);
+    }
+
+    yield return new WaitForSeconds(GetAnimLength("Claw"));
+}
 
     private IEnumerator PatternDash()
     {
         if (player == null)
+        {
             yield break;
+        }
 
-        animator.SetTrigger(AnimDashStart);
+        anim.SetTrigger(AnimDashStart);
         yield return new WaitForSeconds(0.2f);
 
-        Vector2 dashDir =
-            player.position.x > transform.position.x
-            ? Vector2.right
-            : Vector2.left;
+        Vector2 dashDir = player.position.x > transform.position.x ? Vector2.right : Vector2.left;
 
-        Vector2 dashTarget =
-            rb.position + dashDir * 12f;
+        Vector2 dashTarget = new Vector2(player.position.x, rb.position.y);
 
-        animator.SetTrigger(AnimDash);
-
+        anim.SetTrigger(AnimDash);
+        dashHitbox.enabled = true;
         yield return MoveToPosition(dashTarget, dashSpeed);
+        dashHitbox.enabled = false;
 
-        animator.SetTrigger(AnimDashEnd);
+        anim.SetTrigger(AnimDashEnd);
         yield return new WaitForSeconds(0.3f);
     }
 
     private IEnumerator PatternSonic()
     {
         if (player == null)
+        {
             yield break;
+        }
 
-        Vector2 targetPos =
-            new Vector2(transform.position.x, player.position.y);
-
-        yield return MoveToPosition(targetPos, 4f);
-
-        animator.SetTrigger(AnimSonic);
+        anim.SetTrigger(AnimSonic);
 
         yield return new WaitForSeconds(GetAnimLength("Sonic"));
     }
     private IEnumerator RestRoutine()
     {
         if (restPoints == null || restPoints.Length == 0)
+        {
             yield break;
-
-        Transform restPoint =
-            restPoints[Random.Range(0, restPoints.Length)];
-
-        yield return MoveToPosition(
-            restPoint.position,
-            3f);
-
-        animator.SetTrigger(AnimRestStart);
-
-        yield return new WaitForSeconds(
-            GetAnimLength("RestStart"));
-
-        int restCount = Random.Range(2, 4);
-
-        for (int i = 0; i < restCount; i++)
-        {
-            animator.SetTrigger(
-                Random.value > 0.5f
-                ? AnimRest
-                : AnimRest2);
-
-            yield return new WaitForSeconds(1.5f);
         }
 
-        animator.SetTrigger(AnimRestEnd);
+        Transform restPoint = restPoints[Random.Range(0, restPoints.Length)];
 
-        yield return new WaitForSeconds(
-            GetAnimLength("RestEnd"));
+        Vector2 restPos = (Vector2)restPoint.position + restPointOffset;
+        yield return MoveToPosition(restPos, moveSpeed);
 
-        if (airPoint != null)
-        {
-            yield return MoveToPosition(
-                airPoint.position,
-                3f);
-        }
+        anim.SetTrigger(AnimRestStart);
+
+        yield return new WaitForSeconds(GetAnimLength("RestStart"));
+
+        restJumpTriggered = false;
+
+        anim.SetTrigger(Random.value > 0.5f ? AnimRest : AnimRest2);
+
+        yield return new WaitUntil(() => restJumpTriggered);
+
+        Vector2 aboveRest = (Vector2)restPoint.position + Vector2.up * restJumpHeight;
+        yield return MoveToPosition(aboveRest, moveSpeed);
     }
 
     // ───────────────────────────────────────────
@@ -225,7 +243,9 @@ public class BossController : MonoBehaviour
     private void OnDeath()
     {
         if (isDead)
+        {
             return;
+        }
 
         isDead = true;
 
@@ -233,6 +253,7 @@ public class BossController : MonoBehaviour
 
         clawHitbox.enabled = false;
         sonicHitbox.enabled = false;
+        dashHitbox.enabled = false;
 
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 2f;
@@ -248,30 +269,39 @@ public class BossController : MonoBehaviour
     public void SonicHitboxOn() => sonicHitbox.enabled = true;
     public void SonicHitboxOff() => sonicHitbox.enabled = false;
 
+    public void RestJumpEvent()
+    {
+        restJumpTriggered = true;
+    }
+
     // ───────────────────────────────────────────
     // 유틸
     // ───────────────────────────────────────────
 
     private IEnumerator MoveToPosition(Vector2 target, float speed)
     {
-        while (!isDead &&
-               Vector2.Distance(rb.position, target) > 0.1f)
+        bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
+
+        while (!isDead && Vector2.Distance(rb.position, target) > 0.1f)
         {
-            rb.MovePosition(
-                Vector2.MoveTowards(
-                    rb.position,
-                    target,
-                    speed * Time.fixedDeltaTime));
+            bossFlip.moveDirection = (target - rb.position);
+            rb.MovePosition(Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime));
 
             yield return new WaitForFixedUpdate();
         }
 
         rb.MovePosition(target);
+        bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 이동 끝나면 플레이어 바라보기
     }
     private float GetAnimLength(string clipName)
     {
-        foreach (var clip in animator.runtimeAnimatorController.animationClips)
-            if (clip.name == clipName) return clip.length;
+        foreach (var clip in anim.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+            {
+                return clip.length;
+            }
+        }
         return 1f;
     }
 }
