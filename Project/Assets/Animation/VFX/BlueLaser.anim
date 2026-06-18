@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Claw
+  m_Name: BlueLaser
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,17 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1516176371882170263, guid: e04d9282577c12d4dbd4040c70fadc2e, type: 3}
+      value: {fileID: 4839849661682825975, guid: a6c539fe645dec24987d49d1542c92aa, type: 3}
     - time: 0.083333336
-      value: {fileID: -3339711345090056240, guid: 42013fcf5cf3a2d438e38b9699360d8a, type: 3}
+      value: {fileID: 8986622231772986192, guid: 88ba5bcdcc5921a46a6361d1e439c017, type: 3}
     - time: 0.16666667
-      value: {fileID: 4314677517641207043, guid: 23f81cbdd1a249441970c8037e801a03, type: 3}
+      value: {fileID: 292298694556545378, guid: defcaed91ece40849961236dcf50740c, type: 3}
     - time: 0.25
-      value: {fileID: -8223745339221208705, guid: 1f718541a9702d349b4001bc923c6985, type: 3}
+      value: {fileID: 5822900870701293054, guid: a5245f6ae640f4f468a88a606cb0a4b8, type: 3}
     - time: 0.33333334
-      value: {fileID: 2173994873571851624, guid: a9e4da4f13c093449ae41d65334a62a4, type: 3}
+      value: {fileID: -6281227271253198835, guid: 5aa556b1dd0d24346a39a187863cf759, type: 3}
     - time: 0.41666666
-      value: {fileID: 5508459477629004313, guid: 00bdd4bbbc8eb444a882e568932a5155, type: 3}
+      value: {fileID: 961539723984690882, guid: 0ad0876f55376a84e99d1d801de4f582, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -54,12 +54,12 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1516176371882170263, guid: e04d9282577c12d4dbd4040c70fadc2e, type: 3}
-    - {fileID: -3339711345090056240, guid: 42013fcf5cf3a2d438e38b9699360d8a, type: 3}
-    - {fileID: 4314677517641207043, guid: 23f81cbdd1a249441970c8037e801a03, type: 3}
-    - {fileID: -8223745339221208705, guid: 1f718541a9702d349b4001bc923c6985, type: 3}
-    - {fileID: 2173994873571851624, guid: a9e4da4f13c093449ae41d65334a62a4, type: 3}
-    - {fileID: 5508459477629004313, guid: 00bdd4bbbc8eb444a882e568932a5155, type: 3}
+    - {fileID: 4839849661682825975, guid: a6c539fe645dec24987d49d1542c92aa, type: 3}
+    - {fileID: 8986622231772986192, guid: 88ba5bcdcc5921a46a6361d1e439c017, type: 3}
+    - {fileID: 292298694556545378, guid: defcaed91ece40849961236dcf50740c, type: 3}
+    - {fileID: 5822900870701293054, guid: a5245f6ae640f4f468a88a606cb0a4b8, type: 3}
+    - {fileID: -6281227271253198835, guid: 5aa556b1dd0d24346a39a187863cf759, type: 3}
+    - {fileID: 961539723984690882, guid: 0ad0876f55376a84e99d1d801de4f582, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -84,18 +84,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.25
-    functionName: ClawHitboxOn
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.41666666
-    functionName: ClawHitboxOff
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

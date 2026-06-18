@@ -3,26 +3,37 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    private Animator animator;
+    private Animator anim;
     private Rigidbody2D rb;
     private EnemyStatus enemyStatus;
+    private BlueBossFlip bossFlip;
 
     [Header("상태 설정")]
-    [SerializeField] private float dashSpeed = 10f;
-    [SerializeField] private float clawRange = 2f;
-    [SerializeField] private float patternCooldown = 1.5f;
+    [SerializeField] private float dashSpeed = 10f; // 대시 속도
+    [SerializeField] private float patternCooldown = 1.5f; // 패턴 쿨타임
+    [SerializeField] private float moveSpeed = 6f; // 이동속도
 
-    [Header("휴식 패턴")]
-    [SerializeField] private Transform[] restPoints;
-    [SerializeField] private Transform airPoint;
+    [Header("휴식 패턴")] 
+    [SerializeField] private Transform[] restPoints; //휴식 포인트
+    [SerializeField] private Vector2 restPointOffset = Vector2.zero; //오프셋
+    [SerializeField] private float restJumpHeight = 5f; // 휴식 끝난 후 점프 높이
 
     [Header("히트박스 설정")]
-    [SerializeField] private Collider2D clawHitbox;
-    [SerializeField] private Collider2D sonicHitbox;
+    [SerializeField] private Collider2D clawHitbox;  // 할퀴기
+    [SerializeField] private Collider2D dashHitbox; // 대시
+
+    [Header("음파 설정")]
+    public string sonicPoolKey = "BlueLaser";
+    [SerializeField] private Transform sonicSpawnPoint; // FirePoint
+    [SerializeField] private float sonicAngle = 45f;   // 기울기 
+    [SerializeField] private float sonicRange = 20f;
+    [SerializeField] private int sonicDamage = 10;
+    [SerializeField] private LayerMask playerLayer;
 
     private Transform player;
     private bool isPhase2 = false;
     private bool isDead = false;
+    private bool restJumpTriggered;
 
     private Coroutine currentLoop;
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
@@ -33,20 +44,22 @@ public class BossController : MonoBehaviour
     private static readonly int AnimRestStart = Animator.StringToHash("RestStart");
     private static readonly int AnimRest = Animator.StringToHash("Rest");
     private static readonly int AnimRest2 = Animator.StringToHash("Rest2");
-    private static readonly int AnimRestEnd = Animator.StringToHash("RestEnd");
 
     private void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        bossFlip = GetComponent<BlueBossFlip>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         enemyStatus = GetComponent<EnemyStatus>();
 
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
+        {
             player = playerObj.transform;
+        }
 
         clawHitbox.enabled = false;
-        sonicHitbox.enabled = false;
+
 
         enemyStatus.OnEnemyDeath += OnDeath;
 
@@ -55,12 +68,19 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
-        if (isDead || isPhase2)
-            return;
-
-        if (enemyStatus.GetHPRatio() <= 0.5f)
+        if (!isDead && !isPhase2)
         {
-            isPhase2 = true;
+            if (enemyStatus.GetHPRatio() <= 0.5f)
+            {
+                isPhase2 = true;
+            }
+        }
+
+        if (sonicSpawnPoint != null && !isDead)
+        {
+            Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
+            Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
+            Debug.DrawRay(sonicSpawnPoint.position, fireDirection * sonicRange, Color.yellow);
         }
     }
 
@@ -106,20 +126,47 @@ public class BossController : MonoBehaviour
             }
             else if (roll == 1)
             {
-                yield return StartCoroutine(PatternSonic());
+                yield return StartCoroutine(PatternDash());
+                yield return StartCoroutine(PatternDash());
+                yield return StartCoroutine(RestRoutine());
             }
             else
             {
-                yield return StartCoroutine(PatternDash());
-                yield return StartCoroutine(PatternDash());
-
-                yield return StartCoroutine(RestRoutine());
+                yield return StartCoroutine(PatternSonicApproach());
             }
 
             yield return new WaitForSeconds(patternCooldown);
         }
     }
 
+    private IEnumerator PatternSonicApproach()
+    {
+        if (player == null)
+        {
+            yield break;
+        }
+
+        bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 플레이어 바라보기
+
+        while (!isDead)
+        {
+            // 플레이어 대각선 위 목표 위치 (플레이어 반대편 위)
+            float offsetX = bossFlip.isFacingRight ? -sonicRange * 0.7f : sonicRange * 0.7f;
+            float offsetY = sonicRange * 0.7f;
+            Vector2 targetPos = (Vector2)player.position + new Vector2(offsetX, offsetY);
+
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime));
+
+            if (IsPlayerInLaserRange())
+            {
+                anim.SetTrigger(AnimSonic);
+                yield return new WaitForSeconds(GetAnimLength("Sonic"));
+                yield break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
     // ───────────────────────────────────────────
     // 패턴
     // ───────────────────────────────────────────
@@ -127,13 +174,39 @@ public class BossController : MonoBehaviour
     private IEnumerator PatternClaw()
     {
         if (player == null)
+        {
             yield break;
+        }
 
-        Vector2 targetPos = (Vector2)player.position + Vector2.up * clawRange;
+        Vector2 dir = ((Vector2)player.position - rb.position).normalized;
 
-        yield return MoveToPosition(targetPos, 4f);
+        Vector2 targetPos = (Vector2)player.position - dir * 0.4f;
 
-        animator.SetTrigger(AnimClaw);
+        bool attackStarted = false;
+
+        while (!isDead && Vector2.Distance(rb.position, targetPos) > 0.1f)
+        {
+            float distance = Vector2.Distance(rb.position, targetPos);
+
+            // 목표에 거의 도착했을 때 공격 시작
+            if (!attackStarted && distance < 2.5f)
+            {
+                attackStarted = true;
+                anim.SetTrigger(AnimClaw);
+            }
+
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * 2f * Time.fixedDeltaTime));
+
+            yield return new WaitForFixedUpdate();
+        }
+        
+        rb.MovePosition(targetPos);
+
+        // 혹시 너무 가까워서 위 조건을 못 탔을 경우
+        if (!attackStarted)
+        {
+            anim.SetTrigger(AnimClaw);
+        }
 
         yield return new WaitForSeconds(GetAnimLength("Claw"));
     }
@@ -141,81 +214,95 @@ public class BossController : MonoBehaviour
     private IEnumerator PatternDash()
     {
         if (player == null)
+        {
             yield break;
+        }
 
-        animator.SetTrigger(AnimDashStart);
+        anim.SetTrigger(AnimDashStart);
         yield return new WaitForSeconds(0.2f);
 
-        Vector2 dashDir =
-            player.position.x > transform.position.x
-            ? Vector2.right
-            : Vector2.left;
+        Vector2 dashDir = ((Vector2)player.position - rb.position).normalized; // 플레이어 방향
+        Vector2 dashTarget = rb.position + dashDir * 20f; // 숫자 만큼 더 이동
 
-        Vector2 dashTarget =
-            rb.position + dashDir * 12f;
-
-        animator.SetTrigger(AnimDash);
+        anim.SetTrigger(AnimDash);
+        dashHitbox.enabled = true;
 
         yield return MoveToPosition(dashTarget, dashSpeed);
+        dashHitbox.enabled = false;
 
-        animator.SetTrigger(AnimDashEnd);
+        anim.SetTrigger(AnimDashEnd);
         yield return new WaitForSeconds(0.3f);
     }
 
-    private IEnumerator PatternSonic()
+    public void SonicFire()
     {
-        if (player == null)
-            yield break;
+        if (sonicSpawnPoint == null)
+        {
+            return;
+        }
 
-        Vector2 targetPos =
-            new Vector2(transform.position.x, player.position.y);
+        Vector2 spawnPos = sonicSpawnPoint.position;
 
-        yield return MoveToPosition(targetPos, 4f);
+        Quaternion rot = bossFlip.isFacingRight ? Quaternion.Euler(0f, 0f, sonicAngle) : Quaternion.Euler(0f, 180f, sonicAngle); // Y 180으로 뒤집기
 
-        animator.SetTrigger(AnimSonic);
+        GameObject laser = PoolingManager.Instance.Get(sonicPoolKey, spawnPos, rot);
+        if (laser != null)
+        {
+            laser.transform.localScale = Vector3.one;
+        }
 
-        yield return new WaitForSeconds(GetAnimLength("Sonic"));
+        // Raycast 방향도 단순하게
+        Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
+        Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
+
+        RaycastHit2D hit = Physics2D.Raycast(spawnPos, fireDirection, sonicRange, playerLayer);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
+            {
+                damageable.TakeDamage(sonicDamage);
+            }
+        }
+    }
+    private bool IsPlayerInLaserRange()
+    {
+        if (player == null || sonicSpawnPoint == null)
+        {
+            return false;
+        }
+
+        Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
+        Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
+
+        RaycastHit2D hit = Physics2D.Raycast(sonicSpawnPoint.position, fireDirection, sonicRange, playerLayer);
+
+        return hit.collider != null && hit.collider.CompareTag("Player");
     }
     private IEnumerator RestRoutine()
     {
         if (restPoints == null || restPoints.Length == 0)
+        {
             yield break;
-
-        Transform restPoint =
-            restPoints[Random.Range(0, restPoints.Length)];
-
-        yield return MoveToPosition(
-            restPoint.position,
-            3f);
-
-        animator.SetTrigger(AnimRestStart);
-
-        yield return new WaitForSeconds(
-            GetAnimLength("RestStart"));
-
-        int restCount = Random.Range(2, 4);
-
-        for (int i = 0; i < restCount; i++)
-        {
-            animator.SetTrigger(
-                Random.value > 0.5f
-                ? AnimRest
-                : AnimRest2);
-
-            yield return new WaitForSeconds(1.5f);
         }
 
-        animator.SetTrigger(AnimRestEnd);
+        Transform restPoint = restPoints[Random.Range(0, restPoints.Length)];
 
-        yield return new WaitForSeconds(
-            GetAnimLength("RestEnd"));
+        Vector2 restPos = (Vector2)restPoint.position + restPointOffset;
+        yield return MoveToPosition(restPos, moveSpeed);
 
-        if (airPoint != null)
-        {
-            yield return MoveToPosition(
-                airPoint.position,
-                3f);
-        }
+        anim.SetTrigger(AnimRestStart);
+
+        yield return new WaitForSeconds(GetAnimLength("RestStart"));
+
+        restJumpTriggered = false;
+
+        anim.SetTrigger(Random.value > 0.5f ? AnimRest : AnimRest2);
+
+        yield return new WaitUntil(() => restJumpTriggered);
+
+        Vector2 aboveRest = (Vector2)restPoint.position + Vector2.up * restJumpHeight;
+        yield return MoveToPosition(aboveRest, moveSpeed);
     }
 
     // ───────────────────────────────────────────
@@ -225,14 +312,16 @@ public class BossController : MonoBehaviour
     private void OnDeath()
     {
         if (isDead)
+        {
             return;
+        }
 
         isDead = true;
 
         StopAllCoroutines();
 
         clawHitbox.enabled = false;
-        sonicHitbox.enabled = false;
+        dashHitbox.enabled = false;
 
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 2f;
@@ -245,8 +334,11 @@ public class BossController : MonoBehaviour
     public void ClawHitboxOn() => clawHitbox.enabled = true;
     public void ClawHitboxOff() => clawHitbox.enabled = false;
 
-    public void SonicHitboxOn() => sonicHitbox.enabled = true;
-    public void SonicHitboxOff() => sonicHitbox.enabled = false;
+
+    public void RestJumpEvent()
+    {
+        restJumpTriggered = true;
+    }
 
     // ───────────────────────────────────────────
     // 유틸
@@ -254,24 +346,28 @@ public class BossController : MonoBehaviour
 
     private IEnumerator MoveToPosition(Vector2 target, float speed)
     {
-        while (!isDead &&
-               Vector2.Distance(rb.position, target) > 0.1f)
+        bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
+
+        while (!isDead && Vector2.Distance(rb.position, target) > 0.1f)
         {
-            rb.MovePosition(
-                Vector2.MoveTowards(
-                    rb.position,
-                    target,
-                    speed * Time.fixedDeltaTime));
+            bossFlip.moveDirection = (target - rb.position);
+            rb.MovePosition(Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime));
 
             yield return new WaitForFixedUpdate();
         }
 
         rb.MovePosition(target);
+        bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 이동 끝나면 플레이어 바라보기
     }
     private float GetAnimLength(string clipName)
     {
-        foreach (var clip in animator.runtimeAnimatorController.animationClips)
-            if (clip.name == clipName) return clip.length;
+        foreach (var clip in anim.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+            {
+                return clip.length;
+            }
+        }
         return 1f;
     }
 }
