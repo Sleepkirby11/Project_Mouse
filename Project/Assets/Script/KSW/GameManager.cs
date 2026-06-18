@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
             return talkData[id][talkIndex];
     }
     
-    public void LoadScene(int index)
+    public void LoadScene(string index)
     {
         SceneManager.LoadScene(index);
     }

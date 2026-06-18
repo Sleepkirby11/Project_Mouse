@@ -45,6 +45,9 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     [SerializeField] private Gradient whiteStance;
     public Stance currentStance;
 
+    [Header("플레이어 콤보")]
+    public int combo;
+
 
     private Rigidbody2D rb;
     private bool isKnockbacked; // 넉백 상태 여부
@@ -89,7 +92,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         if (UI.Instance != null)
         {
-            UI.Instance.TakeDamage(damage);
+            UI.Instance.UpdateHPBar();
         }
 
         //점프 애니메이션 실행 이전 Invincible 활성화
@@ -109,6 +112,16 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             playerAnim.SetTrigger("Hit");
         }
+    }
+
+    public void Heal(int amount)
+    {
+        if(hp >= maxHp) return;
+
+        hp += amount;               
+        if(hp >= maxHp) hp = maxHp;
+
+        UI.Instance.UpdateHPBar();
     }
 
     // IHittable 구현 : 넉백

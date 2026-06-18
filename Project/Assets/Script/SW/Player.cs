@@ -21,49 +21,50 @@ using static UnityEngine.GraphicsBuffer;
  */
 public class Player : MonoBehaviour
 {
-    PlayerStatus status;
+    [HideInInspector] public PlayerStatus status;
  
+    public GameObject eventSystem;
     public GameObject cam;
 
     [Header("공격")]
     public GameObject cursorObject;
-    Cursor cursor;
+    [HideInInspector] public Cursor cursor;
 
     [Header("발판")]
     public GameObject groundLine;
-    Cursor groundCursor;
+    [HideInInspector] public Cursor groundCursor;
 
     [Header("공격 표시 커서")]
     public GameObject attackCursor;
 
 
     //유니티 컴포넌트
-    Rigidbody2D rigid;
+    [HideInInspector] public Rigidbody2D rigid;
     BoxCollider2D col;
-    Animator anim;
+    [HideInInspector] public Animator anim;
     SpriteRenderer sprite;
     LineRenderer dashLine;
-    ParticleSystem particle;
+    [HideInInspector] public ParticleSystem particle;
 
     //이동값 변수
-    float speed;
-    Vector2 inputVec;
-    bool isCanMove;
+    [HideInInspector] public float speed;
+    [HideInInspector] public Vector2 inputVec;
+    [HideInInspector] public bool isCanMove;
 
     //점프 횟수
-    int jumpCount;
+    public int jumpCount;
 
     //대시 준비 여부
-    bool isDashReady;
+    [HideInInspector] public bool isDashReady;
 
     private bool isChargeInk;
     private bool isChargeSpecial;
 
     //마우스
-    Transform mouse;
+    [HideInInspector] public Transform mouse;
     Vector2 mouseDist;
     public float maxDist;
-    bool isSkill;
+    public bool isSkill;
 
     float usedInk;
 
@@ -71,10 +72,16 @@ public class Player : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(cursorObject);
-        DontDestroyOnLoad(groundLine);
-        DontDestroyOnLoad(attackCursor);
-        DontDestroyOnLoad(cam);
+        if(cursorObject != null)
+            DontDestroyOnLoad(cursorObject);
+        if(groundLine != null)
+            DontDestroyOnLoad(groundLine);
+        if(attackCursor != null)
+            DontDestroyOnLoad(attackCursor);
+        if(cam != null)
+            DontDestroyOnLoad(cam);
+        if(eventSystem != null)
+            DontDestroyOnLoad(eventSystem);
 
         status = GetComponent<PlayerStatus>();
         rigid = GetComponent<Rigidbody2D>();
@@ -124,229 +131,7 @@ public class Player : MonoBehaviour
         GroundCheck();
     }
 
-    //플레이어 이동
-    public void ActionMove(InputAction.CallbackContext context)
-    {
-        //이동 키 변화 감지 시 true
-        isCanMove = true;
-        //이동 제한 조건식
-        if (status.HP <= 0 || !status.CanMove)
-        {
-            return;
-        }
-        //키 입력 시작
-        if (context.started)
-        {
-            anim.SetBool("IsWalk", true);
-            inputVec.x = context.ReadValue<Vector2>().x * speed;
-
-            rigid.linearVelocityX = inputVec.x;
-            SpriteFlip();
-        }
-        //키 입력 종료
-        if (context.canceled)
-        {
-            anim.SetBool("IsWalk", false);
-            inputVec.x = 0;
-        }
-    }
-    //플레이어 급강하
-    public void ActionDown(InputAction.CallbackContext context)
-    {
-        //이동 키 변화 감지 시 true
-        isCanMove = true;
-        //이동 제한 조건식
-        if (status.HP <= 0 || !status.CanMove)
-        {
-            return;
-        }
-
-        if (context.started)
-        {
-            rigid.linearVelocityY = -speed * 2;
-        }
-    }
-
-    //플레이어 점프
-    public void ActionJump(InputAction.CallbackContext context)
-    {
-        //점프 제한 조건식
-        if (status.HP <= 0 || !status.CanMove)
-        {
-            return;
-        }
-
-        if (context.started)
-        {
-            //점프 키 입력을 1회로 한정
-            if (jumpCount > 1)
-            {
-                //점프 가속 초기화
-                rigid.linearVelocityY = 0;
-
-                rigid.AddForceY(status.jumpForce, ForceMode2D.Impulse);
-
-                JumpAnimUpdate(true);
-                jumpCount--;
-            }
-        }
-        if (context.canceled)
-        {
-            //키 입력 종료 시 Y 속도값 0
-            if (rigid.linearVelocityY > 0 && jumpCount >= 1)
-                rigid.linearVelocityY = 0;
-        }
-    }
-
-    //대시 키 받아오기
-    public void ActionDash(InputAction.CallbackContext context)
-    {
-        if (status.HP <= 0 || !status.CanMove)
-        {
-            return;
-        }
-        //아래가 수정 전
-        //if (status.HP <= 0)
-        //{
-        //    return;
-        //}
-
-        if (context.started)
-        {
-            isDashReady = true;
-        }
-
-        if (context.canceled)
-        {
-            isDashReady = false;
-            DashLine();
-            if (jumpCount == 1)
-            {
-                //마우스 방향 구하기
-                Vector2 dir = (Vector2)(mouse.transform.position - transform.position);
-
-                //normalized된 방향으로 AddForce
-                rigid.linearVelocity = Vector2.zero;
-                rigid.AddForce(dir.normalized * status.dashForce, ForceMode2D.Impulse);
-                //키 입력 영향 임시 제한
-                isCanMove = false;
-
-                SpriteFlip();
-                JumpAnimUpdate(true);
-
-                jumpCount--;
-            }
-        }
-    }
-
-    //공격 키 받아오기
-    public void ActionAttack(InputAction.CallbackContext context)
-    {
-        if (status.HP <= 0 || !status.CanMove)
-        {
-            return;
-        }
-        //아래가 수정 전
-        //if (status.HP <= 0)
-        //    return;
-
-        //스킬과 일반 공격 구분
-        //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
-        //스킬 오브젝트 Component 호출
-        TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
-        if (context.started && status.ink > 0)
-        {
-            //초기화
-            cursorObject.transform.position = mouse.transform.position;
-            trail.startWidth = 0.25f;
-            cursor.mouse = mouse;
-            trail.Clear();
-            cursor.isMove = true;
-            cursor.lifeTime = 0;
-        }
-        if (context.canceled && cursor.isMove)
-        {
-            ActiveAttack(cursor);
-        }
-
-    }
-
-    //키 입력 종료 시 UI의 상태에 따른 스탠스 변환
-    public void ActionStance(InputAction.CallbackContext context)
-    {
-        if (status.HP <= 0 || !status.CanMove)
-        {
-            return;
-        }
-
-        if (context.started)
-        {
-                
-        }
-        if (context.canceled)
-        {
-            TrailRenderer trail = cursorObject.GetComponent<TrailRenderer>();
-            TrailRenderer groundTrail = groundLine.GetComponent<TrailRenderer>();
-
-            trail.Clear();
-            groundTrail.Clear();
-            var main = particle.main;
-
-            trail.colorGradient = status.ChangeStance(status.currentStance);
-            groundTrail.colorGradient = status.ChangeStance(status.currentStance);
-            main.startColor = status.ChangeStance(status.currentStance);
-        }
-    }
-
-    //원 버튼으로 On/Off
-    public void ActionSkill(InputAction.CallbackContext context)
-    {
-        if (status.HP <= 0 || !status.CanMove)
-        {
-            return;
-        }
-
-        if (context.started)
-        {
-            if(!isSkill)
-                SkillBool(true);
-            else
-                SkillBool(false);
-        }
-    }
-
-    public void ActionMakeGround(InputAction.CallbackContext context)
-    {
-        if (status.HP <= 0 || !status.CanMove)
-        {
-            return;
-        }
-        //아래가 수정 전
-        //if (status.HP <= 0)
-        //    return;
-
-        //스킬과 일반 공격 구분
-        //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
-        //스킬 오브젝트 Component 호출
-        TrailRenderer trail = groundLine.GetComponent<TrailRenderer>();
-        if (context.started && status.ink > 0)
-        {
-            //초기화
-            groundLine.transform.position = mouse.transform.position;
-            trail.startWidth = 0.25f;
-            groundCursor.mouse = mouse;
-            trail.Clear();
-            groundCursor.isMove = true;
-            groundCursor.lifeTime = 0;
-        }
-        if (context.canceled && groundCursor.isMove)
-        {
-            ActiveAttack(groundCursor);
-        }
-
-    }
-
-    void SpriteFlip()
+    public void SpriteFlip()
     {
         //플레이어 이동 방향에 따른 스프라이트 반전
         if (rigid.linearVelocityX > 0)
@@ -360,7 +145,7 @@ public class Player : MonoBehaviour
     }
 
     //Dash 방향 미리보기 표시
-    void DashLine()
+    public void DashLine()
     {
         dashLine.enabled = isDashReady;
         if (jumpCount != 1)
@@ -388,8 +173,10 @@ public class Player : MonoBehaviour
 
         if (rigid.linearVelocityY <= 0)
         {
-            if (Physics2D.BoxCast
-                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground")))
+            bool isGround;
+            isGround = Physics2D.BoxCast
+                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground"));
+            if (isGround)
             {
                 //이동 가능 + input 값 이어서 받기
                 if (!status.IsKnockbacked)
@@ -412,7 +199,7 @@ public class Player : MonoBehaviour
     }
 
     //매개변수 상태와 무적 판정에 따른 Animation 전환
-    void JumpAnimUpdate(bool isUpate)
+    public void JumpAnimUpdate(bool isUpate)
     {
         if (!status.IsInvincible)
         {
@@ -452,7 +239,7 @@ public class Player : MonoBehaviour
     }
 
     //매개변수 상태에 따른 particle, isSkill 변환
-    void SkillBool(bool Skill)
+    public void SkillBool(bool Skill)
     {
         var main = particle.main;
         isSkill = Skill;
@@ -467,7 +254,7 @@ public class Player : MonoBehaviour
     }
 
     //공격 발동
-    void ActiveAttack(Cursor cursor)
+    public void ActiveAttack(Cursor cursor)
     {
         bool isGroundCursor = false;
         if (cursor.gameObject.CompareTag("Ground"))
@@ -478,6 +265,7 @@ public class Player : MonoBehaviour
         //발동, Collider 입히기
         cursor.isMove = false;
         cursor.lifeTime = 0.5f;
+        cursor.isSkill = isSkill;
 
         //isTrigger = 여기선 공격인가에 대한 여부
         if (cursor.gameObject.GetComponent<EdgeCollider2D>().isTrigger == true)
@@ -560,7 +348,10 @@ public class Player : MonoBehaviour
     void InkUIUpdate()
     {
         if (UI.Instance != null)
-            UI.Instance.ChargeInk(status.ink);
+        {
+            UI.Instance.UpdateInkBar();
+            UI.Instance.UpdateSpedialInkBar();
+        }
     }
 
 

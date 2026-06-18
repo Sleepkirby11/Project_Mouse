@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,11 +13,18 @@ using UnityEngine.UIElements;
 
 public class Cursor : MonoBehaviour
 {
+    GameObject player;
+    
+    Player playerScript;
+    PlayerStatus playerStatus;
+
     //Trail의 지속시간
     public float lifeTime;
 
     //드로잉 가능 여부
     public bool isMove;
+
+    [HideInInspector] public bool isSkill;
 
     TrailRenderer trail;
     EdgeCollider2D col;
@@ -40,6 +48,9 @@ public class Cursor : MonoBehaviour
     {
         trail = GetComponent<TrailRenderer>();
         col = GetComponent<EdgeCollider2D>();
+        player = GameObject.FindWithTag("Player");
+        playerScript = player.gameObject.GetComponent<Player>();
+        playerStatus = player.gameObject.GetComponent<PlayerStatus>();
         trail.time = 9999;
     }
 
@@ -138,6 +149,9 @@ public class Cursor : MonoBehaviour
         if (damageable != null && !collision.gameObject.CompareTag("Player"))
         {
             damageable.TakeDamage(damage);
+            Debug.Log(isSkill);
+            if(isSkill && playerStatus.currentStance == PlayerStatus.Stance.Green)
+                playerStatus.Heal(2);
         }
     }
 }
