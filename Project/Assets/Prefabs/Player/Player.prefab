@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 1608361483271829096}
   - component: {fileID: 6404161621859968284}
   - component: {fileID: 7994187737598852400}
+  - component: {fileID: 59548725156804224}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -168,8 +169,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6404161621859968284}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 59548725156804224}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
         m_MethodName: ActionMove
         m_Mode: 0
         m_Arguments:
@@ -188,8 +189,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta,/Pen/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6404161621859968284}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 59548725156804224}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
         m_MethodName: ActionAttack
         m_Mode: 0
         m_Arguments:
@@ -204,8 +205,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6404161621859968284}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 59548725156804224}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
         m_MethodName: ActionSkill
         m_Mode: 0
         m_Arguments:
@@ -224,8 +225,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6404161621859968284}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 59548725156804224}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
         m_MethodName: ActionJump
         m_Mode: 0
         m_Arguments:
@@ -244,8 +245,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Previous[/Keyboard/1]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6404161621859968284}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 59548725156804224}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
         m_MethodName: ActionStance
         m_Mode: 0
         m_Arguments:
@@ -260,8 +261,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Next[/Keyboard/2]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6404161621859968284}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 59548725156804224}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
         m_MethodName: ActionDash
         m_Mode: 0
         m_Arguments:
@@ -316,8 +317,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6404161621859968284}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 59548725156804224}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
         m_MethodName: ActionDown
         m_Mode: 0
         m_Arguments:
@@ -332,8 +333,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Down[/Keyboard/s]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6404161621859968284}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 59548725156804224}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
         m_MethodName: ActionMakeGround
         m_Mode: 0
         m_Arguments:
@@ -436,11 +437,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4d45d7b17bad54fae3b03291c0912c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: {fileID: 0}
   cam: {fileID: 0}
   cursorObject: {fileID: 0}
+  cursor: {fileID: 0}
   groundLine: {fileID: 0}
+  groundCursor: {fileID: 0}
   attackCursor: {fileID: 0}
+  rigid: {fileID: 0}
+  anim: {fileID: 0}
+  particle: {fileID: 0}
+  speed: 0
+  inputVec: {x: 0, y: 0}
+  isCanMove: 0
+  jumpCount: 0
+  isDashReady: 0
+  mouse: {fileID: 0}
   maxDist: 7.5
+  isSkill: 0
 --- !u!114 &7994187737598852400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +598,18 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   currentStance: 3
+--- !u!114 &59548725156804224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421529219847481145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d671cad03c85546aa91317a254ea3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4407140826386702890
 GameObject:
   m_ObjectHideFlags: 0
