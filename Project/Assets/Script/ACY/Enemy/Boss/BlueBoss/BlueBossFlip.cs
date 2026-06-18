@@ -32,15 +32,30 @@ public class BlueBossFlip : MonoBehaviour
     {
         if (facingMode == FacingMode.Player)
         {
-            if (playerTransform == null) return;
+            if (playerTransform == null)
+            {
+                return;
+            }
             float direction = playerTransform.position.x - transform.position.x;
-            if (direction > 0 && !isFacingRight) Flip();
-            else if (direction < 0 && isFacingRight) Flip();
+            if (direction > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if (direction < 0 && isFacingRight)
+            {
+                Flip();
+            }
         }
         else
         {
-            if (moveDirection.x > 0 && !isFacingRight) Flip();
-            else if (moveDirection.x < 0 && isFacingRight) Flip();
+            if (moveDirection.x > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if (moveDirection.x < 0 && isFacingRight)
+            {
+                Flip();
+            }
         }
     }
 

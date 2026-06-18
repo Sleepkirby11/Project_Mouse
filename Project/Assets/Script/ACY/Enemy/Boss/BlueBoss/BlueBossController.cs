@@ -71,7 +71,9 @@ public class BossController : MonoBehaviour
         if (!isDead && !isPhase2)
         {
             if (enemyStatus.GetHPRatio() <= 0.5f)
+            {
                 isPhase2 = true;
+            }
         }
 
         if (sonicSpawnPoint != null && !isDead)
@@ -119,7 +121,9 @@ public class BossController : MonoBehaviour
             int roll = Random.Range(0, 3);
 
             if (roll == 0)
+            {
                 yield return StartCoroutine(PatternClaw());
+            }
             else if (roll == 1)
             {
                 yield return StartCoroutine(PatternDash());
@@ -127,7 +131,9 @@ public class BossController : MonoBehaviour
                 yield return StartCoroutine(RestRoutine());
             }
             else
+            {
                 yield return StartCoroutine(PatternSonicApproach());
+            }
 
             yield return new WaitForSeconds(patternCooldown);
         }
@@ -135,7 +141,10 @@ public class BossController : MonoBehaviour
 
     private IEnumerator PatternSonicApproach()
     {
-        if (player == null) yield break;
+        if (player == null)
+        {
+            yield break;
+        }
 
         bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 플레이어 바라보기
 
@@ -225,28 +234,22 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
     }
 
-    private IEnumerator PatternSonic()
-    {
-        if (player == null) yield break;
-
-        anim.SetTrigger(AnimSonic);
-
-        yield return new WaitForSeconds(GetAnimLength("Sonic"));
-    }
-
     public void SonicFire()
     {
-        if (sonicSpawnPoint == null) return;
+        if (sonicSpawnPoint == null)
+        {
+            return;
+        }
 
         Vector2 spawnPos = sonicSpawnPoint.position;
 
-        Quaternion rot = bossFlip.isFacingRight
-            ? Quaternion.Euler(0f, 0f, sonicAngle)
-            : Quaternion.Euler(0f, 180f, sonicAngle); // Y 180으로 뒤집기
+        Quaternion rot = bossFlip.isFacingRight ? Quaternion.Euler(0f, 0f, sonicAngle) : Quaternion.Euler(0f, 180f, sonicAngle); // Y 180으로 뒤집기
 
         GameObject laser = PoolingManager.Instance.Get(sonicPoolKey, spawnPos, rot);
         if (laser != null)
+        {
             laser.transform.localScale = Vector3.one;
+        }
 
         // Raycast 방향도 단순하게
         Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
@@ -257,19 +260,22 @@ public class BossController : MonoBehaviour
         if (hit.collider != null)
         {
             if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
+            {
                 damageable.TakeDamage(sonicDamage);
+            }
         }
     }
     private bool IsPlayerInLaserRange()
     {
-        if (player == null || sonicSpawnPoint == null) return false;
+        if (player == null || sonicSpawnPoint == null)
+        {
+            return false;
+        }
 
         Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
         Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
 
         RaycastHit2D hit = Physics2D.Raycast(sonicSpawnPoint.position, fireDirection, sonicRange, playerLayer);
-
-        Debug.Log($"히트: {(hit.collider != null ? hit.collider.name : "없음")}");
 
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
