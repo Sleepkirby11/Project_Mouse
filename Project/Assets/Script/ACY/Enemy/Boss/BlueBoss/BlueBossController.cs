@@ -251,17 +251,42 @@ public class BossController : MonoBehaviour
             laser.transform.localScale = Vector3.one;
         }
 
-        // Raycast 방향도 단순하게
         Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
         Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
 
-        RaycastHit2D hit = Physics2D.Raycast(spawnPos, fireDirection, sonicRange, playerLayer);
+        Collider2D[] bossColliders = GetComponentsInChildren<Collider2D>();
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(playerLayer); // 플레이어 레이어만 충돌 검사하도록 설정
+        filter.useLayerMask = true;
+        filter.useTriggers = true;
 
-        if (hit.collider != null)
+        RaycastHit2D[] hits = new RaycastHit2D[5];
+        int hitCount = Physics2D.Raycast(spawnPos, fireDirection, filter, hits, sonicRange);
+
+        for (int i = 0; i < hitCount; i++)
         {
+            RaycastHit2D hit = hits[i];
+
+            // 자신의 콜라이더거나 자식 히트박스라면 무시하고 다음 타겟 검사
+            bool isSelf = false;
+            foreach (var bossCollider in bossColliders)
+            {
+                if (hit.collider == bossCollider)
+                {
+                    isSelf = true;
+                    break;
+                }
+            }
+            if (isSelf)
+            {
+                continue;
+            }
+
+            // 본인이 아니라면 타격 처리 후 반복문 탈출
             if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
             {
                 damageable.TakeDamage(sonicDamage);
+                break; // 플레이어를 맞췄으므로 멈춤
             }
         }
     }

@@ -913,7 +913,7 @@ MonoBehaviour:
   sonicSpawnPoint: {fileID: 1563062163}
   sonicAngle: 45
   sonicRange: 20
-  sonicDamage: 10
+  sonicDamage: 30
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -4148,63 +4148,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3268619075305744560, guid: 771cca234fa3d5e4080958e572a7f350, type: 3}
   m_PrefabInstance: {fileID: 2776839231201576884}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6578089256282507977
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672353661157944038, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8016788000148958878, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
-      propertyPath: m_Name
-      value: BlueLaser
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
 --- !u!1001 &7207553135563774238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4558,4 +4501,3 @@ SceneRoots:
   - {fileID: 1073639594}
   - {fileID: 1334061852}
   - {fileID: 418102290}
-  - {fileID: 6578089256282507977}
