@@ -186,12 +186,12 @@ public class BossController : MonoBehaviour
         anim.SetTrigger(AnimDashStart);
         yield return new WaitForSeconds(0.2f);
 
-        Vector2 dashDir = player.position.x > transform.position.x ? Vector2.right : Vector2.left;
-
-        Vector2 dashTarget = new Vector2(player.position.x, rb.position.y);
+        Vector2 dashDir = ((Vector2)player.position - rb.position).normalized; // 플레이어 방향
+        Vector2 dashTarget = rb.position + dashDir * 20f; // 숫자 만큼 더 이동
 
         anim.SetTrigger(AnimDash);
         dashHitbox.enabled = true;
+
         yield return MoveToPosition(dashTarget, dashSpeed);
         dashHitbox.enabled = false;
 
