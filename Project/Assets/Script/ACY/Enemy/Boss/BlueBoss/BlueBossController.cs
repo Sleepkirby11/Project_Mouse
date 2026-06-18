@@ -338,104 +338,171 @@ public class BossController : MonoBehaviour, IHitReaction
     }
     private IEnumerator PatternEnrageDesperation()
     {
-        if (player == null) yield break;
+        if (player == null || mapBoundaryColliders == null || mapBoundaryColliders.Length == 0)
+            yield break;
 
-        // 3개의 대시 경로 정보를 저장할 배열
-        Vector2[] startPositions = new Vector2[3];
-        Vector2[] targetPositions = new Vector2[3];
-        Quaternion[] lineRotations = new Quaternion[3];
-        GameObject[] spawnedLines = new GameObject[3];
+        // 맵 범위 계산
+        Bounds mapBounds = mapBoundaryColliders[0].bounds;
+        foreach (var col in mapBoundaryColliders) mapBounds.Encapsulate(col.bounds);
 
-        Vector2 currentSimulatedPos = rb.position;
+        float margin = 1.0f;
+        float minX = mapBounds.min.x + margin;
+        float maxX = mapBounds.max.x - margin;
+        float minY = mapBounds.min.y + margin;
+        float maxY = mapBounds.max.y - margin;
+        Vector2 mapCenter = mapBounds.center; // 중심점이 될 곳
 
-        //경고선 생성 3개
-        for (int i = 0; i < 3; i++)
+        SpriteRenderer bossSprite = GetComponentInChildren<SpriteRenderer>();
+
+        // 패턴 시작: 보스 숨기기 및 무적/충돌 해제
+        isInvincible = true;
+        if (bossSprite != null) bossSprite.enabled = false;
+        dashHitbox.enabled = false;
+        rb.linearVelocity = Vector2.zero;
+
+        int dashCount = 4; //선 개수
+        Vector2[] startPositions = new Vector2[dashCount];
+        Vector2[] targetPositions = new Vector2[dashCount];
+        GameObject[] spawnedLines = new GameObject[dashCount];
+
+        // 랜덤 각도로 맵을 가로지르는 * 자 모양 경고선 생성
+        float baseAngleInterval = 180f / dashCount;
+        float randomAngleOffset = Random.Range(0f, 30f); // 매 패턴마다 회전 각도 다르게
+
+        for (int i = 0; i < dashCount; i++)
         {
-            startPositions[i] = currentSimulatedPos;
+            // 중심점을 지나갈 무작위 각도 계산
+            float finalAngle = (baseAngleInterval * i) + randomAngleOffset + Random.Range(-5f, 5f);
+            Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
 
-            Vector2 targetDir = ((Vector2)player.position - currentSimulatedPos).normalized;
-            float maxDashDistance = 15f; // 최대 돌진 거리
+            // 중심점(맵 중앙 혹은 플레이어 위치)을 기준으로 맵 끝과 끝 계산
+            // 넉넉하게 큰 값을 곱한 뒤 외곽 벽에 걸리도록 세팅
+            startPositions[i] = mapCenter - dir * 25f;
+            targetPositions[i] = mapCenter + dir * 25f;
 
-            // 맵 테두리 콜라이더 감지
-            Physics2D.queriesHitTriggers = true;
-            RaycastHit2D[] hits = Physics2D.RaycastAll(currentSimulatedPos, targetDir, maxDashDistance);
+            // 맵 Bounds 안으로 클램핑(제한)하여 정확한 외곽 점 추출
+            startPositions[i] = ClampToEdges(startPositions[i], minX, maxX, minY, maxY);
+            targetPositions[i] = ClampToEdges(targetPositions[i], minX, maxX, minY, maxY);
 
-            Vector2 finalTargetPos = currentSimulatedPos + targetDir * maxDashDistance;
-
-            foreach (var hit in hits)
+            // 가끔 방향이 반대가 될 수 있도록 50% 확률로 시작점과 끝점 뒤집기 (랜덤성 극대화)
+            if (Random.value > 0.5f)
             {
-                // 부딪힌 대상이 인스펙터에 등록된 외곽 벽인지 체크
-                bool isWall = false;
-                foreach (var wallCollider in mapBoundaryColliders)
-                {
-                    if (hit.collider == wallCollider)
-                    {
-                        isWall = true;
-                        break;
-                    }
-                }
-
-                if (isWall)
-                {
-                    // 벽에 닿았다면 벽보다 살짝 안쪽(0.5f)을 목표 지점으로 설정
-                    finalTargetPos = hit.point - targetDir * 0.5f;
-                    break;
-                }
+                Vector2 temp = startPositions[i];
+                startPositions[i] = targetPositions[i];
+                targetPositions[i] = temp;
             }
 
-            targetPositions[i] = finalTargetPos;
+            // 경고선 배치
+            Vector2 pathDir = (targetPositions[i] - startPositions[i]).normalized;
+            float distance = Vector2.Distance(startPositions[i], targetPositions[i]);
+            float angle = Mathf.Atan2(pathDir.y, pathDir.x) * Mathf.Rad2Deg;
+            Quaternion lineRotation = Quaternion.Euler(0, 0, angle);
 
-            // 경고선 각도 계산
-            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-            lineRotations[i] = Quaternion.Euler(0, 0, angle);
-
-            // 경고선 생성 및 배치
             Vector2 centerPos = (startPositions[i] + targetPositions[i]) * 0.5f;
-            GameObject line = PoolingManager.Instance.Get(warningLinePoolKey, centerPos, lineRotations[i]);
+            GameObject line = PoolingManager.Instance.Get(warningLinePoolKey, centerPos, lineRotation);
 
             if (line != null)
             {
-                float distance = Vector2.Distance(startPositions[i], targetPositions[i]);
                 line.transform.localScale = new Vector3(distance, 1f, 1f);
                 spawnedLines[i] = line;
 
                 if (line.TryGetComponent(out BlueBossWarningLine warningLineScript))
                 {
-                    warningLineScript.ActivateWarning(dashWarningDuration, warningLinePoolKey);
+                    warningLineScript.ActivateWarning(dashWarningDuration * 2.5f, warningLinePoolKey);
                 }
             }
 
-            // 다음 선의 시작점은 이번 목표 지점
-            currentSimulatedPos = targetPositions[i];
-
-            yield return new WaitForSeconds(warningInterval);
+            yield return new WaitForSeconds(warningInterval); // 선들이 차례대로 깔림
         }
 
-        // 생성된 순서대로 페이드아웃 및 돌진
-        anim.SetTrigger(AnimDash);
-        dashHitbox.enabled = true;
+        // 모든 선이 선명해질 때까지 잠시 대기
+        yield return new WaitForSeconds(0.4f);
 
-        for (int i = 0; i < 3; i++)
+        // 순간이동 및 돌진 실행
+        anim.SetTrigger(AnimDash);
+
+        for (int i = 0; i < dashCount; i++)
         {
             if (isDead) yield break;
 
-            // 보스 방향 전환 및 고속 돌진
+            // 보스 순간이동 및 등장
+            rb.position = startPositions[i];
+            if (bossSprite != null) bossSprite.enabled = true;
+            dashHitbox.enabled = true; // 이때 충돌 판정 켬
+
+            // 보스 방향 및 룩 설정
+            Vector2 dashDir = (targetPositions[i] - rb.position).normalized;
             bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
-            bossFlip.moveDirection = (targetPositions[i] - rb.position);
+            bossFlip.moveDirection = dashDir;
 
-            float enrageDashSpeed = dashSpeed * 2.5f;
+            // 대각선 돌진 축 회전
+            float dashAngle = Mathf.Atan2(dashDir.y, dashDir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? dashAngle : dashAngle + 180f);
 
+            // 출발 시 해당 경고선 끄기
+            if (spawnedLines[i] != null) spawnedLines[i].SetActive(false);
+
+            // 전력 질주 속도
+            float enrageDashSpeed = dashSpeed * 3.5f;
+
+            // 통과 처리
             while (Vector2.Distance(rb.position, targetPositions[i]) > 0.2f)
             {
                 rb.MovePosition(Vector2.MoveTowards(rb.position, targetPositions[i], enrageDashSpeed * Time.fixedDeltaTime));
                 yield return new WaitForFixedUpdate();
             }
 
-            rb.MovePosition(targetPositions[i]);
+            rb.MovePosition(targetPositions[i]); // 끝점 안착
+
+            if (bossSprite != null) bossSprite.enabled = false;
+            dashHitbox.enabled = false;
+
+            yield return new WaitForSeconds(0.1f);
         }
 
+        transform.rotation = Quaternion.identity;
+        if (bossSprite != null) bossSprite.enabled = true; // 보스 다시 보이게
         dashHitbox.enabled = false;
         anim.SetTrigger(AnimDashEnd);
+        bossFlip.facingMode = BlueBossFlip.FacingMode.Player;
+
+        yield return new WaitForSeconds(0.5f);
+    }
+
+    // 외곽 경계선 밖으로 나가지 않도록 좌표를 잡아주는 유틸 함수
+    private Vector2 ClampToEdges(Vector2 point, float minX, float maxX, float minY, float maxY)
+    {
+        point.x = Mathf.Clamp(point.x, minX, maxX);
+        point.y = Mathf.Clamp(point.y, minY, maxY);
+        return point;
+    }
+
+    // ───────────────────────────────────────────
+    // 도우미 함수 (맵 외곽 랜덤 포인트 계산)
+    // ───────────────────────────────────────────
+
+    // 맵 경계선 위의 랜덤한 점을 반환
+    private Vector2 GetRandomPointOnBounds(float minX, float maxX, float minY, float maxY)
+    {
+        int edge = Random.Range(0, 4); // 0:남, 1:북, 2:서, 3:동
+        switch (edge)
+        {
+            case 0: return new Vector2(Random.Range(minX, maxX), minY); // 남
+            case 1: return new Vector2(Random.Range(minX, maxX), maxY); // 북
+            case 2: return new Vector2(minX, Random.Range(minY, maxY)); // 서
+            case 3: return new Vector2(maxX, Random.Range(minY, maxY)); // 동
+            default: return Vector2.zero;
+        }
+    }
+
+    // 주어진 시작점의 반대편 벽 쪽 랜덤 포인트를 반환 (맵을 가로지르도록)
+    private Vector2 GetOppositePointOnBounds(Vector2 startPoint, float minX, float maxX, float minY, float maxY)
+    {
+        // 간단하게 시작점 좌표를 반전시켜 맵 건너편 영역을 계산
+        float targetX = (startPoint.x < (minX + maxX) * 0.5f) ? Random.Range(maxX - 2f, maxX) : Random.Range(minX, minX + 2f);
+        float targetY = (startPoint.y < (minY + maxY) * 0.5f) ? Random.Range(maxY - 2f, maxY) : Random.Range(minY, minY + 2f);
+
+        return new Vector2(targetX, targetY);
     }
     public void SonicFire()
     {
