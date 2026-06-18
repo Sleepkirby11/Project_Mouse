@@ -11,8 +11,6 @@ public class AnimationEvent : MonoBehaviour
 
     public void ClawHitboxOn() => boss.ClawHitboxOn();
     public void ClawHitboxOff() => boss.ClawHitboxOff();
-    public void SonicHitboxOn() => boss.SonicHitboxOn();
-    public void SonicHitboxOff() => boss.SonicHitboxOff();
-
+    public void SonicFire() => boss.SonicFire();
     public void RestJumpEvent() => boss.RestJumpEvent();
 }
