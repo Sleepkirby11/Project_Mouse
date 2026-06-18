@@ -128,6 +128,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         StopBirdAttack();
         StopFrogAttack();
+        StopFlowerAttack();
     }
 
     // -----------------------새 패턴----------------------------
