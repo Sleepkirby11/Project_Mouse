@@ -92,6 +92,11 @@ public class BossController : MonoBehaviour, IHitReaction
 
         float hpRatio = enemyStatus.GetHPRatio();
 
+        if (!isPhase2 && hpRatio <= 0.5f)
+        {
+            isPhase2 = true;
+        }
+
         // 3페이즈 최우선 진입
         if (hpRatio <= 0.1f)
         {
@@ -148,7 +153,7 @@ public class BossController : MonoBehaviour, IHitReaction
         while (!isDead)
         {
             int roll = Random.Range(0, 3);
-
+            Debug.Log($"Pattern : {roll}");
             if (roll == 0)
             {
                 yield return StartCoroutine(PatternClaw());
@@ -224,6 +229,51 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             currentLoop = StartCoroutine(Phase2Loop());
         }
+    }
+    private IEnumerator FadeOut(float duration)
+    {
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+
+        float startAlpha = sr.color.a;
+
+        Color color = sr.color;
+        float t = 0f;
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+
+            color.a = Mathf.Lerp(startAlpha, 0f, t / duration);
+            sr.color = color;
+
+            yield return null;
+        }
+
+        color.a = 0f;
+        sr.color = color;
+    }
+
+    private IEnumerator FadeIn(float duration)
+    {
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+
+        float startAlpha = sr.color.a;
+
+        Color color = sr.color;
+        float t = 0f;
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+
+            color.a = Mathf.Lerp(startAlpha, 1f, t / duration);
+            sr.color = color;
+
+            yield return null;
+        }
+
+        color.a = 1f;
+        sr.color = color;
     }
     // ───────────────────────────────────────────
     // 패턴
@@ -356,9 +406,13 @@ public class BossController : MonoBehaviour, IHitReaction
 
         // 패턴 시작: 보스 숨기기 및 무적/충돌 해제
         isInvincible = true;
-        if (bossSprite != null) bossSprite.enabled = false;
+
         dashHitbox.enabled = false;
         rb.linearVelocity = Vector2.zero;
+
+        yield return StartCoroutine(FadeOut(0.4f));
+        // 완전히 사라진 상태로 잠깐 유지
+        yield return new WaitForSeconds(0.1f);
 
         int dashCount = 4; //선 개수
         Vector2[] startPositions = new Vector2[dashCount];
@@ -427,17 +481,13 @@ public class BossController : MonoBehaviour, IHitReaction
 
             // 보스 순간이동 및 등장
             rb.position = startPositions[i];
-            if (bossSprite != null) bossSprite.enabled = true;
+            yield return StartCoroutine(FadeIn(0.1f));
             dashHitbox.enabled = true; // 이때 충돌 판정 켬
 
             // 보스 방향 및 룩 설정
             Vector2 dashDir = (targetPositions[i] - rb.position).normalized;
             bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
             bossFlip.moveDirection = dashDir;
-
-            // 대각선 돌진 축 회전
-            float dashAngle = Mathf.Atan2(dashDir.y, dashDir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? dashAngle : dashAngle + 180f);
 
             // 출발 시 해당 경고선 끄기
             if (spawnedLines[i] != null) spawnedLines[i].SetActive(false);
@@ -454,14 +504,14 @@ public class BossController : MonoBehaviour, IHitReaction
 
             rb.MovePosition(targetPositions[i]); // 끝점 안착
 
-            if (bossSprite != null) bossSprite.enabled = false;
+            if (bossSprite != null) yield return StartCoroutine(FadeOut(0.15f));
             dashHitbox.enabled = false;
 
             yield return new WaitForSeconds(0.1f);
         }
 
+        yield return StartCoroutine(FadeIn(0.15f));
         transform.rotation = Quaternion.identity;
-        if (bossSprite != null) bossSprite.enabled = true; // 보스 다시 보이게
         dashHitbox.enabled = false;
         anim.SetTrigger(AnimDashEnd);
         bossFlip.facingMode = BlueBossFlip.FacingMode.Player;
@@ -475,34 +525,6 @@ public class BossController : MonoBehaviour, IHitReaction
         point.x = Mathf.Clamp(point.x, minX, maxX);
         point.y = Mathf.Clamp(point.y, minY, maxY);
         return point;
-    }
-
-    // ───────────────────────────────────────────
-    // 도우미 함수 (맵 외곽 랜덤 포인트 계산)
-    // ───────────────────────────────────────────
-
-    // 맵 경계선 위의 랜덤한 점을 반환
-    private Vector2 GetRandomPointOnBounds(float minX, float maxX, float minY, float maxY)
-    {
-        int edge = Random.Range(0, 4); // 0:남, 1:북, 2:서, 3:동
-        switch (edge)
-        {
-            case 0: return new Vector2(Random.Range(minX, maxX), minY); // 남
-            case 1: return new Vector2(Random.Range(minX, maxX), maxY); // 북
-            case 2: return new Vector2(minX, Random.Range(minY, maxY)); // 서
-            case 3: return new Vector2(maxX, Random.Range(minY, maxY)); // 동
-            default: return Vector2.zero;
-        }
-    }
-
-    // 주어진 시작점의 반대편 벽 쪽 랜덤 포인트를 반환 (맵을 가로지르도록)
-    private Vector2 GetOppositePointOnBounds(Vector2 startPoint, float minX, float maxX, float minY, float maxY)
-    {
-        // 간단하게 시작점 좌표를 반전시켜 맵 건너편 영역을 계산
-        float targetX = (startPoint.x < (minX + maxX) * 0.5f) ? Random.Range(maxX - 2f, maxX) : Random.Range(minX, minX + 2f);
-        float targetY = (startPoint.y < (minY + maxY) * 0.5f) ? Random.Range(maxY - 2f, maxY) : Random.Range(minY, minY + 2f);
-
-        return new Vector2(targetX, targetY);
     }
     public void SonicFire()
     {
