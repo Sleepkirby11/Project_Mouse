@@ -60,11 +60,13 @@ public class BossController : MonoBehaviour, IHitReaction
     [Header("대시 중 벽 충돌 설정")]
     [SerializeField] private Collider2D[] mapBoundaryColliders;
 
+    [Header("사망 시 켜질 콜라이더")]
+    [SerializeField] private Collider2D deathCollider;
+
     private Transform player;
     private bool isPhase2 = false;
     private bool isDead = false;
     private bool restJumpTriggered;
-    private bool desperationFlip = false;
 
     private Coroutine waterSpoutLoop;
     private Coroutine currentLoop;
@@ -89,7 +91,10 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             player = playerObj.transform;
         }
-
+        if (deathCollider != null)
+        {
+            deathCollider.enabled = false;
+        }
         clawHitbox.enabled = false;
 
 
@@ -436,22 +441,22 @@ public class BossController : MonoBehaviour, IHitReaction
         // 랜덤 각도로 맵을 가로지르는 * 자 모양 경고선 생성
         float baseAngleInterval = 180f / dashCount;
         float randomAngleOffset = Random.Range(0f, 30f); // 매 패턴마다 회전 각도 다르게
+        bool startFromLeft = Random.value > 0.5f;
 
         for (int i = 0; i < dashCount; i++)
         {
-            // 중심점을 지나갈 무작위 각도 계산
             float finalAngle = (baseAngleInterval * i) + randomAngleOffset + Random.Range(-5f, 5f);
             Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
 
-            // 중심점을 기준으로 맵 끝과 끝 계산
-            // 넉넉하게 큰 값을 곱한 뒤 외곽 벽에 걸리도록 세팅
             startPositions[i] = mapCenter - dir * 25f;
             targetPositions[i] = mapCenter + dir * 25f;
 
-            // 맵 Bounds 안으로 제한하여 정확한 외곽 점 추출
             startPositions[i] = ClampToEdges(startPositions[i], minX, maxX, minY, maxY);
             targetPositions[i] = ClampToEdges(targetPositions[i], minX, maxX, minY, maxY);
-            if (desperationFlip)
+
+            // 홀짝으로 교차 뒤집기
+            bool flip = startFromLeft ? (i % 2 == 0) : (i % 2 != 0);
+            if (flip)
             {
                 Vector2 temp = startPositions[i];
                 startPositions[i] = targetPositions[i];
@@ -693,6 +698,11 @@ public class BossController : MonoBehaviour, IHitReaction
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 2f;
         rb.linearVelocity = Vector2.zero;
+
+        if (deathCollider != null)
+        {
+            deathCollider.enabled = true;
+        }
     }
 
     // ───────────────────────────────────────────

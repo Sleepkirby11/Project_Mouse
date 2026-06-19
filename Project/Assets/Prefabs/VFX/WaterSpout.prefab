@@ -106,7 +106,7 @@ MonoBehaviour:
   poolKey: WaterSpout
   hitbox: {fileID: 8427086041673145827}
   damage: 5
-  launchForceY: 40
+  launchForceY: 30
   stunTime: 0.3
 --- !u!95 &3702629276771431473
 Animator:
