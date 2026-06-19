@@ -23,6 +23,8 @@ public class BossController : MonoBehaviour, IHitReaction
     [SerializeField] private float dashSpeed = 10f; // 대시 속도
     [SerializeField] private float patternCooldown = 1.5f; // 패턴 쿨타임
     [SerializeField] private float moveSpeed = 6f; // 이동속도
+    [SerializeField] private float clawAttackYOffset = 0.5f; // 할퀴기 패턴 오프셋(플레이어보다 얼마나 위에서 때릴 것인가)
+    [SerializeField] private float sonicThickness = 1.0f; // 레이저 범위 감지 폭
 
     [Header("휴식 패턴")] 
     [SerializeField] private Transform[] restPoints; //휴식 포인트
@@ -100,7 +102,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
         enemyStatus.OnEnemyDeath += OnDeath;
 
-        waterSpoutLoop = StartCoroutine(WaterSpoutLoop());
+        //waterSpoutLoop = StartCoroutine(WaterSpoutLoop());
         currentLoop = StartCoroutine(Phase1Loop());
     }
 
@@ -131,11 +133,16 @@ public class BossController : MonoBehaviour, IHitReaction
             return;
         }
 
-        if (sonicSpawnPoint != null && !isDead) //레이저 범위 시각화
+        if (sonicSpawnPoint != null && !isDead)
         {
             Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
             Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
-            Debug.DrawRay(sonicSpawnPoint.position, fireDirection * sonicRange, Color.yellow);
+
+            Vector2 orthoDir = new Vector2(-fireDirection.y, fireDirection.x) * (sonicThickness * 0.5f);
+
+            Debug.DrawRay((Vector2)sonicSpawnPoint.position + orthoDir, fireDirection * sonicRange, Color.yellow);
+            Debug.DrawRay((Vector2)sonicSpawnPoint.position - orthoDir, fireDirection * sonicRange, Color.yellow);
+            Debug.DrawLine((Vector2)sonicSpawnPoint.position + orthoDir, (Vector2)sonicSpawnPoint.position - orthoDir, Color.yellow);
         }
     }
 
@@ -305,7 +312,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
         Vector2 dir = ((Vector2)player.position - rb.position).normalized;
 
-        Vector2 targetPos = (Vector2)player.position - dir * 0.4f;
+        Vector2 targetPos = (Vector2)player.position - (dir * 0.4f) + (Vector2.up * clawAttackYOffset);
 
         bool attackStarted = false;
 
@@ -563,7 +570,7 @@ public class BossController : MonoBehaviour, IHitReaction
             float offsetY = sonicRange * 0.7f;
             Vector2 targetPos = (Vector2)player.position + new Vector2(offsetX, offsetY);
 
-            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime));
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * 1.8f * Time.fixedDeltaTime));
 
             if (IsPlayerInLaserRange())
             {
@@ -639,9 +646,11 @@ public class BossController : MonoBehaviour, IHitReaction
         }
 
         Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
+        float actualAngle = bossFlip.isFacingRight ? -sonicAngle : sonicAngle;
         Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
 
-        RaycastHit2D hit = Physics2D.Raycast(sonicSpawnPoint.position, fireDirection, sonicRange, playerLayer);
+        Vector2 boxSize = new Vector2(0.1f, sonicThickness); // 진행방향 길이는 최소화하고 폭을 설정
+        RaycastHit2D hit = Physics2D.BoxCast(sonicSpawnPoint.position, boxSize, actualAngle, fireDirection, sonicRange, playerLayer);
 
         return hit.collider != null && hit.collider.CompareTag("Player");
     }

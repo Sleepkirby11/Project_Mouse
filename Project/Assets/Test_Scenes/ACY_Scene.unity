@@ -2130,6 +2130,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 27.132526}
   m_EdgeRadius: 0
+--- !u!60 &1443245001 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7466204892382239570, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+  m_PrefabInstance: {fileID: 6855847739495469314}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1483553434
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,22 +4008,30 @@ PrefabInstance:
     - target: {fileID: 1708496520089781170, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d1c91c31725dfcb408c8847b37a85d00, type: 3}
-    - target: {fileID: 2183927895254140913, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
-      propertyPath: m_Size.x
-      value: 0.5297445
+      objectReference: {fileID: 21300000, guid: b42bcd302d3d94c40a1e5a478de3c397, type: 3}
+    - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: dashHitbox
+      value: 
+      objectReference: {fileID: 1443245001}
+    - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: restJumpHeight
+      value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 2183927895254140913, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
-      propertyPath: m_Size.y
-      value: 0.1045503
+    - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: sonicThickness
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2183927895254140913, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.005659595
+    - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: clawAttackYOffset
+      value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2183927895254140913, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.29641232
+    - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: restPointOffset.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: waterSpoutYOffset
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
       propertyPath: 'restPoints.Array.data[0]'
@@ -4100,9 +4113,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5092889870395460473, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
-      propertyPath: dieAnimationLength
-      value: 3
+    - target: {fileID: 3471223895787820529, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.415
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471223895787820529, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
