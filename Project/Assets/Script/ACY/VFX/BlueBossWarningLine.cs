@@ -4,7 +4,6 @@ using UnityEngine;
 public class BlueBossWarningLine : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private float blinkSpeed = 0.1f; // 깜빡임 속도
 
     private Color originalColor;
     private Coroutine currentEffectRoutine;
@@ -24,7 +23,10 @@ public class BlueBossWarningLine : MonoBehaviour
         myPoolKey = poolKey; // 풀 키 저장
 
         // 기존에 돌던 연출이 있다면 정지
-        if (currentEffectRoutine != null) StopCoroutine(currentEffectRoutine);
+        if (currentEffectRoutine != null)
+        {
+            StopCoroutine(currentEffectRoutine);
+        }
 
         spriteRenderer.enabled = true;
         spriteRenderer.color = originalColor;

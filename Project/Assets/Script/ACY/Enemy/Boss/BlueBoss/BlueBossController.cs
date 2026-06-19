@@ -5,10 +5,12 @@ using UnityEngine;
  * 공격패턴1. 할퀴기(Claw) : 플레이어에게 접근해 근접 공격
  * 공격패턴2. 레이저(Sonic) : 플레이어가 공격 범위 내에 접근하면 레이저 발사
  * 공격패턴3. 돌진(Dash) : 플레이어의 방향으로 돌진 (닿으면 대미지)
+ * 공격패턴4. 물기둥(WaterSpout) : 플레이어 근처에 물기둥 생성 (닿으면 대미지 + 에어본)
  * 행동패턴1. 휴식(Rest) : 돌진 후 50% 확률로 휴식(restPoint로 돌아가서 대기)
  * 
  * 1페이즈 : 할퀴기, 돌진 랜덤
  * 2페이즈 (HP50%) : 할퀴기, 레이저, 돌진(2연속) 랜덤
+ * 3페이즈 (10%발악패턴) : 무적 상태가 되며 경고선을 여러개 생성 후 순차적으로 돌진 공격
  */
 public class BossController : MonoBehaviour, IHitReaction
 {
@@ -31,13 +33,21 @@ public class BossController : MonoBehaviour, IHitReaction
     [SerializeField] private Collider2D clawHitbox;  // 할퀴기
     [SerializeField] private Collider2D dashHitbox; // 대시
 
-    [Header("음파 설정")]
+    [Header("레이저 패턴 설정")]
     public string sonicPoolKey = "BlueLaser";
     [SerializeField] private Transform sonicSpawnPoint; // FirePoint
     [SerializeField] private float sonicAngle = 45f;   // 기울기 
     [SerializeField] private float sonicRange = 20f;
     [SerializeField] private int sonicDamage = 10;
     [SerializeField] private LayerMask playerLayer;
+
+    [Header("물기둥 패턴 설정")]
+    public string waterSpoutPoolKey = "WaterSpout";
+    [SerializeField] private float waterSpoutInterval = 3f;  // 생성 주기
+    [SerializeField] private float waterSpoutSpread = 3f;
+    [SerializeField] private float waterSpoutYOffset = 0f; // 오프셋
+    [SerializeField] private LayerMask groundLayer;
+
 
     [Header("발악 패턴 (3페이즈) 설정")]
     public string warningLinePoolKey = "WarningLine"; // 경고선 키
@@ -54,7 +64,9 @@ public class BossController : MonoBehaviour, IHitReaction
     private bool isPhase2 = false;
     private bool isDead = false;
     private bool restJumpTriggered;
+    private bool desperationFlip = false;
 
+    private Coroutine waterSpoutLoop;
     private Coroutine currentLoop;
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
     private static readonly int AnimSonic = Animator.StringToHash("Sonic");
@@ -83,12 +95,16 @@ public class BossController : MonoBehaviour, IHitReaction
 
         enemyStatus.OnEnemyDeath += OnDeath;
 
+        waterSpoutLoop = StartCoroutine(WaterSpoutLoop());
         currentLoop = StartCoroutine(Phase1Loop());
     }
 
     private void Update()
     {
-        if (isDead || isPhase3) return;
+        if (isDead || isPhase3)
+        {
+            return;
+        }
 
         float hpRatio = enemyStatus.GetHPRatio();
 
@@ -102,7 +118,10 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             isPhase3 = true;
             isPhase2 = false; // 2페이즈 루프 정지
-            if (currentLoop != null) StopCoroutine(currentLoop);
+            if (currentLoop != null)
+            {
+                StopCoroutine(currentLoop);
+            }
             currentLoop = StartCoroutine(Phase3Loop());
             return;
         }
@@ -132,11 +151,7 @@ public class BossController : MonoBehaviour, IHitReaction
             else
             {
                 yield return StartCoroutine(PatternDash());
-
-                if (Random.value > 0.5f) //50% 확률로 휴식
-                {
-                    yield return StartCoroutine(RestRoutine());
-                }
+                yield return StartCoroutine(RestRoutine());
             }
 
             yield return new WaitForSeconds(patternCooldown);
@@ -153,7 +168,6 @@ public class BossController : MonoBehaviour, IHitReaction
         while (!isDead)
         {
             int roll = Random.Range(0, 3);
-            Debug.Log($"Pattern : {roll}");
             if (roll == 0)
             {
                 yield return StartCoroutine(PatternClaw());
@@ -162,10 +176,7 @@ public class BossController : MonoBehaviour, IHitReaction
             {
                 yield return StartCoroutine(PatternDash());
                 yield return StartCoroutine(PatternDash());
-                if (Random.value > 0.5f)
-                {
-                    yield return StartCoroutine(RestRoutine());
-                }
+                yield return StartCoroutine(RestRoutine());
             }
             else
             {
@@ -176,34 +187,6 @@ public class BossController : MonoBehaviour, IHitReaction
         }
     }
 
-    private IEnumerator PatternSonicApproach()
-    {
-        if (player == null)
-        {
-            yield break;
-        }
-
-        bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 플레이어 바라보기
-
-        while (!isDead)
-        {
-            // 플레이어 대각선 위 목표 위치 (플레이어 반대편 위)
-            float offsetX = bossFlip.isFacingRight ? -sonicRange * 0.7f : sonicRange * 0.7f;
-            float offsetY = sonicRange * 0.7f;
-            Vector2 targetPos = (Vector2)player.position + new Vector2(offsetX, offsetY);
-
-            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime));
-
-            if (IsPlayerInLaserRange())
-            {
-                anim.SetTrigger(AnimSonic);
-                yield return new WaitForSeconds(GetAnimLength("Sonic"));
-                yield break;
-            }
-
-            yield return new WaitForFixedUpdate();
-        }
-    }
     private IEnumerator Phase3Loop()
     {
         // 패턴 시작과 동시에 무적 전개
@@ -213,7 +196,10 @@ public class BossController : MonoBehaviour, IHitReaction
         // 3번 반복 (총 9번 돌진)
         for (int i = 0; i < 3; i++)
         {
-            if (isDead) yield break;
+            if (isDead)
+            {
+                yield break;
+            }
 
             yield return StartCoroutine(PatternEnrageDesperation());
 
@@ -278,7 +264,33 @@ public class BossController : MonoBehaviour, IHitReaction
     // ───────────────────────────────────────────
     // 패턴
     // ───────────────────────────────────────────
+    private IEnumerator WaterSpoutLoop()
+    {
+        while (!isDead)
+        {
+            if (player == null)
+            {
+                yield return new WaitForSeconds(waterSpoutInterval);
+                continue;
+            }
 
+            float randomX = player.position.x + Random.Range(-waterSpoutSpread, waterSpoutSpread);
+
+            RaycastHit2D hit = Physics2D.Raycast(
+                new Vector2(randomX, -20f),
+                Vector2.up,
+                100f,
+                groundLayer
+            );
+
+            if (hit.collider != null)
+            {
+                PoolingManager.Instance.Get(waterSpoutPoolKey, hit.point + Vector2.up * waterSpoutYOffset, Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(waterSpoutInterval);
+        }
+    }
     private IEnumerator PatternClaw()
     {
         if (player == null)
@@ -389,7 +401,9 @@ public class BossController : MonoBehaviour, IHitReaction
     private IEnumerator PatternEnrageDesperation()
     {
         if (player == null || mapBoundaryColliders == null || mapBoundaryColliders.Length == 0)
+        {
             yield break;
+        }
 
         // 맵 범위 계산
         Bounds mapBounds = mapBoundaryColliders[0].bounds;
@@ -429,17 +443,15 @@ public class BossController : MonoBehaviour, IHitReaction
             float finalAngle = (baseAngleInterval * i) + randomAngleOffset + Random.Range(-5f, 5f);
             Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
 
-            // 중심점(맵 중앙 혹은 플레이어 위치)을 기준으로 맵 끝과 끝 계산
+            // 중심점을 기준으로 맵 끝과 끝 계산
             // 넉넉하게 큰 값을 곱한 뒤 외곽 벽에 걸리도록 세팅
             startPositions[i] = mapCenter - dir * 25f;
             targetPositions[i] = mapCenter + dir * 25f;
 
-            // 맵 Bounds 안으로 클램핑(제한)하여 정확한 외곽 점 추출
+            // 맵 Bounds 안으로 제한하여 정확한 외곽 점 추출
             startPositions[i] = ClampToEdges(startPositions[i], minX, maxX, minY, maxY);
             targetPositions[i] = ClampToEdges(targetPositions[i], minX, maxX, minY, maxY);
-
-            // 가끔 방향이 반대가 될 수 있도록 50% 확률로 시작점과 끝점 뒤집기 (랜덤성 극대화)
-            if (Random.value > 0.5f)
+            if (desperationFlip)
             {
                 Vector2 temp = startPositions[i];
                 startPositions[i] = targetPositions[i];
@@ -504,7 +516,10 @@ public class BossController : MonoBehaviour, IHitReaction
 
             rb.MovePosition(targetPositions[i]); // 끝점 안착
 
-            if (bossSprite != null) yield return StartCoroutine(FadeOut(0.15f));
+            if (bossSprite != null)
+            {
+                yield return StartCoroutine(FadeOut(0.15f));
+            }
             dashHitbox.enabled = false;
 
             yield return new WaitForSeconds(0.1f);
@@ -525,6 +540,35 @@ public class BossController : MonoBehaviour, IHitReaction
         point.x = Mathf.Clamp(point.x, minX, maxX);
         point.y = Mathf.Clamp(point.y, minY, maxY);
         return point;
+    }
+
+    private IEnumerator PatternSonicApproach()
+    {
+        if (player == null)
+        {
+            yield break;
+        }
+
+        bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 플레이어 바라보기
+
+        while (!isDead)
+        {
+            // 플레이어 대각선 위 목표 위치 (플레이어 반대편 위)
+            float offsetX = bossFlip.isFacingRight ? -sonicRange * 0.7f : sonicRange * 0.7f;
+            float offsetY = sonicRange * 0.7f;
+            Vector2 targetPos = (Vector2)player.position + new Vector2(offsetX, offsetY);
+
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime));
+
+            if (IsPlayerInLaserRange())
+            {
+                anim.SetTrigger(AnimSonic);
+                yield return new WaitForSeconds(GetAnimLength("Sonic"));
+                yield break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
     }
     public void SonicFire()
     {
@@ -640,8 +684,15 @@ public class BossController : MonoBehaviour, IHitReaction
         clawHitbox.enabled = false;
         dashHitbox.enabled = false;
 
-        rb.linearVelocity = Vector2.zero;
+        StartCoroutine(DeathFallRoutine());
+    }
+    private IEnumerator DeathFallRoutine()
+    {
+        yield return null;
+
+        rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 2f;
+        rb.linearVelocity = Vector2.zero;
     }
 
     // ───────────────────────────────────────────
@@ -669,7 +720,6 @@ public class BossController : MonoBehaviour, IHitReaction
         return false; // 평소 대미지 정상
     }
 
-    // 대미지가 들어온 직후에 호출됨 (필요 없다면 비워두기)
     public void OnAfterTakeDamage(EnemyStatus status, int damage)
     {
     }
