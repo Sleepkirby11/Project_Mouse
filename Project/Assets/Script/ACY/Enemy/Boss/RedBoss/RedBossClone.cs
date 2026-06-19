@@ -4,11 +4,11 @@ public class RedBossClone : MonoBehaviour, IDamageable
 {
     private RedBossAttack owner;
 
-    [Header("Ÿ�� ����")]
+    [Header("타겟 설정")]
     private Transform playerTransform;
     public bool isFacingRight = true;
 
-    [Header("��ƼŬ")]
+    [Header("파티클")]
     private GameObject spawnVFX;
     private GameObject disappearVFX;
 
@@ -42,12 +42,12 @@ public class RedBossClone : MonoBehaviour, IDamageable
         }
         gameObject.SetActive(true);
 
-        // ���� ����Ʈ
+        // 생성 이펙트
         PlayVFX(spawnVFX);
         FlipToTarget();
         if (animator != null)
         {
-            animator.SetBool(CastTrigger, false); // �ʱ�ȭ
+            animator.SetBool(CastTrigger, false); // 초기화
         }
     }
 
@@ -74,8 +74,8 @@ public class RedBossClone : MonoBehaviour, IDamageable
         {
             return;
         }
-        animator.SetBool(CastTrigger, true); // ĳ���� �ִϸ��̼����� ��ȯ
-        animator.Play(stateHash, 0, normalizedTime); // ������ �ִϸ��̼� ����ȭ
+        animator.SetBool(CastTrigger, true); // 캐스팅 애니메이션으로 전환
+        animator.Play(stateHash, 0, normalizedTime); // 보스와 애니메이션 동기화
     }
 
     public void TakeDamage(int damage)
@@ -96,12 +96,12 @@ public class RedBossClone : MonoBehaviour, IDamageable
         }
 
         isDead = true;
-        // ���� ����Ʈ
+        // 제거 이펙트
         PlayVFX(disappearVFX);
 
         owner = null;
 
-        // Ǯ�� ��ȯ
+        // 풀로 반환
         PoolingManager.Instance.Return(CLONE_KEY, gameObject);
     }
 

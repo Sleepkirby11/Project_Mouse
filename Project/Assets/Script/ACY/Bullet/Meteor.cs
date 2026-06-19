@@ -2,11 +2,11 @@
 
 public class Meteor : MonoBehaviour
 {
-    [Header("�̵� ����")]
+    [Header("이동 설정")]
     [SerializeField] private float minfallSpeed = 6f;
     [SerializeField] private float maxfallSpeed = 10f;
 
-    [Header("������")]
+    [Header("데미지")]
     [SerializeField] private int damage = 1;
 
     float fallSpeed;

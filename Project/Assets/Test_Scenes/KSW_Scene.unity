@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1 &362230552
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +318,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570063000}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> main
 --- !u!1 &878607610
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +421,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!1 &1085511844
 =======
@@ -605,6 +609,8 @@ CanvasRenderer:
   m_GameObject: {fileID: 1184535881}
 >>>>>>> Stashed changes
   m_CullTransparentMesh: 1
+=======
+>>>>>>> main
 --- !u!114 &1274487664 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3716465741720496009, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
@@ -695,6 +701,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1673154388
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +781,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673154388}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> main
 --- !u!1 &1902481486
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,14 +972,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 306179050559651237, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 666478932767545571, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     - target: {fileID: 666478932767545571, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_IsActive
@@ -1004,6 +1010,11 @@ PrefabInstance:
     - target: {fileID: 2206530943666713997, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+=======
+    - target: {fileID: 1179677294668474743, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+>>>>>>> main
       objectReference: {fileID: 0}
     - target: {fileID: 2551296098029062224, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1012,6 +1023,7 @@ PrefabInstance:
     - target: {fileID: 2551296098029062224, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+<<<<<<< HEAD
       objectReference: {fileID: 0}
     - target: {fileID: 7330735326392151285, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1056,6 +1068,8 @@ PrefabInstance:
     - target: {fileID: 7072988042384938707, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+=======
+>>>>>>> main
       objectReference: {fileID: 0}
     - target: {fileID: 7951452984803062232, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_Pivot.x
@@ -1137,6 +1151,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8008626018680129636, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
 <<<<<<< Updated upstream
       propertyPath: m_AnchoredPosition.x
@@ -1278,6 +1293,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 4037026322319572912}
   m_PrefabAsset: {fileID: 0}
 >>>>>>> Stashed changes
+=======
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
+>>>>>>> main
 --- !u!1001 &7990928510457874546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1352,4 +1374,7 @@ SceneRoots:
   - {fileID: 1378633660}
   - {fileID: 4037026322319572912}
   - {fileID: 7990928510457874546}
+<<<<<<< HEAD
   - {fileID: 6288174019942181469}
+=======
+>>>>>>> main

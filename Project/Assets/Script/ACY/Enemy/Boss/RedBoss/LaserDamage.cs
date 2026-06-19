@@ -6,7 +6,7 @@ public class LaserDamage : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        // ������ ����
+        // 보스는 무시
         if (collision.GetComponent<RedBossAttack>() != null)
         {
             return;
