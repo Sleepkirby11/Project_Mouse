@@ -161,6 +161,8 @@ MonoBehaviour:
   dashSpeed: 35
   patternCooldown: 0.5
   moveSpeed: 15
+  clawAttackYOffset: 1.5
+  sonicThickness: 2
   restPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -168,10 +170,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  restPointOffset: {x: 0, y: 2}
-  restJumpHeight: 5
+  restPointOffset: {x: 0, y: 3.5}
+  restJumpHeight: 8
   clawHitbox: {fileID: 5999535619754719866}
-  dashHitbox: {fileID: 0}
+  dashHitbox: {fileID: 7466204892382239570}
   sonicPoolKey: BlueLaser
   sonicSpawnPoint: {fileID: 3471223895787820529}
   sonicAngle: 45
@@ -183,7 +185,7 @@ MonoBehaviour:
   waterSpoutPoolKey: WaterSpout
   waterSpoutInterval: 5
   waterSpoutSpread: 3
-  waterSpoutYOffset: 1.5
+  waterSpoutYOffset: 2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -486,7 +488,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 333b9a812e514aa44a0849b0c72d916c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a64e2f6bea39cb48bda6ef15a333c08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -648,7 +650,7 @@ Transform:
   m_GameObject: {fileID: 7850722398097481595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.242, y: -0.185, z: 0}
+  m_LocalPosition: {x: 0.415, y: -0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
