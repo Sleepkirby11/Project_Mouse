@@ -70,7 +70,7 @@ public class ZoneManager : MonoBehaviour
             {
                 if (playerObject == null)
                 {
-                    playerObject = GameObject.FindGameObjectWithTag("Player");
+                    playerObject = GameObject.FindWithTag("Player");
                 }
 
                 if (playerObject != null)
