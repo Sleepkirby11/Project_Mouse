@@ -319,11 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 0}
-  zonePrefabs:
-  - {fileID: 3818949175074173064, guid: 0bf4a69c1f65bbc42b0ef1ff4ea1f6ec, type: 3}
-  - {fileID: 3316367359528164917, guid: 7c4fc5354d400d645a8d96b62a8535eb, type: 3}
-  - {fileID: 7445721056531100163, guid: c15a4682e360353488cc45a574eebb0b, type: 3}
-  - {fileID: 1287433495598909183, guid: 8d8cc848992c5134c8a8209fd12042cd, type: 3}
+  zonePrefabs: []
 --- !u!4 &1966956955
 Transform:
   m_ObjectHideFlags: 0
