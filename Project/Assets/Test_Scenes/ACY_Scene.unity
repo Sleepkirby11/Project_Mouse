@@ -3505,6 +3505,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9168699527130250196, guid: 4e16ca2ed380bcd4a809df1ee3de8bd8, type: 3}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
+      propertyPath: pools.Array.data[0].initialSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[13].initialSize
       value: 1
       objectReference: {fileID: 0}
@@ -4176,11 +4180,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1823950582210720561, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3372036266355469166, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: appearVFX
