@@ -1,83 +1,131 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ZoneManager : MonoBehaviour
 {
     public static ZoneManager Instance { get; private set; }
 
     [Header("References")]
-    [SerializeField] private GameObject playerObject; 
-    [Tooltip("Optional: Player prefab to instantiate at runtime if no player exists in the scene.")]
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject playerObject;
 
-    [Header("���� ���� ���� ������")]
-    [SerializeField] private GameObject startZonePrefab;
+    [Header("현재 씬의 맵 조각 데이터 리스트")]
+    [Tooltip("인스펙터의 Element 번호가 곧 구역 ID가 됩니다. (0번칸 = 0번 구역)")]
+    [SerializeField] private List<GameObject> zonePrefabs = new List<GameObject>();
 
     private Dictionary<int, GameObject> activeZones = new Dictionary<int, GameObject>();
-    private Dictionary<int, GameObject> zonePrefabIndex = new Dictionary<int, GameObject>();
     private int currentZoneId = -1;
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Instance.UpdateSceneData(this.zonePrefabs);
+            Destroy(gameObject);
+            return;
+        }
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        // Ensure there's a player instance (find in scene or instantiate prefab)
-        EnsurePlayer();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-        // Index all Zone prefabs under Resources/Tilemaps (includes subfolders)
-        IndexZonePrefabs();
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
-        if (startZonePrefab != null)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitFirstZone();
+    }
+
+    public void UpdateSceneData(List<GameObject> newPrefabs)
+    {
+        this.zonePrefabs = new List<GameObject>(newPrefabs);
+        Debug.Log($"[ZoneManager] 새로운 씬의 맵 데이터 {zonePrefabs.Count}개를 갱신했습니다.");
+    }
+
+    private void InitFirstZone()
+    {
+        if (zonePrefabs == null || zonePrefabs.Count == 0) return;
+
+        activeZones.Clear();
+        currentZoneId = -1;
+
+        int firstZoneId = 0;
+        LoadZonePrefab(firstZoneId);
+
+        if (activeZones.TryGetValue(firstZoneId, out GameObject startZoneObj))
         {
-            Zone startZone = startZonePrefab.GetComponent<Zone>();
+            Zone startZone = startZoneObj.GetComponent<Zone>();
+
             if (startZone != null)
             {
-                GameObject zoneObj = Instantiate(startZonePrefab, startZonePrefab.transform.position, Quaternion.identity);
-                Zone instantiatedZone = zoneObj.GetComponent<Zone>();
-                activeZones.Add(instantiatedZone.zoneId, zoneObj);
-
                 if (playerObject == null)
                 {
-                    Debug.LogWarning("[ZoneManager] playerObject가 할당되어 있지 않습니다. 스폰을 건너뜁니다.");
+                    playerObject = GameObject.FindGameObjectWithTag("Player");
                 }
-                else
+
+                if (playerObject != null)
                 {
-                    Transform sp = instantiatedZone.spawnPoint;
-                    if (sp == null)
-                    {
-                        sp = FindChildRecursive(instantiatedZone.transform, "SpawnPoint");
-                        if (sp != null) instantiatedZone.spawnPoint = sp;
-                    }
-
-                    if (sp != null)
-                    {
-                        Debug.Log($"[ZoneManager] 이동 전 playerObject: name={playerObject.name}, activeInHierarchy={playerObject.activeInHierarchy}, sceneValid={playerObject.scene.IsValid()}");
-                        playerObject.transform.position = sp.position;
-                        Debug.Log($"[ZoneManager] 플레이어를 {instantiatedZone.zoneId}번 존의 SpawnPoint로 이동했습니다. 위치:{sp.position} | playerObject now at:{playerObject.transform.position}");
-                    }
-                    else
-                    {
-                        playerObject.transform.position = instantiatedZone.transform.position;
-                        Debug.LogWarning($"[ZoneManager] SpawnPoint가 없습니다. 플레이어를 존 루트 위치로 이동: {instantiatedZone.zoneId}. playerObject: name={playerObject.name}, activeInHierarchy={playerObject.activeInHierarchy}");
-                    }
+                    StartCoroutine(SpawnProcessRoutine(startZone));
                 }
-
-                // 3. ù ���� �ֺ� �� �ε�
-                OnPlayerEnterZone(instantiatedZone);
             }
         }
     }
 
+    private System.Collections.IEnumerator SpawnProcessRoutine(Zone startZone)
+    {
+        yield return null;
+
+        if (startZone != null && startZone.spawnPoint != null && playerObject != null)
+        {
+            Vector3 spawnPosition = startZone.spawnPoint.position;
+
+            yield return StartCoroutine(SafeTeleport(playerObject.transform, spawnPosition));
+
+            OnPlayerEnterZone(startZone);
+        }
+    }
+
+    private System.Collections.IEnumerator SafeTeleport(Transform target, Vector3 destination)
+    {
+        yield return new WaitForEndOfFrame();
+
+        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        target.position = destination;
+
+        yield return null;
+
+        
+    }
+
     public void OnPlayerEnterZone(Zone enteredZone)
     {
+        if (enteredZone == null || enteredZone.zoneId == -1) return;
+
+        // 플레이어가 새로운 콜라이더 경계를 밟아 트리거가 인식되었을 때의 원시 로그를 출력합니다.
+        Debug.Log($"[ZoneManager] 플레이어가 {enteredZone.zoneId}번 구역 트리거 콜라이더에 진입 시도 중입니다.");
+
+        // 이미 활성화된 현재 구역과 중복되는 연산일 경우 리턴 처리되기 전에 확인 가능하도록 상단에 배치했습니다.
         if (currentZoneId == enteredZone.zoneId) return;
 
         currentZoneId = enteredZone.zoneId;
-        Debug.Log($"[ZoneManager] �÷��̾ {currentZoneId}�� ������ �����߽��ϴ�.");
+
+        // 필터 및 로드 처리가 정상적으로 승인되어 현재 구역 상태가 전환되었음을 알리는 확정 로그입니다.
+        Debug.Log($"[ZoneManager] 현재 활성화된 구역이 {currentZoneId}번 구역으로 성공적으로 갱신되었습니다.");
 
         HashSet<int> zonesToKeep = new HashSet<int> { currentZoneId };
         foreach (int neighborId in enteredZone.connectedZoneIds)
@@ -100,11 +148,6 @@ public class ZoneManager : MonoBehaviour
             activeZones.Remove(removeId);
         }
 
-        if (zonesToRemove.Count > 0)
-        {
-            Resources.UnloadUnusedAssets();
-        }
-
         foreach (int keepId in zonesToKeep)
         {
             if (!activeZones.ContainsKey(keepId))
@@ -116,116 +159,22 @@ public class ZoneManager : MonoBehaviour
 
     private void LoadZonePrefab(int zoneId)
     {
-        // 먼저 인덱스에서 찾기
-        if (zonePrefabIndex != null && zonePrefabIndex.TryGetValue(zoneId, out GameObject indexedPrefab))
-        {
-            GameObject spawnedZone = Instantiate(indexedPrefab, indexedPrefab.transform.position, indexedPrefab.transform.rotation);
-            activeZones.Add(zoneId, spawnedZone);
-            Debug.Log($"[ZoneManager] Indexed prefab으로 Zone_{zoneId} 로드 및 인스턴스화 완료: {indexedPrefab.name}");
-            return;
-        }
+        if (zoneId < 0 || zoneId >= zonePrefabs.Count) return;
 
-        // 인덱스에 없으면 기존 방식 시도
-        GameObject zonePrefab = Resources.Load<GameObject>($"Tilemaps/Tilemaps_{zoneId}");
-        Debug.Log($"[ZoneManager] Resources.Load로 Tilemaps_{zoneId}를 시도했습니다. 결과: {(zonePrefab != null ? "성공" : "실패")}");
+        GameObject zonePrefab = zonePrefabs[zoneId];
 
         if (zonePrefab != null)
         {
             GameObject spawnedZone = Instantiate(zonePrefab, zonePrefab.transform.position, zonePrefab.transform.rotation);
+
+            Zone zoneScript = spawnedZone.GetComponent<Zone>();
+            if (zoneScript != null)
+            {
+                zoneScript.zoneId = zoneId;
+                Debug.Log($"[ZoneManager] 하이어라키에 고유 ID {zoneId}번 구역 프리팹 인스턴스가 로드되었습니다.");
+            }
+
             activeZones.Add(zoneId, spawnedZone);
         }
-        else
-        {
-            Debug.LogWarning($"[ZoneManager] Resources/Tilemaps/Tilemaps_{zoneId}를 찾을 수 없습니다.");
-        }
-    }
-
-    private void IndexZonePrefabs()
-    {
-        zonePrefabIndex.Clear();
-        GameObject[] prefabs = Resources.LoadAll<GameObject>("Tilemaps");
-        foreach (var prefab in prefabs)
-        {
-            if (prefab == null) continue;
-            var z = prefab.GetComponent<Zone>();
-            if (z != null)
-            {
-                if (zonePrefabIndex.ContainsKey(z.zoneId))
-                {
-                    Debug.LogWarning($"[ZoneManager] 중복 zoneId {z.zoneId} 발견: 기존={zonePrefabIndex[z.zoneId].name} 새로찾음={prefab.name}");
-                }
-                else
-                {
-                    zonePrefabIndex.Add(z.zoneId, prefab);
-                }
-            }
-        }
-        Debug.Log($"[ZoneManager] IndexZonePrefabs 완료. found {zonePrefabIndex.Count} prefabs under Resources/Tilemaps (including subfolders).\n");
-    }
-
-    private void EnsurePlayer()
-    {
-        // // If inspector assigned something to playerObject, it may be a scene instance or a prefab asset.
-        // if (playerObject != null)
-        // {
-        //     bool sceneValid = playerObject.scene.IsValid();
-        //     Debug.Log($"[ZoneManager] playerObject 필드에 값이 있습니다. name={playerObject.name}, sceneValid={sceneValid}, activeInHierarchy={playerObject.activeInHierarchy}");
-        //     if (!sceneValid)
-        //     {
-        //         // Likely a prefab asset assigned to the field — instantiate a runtime instance
-        //         if (Application.isPlaying)
-        //         {
-        //             Debug.Log("[ZoneManager] playerObject가 프리팹 에셋으로 보입니다. 런타임 인스턴스화합니다.");
-        //             GameObject inst = Instantiate(playerObject);
-        //             inst.name = inst.name.Replace("(Clone)", ""); // keep readable
-        //             playerObject = inst;
-        //             Debug.Log($"[ZoneManager] playerPrefab 인스턴스화 완료: name={playerObject.name}, instanceID={playerObject.GetInstanceID()}, activeInHierarchy={playerObject.activeInHierarchy}");
-        //         }
-        //         else
-        //         {
-        //             Debug.LogWarning("[ZoneManager] playerObject가 에디터에서 프리팹 에셋으로 지정되어 있습니다. 플레이 모드에서 동작을 확인하세요.");
-        //         }
-        //     }
-        //     else
-        //     {
-        //         // existing scene instance
-        //         if (!playerObject.activeInHierarchy) playerObject.SetActive(true);
-        //         Debug.Log($"[ZoneManager] 씬에 있는 playerObject를 사용합니다: name={playerObject.name}");
-        //     }
-        //     return;
-        // }
-
-        // 1) 씬에 Player 태그로 배치된 오브젝트 검색
-        GameObject found = GameObject.FindWithTag("Player");
-        if (found != null)
-        {
-            playerObject = found;
-            Debug.Log($"[ZoneManager] 씬에서 태그로 플레이어를 찾음: name={playerObject.name}");
-            return;
-        }
-
-        // 2) playerPrefab이 할당되어 있으면 인스턴스화
-        // if (playerPrefab != null)
-        // {
-        //     Debug.Log("[ZoneManager] playerPrefab으로부터 플레이어를 인스턴스화합니다.");
-        //     playerObject = Instantiate(playerPrefab);
-        //     Debug.Log($"[ZoneManager] playerPrefab 인스턴스화 완료: name={playerObject.name}, instanceID={playerObject.GetInstanceID()}");
-        //     return;
-        // }
-
-        Debug.LogWarning("[ZoneManager] playerObject와 playerPrefab이 모두 비어있습니다. 플레이어를 찾거나 prefab을 할당하세요.");
-    }
-
-    // 재귀적으로 자식에서 이름으로 Transform 찾기
-    private Transform FindChildRecursive(Transform parent, string name)
-    {
-        if (parent == null) return null;
-        foreach (Transform child in parent)
-        {
-            if (child.name == name) return child;
-            Transform found = FindChildRecursive(child, name);
-            if (found != null) return found;
-        }
-        return null;
     }
 }
