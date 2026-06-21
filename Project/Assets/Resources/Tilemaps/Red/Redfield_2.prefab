@@ -22056,9 +22056,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8c516105f252c408421b953d41a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneId: 202
+  zoneId: 2
   spawnPoint: {fileID: 0}
-  connectedZoneIds: c9000000cb000000
+  connectedZoneIds: 0100000003000000
 --- !u!1 &5006165469499367718
 GameObject:
   m_ObjectHideFlags: 0

@@ -149,8 +149,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 0}
-  playerPrefab: {fileID: 1421529219847481145, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
-  startZonePrefab: {fileID: 3011886835509846344, guid: a21c66a23db51a3489a3ce383ad9e7cc, type: 3}
+  zonePrefabs:
+  - {fileID: 3011886835509846344, guid: a21c66a23db51a3489a3ce383ad9e7cc, type: 3}
+  - {fileID: 8655145904211127233, guid: 575dcf5565d8ac244bc59470e2a1437c, type: 3}
+  startZoneId: 0
 --- !u!4 &97741520
 Transform:
   m_ObjectHideFlags: 0

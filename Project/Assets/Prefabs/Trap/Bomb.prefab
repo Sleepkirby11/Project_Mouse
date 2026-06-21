@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1089724136678121212}
   - component: {fileID: -2402550210240820376}
   - component: {fileID: 6904492949186533482}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bomb
   m_TagString: AttackableTrap
   m_Icon: {fileID: 0}

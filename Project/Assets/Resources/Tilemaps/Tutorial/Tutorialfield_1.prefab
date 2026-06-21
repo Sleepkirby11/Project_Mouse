@@ -33910,9 +33910,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8c516105f252c408421b953d41a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneId: 101
+  zoneId: 1
   spawnPoint: {fileID: 0}
-  connectedZoneIds: 64000000
+  connectedZoneIds: 00000000
 --- !u!1001 &659440982352225824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34063,25 +34063,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4169286712872263522}
     m_Modifications:
-    - target: {fileID: 3452495524052986724, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3452495524052986724, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
-      propertyPath: nextSceneName
-      value: Red
-      objectReference: {fileID: 0}
     - target: {fileID: 7758221207617996518, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
       propertyPath: m_Name
       value: SceneTransitionTrigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 8319031371607440566, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8319031371607440566, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8319031371607440566, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34126,31 +34110,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7758221207617996518, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2085000048720228653}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
---- !u!1 &5721006749963653263 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7758221207617996518, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
-  m_PrefabInstance: {fileID: 2652519328545183337}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2085000048720228653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721006749963653263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 455d7cf936a0a0c4d80cb866f8f80a2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneIndex: 0
-  id: 0
-  isNPC: 0
 --- !u!4 &6322076077094529759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8319031371607440566, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}

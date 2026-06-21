@@ -50611,9 +50611,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8c516105f252c408421b953d41a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneId: 200
+  zoneId: 0
   spawnPoint: {fileID: 2679194210760481878}
-  connectedZoneIds: c9000000
+  connectedZoneIds: 01000000
 --- !u!1001 &127007774331406881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50716,6 +50716,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8402703337166098147}
     m_Modifications:
+    - target: {fileID: -2402550210240820376, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1904359348216939170, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -112.642975
@@ -50759,6 +50763,10 @@ PrefabInstance:
     - target: {fileID: 2246915190256442603, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
       propertyPath: m_Name
       value: Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904492949186533482, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
+      propertyPath: m_BodyType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
