@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -14,6 +15,8 @@ using UnityEngine;
  */
 public class BossController : MonoBehaviour, IHitReaction
 {
+    #region Settings & Variables
+
     private Animator anim;
     private Rigidbody2D rb;
     private EnemyStatus enemyStatus;
@@ -50,7 +53,6 @@ public class BossController : MonoBehaviour, IHitReaction
     [SerializeField] private float waterSpoutYOffset = 0f; // 오프셋
     [SerializeField] private LayerMask groundLayer;
 
-
     [Header("발악 패턴 (3페이즈) 설정")]
     public string warningLinePoolKey = "WarningLine"; // 경고선 키
     [SerializeField] private float dashWarningDuration = 0.8f; // 경고선이 유지되는 시간 (페이드아웃 포함)
@@ -70,8 +72,11 @@ public class BossController : MonoBehaviour, IHitReaction
     private bool isDead = false;
     private bool restJumpTriggered;
 
+    // 코루틴 추적 변수
     private Coroutine waterSpoutLoop;
     private Coroutine currentLoop;
+    private Coroutine deathRoutine;
+
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
     private static readonly int AnimSonic = Animator.StringToHash("Sonic");
     private static readonly int AnimDashStart = Animator.StringToHash("DashStart");
@@ -80,6 +85,10 @@ public class BossController : MonoBehaviour, IHitReaction
     private static readonly int AnimRestStart = Animator.StringToHash("RestStart");
     private static readonly int AnimRest = Animator.StringToHash("Rest");
     private static readonly int AnimRest2 = Animator.StringToHash("Rest2");
+
+    #endregion
+
+    #region Unity Lifecycle
 
     private void Start()
     {
@@ -97,18 +106,27 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             deathCollider.enabled = false;
         }
-        clawHitbox.enabled = false;
+        if (clawHitbox != null)
+        {
+            clawHitbox.enabled = false;
+        }
 
+        if (enemyStatus != null)
+        {
+            enemyStatus.OnEnemyDeath += OnDeath;
+        }
 
-        enemyStatus.OnEnemyDeath += OnDeath;
-
-        //waterSpoutLoop = StartCoroutine(WaterSpoutLoop());
         currentLoop = StartCoroutine(Phase1Loop());
     }
 
     private void Update()
     {
         if (isDead || isPhase3)
+        {
+            return;
+        }
+
+        if (enemyStatus == null)
         {
             return;
         }
@@ -133,7 +151,7 @@ public class BossController : MonoBehaviour, IHitReaction
             return;
         }
 
-        if (sonicSpawnPoint != null && !isDead)
+        if (sonicSpawnPoint != null && !isDead && bossFlip != null)
         {
             Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
             Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
@@ -146,9 +164,32 @@ public class BossController : MonoBehaviour, IHitReaction
         }
     }
 
-    // ───────────────────────────────────────────
-    // 페이즈 루프
-    // ───────────────────────────────────────────
+    #endregion
+
+    #region Coroutine Management
+
+    private void StopAllBossCoroutines()
+    {
+        if (currentLoop != null)
+        {
+            StopCoroutine(currentLoop);
+            currentLoop = null;
+        }
+        if (waterSpoutLoop != null)
+        {
+            StopCoroutine(waterSpoutLoop);
+            waterSpoutLoop = null;
+        }
+        if (deathRoutine != null)
+        {
+            StopCoroutine(deathRoutine);
+            deathRoutine = null;
+        }
+    }
+
+    #endregion
+
+    #region Phase Loops
 
     private IEnumerator Phase1Loop()
     {
@@ -158,12 +199,13 @@ public class BossController : MonoBehaviour, IHitReaction
 
             if (roll == 0)
             {
-                yield return StartCoroutine(PatternClaw());
+                // 중첩 Coroutine 대신 인라인 yield return으로 순차 실행
+                yield return PatternClaw();
             }
             else
             {
-                yield return StartCoroutine(PatternDash());
-                yield return StartCoroutine(RestRoutine());
+                yield return PatternDash();
+                yield return RestRoutine();
             }
 
             yield return new WaitForSeconds(patternCooldown);
@@ -182,17 +224,17 @@ public class BossController : MonoBehaviour, IHitReaction
             int roll = Random.Range(0, 3);
             if (roll == 0)
             {
-                yield return StartCoroutine(PatternClaw());
+                yield return PatternClaw();
             }
             else if (roll == 1)
             {
-                yield return StartCoroutine(PatternDash());
-                yield return StartCoroutine(PatternDash());
-                yield return StartCoroutine(RestRoutine());
+                yield return PatternDash();
+                yield return PatternDash();
+                yield return RestRoutine();
             }
             else
             {
-                yield return StartCoroutine(PatternSonicApproach());
+                yield return PatternSonicApproach();
             }
 
             yield return new WaitForSeconds(patternCooldown);
@@ -203,7 +245,10 @@ public class BossController : MonoBehaviour, IHitReaction
     {
         // 패턴 시작과 동시에 무적 전개
         isInvincible = true;
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
 
         // 3번 반복 (총 9번 돌진)
         for (int i = 0; i < 3; i++)
@@ -213,7 +258,7 @@ public class BossController : MonoBehaviour, IHitReaction
                 yield break;
             }
 
-            yield return StartCoroutine(PatternEnrageDesperation());
+            yield return PatternEnrageDesperation();
 
             // 세트 사이의 짧은 휴식 타임 (조율 가능)
             yield return new WaitForSeconds(1.0f);
@@ -228,54 +273,270 @@ public class BossController : MonoBehaviour, IHitReaction
             currentLoop = StartCoroutine(Phase2Loop());
         }
     }
-    private IEnumerator FadeOut(float duration)
+
+    #endregion
+
+    #region Pattern: Claw (할퀴기)
+
+    private IEnumerator PatternClaw()
     {
-        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
-
-        float startAlpha = sr.color.a;
-
-        Color color = sr.color;
-        float t = 0f;
-
-        while (t < duration)
+        if (player == null || rb == null)
         {
-            t += Time.deltaTime;
-
-            color.a = Mathf.Lerp(startAlpha, 0f, t / duration);
-            sr.color = color;
-
-            yield return null;
+            yield break;
         }
 
-        color.a = 0f;
-        sr.color = color;
-    }
+        Vector2 dir = ((Vector2)player.position - rb.position).normalized;
 
-    private IEnumerator FadeIn(float duration)
-    {
-        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        Vector2 targetPos = (Vector2)player.position - (dir * 0.4f) + (Vector2.up * clawAttackYOffset);
 
-        float startAlpha = sr.color.a;
+        bool attackStarted = false;
 
-        Color color = sr.color;
-        float t = 0f;
-
-        while (t < duration)
+        while (!isDead && Vector2.Distance(rb.position, targetPos) > 0.1f)
         {
-            t += Time.deltaTime;
+            float distance = Vector2.Distance(rb.position, targetPos);
 
-            color.a = Mathf.Lerp(startAlpha, 1f, t / duration);
-            sr.color = color;
+            // 목표에 거의 도착했을 때 공격 시작
+            if (!attackStarted && distance < 2.5f)
+            {
+                attackStarted = true;
+                if (anim != null)
+                {
+                    anim.SetTrigger(AnimClaw);
+                }
+            }
 
-            yield return null;
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * 2f * Time.fixedDeltaTime));
+
+            yield return new WaitForFixedUpdate();
+        }
+        
+        rb.MovePosition(targetPos);
+
+        // 혹시 너무 가까워서 위 조건을 못 탔을 경우
+        if (!attackStarted && anim != null)
+        {
+            anim.SetTrigger(AnimClaw);
         }
 
-        color.a = 1f;
-        sr.color = color;
+        yield return new WaitForSeconds(GetAnimLength("Claw"));
     }
-    // ───────────────────────────────────────────
-    // 패턴
-    // ───────────────────────────────────────────
+
+    #endregion
+
+    #region Pattern: Dash (돌진)
+
+    private IEnumerator PatternDash()
+    {
+        if (player == null || rb == null)
+        {
+            yield break;
+        }
+
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimDashStart);
+        }
+        yield return new WaitForSeconds(0.2f);
+
+        Vector2 dashDir = ((Vector2)player.position - rb.position).normalized; // 플레이어 방향
+        float dashDistance = 20f;
+        float remainedDistance = dashDistance;
+
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimDash);
+        }
+        if (dashHitbox != null)
+        {
+            dashHitbox.enabled = true;
+        }
+        if (bossFlip != null)
+        {
+            bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
+        }
+
+        while (!isDead && remainedDistance > 0f)
+        {
+            float moveStep = dashSpeed * Time.fixedDeltaTime;
+            if (moveStep > remainedDistance)
+            {
+                moveStep = remainedDistance;
+            }
+
+            Physics2D.queriesHitTriggers = true;
+            RaycastHit2D[] hits = Physics2D.RaycastAll(rb.position, dashDir, moveStep + 0.6f);
+
+            foreach (var hit in hits)
+            {
+                bool isWall = false;
+                if (mapBoundaryColliders != null)
+                {
+                    foreach (var wallCollider in mapBoundaryColliders)
+                    {
+                        if (wallCollider != null && hit.collider == wallCollider)
+                        {
+                            isWall = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (isWall)
+                {
+                    // 벽에 부딪혔을때 반사각 계산
+                    Vector3 reflectDir = Vector3.Reflect(dashDir, hit.normal);
+                    dashDir = reflectDir.normalized;
+
+                    // 끼임 방지
+                    rb.position = hit.point + hit.normal * 0.1f;
+                    break; // 다른 충돌체 검사 중단
+                }
+            }
+
+            // 이동 처리
+            Vector2 nextPos = rb.position + dashDir * moveStep;
+            if (bossFlip != null)
+            {
+                bossFlip.moveDirection = dashDir;
+            }
+            rb.MovePosition(nextPos);
+
+            remainedDistance -= moveStep;
+            yield return new WaitForFixedUpdate();
+        }
+
+        if (dashHitbox != null)
+        {
+            dashHitbox.enabled = false;
+        }
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimDashEnd);
+        }
+        if (bossFlip != null)
+        {
+            bossFlip.facingMode = BlueBossFlip.FacingMode.Player;
+        }
+        yield return new WaitForSeconds(0.3f);
+    }
+
+    #endregion
+
+    #region Pattern: Laser (레이저/소닉)
+
+    private IEnumerator PatternSonicApproach()
+    {
+        if (player == null || rb == null)
+        {
+            yield break;
+        }
+
+        if (bossFlip != null)
+        {
+            bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 플레이어 바라보기
+        }
+
+        while (!isDead)
+        {
+            // 플레이어 대각선 위 목표 위치 (플레이어 반대편 위)
+            float offsetX = (bossFlip != null && bossFlip.isFacingRight) ? -sonicRange * 0.7f : sonicRange * 0.7f;
+            float offsetY = sonicRange * 0.7f;
+            Vector2 targetPos = (Vector2)player.position + new Vector2(offsetX, offsetY);
+
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * 1.8f * Time.fixedDeltaTime));
+
+            if (IsPlayerInLaserRange())
+            {
+                if (anim != null)
+                {
+                    anim.SetTrigger(AnimSonic);
+                }
+                yield return new WaitForSeconds(GetAnimLength("Sonic"));
+                yield break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    public void SonicFire()
+    {
+        if (sonicSpawnPoint == null || bossFlip == null)
+        {
+            return;
+        }
+
+        Vector2 spawnPos = sonicSpawnPoint.position;
+
+        Quaternion rot = bossFlip.isFacingRight ? Quaternion.Euler(0f, 0f, sonicAngle) : Quaternion.Euler(0f, 180f, sonicAngle); // Y 180으로 뒤집기
+
+        GameObject laser = PoolingManager.Instance.Get(sonicPoolKey, spawnPos, rot);
+        if (laser != null)
+        {
+            laser.transform.localScale = Vector3.one;
+        }
+
+        Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
+        Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
+
+        Collider2D[] bossColliders = GetComponentsInChildren<Collider2D>();
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(playerLayer); // 플레이어 레이어만 충돌 검사하도록 설정
+        filter.useLayerMask = true;
+        filter.useTriggers = true;
+
+        RaycastHit2D[] hits = new RaycastHit2D[5];
+        int hitCount = Physics2D.Raycast(spawnPos, fireDirection, filter, hits, sonicRange);
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            RaycastHit2D hit = hits[i];
+
+            // 자신의 콜라이더거나 자식 히트박스라면 무시하고 다음 타겟 검사
+            bool isSelf = false;
+            foreach (var bossCollider in bossColliders)
+            {
+                if (hit.collider == bossCollider)
+                {
+                    isSelf = true;
+                    break;
+                }
+            }
+            if (isSelf)
+            {
+                continue;
+            }
+
+            // 본인이 아니라면 타격 처리 후 반복문 탈출
+            if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
+            {
+                damageable.TakeDamage(sonicDamage);
+                break; // 플레이어를 맞췄으므로 멈춤
+            }
+        }
+    }
+
+    private bool IsPlayerInLaserRange()
+    {
+        if (player == null || sonicSpawnPoint == null || bossFlip == null)
+        {
+            return false;
+        }
+
+        Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
+        float actualAngle = bossFlip.isFacingRight ? -sonicAngle : sonicAngle;
+        Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
+
+        Vector2 boxSize = new Vector2(0.1f, sonicThickness); // 진행방향 길이는 최소화하고 폭을 설정
+        RaycastHit2D hit = Physics2D.BoxCast(sonicSpawnPoint.position, boxSize, actualAngle, fireDirection, sonicRange, playerLayer);
+
+        return hit.collider != null && hit.collider.CompareTag("Player");
+    }
+
+    #endregion
+
+    #region Pattern: Water Spout (물기둥)
+
     private IEnumerator WaterSpoutLoop()
     {
         while (!isDead)
@@ -297,129 +558,108 @@ public class BossController : MonoBehaviour, IHitReaction
 
             if (hit.collider != null)
             {
-                PoolingManager.Instance.Get(waterSpoutPoolKey, hit.point + Vector2.up * waterSpoutYOffset, Quaternion.identity);
+                GameObject spoutObj = PoolingManager.Instance.Get(waterSpoutPoolKey, hit.point + Vector2.up * waterSpoutYOffset, Quaternion.identity);
+                if (spoutObj == null)
+                {
+                    Debug.LogWarning("Failed to pool water spout object!");
+                }
             }
 
             yield return new WaitForSeconds(waterSpoutInterval);
         }
     }
-    private IEnumerator PatternClaw()
+
+    #endregion
+
+    #region Pattern: Rest (휴식)
+
+    private IEnumerator RestRoutine()
     {
-        if (player == null)
+        if (restPoints == null || restPoints.Length == 0)
         {
             yield break;
         }
 
-        Vector2 dir = ((Vector2)player.position - rb.position).normalized;
-
-        Vector2 targetPos = (Vector2)player.position - (dir * 0.4f) + (Vector2.up * clawAttackYOffset);
-
-        bool attackStarted = false;
-
-        while (!isDead && Vector2.Distance(rb.position, targetPos) > 0.1f)
+        // 유효한 포인트 필터링
+        List<Transform> validRestPoints = new List<Transform>();
+        foreach (var pt in restPoints)
         {
-            float distance = Vector2.Distance(rb.position, targetPos);
-
-            // 목표에 거의 도착했을 때 공격 시작
-            if (!attackStarted && distance < 2.5f)
+            if (pt != null)
             {
-                attackStarted = true;
-                anim.SetTrigger(AnimClaw);
+                validRestPoints.Add(pt);
             }
-
-            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * 2f * Time.fixedDeltaTime));
-
-            yield return new WaitForFixedUpdate();
-        }
-        
-        rb.MovePosition(targetPos);
-
-        // 혹시 너무 가까워서 위 조건을 못 탔을 경우
-        if (!attackStarted)
-        {
-            anim.SetTrigger(AnimClaw);
         }
 
-        yield return new WaitForSeconds(GetAnimLength("Claw"));
-    }
-
-    private IEnumerator PatternDash()
-    {
-        if (player == null)
+        if (validRestPoints.Count == 0)
         {
             yield break;
         }
 
-        anim.SetTrigger(AnimDashStart);
-        yield return new WaitForSeconds(0.2f);
-
-        Vector2 dashDir = ((Vector2)player.position - rb.position).normalized; // 플레이어 방향
-        float dashDistance = 20f;
-        float remainedDistance = dashDistance;
-
-        anim.SetTrigger(AnimDash);
-        dashHitbox.enabled = true;
-        bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
-
-        while (!isDead && remainedDistance > 0f)
+        Transform restPoint = validRestPoints[Random.Range(0, validRestPoints.Count)];
+        if (restPoint == null)
         {
-            float moveStep = dashSpeed * Time.fixedDeltaTime;
-            if (moveStep > remainedDistance)
-            {
-                moveStep = remainedDistance;
-            }
-
-            Physics2D.queriesHitTriggers = true;
-            RaycastHit2D[] hits = Physics2D.RaycastAll(rb.position, dashDir, moveStep + 0.6f);
-
-            foreach (var hit in hits)
-            {
-                bool isWall = false;
-                foreach (var wallCollider in mapBoundaryColliders)
-                {
-                    if (hit.collider == wallCollider)
-                    {
-                        isWall = true;
-                        break;
-                    }
-                }
-
-                if (isWall)
-                {
-                    // 벽에 부딪혔을때 반사각 계산
-                    Vector3 reflectDir = Vector3.Reflect(dashDir, hit.normal);
-                    dashDir = reflectDir.normalized;
-
-                    // 끼임 방지
-                    rb.position = hit.point + hit.normal * 0.1f;
-                    break; // 다른 충돌체 검사 중단
-                }
-            }
-
-            // 이동 처리
-            Vector2 nextPos = rb.position + dashDir * moveStep;
-            bossFlip.moveDirection = dashDir;
-            rb.MovePosition(nextPos);
-
-            remainedDistance -= moveStep;
-            yield return new WaitForFixedUpdate();
+            yield break;
         }
 
-        dashHitbox.enabled = false;
-        anim.SetTrigger(AnimDashEnd);
-        bossFlip.facingMode = BlueBossFlip.FacingMode.Player;
-        yield return new WaitForSeconds(0.3f);
+        Vector2 restPos = (Vector2)restPoint.position + restPointOffset;
+        yield return MoveToPosition(restPos, moveSpeed);
+
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimRestStart);
+        }
+
+        yield return new WaitForSeconds(GetAnimLength("RestStart"));
+
+        restJumpTriggered = false;
+
+        if (anim != null)
+        {
+            anim.SetTrigger(Random.value > 0.5f ? AnimRest : AnimRest2);
+        }
+
+        yield return new WaitUntil(() => restJumpTriggered);
+
+        Vector2 aboveRest = (Vector2)restPoint.position + Vector2.up * restJumpHeight;
+        yield return MoveToPosition(aboveRest, moveSpeed);
     }
+
+    #endregion
+
+    #region Pattern: Phase 3 Enrage (발악)
+
     private IEnumerator PatternEnrageDesperation()
     {
-        if (player == null || mapBoundaryColliders == null || mapBoundaryColliders.Length == 0)
+        if (player == null || mapBoundaryColliders == null || mapBoundaryColliders.Length == 0 || rb == null)
         {
             yield break;
         }
 
         // 맵 범위 계산
-        Bounds mapBounds = mapBoundaryColliders[0].bounds;
-        foreach (var col in mapBoundaryColliders) mapBounds.Encapsulate(col.bounds);
+        Bounds mapBounds = new Bounds();
+        bool boundsInitialized = false;
+
+        foreach (var col in mapBoundaryColliders)
+        {
+            if (col != null)
+            {
+                if (!boundsInitialized)
+                {
+                    mapBounds = col.bounds;
+                    boundsInitialized = true;
+                }
+                else
+                {
+                    mapBounds.Encapsulate(col.bounds);
+                }
+            }
+        }
+
+        if (!boundsInitialized)
+        {
+            Debug.LogWarning("No valid boundary colliders found for Blue Boss!");
+            yield break;
+        }
 
         float margin = 1.0f;
         float minX = mapBounds.min.x + margin;
@@ -433,10 +673,13 @@ public class BossController : MonoBehaviour, IHitReaction
         // 패턴 시작: 보스 숨기기 및 무적/충돌 해제
         isInvincible = true;
 
-        dashHitbox.enabled = false;
+        if (dashHitbox != null)
+        {
+            dashHitbox.enabled = false;
+        }
         rb.linearVelocity = Vector2.zero;
 
-        yield return StartCoroutine(FadeOut(0.4f));
+        yield return FadeOut(0.4f);
         // 완전히 사라진 상태로 잠깐 유지
         yield return new WaitForSeconds(0.1f);
 
@@ -497,7 +740,10 @@ public class BossController : MonoBehaviour, IHitReaction
         yield return new WaitForSeconds(0.4f);
 
         // 순간이동 및 돌진 실행
-        anim.SetTrigger(AnimDash);
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimDash);
+        }
 
         for (int i = 0; i < dashCount; i++)
         {
@@ -505,13 +751,19 @@ public class BossController : MonoBehaviour, IHitReaction
 
             // 보스 순간이동 및 등장
             rb.position = startPositions[i];
-            yield return StartCoroutine(FadeIn(0.1f));
-            dashHitbox.enabled = true; // 이때 충돌 판정 켬
+            yield return FadeIn(0.1f);
+            if (dashHitbox != null)
+            {
+                dashHitbox.enabled = true; // 이때 충돌 판정 켬
+            }
 
             // 보스 방향 및 룩 설정
             Vector2 dashDir = (targetPositions[i] - rb.position).normalized;
-            bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
-            bossFlip.moveDirection = dashDir;
+            if (bossFlip != null)
+            {
+                bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
+                bossFlip.moveDirection = dashDir;
+            }
 
             // 출발 시 해당 경고선 끄기
             if (spawnedLines[i] != null) spawnedLines[i].SetActive(false);
@@ -530,23 +782,34 @@ public class BossController : MonoBehaviour, IHitReaction
 
             if (bossSprite != null)
             {
-                yield return StartCoroutine(FadeOut(0.15f));
+                yield return FadeOut(0.15f);
             }
-            dashHitbox.enabled = false;
+            if (dashHitbox != null)
+            {
+                dashHitbox.enabled = false;
+            }
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        yield return StartCoroutine(FadeIn(0.15f));
+        yield return FadeIn(0.15f);
         transform.rotation = Quaternion.identity;
-        dashHitbox.enabled = false;
-        anim.SetTrigger(AnimDashEnd);
-        bossFlip.facingMode = BlueBossFlip.FacingMode.Player;
+        if (dashHitbox != null)
+        {
+            dashHitbox.enabled = false;
+        }
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimDashEnd);
+        }
+        if (bossFlip != null)
+        {
+            bossFlip.facingMode = BlueBossFlip.FacingMode.Player;
+        }
 
         yield return new WaitForSeconds(0.5f);
     }
 
-    // 외곽 경계선 밖으로 나가지 않도록 좌표를 잡아주는 유틸 함수
     private Vector2 ClampToEdges(Vector2 point, float minX, float maxX, float minY, float maxY)
     {
         point.x = Mathf.Clamp(point.x, minX, maxX);
@@ -554,135 +817,63 @@ public class BossController : MonoBehaviour, IHitReaction
         return point;
     }
 
-    private IEnumerator PatternSonicApproach()
+    private IEnumerator FadeOut(float duration)
     {
-        if (player == null)
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr == null)
         {
             yield break;
         }
 
-        bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 플레이어 바라보기
+        float startAlpha = sr.color.a;
 
-        while (!isDead)
+        Color color = sr.color;
+        float t = 0f;
+
+        while (t < duration)
         {
-            // 플레이어 대각선 위 목표 위치 (플레이어 반대편 위)
-            float offsetX = bossFlip.isFacingRight ? -sonicRange * 0.7f : sonicRange * 0.7f;
-            float offsetY = sonicRange * 0.7f;
-            Vector2 targetPos = (Vector2)player.position + new Vector2(offsetX, offsetY);
+            t += Time.deltaTime;
 
-            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * 1.8f * Time.fixedDeltaTime));
+            color.a = Mathf.Lerp(startAlpha, 0f, t / duration);
+            sr.color = color;
 
-            if (IsPlayerInLaserRange())
-            {
-                anim.SetTrigger(AnimSonic);
-                yield return new WaitForSeconds(GetAnimLength("Sonic"));
-                yield break;
-            }
-
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
+
+        color.a = 0f;
+        sr.color = color;
     }
-    public void SonicFire()
+
+    private IEnumerator FadeIn(float duration)
     {
-        if (sonicSpawnPoint == null)
-        {
-            return;
-        }
-
-        Vector2 spawnPos = sonicSpawnPoint.position;
-
-        Quaternion rot = bossFlip.isFacingRight ? Quaternion.Euler(0f, 0f, sonicAngle) : Quaternion.Euler(0f, 180f, sonicAngle); // Y 180으로 뒤집기
-
-        GameObject laser = PoolingManager.Instance.Get(sonicPoolKey, spawnPos, rot);
-        if (laser != null)
-        {
-            laser.transform.localScale = Vector3.one;
-        }
-
-        Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
-        Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
-
-        Collider2D[] bossColliders = GetComponentsInChildren<Collider2D>();
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.SetLayerMask(playerLayer); // 플레이어 레이어만 충돌 검사하도록 설정
-        filter.useLayerMask = true;
-        filter.useTriggers = true;
-
-        RaycastHit2D[] hits = new RaycastHit2D[5];
-        int hitCount = Physics2D.Raycast(spawnPos, fireDirection, filter, hits, sonicRange);
-
-        for (int i = 0; i < hitCount; i++)
-        {
-            RaycastHit2D hit = hits[i];
-
-            // 자신의 콜라이더거나 자식 히트박스라면 무시하고 다음 타겟 검사
-            bool isSelf = false;
-            foreach (var bossCollider in bossColliders)
-            {
-                if (hit.collider == bossCollider)
-                {
-                    isSelf = true;
-                    break;
-                }
-            }
-            if (isSelf)
-            {
-                continue;
-            }
-
-            // 본인이 아니라면 타격 처리 후 반복문 탈출
-            if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
-            {
-                damageable.TakeDamage(sonicDamage);
-                break; // 플레이어를 맞췄으므로 멈춤
-            }
-        }
-    }
-    private bool IsPlayerInLaserRange()
-    {
-        if (player == null || sonicSpawnPoint == null)
-        {
-            return false;
-        }
-
-        Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;
-        float actualAngle = bossFlip.isFacingRight ? -sonicAngle : sonicAngle;
-        Vector2 fireDirection = Quaternion.Euler(0, 0, bossFlip.isFacingRight ? -sonicAngle : sonicAngle) * dir;
-
-        Vector2 boxSize = new Vector2(0.1f, sonicThickness); // 진행방향 길이는 최소화하고 폭을 설정
-        RaycastHit2D hit = Physics2D.BoxCast(sonicSpawnPoint.position, boxSize, actualAngle, fireDirection, sonicRange, playerLayer);
-
-        return hit.collider != null && hit.collider.CompareTag("Player");
-    }
-    private IEnumerator RestRoutine()
-    {
-        if (restPoints == null || restPoints.Length == 0)
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr == null)
         {
             yield break;
         }
 
-        Transform restPoint = restPoints[Random.Range(0, restPoints.Length)];
+        float startAlpha = sr.color.a;
 
-        Vector2 restPos = (Vector2)restPoint.position + restPointOffset;
-        yield return MoveToPosition(restPos, moveSpeed);
+        Color color = sr.color;
+        float t = 0f;
 
-        anim.SetTrigger(AnimRestStart);
+        while (t < duration)
+        {
+            t += Time.deltaTime;
 
-        yield return new WaitForSeconds(GetAnimLength("RestStart"));
+            color.a = Mathf.Lerp(startAlpha, 1f, t / duration);
+            sr.color = color;
 
-        restJumpTriggered = false;
+            yield return null;
+        }
 
-        anim.SetTrigger(Random.value > 0.5f ? AnimRest : AnimRest2);
-
-        yield return new WaitUntil(() => restJumpTriggered);
-
-        Vector2 aboveRest = (Vector2)restPoint.position + Vector2.up * restJumpHeight;
-        yield return MoveToPosition(aboveRest, moveSpeed);
+        color.a = 1f;
+        sr.color = color;
     }
 
-    // ───────────────────────────────────────────
-    // 사망
-    // ───────────────────────────────────────────
+    #endregion
+
+    #region Death & Utilities
 
     private void OnDeath()
     {
@@ -693,20 +884,30 @@ public class BossController : MonoBehaviour, IHitReaction
 
         isDead = true;
 
-        StopAllCoroutines();
+        StopAllBossCoroutines();
 
-        clawHitbox.enabled = false;
-        dashHitbox.enabled = false;
+        if (clawHitbox != null)
+        {
+            clawHitbox.enabled = false;
+        }
+        if (dashHitbox != null)
+        {
+            dashHitbox.enabled = false;
+        }
 
-        StartCoroutine(DeathFallRoutine());
+        deathRoutine = StartCoroutine(DeathFallRoutine());
     }
+
     private IEnumerator DeathFallRoutine()
     {
         yield return null;
 
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.gravityScale = 2f;
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 2f;
+            rb.linearVelocity = Vector2.zero;
+        }
 
         if (deathCollider != null)
         {
@@ -714,22 +915,27 @@ public class BossController : MonoBehaviour, IHitReaction
         }
     }
 
-    // ───────────────────────────────────────────
-    // 애니메이션 이벤트
-    // ───────────────────────────────────────────
+    public void ClawHitboxOn()
+    {
+        if (clawHitbox != null)
+        {
+            clawHitbox.enabled = true;
+        }
+    }
 
-    public void ClawHitboxOn() => clawHitbox.enabled = true;
-    public void ClawHitboxOff() => clawHitbox.enabled = false;
-
+    public void ClawHitboxOff()
+    {
+        if (clawHitbox != null)
+        {
+            clawHitbox.enabled = false;
+        }
+    }
 
     public void RestJumpEvent()
     {
         restJumpTriggered = true;
     }
 
-    // ───────────────────────────────────────────
-    // 유틸
-    // ───────────────────────────────────────────
     public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
     {
         if (isInvincible) // 발악 패턴 중 무적
@@ -742,23 +948,42 @@ public class BossController : MonoBehaviour, IHitReaction
     public void OnAfterTakeDamage(EnemyStatus status, int damage)
     {
     }
+
     private IEnumerator MoveToPosition(Vector2 target, float speed)
     {
-        bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
-
-        while (!isDead && Vector2.Distance(rb.position, target) > 0.1f)
+        if (bossFlip != null)
         {
-            bossFlip.moveDirection = (target - rb.position);
+            bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
+        }
+
+        while (!isDead && rb != null && Vector2.Distance(rb.position, target) > 0.1f)
+        {
+            if (bossFlip != null)
+            {
+                bossFlip.moveDirection = (target - rb.position);
+            }
             rb.MovePosition(Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime));
 
             yield return new WaitForFixedUpdate();
         }
 
-        rb.MovePosition(target);
-        bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 이동 끝나면 플레이어 바라보기
+        if (rb != null)
+        {
+            rb.MovePosition(target);
+        }
+        if (bossFlip != null)
+        {
+            bossFlip.facingMode = BlueBossFlip.FacingMode.Player; // 이동 끝나면 플레이어 바라보기
+        }
     }
+
     private float GetAnimLength(string clipName)
     {
+        if (anim == null || anim.runtimeAnimatorController == null)
+        {
+            return 1f;
+        }
+
         foreach (var clip in anim.runtimeAnimatorController.animationClips)
         {
             if (clip.name == clipName)
@@ -768,4 +993,6 @@ public class BossController : MonoBehaviour, IHitReaction
         }
         return 1f;
     }
+
+    #endregion
 }

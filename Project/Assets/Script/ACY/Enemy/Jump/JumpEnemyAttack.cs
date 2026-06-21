@@ -2,12 +2,14 @@
 using UnityEngine;
 
 /*
-플레이어 감지 시 준비자세 (빨갛게 물듬)
-플레이어의 위치로 점프
-(몸체 및 착지 시 충격파에 공격 판정)
+ * 플레이어 감지 시 준비자세
+ * 플레이어의 위치로 점프
+ * (몸체 및 착지 시 충격파에 공격 판정)
  */
 public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 {
+    #region Settings & Variables
+
     [Header("점프 공격 설정")]
     [SerializeField] private float attackRange = 3f;       // 공격 시전 사거리
     [SerializeField] private float attackCooldown = 3f;    // 공격 간 쿨타임
@@ -42,7 +44,6 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     private Rigidbody2D rb;
     private JumpEnemyMove moveScript;
     private SpriteRenderer spriteRenderer;
-    // private Animator anim;
 
     private bool isAttackingOrReady = false;
     private bool hasDirectHit = false;
@@ -54,15 +55,21 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     public bool IsAttackingOrReady => isAttackingOrReady;
     public bool IsCharging => isCharging;
 
+    #endregion
+
+    #region Unity Lifecycle
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        originGravity = rb.gravityScale;
+        if (rb != null)
+        {
+            originGravity = rb.gravityScale;
+        }
         moveScript = GetComponent<JumpEnemyMove>();
 
         // 자식 객체(스프라이트)에서 컴포넌트들을 찾음
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        // anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -88,6 +95,10 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         }
     }
 
+    #endregion
+
+    #region Jump Attack Logic
+
     private IEnumerator JumpAttackComboRoutine(Transform player)
     {
         isAttackingOrReady = true;
@@ -99,7 +110,6 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         // 점프 시작
         isCharging = false;
 
-
         Vector2 startPos = transform.position;
 
         // 준비 끝난 순간의 플레이어 위치로 점프
@@ -108,8 +118,11 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         float elapsed = 0f;
 
         // 포물선 이동 중 직접 제어
-        rb.gravityScale = 0f;
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null)
+        {
+            rb.gravityScale = 0f;
+            rb.linearVelocity = Vector2.zero;
+        }
 
         while (elapsed < jumpDuration)
         {
@@ -119,52 +132,50 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             Vector2 linearPos = Vector2.Lerp(startPos, targetPos, t);
             float arc = jumpHeight * Mathf.Sin(Mathf.PI * t);
 
-            rb.MovePosition(new Vector2(linearPos.x, linearPos.y + arc));
+            if (rb != null)
+            {
+                rb.MovePosition(new Vector2(linearPos.x, linearPos.y + arc));
+            }
 
             CheckDirectHit();
             yield return null;
         }
-        Vector2 landingStart = rb.position;
-        float landingElapsed = 0f;
-        float landingSpeedY = jumpHeight * Mathf.PI / jumpDuration; // 포물선 끝 하강 속도
-        float landingSpeedX = (targetPos.x - startPos.x) / jumpDuration; // 포물선 X 속도 유지
-        // 포물선을 착지할 때까지 계속 연장
-        while (!IsGrounded())
+
+        if (rb != null)
         {
-            landingElapsed += Time.deltaTime;
-            float dx = landingSpeedX * landingElapsed;
-            float dy = -landingSpeedY * landingElapsed - 0.5f * 9.8f * rb.gravityScale * landingElapsed * landingElapsed;
+            Vector2 landingStart = rb.position;
+            float landingElapsed = 0f;
+            float landingSpeedY = jumpHeight * Mathf.PI / jumpDuration; // 포물선 끝 하강 속도
+            float landingSpeedX = (targetPos.x - startPos.x) / jumpDuration; // 포물선 X 속도 유지
 
-            rb.MovePosition(landingStart + new Vector2(dx, dy));
+            // 포물선을 착지할 때까지 계속 연장
+            while (!IsGrounded())
+            {
+                landingElapsed += Time.deltaTime;
+                float dx = landingSpeedX * landingElapsed;
+                float dy = -landingSpeedY * landingElapsed - 0.5f * 9.8f * rb.gravityScale * landingElapsed * landingElapsed;
 
-            CheckDirectHit();
-            yield return null;
+                rb.MovePosition(landingStart + new Vector2(dx, dy));
+
+                CheckDirectHit();
+                yield return null;
+            }
+
+            rb.gravityScale = originGravity;
+
+            // 착지 정지
+            rb.linearVelocity = Vector2.zero;
         }
-
-        rb.gravityScale = originGravity;
-
-        // 착지 정지
-        rb.linearVelocity = Vector2.zero;
 
         // 착지 충격파
         ExecuteShockwave();
 
         lastAttackTime = Time.time;
 
-       // yield return new WaitForSeconds(0.4f);
-
         isAttackingOrReady = false;
         jumpRoutine = null;
     }
-    public bool OnBeforeTakeDamage(EnemyStatus enemyStatus, int damage)
-    {
-        return false; // 대미지는 그대로 받음
-    }
 
-    public void OnAfterTakeDamage(EnemyStatus enemyStatus, int damage)
-    {
-        CancelJumpAttackByHit();
-    }
     public void CancelJumpAttackByHit()
     {
         if (!isAttackingOrReady)
@@ -178,8 +189,11 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             jumpRoutine = null;
         }
 
-        rb.gravityScale = originGravity;
-        rb.linearVelocity = new Vector2(0f, -cancelFallSpeed);
+        if (rb != null)
+        {
+            rb.gravityScale = originGravity;
+            rb.linearVelocity = new Vector2(0f, -cancelFallSpeed);
+        }
 
         lastAttackTime = Time.time;
 
@@ -189,6 +203,25 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         moveScript?.PlayHurtJump();
         isAttackingOrReady = false;
     }
+
+    #endregion
+
+    #region Combat Callbacks
+
+    public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
+    {
+        return false; // 대미지는 그대로 받음
+    }
+
+    public void OnAfterTakeDamage(EnemyStatus status, int damage)
+    {
+        CancelJumpAttackByHit();
+    }
+
+    #endregion
+
+    #region Collision & Ground Check
+
     private void CheckDirectHit()
     {
         if (hasDirectHit)
@@ -213,8 +246,13 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         Debug.Log($"{gameObject.name} 충격파 공격");
 
         Vector2 shockwaveCenter = (Vector2)transform.position + shockwaveBoxOffset;
-        PoolingManager.Instance.Get(shockwavePoolKey, shockwaveCenter, Quaternion.identity); 
-        Collider2D playerCollider = Physics2D.OverlapBox(shockwaveCenter,  shockwaveBoxSize, 0f,  playerLayer);
+        GameObject swObj = PoolingManager.Instance.Get(shockwavePoolKey, shockwaveCenter, Quaternion.identity); 
+        if (swObj == null)
+        {
+            Debug.LogWarning("Failed to pool shockwave object!");
+        }
+
+        Collider2D playerCollider = Physics2D.OverlapBox(shockwaveCenter, shockwaveBoxSize, 0f, playerLayer);
 
         if (playerCollider != null)
         {
@@ -235,10 +273,10 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
-    // 공격 범위 빨강
-    // 직접 충돌 범위 시안
-    // 충격파 범위 마젠타
-    // 착지 체크 노랑
+    #endregion
+
+    #region Utility Methods
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -257,4 +295,6 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
+
+    #endregion
 }

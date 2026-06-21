@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
-public enum PlantIntent { Approach, InMeleeRange, InRangedRange } // Idle 상태 제거
+public enum PlantIntent { Approach, InMeleeRange, InRangedRange }
 
 public class KillerPlantMove : MonoBehaviour
 {
+    #region Settings & Variables
+
     [Header("공격 범위")]
     public float rangedRange = 6f;
     public float meleeRange = 1.8f;
@@ -37,7 +39,11 @@ public class KillerPlantMove : MonoBehaviour
     private bool wasInRangedZone;
     private float currentDistToPlayer; // Update와 FixedUpdate 공유용
 
-    void Start()
+    #endregion
+
+    #region Unity Lifecycle
+
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -54,7 +60,7 @@ public class KillerPlantMove : MonoBehaviour
         runCooldownTimer = runCooldown;
     }
 
-    void Update()
+    private void Update()
     {
         if (playerTransform == null) return;
 
@@ -67,18 +73,21 @@ public class KillerPlantMove : MonoBehaviour
         UpdateAnim();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (playerTransform == null) return;
 
         HandleMovement(currentDistToPlayer);
     }
 
-    // 💡 무한 추적에 맞게 상태 전환 로직 대폭 축소 및 수정
-    void UpdateIntent(float dist)
+    #endregion
+
+    #region AI Intent & Movement Logic
+
+    // 거리에 따라 의도(Intent) 판단 및 상태 전환
+    private void UpdateIntent(float dist)
     {
-        // 🔥 [핵심 수정 1] 공격 중(코루틴 실행 중)일 때는 절대로 상태를 변경하지 않고 리턴합니다.
-        // 이 자물쇠가 있어야 공격 도중에 걷는 상태로 바뀌지 않습니다.
+        // 공격 중(코루틴 실행 중)일 때는 절대로 상태를 변경하지 않고 리턴
         if (isAttacking) return;
 
         bool inMelee = dist <= meleeRange;
@@ -97,17 +106,18 @@ public class KillerPlantMove : MonoBehaviour
                 break;
 
             case PlantIntent.InMeleeRange:
-                // 공격 중이 아닐 때(isAttacking이 false일 때)만 거리를 체크해서 탈출하도록 둠
+                // 공격 중이 아닐 때만 거리를 체크해서 추적으로 복귀
                 if (!inMelee) intent = PlantIntent.Approach;
                 break;
 
             case PlantIntent.InRangedRange:
-                // 원거리는 KillerPlantAttack 코루틴 끝에서 직접 Approach로 바꿔줄 때까지 이 상태를 유지합니다.
+                // 원거리는 KillerPlantAttack 코루틴 끝에서 직접 Approach로 복귀시킴
                 break;
         }
     }
 
-    void UpdateRunTimer(float deltaTime)
+    // 전력 질주 확률 및 쿨다운 관리
+    private void UpdateRunTimer(float deltaTime)
     {
         if (isRunning)
         {
@@ -129,10 +139,12 @@ public class KillerPlantMove : MonoBehaviour
         }
     }
 
-    void HandleMovement(float dist)
+    // 물리적 이동 속도 결정 및 대입
+    private void HandleMovement(float dist)
     {
-        // 🔥 [핵심 수정 2] intent 상태와 상관없이 'isAttacking' 플래그가 켜져 있다면 
-        // 묻지도 따지지도 않고 X축 속도를 0으로 만들어 물리 이동을 완벽히 차단합니다.
+        if (rb == null) return;
+
+        // 공격 중이거나 공격 범위 진입, 정지 거리 도달 시 속도 0
         if (isAttacking || intent == PlantIntent.InMeleeRange || intent == PlantIntent.InRangedRange || dist <= stopDistance)
         {
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
@@ -145,10 +157,16 @@ public class KillerPlantMove : MonoBehaviour
         rb.linearVelocity = new Vector2(directionX * speed, rb.linearVelocity.y);
     }
 
-    void UpdateAnim()
+    #endregion
+
+    #region Animation & Direction Controls
+
+    // 상태에 따른 걷기 / 달기 애니메이션 제어
+    private void UpdateAnim()
     {
-        // 🔥 [핵심 수정 3] 공격 중일 때는 Walk/Run 애니메이션을 강제로 끕니다.
-        // 공격 애니메이션과 걷기 애니메이션이 꼬여서 스케이트 타는 현상을 막아줍니다.
+        if (anim == null) return;
+
+        // 공격 중일 때는 이동 애니메이션 정지
         if (isAttacking)
         {
             anim.SetBool("Walk", false);
@@ -161,6 +179,7 @@ public class KillerPlantMove : MonoBehaviour
         anim.SetBool("Run", isApproach && isRunning);
     }
 
+    // 타겟을 바라보도록 플립 처리
     private void FlipToTarget()
     {
         if (playerTransform == null) return;
@@ -191,7 +210,12 @@ public class KillerPlantMove : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // 💡 기즈모에서도 초록색(detectRange) 선을 삭제했습니다.
+    #endregion
+
+    #region Utility Methods
+
+    public void ResetRangedZone() => wasInRangedZone = false;
+
     private void OnDrawGizmosSelected()
     {
         // 1. 원거리 공격 범위 (노란색 원)
@@ -207,5 +231,5 @@ public class KillerPlantMove : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, stopDistance);
     }
 
-    public void ResetRangedZone() => wasInRangedZone = false;
+    #endregion
 }
