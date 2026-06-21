@@ -3,8 +3,14 @@ using UnityEngine;
 
 public class BossSpirit : MonoBehaviour, IHitReaction
 {
-    public enum SpiritType { Green, Mint, YellowGreen}
+    #region Types
+
+    public enum SpiritType { Green, Mint, YellowGreen }
     public enum SpiritState { Roaming, Returning }
+
+    #endregion
+
+    #region Settings & Variables
 
     [Header("정령 타입")]
     [SerializeField] private SpiritType spiritType;
@@ -41,6 +47,10 @@ public class BossSpirit : MonoBehaviour, IHitReaction
     private Vector3 currentTargetPosition; // 현재 날아가고 있는 목적지
     private float waveTimer;
 
+    #endregion
+
+    #region Unity Lifecycle
+
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
@@ -74,6 +84,10 @@ public class BossSpirit : MonoBehaviour, IHitReaction
         }
     }
 
+    #endregion
+
+    #region Spirit Initialization
+
     public void Init(GreenBossAttack attack, SpiritType type, Transform boss)
     {
         bossAttack = attack;
@@ -90,7 +104,6 @@ public class BossSpirit : MonoBehaviour, IHitReaction
             _ => null
         };
 
-
         SetNewRandomTarget();
         if (enemyStatus != null)
         {
@@ -98,27 +111,28 @@ public class BossSpirit : MonoBehaviour, IHitReaction
         }
 
         bossTransform = boss;
+        if (bossTransform == null)
+        {
+            Debug.LogWarning("BossTransform is not assigned on BossSpirit Init!");
+        }
+
         state = SpiritState.Roaming;
         roamTimer = roamDuration;
     }
 
-    private void SetNewRandomTarget()
-    {
-        float randomX = Random.Range(mapCenter.x - mapRange.x, mapCenter.x + mapRange.x);
-        float randomY = Random.Range(mapCenter.y - mapRange.y, mapCenter.y + mapRange.y);
+    #endregion
 
-        currentTargetPosition = new Vector3(randomX, randomY, transform.position.z);
-    }
+    #region Roaming & Return Behaviors
 
     private void RoamAroundMap()
     {
-        //  현재 목적지 방향 계산
+        // 현재 목적지 방향 계산
         Vector3 direction = (currentTargetPosition - transform.position).normalized;
 
         // 목적지를 향해 기본 이동
         Vector3 movePosition = transform.position + direction * moveSpeed * Time.deltaTime;
 
-        //  위아래로 넘실거리는 효과
+        // 위아래로 넘실거리는 효과
         waveTimer += Time.deltaTime * waveSpeed;
         float waveOffset = Mathf.Sin(waveTimer) * waveAmount * Time.deltaTime;
         movePosition.y += waveOffset;
@@ -141,72 +155,6 @@ public class BossSpirit : MonoBehaviour, IHitReaction
         }
     }
 
-    // 정령이 날아다니는 영역 표시
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(new Vector3(mapCenter.x, mapCenter.y, 0), new Vector3(mapRange.x * 2, mapRange.y * 2, 0));
-    }
-    public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
-    {
-        if (isDead)
-        {
-            return true;
-        }
-        if (invincibleTimer > 0f)
-        {
-             return true;
-        }
-        return false;
-    }
-
-    public void OnAfterTakeDamage(EnemyStatus status, int damage)
-    {
-        if (isDead || status == null)
-        {
-            return;
-        }
-        if (invincibleTimer > 0f)
-        {
-            return;
-        }
-        if (status.GetHPRatio() <= 0)
-        {
-            isDead = true;
-
-            if (bossAttack != null)
-            {
-                bossAttack.OnSpiritDestroyed(); // 보스에게 사망 보고
-            }
-
-            StartCoroutine(FadeAndReturn());
-        }
-    }
-    private IEnumerator FadeAndReturn()
-    {
-        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
-        if (sr != null)
-        {
-            float elapsed = 0f;
-            Color original = sr.color;
-            while (elapsed < fadeTime)
-            {
-                elapsed += Time.deltaTime;
-                sr.color = new Color(original.r, original.g, original.b,  Mathf.Lerp(1f, 0f, elapsed / fadeTime));
-                yield return null;
-            }
-            sr.color = original; // 반납 전 색상 복원
-        }
-
-        if (myPoolKey != null)
-        {
-            PoolingManager.Instance.Return(myPoolKey, gameObject);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-    }
     private void ReturnToBoss()
     {
         if (bossTransform == null)
@@ -233,7 +181,7 @@ public class BossSpirit : MonoBehaviour, IHitReaction
             // 보스에게 귀환 보고
             bossAttack?.OnSpiritReturned();
 
-            if (myPoolKey != null)
+            if (myPoolKey != null && PoolingManager.Instance != null)
             {
                 PoolingManager.Instance.Return(myPoolKey, gameObject);
             }
@@ -243,4 +191,90 @@ public class BossSpirit : MonoBehaviour, IHitReaction
             }
         }
     }
+
+    #endregion
+
+    #region Combat Callbacks
+
+    public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
+    {
+        if (isDead)
+        {
+            return true;
+        }
+        if (invincibleTimer > 0f)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void OnAfterTakeDamage(EnemyStatus status, int damage)
+    {
+        if (isDead || status == null)
+        {
+            return;
+        }
+        if (invincibleTimer > 0f)
+        {
+            return;
+        }
+        if (status.GetHPRatio() <= 0)
+        {
+            isDead = true;
+
+            if (bossAttack != null)
+            {
+                bossAttack.OnSpiritDestroyed(); // 보스에게 사망 보고
+            }
+
+            StartCoroutine(FadeAndReturn());
+        }
+    }
+
+    private IEnumerator FadeAndReturn()
+    {
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
+        {
+            float elapsed = 0f;
+            Color original = sr.color;
+            while (elapsed < fadeTime)
+            {
+                elapsed += Time.deltaTime;
+                sr.color = new Color(original.r, original.g, original.b, Mathf.Lerp(1f, 0f, elapsed / fadeTime));
+                yield return null;
+            }
+            sr.color = original; // 반납 전 색상 복원
+        }
+
+        if (myPoolKey != null && PoolingManager.Instance != null)
+        {
+            PoolingManager.Instance.Return(myPoolKey, gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    #endregion
+
+    #region Utility Methods
+
+    private void SetNewRandomTarget()
+    {
+        float randomX = Random.Range(mapCenter.x - mapRange.x, mapCenter.x + mapRange.x);
+        float randomY = Random.Range(mapCenter.y - mapRange.y, mapCenter.y + mapRange.y);
+
+        currentTargetPosition = new Vector3(randomX, randomY, transform.position.z);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(new Vector3(mapCenter.x, mapCenter.y, 0), new Vector3(mapRange.x * 2, mapRange.y * 2, 0));
+    }
+
+    #endregion
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class LaserCross : MonoBehaviour
 {
+    #region Settings & Variables
+
     [Header("경고선")]
     [SerializeField] private SpriteRenderer[] warningLines;
 
@@ -25,6 +27,11 @@ public class LaserCross : MonoBehaviour
 
     private float rotateDirection; // 1(시계) -1(반시계) 방향
     private Coroutine laserRoutine;
+
+    #endregion
+
+    #region Unity Lifecycle
+
     private void OnDisable()
     {
         if (laserRoutine != null)
@@ -33,15 +40,18 @@ public class LaserCross : MonoBehaviour
             laserRoutine = null;
         }
     }
+
+    #endregion
+
+    #region Laser Initialization
+
     public void Init(float warningTime, float laserDuration, bool enraged = false)
     {
         duration = laserDuration;
         isEnraged = enraged;
 
         // ---------- 상태 초기화 ----------
-
         transform.rotation = Quaternion.identity;
-
         rotateDirection = Random.value < 0.5f ? 1f : -1f;
 
         SetWarning(true);
@@ -51,13 +61,17 @@ public class LaserCross : MonoBehaviour
         SetLaserAlpha(1f);
 
         // 레이저 두께 초기화
-        for (int i = 0; i < laserLines.Length; i++)
+        if (laserLines != null)
         {
-            Vector3 scale = laserLines[i].localScale;
-
-            scale.y = 0f;
-
-            laserLines[i].localScale = scale;
+            for (int i = 0; i < laserLines.Length; i++)
+            {
+                if (laserLines[i] != null)
+                {
+                    Vector3 scale = laserLines[i].localScale;
+                    scale.y = 0f;
+                    laserLines[i].localScale = scale;
+                }
+            }
         }
 
         // 기존 코루틴 제거
@@ -69,13 +83,16 @@ public class LaserCross : MonoBehaviour
         laserRoutine = StartCoroutine(LaserRoutine(warningTime));
     }
 
+    #endregion
+
+    #region Laser Sequence Routine
+
     private IEnumerator LaserRoutine(float warningTime)
     {
         SetLaser(false);
 
         // ---------------- 경고선 ----------------
         SetWarning(true);
-
         SetWarningAlpha(0.15f);
 
         yield return new WaitForSeconds(warningTime * 0.5f);
@@ -94,13 +111,17 @@ public class LaserCross : MonoBehaviour
         SetLaserAlpha(1f);
 
         // 시작 굵기 0
-        for (int i = 0; i < laserLines.Length; i++)
+        if (laserLines != null)
         {
-            Vector3 scale = laserLines[i].localScale;
-
-            scale.y = 0f;
-
-            laserLines[i].localScale = scale;
+            for (int i = 0; i < laserLines.Length; i++)
+            {
+                if (laserLines[i] != null)
+                {
+                    Vector3 scale = laserLines[i].localScale;
+                    scale.y = 0f;
+                    laserLines[i].localScale = scale;
+                }
+            }
         }
 
         // 사운드
@@ -108,14 +129,6 @@ public class LaserCross : MonoBehaviour
         {
             audioSource.PlayOneShot(laserSFX);
         }
-
-        // 카메라 흔들림
-        /*
-        if (CameraShake.Instance != null)
-        {
-            CameraShake.Instance.Shake(0.25f, 0.15f);
-        }
-        */
 
         // ---------------- 굵어지는 연출 ----------------
         float growTime = 0.2f;
@@ -127,13 +140,17 @@ public class LaserCross : MonoBehaviour
 
             float value = Mathf.Lerp(0f, laserThickness, growTimer / growTime);
 
-            for (int i = 0; i < laserLines.Length; i++)
+            if (laserLines != null)
             {
-                Vector3 scale = laserLines[i].localScale;
-
-                scale.y = value;
-
-                laserLines[i].localScale = scale;
+                for (int i = 0; i < laserLines.Length; i++)
+                {
+                    if (laserLines[i] != null)
+                    {
+                        Vector3 scale = laserLines[i].localScale;
+                        scale.y = value;
+                        laserLines[i].localScale = scale;
+                    }
+                }
             }
 
             yield return null;
@@ -162,8 +179,7 @@ public class LaserCross : MonoBehaviour
 
             rotateTimer = 0f;
             Quaternion reverseStartRot = transform.rotation;
-            // 기존 각도로 복귀
-            Quaternion reverseTargetRot = startRotation;
+            Quaternion reverseTargetRot = startRotation; // 기존 각도로 복귀
 
             while (rotateTimer < duration)
             {
@@ -192,46 +208,71 @@ public class LaserCross : MonoBehaviour
             yield return null;
         }
 
-        PoolingManager.Instance.Return(LASER_KEY, gameObject);
+        if (PoolingManager.Instance != null)
+        {
+            PoolingManager.Instance.Return(LASER_KEY, gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
+
+    #endregion
+
+    #region Rendering Helpers
 
     private void SetWarning(bool value)
     {
+        if (warningLines == null) return;
         for (int i = 0; i < warningLines.Length; i++)
         {
-            warningLines[i].gameObject.SetActive(value);
+            if (warningLines[i] != null)
+            {
+                warningLines[i].gameObject.SetActive(value);
+            }
         }
     }
 
     private void SetWarningAlpha(float alpha)
     {
+        if (warningLines == null) return;
         for (int i = 0; i < warningLines.Length; i++)
         {
-            Color color = warningLines[i].color;
-
-            color.a = alpha;
-
-            warningLines[i].color = color;
+            if (warningLines[i] != null)
+            {
+                Color color = warningLines[i].color;
+                color.a = alpha;
+                warningLines[i].color = color;
+            }
         }
     }
 
     private void SetLaser(bool value)
     {
+        if (laserLines == null) return;
         for (int i = 0; i < laserLines.Length; i++)
         {
-            laserLines[i].gameObject.SetActive(value);
+            if (laserLines[i] != null)
+            {
+                laserLines[i].gameObject.SetActive(value);
+            }
         }
     }
 
     private void SetLaserAlpha(float alpha)
     {
+        if (laserRenderers == null) return;
         for (int i = 0; i < laserRenderers.Length; i++)
         {
-            Color color = laserRenderers[i].color;
-
-            color.a = alpha;
-
-            laserRenderers[i].color = color;
+            if (laserRenderers[i] != null)
+            {
+                Color color = laserRenderers[i].color;
+                color.a = alpha;
+                laserRenderers[i].color = color;
+            }
         }
     }
+
+    #endregion
 }

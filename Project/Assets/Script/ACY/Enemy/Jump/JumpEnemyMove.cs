@@ -1,16 +1,4 @@
 ﻿using UnityEngine;
-/*
- * 점프형 적
- * 평소엔 멈춰있음
- * 플레이어가 인식 범위에 들어오면 플레이어를 향해 이동
- * 플레이어가 공격 범위에 들어오면 점프 공격
- * 만약 한번이라도 플레이어를 인식한 경우 플레이어가 공격 범위를 벗어나도 계속 추적
- * 점프 공격
- * 1. 플레이어가 공격 범위내에 들어오면 준비 자세
- * 2. 점프하여 플레이어를 향해 이동
- * 3.착지 시 충격파 발생(범위 공격) 플레이어가 범위 내에 있으면 대미지
- * 4. 쿨타임 대기 후 1번으로 회귀
- */
 
 /*
  * 점프형 적 - 이동 및 배회 제어 (Move)
@@ -20,6 +8,8 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public class JumpEnemyMove : MonoBehaviour
 {
+    #region Settings & Variables
+
     [SerializeField] private float moveSpeed = 3f;
 
     [Header("감지 설정")]
@@ -40,6 +30,10 @@ public class JumpEnemyMove : MonoBehaviour
     // 공격 스크립트가 가져다 쓸 정보
     public Transform TargetPlayer => targetPlayer;
     public bool FoundPlayer => foundPlayer;
+
+    #endregion
+
+    #region Unity Lifecycle
 
     private void Awake()
     {
@@ -65,10 +59,13 @@ public class JumpEnemyMove : MonoBehaviour
         FlipToTarget();
         UpdateAnimator();
 
-        //  준비 중이거나 점프 중이면 멈춤
+        // 준비 중이거나 점프 중이면 멈춤
         if (attackScript != null && attackScript.IsAttackingOrReady)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
             return;
         }
 
@@ -80,20 +77,9 @@ public class JumpEnemyMove : MonoBehaviour
         }
     }
 
-    private void UpdateAnimator()
-    {
-        if (anim == null)
-        {
-            return;
-        }
-        bool isJumping = attackScript != null && attackScript.IsAttackingOrReady && !attackScript.IsCharging;
-        bool isCharging = attackScript != null && attackScript.IsCharging;
-        bool isAirborne = attackScript != null && !attackScript.IsGrounded();
+    #endregion
 
-        anim.SetBool("IsCharging", isCharging);
-        anim.SetBool("IsJumping", isJumping);
-        anim.SetBool("IsAirborne", isAirborne);
-    }
+    #region Player Detection & Movement
 
     private void FindPlayer()
     {
@@ -112,11 +98,14 @@ public class JumpEnemyMove : MonoBehaviour
 
     private void MoveToPlayer()
     {
+        if (rb == null || targetPlayer == null) return;
+
         float direction = targetPlayer.position.x > transform.position.x ? 1f : -1f;
         float distanceToPlayer = Mathf.Abs(targetPlayer.position.x - transform.position.x);
 
         // 공격 사거리 근처에 도달할 때까지만 걸어서 추적
-        if (distanceToPlayer > attackScript.AttackRange * 0.9f)
+        float attackRange = attackScript != null ? attackScript.AttackRange : 3f;
+        if (distanceToPlayer > attackRange * 0.9f)
         {
             rb.linearVelocity = new Vector2(direction * moveSpeed, rb.linearVelocity.y);
             FlipSprite(direction);
@@ -127,6 +116,25 @@ public class JumpEnemyMove : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Animation & Direction Controls
+
+    private void UpdateAnimator()
+    {
+        if (anim == null)
+        {
+            return;
+        }
+        bool isJumping = attackScript != null && attackScript.IsAttackingOrReady && !attackScript.IsCharging;
+        bool isCharging = attackScript != null && attackScript.IsCharging;
+        bool isAirborne = attackScript != null && !attackScript.IsGrounded();
+
+        anim.SetBool("IsCharging", isCharging);
+        anim.SetBool("IsJumping", isJumping);
+        anim.SetBool("IsAirborne", isAirborne);
+    }
+
     private void FlipSprite(float direction)
     {
         if (Mathf.Abs(direction) > 0.01f)
@@ -134,14 +142,16 @@ public class JumpEnemyMove : MonoBehaviour
             transform.localScale = new Vector3(direction > 0 ? 1f : -1f, 1f, 1f);
         }
     }
+
     private void FlipToTarget()
     {
-        if (playerTransform == null)
+        Transform activeTarget = playerTransform != null ? playerTransform : targetPlayer;
+        if (activeTarget == null)
         {
             return;
         }
 
-        float direction = playerTransform.position.x - transform.position.x;
+        float direction = activeTarget.position.x - transform.position.x;
 
         if (direction > 0 && !isFacingRight)
         {
@@ -161,7 +171,12 @@ public class JumpEnemyMove : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
-    public void PlayHurtJump() //점프 중 공격당했을때 특수 애니메이션 재생
+
+    #endregion
+
+    #region Utility Methods
+
+    public void PlayHurtJump() // 점프 중 공격당했을때 특수 애니메이션 재생
     {
         if (anim == null)
         {
@@ -177,10 +192,12 @@ public class JumpEnemyMove : MonoBehaviour
             anim.SetTrigger("Hurt_Jump");
         }
     }
-    // 감지 범위 노랑으로 표시
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, findPlayerRange);
     }
+
+    #endregion
 }

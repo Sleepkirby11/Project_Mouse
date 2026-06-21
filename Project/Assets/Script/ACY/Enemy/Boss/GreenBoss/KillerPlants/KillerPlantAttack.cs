@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class KillerPlantAttack : MonoBehaviour
 {
+    #region Settings & Variables
+
     [Header("근접 공격")]
     public int meleeDamage = 15;
     public float meleeRate = 1.2f;
@@ -25,7 +27,11 @@ public class KillerPlantAttack : MonoBehaviour
     private float rangedTimer;
     private bool actionRunning;
 
-    void Start()
+    #endregion
+
+    #region Unity Lifecycle
+
+    private void Start()
     {
         movement = GetComponent<KillerPlantMove>();
         anim = GetComponentInChildren<Animator>();
@@ -36,7 +42,14 @@ public class KillerPlantAttack : MonoBehaviour
             player = playerObj.transform;
         }
 
-        meleeRange = movement.meleeRange;
+        if (movement != null)
+        {
+            meleeRange = movement.meleeRange;
+        }
+        else
+        {
+            meleeRange = 1.8f;
+        }
 
         if (firePoint == null)
         {
@@ -44,8 +57,9 @@ public class KillerPlantAttack : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
+        // OnDisable 시 기존 공격 관련 코루틴 정리
         StopAllCoroutines();
         if (movement != null)
         {
@@ -54,7 +68,7 @@ public class KillerPlantAttack : MonoBehaviour
         actionRunning = false;
     }
 
-    void Update()
+    private void Update()
     {
         // 쿨타임 계산
         if (meleeTimer > 0f)
@@ -65,13 +79,14 @@ public class KillerPlantAttack : MonoBehaviour
         {
             rangedTimer -= Time.deltaTime;
         }
-        // 공격 중이라면 아래의 공격 트리거 조건문들을 실행하지 않고 리턴
-        if (actionRunning || player == null)
+
+        // 공격 중이거나 플레이어가 없으면 공격 생략
+        if (actionRunning || player == null || movement == null)
         {
             return;
         }
 
-        // 공격 발동 조건
+        // 공격 발동 조건 분기
         if (movement.intent == PlantIntent.InMeleeRange && meleeTimer <= 0f)
         {
             DoMelee();
@@ -82,16 +97,26 @@ public class KillerPlantAttack : MonoBehaviour
         }
     }
 
-    void DoMelee()
+    #endregion
+
+    #region Melee Attack Logic
+
+    private void DoMelee()
     {
         actionRunning = true;
-        movement.isAttacking = true;
+        if (movement != null)
+        {
+            movement.isAttacking = true;
+        }
         meleeTimer = meleeRate;
 
-        anim.SetTrigger("Attack");
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+        }
     }
 
-    public void OnMeleeHit() // 애니메이션 이벤트로 호출
+    public void OnMeleeHit() // 애니메이션 프레임 이벤트로 호출
     {
         if (player == null)
         {
@@ -105,39 +130,51 @@ public class KillerPlantAttack : MonoBehaviour
         }
     }
 
-    public void OnMeleeEnd()
+    public void OnMeleeEnd() // 애니메이션 프레임 이벤트로 호출
     {
-        movement.isAttacking = false; 
-        actionRunning = false;
-
         if (movement != null)
         {
+            movement.isAttacking = false; 
             movement.intent = PlantIntent.Approach;
         }
+        actionRunning = false;
     }
 
-    IEnumerator DoRanged()
+    #endregion
+
+    #region Ranged Attack Logic
+
+    private IEnumerator DoRanged()
     {
         actionRunning = true;
-        movement.isAttacking = true;
+        if (movement != null)
+        {
+            movement.isAttacking = true;
+        }
         rangedTimer = rangedRate;
 
-        anim.SetTrigger("Shoot");
+        if (anim != null)
+        {
+            anim.SetTrigger("Shoot");
+        }
         yield return new WaitForSeconds(rangedFireDelay);
 
         FireProjectile();
 
         yield return new WaitForSeconds(0.3f);
 
-        movement.isAttacking = false;
+        if (movement != null)
+        {
+            movement.isAttacking = false;
+            movement.ResetRangedZone();
+            movement.intent = PlantIntent.Approach;
+        }
         actionRunning = false;
-        movement.ResetRangedZone();
-        movement.intent = PlantIntent.Approach;
     }
 
-    void FireProjectile()
+    private void FireProjectile()
     {
-        if (player == null)
+        if (player == null || firePoint == null)
         {
             return;
         }
@@ -151,4 +188,6 @@ public class KillerPlantAttack : MonoBehaviour
 
         obj.GetComponent<KillerPlantBullet>()?.Launch(dirX, projectileSpeed);
     }
+
+    #endregion
 }

@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+
 /*
-행동패턴: 자리에 고정 
-플레이어가 근처로 접근 시 뒤로 이동하며 거리를 벌림
+ * 행동패턴: 자리에 고정 
+ * 플레이어가 근처로 접근 시 뒤로 이동하며 거리를 벌림 (백스텝)
  */
 public class ArcherEnemyMove : MonoBehaviour
 {
+    #region Settings & Variables
+
     [Header("감지 설정")]
     [SerializeField] private float detectRange = 5f; // 플레이어 감지 범위
     [SerializeField] private float escapeRange = 2f; // 백스텝 트리거 범위
@@ -28,19 +31,27 @@ public class ArcherEnemyMove : MonoBehaviour
     private bool isFacingRight = true;
 
     private static readonly int BackstepHash = Animator.StringToHash("Backstep");
+
     // 공격 컴포넌트에서 참조
     public Transform TargetPlayer => player;
     public bool IsBackstepping => isBackstepping;
 
-    void Awake()
+    #endregion
+
+    #region Unity Lifecycle
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        }
         anim = GetComponentInChildren<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
         if (backstepCooldownTimer > 0f)
         {
@@ -61,8 +72,10 @@ public class ArcherEnemyMove : MonoBehaviour
         UpdateFacing();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
+        if (rb == null) return;
+
         // 백스텝 상태일 때만 이동
         if (isBackstepping && player != null)
         {
@@ -85,6 +98,10 @@ public class ArcherEnemyMove : MonoBehaviour
             }
         }
     }
+
+    #endregion
+
+    #region Target Detection & Backstep AI
 
     private void CheckDetection()
     {
@@ -115,8 +132,8 @@ public class ArcherEnemyMove : MonoBehaviour
         }
         else
         {
-            // 플레이어 탐색 
-            Collider2D col = Physics2D.OverlapCircle(transform.position, detectRange, playerLayer); //player가 없을때만 탐색하여 최적화
+            // 플레이어 탐색 (player가 없을 때만 탐색하여 성능 최적화)
+            Collider2D col = Physics2D.OverlapCircle(transform.position, detectRange, playerLayer);
             if (col != null)
             {
                 player = col.transform;
@@ -124,12 +141,9 @@ public class ArcherEnemyMove : MonoBehaviour
         }
     }
 
-    private bool CheckGround(float dirX)
-    {
-        Vector2 checkOrigin = new Vector2(transform.position.x + dirX * groundCheckDistance, transform.position.y - groundCheckDropY);
-        RaycastHit2D hit = Physics2D.Raycast(checkOrigin, Vector2.down, 1f, LayerMask.GetMask("Ground"));
-        return hit.collider != null;
-    }
+    #endregion
+
+    #region Direction & Flips
 
     private void UpdateFacing()
     {
@@ -158,7 +172,18 @@ public class ArcherEnemyMove : MonoBehaviour
         transform.localScale = scale;
     }
 
-    private void OnDrawGizmosSelected() // 디버그용 코드
+    #endregion
+
+    #region Ground Check & Utilities
+
+    private bool CheckGround(float dirX)
+    {
+        Vector2 checkOrigin = new Vector2(transform.position.x + dirX * groundCheckDistance, transform.position.y - groundCheckDropY);
+        RaycastHit2D hit = Physics2D.Raycast(checkOrigin, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+        return hit.collider != null;
+    }
+
+    private void OnDrawGizmosSelected() // 디버그용 기즈모 코드
     {
         // 감지 범위 — 노란색
         Gizmos.color = Color.yellow;
@@ -177,4 +202,6 @@ public class ArcherEnemyMove : MonoBehaviour
             Gizmos.DrawLine(origin, origin + Vector3.down * 1f);
         }
     }
+
+    #endregion
 }

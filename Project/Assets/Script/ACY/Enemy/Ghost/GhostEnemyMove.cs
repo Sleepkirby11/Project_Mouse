@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 
 /*
-유령 이동 스크립트
-1. 플레이어 미감지 시: 좌우를 루프를 그리며 배회 (유영)
-2. 플레이어 감지 시: 
-(1) 멈춰서돌진 준비 (반투명 상태 진입) 후 플레이어 위치로 돌진
-(2) 접촉 성공 시 '공격패턴'의 1번으로 이동
-(3) 접촉 실패 시 실체화 + 느린 추적(유영과 같은 스피드)
-(4) 공격 쿨타임이 끝나고 공격 범위 내에 있을 시 돌진공격
-
-특이사항: 플레이어 감지 시 반투명 상태가 됨, 벽과 땅을 무시하고 이동 
+ * 유령 이동 스크립트
+ * 1. 플레이어 미감지 시: 좌우를 루프를 그리며 배회 (유영)
+ * 2. 플레이어 감지 시: 
+ *   (1) 멈춰서 돌진 준비 (반투명 상태 진입) 후 플레이어 위치로 돌진
+ *   (2) 접촉 성공 시 '공격패턴'의 1번으로 이동
+ *   (3) 접촉 실패 시 실체화 + 느린 추적 (유영과 같은 스피드)
+ *   (4) 공격 쿨타임이 끝나고 공격 범위 내에 있을 시 돌진공격
+ * 
+ * 특이사항: 플레이어 감지 시 반투명 상태가 됨, 벽과 땅을 무시하고 이동 
  */
 public class GhostEnemyMove : MonoBehaviour, IHitReaction
 {
+    #region Types
+
     private enum GhostState
     {
         Patrol,
@@ -22,6 +24,10 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         Possessing,
         Retreat
     }
+
+    #endregion
+
+    #region Variables & Settings
 
     [Header("현재 상태")]
     [SerializeField] private GhostState currentState = GhostState.Patrol;
@@ -72,7 +78,6 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     private Vector2 chargeDirection;
     private Vector2 retreatDirection;
 
-
     private float patrolTime;
     private float chargeTimer;
     private float cooldownTimer;
@@ -80,6 +85,10 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
 
     private bool hasDetectedPlayer = false;
     private bool isDead = false;
+
+    #endregion
+
+    #region Unity Lifecycle
 
     private void Awake()
     {
@@ -94,10 +103,10 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     {
         if (playerTransform == null)
         {
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player != null)
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
             {
-                playerTransform = player.transform;
+                playerTransform = playerObj.transform;
             }
         }
         originPosition = transform.position;
@@ -147,7 +156,10 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
                 break;
 
             case GhostState.Possessing:
-                rb.linearVelocity = Vector2.zero;
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                }
                 break;
 
             case GhostState.Retreat:
@@ -156,40 +168,14 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         }
     }
 
-    private void UpdateMovementAnimation()
-    {
-        if (animator == null)
-        {
-            return;
-        }
+    #endregion
 
-        if (currentState == GhostState.Possessing)
-        {
-            animator.SetBool("IsMoving", false);
-            return;
-        }
+    #region Core Movement AI & States
 
-        bool isMoving = rb.linearVelocity.magnitude > 0.1f;
-
-        animator.SetBool("IsMoving", isMoving);
-    }
-    private void CheckPlayerDetection()
-    {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRange, playerLayer);
-
-        if (hit == null)
-        {
-            return;
-        }
-
-        player = hit.transform;
-        hasDetectedPlayer = true;
-
-        StartSlowChase();
-    }
-
+    // 무한 8자 모양 배회 이동
     private void PatrolInfinity()
     {
+        if (rb == null) return;
         patrolTime += Time.fixedDeltaTime * patrolSpeed;
 
         float x = Mathf.Sin(patrolTime) * patrolWidth;
@@ -200,15 +186,20 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         rb.linearVelocity = (targetPosition - rb.position) * followStrength;
     }
 
+    // 슬로우 추적 시작
     private void StartSlowChase()
     {
         currentState = GhostState.SlowChase;
         SetTransparent(false);
     }
 
+    // 슬로우 추적 이동
     private void SlowChaseMove()
     {
-        if (player == null)
+        if (rb == null) return;
+        Transform target = playerTransform != null ? playerTransform : player;
+
+        if (target == null)
         {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -217,9 +208,8 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         cooldownTimer -= Time.fixedDeltaTime;
         cooldownTimer = Mathf.Max(0f, cooldownTimer);
 
-        Vector2 dir =  ((Vector2)player.position - rb.position).normalized;
-
-        float distanceToPlayer = Vector2.Distance(rb.position, player.position);
+        Vector2 dir = ((Vector2)target.position - rb.position).normalized;
+        float distanceToPlayer = Vector2.Distance(rb.position, target.position);
 
         // 너무 가까우면 멈춤
         float stopDistance = 0.7f;
@@ -233,24 +223,31 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             rb.linearVelocity = Vector2.zero;
         }
 
-        if (cooldownTimer <= 0f &&
-            distanceToPlayer <= chargeAttackRange)
+        if (cooldownTimer <= 0f && distanceToPlayer <= chargeAttackRange)
         {
             StartChargeReady();
         }
     }
 
+    // 돌진 준비 시작
     private void StartChargeReady()
     {
         currentState = GhostState.ChargeReady;
         chargeReadyTimer = chargeReadyTime;
 
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
+    // 돌진 준비 이동 (정지 상태에서 서서히 반투명해짐)
     private void ChargeReadyMove()
     {
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
 
         chargeReadyTimer -= Time.fixedDeltaTime;
 
@@ -264,20 +261,12 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             StartCharge();
         }
     }
-    private void SetAlpha(float alpha)
-    {
-        if (spriteRenderer == null)
-        {
-            return;
-        }
 
-            Color color = spriteRenderer.color;
-        color.a = alpha;
-        spriteRenderer.color = color;
-    }
+    // 돌진 시작
     private void StartCharge()
     {
-        if (player == null)
+        Transform target = playerTransform != null ? playerTransform : player;
+        if (target == null || rb == null)
         {
             return;
         }
@@ -287,22 +276,22 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
 
         SetTransparent(true);
 
-        Vector2 dir = (Vector2)player.position - rb.position;
+        Vector2 dir = (Vector2)target.position - rb.position;
 
-        // 플레이어와 겹쳐있을 경우
+        // 플레이어와 겹쳐있을 경우의 예외 처리
         if (dir.sqrMagnitude <= 0.01f)
         {
-            // 현재 바라보는 방향 사용
             dir = transform.right;
         }
 
         chargeDirection = dir.normalized;
-
         rb.linearVelocity = chargeDirection * chargeSpeed;
     }
 
+    // 돌진 중 이동 처리
     private void ChargeMove()
     {
+        if (rb == null) return;
         chargeTimer -= Time.fixedDeltaTime;
         rb.linearVelocity = chargeDirection * chargeSpeed;
 
@@ -313,10 +302,14 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         }
     }
 
+    // 플레이어 빙의 시작
     private void StartPossessing()
     {
         currentState = GhostState.Possessing;
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
 
         if (spriteRenderer != null)
         {
@@ -329,6 +322,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         }
     }
 
+    // 빙의 해제 및 후퇴 시작
     public void EndPossessionAndRetreat()
     {
         if (spriteRenderer != null)
@@ -347,9 +341,10 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         }
         SetTransparent(false);
 
-        if (player != null)
+        Transform target = playerTransform != null ? playerTransform : player;
+        if (target != null && rb != null)
         {
-            retreatDirection = (rb.position - (Vector2)player.position).normalized;
+            retreatDirection = (rb.position - (Vector2)target.position).normalized;
         }
         else
         {
@@ -365,8 +360,10 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         currentState = GhostState.Retreat;
     }
 
+    // 후퇴 이동 처리
     private void RetreatMove()
     {
+        if (rb == null) return;
         retreatTimer -= Time.fixedDeltaTime;
 
         rb.linearVelocity = retreatDirection * retreatSpeed;
@@ -378,17 +375,9 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         }
     }
 
-    private void SetTransparent(bool value)
-    {
-        if (spriteRenderer == null)
-        {
-            return;
-        }
+    #endregion
 
-        Color color = spriteRenderer.color;
-        color.a = value ? transparentAlpha : 1f;
-        spriteRenderer.color = color;
-    }
+    #region Collisions & Trigger Events
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -415,26 +404,69 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             EndPossessionAndRetreat();
         }
     }
-    public bool OnBeforeTakeDamage(EnemyStatus enemyStatus, int damage) // 돌진 준비 자세, 돌진 중에는 무적
+
+    #endregion
+
+    #region Combat Callbacks
+
+    public bool OnBeforeTakeDamage(EnemyStatus status, int damage) // 돌진 준비 자세 및 돌진 중 무적
     {
         return currentState == GhostState.ChargeReady || currentState == GhostState.Charge;
     }
 
-    public void OnAfterTakeDamage(EnemyStatus enemyStatus, int damage)
+    public void OnAfterTakeDamage(EnemyStatus status, int damage)
     {
     }
+
+    #endregion
+
+    #region Utility Methods
+
+    private void CheckPlayerDetection()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRange, playerLayer);
+
+        if (hit == null)
+        {
+            return;
+        }
+
+        player = hit.transform;
+        hasDetectedPlayer = true;
+
+        StartSlowChase();
+    }
+
+    private void UpdateMovementAnimation()
+    {
+        if (animator == null || rb == null)
+        {
+            return;
+        }
+
+        if (currentState == GhostState.Possessing)
+        {
+            animator.SetBool("IsMoving", false);
+            return;
+        }
+
+        bool isMoving = rb.linearVelocity.magnitude > 0.1f;
+        animator.SetBool("IsMoving", isMoving);
+    }
+
     private void HandleFacingDirection()
     {
         float directionX = 0f;
+        Transform target = playerTransform != null ? playerTransform : player;
 
         if (currentState == GhostState.SlowChase || currentState == GhostState.ChargeReady || currentState == GhostState.Charge)
         {
-            if (playerTransform != null)
+            if (target != null)
             {
-                directionX = playerTransform.position.x - transform.position.x;
+                directionX = target.position.x - transform.position.x;
             }
         }
-        else
+        else if (rb != null)
         {
             directionX = rb.linearVelocity.x;
         }
@@ -449,7 +481,6 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         }
     }
 
-
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -458,12 +489,40 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         scale.x *= -1;
         transform.localScale = scale;
     }
+
     public void Die()
     {
         isDead = true;
 
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
         SetTransparent(false);
+    }
+
+    private void SetAlpha(float alpha)
+    {
+        if (spriteRenderer == null)
+        {
+            return;
+        }
+
+        Color color = spriteRenderer.color;
+        color.a = alpha;
+        spriteRenderer.color = color;
+    }
+
+    private void SetTransparent(bool value)
+    {
+        if (spriteRenderer == null)
+        {
+            return;
+        }
+
+        Color color = spriteRenderer.color;
+        color.a = value ? transparentAlpha : 1f;
+        spriteRenderer.color = color;
     }
 
     private void OnDrawGizmosSelected()
@@ -478,4 +537,6 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         Vector3 center = Application.isPlaying ? originPosition : transform.position;
         Gizmos.DrawWireCube(center, new Vector3(patrolWidth * 2f, patrolHeight * 2f, 0f));
     }
+
+    #endregion
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PoolingManager : MonoBehaviour
 {
+    #region Singleton
+
     private static PoolingManager _instance;
     public static PoolingManager Instance
     {
@@ -17,6 +19,10 @@ public class PoolingManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Types
+
     [System.Serializable]
     public class Pool
     {
@@ -25,6 +31,10 @@ public class PoolingManager : MonoBehaviour
         public int initialSize = 10;
     }
 
+    #endregion
+
+    #region Settings & Variables
+
     [SerializeField] private List<Pool> pools;
 
     private Dictionary<string, Queue<GameObject>> poolDict;
@@ -32,6 +42,10 @@ public class PoolingManager : MonoBehaviour
 
     // 중복 Return 방지용
     private HashSet<GameObject> pooledObjects;
+
+    #endregion
+
+    #region Unity Lifecycle
 
     private void Awake()
     {
@@ -47,6 +61,10 @@ public class PoolingManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    #endregion
+
+    #region Initialization & Pool Creation
 
     private void InitializePools()
     {
@@ -98,14 +116,20 @@ public class PoolingManager : MonoBehaviour
         for (int i = 0; i < size; i++)
         {
             GameObject obj = Instantiate(prefab, transform);
-            obj.SetActive(false);
-
-            queue.Enqueue(obj);
-            pooledObjects.Add(obj);
+            if (obj != null)
+            {
+                obj.SetActive(false);
+                queue.Enqueue(obj);
+                pooledObjects.Add(obj);
+            }
         }
 
         poolDict.Add(key, queue);
     }
+
+    #endregion
+
+    #region Pool Get & Return Logic
 
     public GameObject Get(string key, Vector3 position, Quaternion rotation)
     {
@@ -117,7 +141,7 @@ public class PoolingManager : MonoBehaviour
 
         Queue<GameObject> queue = poolDict[key];
 
-        // 자동 확장
+        // 자동 확장 (풀이 비어있을 때 새로 인스턴스화)
         if (queue.Count == 0)
         {
             if (!prefabDict.TryGetValue(key, out GameObject prefab) || prefab == null)
@@ -127,24 +151,28 @@ public class PoolingManager : MonoBehaviour
             }
 
             GameObject newObj = Instantiate(prefab, transform);
-            newObj.SetActive(false);
-
-            queue.Enqueue(newObj);
-            pooledObjects.Add(newObj);
+            if (newObj != null)
+            {
+                newObj.SetActive(false);
+                queue.Enqueue(newObj);
+                pooledObjects.Add(newObj);
+            }
         }
 
         GameObject obj = queue.Dequeue();
+        if (obj != null)
+        {
+            pooledObjects.Remove(obj);
 
-        pooledObjects.Remove(obj);
+            // Pool 부모에서 분리
+            obj.transform.SetParent(null, false);
 
-        // Pool 부모에서 분리
-        obj.transform.SetParent(null, false);
+            // 위치 설정
+            obj.transform.SetPositionAndRotation(position, rotation);
 
-        // 위치 먼저
-        obj.transform.SetPositionAndRotation(position, rotation);
-
-        // 그 다음 활성화
-        obj.SetActive(true);
+            // 오브젝트 활성화
+            obj.SetActive(true);
+        }
 
         return obj;
     }
@@ -173,10 +201,12 @@ public class PoolingManager : MonoBehaviour
 
         obj.SetActive(false);
 
-        // Pool 밑으로 정리
+        // Pool 밑으로 자식화하여 정리
         obj.transform.SetParent(transform, false);
 
         poolDict[key].Enqueue(obj);
         pooledObjects.Add(obj);
     }
+
+    #endregion
 }
