@@ -15,6 +15,8 @@ using System.Collections.Generic;
  */
 public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 {
+    #region Settings & Variables
+
     [Header("공통")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform pivotPoint;
@@ -24,7 +26,6 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [SerializeField] private float attackCooldown = 3f;   // 공격 간격 
 
     private const string ARROW_KEY = "RedBossArrow";
-
 
     [Header("캐스팅 UI")]
     [SerializeField] private Slider meteorCastSlider;
@@ -105,6 +106,17 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     private Color originalColor;
     private Animator anim;
 
+    // 코루틴 추적 변수
+    private Coroutine attackRoutine;
+    private Coroutine currentPatternRoutine;
+    private Coroutine stunRoutine;
+    private Coroutine enrageRoutine;
+    private Coroutine lastStandRoutine;
+
+    #endregion
+
+    #region Unity Lifecycle
+
     private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
@@ -119,9 +131,57 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         {
             meteorCastSlider.gameObject.SetActive(false);
         }
-        currentClones = new GameObject[teleportPoints.Length];
-        StartCoroutine(AttackRoutine());
+
+        // teleportPoints null 체크
+        if (teleportPoints != null)
+        {
+            currentClones = new GameObject[teleportPoints.Length];
+        }
+        else
+        {
+            currentClones = new GameObject[0];
+        }
+
+        attackRoutine = StartCoroutine(AttackRoutine());
     }
+
+    #endregion
+
+    #region Coroutine Management
+
+    // StopAllCoroutines 대신 특정 코루틴만 정지하여 오작동 방지
+    private void StopAllBossCoroutines()
+    {
+        if (attackRoutine != null)
+        {
+            StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
+        if (currentPatternRoutine != null)
+        {
+            StopCoroutine(currentPatternRoutine);
+            currentPatternRoutine = null;
+        }
+        if (stunRoutine != null)
+        {
+            StopCoroutine(stunRoutine);
+            stunRoutine = null;
+        }
+        if (enrageRoutine != null)
+        {
+            StopCoroutine(enrageRoutine);
+            enrageRoutine = null;
+        }
+        if (lastStandRoutine != null)
+        {
+            StopCoroutine(lastStandRoutine);
+            lastStandRoutine = null;
+        }
+    }
+
+    #endregion
+
+    #region Pattern Choice Logic
 
     private IEnumerator AttackRoutine()
     {
@@ -141,24 +201,31 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             switch (nextPattern)
             {
                 case "Arrow":
-                    yield return StartCoroutine(AttackArrow());
+                    currentPatternRoutine = StartCoroutine(AttackArrow());
+                    yield return currentPatternRoutine;
                     break;
                 case "Orb":
-                    yield return StartCoroutine(AttackOrb());
+                    currentPatternRoutine = StartCoroutine(AttackOrb());
+                    yield return currentPatternRoutine;
                     break;
                 case "Meteor":
-                    yield return StartCoroutine(AttackMeteor());
+                    currentPatternRoutine = StartCoroutine(AttackMeteor());
+                    yield return currentPatternRoutine;
                     break;
                 case "Laser":
-                    yield return StartCoroutine(AttackLaser());
+                    currentPatternRoutine = StartCoroutine(AttackLaser());
+                    yield return currentPatternRoutine;
                     break;
             }
+            currentPatternRoutine = null;
+
             if (isLastStand)
             {
                 yield break;
             }
         }
     }
+
     // 가중치 계산 및 선택
     private string ChooseNextPattern()
     {
@@ -201,7 +268,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         return "Arrow"; // 예외 처리용 기본값
     }
-    // ------------------------공격패턴 1 : 유도 화살-------------------------
+
+    #endregion
+
+    #region Arrow Pattern
+
     public IEnumerator AttackArrow()
     {
         // 분노 상태면 3연발, 아니면 1발
@@ -229,7 +300,9 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
     private void SpawnArrow(float angleOffset)
     {
-        GameObject obj = PoolingManager.Instance.Get(ARROW_KEY, firePoint.position, Quaternion.identity);
+        // firePoint null 예외 처리
+        Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
+        GameObject obj = PoolingManager.Instance.Get(ARROW_KEY, spawnPos, Quaternion.identity);
         if (obj == null)
         {
             return;
@@ -237,7 +310,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         obj.GetComponent<FireArrow>()?.Init(angleOffset);
     }
-    //---------------공격 패턴 2 : 마법 구체 -------------------
+
+    #endregion
+
+    #region Magic Orb Pattern
+
     public IEnumerator AttackOrb()
     {
         if (anim != null)
@@ -297,6 +374,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         yield return new WaitForSeconds(2f);
         activeOrbs.Clear();
     }
+
     //남아있는 구체 제거 함수
     public void RemoveCurrentOrbs()
     {
@@ -316,7 +394,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         activeOrbs.Clear();
     }
-    // ----------------------공격패턴 3 : 메테오 ---------------------------
+
+    #endregion
+
+    #region Meteor Pattern
+
     public IEnumerator AttackMeteor()
     {
         isCastingMeteor = true;
@@ -328,7 +410,8 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         SpawnClone();
 
-        yield return StartCoroutine(ShowMeteorCastUI());
+        // 중첩 Coroutine 대신 인라인 yield return으로 순차 실행
+        yield return ShowMeteorCastUI();
 
         // 캐스팅 중 스턴당했으면 취소
         if (isStunned)
@@ -358,7 +441,6 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             yield return new WaitForSeconds(waveInterval);
         }
         isCastingMeteor = false;
-
     }
 
     private void SpawnMeteorWave()
@@ -387,6 +469,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             }
         }
     }
+
     private IEnumerator ShowMeteorCastUI()
     {
         if (meteorCastSlider == null)
@@ -410,7 +493,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         meteorCastSlider.value = meteorCastTime;
         meteorCastSlider.gameObject.SetActive(false);
     }
-    //---------------캐스팅 중 파훼 --------------
+
+    #endregion
+
+    #region Interruption & Stun
+
     public void ApplyStun(float duration)
     {
         if (isStunned || isInvincible || isEnrageTransitioning || isLastStandTransitioning)
@@ -428,9 +515,10 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         // 남은 분신 제거
         RemoveClone();
 
-        StopAllCoroutines();
-        StartCoroutine(StunRoutine(duration));
+        StopAllBossCoroutines();
+        stunRoutine = StartCoroutine(StunRoutine(duration));
     }
+
     private IEnumerator StunRoutine(float duration)
     {
         if (meteorCastSlider != null)
@@ -452,8 +540,9 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         isStunned = false;
 
-        StartCoroutine(AttackRoutine());
+        attackRoutine = StartCoroutine(AttackRoutine());
     }
+
     public void OnHitDuringCast()
     {
         if (!isCastingMeteor || isStunned)
@@ -466,99 +555,14 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         }
         ApplyStun(stunDuration);
     }
-    public bool OnBeforeTakeDamage(EnemyStatus enemy, int damage)
-    {
-        if (isInvincible)
-        {
-            return true;
-        }
 
-        return false;
-    }
+    #endregion
 
-    public void OnAfterTakeDamage(EnemyStatus enemy, int damage)
-    {
-        OnHitDuringCast(); // 메테오 캐스팅 중 피격 시 스턴
+    #region Clone Management
 
-        if (enemy == null)
-        {
-            return;
-        }
-
-        float currentHPRatio = enemy.GetHPRatio();
-
-        if (!hasDoneLastStand && !isLastStandTransitioning && currentHPRatio <= 0.1f)
-        {
-            hasDoneLastStand = true; // 다시는 이 조건문에 들어오지 않음
-            StopAllCoroutines();     // 현재 하던 공격 취소
-            StartCoroutine(LastStandTransitionRoutine()); // 발악 패턴 돌입
-            return;
-        }
-
-        if (!isEnraged && !isEnrageTransitioning && !isLastStandTransitioning)
-        {
-            if (currentHPRatio <= 0.5f)
-            {
-                StopAllCoroutines();
-                StartCoroutine(EnrageTransitionRoutine());
-            }
-        }
-    }
-
-    private IEnumerator EnrageTransitionRoutine()
-    {
-
-        isEnrageTransitioning = true;
-        isEnraged = true;    // 분노 상태 
-        isInvincible = true; // 무적
-
-        if (sr != null)
-        {
-            sr.color = originalColor; // 스턴 도중 전환 시 색상 복구
-        }
-
-        // 혹시 메테오 캐스팅 중이거나 레이저 때문에 투명해진 상태였다면 원래대로 복구
-        isCastingMeteor = false;
-        isStunned = false;
-        ToggleVisibility(true);
-        RemoveClone();
-        RemoveCurrentOrbs();
-
-        if (anim != null)
-        {
-            anim.SetBool("IsCasting", false);
-            anim.Play("RedBossIdle1"); // 강제로 대기 모션 적용
-        }
-
-        // 분노 이펙트 생성
-        if (enrageVFX != null)
-        {
-            Vector3 spawnPos = pivotPoint != null ? pivotPoint.position : transform.position;
-            GameObject vfx = Instantiate(enrageVFX, spawnPos, Quaternion.identity);
-            Destroy(vfx, enrageTransitionTime); // 연출 시간에 맞춰 이펙트 삭제
-        }
-
-        yield return new WaitForSeconds(enrageTransitionTime);
-
-        isInvincible = false;
-        isEnrageTransitioning = false;
-
-        StartCoroutine(AttackRoutine()); // 공격 루틴 처음부터 다시 시작
-    }
-    // 보스 숨기기 및 나타내기 강제 적용 함수 (분노 연출 시 보스가 투명해져있으면 강제로 나타냄)
-    private void ToggleVisibility(bool isVisible)
-    {
-        if (sr != null)
-        {
-            Color color = sr.color;
-            color.a = isVisible ? 1f : 0f;
-            sr.color = color;
-        }
-    }
-    //-------------캐스팅 중 분신------------
     private void SpawnClone()
     {
-        if (teleportPoints.Length == 0)
+        if (teleportPoints == null || teleportPoints.Length == 0)
         {
             return;
         }
@@ -569,6 +573,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         for (int i = 0; i < teleportPoints.Length; i++)
         {
+            if (teleportPoints[i] == null)
+            {
+                continue;
+            }
+
             Vector3 spawnPos = teleportPoints[i].position;
 
             if (Vector3.Distance(spawnPos, transform.position) < 0.5f)
@@ -594,9 +603,10 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             currentClones[i] = cloneObj;
         }
     }
+
     public void SwapCloneAndBoss(int oldIndex, int newIndex)
     {
-        if (!isCastingMeteor || currentClones == null) // 분신이 없는 상태면 스왑 불가
+        if (!isCastingMeteor || currentClones == null || teleportPoints == null) // 분신이 없는 상태면 스왑 불가
         {
             return;
         }
@@ -609,6 +619,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         if (oldIndex >= 0 && oldIndex < teleportPoints.Length)
         {
+            if (teleportPoints[oldIndex] == null)
+            {
+                return;
+            }
+
             Vector3 spawnPos = teleportPoints[oldIndex].position;
             GameObject cloneObj = PoolingManager.Instance.Get("RedBossClone", spawnPos, Quaternion.identity);
 
@@ -648,18 +663,31 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         hasClones = false;
     }
-    // ---------------------공격패턴 4 : 레이저-----------------------
+
+    #endregion
+
+    #region Laser Pattern
+
     public IEnumerator AttackLaser()
     {
         isInvincible = true;
-        yield return StartCoroutine(FadeRoutine(0f, 0.5f));
+        yield return FadeRoutine(0f, 0.5f);
 
-        GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, laserSpawnPoint.position, Quaternion.identity);
-        LaserCross laser = laserObj.GetComponent<LaserCross>();
-
-        if (laser != null)
+        // laserSpawnPoint null 체크
+        Vector3 spawnPos = laserSpawnPoint != null ? laserSpawnPoint.position : transform.position;
+        GameObject laserObj = PoolingManager.Instance.Get(LASER_KEY, spawnPos, Quaternion.identity);
+        
+        if (laserObj != null)
         {
-            laser.Init(laserWarningTime, laserDuration, isEnraged);
+            LaserCross laser = laserObj.GetComponent<LaserCross>();
+            if (laser != null)
+            {
+                laser.Init(laserWarningTime, laserDuration, isEnraged);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("laserObj returned from PoolingManager is null!");
         }
 
         float totalWaitTime = laserWarningTime + laserDuration + 0.5f;
@@ -671,7 +699,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         yield return new WaitForSeconds(totalWaitTime);
 
-        yield return StartCoroutine(FadeRoutine(1f, 0.5f));
+        yield return FadeRoutine(1f, 0.5f);
         isInvincible = false;
 
         ApplyStun(3f);
@@ -700,7 +728,105 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         color.a = targetAlpha;
         sr.color = color;
     }
-    // ------------- 마지막 발악 패턴 ---------------
+
+    #endregion
+
+    #region Damage Callbacks
+
+    public bool OnBeforeTakeDamage(EnemyStatus enemy, int damage)
+    {
+        if (isInvincible)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void OnAfterTakeDamage(EnemyStatus enemy, int damage)
+    {
+        OnHitDuringCast(); // 메테오 캐스팅 중 피격 시 스턴
+
+        if (enemy == null)
+        {
+            return;
+        }
+
+        float currentHPRatio = enemy.GetHPRatio();
+
+        if (!hasDoneLastStand && !isLastStandTransitioning && currentHPRatio <= 0.1f)
+        {
+            hasDoneLastStand = true; // 다시는 이 조건문에 들어오지 않음
+            StopAllBossCoroutines();     // 현재 하던 공격 취소
+            lastStandRoutine = StartCoroutine(LastStandTransitionRoutine()); // 발악 패턴 돌입
+            return;
+        }
+
+        if (!isEnraged && !isEnrageTransitioning && !isLastStandTransitioning)
+        {
+            if (currentHPRatio <= 0.5f)
+            {
+                StopAllBossCoroutines();
+                enrageRoutine = StartCoroutine(EnrageTransitionRoutine());
+            }
+        }
+    }
+
+    #endregion
+
+    #region Phase Transitions
+
+    private IEnumerator EnrageTransitionRoutine()
+    {
+        isEnrageTransitioning = true;
+        isEnraged = true;    // 분노 상태 
+        isInvincible = true; // 무적
+
+        if (sr != null)
+        {
+            sr.color = originalColor; // 스턴 도중 전환 시 색상 복구
+        }
+
+        // 혹시 메테오 캐스팅 중이거나 레이저 때문에 투명해진 상태였다면 원래대로 복구
+        isCastingMeteor = false;
+        isStunned = false;
+        ToggleVisibility(true);
+        RemoveClone();
+        RemoveCurrentOrbs();
+
+        if (anim != null)
+        {
+            anim.SetBool("IsCasting", false);
+            anim.Play("RedBossIdle1"); // 강제로 대기 모션 적용
+        }
+
+        // 분노 이펙트 생성
+        if (enrageVFX != null)
+        {
+            Vector3 spawnPos = pivotPoint != null ? pivotPoint.position : transform.position;
+            GameObject vfx = Instantiate(enrageVFX, spawnPos, Quaternion.identity);
+            Destroy(vfx, enrageTransitionTime); // 연출 시간에 맞춰 이펙트 삭제
+        }
+
+        yield return new WaitForSeconds(enrageTransitionTime);
+
+        isInvincible = false;
+        isEnrageTransitioning = false;
+
+        attackRoutine = StartCoroutine(AttackRoutine()); // 공격 루틴 처음부터 다시 시작
+    }
+
+    // 보스 숨기기 및 나타내기 강제 적용 함수 (분노 연출 시 보스가 투명해져있으면 강제로 나타냄)
+    private void ToggleVisibility(bool isVisible)
+    {
+        if (sr != null)
+        {
+            Color color = sr.color;
+            color.a = isVisible ? 1f : 0f;
+            sr.color = color;
+        }
+    }
+
     private IEnumerator LastStandTransitionRoutine()
     {
         isLastStandTransitioning = true;
@@ -736,13 +862,14 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         isLastStandTransitioning = false;
 
-        yield return StartCoroutine(LastStandAttackRoutine());
+        yield return LastStandAttackRoutine();
 
         isLastStand = false; 
         isInvincible = false; 
 
-        StartCoroutine(AttackRoutine());
+        attackRoutine = StartCoroutine(AttackRoutine());
     }
+
     private IEnumerator LastStandAttackRoutine()
     {
         // 지속 시간
@@ -783,7 +910,8 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
                 {
                     float finalAngle = (i * angleStep) + currentSpiralAngle;
 
-                    GameObject obj = PoolingManager.Instance.Get(ARROW_KEY, firePoint.position, Quaternion.identity);
+                    Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
+                    GameObject obj = PoolingManager.Instance.Get(ARROW_KEY, spawnPos, Quaternion.identity);
                     if (obj != null)
                     {
                         obj.GetComponent<FireArrow>()?.Init(finalAngle, false);
@@ -796,4 +924,6 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         yield return new WaitForSeconds(attackCooldown);
     }
+
+    #endregion
 }

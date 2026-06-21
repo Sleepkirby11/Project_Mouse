@@ -48,7 +48,8 @@ public class ArcherEnemyAttack : MonoBehaviour
     }
     private void Fire(Vector3 targetPos)
     {
-        GameObject arrowObj = PoolingManager.Instance.Get(ARROW_KEY, firePoint.position, Quaternion.identity);
+        Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
+        GameObject arrowObj = PoolingManager.Instance.Get(ARROW_KEY, spawnPos, Quaternion.identity);
 
         if (arrowObj == null)
         {
@@ -57,7 +58,7 @@ public class ArcherEnemyAttack : MonoBehaviour
 
         if (arrowObj.TryGetComponent<Arrow>(out var arrow))
         {
-            arrow.Initialize(firePoint.position, targetPos);
+            arrow.Initialize(spawnPos, targetPos);
         }
     }
 }
