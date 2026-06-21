@@ -872,7 +872,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 328, y: -6.3999996, z: -10}
+  m_LocalPosition: {x: -10.6, y: -6.3999996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1648,7 +1648,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4599902366801354418, guid: 40fe4c95246ceb94f8e9c61def05b622, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 328
+      value: -10.6
       objectReference: {fileID: 0}
     - target: {fileID: 4599902366801354418, guid: 40fe4c95246ceb94f8e9c61def05b622, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2382,7 +2382,7 @@ PrefabInstance:
       objectReference: {fileID: 1964608236}
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 328
+      value: -10.6
       objectReference: {fileID: 0}
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4000,6 +4000,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 1629685381488659163, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
       propertyPath: 'restPoints.Array.data[0]'
       value: 
@@ -4172,11 +4176,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1823950582210720561, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3372036266355469166, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: appearVFX
