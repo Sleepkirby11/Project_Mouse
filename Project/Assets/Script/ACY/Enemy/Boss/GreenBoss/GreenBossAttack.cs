@@ -15,6 +15,8 @@ using UnityEngine;
 
 public class GreenBossAttack : MonoBehaviour, IHitReaction
 {
+    #region Settings & Variables
+
     [Header("새 소환 설정")]
     [SerializeField] private float warningTime = 1.0f;    // 경고선이 깜빡이는 시간
     [SerializeField] private float spawnInterval = 3.0f;  // 새 소환 주기
@@ -70,6 +72,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private Coroutine birdRoutine;
     private Coroutine frogRoutine;
     private Coroutine flowerRoutine;
+    private Coroutine pushRoutine;
+    private Coroutine spiritRoutine;
+    private Coroutine finalPhaseRoutine;
+    private Coroutine fadeRoutine;
 
     private int activeSpiritsCount = 0;       // 현재 살아있는 정령 수
     private bool hasTriggeredSpiritPattern = false; // 체력 50% 이하 패턴 발동 체크
@@ -81,6 +87,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     // 플레이어 감지 관련 변수
     private Transform playerTransform;
+
+    #endregion
+
+    #region Unity Lifecycle
 
     private void Awake()
     {
@@ -113,7 +123,6 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void Update()
     {
-
         if (currentPushCooldown > 0f)
         {
             currentPushCooldown -= Time.deltaTime;
@@ -127,9 +136,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void OnDisable()
     {
-        StopBirdAttack();
-        StopFrogAttack();
-        StopFlowerAttack();
+        StopAllBossCoroutines();
     }
 
     private void OnDestroy()
@@ -140,7 +147,25 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         }
     }
 
-    // -----------------------새 패턴----------------------------
+    #endregion
+
+    #region Coroutine Management
+
+    private void StopAllBossCoroutines()
+    {
+        if (birdRoutine != null) { StopCoroutine(birdRoutine); birdRoutine = null; }
+        if (frogRoutine != null) { StopCoroutine(frogRoutine); frogRoutine = null; }
+        if (flowerRoutine != null) { StopCoroutine(flowerRoutine); flowerRoutine = null; }
+        if (pushRoutine != null) { StopCoroutine(pushRoutine); pushRoutine = null; }
+        if (spiritRoutine != null) { StopCoroutine(spiritRoutine); spiritRoutine = null; }
+        if (finalPhaseRoutine != null) { StopCoroutine(finalPhaseRoutine); finalPhaseRoutine = null; }
+        if (fadeRoutine != null) { StopCoroutine(fadeRoutine); fadeRoutine = null; }
+    }
+
+    #endregion
+
+    #region Pattern: Bird (새 소환)
+
     public void StartBirdAttack()
     {
         if (birdRoutine == null)
@@ -185,7 +210,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         }
     }
 
-    //------------------바람 패턴----------------------
+    #endregion
+
+    #region Pattern: Wind Blast (바람)
+
     private void CheckPlayerDistanceAndPushInstant()
     {
         if (playerTransform == null)
@@ -201,7 +229,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             PlayerStatus pStatus = playerTransform.GetComponent<PlayerStatus>();
             if (pStatus != null)
             {
-                StartCoroutine(PushAndLockPlayerRoutine(pStatus));
+                pushRoutine = StartCoroutine(PushAndLockPlayerRoutine(pStatus));
             }
         }
     }
@@ -212,7 +240,11 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
         // 바람 이펙트 소환
         Vector3 effectPos = transform.position + new Vector3(-2f, 0f, 0f);
-        PoolingManager.Instance.Get(windPoolKey, effectPos, Quaternion.identity);
+        GameObject windObj = PoolingManager.Instance.Get(windPoolKey, effectPos, Quaternion.identity);
+        if (windObj == null)
+        {
+            Debug.LogWarning("Failed to pool wind effect object!");
+        }
 
         // 왼쪽 넉백
         IHittable hittable = status.GetComponent<IHittable>();
@@ -232,16 +264,20 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         }
 
         isPushing = false;
+        pushRoutine = null;
     }
 
-    //------------------------정령 패턴-----------------------------
+    #endregion
+
+    #region Pattern: Spirit Shield (정령 보호막)
+
     public void StartSpiritAttack()
     {
         if (activeSpiritsCount > 0)
         {
             return;
         }
-        StartCoroutine(SpiritAttackRoutine());
+        spiritRoutine = StartCoroutine(SpiritAttackRoutine());
     }
 
     private IEnumerator SpiritAttackRoutine()
@@ -266,9 +302,16 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         {
             for (int j = 0; j < 3; j++)
             {
-                Vector3 spawnPos = spiritSpawnPoints.Length > 0
-                    ? spiritSpawnPoints[Random.Range(0, spiritSpawnPoints.Length)].position
-                    : transform.position;
+                // spiritSpawnPoints와 그 요소들 null 체크 후 스폰 위치 결정
+                Vector3 spawnPos = transform.position;
+                if (spiritSpawnPoints != null && spiritSpawnPoints.Length > 0)
+                {
+                    Transform pt = spiritSpawnPoints[Random.Range(0, spiritSpawnPoints.Length)];
+                    if (pt != null)
+                    {
+                        spawnPos = pt.position;
+                    }
+                }
 
                 GameObject spiritObj = PoolingManager.Instance.Get(spiritPoolKeys[i], spawnPos, Quaternion.identity);
                 if (spiritObj != null)
@@ -281,7 +324,9 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
                 }
             }
         }
+        spiritRoutine = null;
     }
+
     public void OnSpiritReturned()
     {
         // 귀환한 정령 수 비례 회복
@@ -325,7 +370,11 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             }
         }
     }
-    // --------------------------개구리 패턴-------------------------------
+
+    #endregion
+
+    #region Pattern: Frog (개구리 소환)
+
     public void StartFrogAttack()
     {
         if (frogRoutine == null)
@@ -355,11 +404,18 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             }
 
             Vector3 spawnPos = playerTransform.position + (Vector3)frogSpawnOffset;
-            PoolingManager.Instance.Get(frogPoolKey, spawnPos, Quaternion.identity);
+            GameObject frogObj = PoolingManager.Instance.Get(frogPoolKey, spawnPos, Quaternion.identity);
+            if (frogObj == null)
+            {
+                Debug.LogWarning("Failed to pool frog object!");
+            }
         }
     }
 
-    //----------------------꽃 트랩 패턴-------------------------
+    #endregion
+
+    #region Pattern: Flower Trap (꽃 함정)
+
     public void StartFlowerAttack()
     {
         if (flowerRoutine == null)
@@ -392,6 +448,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             }
         }
     }
+
     private List<float> GetSpawnXPositions()
     {
         List<float> positions = new List<float>();
@@ -420,6 +477,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
         return positions;
     }
+
     private void SpawnOneFlower(float x)
     {
         Vector2 rayOrigin = new Vector2(x, 10f);
@@ -442,7 +500,11 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             }
         }
     }
-    //-------------------------------마지막 소환수 패턴------------------------------------
+
+    #endregion
+
+    #region Pattern: Final Phase (마지막 소환수)
+
     private IEnumerator FinalPhaseRoutine()
     {
         isFinalPhase = true; // 무적
@@ -452,8 +514,12 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         StopFrogAttack();
         StopFlowerAttack();
 
-        // 보스 투명화 페이드 아웃
-        yield return StartCoroutine(FadeRoutine(0f, fadeOutDuration));
+        // 다른 부가 코루틴 정지
+        if (pushRoutine != null) { StopCoroutine(pushRoutine); pushRoutine = null; }
+        if (spiritRoutine != null) { StopCoroutine(spiritRoutine); spiritRoutine = null; }
+
+        // 보스 투명화 페이드 아웃 (Nested coroutine inline yield)
+        yield return FadeRoutine(0f, fadeOutDuration);
 
         // 마법진 프리팹이 있다면 생성
         if (finalEffectPrefab != null)
@@ -484,6 +550,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         // 보스 제거
         yield return new WaitForSeconds(0.1f);
         gameObject.SetActive(false);
+        finalPhaseRoutine = null;
     }
 
     private void SpawnKillerPlant()
@@ -515,11 +582,13 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
         gameObject.SetActive(true);
         isFinalPhase = false;
-        StartCoroutine(FadeRoutine(1f, 1f));
+        
+        fadeRoutine = StartCoroutine(FadeRoutine(1f, 1f));
 
         StartBirdAttack();
         StartFlowerAttack();
     }
+
     private IEnumerator FadeRoutine(float targetAlpha, float duration)
     {
         if (sr == null)
@@ -542,6 +611,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         color.a = targetAlpha;
         sr.color = color;
     }
+
+    #endregion
+
+    #region Damage Callbacks
 
     public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
     {
@@ -569,8 +642,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             if (hpRatio > 0f && hpRatio <= 0.1f)
             {
                 hasTriggeredFinalPhase = true;
-                StartCoroutine(FinalPhaseRoutine());
+                finalPhaseRoutine = StartCoroutine(FinalPhaseRoutine());
             }
         }
     }
+
+    #endregion
 }

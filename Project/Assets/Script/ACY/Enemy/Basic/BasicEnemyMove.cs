@@ -2,12 +2,18 @@
 using UnityEngine;
 
 /*
- 행동패턴: 좌우를 배회 (인스펙터에서 수치 조절 가능)
- 플레이어 감지 시 플레이어를 추적
+ * 행동패턴: 좌우를 배회 (인스펙터에서 수치 조절 가능)
+ * 플레이어 감지 시 플레이어를 추적
  */
 public class BasicEnemyMove : MonoBehaviour
 {
+    #region Types
+
     public enum EnemyState { Patrol, Chase } // 배회상태, 추적상태
+
+    #endregion
+
+    #region Settings & Variables
 
     [Header("현재 상태")]
     public EnemyState currentState = EnemyState.Patrol; // 초기 상태는 배회
@@ -31,11 +37,15 @@ public class BasicEnemyMove : MonoBehaviour
     private Vector3 patrolTarget;
     private float detectionRadiusSqr;
 
-    private Animator animator; // 추가
-    private static readonly int IsMoving = Animator.StringToHash("IsMoving");   // 추가
-    private static readonly int IsChasing = Animator.StringToHash("IsChasing"); // 추가
+    private Animator animator;
+    private static readonly int IsMoving = Animator.StringToHash("IsMoving");   
+    private static readonly int IsChasing = Animator.StringToHash("IsChasing"); 
 
     private WaitForSeconds scanIntervalWFS;
+
+    #endregion
+
+    #region Unity Lifecycle
 
     private void Awake()
     {
@@ -67,20 +77,27 @@ public class BasicEnemyMove : MonoBehaviour
                 break;
         }
     }
+
+    #endregion
+
+    #region State & Scan Logic
+
     private void SetState(EnemyState newState)
     {
         currentState = newState;
 
-        bool isChasing = newState == EnemyState.Chase;
-        animator.SetBool(IsMoving, !isChasing);   // Patrol일 때만 IsMoving
-        animator.SetBool(IsChasing, isChasing);    // Chase일 때만 IsChasing
+        bool isChasingState = newState == EnemyState.Chase;
+        if (animator != null)
+        {
+            animator.SetBool(IsMoving, !isChasingState);   // Patrol일 때만 IsMoving
+            animator.SetBool(IsChasing, isChasingState);    // Chase일 때만 IsChasing
+        }
     }
 
     private IEnumerator EnvironmentScanRoutine()
     {
         while (true)
         {
-            // 0.2초 대기
             yield return scanIntervalWFS;
 
             if (targetTransform == null)
@@ -106,6 +123,10 @@ public class BasicEnemyMove : MonoBehaviour
             }
         }
     }
+
+    #endregion
+
+    #region Movement Logic
 
     private void PatrolMovement()
     {
@@ -147,7 +168,7 @@ public class BasicEnemyMove : MonoBehaviour
             return;
         }
 
-        Vector3 targetPos = new Vector3(targetTransform.position.x, myTransform.position.y, myTransform.position.z); //x 축으로만 이동
+        Vector3 targetPos = new Vector3(targetTransform.position.x, myTransform.position.y, myTransform.position.z); // x축으로만 이동
 
         myTransform.position = Vector3.MoveTowards // 타겟을 향해 이동
         ( 
@@ -157,11 +178,10 @@ public class BasicEnemyMove : MonoBehaviour
         );
     }
 
-    private void UpdatePatrolTarget() // 배회 목표 지점 갱신
-    {
-        float randomX = Random.Range(-patrolRange, patrolRange); 
-        patrolTarget = new Vector3(startPosition.x + randomX, myTransform.position.y, myTransform.position.z); 
-    }
+    #endregion
+
+    #region Direction & Flips
+
     private void FlipToTarget() // 타겟을 향해 방향 전환
     {
         if (targetTransform == null)
@@ -189,10 +209,23 @@ public class BasicEnemyMove : MonoBehaviour
         scale.x *= -1;
         myTransform.localScale = scale;
     }
+
+    #endregion
+
+    #region Utility Methods
+
+    private void UpdatePatrolTarget() // 배회 목표 지점 갱신
+    {
+        float randomX = Random.Range(-patrolRange, patrolRange); 
+        patrolTarget = new Vector3(startPosition.x + randomX, myTransform.position.y, myTransform.position.z); 
+    }
+
     // 감지 범위 시각화
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
+
+    #endregion
 }

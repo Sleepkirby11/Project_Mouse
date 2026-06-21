@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * 일정시간마다 정해진 위치로 순간이동
+ * 일정시간마다 정해진 위치로 순간이동하는 보스 이동 제어
  */
 public class RedBossMove : MonoBehaviour
 {
+    #region Settings & Variables
+
     [Header("타겟 설정")]
     [SerializeField] private Transform playerTransform; // 플레이어 위치 참조
     public bool isFacingRight = true; // 현재 바라보는 방향 (기본 오른쪽)
@@ -22,6 +24,10 @@ public class RedBossMove : MonoBehaviour
     private int currentPointIndex = -1;
     private RedBossAttack bossAttack;
 
+    #endregion
+
+    #region Unity Lifecycle
+
     private void Start()
     {
         bossAttack = GetComponent<RedBossAttack>();
@@ -35,10 +41,15 @@ public class RedBossMove : MonoBehaviour
         }
         StartCoroutine(TeleportRoutine());
     }
+
     private void Update()
     {
         FlipToTarget();
     }
+
+    #endregion
+
+    #region Teleport Core Logic
 
     private IEnumerator TeleportRoutine()
     {
@@ -54,13 +65,24 @@ public class RedBossMove : MonoBehaviour
             {
                 yield break;
             }
-            yield return StartCoroutine(TeleportSequence());
+            // inline yield return for direct nested coroutine execution
+            yield return TeleportSequence();
         }
     }
 
     private IEnumerator TeleportSequence()
     {
+        if (teleportPoints == null || teleportPoints.Length == 0)
+        {
+            yield break;
+        }
+
         int newIndex = GetRandomDifferentIndex();
+        if (newIndex == -1 || newIndex >= teleportPoints.Length || teleportPoints[newIndex] == null)
+        {
+            yield break;
+        }
+
         int oldIndex = currentPointIndex; // 이동 전 현재 위치 인덱스 백업
 
         // 사라지는 이펙트 재생
@@ -87,43 +109,10 @@ public class RedBossMove : MonoBehaviour
         StartCoroutine(TeleportSequence());
     }
 
-    private int GetRandomDifferentIndex()
-    {
-        if (teleportPoints.Length == 1)
-        {
-            return 0;
-        }
+    #endregion
 
-        List<int> candidates = new List<int>();
-        for (int i = 0; i < teleportPoints.Length; i++)
-        {
-            if (i != currentPointIndex)
-            {
-                candidates.Add(i);
-            }
-        }
+    #region Direction & Flips
 
-        return candidates[Random.Range(0, candidates.Count)];
-    }
-
-    private void SpawnVFX(GameObject vfxPrefab, Vector3 position)
-    {
-        if (vfxPrefab == null)
-        {
-            return;
-        }
-
-        GameObject vfx = Instantiate(vfxPrefab, position, Quaternion.identity);
-
-        ParticleSystem ps = vfx.GetComponent<ParticleSystem>();
-        if (ps != null)
-        {
-            ps.Play();
-
-            // 파티클 재생 끝나면 자동 제거
-            Destroy(vfx, ps.main.duration + ps.main.startLifetime.constantMax);
-        }
-    }
     private void FlipToTarget()
     {
         if (playerTransform == null)
@@ -151,4 +140,63 @@ public class RedBossMove : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    #endregion
+
+    #region Utility Methods
+
+    private int GetRandomDifferentIndex()
+    {
+        if (teleportPoints == null || teleportPoints.Length == 0)
+        {
+            return -1;
+        }
+
+        if (teleportPoints.Length == 1)
+        {
+            return 0;
+        }
+
+        List<int> candidates = new List<int>();
+        for (int i = 0; i < teleportPoints.Length; i++)
+        {
+            if (i != currentPointIndex && teleportPoints[i] != null)
+            {
+                candidates.Add(i);
+            }
+        }
+
+        if (candidates.Count == 0)
+        {
+            return 0; // 예외 복구
+        }
+
+        return candidates[Random.Range(0, candidates.Count)];
+    }
+
+    private void SpawnVFX(GameObject vfxPrefab, Vector3 position)
+    {
+        if (vfxPrefab == null)
+        {
+            return;
+        }
+
+        GameObject vfx = Instantiate(vfxPrefab, position, Quaternion.identity);
+        if (vfx != null)
+        {
+            ParticleSystem ps = vfx.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                ps.Play();
+                // 파티클 재생 끝나면 자동 제거
+                Destroy(vfx, ps.main.duration + ps.main.startLifetime.constantMax);
+            }
+            else
+            {
+                Destroy(vfx, 1.5f); // 파티클이 없으면 기본 1.5초 후 제거
+            }
+        }
+    }
+
+    #endregion
 }

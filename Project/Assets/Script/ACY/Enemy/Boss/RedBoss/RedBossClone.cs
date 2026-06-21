@@ -2,6 +2,8 @@
 
 public class RedBossClone : MonoBehaviour, IDamageable
 {
+    #region Settings & Variables
+
     private RedBossAttack owner;
 
     [Header("타겟 설정")]
@@ -18,10 +20,29 @@ public class RedBossClone : MonoBehaviour, IDamageable
     private Animator animator;
 
     private static readonly int CastTrigger = Animator.StringToHash("IsCasting");
+
+    #endregion
+
+    #region Unity Lifecycle
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
     }
+
+    private void Update()
+    {
+        if (isDead)
+        {
+            return;
+        }
+        FlipToTarget();
+    }
+
+    #endregion
+
+    #region Clone Initialization
+
     public void Init(RedBossAttack boss, GameObject spawnEffect, GameObject disappearEffect)
     {
         owner = boss;
@@ -33,16 +54,15 @@ public class RedBossClone : MonoBehaviour, IDamageable
 
         if (playerTransform == null)
         {
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player != null)
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
             {
-                playerTransform = player.transform;
+                playerTransform = playerObj.transform;
             }
-
         }
         gameObject.SetActive(true);
 
-        // 생성 이펙트
+        // 생성 이펙트 재생
         PlayVFX(spawnVFX);
         FlipToTarget();
         if (animator != null)
@@ -51,21 +71,17 @@ public class RedBossClone : MonoBehaviour, IDamageable
         }
     }
 
-    private void Update()
-    {
-        if (isDead)
-        {
-            return;
-        }
-        FlipToTarget();
-    }
+    #endregion
+
+    #region Animation Synchronization
+
     public void PlayCastAnimation()
     {
         if (isDead || animator == null)
         {
             return;
         }
-       animator.SetBool(CastTrigger, true);
+        animator.SetBool(CastTrigger, true);
     }
 
     public void SyncAnimation(int stateHash, float normalizedTime)
@@ -77,6 +93,10 @@ public class RedBossClone : MonoBehaviour, IDamageable
         animator.SetBool(CastTrigger, true); // 캐스팅 애니메이션으로 전환
         animator.Play(stateHash, 0, normalizedTime); // 보스와 애니메이션 동기화
     }
+
+    #endregion
+
+    #region Combat & Damage Handlers
 
     public void TakeDamage(int damage)
     {
@@ -96,33 +116,26 @@ public class RedBossClone : MonoBehaviour, IDamageable
         }
 
         isDead = true;
-        // 제거 이펙트
+        // 제거 이펙트 재생
         PlayVFX(disappearVFX);
 
         owner = null;
 
         // 풀로 반환
-        PoolingManager.Instance.Return(CLONE_KEY, gameObject);
-    }
-
-    private void PlayVFX(GameObject vfxPrefab)
-    {
-        if (vfxPrefab == null)
+        if (PoolingManager.Instance != null)
         {
-            return;
+            PoolingManager.Instance.Return(CLONE_KEY, gameObject);
         }
-
-        GameObject vfx = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
-
-        ParticleSystem ps = vfx.GetComponentInChildren<ParticleSystem>();
-
-        if (ps != null)
+        else
         {
-            ps.Play();
-
-            Destroy(vfx, ps.main.duration + ps.main.startLifetime.constantMax);
+            gameObject.SetActive(false);
         }
     }
+
+    #endregion
+
+    #region Direction & Flips
+
     private void FlipToTarget()
     {
         if (playerTransform == null)
@@ -150,4 +163,33 @@ public class RedBossClone : MonoBehaviour, IDamageable
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    #endregion
+
+    #region VFX Utilities
+
+    private void PlayVFX(GameObject vfxPrefab)
+    {
+        if (vfxPrefab == null)
+        {
+            return;
+        }
+
+        GameObject vfx = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
+        if (vfx != null)
+        {
+            ParticleSystem ps = vfx.GetComponentInChildren<ParticleSystem>();
+            if (ps != null)
+            {
+                ps.Play();
+                Destroy(vfx, ps.main.duration + ps.main.startLifetime.constantMax);
+            }
+            else
+            {
+                Destroy(vfx, 1.5f);
+            }
+        }
+    }
+
+    #endregion
 }

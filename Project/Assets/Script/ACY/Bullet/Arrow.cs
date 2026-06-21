@@ -108,6 +108,13 @@ public class Arrow : MonoBehaviour
     {
         isInitialized = false;
 
-        PoolingManager.Instance.Return(POOL_KEY, gameObject);
+        if (PoolingManager.Instance != null)
+        {
+            PoolingManager.Instance.Return(POOL_KEY, gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
