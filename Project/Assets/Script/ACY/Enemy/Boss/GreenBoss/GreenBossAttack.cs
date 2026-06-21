@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,6 +77,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private bool isFinalPhase = false; // 마지막 패턴때 무적 플래그
     private SpriteRenderer sr;
     private EnemyStatus enemyStatus;
+    private EnemyStatus activeKpStatus;
 
     // 플레이어 감지 관련 변수
     private Transform playerTransform;
@@ -129,6 +130,14 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         StopBirdAttack();
         StopFrogAttack();
         StopFlowerAttack();
+    }
+
+    private void OnDestroy()
+    {
+        if (activeKpStatus != null)
+        {
+            activeKpStatus.OnEnemyDeath -= RevealBossAfterKP;
+        }
     }
 
     // -----------------------새 패턴----------------------------
@@ -490,13 +499,20 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         // 소환수의 EnemyStatus 보스 복귀 함수 연결
         if (spawnedKP.TryGetComponent(out EnemyStatus kpStatus))
         {
-            kpStatus.OnEnemyDeath += RevealBossAfterKP;
+            activeKpStatus = kpStatus;
+            activeKpStatus.OnEnemyDeath += RevealBossAfterKP;
         }
     }
 
     // 보스 복귀 함수
     public void RevealBossAfterKP()
     {
+        if (activeKpStatus != null)
+        {
+            activeKpStatus.OnEnemyDeath -= RevealBossAfterKP;
+            activeKpStatus = null;
+        }
+
         gameObject.SetActive(true);
         isFinalPhase = false;
         StartCoroutine(FadeRoutine(1f, 1f));

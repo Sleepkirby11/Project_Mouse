@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class KillerPlantAttack : MonoBehaviour
@@ -29,7 +29,13 @@ public class KillerPlantAttack : MonoBehaviour
     {
         movement = GetComponent<KillerPlantMove>();
         anim = GetComponentInChildren<Animator>();
-        player = GameObject.FindWithTag("Player").transform;
+        
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.transform;
+        }
+
         meleeRange = movement.meleeRange;
 
         if (firePoint == null)

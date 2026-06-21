@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,6 +21,7 @@ using static UnityEngine.GraphicsBuffer;
  */
 public class Player : MonoBehaviour
 {
+    public static Player instance;
     [HideInInspector] public PlayerStatus status;
  
     public GameObject eventSystem;
@@ -71,17 +72,32 @@ public class Player : MonoBehaviour
     //씬 이동 시 초기화 방지
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        if(cursorObject != null)
-            DontDestroyOnLoad(cursorObject);
-        if(groundLine != null)
-            DontDestroyOnLoad(groundLine);
-        if(attackCursor != null)
-            DontDestroyOnLoad(attackCursor);
-        if(cam != null)
-            DontDestroyOnLoad(cam);
-        if(eventSystem != null)
-            DontDestroyOnLoad(eventSystem);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            if(cursorObject != null)
+                DontDestroyOnLoad(cursorObject);
+            if(groundLine != null)
+                DontDestroyOnLoad(groundLine);
+            if(attackCursor != null)
+                DontDestroyOnLoad(attackCursor);
+            if(cam != null)
+                DontDestroyOnLoad(cam);
+            if(eventSystem != null)
+                DontDestroyOnLoad(eventSystem);
+        }
+        else
+        {
+            if (cursorObject != null) Destroy(cursorObject);
+            if (groundLine != null) Destroy(groundLine);
+            if (attackCursor != null) Destroy(attackCursor);
+            if (cam != null) Destroy(cam);
+            if (eventSystem != null) Destroy(eventSystem);
+
+            Destroy(gameObject);
+            return;
+        }
 
         status = GetComponent<PlayerStatus>();
         rigid = GetComponent<Rigidbody2D>();

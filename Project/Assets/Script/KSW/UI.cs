@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -41,8 +41,12 @@ public class UI : MonoBehaviour
 
     void Start()
     {
-        playerStatus = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
-        UpdateHPBar();
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            playerStatus = playerObj.GetComponent<PlayerStatus>();
+            UpdateHPBar();
+        }
     }
 
     // 게임 시작 버튼 누를 때 호출
@@ -63,7 +67,7 @@ public class UI : MonoBehaviour
     //플레이어 체력 상태 업데이트
     public void UpdateHPBar()
     {
-        if (hpSlider != null) hpSlider.value = playerStatus.HP / playerStatus.MaxHP;
+        if (hpSlider != null && playerStatus != null) hpSlider.value = playerStatus.HP / playerStatus.MaxHP;
     }
 
     public void ActivePal(bool isActive)
@@ -73,6 +77,7 @@ public class UI : MonoBehaviour
 
     public void ChangeStance(int amount)
     {
+        if (playerStatus == null) return;
         Debug.Log("체인지");
         switch (amount)
         {
@@ -94,13 +99,13 @@ public class UI : MonoBehaviour
     //플레이어 ink 상태 업데이트
     public void UpdateInkBar()
     {
-        if (inkSlider != null) inkSlider.value = playerStatus.ink / playerStatus.maxInk;
+        if (inkSlider != null && playerStatus != null) inkSlider.value = playerStatus.ink / playerStatus.maxInk;
     }
 
     //플레이어 specialInk 상태 업데이트
     public void UpdateSpedialInkBar()
     {
-        if (specialInkSlider != null) specialInkSlider.value = playerStatus.specialInk / playerStatus.maxSpecialInk;
+        if (specialInkSlider != null && playerStatus != null) specialInkSlider.value = playerStatus.specialInk / playerStatus.maxSpecialInk;
     }
 
     //대화에 필요한 Action
