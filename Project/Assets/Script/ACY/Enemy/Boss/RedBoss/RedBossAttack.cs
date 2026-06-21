@@ -413,7 +413,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     //---------------캐스팅 중 파훼 --------------
     public void ApplyStun(float duration)
     {
-        if (isStunned)
+        if (isStunned || isInvincible || isEnrageTransitioning || isLastStandTransitioning)
         {
             return;
         }
@@ -440,7 +440,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         if (sr != null)
         {
-            sr.color = Color.yellow;
+            sr.color = new Color32(0, 202, 255, 255); // #00CAFF 하늘색
         }
 
         yield return new WaitForSeconds(duration);
@@ -511,6 +511,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         isEnrageTransitioning = true;
         isEnraged = true;    // 분노 상태 
         isInvincible = true; // 무적
+
+        if (sr != null)
+        {
+            sr.color = originalColor; // 스턴 도중 전환 시 색상 복구
+        }
 
         // 혹시 메테오 캐스팅 중이거나 레이저 때문에 투명해진 상태였다면 원래대로 복구
         isCastingMeteor = false;
@@ -701,6 +706,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         isLastStandTransitioning = true;
         isLastStand = true;
         isInvincible = true;
+
+        if (sr != null)
+        {
+            sr.color = originalColor; // 스턴 도중 전환 시 색상 복구
+        }
 
         isCastingMeteor = false;
         isStunned = false;
