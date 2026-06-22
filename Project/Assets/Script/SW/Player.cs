@@ -51,9 +51,6 @@ public class Player : MonoBehaviour
     [HideInInspector] public float speed;
     [HideInInspector] public Vector2 inputVec;
     [HideInInspector] public bool isCanMove;
-    [HideInInspector] public bool isOnIce; //얼음 체크용
-    [Header("얼음 미끄러짐 정도 (낮을수록 더 미끄러움)")]
-    public float iceSlipRate = 0.005f;
 
     //점프 횟수
     public int jumpCount;
@@ -186,26 +183,21 @@ public class Player : MonoBehaviour
     //착지 판정 검사
     void GroundCheck()
     {
-        if (!status.CanMove)
+        if (!status.CanMove) //추가함
         {
             return;
         }
         //낙하중 + BoxCast로 착지 판정 검사
 
-        if (rigid.linearVelocityY <= 0.1f)
+        if (rigid.linearVelocityY <= 0)
         {
             bool isGround;
-            Vector2 boxCastOrigin = (Vector2)transform.position + col.offset;
             isGround = Physics2D.BoxCast
-                (boxCastOrigin, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground", "Ice"));
-            
+                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground"));
             if (isGround)
             {
-                isOnIce = Physics2D.BoxCast
-                    (boxCastOrigin, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ice"));
-
                 //이동 가능 + input 값 이어서 받기
-                if(!status.IsKnockbacked && !isOnIce)
+                if (!status.IsKnockbacked)
                     rigid.linearVelocityX = inputVec.x;
                 jumpCount = 2;
                 isCanMove = true;
@@ -384,19 +376,11 @@ public class Player : MonoBehaviour
     //이동 함수
     void Move()
     {
-        if (status.IsKnockbacked) 
+        if (status.IsKnockbacked) //추가함
         {
             return;
         }
-        if (isOnIce)
-        {
-            float slipSpeed = Mathf.Lerp(rigid.linearVelocityX, inputVec.x, iceSlipRate);
-            rigid.linearVelocityX = slipSpeed;
-        }
-        else
-        {
-            rigid.linearVelocityX = inputVec.x;
-        }
+        rigid.linearVelocityX = inputVec.x;
     }
 
     //넉백 상태 종료 후 처리 함수
@@ -425,8 +409,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        int layer = collision.gameObject.layer;
-        if (layer == LayerMask.NameToLayer("Ground") || layer == LayerMask.NameToLayer("Ice"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             anim.SetBool("IsFalling", false);
             anim.SetBool("IsJump", false);
@@ -434,18 +417,8 @@ public class Player : MonoBehaviour
             {
                 if (contact.normal.y > 0.5f) //접촉 지점의 노멀 벡터가 위쪽을 향할 때만 착지 판정
                 {
-                    bool isIce = (layer == LayerMask.NameToLayer("Ice"));
-                    if (isIce)
-                    {
-                        isOnIce = true;
-                    }
-                    else
-                    {
-                        isOnIce = false;
-                    }
-
                     //이동 가능 + input 값 이어서 받기
-                    if (!status.IsKnockbacked && !isIce)
+                    if (!status.IsKnockbacked)
                         rigid.linearVelocityX = inputVec.x;
                     SpriteFlip();
                     if (jumpCount < 2)
@@ -459,29 +432,29 @@ public class Player : MonoBehaviour
             }
         }
     }
-    void OnTriggerEnter2D(Collider2D collision)
+   void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.transform.parent != null)
     {
-        if (collision.transform.parent != null)
+        GameObject parentObj = collision.transform.parent.gameObject;
+        
+        if (parentObj.CompareTag("Interactable"))
         {
-            GameObject parentObj = collision.transform.parent.gameObject;
-
-            if (parentObj.CompareTag("Interactable"))
-            {
-                interactable = parentObj.GetComponent<IInteractable>();
-            }
+            interactable = parentObj.GetComponent<IInteractable>();
         }
     }
+}
 
-    void OnTriggerExit2D(Collider2D collision)
+void OnTriggerExit2D(Collider2D collision)
+{
+    if (collision.transform.parent != null)
     {
-        if (collision.transform.parent != null)
+        GameObject parentObj = collision.transform.parent.gameObject;
+        
+        if (parentObj.CompareTag("Interactable"))
         {
-            GameObject parentObj = collision.transform.parent.gameObject;
-
-            if (parentObj.CompareTag("Interactable"))
-            {
-                interactable = null;
-            }
+            interactable = null;
         }
     }
+}
 }

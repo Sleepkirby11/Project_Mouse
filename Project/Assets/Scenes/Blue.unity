@@ -883,6 +883,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1294957592}
     - target: {fileID: 6404161621859968284, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: iceFriction
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404161621859968284, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: iceSlipRate
       value: 0.0005
       objectReference: {fileID: 0}
