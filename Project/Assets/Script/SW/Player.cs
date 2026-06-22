@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -432,18 +432,29 @@ public class Player : MonoBehaviour
             }
         }
     }
-    void OnTriggerEnter2D(Collider2D collision)
+   void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.transform.parent != null)
     {
-        if(collision.transform.parent.gameObject.CompareTag("Interactable"))
+        GameObject parentObj = collision.transform.parent.gameObject;
+        
+        if (parentObj.CompareTag("Interactable"))
         {
-            interactable = collision.transform.parent.gameObject.GetComponent<IInteractable>();
+            interactable = parentObj.GetComponent<IInteractable>();
         }
     }
-    void OnTriggerExit2D(Collider2D collision)
+}
+
+void OnTriggerExit2D(Collider2D collision)
+{
+    if (collision.transform.parent != null)
     {
-        if(collision.transform.parent.gameObject.CompareTag("Interactable"))
+        GameObject parentObj = collision.transform.parent.gameObject;
+        
+        if (parentObj.CompareTag("Interactable"))
         {
             interactable = null;
         }
     }
+}
 }

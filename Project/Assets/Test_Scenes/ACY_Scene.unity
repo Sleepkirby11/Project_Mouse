@@ -4263,10 +4263,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParryingShieldEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 3868120746790778872, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4492551149636952784, guid: bac9face0a8eaac4d881df84e45cc343, type: 3}
       propertyPath: m_LocalPosition.x
       value: 39.06
