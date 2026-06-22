@@ -67,6 +67,8 @@ public class Player : MonoBehaviour
     public float maxDist;
     public bool isSkill;
 
+    [HideInInspector] public IInteractable interactable;
+
     float usedInk;
 
     //씬 이동 시 초기화 방지
@@ -428,6 +430,20 @@ public class Player : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.parent.gameObject.CompareTag("Interactable"))
+        {
+            interactable = collision.transform.parent.gameObject.GetComponent<IInteractable>();
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.transform.parent.gameObject.CompareTag("Interactable"))
+        {
+            interactable = null;
         }
     }
 }
