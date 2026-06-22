@@ -85,6 +85,14 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    public void ActionInteract(InputAction.CallbackContext context)
+    {
+        if(context.started && player.interactable != null)
+        {
+            player.interactable.Interact();
+        }
+    }
+
     //대시 키 받아오기
     public void ActionDash(InputAction.CallbackContext context)
     {
