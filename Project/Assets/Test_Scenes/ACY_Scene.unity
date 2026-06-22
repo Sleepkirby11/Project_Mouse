@@ -3648,7 +3648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1114137132973608061, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6425096678983798487, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: dieAnimationLength
@@ -3887,18 +3887,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2447503255356326170, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2447503255356326170, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2447503255356326170, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2447503255356326170, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 53.71
       objectReference: {fileID: 0}
@@ -3938,49 +3926,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2447503255356326170, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3298864769083811923, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_Size.x
-      value: 1.7418709
-      objectReference: {fileID: 0}
-    - target: {fileID: 3298864769083811923, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_Size.y
-      value: 1.6296172
-      objectReference: {fileID: 0}
-    - target: {fileID: 3298864769083811923, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.008592606
-      objectReference: {fileID: 0}
-    - target: {fileID: 3298864769083811923, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.5695112
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636632322297117404, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636632322297117404, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636632322297117404, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5495363164581017507, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: dieAnimationLength
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5988464360397360385, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
       propertyPath: m_Name
       value: BasicEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5988464360397360385, guid: bd373a0a80001de41945e1c7aecf4ba9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
