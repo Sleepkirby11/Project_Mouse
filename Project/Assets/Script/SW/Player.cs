@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public Vector2 inputVec;
     [HideInInspector] public bool isCanMove;
     [HideInInspector] public bool isOnIce; //얼음 체크용
-    [Header("얼음 미끄러짐 정도 (낮을수록 더 미끄러움, 기본값: 0.005f)")]
+    [Header("얼음 미끄러짐 정도 (낮을수록 더 미끄러움)")]
     public float iceSlipRate = 0.005f;
 
     //점프 횟수
@@ -198,10 +198,12 @@ public class Player : MonoBehaviour
             Vector2 boxCastOrigin = (Vector2)transform.position + col.offset;
             isGround = Physics2D.BoxCast
                 (boxCastOrigin, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground", "Ice"));
-            isOnIce = Physics2D.BoxCast
-                (boxCastOrigin, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ice"));
+            
             if (isGround)
             {
+                isOnIce = Physics2D.BoxCast
+                    (boxCastOrigin, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ice"));
+
                 //이동 가능 + input 값 이어서 받기
                 if(!status.IsKnockbacked && !isOnIce)
                     rigid.linearVelocityX = inputVec.x;
@@ -219,10 +221,6 @@ public class Player : MonoBehaviour
 
             JumpAnimUpdate(false);
             anim.SetBool("IsFalling", true);
-        }
-        else
-        {
-            isOnIce = false;
         }
     }
 
