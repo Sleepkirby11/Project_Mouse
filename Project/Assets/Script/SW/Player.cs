@@ -308,7 +308,10 @@ public class Player : MonoBehaviour
         if (isGroundCursor)
             isGroundCursor = false;
         if(isSkill)
+        {
             SkillBool(false);
+            StatusImage.instance.ChangeImage((int)status.currentStance, isSkill);
+        }
     }
 
     //공격 | 스킬의 대미지 계산 함수
@@ -353,13 +356,15 @@ public class Player : MonoBehaviour
         cursor.damage = (int)nowDamage;
     }
 
-    //외부 참조가 가능하게 한 선 그리기 캔슬
+    //외부 참조가 가능하게 한 선 그리기 및 행동 캔슬
     public void CancleCursor()
     {
         if (cursor.isMove == true)
             ActiveAttack(cursor);
         if (groundCursor.isMove == true)
             ActiveAttack(groundCursor);
+        dashLine.enabled = false;
+        isDashReady = false;
     }
 
     //Ink UI를 업데이트하는 함수
@@ -401,6 +406,7 @@ public class Player : MonoBehaviour
         }
     }
 
+
     //점프 후 착지 판정 보완
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -432,6 +438,8 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    //레버 상호작용 감지
    void OnTriggerEnter2D(Collider2D collision)
 {
     if (collision.transform.parent != null)

@@ -98,7 +98,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         //점프 애니메이션 실행 이전 Invincible 활성화
         SetInvincible(true);
 
-        //플레이어 애니메이션 초기화
+        //플레이어 애니메이션 및 행동 초기화
         playerAnim.SetBool("IsJump", false);
         playerAnim.SetBool("IsFalling", false);
 
@@ -179,6 +179,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     {
         isStunned = true;
         Debug.Log($"[PlayerStatus] 패링 성공 {duration}초간 스턴");
+        GetComponent<Player>().CancleCursor();
 
         yield return new WaitForSeconds(duration);
 
@@ -188,6 +189,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public void SetPossessed(bool value)    //빙의
     {
         isPossessed = value;
+        GetComponent<Player>().CancleCursor();
 
         if (rb != null && value)
         {
