@@ -182,6 +182,7 @@ public class PlayerInputScript : MonoBehaviour
             groundTrail.colorGradient = player.status.ChangeStance(player.status.currentStance);
             main.startColor = player.status.ChangeStance(player.status.currentStance);
 
+            StatusImage.instance.ChangeImage((int)player.status.currentStance, player.isSkill);
             UI.Instance.ActivePal(false);
         }
     }
@@ -200,6 +201,7 @@ public class PlayerInputScript : MonoBehaviour
                 player.SkillBool(true);
             else
                 player.SkillBool(false);
+            StatusImage.instance.ChangeImage((int)player.status.currentStance, player.isSkill);
         }
     }
 
