@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 
     public int sceneIndex;
 
-
     [Header("대화창")]
     public int id;
     public bool isNPC;

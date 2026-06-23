@@ -119,7 +119,6 @@ public class UI : MonoBehaviour
         talkPanel.SetActive(isAction);
     }
 
-    //
     void Talk(int id, bool isNPC)
     {
         string talkData = GameManager.instance.GetTalk(id, talkIndex);
