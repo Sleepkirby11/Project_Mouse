@@ -47,7 +47,7 @@ MonoBehaviour:
   pools:
   - key: RedBossArrow
     prefab: {fileID: 1582195347710664461, guid: ea85f8cce0a9b5849a1977a092d11d78, type: 3}
-    initialSize: 10
+    initialSize: 40
   - key: RedBossMeteor
     prefab: {fileID: 2983593613088629823, guid: 6b4a0a588a1510e4fb3d501fa6f3a426, type: 3}
     initialSize: 30
@@ -84,3 +84,21 @@ MonoBehaviour:
   - key: Shockwave
     prefab: {fileID: 6334322862548045781, guid: 812e58b2cb9b57047b42162b6cba6dad, type: 3}
     initialSize: 5
+  - key: FlowerLockIcon
+    prefab: {fileID: 8575637050091287450, guid: 87b1f7a9dfbc8c94397eab93fc524554, type: 3}
+    initialSize: 1
+  - key: FlowerTrap
+    prefab: {fileID: 8522541369801760802, guid: dd2fa82868fb53341be9317068664858, type: 3}
+    initialSize: 5
+  - key: KillerPlantBullet
+    prefab: {fileID: 3739273753223816140, guid: 3ca2e0ac1e4212b4889002884040db14, type: 3}
+    initialSize: 5
+  - key: BlueLaser
+    prefab: {fileID: 8016788000148958878, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}
+    initialSize: 5
+  - key: WaterSpout
+    prefab: {fileID: 4327989480321104302, guid: e627c912549921e4297fa1567f1be872, type: 3}
+    initialSize: 9
+  - key: WarningLine
+    prefab: {fileID: 9168699527130250196, guid: 4e16ca2ed380bcd4a809df1ee3de8bd8, type: 3}
+    initialSize: 4
