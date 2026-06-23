@@ -32759,10 +32759,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4169286712872263522}
     m_Modifications:
-    - target: {fileID: 3452495524052986724, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
-      propertyPath: nextSceneName
-      value: Blue
-      objectReference: {fileID: 0}
     - target: {fileID: 7758221207617996518, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
       propertyPath: m_Name
       value: SceneTransitionTrigger

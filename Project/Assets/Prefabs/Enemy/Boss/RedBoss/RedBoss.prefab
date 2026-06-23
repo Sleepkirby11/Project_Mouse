@@ -155,7 +155,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   teleportInterval: 3
   disappearVFX: {fileID: 0}
   appearVFX: {fileID: 0}
@@ -194,12 +193,11 @@ MonoBehaviour:
   meteorPerWave: 7
   waveInterval: 1.5
   meteorCastTime: 2
-  meteorSpawnXRange: {x: 25, y: 25}
+  meteorSpawnXRange: {x: -25, y: 25}
   meteorSpawnYRange: {x: 23, y: 18}
   meteorTargetY: -15
   stunDuration: 3
   teleportPoints:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
