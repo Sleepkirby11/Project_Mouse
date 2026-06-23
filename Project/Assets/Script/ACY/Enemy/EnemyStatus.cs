@@ -79,7 +79,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable
                 return;
             }
         }
-
+        CameraShake.instance.Impulse();
         if (anim != null)
         {
             if (HasParameter("Hurt"))

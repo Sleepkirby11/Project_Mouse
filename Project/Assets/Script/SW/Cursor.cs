@@ -150,7 +150,6 @@ public class Cursor : MonoBehaviour
         if (damageable != null && !collision.gameObject.CompareTag("Player"))
         {
             damageable.TakeDamage(damage);
-            Debug.Log(isSkill);
             if(isSkill)
             {
                 if(playerStatus.currentStance == PlayerStatus.Stance.Green) playerStatus.Heal(2);
