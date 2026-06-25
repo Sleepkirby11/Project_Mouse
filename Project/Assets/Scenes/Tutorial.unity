@@ -299,6 +299,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 329193711}
+    - target: {fileID: 5513363662809447578, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5746161562967716325, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1096,10 +1100,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackCursor
       objectReference: {fileID: 0}
-    - target: {fileID: 1569049161552131436, guid: bfca6e5d9defd654ab8a081997886f5c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -4750761433519615375, guid: f70078a1801a2fb4f8dc0b8b09199305, type: 3}
     - target: {fileID: 7354637404276066719, guid: bfca6e5d9defd654ab8a081997886f5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
