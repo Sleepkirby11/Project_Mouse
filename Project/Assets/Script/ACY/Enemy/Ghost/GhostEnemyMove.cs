@@ -96,7 +96,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         ghostEnemyAttack = GetComponent<GhostEnemyAttack>();
         ghostCollider = GetComponent<Collider2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -127,7 +127,6 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             CheckPlayerDetection();
         }
         HandleFacingDirection();
-        UpdateMovementAnimation();
     }
 
     private void FixedUpdate()
@@ -435,23 +434,6 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         hasDetectedPlayer = true;
 
         StartSlowChase();
-    }
-
-    private void UpdateMovementAnimation()
-    {
-        if (animator == null || rb == null)
-        {
-            return;
-        }
-
-        if (currentState == GhostState.Possessing)
-        {
-            animator.SetBool("IsMoving", false);
-            return;
-        }
-
-        bool isMoving = rb.linearVelocity.magnitude > 0.1f;
-        animator.SetBool("IsMoving", isMoving);
     }
 
     private void HandleFacingDirection()
