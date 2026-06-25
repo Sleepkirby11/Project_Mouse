@@ -5,6 +5,7 @@ public class RgbBossAttack : MonoBehaviour
 {
     [Header("FireGear Spawn")]
     [SerializeField] private float spawnOffsetY = -1f;
+    [SerializeField] private float redAttackInterval = 3f;
 
     private Transform player;
     private EnemyStatus enemyStatus;
@@ -21,9 +22,18 @@ public class RgbBossAttack : MonoBehaviour
         if (playerObj != null)
             player = playerObj.transform;
 
-        StartCoroutine(AttackRoutine());
+        //StartCoroutine(AttackRoutine());
     }
-
+    private void Update() // 테스트용 
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            PoolingManager.Instance.Get(
+                "IceHammer",
+                player.position + Vector3.up * 3f,
+                Quaternion.identity);
+        }
+    }
     private IEnumerator AttackRoutine()
     {
         while (true)
@@ -51,10 +61,9 @@ public class RgbBossAttack : MonoBehaviour
 
     private IEnumerator RedAttack()
     {
-        // 플레이어 위치에 FireGear 생성
         SpawnFireGears();
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(redAttackInterval);
     }
 
     private IEnumerator GreenAttack()
@@ -66,9 +75,15 @@ public class RgbBossAttack : MonoBehaviour
 
     private IEnumerator BlueAttack()
     {
-        // TODO : Blue 전용 패턴
+        Vector3 spawnPos =
+            player.position + Vector3.up * 5f;
 
-        yield return new WaitForSeconds(3f);
+        PoolingManager.Instance.Get(
+            "IceHammer",
+            spawnPos,
+            Quaternion.identity);
+
+        yield return new WaitForSeconds(5f);
     }
 
     private void SpawnFireGears()
