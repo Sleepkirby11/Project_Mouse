@@ -3450,7 +3450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738235730334658934, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3540639986238268416, guid: 317bd3275a5c17f40bc5fe1b963f4bf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4026,6 +4026,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1383748885323869681, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383748885323869681, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5119883765333634511, guid: 1695e6bc71d01a94387860762c29b7d0, type: 3}
+    - target: {fileID: 1383748885323869681, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2196911329696525700, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
       propertyPath: possessionSlider
       value: 
@@ -4081,6 +4093,10 @@ PrefabInstance:
     - target: {fileID: 4834161149477849590, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
       propertyPath: m_Name
       value: GhostEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834161149477849590, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
