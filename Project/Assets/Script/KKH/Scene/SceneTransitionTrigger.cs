@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement; // �� ��ȯ�� ���� �ʼ������� �����ؾ� �մϴ�.
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class SceneTransitionTrigger : MonoBehaviour
 {
-    [Header("�̵��� �� ����")]
-    [Tooltip("�̵��ϰ��� �ϴ� ����Ƽ ���� ��Ȯ�� �̸��� �����ּ���.")]
+    [Header("다음 씬 이름")]
+    [Tooltip("넘어갈 씬의 이름을 대소문자 포함 정확하게 표기할 것")]
     [SerializeField] private string nextSceneName;
 
-    [Header("��ȯ ���� ����")]
-    [Tooltip("Ʈ���ſ� �ε��� �� �� �� �ڿ� ���� ��ȯ���� ���մϴ�.")]
+    [Header("딜레이")]
     [SerializeField] private float transitionDelay = 0.5f;
 
     private bool isTransitioning = false;
@@ -32,7 +31,6 @@ public class SceneTransitionTrigger : MonoBehaviour
     private IEnumerator TransitionRoutine()
     {
         isTransitioning = true;
-        Debug.Log($"[SceneTransition] {nextSceneName} ������ �̵��� �����մϴ�. ({transitionDelay}�� ���...)");
 
 
         yield return new WaitForSeconds(transitionDelay);
