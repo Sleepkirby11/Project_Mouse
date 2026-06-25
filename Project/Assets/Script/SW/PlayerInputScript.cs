@@ -50,7 +50,8 @@ public class PlayerInputScript : MonoBehaviour
 
         if (context.started)
         {
-            player.rigid.linearVelocityY = -player.speed * 2;
+            if(player.rigid.linearVelocityY > -player.speed * 2)
+                player.rigid.linearVelocityY = -player.speed * 2;
         }
     }
 

@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     public static Player instance;
     [HideInInspector] public PlayerStatus status;
  
-    public GameObject eventSystem;
     public GameObject cam;
 
     [Header("공격")]
@@ -86,8 +85,6 @@ public class Player : MonoBehaviour
                 DontDestroyOnLoad(attackCursor);
             if(cam != null)
                 DontDestroyOnLoad(cam);
-            if(eventSystem != null)
-                DontDestroyOnLoad(eventSystem);
         }
         else
         {
@@ -95,7 +92,6 @@ public class Player : MonoBehaviour
             if (groundLine != null) Destroy(groundLine);
             if (attackCursor != null) Destroy(attackCursor);
             if (cam != null) Destroy(cam);
-            if (eventSystem != null) Destroy(eventSystem);
 
             Destroy(gameObject);
             return;

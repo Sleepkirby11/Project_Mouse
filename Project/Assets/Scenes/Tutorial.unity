@@ -279,14 +279,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 875154847216086592, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 923747826684237380, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 821db21e3aa6d3f4f970c288517bcb01, type: 3}
     - target: {fileID: 1179677294668474743, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -406,14 +398,6 @@ PrefabInstance:
     - target: {fileID: 7951452984803062232, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8008626018680129636, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140927067658179791, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1112,6 +1096,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackCursor
       objectReference: {fileID: 0}
+    - target: {fileID: 1569049161552131436, guid: bfca6e5d9defd654ab8a081997886f5c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4750761433519615375, guid: f70078a1801a2fb4f8dc0b8b09199305, type: 3}
     - target: {fileID: 7354637404276066719, guid: bfca6e5d9defd654ab8a081997886f5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
