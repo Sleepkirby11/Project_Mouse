@@ -119,10 +119,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void Update()
     {
-        if (state != State.Patrol)
-        {
-            FlipToTarget();
-        }
+        FlipToTarget();
 
         UpdateAnimator();
 
@@ -210,9 +207,8 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             yield return parryIntervalWait;
 
             // 플레이어를 추적 중일 때만 패링 시도
-            if (target != null)
+            if (target != null && state == State.Tracking)
             {
-                Debug.Log("패링 시도");
                 state = State.Parrying;
                 if (rb != null)
                 {
@@ -388,14 +384,29 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void FlipToTarget()
     {
-        Transform activeTarget = playerTransform != null ? playerTransform : target;
+        // Patrol 중엔 움직이는 방향 기준
+        if (state == State.Patrol)
+        {
+            if (patrolDir > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if (patrolDir < 0 && isFacingRight)
+            {
+                Flip();
+            }
+
+            return;
+        }
+
+        // 추적, 패링, 카운터 중엔 실제 감지된 target 기준
+        Transform activeTarget = target ?? playerTransform;
         if (activeTarget == null)
         {
             return;
         }
 
         float direction = activeTarget.position.x - transform.position.x;
-
         if (direction > 0 && !isFacingRight)
         {
             Flip();
