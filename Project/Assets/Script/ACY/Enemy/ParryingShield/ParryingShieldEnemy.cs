@@ -38,13 +38,13 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     [SerializeField] private int contactDamage = 1;
     [SerializeField] private float contactKnockbackX = 6f;   // 옆으로 밀려나는 힘
     [SerializeField] private float contactKnockbackY = 5f;   // 약하게 뜨는 힘
-    [SerializeField] private float contactCooldown = 0.8f; // 재접촉 무적 시간
+    [SerializeField] private float contactCooldown = 0.8f;   // 재접촉 무적 시간
 
     [Header("카운터 공격")]
     [SerializeField] private float counterDashForce = 22f;  // 돌진 힘
-    [SerializeField] private float counterDashTime = 0.6f; // 돌진 유지 시간
-    [SerializeField] private float counterLaunchY = 18f;  // 카운터 히트 공중부양 힘
-    [SerializeField] private float counterStunTime = 1.5f; // 스턴 지속 시간
+    [SerializeField] private float counterDashTime = 0.6f;  // 돌진 유지 시간
+    [SerializeField] private float counterLaunchY = 18f;    // 카운터 히트 공중부양 힘
+    [SerializeField] private float counterStunTime = 1.5f;  // 스턴 지속 시간
     [SerializeField] private float counterRecoverTime = 0.3f;
 
     [Header("타겟 설정")]
@@ -54,9 +54,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     private enum State { Patrol, Tracking, Parrying, Countering, Recovering } 
 
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
     private Animator anim;
-    private Color originalColor;
     private Transform target;
     private State state = State.Patrol; // 초기 상태는 배회
 
@@ -84,13 +82,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         }
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
-
-        if (spriteRenderer != null)
-        {
-            originalColor = spriteRenderer.color;
-        }
 
         // 패링 타이머 캐싱
         parryWait = new WaitForSeconds(parryDuration);
@@ -172,14 +164,20 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void MoveToward(Vector3 destination) // 플레이어 방향으로 이동
     {
-        if (rb == null) return;
+        if (rb == null)
+        {
+            return;
+        }
         float dirX = destination.x > transform.position.x ? 1f : -1f; // 이동 방향 계산
         rb.linearVelocity = new Vector2(dirX * moveSpeed, rb.linearVelocity.y);
     }
 
     private void Patrol()
     {
-        if (rb == null) return;
+        if (rb == null)
+        {
+            return;
+        }
         // 배회 반경 도달 시 방향 전환
         float distFromOrigin = transform.position.x - patrolOrigin.x;
         if (distFromOrigin > patrolDistance && patrolDir == 1f)
@@ -374,6 +372,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             return;
         }
+        if (state == State.Countering)
+        {
+            return;
+        }
         anim.SetBool("IsParrying", state == State.Parrying);
         anim.SetBool("IsMoving", state == State.Tracking || state == State.Patrol);
         if (rb != null)
@@ -407,6 +409,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         }
 
         float direction = activeTarget.position.x - transform.position.x;
+        if (Mathf.Abs(direction) < 0.1f) // 너무가까우면 Flip 안함
+        {
+            return;
+        }
         if (direction > 0 && !isFacingRight)
         {
             Flip();
