@@ -258,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 10
   dieAnimationLength: 3
+  isBoss: 1
 --- !u!114 &878273054086867009
 MonoBehaviour:
   m_ObjectHideFlags: 0

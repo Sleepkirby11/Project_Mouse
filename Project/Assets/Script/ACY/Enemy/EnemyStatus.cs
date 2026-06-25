@@ -14,7 +14,10 @@ public class EnemyStatus : MonoBehaviour, IDamageable
     [SerializeField] private float dieAnimationLength = 1f; // 사망 애니메이션 길이에 맞춰 설정 
     private Animator anim;
 
-    public event Action OnEnemyDeath; // 사망 시 보고 받을 리스너 (예: GreenBoss 등)
+    public event Action OnEnemyDeath; // 사망 시 보고 받을 리스너
+
+    [Header("보스 설정")]
+    [SerializeField] private bool isBoss = false; // 보스인지 판별
 
     #endregion
 
@@ -130,6 +133,11 @@ public class EnemyStatus : MonoBehaviour, IDamageable
 
         OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
 
+        if (isBoss)
+        {
+            ActivatePortal();
+        }
+
         if (anim != null)
         {
             if (HasParameter("Death"))
@@ -154,6 +162,21 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         }
 
         Destroy(gameObject, dieAnimationLength); // 애니메이션 대기 후 파괴
+    }
+    private void ActivatePortal()
+    {
+        // 모든 게임 오브젝트를 순환
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            // Protal 태그를 찾음
+            if (obj.CompareTag("Portal") && obj.scene.name != null)
+            {
+                obj.SetActive(true);
+                Debug.Log($"[EnemyStatus] 보스 처치 완료! '{obj.name}' 포탈이 활성화되었습니다.");
+                break;
+            }
+        }
     }
 
     #endregion
