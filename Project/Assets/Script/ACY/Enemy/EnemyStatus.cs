@@ -27,6 +27,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable
 
     private GameObject cachedPortalVisual;
     private PlayerStatus cachedPlayer;
+    public EnemyElement CurrentElement => element;
+
     #endregion
 
     #region Unity Lifecycle
@@ -43,6 +45,11 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         {
             CachePortal();
         }
+    }
+    public void SetElement(EnemyElement newElement)
+    {
+        element = newElement;
+        Debug.Log($"{gameObject.name} 속성 변경 : {element}");
     }
     #endregion
 
