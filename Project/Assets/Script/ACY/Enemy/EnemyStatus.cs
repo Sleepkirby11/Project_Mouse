@@ -19,6 +19,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable
     [Header("보스 설정")]
     [SerializeField] private bool isBoss = false; // 보스인지 판별
 
+    private GameObject cachedPortalVisual;
+
     #endregion
 
     #region Unity Lifecycle
@@ -28,7 +30,13 @@ public class EnemyStatus : MonoBehaviour, IDamageable
         anim = GetComponentInChildren<Animator>();
         currentHP = maxHP;
     }
-
+    private void Start()
+    {
+        if (isBoss)
+        {
+            CachePortal();
+        }
+    }
     #endregion
 
     #region HP Getters & Utility
@@ -133,9 +141,9 @@ public class EnemyStatus : MonoBehaviour, IDamageable
 
         OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
 
-        if (isBoss)
+        if (isBoss && cachedPortalVisual != null) // 포탈 활성화
         {
-            ActivatePortal();
+            cachedPortalVisual.SetActive(true);
         }
 
         if (anim != null)
@@ -163,19 +171,20 @@ public class EnemyStatus : MonoBehaviour, IDamageable
 
         Destroy(gameObject, dieAnimationLength); // 애니메이션 대기 후 파괴
     }
-    private void ActivatePortal()
+    private void CachePortal()
     {
-        // 모든 게임 오브젝트를 순환
-        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-        foreach (GameObject obj in allObjects)
+        GameObject portalParent = GameObject.FindWithTag("Portal");
+
+        if (portalParent != null)
         {
-            // Protal 태그를 찾음
-            if (obj.CompareTag("Portal") && obj.scene.name != null)
+            if (portalParent.transform.childCount > 0)
             {
-                obj.SetActive(true);
-                Debug.Log($"[EnemyStatus] 보스 처치 완료! '{obj.name}' 포탈이 활성화되었습니다.");
-                break;
+                cachedPortalVisual = portalParent.transform.GetChild(0).gameObject;
             }
+        }
+        else
+        {
+            Debug.LogWarning("Portal 태그 없음");
         }
     }
 
