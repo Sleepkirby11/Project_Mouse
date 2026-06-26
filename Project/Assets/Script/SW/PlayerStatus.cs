@@ -58,6 +58,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public bool IsPossessed => isPossessed;
     public bool IsKnockbacked => isKnockbacked;
     public bool IsInvincible => isInvincible;
+    public bool IsBound => isBound;
+    private Coroutine bindCoroutine;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); 
@@ -206,6 +208,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         if (gameObject.activeInHierarchy)
         {
+            if (bindCoroutine != null)
+            {
+                StopCoroutine(bindCoroutine);
+            }
             StartCoroutine(BindRoutine(duration));
         }
     }
@@ -228,8 +234,13 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         rb.gravityScale = 1f;
         isBound = false;
         rb.linearVelocityX = 0;
+        bindCoroutine = null;
 
-        GetComponent<Player>().OnKnockbackEnd();
+        if (playerAnim != null)
+        {
+            playerAnim.SetBool("IsJump", false);
+            playerAnim.SetBool("IsFalling", true); 
+        }
     }
     public void LaunchByWater(float forceY) // 물기둥
     {

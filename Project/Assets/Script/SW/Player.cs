@@ -179,10 +179,8 @@ public class Player : MonoBehaviour
     //착지 판정 검사
     void GroundCheck()
     {
-        if (!status.CanMove) //추가함
-        {
-            return;
-        }
+        if (status.IsBound) return;
+        if (!status.CanMove) return;
         //낙하중 + BoxCast로 착지 판정 검사
 
         if (rigid.linearVelocityY <= 0)
