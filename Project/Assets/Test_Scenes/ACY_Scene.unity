@@ -3077,7 +3077,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d9384ec5665c64ba9ffd0226d62bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeInterval: 10
   baseController: {fileID: 9100000, guid: 9adc5c475ffd3384c9597b2090ff27ae, type: 2}
   greenOverride: {fileID: 22100000, guid: 6b97934f73c56644caebd088dc605ccd, type: 2}
   blueOverride: {fileID: 22100000, guid: 1c02754289d5e0347b96428bbe85dc49, type: 2}
@@ -3159,7 +3158,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796119475}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

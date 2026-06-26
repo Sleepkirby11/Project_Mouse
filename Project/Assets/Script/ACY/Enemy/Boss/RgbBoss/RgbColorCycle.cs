@@ -1,21 +1,22 @@
-using System.Collections;
 using UnityEngine;
 
 public class RgbColorCycle : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] private float changeInterval = 10f;
-
+    #region Inspector Fields
     [Header("Animator Overrides")]
-    [SerializeField] private RuntimeAnimatorController baseController; //Red
+    [SerializeField] private RuntimeAnimatorController baseController; // Red
     [SerializeField] private AnimatorOverrideController greenOverride;
     [SerializeField] private AnimatorOverrideController blueOverride;
     [SerializeField] private AnimatorOverrideController magentaOverride;
+    #endregion
 
+    #region Private Fields
     private bool isFinalPhase = false;
     private EnemyStatus enemyStatus;
     private Animator animator;
+    #endregion
 
+    #region Unity Lifecycle
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
@@ -25,25 +26,12 @@ public class RgbColorCycle : MonoBehaviour
     private void Start()
     {
         EnemyStatus.EnemyElement first = (EnemyStatus.EnemyElement)Random.Range(0, 3);
-
         enemyStatus.SetElement(first);
         ApplyController(GetController(first));
-        // StartCoroutine(ColorCycleRoutine());
     }
+    #endregion
 
-    private IEnumerator ColorCycleRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(changeInterval);
-
-            if (isFinalPhase)
-                continue;
-
-            ChangeElementRandom();
-        }
-    }
-
+    #region Public Methods
     public void ChangeElementRandom()
     {
         EnemyStatus.EnemyElement current = enemyStatus.CurrentElement;
@@ -60,28 +48,7 @@ public class RgbColorCycle : MonoBehaviour
 
         Debug.Log($"RGB Boss Element & Animation Changed : {next}");
     }
-    private RuntimeAnimatorController GetController(EnemyStatus.EnemyElement element)
-    {
-        return element switch
-        {
-            EnemyStatus.EnemyElement.Red => baseController,
-            EnemyStatus.EnemyElement.Green => greenOverride,
-            EnemyStatus.EnemyElement.Blue => blueOverride,
-            EnemyStatus.EnemyElement.None => magentaOverride, // 발악 상태
-            _ => baseController
-        };
-    }
-    private void ApplyController(RuntimeAnimatorController targetController)
-    {
-        if (animator == null || targetController == null) return;
 
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        float normalizedTime = stateInfo.normalizedTime;
-        int stateHash = stateInfo.shortNameHash;
-
-        animator.runtimeAnimatorController = targetController;
-        animator.Play(stateHash, 0, normalizedTime);
-    }
     public void EnterFinalPhase()
     {
         if (isFinalPhase)
@@ -94,6 +61,7 @@ public class RgbColorCycle : MonoBehaviour
 
         Debug.Log("발악 패턴 시작");
     }
+
     public void ExitFinalPhase()
     {
         if (!isFinalPhase)
@@ -106,4 +74,31 @@ public class RgbColorCycle : MonoBehaviour
 
         Debug.Log("발악 상태 해제, RGB 사이클로 복귀!");
     }
+    #endregion
+
+    #region Private Methods
+    private RuntimeAnimatorController GetController(EnemyStatus.EnemyElement element)
+    {
+        return element switch
+        {
+            EnemyStatus.EnemyElement.Red => baseController,
+            EnemyStatus.EnemyElement.Green => greenOverride,
+            EnemyStatus.EnemyElement.Blue => blueOverride,
+            EnemyStatus.EnemyElement.None => magentaOverride, // 발악 상태
+            _ => baseController
+        };
+    }
+
+    private void ApplyController(RuntimeAnimatorController targetController)
+    {
+        if (animator == null || targetController == null) return;
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float normalizedTime = stateInfo.normalizedTime;
+        int stateHash = stateInfo.shortNameHash;
+
+        animator.runtimeAnimatorController = targetController;
+        animator.Play(stateHash, 0, normalizedTime);
+    }
+    #endregion
 }

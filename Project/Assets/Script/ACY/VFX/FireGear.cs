@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FireGear : MonoBehaviour
 {
+    #region Inspector Fields
     [Header("Movement")]
     [SerializeField] private float riseSpeed = 3f;
     [SerializeField] private float riseHeight = 5f;
@@ -10,7 +11,9 @@ public class FireGear : MonoBehaviour
     [Header("Damage")]
     [SerializeField] private float damageInterval = 0.12f;
     [SerializeField] private int damageAmount = 5;
+    #endregion
 
+    #region Private Fields
     private Coroutine grindRoutine;
     private Coroutine riseRoutine;
 
@@ -19,7 +22,9 @@ public class FireGear : MonoBehaviour
     private float animLength;
     private PlayerStatus capturedPlayer;
     private Rigidbody2D capturedRb;
+    #endregion
 
+    #region Unity Lifecycle
     private void Awake()
     {
         Animator anim = GetComponentInChildren<Animator>();
@@ -32,6 +37,7 @@ public class FireGear : MonoBehaviour
             }
         }
     }
+
     private void OnEnable()
     {
         originPos = transform.position;
@@ -58,7 +64,9 @@ public class FireGear : MonoBehaviour
             grindRoutine = null;
         }
     }
+    #endregion
 
+    #region Rise & Bind Routines
     private IEnumerator RiseRoutine()
     {
         Vector3 targetPos = originPos + Vector3.up * riseHeight;
@@ -83,17 +91,27 @@ public class FireGear : MonoBehaviour
             yield return null;
         }
 
-        // »ó½Â Á¾·á ÈÄ ÇÃ·¹ÀÌ¾î ÇØÁ¦
+        // ìƒìŠ¹ ì™„ë£Œ ì‹œ í”Œë ˆì´ì–´ ì†ë°• í•´ì œ
         ReleasePlayer();
 
         riseRoutine = null;
     }
 
+    private void ReleasePlayer()
+    {
+        capturedRb = null;
+        capturedPlayer = null;
+    }
+    #endregion
+
+    #region Animation Events
     public void OnAnimationEnd()
     {
         PoolingManager.Instance.Return("FireGear", gameObject);
     }
+    #endregion
 
+    #region Collision Events
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player"))
@@ -110,7 +128,7 @@ public class FireGear : MonoBehaviour
         HitStopManager.Instance.DoHitStop(0.04f, 0f);
         capturedPlayer.ApplyBind(animLength / 2f);
 
-        // Áßº¹ ½ÇÇà ¹æÁö
+        // ë‹¤ë‹¨ íˆíŠ¸ ì¤‘ë³µ ì‹¤í–‰ ë°©ì§€
         if (grindRoutine == null)
         {
             grindRoutine = StartCoroutine(GrindRoutine(capturedPlayer));
@@ -130,13 +148,9 @@ public class FireGear : MonoBehaviour
             grindRoutine = null;
         }
     }
+    #endregion
 
-    private void ReleasePlayer()
-    {
-        capturedRb = null;
-        capturedPlayer = null;
-    }
-
+    #region Grind & Damage Routines
     private IEnumerator GrindRoutine(PlayerStatus player)
     {
         while (player != null && player.gameObject.activeInHierarchy)
@@ -148,4 +162,5 @@ public class FireGear : MonoBehaviour
 
         grindRoutine = null;
     }
+    #endregion
 }
