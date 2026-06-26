@@ -5,8 +5,8 @@ public class PoisonMushroom : MonoBehaviour, IDamageable
 {
     #region Inspector Fields
     [Header("Pool Keys")]
-    [SerializeField] private string mushroomKey = "PoisonMushroom";
-    [SerializeField] private string poisonAreaKey = "PoisonArea";
+    [SerializeField] private string poolKey = "Mushroom";
+    [SerializeField] private string poisonAreaPoolKey = "PoisonArea";
 
     [Header("Life Settings")]
     [SerializeField] private float timeToExplode = 3f;
@@ -87,14 +87,14 @@ public class PoisonMushroom : MonoBehaviour, IDamageable
                 yield return null;
             }
         }
-        PoolingManager.Instance.Return(mushroomKey, gameObject);
+        PoolingManager.Instance.Return(poolKey, gameObject);
     }
 
     private void SpawnPoisonArea()
     {
         Vector3 areaSpawnPos = transform.position + new Vector3(0f, poisonAreaOffsetY, 0f);
-        PoolingManager.Instance.Get(poisonAreaKey, areaSpawnPos, Quaternion.identity);
-        PoolingManager.Instance.Return(mushroomKey, gameObject);
+        PoolingManager.Instance.Get(poisonAreaPoolKey, areaSpawnPos, Quaternion.identity);
+        PoolingManager.Instance.Return(poolKey, gameObject);
     }
     #endregion
 

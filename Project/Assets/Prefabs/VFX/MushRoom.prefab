@@ -198,8 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a337b0e3457af48a6c9a85e32d2abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mushroomKey: Mushroom
-  poisonAreaKey: PoisonArea
+  poolKey: Mushroom
+  poisonAreaPoolKey: PoisonArea
   timeToExplode: 3
   fadeDuration: 0.5
   poisonAreaOffsetY: -1

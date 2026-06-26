@@ -11,6 +11,9 @@ public class FireGear : MonoBehaviour
     [Header("Damage")]
     [SerializeField] private float damageInterval = 0.12f;
     [SerializeField] private int damageAmount = 5;
+
+    [Header("Pool Settings")]
+    [SerializeField] private string poolKey = "FireGear";
     #endregion
 
     #region Private Fields
@@ -107,7 +110,7 @@ public class FireGear : MonoBehaviour
     #region Animation Events
     public void OnAnimationEnd()
     {
-        PoolingManager.Instance.Return("FireGear", gameObject);
+        PoolingManager.Instance.Return(poolKey, gameObject);
     }
     #endregion
 

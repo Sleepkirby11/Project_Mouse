@@ -19,6 +19,9 @@ public class Hurricane : MonoBehaviour
 
     [Tooltip("레드 속성 피해량")]
     [SerializeField] private int redDamage = 20;
+
+    [Header("Pool Settings")]
+    [SerializeField] private string poolKey = "Hurricane";
     #endregion
 
     #region Private Fields
@@ -151,7 +154,7 @@ public class Hurricane : MonoBehaviour
 
         if (spriteRenderer == null)
         {
-            PoolingManager.Instance.Return("Hurricane", gameObject);
+            PoolingManager.Instance.Return(poolKey, gameObject);
             yield break;
         }
 
@@ -170,7 +173,7 @@ public class Hurricane : MonoBehaviour
         }
 
         // 완전히 투명해지면 오브젝트 풀로 반환
-        PoolingManager.Instance.Return("Hurricane", gameObject);
+        PoolingManager.Instance.Return(poolKey, gameObject);
     }
     #endregion
 }

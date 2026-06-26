@@ -127,7 +127,7 @@ MonoBehaviour:
   maxScale: 5
   basePullForce: 50
   pullRadius: 50
-  explosionPoolName: Explosion
+  explosionPoolKey: Explosion
   explosionInterval: 0.2
   explosionSpawnRadius: 3
   baseExplosionCount: 1

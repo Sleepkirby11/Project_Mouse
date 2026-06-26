@@ -14,6 +14,8 @@ public class RgbColorCycle : MonoBehaviour
     private bool isFinalPhase = false;
     private EnemyStatus enemyStatus;
     private Animator animator;
+
+    private static readonly int CastingTrigger = Animator.StringToHash("Casting");
     #endregion
 
     #region Unity Lifecycle
@@ -46,6 +48,11 @@ public class RgbColorCycle : MonoBehaviour
         enemyStatus.SetElement(next);
         ApplyController(GetController(next));
 
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
+
         Debug.Log($"RGB Boss Element & Animation Changed : {next}");
     }
 
@@ -58,6 +65,11 @@ public class RgbColorCycle : MonoBehaviour
 
         enemyStatus.SetElement(EnemyStatus.EnemyElement.None);
         ApplyController(GetController(EnemyStatus.EnemyElement.None));
+
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
 
         Debug.Log("발악 패턴 시작");
     }

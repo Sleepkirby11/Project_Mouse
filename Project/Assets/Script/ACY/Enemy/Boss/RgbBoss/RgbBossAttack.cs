@@ -1,7 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ * 보스는 현재 자신의 상태에 따라 외관이 변함
+Red Blue Green None 총 4가지로 나뉘며
+현재 상태에 따라 사용하는 공격 패턴이 달라짐
+Red 전용 패턴 
+1. 불 톱니바퀴 : 플레이어 밑에서 톱니가 나타나 위로 이동
+히트 시 플레이어는 속박당하며 톱니바퀴에 끌려가며 지속대미지
+2. 폭발 : 플레이어 주변 범위에 3개의 폭발을 일으킴
 
+Blue 전용 패턴
+1. 얼음망치 : 플레이어 왼쪽에 얼음 망치를 생성
+얼음 망치가 땅에 닿을 시 바닥에 얼음 기둥 생성
+만약 땅에 닿기 전에 "그린"으로 공격 시 망치는 사라짐
+
+Green 전용 패턴
+1. 독버섯 : 플레이어 주변 땅에 3개의 독버섯을 생성
+독버섯은 일정 시간이 경과하면 터짐
+터질 시 바닥에 독장판 생성
+만약 터지기 전에 "레드"상태로 공격 시 버섯은 사라짐
+
+공용 패턴 (이 패턴은 모든 상태에서 사용되며 상태에 따라 효과나 스프라이트가 바뀜)
+1. 탄환 : 플레이어에게 일직선으로 이동하는 탄환 발사
+탄환 이동 후 명중하지 않을 시 잠깐의 경직을 가진 후 플레이어에게 다시 이동함
+총 5회에 걸쳐 이동하며 플레이어가 강점인 색으로 공격 시 탄환은 사라짐
+색 별 효과: Green 체력 회복, Blue 스턴, Red 강한 대미지
+
+2. 번개 : 보스는  플레이어 방향으로 번개를 쏨
+번개는 플레이어의 이전 위치를 추적하여 2회 연속으로 공격함
+색 별 효과: Green 회복, Blue 스턴, Red 강한 대미지
+
+3. 소용돌이 : 보스 앞에 소용돌이를 소환하여 플레이어 쪽으로 발사
+색 별 효과: Green 회복, Blue 위로 날려보냄, Red 강한 대미지
+
+10% 패턴
+상태가 None 으로 바뀌며 마젠타 색으로 변하게 됨
+보스는 무적 상태가 되며
+미리 지정해두었던 위치에 블랙홀이 생기고 플레이어를 빨아들임
+블랙홀은 점점 크기가 커지며 흡입력도 강해짐
+블랙홀 근처와 내부에는 폭발 파티클이 생기며 플레이어가 닿으면 대미지를 입음
+일정 시간이 끝나면 패턴 종료 후 기존 rgb 사이클로 회귀
+
+현재 버그 및 개선점: 
+1. 소용돌이가 공중이 아닌 바닥에서 생기게 수정
+2. 불 톱니에 뒤늦게 걸려도 톱니가 사라질때 풀리는게 아닌 기존 속박시간이 지나야 풀려서 공중에 어색하게 멈춰있음 
+3. 아이스해머에 피격 시 스턴 추가? 일단은 고민중
+4. Blue 패턴에 WaterDragon 추가 예정
+( GreenBoss의 새 패턴과 유사하게 일자로 맵을 지나갈 예정)
+5. 10% 패턴이 끝난 후 잠시 쉬는 시간을 주고 다시 공격 루틴으로 돌아가게 수정
+ */
 public enum BossAttackType
 {
     Burst,
@@ -21,31 +69,30 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
     [Header("FireGear Spawn")]
     [SerializeField] private float spawnOffsetY = -1f;
-    [SerializeField] private float redAttackInterval = 3f;
 
     [Header("Hurricane 설정")]
     [SerializeField] private float spawnOffsetX = 1.5f;
 
-    [Header("속성별 탄환 풀 이름 설정")]
-    [SerializeField] private string redBulletPoolName = "RedBullet";
-    [SerializeField] private string greenBulletPoolName = "GreenBullet";
-    [SerializeField] private string blueBulletPoolName = "BlueBullet";
+    [Header("속성별 탄환 풀 키 설정")]
+    [SerializeField] private string redBulletPoolKey = "RedBullet";
+    [SerializeField] private string greenBulletPoolKey = "GreenBullet";
+    [SerializeField] private string blueBulletPoolKey = "BlueBullet";
 
     [Header("Burst 패턴 설정")]
-    [SerializeField] private string redBurstPoolName = "Burst";
+    [SerializeField] private string redBurstPoolKey = "Burst";
     [SerializeField] private float burstSpawnRadius = 3.5f;
 
     [Header("독버섯 패턴 설정 (Green)")]
-    [SerializeField] private string mushroomPoolName = "Mushroom";
+    [SerializeField] private string mushroomPoolKey = "Mushroom";
     [SerializeField] private int mushroomSpawnCount = 3;
     [SerializeField] private float spawnRangeX = 5f;
     [SerializeField] private float mushroomOffsetY = 0f;
     [SerializeField] private LayerMask groundLayer;
 
     [Header("번개 패턴 설정")]
-    [SerializeField] private string redLightningPoolName = "RedLightning";
-    [SerializeField] private string greenLightningPoolName = "GreenLightning";
-    [SerializeField] private string blueLightningPoolName = "BlueLightning";
+    [SerializeField] private string redLightningPoolKey = "RedLightning";
+    [SerializeField] private string greenLightningPoolKey = "GreenLightning";
+    [SerializeField] private string blueLightningPoolKey = "BlueLightning";
     [SerializeField] private int lightningCount = 3;
     [SerializeField] private float lightningInterval = 0.3f;
     [SerializeField] private float posRecordInterval = 0.5f;
@@ -59,9 +106,14 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     [SerializeField] private float hammerOffsetY = 0f;
 
     [Header("10%패턴 (블랙홀) 설정")]
-    [SerializeField] private string blackHolePoolName = "BlackHole";
+    [SerializeField] private string blackHolePoolKey = "BlackHole";
     [SerializeField] private Transform[] blackHoleSpawnPoints;
     [SerializeField] private float finalPhaseDuration = 10f;
+
+    [Header("VFX 풀 키 설정")]
+    [SerializeField] private string hurricanePoolKey = "Hurricane";
+    [SerializeField] private string fireGearPoolKey = "FireGear";
+    [SerializeField] private string iceHammerPoolKey = "IceHammer";
     #endregion
 
     #region Private Fields
@@ -224,10 +276,6 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                 yield return new WaitForSeconds(2f);
                 break;
             case BossAttackType.Lightning:
-                if (animator != null)
-                {
-                    animator.SetTrigger(CastingTrigger);
-                }
                 float waitTime = (lightningCount * lightningInterval) + 1.5f;
                 yield return new WaitForSeconds(waitTime);
                 break;
@@ -238,10 +286,6 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     #region Red Pattern (Burst, FireGear)
     private void SpawnBurstPattern()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
         if (player == null) return;
 
         for (int i = 0; i < 3; i++)
@@ -250,14 +294,14 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
             Vector3 spawnPos = player.position + new Vector3(randomCircle.x, randomCircle.y, 0f);
 
             GameObject burstObj = PoolingManager.Instance.Get(
-                redBurstPoolName,
+                redBurstPoolKey,
                 spawnPos,
                 Quaternion.identity);
 
             if (burstObj != null)
             {
                 Burst burst = burstObj.GetComponent<Burst>();
-                burst?.InitializeBurst(redBurstPoolName);
+                burst?.InitializeBurst(redBurstPoolKey);
             }
         }
     }
@@ -271,17 +315,13 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
             player.position.y + spawnOffsetY,
             0f);
 
-        PoolingManager.Instance.Get("FireGear", spawnPos, Quaternion.identity);
+        PoolingManager.Instance.Get(fireGearPoolKey, spawnPos, Quaternion.identity);
     }
     #endregion
 
     #region Green Pattern (Mushroom)
     private void SpawnPoisonMushrooms()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
         if (player == null) return;
 
         int successfulSpawns = 0;
@@ -299,7 +339,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
             if (hit.collider != null)
             {
                 Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, mushroomOffsetY, 0f);
-                PoolingManager.Instance.Get(mushroomPoolName, spawnPos, Quaternion.identity);
+                PoolingManager.Instance.Get(mushroomPoolKey, spawnPos, Quaternion.identity);
                 successfulSpawns++;
             }
         }
@@ -311,11 +351,6 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     #region Blue Pattern (IceHammer)
     public void SpawnIceHammer()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
-
         if (player == null)
             return;
 
@@ -336,7 +371,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, hammerOffsetY, 0f);
 
         PoolingManager.Instance.Get(
-            "IceHammer",
+            iceHammerPoolKey,
             spawnPos,
             Quaternion.identity);
     }
@@ -345,10 +380,6 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     #region Common Pattern (Hurricane, Bullet, Lightning)
     private void SpawnHurricane()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
         Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
 
         Vector3 spawnPos = transform.position +
@@ -356,7 +387,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                       (Vector3.up * spawnOffsetY);
 
         GameObject hurricaneObj = PoolingManager.Instance.Get(
-            "Hurricane",
+            hurricanePoolKey,
             spawnPos,
             Quaternion.identity);
 
@@ -385,19 +416,19 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         if (player == null || bulletFirePoint == null)
             return;
 
-        string targetPoolName = enemyStatus.CurrentElement switch
+        string targetPoolKey = enemyStatus.CurrentElement switch
         {
-            EnemyStatus.EnemyElement.Red => redBulletPoolName,
-            EnemyStatus.EnemyElement.Green => greenBulletPoolName,
-            EnemyStatus.EnemyElement.Blue => blueBulletPoolName,
+            EnemyStatus.EnemyElement.Red => redBulletPoolKey,
+            EnemyStatus.EnemyElement.Green => greenBulletPoolKey,
+            EnemyStatus.EnemyElement.Blue => blueBulletPoolKey,
             _ => ""
         };
 
-        if (string.IsNullOrEmpty(targetPoolName))
+        if (string.IsNullOrEmpty(targetPoolKey))
             return;
 
         GameObject bulletObj = PoolingManager.Instance.Get(
-            targetPoolName,
+            targetPoolKey,
             bulletFirePoint.position,
             Quaternion.identity);
 
@@ -407,7 +438,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
             if (bullet != null)
             {
-                bullet.Initialize(player, targetPoolName);
+                bullet.Initialize(player, targetPoolKey);
 
                 if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
                     bullet.onHitPlayer = () => enemyStatus.Heal(healAmount);
@@ -422,14 +453,14 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         StartCoroutine(SpawnLightningBurst());
     }
 
-    private string GetLightningPoolName()
+    private string GetLightningPoolKey()
     {
         return enemyStatus.CurrentElement switch
         {
-            EnemyStatus.EnemyElement.Red => redLightningPoolName,
-            EnemyStatus.EnemyElement.Green => greenLightningPoolName,
-            EnemyStatus.EnemyElement.Blue => blueLightningPoolName,
-            _ => redLightningPoolName
+            EnemyStatus.EnemyElement.Red => redLightningPoolKey,
+            EnemyStatus.EnemyElement.Green => greenLightningPoolKey,
+            EnemyStatus.EnemyElement.Blue => blueLightningPoolKey,
+            _ => redLightningPoolKey
         };
     }
 
@@ -437,14 +468,14 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     {
         if (firePoint == null) yield break;
 
-        string poolName = GetLightningPoolName();
+        string poolKey = GetLightningPoolKey();
 
         for (int i = 0; i < lightningCount; i++)
         {
             Vector2 dir = (lastPlayerPos - firePoint.position).normalized;
 
             GameObject obj = PoolingManager.Instance.Get(
-                poolName,
+                poolKey,
                 firePoint.position,
                 Quaternion.identity);
 
@@ -453,7 +484,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                 LightningBolt bolt = obj.GetComponent<LightningBolt>();
                 if (bolt != null)
                 {
-                    bolt.Initialize(poolName, dir, enemyStatus.CurrentElement);
+                    bolt.Initialize(poolKey, dir, enemyStatus.CurrentElement);
 
                     if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
                         bolt.onHitPlayer = () => enemyStatus.Heal(healAmount);
@@ -483,7 +514,6 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         isInvincible = true;
 
         if (colorCycle != null) colorCycle.EnterFinalPhase();
-        if (animator != null) animator.SetTrigger(CastingTrigger);
 
         SpawnBlackHoles();
 
@@ -512,7 +542,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         foreach (Transform spawnPoint in blackHoleSpawnPoints)
         {
             GameObject bhObj = PoolingManager.Instance.Get(
-                blackHolePoolName,
+                blackHolePoolKey,
                 spawnPoint.position,
                 Quaternion.identity
             );
@@ -522,7 +552,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                 BlackHole blackHole = bhObj.GetComponent<BlackHole>();
                 if (blackHole != null)
                 {
-                    blackHole.Initialize(blackHolePoolName, player);
+                    blackHole.Initialize(blackHolePoolKey, player);
                     activeBlackHoles.Add(blackHole);
                 }
             }

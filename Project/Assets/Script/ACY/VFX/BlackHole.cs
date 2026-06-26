@@ -13,7 +13,7 @@ public class BlackHole : MonoBehaviour
     [SerializeField] private float pullRadius = 15f;    // 플레이어를 끌어당기기 시작할 반경
 
     [Header("폭발 이펙트 설정")]
-    [SerializeField] private string explosionPoolName = "Explosion";
+    [SerializeField] private string explosionPoolKey = "Explosion";
     [SerializeField] private float explosionInterval = 0.2f;
     [SerializeField] private float explosionSpawnRadius = 1.5f;
     [SerializeField] private int baseExplosionCount = 1; // 1회당 생성되는 기본 폭발물 개수
@@ -98,7 +98,7 @@ public class BlackHole : MonoBehaviour
             for (int i = 0; i < spawnCount; i++)
             {
                 Vector2 randomPos = (Vector2)transform.position + Random.insideUnitCircle * currentRadius;
-                PoolingManager.Instance.Get(explosionPoolName, randomPos, Quaternion.identity);
+                PoolingManager.Instance.Get(explosionPoolKey, randomPos, Quaternion.identity);
             }
 
             yield return new WaitForSeconds(explosionInterval);

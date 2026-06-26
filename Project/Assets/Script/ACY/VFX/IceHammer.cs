@@ -12,6 +12,10 @@ public class IceHammer : MonoBehaviour, IDamageable
     [Header("Hitbox Setup")]
     [SerializeField] private Collider2D hammerHitbox; // 타격 판정 콜라이더 (플레이어가 닿는 영역)
     [SerializeField] private float fadeDuration = 0.5f; // 페이드아웃 지속 시간
+
+    [Header("Pool Settings")]
+    [SerializeField] private string poolKey = "IceHammer";
+    [SerializeField] private string icePoolKey = "Ice";
     #endregion
 
     #region Private Fields
@@ -108,7 +112,7 @@ public class IceHammer : MonoBehaviour, IDamageable
                 Vector3.right * (i * iceSpacing);
 
             PoolingManager.Instance.Get(
-                "Ice",
+                icePoolKey,
                 pos,
                 Quaternion.identity);
 
@@ -116,7 +120,7 @@ public class IceHammer : MonoBehaviour, IDamageable
         }
 
         PoolingManager.Instance.Return(
-            "IceHammer",
+            poolKey,
             gameObject);
     }
 
@@ -146,7 +150,7 @@ public class IceHammer : MonoBehaviour, IDamageable
         }
 
         // 완전히 페이드아웃되면 오브젝트 풀에 반환
-        PoolingManager.Instance.Return("IceHammer", gameObject);
+        PoolingManager.Instance.Return(poolKey, gameObject);
     }
 
     private void ResetAlpha()

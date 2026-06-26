@@ -3033,23 +3033,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healAmount: 5
   spawnOffsetY: -5
-  redAttackInterval: 3
   spawnOffsetX: 1.5
-  redBulletPoolName: RedBullet
-  greenBulletPoolName: GreenBullet
-  blueBulletPoolName: BlueBullet
-  redBurstPoolName: RedBurst
+  redBulletPoolKey: RedBullet
+  greenBulletPoolKey: GreenBullet
+  blueBulletPoolKey: BlueBullet
+  redBurstPoolKey: Burst
   burstSpawnRadius: 9
-  mushroomPoolName: Mushroom
+  mushroomPoolKey: Mushroom
   mushroomSpawnCount: 3
   spawnRangeX: 8
   mushroomOffsetY: 2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  redLightningPoolName: RedLightning
-  greenLightningPoolName: GreenLightning
-  blueLightningPoolName: BlueLightning
+  redLightningPoolKey: RedLightning
+  greenLightningPoolKey: GreenLightning
+  blueLightningPoolKey: BlueLightning
   lightningCount: 2
   lightningInterval: 0.3
   posRecordInterval: 0.5
@@ -3057,7 +3056,7 @@ MonoBehaviour:
   bulletFirePoint: {fileID: 1066905556}
   hammerOffsetX: -5
   hammerOffsetY: 4
-  blackHolePoolName: BlackHole
+  blackHolePoolKey: BlackHole
   blackHoleSpawnPoints:
   - {fileID: 1353890030}
   - {fileID: 63076516}
@@ -3065,6 +3064,9 @@ MonoBehaviour:
   - {fileID: 1302167156}
   - {fileID: 43234244}
   finalPhaseDuration: 10
+  hurricanePoolKey: Hurricane
+  fireGearPoolKey: FireGear
+  iceHammerPoolKey: IceHammer
 --- !u!114 &1796119478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4093,6 +4095,10 @@ PrefabInstance:
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.size
       value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
+      propertyPath: pools.Array.data[26].key
+      value: Burst
       objectReference: {fileID: 0}
     - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: pools.Array.data[29].key
