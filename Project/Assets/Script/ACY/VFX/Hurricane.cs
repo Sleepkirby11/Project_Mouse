@@ -9,15 +9,18 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f; // 페이드아웃 지속 시간
 
     [Header("소용돌이 원소별 대미지 설정")]
-    [Tooltip("기본 스프라이트(파랑) 상태일 때 대미지")]
+    [Tooltip("블루 상태일 때 대미지")]
     [SerializeField] private int blueDamage = 10;
+    [SerializeField] private float launchForceY = 15f;
 
-    [Tooltip("그린 보스 상태일 때 대미지")]
+    [Tooltip("그린 상태일 때 대미지")]
     [SerializeField] private int greenDamage = 15;
 
-    [Tooltip("레드 보스 상태일 때 대미지")]
+    [Tooltip("레드 상태일 때 대미지")]
     [SerializeField] private int redDamage = 20;
 
+    private EnemyStatus.EnemyElement currentElement;
+    public System.Action onHitPlayer;
     private int finalDamage;
     private SpriteRenderer spriteRenderer;
     private Coroutine returnRoutine;
@@ -39,7 +42,7 @@ public class Hurricane : MonoBehaviour
     private void OnEnable()
     {
         isDisposing = false;
-
+        onHitPlayer = null;
         // ★ 오브젝트 풀에서 다시 켜질 때 이동 속도를 원상태로 복구합니다.
         moveSpeed = originMoveSpeed;
 
@@ -66,6 +69,7 @@ public class Hurricane : MonoBehaviour
 
     public void Initialize(EnemyStatus.EnemyElement bossElement, Vector3 dir)
     {
+        currentElement = bossElement;
         moveDirection = dir.normalized;
 
         if (spriteRenderer == null) return;
@@ -95,22 +99,21 @@ public class Hurricane : MonoBehaviour
     // 플레이어 충돌 처리
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 이미 사라지는 중이라면 충돌 무시
         if (isDisposing) return;
+        if (!collision.CompareTag("Player")) return;
 
-        if (collision.CompareTag("Player"))
+        IDamageable damageable = collision.GetComponent<IDamageable>();
+        damageable?.TakeDamage(finalDamage);
+
+        onHitPlayer?.Invoke();
+
+        if (currentElement == EnemyStatus.EnemyElement.Blue)
         {
-            IDamageable damageable = collision.GetComponent<IDamageable>();
-
-            if (damageable != null)
-            {
-                damageable.TakeDamage(finalDamage);
-                Debug.Log($"[Hurricane] 플레이어 충돌! 대미지 {finalDamage} 부여.");
-            }
-
-            // 충돌 직후 대미지를 준 후 즉시 페이드아웃 코루틴 시작
-            StartCoroutine(FadeOutAndReturnRoutine());
+            if (collision.TryGetComponent(out PlayerStatus playerStatus))
+                playerStatus.LaunchByWater(launchForceY);
         }
+
+        StartCoroutine(FadeOutAndReturnRoutine());
     }
 
     // 시간 경과 후 자동 페이드아웃 시작 루틴

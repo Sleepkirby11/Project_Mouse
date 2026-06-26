@@ -9,6 +9,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
 
     [Header("대미지 설정")]
     [SerializeField] private int bulletDamage = 15;
+    [SerializeField] private float stunDuration = 1f;
 
     [Header("이동 및 페이드 설정")]
     [SerializeField] private float moveSpeed = 7f;
@@ -28,6 +29,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
     private Collider2D bulletCollider;
     private bool destroyed = false;
 
+    public System.Action onHitPlayer;
     private void Awake()
     {
         playerStatus = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
@@ -136,12 +138,17 @@ public class RgbBullet : MonoBehaviour, IDamageable
         if (collision.CompareTag("Player"))
         {
             IDamageable damageable = collision.GetComponent<IDamageable>();
-            if (damageable != null)
+            damageable?.TakeDamage(bulletDamage);
+
+            onHitPlayer?.Invoke();
+
+            // 블루 - 스턴
+            if (myElement == EnemyStatus.EnemyElement.Blue)
             {
-                damageable.TakeDamage(bulletDamage);
+                if (collision.TryGetComponent(out IStunnable stunnable))
+                    stunnable.ApplyStun(stunDuration);
             }
 
-            // 플레이어와 부딪혀서 터질 때는 즉시 반납 (원하면 이것도 StartFadeOut()으로 변경 가능)
             destroyed = true;
             StopAllCoroutines();
             PoolingManager.Instance.Return(myPoolName, gameObject);

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class RgbBossAttack : MonoBehaviour
 {
+    [Header("회복량 설정")]
+    [SerializeField] private int healAmount = 5;
     [Header("FireGear Spawn")]
     [SerializeField] private float spawnOffsetY = -1f;
     [SerializeField] private float redAttackInterval = 3f;
@@ -40,13 +42,14 @@ public class RgbBossAttack : MonoBehaviour
     private EnemyStatus enemyStatus;
     private SpriteRenderer bossSpriteRenderer;
     private Animator animator;
-
+    private RgbBossMove bossMove;
 
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
         bossSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
+        bossMove = GetComponent<RgbBossMove>();
     }
 
     private void Start()
@@ -63,7 +66,7 @@ public class RgbBossAttack : MonoBehaviour
     {
             if (Input.GetKeyDown(KeyCode.L))
             {
-            SpawnFireGears();
+            SpawnHurricane();
             }
     }
 
@@ -141,7 +144,15 @@ public class RgbBossAttack : MonoBehaviour
             if (obj != null)
             {
                 LightningBolt bolt = obj.GetComponent<LightningBolt>();
-                bolt?.Initialize(poolName, dir);
+                if (bolt != null)
+                {
+                    bolt.Initialize(poolName, dir, enemyStatus.CurrentElement);
+
+                    if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
+                        bolt.onHitPlayer = () => enemyStatus.Heal(healAmount);
+                    else
+                        bolt.onHitPlayer = null;
+                }
             }
 
             yield return new WaitForSeconds(lightningInterval);
@@ -189,7 +200,7 @@ public class RgbBossAttack : MonoBehaviour
 
     private void SpawnHurricane()
     {
-        Vector3 spawnDirection = bossSpriteRenderer.flipX ? Vector3.left : Vector3.right;
+        Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
 
         // spawnOffsetX 실제로 적용
         Vector3 spawnPos = transform.position +
@@ -204,7 +215,12 @@ public class RgbBossAttack : MonoBehaviour
         if (hurricaneObj != null)
         {
             Hurricane hurricane = hurricaneObj.GetComponent<Hurricane>();
-            hurricane?.Initialize(enemyStatus.CurrentElement, spawnDirection);
+            hurricane.Initialize(enemyStatus.CurrentElement, spawnDirection);
+
+            if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
+                hurricane.onHitPlayer = () => enemyStatus.Heal(healAmount);
+            else
+                hurricane.onHitPlayer = null;
         }
     }
 
@@ -246,7 +262,15 @@ public class RgbBossAttack : MonoBehaviour
         if (bulletObj != null)
         {
             RgbBullet bullet = bulletObj.GetComponent<RgbBullet>();
-            bullet?.Initialize(player, targetPoolName);
+            if (bullet != null)
+            {
+                bullet.Initialize(player, targetPoolName);
+
+                if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
+                    bullet.onHitPlayer = () => enemyStatus.Heal(healAmount);
+                else
+                    bullet.onHitPlayer = null;
+            }
         }
     }
 
