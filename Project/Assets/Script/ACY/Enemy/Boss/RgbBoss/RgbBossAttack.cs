@@ -63,7 +63,7 @@ public class RgbBossAttack : MonoBehaviour
     {
             if (Input.GetKeyDown(KeyCode.L))
             {
-                animator.SetTrigger("LightningAttack"); // 애니메이션 + Event로 번개 자동 발사
+            SpawnFireGears();
             }
     }
 

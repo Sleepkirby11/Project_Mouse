@@ -156,11 +156,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924a0b0867e131649b2c3182e005e03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riseSpeed: 3
-  riseHeight: 15
+  riseSpeed: 5
+  riseHeight: 10
   damageInterval: 0.12
   damageAmount: 5
-  hitStopDuration: 0.06
 --- !u!58 &8909638770473367708
 CircleCollider2D:
   m_ObjectHideFlags: 0

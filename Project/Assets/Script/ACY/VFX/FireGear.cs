@@ -16,9 +16,22 @@ public class FireGear : MonoBehaviour
 
     private Vector3 originPos;
 
+    private float animLength;
     private PlayerStatus capturedPlayer;
     private Rigidbody2D capturedRb;
 
+    private void Awake()
+    {
+        Animator anim = GetComponentInChildren<Animator>();
+        foreach (var clip in anim.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == "FireGear")
+            {
+                animLength = clip.length;
+                break;
+            }
+        }
+    }
     private void OnEnable()
     {
         originPos = transform.position;
@@ -95,7 +108,7 @@ public class FireGear : MonoBehaviour
         capturedPlayer = player;
         capturedRb = rb;
         HitStopManager.Instance.DoHitStop(0.04f, 0f);
-        capturedPlayer.ApplyBind(riseHeight / riseSpeed + 1f);
+        capturedPlayer.ApplyBind(animLength / 2f);
 
         // 중복 실행 방지
         if (grindRoutine == null)
