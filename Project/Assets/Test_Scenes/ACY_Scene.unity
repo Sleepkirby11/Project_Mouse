@@ -818,7 +818,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2492005416567478135, guid: c26d8a095aa084c4ca44065dc1c543ac, type: 3}
+  m_Sprite: {fileID: -5443343911616032526, guid: 262412c6bb60f57458e37ff73c185fe2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1818,6 +1818,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 359622b585f6df440ae11d46ea755728, type: 3}
+--- !u!1 &1066905555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1066905556}
+  m_Layer: 7
+  m_Name: BulletFirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1066905556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066905555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.72, y: -0.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1796119476}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1073639594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2830,6 +2861,7 @@ Transform:
   m_Children:
   - {fileID: 402445038}
   - {fileID: 1877103828}
+  - {fileID: 1066905556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1796119477
@@ -2860,13 +2892,16 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  firePoint: {fileID: 1877103828}
   redLightningPoolName: RedLightning
   greenLightningPoolName: GreenLightning
   blueLightningPoolName: BlueLightning
   lightningCount: 2
   lightningInterval: 0.3
   posRecordInterval: 0.5
+  firePoint: {fileID: 1877103828}
+  bulletFirePoint: {fileID: 1066905556}
+  hammerOffsetX: -5
+  hammerOffsetY: 4
 --- !u!114 &1796119478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2883,6 +2918,7 @@ MonoBehaviour:
   baseController: {fileID: 9100000, guid: 9adc5c475ffd3384c9597b2090ff27ae, type: 2}
   greenOverride: {fileID: 22100000, guid: 6b97934f73c56644caebd088dc605ccd, type: 2}
   blueOverride: {fileID: 22100000, guid: 1c02754289d5e0347b96428bbe85dc49, type: 2}
+  magentaOverride: {fileID: 22100000, guid: 3fa4138fb35e42f4a874d09dfb3eda0c, type: 2}
 --- !u!114 &1796119479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3000,7 +3036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877103828}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: LightningFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

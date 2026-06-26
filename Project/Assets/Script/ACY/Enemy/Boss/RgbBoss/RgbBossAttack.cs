@@ -5,6 +5,7 @@ public class RgbBossAttack : MonoBehaviour
 {
     [Header("회복량 설정")]
     [SerializeField] private int healAmount = 5;
+
     [Header("FireGear Spawn")]
     [SerializeField] private float spawnOffsetY = -1f;
     [SerializeField] private float redAttackInterval = 3f;
@@ -29,7 +30,6 @@ public class RgbBossAttack : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("번개 패턴 설정")]
-    [SerializeField] private Transform firePoint;
     [SerializeField] private string redLightningPoolName = "RedLightning";
     [SerializeField] private string greenLightningPoolName = "GreenLightning";
     [SerializeField] private string blueLightningPoolName = "BlueLightning";
@@ -37,13 +37,22 @@ public class RgbBossAttack : MonoBehaviour
     [SerializeField] private float lightningInterval = 0.3f;
     [SerializeField] private float posRecordInterval = 0.5f; // 숫자가 클수록 피하기 쉬워짐
 
+    [Header("FirePoint")]
+    [SerializeField] private Transform firePoint;          // 번개
+    [SerializeField] private Transform bulletFirePoint;    // 일반 탄환
+
+    [Header("얼음 망치 설정")]
+    [SerializeField] private float hammerOffsetX = 0f;
+    [SerializeField] private float hammerOffsetY = 0f;
+
     private Vector3 lastPlayerPos;
     private Transform player;
     private EnemyStatus enemyStatus;
     private SpriteRenderer bossSpriteRenderer;
     private Animator animator;
     private RgbBossMove bossMove;
-
+    private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
+    private static readonly int CastingTrigger = Animator.StringToHash("Casting");
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
@@ -66,8 +75,8 @@ public class RgbBossAttack : MonoBehaviour
     {
             if (Input.GetKeyDown(KeyCode.L))
             {
-            SpawnHurricane();
-            }
+            SpawnBurstPattern();
+        }
     }
 
     private IEnumerator AttackRoutine()
@@ -171,6 +180,10 @@ public class RgbBossAttack : MonoBehaviour
 
     private void SpawnPoisonMushrooms()
     {
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
         if (player == null) return;
 
         int successfulSpawns = 0;
@@ -200,6 +213,10 @@ public class RgbBossAttack : MonoBehaviour
 
     private void SpawnHurricane()
     {
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
         Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
 
         // spawnOffsetX 실제로 적용
@@ -240,9 +257,11 @@ public class RgbBossAttack : MonoBehaviour
 
     // ─── 속성 탄환 ───────────────────────────────────────
 
-    private void SpawnBossBullet()
+    // 애니메이션에서 호출
+    public void SpawnBossBullet()
     {
-        if (player == null) return;
+        if (player == null || bulletFirePoint == null)
+            return;
 
         string targetPoolName = enemyStatus.CurrentElement switch
         {
@@ -252,16 +271,18 @@ public class RgbBossAttack : MonoBehaviour
             _ => ""
         };
 
-        if (string.IsNullOrEmpty(targetPoolName)) return;
+        if (string.IsNullOrEmpty(targetPoolName))
+            return;
 
         GameObject bulletObj = PoolingManager.Instance.Get(
             targetPoolName,
-            transform.position,
+            bulletFirePoint.position,
             Quaternion.identity);
 
         if (bulletObj != null)
         {
             RgbBullet bullet = bulletObj.GetComponent<RgbBullet>();
+
             if (bullet != null)
             {
                 bullet.Initialize(player, targetPoolName);
@@ -273,11 +294,21 @@ public class RgbBossAttack : MonoBehaviour
             }
         }
     }
+    public void ShootBullet()
+    {
+        if (animator == null)
+            return;
 
+        animator.SetTrigger(ShootTrigger);
+    }
     // ─── Burst ───────────────────────────────────────────
 
     private void SpawnBurstPattern()
     {
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
         if (player == null) return;
 
         for (int i = 0; i < 3; i++)
@@ -296,5 +327,37 @@ public class RgbBossAttack : MonoBehaviour
                 burst?.InitializeBurst(redBurstPoolName);
             }
         }
+    }
+    public void SpawnIceHammer()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
+
+        if (player == null)
+            return;
+
+        // 플레이어 기준 X 위치에서 위쪽에서 아래로 레이캐스트
+        Vector3 rayStart = player.position + new Vector3(hammerOffsetX, 5f, 0f);
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            rayStart,
+            Vector2.down,
+            15f,
+            groundLayer);
+
+        if (hit.collider == null)
+        {
+            Debug.LogWarning("망치 생성 실패 : Ground를 찾지 못함");
+            return;
+        }
+
+        Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, hammerOffsetY, 0f);
+
+        PoolingManager.Instance.Get(
+            "IceHammer",
+            spawnPos,
+            Quaternion.identity);
     }
 }
