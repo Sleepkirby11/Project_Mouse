@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RgbBossAttack : MonoBehaviour
 {
@@ -7,12 +8,22 @@ public class RgbBossAttack : MonoBehaviour
     [SerializeField] private float spawnOffsetY = -1f;
     [SerializeField] private float redAttackInterval = 3f;
 
+    [Header("Hurricane 설정")]
+    [SerializeField] private float spawnOffsetX = 1.5f; // 보스 앞으로부터의 거리
+
+    [Header("속성별 탄환 풀 이름 설정")]
+    [SerializeField] private string redBulletPoolName = "RedBullet";
+    [SerializeField] private string greenBulletPoolName = "GreenBullet";
+    [SerializeField] private string blueBulletPoolName = "BlueBullet";
+
     private Transform player;
     private EnemyStatus enemyStatus;
+    private SpriteRenderer bossSpriteRenderer;
 
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
+        bossSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
@@ -26,12 +37,9 @@ public class RgbBossAttack : MonoBehaviour
     }
     private void Update() // 테스트용 
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            PoolingManager.Instance.Get(
-                "IceHammer",
-                player.position + Vector3.up * 3f,
-                Quaternion.identity);
+            SpawnBossBullet();
         }
     }
     private IEnumerator AttackRoutine()
@@ -85,7 +93,29 @@ public class RgbBossAttack : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
     }
+    private void SpawnHurricane()
+    {
+        // flipX가 true이면 왼쪽, false이면 오른쪽
+        Vector3 spawnDirection = bossSpriteRenderer.flipX ? Vector3.left : Vector3.right;
 
+        Vector3 spawnPos = transform.position +
+                      (spawnDirection * spawnOffsetX) +
+                      (Vector3.up * spawnOffsetY);
+
+        GameObject hurricaneObj = PoolingManager.Instance.Get(
+            "Hurricane",
+            transform.position,
+            Quaternion.identity);
+
+        if (hurricaneObj != null)
+        {
+            Hurricane hurricane = hurricaneObj.GetComponent<Hurricane>();
+            if (hurricane != null)
+            {
+                hurricane.Initialize(enemyStatus.CurrentElement, spawnDirection);
+            }
+        }
+    }
     private void SpawnFireGears()
     {
         if (player == null)
@@ -100,5 +130,42 @@ public class RgbBossAttack : MonoBehaviour
             "FireGear",
             spawnPos,
             Quaternion.identity);
+    }
+    private void SpawnBossBullet()
+    {
+        if (player == null) return;
+
+        // 1. 보스 속성에 맞는 풀 이름 선택
+        string targetPoolName = "";
+        switch (enemyStatus.CurrentElement)
+        {
+            case EnemyStatus.EnemyElement.Red:
+                targetPoolName = redBulletPoolName;
+                break;
+            case EnemyStatus.EnemyElement.Green:
+                targetPoolName = greenBulletPoolName;
+                break;
+            case EnemyStatus.EnemyElement.Blue:
+                targetPoolName = blueBulletPoolName;
+                break;
+        }
+        if (string.IsNullOrEmpty(targetPoolName)) return;
+
+        // 2. 해당 속성 탄환 생성
+        GameObject bulletObj = PoolingManager.Instance.Get(
+            targetPoolName,
+            transform.position,
+            Quaternion.identity
+        );
+
+        if (bulletObj != null)
+        {
+            RgbBullet bullet = bulletObj.GetComponent<RgbBullet>();
+            if (bullet != null)
+            {
+                // ★ 이제 색상 지정을 보스가 해줄 필요 없이, 플레이어 트랜스폼과 풀 이름만 넘겨서 발사시킵니다.
+                bullet.Initialize(player, targetPoolName);
+            }
+        }
     }
 }
