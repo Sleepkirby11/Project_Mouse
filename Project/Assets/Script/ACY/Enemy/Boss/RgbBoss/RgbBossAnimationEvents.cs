@@ -13,4 +13,8 @@ public class RgbBossAnimationEvents : MonoBehaviour
     {
         bossAttack.SpawnLightning();
     }
+    public void SpawnBossBullet()
+    {
+        bossAttack.SpawnBossBullet();
+    }
 }
