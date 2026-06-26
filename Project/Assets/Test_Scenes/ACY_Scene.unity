@@ -2805,6 +2805,7 @@ GameObject:
   - component: {fileID: 1796119477}
   - component: {fileID: 1796119478}
   - component: {fileID: 1796119479}
+  - component: {fileID: 1796119480}
   m_Layer: 0
   m_Name: RGB_Boss
   m_TagString: Untagged
@@ -2897,6 +2898,20 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
+--- !u!114 &1796119480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796119475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 145e347b770a4d94aab96fc444042675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  isFacingRight: 1
 --- !u!114 &1847812930 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3072225058604166373, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}

@@ -40,13 +40,14 @@ public class RgbBossAttack : MonoBehaviour
     private EnemyStatus enemyStatus;
     private SpriteRenderer bossSpriteRenderer;
     private Animator animator;
-
+    private RgbBossMove bossMove;
 
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
         bossSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
+        bossMove = GetComponent<RgbBossMove>();
     }
 
     private void Start()
@@ -63,7 +64,7 @@ public class RgbBossAttack : MonoBehaviour
     {
             if (Input.GetKeyDown(KeyCode.L))
             {
-            SpawnFireGears();
+            SpawnHurricane();
             }
     }
 
@@ -189,7 +190,7 @@ public class RgbBossAttack : MonoBehaviour
 
     private void SpawnHurricane()
     {
-        Vector3 spawnDirection = bossSpriteRenderer.flipX ? Vector3.left : Vector3.right;
+        Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
 
         // spawnOffsetX 실제로 적용
         Vector3 spawnPos = transform.position +
@@ -204,7 +205,12 @@ public class RgbBossAttack : MonoBehaviour
         if (hurricaneObj != null)
         {
             Hurricane hurricane = hurricaneObj.GetComponent<Hurricane>();
-            hurricane?.Initialize(enemyStatus.CurrentElement, spawnDirection);
+            hurricane.Initialize(enemyStatus.CurrentElement, spawnDirection);
+
+            if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
+                hurricane.onHitPlayer = () => enemyStatus.Heal(20);
+            else
+                hurricane.onHitPlayer = null;
         }
     }
 
