@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class RgbBossAttack : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class RgbBossAttack : MonoBehaviour
     [SerializeField] private float redAttackInterval = 3f;
 
     [Header("Hurricane 설정")]
-    [SerializeField] private float spawnOffsetX = 1.5f; // 보스 앞에 생성되는 거리
+    [SerializeField] private float spawnOffsetX = 1.5f;
 
     [Header("속성별 탄환 풀 이름 설정")]
     [SerializeField] private string redBulletPoolName = "RedBullet";
@@ -22,37 +21,52 @@ public class RgbBossAttack : MonoBehaviour
 
     [Header("독버섯 패턴 설정 (Green)")]
     [SerializeField] private string mushroomPoolName = "Mushroom";
-    [SerializeField] private int mushroomSpawnCount = 3; // 한 번에 소환할 버섯 개수
-    [SerializeField] private float spawnRangeX = 5f;     // 플레이어 기준 좌우 스폰 범위
-    [SerializeField] private float mushroomOffsetY = 0f; // 독버섯 생성 위치 Y 오프셋
+    [SerializeField] private int mushroomSpawnCount = 3;
+    [SerializeField] private float spawnRangeX = 5f;
+    [SerializeField] private float mushroomOffsetY = 0f;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("번개 패턴 설정")]
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private string redLightningPoolName = "RedLightning";
+    [SerializeField] private string greenLightningPoolName = "GreenLightning";
+    [SerializeField] private string blueLightningPoolName = "BlueLightning";
+    [SerializeField] private int lightningCount = 3;
+    [SerializeField] private float lightningInterval = 0.3f;
+    [SerializeField] private float posRecordInterval = 0.5f; // 숫자가 클수록 피하기 쉬워짐
+
+    private Vector3 lastPlayerPos;
     private Transform player;
     private EnemyStatus enemyStatus;
     private SpriteRenderer bossSpriteRenderer;
+    private Animator animator;
+
 
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
         bossSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
     {
         GameObject playerObj = GameObject.FindWithTag("Player");
-
         if (playerObj != null)
             player = playerObj.transform;
 
+        StartCoroutine(RecordPlayerPosition());
         //StartCoroutine(AttackRoutine());
     }
-    private void Update() // 테스트용 
+
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            SpawnPoisonMushrooms();
-        }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                animator.SetTrigger("LightningAttack"); // 애니메이션 + Event로 번개 자동 발사
+            }
     }
+
     private IEnumerator AttackRoutine()
     {
         while (true)
@@ -62,15 +76,12 @@ public class RgbBossAttack : MonoBehaviour
                 case EnemyStatus.EnemyElement.Red:
                     yield return StartCoroutine(RedAttack());
                     break;
-
                 case EnemyStatus.EnemyElement.Green:
                     yield return StartCoroutine(GreenAttack());
                     break;
-
                 case EnemyStatus.EnemyElement.Blue:
                     yield return StartCoroutine(BlueAttack());
                     break;
-
                 default:
                     yield return null;
                     break;
@@ -81,29 +92,72 @@ public class RgbBossAttack : MonoBehaviour
     private IEnumerator RedAttack()
     {
         SpawnFireGears();
-
         yield return new WaitForSeconds(redAttackInterval);
     }
 
     private IEnumerator GreenAttack()
     {
-        // TODO : Green 전용 패턴
-
+        SpawnPoisonMushrooms();
         yield return new WaitForSeconds(3f);
     }
 
     private IEnumerator BlueAttack()
     {
-        Vector3 spawnPos =
-            player.position + Vector3.up * 5f;
-
-        PoolingManager.Instance.Get(
-            "IceHammer",
-            spawnPos,
-            Quaternion.identity);
-
         yield return new WaitForSeconds(5f);
     }
+
+    // Animation Event에서 호출
+    public void SpawnLightning()
+    {
+        StartCoroutine(SpawnLightningBurst());
+    }
+
+    private string GetLightningPoolName()
+    {
+        return enemyStatus.CurrentElement switch
+        {
+            EnemyStatus.EnemyElement.Red => redLightningPoolName,
+            EnemyStatus.EnemyElement.Green => greenLightningPoolName,
+            EnemyStatus.EnemyElement.Blue => blueLightningPoolName,
+            _ => redLightningPoolName
+        };
+    }
+
+    private IEnumerator SpawnLightningBurst()
+    {
+        if (firePoint == null) yield break;
+
+        string poolName = GetLightningPoolName();
+
+        for (int i = 0; i < lightningCount; i++)
+        {
+            Vector2 dir = (lastPlayerPos - firePoint.position).normalized; // 이전 위치로 발사
+
+            GameObject obj = PoolingManager.Instance.Get(
+                poolName,
+                firePoint.position,
+                Quaternion.identity);
+
+            if (obj != null)
+            {
+                LightningBolt bolt = obj.GetComponent<LightningBolt>();
+                bolt?.Initialize(poolName, dir);
+            }
+
+            yield return new WaitForSeconds(lightningInterval);
+        }
+    }
+    private IEnumerator RecordPlayerPosition()
+    {
+        while (true)
+        {
+            lastPlayerPos = player.position;
+            yield return new WaitForSeconds(posRecordInterval);
+        }
+    }
+
+    // ─── 독버섯 ─────────────────────────────────────────
+
     private void SpawnPoisonMushrooms()
     {
         if (player == null) return;
@@ -116,19 +170,13 @@ public class RgbBossAttack : MonoBehaviour
         {
             attempts++;
 
-            // 1. 플레이어 위치 기준으로 좌우 랜덤 X 좌표 산출
             float randomX = Random.Range(-spawnRangeX, spawnRangeX);
-
-            // 플레이어 머리 위 공중에서 아래로 레이를 쏨
             Vector3 rayStartPos = player.position + new Vector3(randomX, 5f, 0f);
-
-            // 2. 아래 방향으로 바닥 레이캐스트 발사
             RaycastHit2D hit = Physics2D.Raycast(rayStartPos, Vector2.down, 15f, groundLayer);
 
             if (hit.collider != null)
             {
                 Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, mushroomOffsetY, 0f);
-
                 PoolingManager.Instance.Get(mushroomPoolName, spawnPos, Quaternion.identity);
                 successfulSpawns++;
             }
@@ -136,101 +184,92 @@ public class RgbBossAttack : MonoBehaviour
 
         Debug.Log($"독버섯 생성 패턴 실행: 플레이어 주변 바닥에 {successfulSpawns}개 스폰됨.");
     }
+
+    // ─── Hurricane ───────────────────────────────────────
+
     private void SpawnHurricane()
     {
-        // flipX가 true이면 왼쪽, false이면 오른쪽
         Vector3 spawnDirection = bossSpriteRenderer.flipX ? Vector3.left : Vector3.right;
 
+        // spawnOffsetX 실제로 적용
         Vector3 spawnPos = transform.position +
                       (spawnDirection * spawnOffsetX) +
                       (Vector3.up * spawnOffsetY);
 
         GameObject hurricaneObj = PoolingManager.Instance.Get(
             "Hurricane",
-            transform.position,
+            spawnPos,          // transform.position 대신 spawnPos 사용
             Quaternion.identity);
 
         if (hurricaneObj != null)
         {
             Hurricane hurricane = hurricaneObj.GetComponent<Hurricane>();
-            if (hurricane != null)
-            {
-                hurricane.Initialize(enemyStatus.CurrentElement, spawnDirection);
-            }
+            hurricane?.Initialize(enemyStatus.CurrentElement, spawnDirection);
         }
     }
+
+    // ─── FireGear ────────────────────────────────────────
+
     private void SpawnFireGears()
     {
-        if (player == null)
-            return;
+        if (player == null) return;
 
         Vector3 spawnPos = new Vector3(
             player.position.x,
             player.position.y + spawnOffsetY,
             0f);
 
-        PoolingManager.Instance.Get(
-            "FireGear",
-            spawnPos,
-            Quaternion.identity);
+        PoolingManager.Instance.Get("FireGear", spawnPos, Quaternion.identity);
     }
+
+    // ─── 속성 탄환 ───────────────────────────────────────
+
     private void SpawnBossBullet()
     {
         if (player == null) return;
 
-        // 1. 보스 속성에 맞는 풀 이름 선택
-        string targetPoolName = "";
-        switch (enemyStatus.CurrentElement)
+        string targetPoolName = enemyStatus.CurrentElement switch
         {
-            case EnemyStatus.EnemyElement.Red:
-                targetPoolName = redBulletPoolName;
-                break;
-            case EnemyStatus.EnemyElement.Green:
-                targetPoolName = greenBulletPoolName;
-                break;
-            case EnemyStatus.EnemyElement.Blue:
-                targetPoolName = blueBulletPoolName;
-                break;
-        }
+            EnemyStatus.EnemyElement.Red => redBulletPoolName,
+            EnemyStatus.EnemyElement.Green => greenBulletPoolName,
+            EnemyStatus.EnemyElement.Blue => blueBulletPoolName,
+            _ => ""
+        };
+
         if (string.IsNullOrEmpty(targetPoolName)) return;
 
-        // 2. 해당 속성 탄환 생성
         GameObject bulletObj = PoolingManager.Instance.Get(
             targetPoolName,
             transform.position,
-            Quaternion.identity
-        );
+            Quaternion.identity);
 
         if (bulletObj != null)
         {
             RgbBullet bullet = bulletObj.GetComponent<RgbBullet>();
-            if (bullet != null)
-            {
-                // ★ 이제 색상 지정을 보스가 해줄 필요 없이, 플레이어 트랜스폼과 풀 이름만 넘겨서 발사시킵니다.
-                bullet.Initialize(player, targetPoolName);
-            }
+            bullet?.Initialize(player, targetPoolName);
         }
     }
+
+    // ─── Burst ───────────────────────────────────────────
+
     private void SpawnBurstPattern()
     {
         if (player == null) return;
 
-        // 플레이어 주변에 무작위로 3개 배치
         for (int i = 0; i < 3; i++)
         {
             Vector2 randomCircle = Random.insideUnitCircle * burstSpawnRadius;
             Vector3 spawnPos = player.position + new Vector3(randomCircle.x, randomCircle.y, 0f);
 
-            GameObject burstObj = PoolingManager.Instance.Get(redBurstPoolName, spawnPos, Quaternion.identity);
+            GameObject burstObj = PoolingManager.Instance.Get(
+                redBurstPoolName,
+                spawnPos,
+                Quaternion.identity);
 
             if (burstObj != null)
             {
                 Burst burst = burstObj.GetComponent<Burst>();
-                if (burst != null)
-                {
-                    // 버스트 초기화 수행 (풀 이름 전달)
-                    burst.InitializeBurst(redBurstPoolName);
-                }
+                burst?.InitializeBurst(redBurstPoolName);
             }
         }
     }

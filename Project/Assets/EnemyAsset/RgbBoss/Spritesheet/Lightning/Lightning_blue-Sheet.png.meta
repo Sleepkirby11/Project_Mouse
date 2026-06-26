@@ -55,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -69,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 7
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,12 +121,12 @@ TextureImporter:
       name: Lightning_blue-Sheet_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 194
-        width: 255
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 192
+        width: 256
+        height: 32
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -143,12 +143,12 @@ TextureImporter:
       name: Lightning_blue-Sheet_1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 163
-        width: 254
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 160
+        width: 256
+        height: 32
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -165,12 +165,12 @@ TextureImporter:
       name: Lightning_blue-Sheet_2
       rect:
         serializedVersion: 2
-        x: 2
-        y: 134
-        width: 252
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 128
+        width: 256
+        height: 32
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -187,12 +187,12 @@ TextureImporter:
       name: Lightning_blue-Sheet_3
       rect:
         serializedVersion: 2
-        x: 3
-        y: 5
-        width: 252
-        height: 115
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 96
+        width: 256
+        height: 32
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -209,12 +209,12 @@ TextureImporter:
       name: Lightning_blue-Sheet_4
       rect:
         serializedVersion: 2
-        x: 36
-        y: 76
-        width: 23
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 64
+        width: 256
+        height: 32
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -231,42 +231,20 @@ TextureImporter:
       name: Lightning_blue-Sheet_5
       rect:
         serializedVersion: 2
-        x: 116
-        y: 74
-        width: 16
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 256
+        height: 32
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3606b3d4720afea70800000000000000
+      spriteID: 27a654bae4c0166419ed93e46c7897b7
       internalID: 8858475082720960611
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lightning_blue-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 238
-        y: 76
-        width: 16
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 23f8798264b390750800000000000000
-      internalID: 6271609128604897074
       vertices: []
       indices: 
       edges: []
@@ -275,7 +253,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 44f14885f84565a4aab6e27d3dad7f01
     internalID: 0
     vertices: []
     indices: 
@@ -291,7 +269,6 @@ TextureImporter:
       Lightning_blue-Sheet_3: 6029151205380822258
       Lightning_blue-Sheet_4: -7648697134619843603
       Lightning_blue-Sheet_5: 8858475082720960611
-      Lightning_blue-Sheet_6: 6271609128604897074
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
