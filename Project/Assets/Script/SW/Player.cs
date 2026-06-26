@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
         {
             Move();
         }
-        else if (!status.CanMove && !status.IsPossessed && !status.IsKnockbacked)
+        else if (!status.CanMove && !status.IsPossessed && !status.IsKnockbacked && !status.IsBound)
         {
             rigid.linearVelocityX = 0;
         }
@@ -375,10 +375,9 @@ public class Player : MonoBehaviour
     //이동 함수
     void Move()
     {
-        if (status.IsKnockbacked) //추가함
-        {
-            return;
-        }
+        if (status.IsKnockbacked) return;
+        if (status.IsBound) return;
+
         rigid.linearVelocityX = inputVec.x;
     }
 
