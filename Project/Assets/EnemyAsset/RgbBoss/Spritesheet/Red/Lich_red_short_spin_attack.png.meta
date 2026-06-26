@@ -1,0 +1,608 @@
+fileFormatVersion: 2
+guid: 5e368ed8a4987fd4fa42e0bea8cf4615
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 138103870073135211
+    second: Lich_red_short_spin_attack_0
+  - first:
+      213: 6961382999543920954
+    second: Lich_red_short_spin_attack_1
+  - first:
+      213: 3159271630041952521
+    second: Lich_red_short_spin_attack_2
+  - first:
+      213: 5847435962532998764
+    second: Lich_red_short_spin_attack_3
+  - first:
+      213: 5258006374415044224
+    second: Lich_red_short_spin_attack_4
+  - first:
+      213: 4518843795694758533
+    second: Lich_red_short_spin_attack_5
+  - first:
+      213: -1049546809706205275
+    second: Lich_red_short_spin_attack_6
+  - first:
+      213: -1864688543362928967
+    second: Lich_red_short_spin_attack_7
+  - first:
+      213: 7791395372628904608
+    second: Lich_red_short_spin_attack_8
+  - first:
+      213: 7188295897427068764
+    second: Lich_red_short_spin_attack_9
+  - first:
+      213: 6778500063797398200
+    second: Lich_red_short_spin_attack_10
+  - first:
+      213: 7571977262869163038
+    second: Lich_red_short_spin_attack_11
+  - first:
+      213: 1044121990422145781
+    second: Lich_red_short_spin_attack_12
+  - first:
+      213: 3478969515632087049
+    second: Lich_red_short_spin_attack_13
+  - first:
+      213: 7629241581054197079
+    second: Lich_red_short_spin_attack_14
+  - first:
+      213: -7542085711599841130
+    second: Lich_red_short_spin_attack_15
+  - first:
+      213: 356895822631567823
+    second: Lich_red_short_spin_attack_16
+  - first:
+      213: 3703951953958245333
+    second: Lich_red_short_spin_attack_17
+  - first:
+      213: 1673439001746296823
+    second: Lich_red_short_spin_attack_18
+  - first:
+      213: 8372903004564539526
+    second: Lich_red_short_spin_attack_19
+  - first:
+      213: -9101739485890861356
+    second: Lich_red_short_spin_attack_20
+  - first:
+      213: 1860397166829500668
+    second: Lich_red_short_spin_attack_21
+  - first:
+      213: 8371262983056691003
+    second: Lich_red_short_spin_attack_22
+  - first:
+      213: 7256218655475090813
+    second: Lich_red_short_spin_attack_23
+  - first:
+      213: -1938460896672173645
+    second: Lich_red_short_spin_attack_24
+  - first:
+      213: -5560157123913962417
+    second: Lich_red_short_spin_attack_25
+  - first:
+      213: -3318895498365405412
+    second: Lich_red_short_spin_attack_26
+  - first:
+      213: 7594361624196407218
+    second: Lich_red_short_spin_attack_27
+  - first:
+      213: 1558299113579224960
+    second: Lich_red_short_spin_attack_28
+  - first:
+      213: -202489819963983800
+    second: Lich_red_short_spin_attack_29
+  - first:
+      213: 8733972780855383348
+    second: Lich_red_short_spin_attack_30
+  - first:
+      213: -3180531842771238780
+    second: Lich_red_short_spin_attack_31
+  - first:
+      213: -6409621703381644989
+    second: Lich_red_short_spin_attack_32
+  - first:
+      213: -8772650787145909228
+    second: Lich_red_short_spin_attack_33
+  - first:
+      213: -8885522038264690476
+    second: Lich_red_short_spin_attack_34
+  - first:
+      213: 8789833669820740776
+    second: Lich_red_short_spin_attack_35
+  - first:
+      213: 2316119267041650940
+    second: Lich_red_short_spin_attack_36
+  - first:
+      213: -1212435753456960118
+    second: Lich_red_short_spin_attack_37
+  - first:
+      213: -1987736917769900040
+    second: Lich_red_short_spin_attack_38
+  - first:
+      213: 3529268149080647918
+    second: Lich_red_short_spin_attack_39
+  - first:
+      213: 2328954994963979561
+    second: Lich_red_short_spin_attack_40
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b60e0d5fcb4aae100800000000000000
+      internalID: 138103870073135211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a39324184fccb9060800000000000000
+      internalID: 6961382999543920954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 901be991fccf7db20800000000000000
+      internalID: 3159271630041952521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6eaf91e604462150800000000000000
+      internalID: 5847435962532998764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08e8fbd70f038f840800000000000000
+      internalID: 5258006374415044224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58a2dd58d7826be30800000000000000
+      internalID: 4518843795694758533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_6
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5af2150ccb24f61f0800000000000000
+      internalID: -1049546809706205275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_7
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9beac1c36ab4f16e0800000000000000
+      internalID: -1864688543362928967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aa0b229fc8902c60800000000000000
+      internalID: 7791395372628904608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_9
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c57c9829805f1c360800000000000000
+      internalID: 7188295897427068764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_10
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ba4b9cd4e1121e50800000000000000
+      internalID: 6778500063797398200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_11
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1ca6a8d331151960800000000000000
+      internalID: 7571977262869163038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_12
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fa29451b677d7e00800000000000000
+      internalID: 1044121990422145781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_13
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 900d9a39758c74030800000000000000
+      internalID: 3478969515632087049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_14
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75dff58ebc280e960800000000000000
+      internalID: 7629241581054197079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_short_spin_attack_15
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 690da864101255790800000000000000
+      internalID: -7542085711599841130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a04b71f41a1ab5d4686307966ec16112
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_red_short_spin_attack_0: 138103870073135211
+      Lich_red_short_spin_attack_1: 6961382999543920954
+      Lich_red_short_spin_attack_10: 6778500063797398200
+      Lich_red_short_spin_attack_11: 7571977262869163038
+      Lich_red_short_spin_attack_12: 1044121990422145781
+      Lich_red_short_spin_attack_13: 3478969515632087049
+      Lich_red_short_spin_attack_14: 7629241581054197079
+      Lich_red_short_spin_attack_15: -7542085711599841130
+      Lich_red_short_spin_attack_2: 3159271630041952521
+      Lich_red_short_spin_attack_3: 5847435962532998764
+      Lich_red_short_spin_attack_4: 5258006374415044224
+      Lich_red_short_spin_attack_5: 4518843795694758533
+      Lich_red_short_spin_attack_6: -1049546809706205275
+      Lich_red_short_spin_attack_7: -1864688543362928967
+      Lich_red_short_spin_attack_8: 7791395372628904608
+      Lich_red_short_spin_attack_9: 7188295897427068764
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

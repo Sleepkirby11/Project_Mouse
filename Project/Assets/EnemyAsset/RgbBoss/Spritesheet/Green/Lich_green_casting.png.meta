@@ -1,0 +1,1045 @@
+fileFormatVersion: 2
+guid: 8d37201f8df3baa44b8bc3a18e423d86
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6929223769400371951
+    second: Lich_green_casting_0
+  - first:
+      213: -8057716606097129833
+    second: Lich_green_casting_1
+  - first:
+      213: 5419507540549109923
+    second: Lich_green_casting_2
+  - first:
+      213: 4686591717958443431
+    second: Lich_green_casting_3
+  - first:
+      213: -1175815874845176802
+    second: Lich_green_casting_4
+  - first:
+      213: -3321374289069184454
+    second: Lich_green_casting_5
+  - first:
+      213: 620351603303950718
+    second: Lich_green_casting_6
+  - first:
+      213: -4878150239458509607
+    second: Lich_green_casting_7
+  - first:
+      213: -8316774835867780828
+    second: Lich_green_casting_8
+  - first:
+      213: 2412606237951501052
+    second: Lich_green_casting_9
+  - first:
+      213: -2103717012362409998
+    second: Lich_green_casting_10
+  - first:
+      213: -6857178120009700009
+    second: Lich_green_casting_11
+  - first:
+      213: 2998480039915734733
+    second: Lich_green_casting_12
+  - first:
+      213: -5621191548879331528
+    second: Lich_green_casting_13
+  - first:
+      213: -1938802035617482317
+    second: Lich_green_casting_14
+  - first:
+      213: -8840640339155664671
+    second: Lich_green_casting_15
+  - first:
+      213: 2626802679353217294
+    second: Lich_green_casting_16
+  - first:
+      213: 7488684601604090133
+    second: Lich_green_casting_17
+  - first:
+      213: 2715323280305815273
+    second: Lich_green_casting_18
+  - first:
+      213: -5507111319804788031
+    second: Lich_green_casting_19
+  - first:
+      213: 87578722233033386
+    second: Lich_green_casting_20
+  - first:
+      213: 5560797661212738423
+    second: Lich_green_casting_21
+  - first:
+      213: 5994248221239330956
+    second: Lich_green_casting_22
+  - first:
+      213: -2550441832718661107
+    second: Lich_green_casting_23
+  - first:
+      213: 9025935731662828081
+    second: Lich_green_casting_24
+  - first:
+      213: -1388375860167234592
+    second: Lich_green_casting_25
+  - first:
+      213: 8330664879981488285
+    second: Lich_green_casting_26
+  - first:
+      213: 115058050012720614
+    second: Lich_green_casting_27
+  - first:
+      213: 4582434866255335724
+    second: Lich_green_casting_28
+  - first:
+      213: 1187734054114209460
+    second: Lich_green_casting_29
+  - first:
+      213: -6987974652386690716
+    second: Lich_green_casting_30
+  - first:
+      213: -2042876096416538211
+    second: Lich_green_casting_31
+  - first:
+      213: 4117204457100962963
+    second: Lich_green_casting_32
+  - first:
+      213: 8673476032153288479
+    second: Lich_green_casting_33
+  - first:
+      213: -4433225392760542254
+    second: Lich_green_casting_34
+  - first:
+      213: 3550160137259227151
+    second: Lich_green_casting_35
+  - first:
+      213: 4483969196891417590
+    second: Lich_green_casting_36
+  - first:
+      213: 8283164092922825795
+    second: Lich_green_casting_37
+  - first:
+      213: -8805621308987177350
+    second: Lich_green_casting_38
+  - first:
+      213: -869304681593528303
+    second: Lich_green_casting_39
+  - first:
+      213: -8092385805827558942
+    second: Lich_green_casting_40
+  - first:
+      213: -6083584803783236554
+    second: Lich_green_casting_41
+  - first:
+      213: 9079062070549823490
+    second: Lich_green_casting_42
+  - first:
+      213: -8484907264144439965
+    second: Lich_green_casting_43
+  - first:
+      213: -5524833777377404759
+    second: Lich_green_casting_44
+  - first:
+      213: 4706227127951830569
+    second: Lich_green_casting_45
+  - first:
+      213: -1614246990434138301
+    second: Lich_green_casting_46
+  - first:
+      213: 8650885565376855989
+    second: Lich_green_casting_47
+  - first:
+      213: 6957717691279566151
+    second: Lich_green_casting_48
+  - first:
+      213: -3464286495343673842
+    second: Lich_green_casting_49
+  - first:
+      213: -1322947617908768402
+    second: Lich_green_casting_50
+  - first:
+      213: -167460165122617125
+    second: Lich_green_casting_51
+  - first:
+      213: 1711333013893324975
+    second: Lich_green_casting_52
+  - first:
+      213: -9033272396423939139
+    second: Lich_green_casting_53
+  - first:
+      213: 7799125118315958307
+    second: Lich_green_casting_54
+  - first:
+      213: 8569559944686266646
+    second: Lich_green_casting_55
+  - first:
+      213: 4363650608863406939
+    second: Lich_green_casting_56
+  - first:
+      213: 6921894002670758102
+    second: Lich_green_casting_57
+  - first:
+      213: -4015403284596334171
+    second: Lich_green_casting_58
+  - first:
+      213: 329430387363816388
+    second: Lich_green_casting_59
+  - first:
+      213: -7476203473704826807
+    second: Lich_green_casting_60
+  - first:
+      213: 3119463068729224054
+    second: Lich_green_casting_61
+  - first:
+      213: -576790240177696475
+    second: Lich_green_casting_62
+  - first:
+      213: 4482247963376294289
+    second: Lich_green_casting_63
+  - first:
+      213: 5299094211472034861
+    second: Lich_green_casting_64
+  - first:
+      213: -6866446380091452986
+    second: Lich_green_casting_65
+  - first:
+      213: -7780296596194896753
+    second: Lich_green_casting_66
+  - first:
+      213: -6915866748862597538
+    second: Lich_green_casting_67
+  - first:
+      213: -1548584240701364018
+    second: Lich_green_casting_68
+  - first:
+      213: -766933988517900529
+    second: Lich_green_casting_69
+  - first:
+      213: 6676168097238818746
+    second: Lich_green_casting_70
+  - first:
+      213: 468899600756346131
+    second: Lich_green_casting_71
+  - first:
+      213: -4249170461576081786
+    second: Lich_green_casting_72
+  - first:
+      213: 5819531807874258883
+    second: Lich_green_casting_73
+  - first:
+      213: 5068229460432842956
+    second: Lich_green_casting_74
+  - first:
+      213: 4206009321669341322
+    second: Lich_green_casting_75
+  - first:
+      213: -3009342062112109455
+    second: Lich_green_casting_76
+  - first:
+      213: -9040939942979065382
+    second: Lich_green_casting_77
+  - first:
+      213: 7107712073765545300
+    second: Lich_green_casting_78
+  - first:
+      213: -8821221738066540785
+    second: Lich_green_casting_79
+  - first:
+      213: -9133826146696418166
+    second: Lich_green_casting_80
+  - first:
+      213: 8196770211103938122
+    second: Lich_green_casting_81
+  - first:
+      213: 6706828995902917621
+    second: Lich_green_casting_82
+  - first:
+      213: -5804767291733599257
+    second: Lich_green_casting_83
+  - first:
+      213: 1015478661003152880
+    second: Lich_green_casting_84
+  - first:
+      213: 7926770311168237324
+    second: Lich_green_casting_85
+  - first:
+      213: -7392055782780187720
+    second: Lich_green_casting_86
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_green_casting_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11592bfb1b376df90800000000000000
+      internalID: -6929223769400371951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79e70d8307d3d2090800000000000000
+      internalID: -8057716606097129833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a80bf3f465f53b40800000000000000
+      internalID: 5419507540549109923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a1633c365e1a0140800000000000000
+      internalID: 4686591717958443431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1c869a01b9aeafe0800000000000000
+      internalID: -1175815874845176802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3a6ae57eab18e1d0800000000000000
+      internalID: -3321374289069184454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_6
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e79a6c61f7eeb9800800000000000000
+      internalID: 620351603303950718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dcb618e3345d4cb0800000000000000
+      internalID: -4878150239458509607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_8
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4297137d951e49c80800000000000000
+      internalID: -8316774835867780828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_9
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf2adf3479c4b7120800000000000000
+      internalID: 2412606237951501052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_10
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f74132f5881ec2e0800000000000000
+      internalID: -2103717012362409998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_11
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75dad3ba4d866d0a0800000000000000
+      internalID: -6857178120009700009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_12
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc6c64da5bdbc9920800000000000000
+      internalID: 2998480039915734733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_13
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83f9e9291148df1b0800000000000000
+      internalID: -5621191548879331528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b9373122ddf715e0800000000000000
+      internalID: -1938802035617482317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_15
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e043a5837cbf4580800000000000000
+      internalID: -8840640339155664671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_16
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0194e59e17447420800000000000000
+      internalID: 2626802679353217294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_17
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 519ac89e7f62de760800000000000000
+      internalID: 7488684601604090133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_18
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eef9f41324cea520800000000000000
+      internalID: 2715323280305815273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_19
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c2c08cbe6fc293b0800000000000000
+      internalID: -5507111319804788031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_20
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa225944264273100800000000000000
+      internalID: 87578722233033386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7738860b20ceb2d40800000000000000
+      internalID: 5560797661212738423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_22
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c88cc729ff8df2350800000000000000
+      internalID: 5994248221239330956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_23
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0a028c7aa20b9cd0800000000000000
+      internalID: -2550441832718661107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_24
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 132b44bf9b0924d70800000000000000
+      internalID: 9025935731662828081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_25
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eb2108d28f7bbce0800000000000000
+      internalID: -1388375860167234592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_26
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d986e1212977c9370800000000000000
+      internalID: 8330664879981488285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_27
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6edae87dfa4c89100800000000000000
+      internalID: 115058050012720614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_casting_28
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2193896b34189f30800000000000000
+      internalID: 4582434866255335724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f00f290aa2cda244e8fea55990480bf7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_green_casting_0: -6929223769400371951
+      Lich_green_casting_1: -8057716606097129833
+      Lich_green_casting_10: -2103717012362409998
+      Lich_green_casting_11: -6857178120009700009
+      Lich_green_casting_12: 2998480039915734733
+      Lich_green_casting_13: -5621191548879331528
+      Lich_green_casting_14: -1938802035617482317
+      Lich_green_casting_15: -8840640339155664671
+      Lich_green_casting_16: 2626802679353217294
+      Lich_green_casting_17: 7488684601604090133
+      Lich_green_casting_18: 2715323280305815273
+      Lich_green_casting_19: -5507111319804788031
+      Lich_green_casting_2: 5419507540549109923
+      Lich_green_casting_20: 87578722233033386
+      Lich_green_casting_21: 5560797661212738423
+      Lich_green_casting_22: 5994248221239330956
+      Lich_green_casting_23: -2550441832718661107
+      Lich_green_casting_24: 9025935731662828081
+      Lich_green_casting_25: -1388375860167234592
+      Lich_green_casting_26: 8330664879981488285
+      Lich_green_casting_27: 115058050012720614
+      Lich_green_casting_28: 4582434866255335724
+      Lich_green_casting_3: 4686591717958443431
+      Lich_green_casting_4: -1175815874845176802
+      Lich_green_casting_5: -3321374289069184454
+      Lich_green_casting_6: 620351603303950718
+      Lich_green_casting_7: -4878150239458509607
+      Lich_green_casting_8: -8316774835867780828
+      Lich_green_casting_9: 2412606237951501052
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

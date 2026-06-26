@@ -1,0 +1,537 @@
+fileFormatVersion: 2
+guid: 4334863ddb363b747b29a27acf6c6006
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -528135971950631703
+    second: Lich_blue_death_0
+  - first:
+      213: -9109683107996899069
+    second: Lich_blue_death_1
+  - first:
+      213: 5346155033149696175
+    second: Lich_blue_death_2
+  - first:
+      213: -3758659632594167120
+    second: Lich_blue_death_3
+  - first:
+      213: 1510089248382328150
+    second: Lich_blue_death_4
+  - first:
+      213: -7176961769410644234
+    second: Lich_blue_death_5
+  - first:
+      213: -209628782079591878
+    second: Lich_blue_death_6
+  - first:
+      213: 6155209694013429587
+    second: Lich_blue_death_7
+  - first:
+      213: -5281645876933705026
+    second: Lich_blue_death_8
+  - first:
+      213: 7973944053568196299
+    second: Lich_blue_death_9
+  - first:
+      213: -3946320045172611770
+    second: Lich_blue_death_10
+  - first:
+      213: -6807955743183606032
+    second: Lich_blue_death_11
+  - first:
+      213: 4780542381794434137
+    second: Lich_blue_death_12
+  - first:
+      213: -8488149687894090123
+    second: Lich_blue_death_13
+  - first:
+      213: 590434309524568252
+    second: Lich_blue_death_14
+  - first:
+      213: 6527297561373793934
+    second: Lich_blue_death_15
+  - first:
+      213: -6918512783245352920
+    second: Lich_blue_death_16
+  - first:
+      213: 1884019383199710610
+    second: Lich_blue_death_17
+  - first:
+      213: 4879519198237518462
+    second: Lich_blue_death_18
+  - first:
+      213: 806865293623340607
+    second: Lich_blue_death_19
+  - first:
+      213: -7954880957050208362
+    second: Lich_blue_death_20
+  - first:
+      213: 2403763780728437703
+    second: Lich_blue_death_21
+  - first:
+      213: 8888804134816862654
+    second: Lich_blue_death_22
+  - first:
+      213: 1756721261329543077
+    second: Lich_blue_death_23
+  - first:
+      213: 9159636548927220763
+    second: Lich_blue_death_24
+  - first:
+      213: -8146928787687640339
+    second: Lich_blue_death_25
+  - first:
+      213: -2421607624422664652
+    second: Lich_blue_death_26
+  - first:
+      213: 5272951053678141214
+    second: Lich_blue_death_27
+  - first:
+      213: 7096459416926091333
+    second: Lich_blue_death_28
+  - first:
+      213: 1039327838078282498
+    second: Lich_blue_death_29
+  - first:
+      213: -8563160730039058413
+    second: Lich_blue_death_30
+  - first:
+      213: -5676319703530524264
+    second: Lich_blue_death_31
+  - first:
+      213: -6076097613839758287
+    second: Lich_blue_death_32
+  - first:
+      213: -5769666448386011128
+    second: Lich_blue_death_33
+  - first:
+      213: 4202113073447581298
+    second: Lich_blue_death_34
+  - first:
+      213: -6158338878685521968
+    second: Lich_blue_death_35
+  - first:
+      213: -6529271937146210408
+    second: Lich_blue_death_36
+  - first:
+      213: 6949281837546507560
+    second: Lich_blue_death_37
+  - first:
+      213: -6725082758865990586
+    second: Lich_blue_death_38
+  - first:
+      213: 4285468145276099153
+    second: Lich_blue_death_39
+  - first:
+      213: -9214846471911854644
+    second: Lich_blue_death_40
+  - first:
+      213: -6061537871999890118
+    second: Lich_blue_death_41
+  - first:
+      213: -7187787485225388868
+    second: Lich_blue_death_42
+  - first:
+      213: -5234437466225540003
+    second: Lich_blue_death_43
+  - first:
+      213: 8210716430276324896
+    second: Lich_blue_death_44
+  - first:
+      213: -5985650190719926390
+    second: Lich_blue_death_45
+  - first:
+      213: -5662869087762142686
+    second: Lich_blue_death_46
+  - first:
+      213: 4301469440919644351
+    second: Lich_blue_death_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_blue_death_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e4e6c6b12faba8f0800000000000000
+      internalID: -528135971950631703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 309e77b7a77e39180800000000000000
+      internalID: -9109683107996899069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa8ed017dab513a40800000000000000
+      internalID: 5346155033149696175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0badf977afe86dbc0800000000000000
+      internalID: -3758659632594167120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65d17fcab2ae4f410800000000000000
+      internalID: 1510089248382328150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f638bfbb4f466c90800000000000000
+      internalID: -7176961769410644234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3ab27dbbbf371df0800000000000000
+      internalID: -209628782079591878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_7
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35716b1ea92bb6550800000000000000
+      internalID: 6155209694013429587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_8
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb2c5fbee03d3b6b0800000000000000
+      internalID: -5281645876933705026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_9
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bce45c37ed329ae60800000000000000
+      internalID: 7973944053568196299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_10
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 645ab71d3dadb39c0800000000000000
+      internalID: -3946320045172611770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_death_11
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fee5f852584581a0800000000000000
+      internalID: -6807955743183606032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 142d5f3b55e662945871915075910e4a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_blue_death_0: -528135971950631703
+      Lich_blue_death_1: -9109683107996899069
+      Lich_blue_death_10: -3946320045172611770
+      Lich_blue_death_11: -6807955743183606032
+      Lich_blue_death_2: 5346155033149696175
+      Lich_blue_death_3: -3758659632594167120
+      Lich_blue_death_4: 1510089248382328150
+      Lich_blue_death_5: -7176961769410644234
+      Lich_blue_death_6: -209628782079591878
+      Lich_blue_death_7: 6155209694013429587
+      Lich_blue_death_8: -5281645876933705026
+      Lich_blue_death_9: 7973944053568196299
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

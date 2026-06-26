@@ -1,0 +1,2379 @@
+fileFormatVersion: 2
+guid: 196a6238bb8d4fc43b3e04e8b997c98c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2257658821762066765
+    second: Lich_magenta_casting_0
+  - first:
+      213: 8254877223795385691
+    second: Lich_magenta_casting_1
+  - first:
+      213: -6845556128749503555
+    second: Lich_magenta_casting_2
+  - first:
+      213: -7592122667736968289
+    second: Lich_magenta_casting_3
+  - first:
+      213: 5058105889216702955
+    second: Lich_magenta_casting_4
+  - first:
+      213: -6987243640471774740
+    second: Lich_magenta_casting_5
+  - first:
+      213: -2521482385982959292
+    second: Lich_magenta_casting_6
+  - first:
+      213: 6737600403667607398
+    second: Lich_magenta_casting_7
+  - first:
+      213: 2854332935824456767
+    second: Lich_magenta_casting_8
+  - first:
+      213: -5586386767136170122
+    second: Lich_magenta_casting_9
+  - first:
+      213: -6407948801274241242
+    second: Lich_magenta_casting_10
+  - first:
+      213: -3482826820904134692
+    second: Lich_magenta_casting_11
+  - first:
+      213: 2139415779871223868
+    second: Lich_magenta_casting_12
+  - first:
+      213: -8764490971372894430
+    second: Lich_magenta_casting_13
+  - first:
+      213: 627731141132089645
+    second: Lich_magenta_casting_14
+  - first:
+      213: 8976429054455040651
+    second: Lich_magenta_casting_15
+  - first:
+      213: 8483289757121866249
+    second: Lich_magenta_casting_16
+  - first:
+      213: -3064378405830341232
+    second: Lich_magenta_casting_17
+  - first:
+      213: -7164443787767316409
+    second: Lich_magenta_casting_18
+  - first:
+      213: -7061318616853528626
+    second: Lich_magenta_casting_19
+  - first:
+      213: -8742125794361875334
+    second: Lich_magenta_casting_20
+  - first:
+      213: 3164832375474259716
+    second: Lich_magenta_casting_21
+  - first:
+      213: -3121362230811740331
+    second: Lich_magenta_casting_22
+  - first:
+      213: 2841825724616166934
+    second: Lich_magenta_casting_23
+  - first:
+      213: 4021460265158079998
+    second: Lich_magenta_casting_24
+  - first:
+      213: -6598066335706424552
+    second: Lich_magenta_casting_25
+  - first:
+      213: -1210836632216698856
+    second: Lich_magenta_casting_26
+  - first:
+      213: -6163032077222772953
+    second: Lich_magenta_casting_27
+  - first:
+      213: 6146892862172366797
+    second: Lich_magenta_casting_28
+  - first:
+      213: -9045922470589517845
+    second: Lich_magenta_casting_29
+  - first:
+      213: 7863617891329770458
+    second: Lich_magenta_casting_30
+  - first:
+      213: -1444617763870032352
+    second: Lich_magenta_casting_31
+  - first:
+      213: 5525657901188875221
+    second: Lich_magenta_casting_32
+  - first:
+      213: 5980767728654876620
+    second: Lich_magenta_casting_33
+  - first:
+      213: 3350910974748888277
+    second: Lich_magenta_casting_34
+  - first:
+      213: -4981693893311105627
+    second: Lich_magenta_casting_35
+  - first:
+      213: 2737093055671140810
+    second: Lich_magenta_casting_36
+  - first:
+      213: -1723912414908073453
+    second: Lich_magenta_casting_37
+  - first:
+      213: -7932945809776834700
+    second: Lich_magenta_casting_38
+  - first:
+      213: 6113562595763667297
+    second: Lich_magenta_casting_39
+  - first:
+      213: -5946522949694138402
+    second: Lich_magenta_casting_40
+  - first:
+      213: 8893416716191036167
+    second: Lich_magenta_casting_41
+  - first:
+      213: 1491286613871588338
+    second: Lich_magenta_casting_42
+  - first:
+      213: 5170472372119674562
+    second: Lich_magenta_casting_43
+  - first:
+      213: -8362687358262461832
+    second: Lich_magenta_casting_44
+  - first:
+      213: 3286719311296967547
+    second: Lich_magenta_casting_45
+  - first:
+      213: 6292711163647374512
+    second: Lich_magenta_casting_46
+  - first:
+      213: 1924475310813402815
+    second: Lich_magenta_casting_47
+  - first:
+      213: -4328519417388787638
+    second: Lich_magenta_casting_48
+  - first:
+      213: 6665056428520537858
+    second: Lich_magenta_casting_49
+  - first:
+      213: 2331745334402103132
+    second: Lich_magenta_casting_50
+  - first:
+      213: -754851604803339910
+    second: Lich_magenta_casting_51
+  - first:
+      213: 4275413151529636048
+    second: Lich_magenta_casting_52
+  - first:
+      213: 2737088563335459174
+    second: Lich_magenta_casting_53
+  - first:
+      213: -6318351875582489782
+    second: Lich_magenta_casting_54
+  - first:
+      213: -3479116878229528967
+    second: Lich_magenta_casting_55
+  - first:
+      213: 7725924427424305647
+    second: Lich_magenta_casting_56
+  - first:
+      213: -1450499325085856667
+    second: Lich_magenta_casting_57
+  - first:
+      213: 8214341098962154019
+    second: Lich_magenta_casting_58
+  - first:
+      213: 3372000955233533438
+    second: Lich_magenta_casting_59
+  - first:
+      213: -2925427226536646324
+    second: Lich_magenta_casting_60
+  - first:
+      213: -479902770193725827
+    second: Lich_magenta_casting_61
+  - first:
+      213: -3726861866401039623
+    second: Lich_magenta_casting_62
+  - first:
+      213: 6235833316174831909
+    second: Lich_magenta_casting_63
+  - first:
+      213: -7668984273179037414
+    second: Lich_magenta_casting_64
+  - first:
+      213: 5048667568335810214
+    second: Lich_magenta_casting_65
+  - first:
+      213: -1290815668739159428
+    second: Lich_magenta_casting_66
+  - first:
+      213: 6259775324974922229
+    second: Lich_magenta_casting_67
+  - first:
+      213: -1419003602639375849
+    second: Lich_magenta_casting_68
+  - first:
+      213: 8296490462868478962
+    second: Lich_magenta_casting_69
+  - first:
+      213: 882826538660039309
+    second: Lich_magenta_casting_70
+  - first:
+      213: 4805620624170499339
+    second: Lich_magenta_casting_71
+  - first:
+      213: -4188812164967489174
+    second: Lich_magenta_casting_72
+  - first:
+      213: -9213384484161492393
+    second: Lich_magenta_casting_73
+  - first:
+      213: -136143358072325916
+    second: Lich_magenta_casting_74
+  - first:
+      213: -3639347540872719262
+    second: Lich_magenta_casting_75
+  - first:
+      213: -5343608437365124874
+    second: Lich_magenta_casting_76
+  - first:
+      213: -8988761427893964013
+    second: Lich_magenta_casting_77
+  - first:
+      213: -7694779811159208616
+    second: Lich_magenta_casting_78
+  - first:
+      213: 4147118038563186608
+    second: Lich_magenta_casting_79
+  - first:
+      213: 5851503691490553023
+    second: Lich_magenta_casting_80
+  - first:
+      213: 7173806691603548831
+    second: Lich_magenta_casting_81
+  - first:
+      213: -8487895767639310193
+    second: Lich_magenta_casting_82
+  - first:
+      213: 1792887310893485228
+    second: Lich_magenta_casting_83
+  - first:
+      213: 6907019377196518282
+    second: Lich_magenta_casting_84
+  - first:
+      213: 1514600793489499731
+    second: Lich_magenta_casting_85
+  - first:
+      213: 3092156681551974999
+    second: Lich_magenta_casting_86
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_magenta_casting_0
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 479
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b658d0634f2ba0e0800000000000000
+      internalID: -2257658821762066765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_1
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 484
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5569cc49173f8270800000000000000
+      internalID: 8254877223795385691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_2
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 492
+        width: 26
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbb33ef58f2bff0a0800000000000000
+      internalID: -6845556128749503555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_3
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 489
+        width: 28
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f93d85298ac53a690800000000000000
+      internalID: -7592122667736968289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_4
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 479
+        width: 31
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be9a21bd180023640800000000000000
+      internalID: 5058105889216702955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_5
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 474
+        width: 31
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce99292dde2580f90800000000000000
+      internalID: -6987243640471774740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_6
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 465
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 441d41c1125e10dd0800000000000000
+      internalID: -2521482385982959292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_7
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 471
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66fd22baed3c08d50800000000000000
+      internalID: 6737600403667607398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_8
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 463
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3cb386aea0ac9720800000000000000
+      internalID: 2854332935824456767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_9
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 471
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67fd7ee45da2972b0800000000000000
+      internalID: -5586386767136170122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_10
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 472
+        width: 23
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62f982914846217a0800000000000000
+      internalID: -6407948801274241242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_11
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 473
+        width: 28
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd75ecd85738aafc0800000000000000
+      internalID: -3482826820904134692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_12
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 454
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c30f612115bb0bd10800000000000000
+      internalID: 2139415779871223868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_13
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 401
+        width: 45
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2274336d5e54e5680800000000000000
+      internalID: -8764490971372894430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_14
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 458
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d29f0a1a52626b800800000000000000
+      internalID: 627731141132089645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_15
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 402
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8ac9467aaea29c70800000000000000
+      internalID: 8976429054455040651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_16
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 403
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90a65f37613bab570800000000000000
+      internalID: 8483289757121866249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_17
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 403
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09dca1f53142975d0800000000000000
+      internalID: -3064378405830341232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_18
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 403
+        width: 46
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74000e87558c29c90800000000000000
+      internalID: -7164443787767316409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_19
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 402
+        width: 46
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecfb7946128210e90800000000000000
+      internalID: -7061318616853528626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_20
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 402
+        width: 46
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a74e74568eabda680800000000000000
+      internalID: -8742125794361875334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_21
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 344
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4078cc9074ebbeb20800000000000000
+      internalID: 3164832375474259716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_22
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 346
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5573529b691bea4d0800000000000000
+      internalID: -3121362230811740331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_23
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 342
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61e405d9071307720800000000000000
+      internalID: 2841825724616166934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_24
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 346
+        width: 47
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef57817fdc81fc730800000000000000
+      internalID: 4021460265158079998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_25
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 343
+        width: 56
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81b51cf20a5fe64a0800000000000000
+      internalID: -6598066335706424552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_26
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 353
+        width: 61
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81081bf8f7e323fe0800000000000000
+      internalID: -1210836632216698856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_27
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 348
+        width: 50
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72f7cc99af2887aa0800000000000000
+      internalID: -6163032077222772953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_28
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 344
+        width: 58
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc70b229d762e4550800000000000000
+      internalID: 6146892862172366797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_29
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 343
+        width: 38
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: befa9cab07d667280800000000000000
+      internalID: -9045922470589517845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_30
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 345
+        width: 39
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad30e161fce212d60800000000000000
+      internalID: 7863617891329770458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_31
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 342
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02ebe443ccfa3fbe0800000000000000
+      internalID: -1444617763870032352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_32
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 346
+        width: 47
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d381beb5941fac40800000000000000
+      internalID: 5525657901188875221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_33
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 343
+        width: 56
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccff79ecf84fff250800000000000000
+      internalID: 5980767728654876620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_34
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 353
+        width: 61
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dc8dd317c3d08e20800000000000000
+      internalID: 3350910974748888277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_35
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 273
+        width: 46
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a575755cc77ddab0800000000000000
+      internalID: -4981693893311105627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_36
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 273
+        width: 46
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac18774e1ab1cf520800000000000000
+      internalID: 2737093055671140810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_37
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 274
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31ab485dace6318e0800000000000000
+      internalID: -1723912414908073453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_38
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 275
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47704d901d388e190800000000000000
+      internalID: -7932945809776834700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_39
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 275
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 161cb903accb7d450800000000000000
+      internalID: 6113562595763667297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_40
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 275
+        width: 46
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed7d5ce12e4b97da0800000000000000
+      internalID: -5946522949694138402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_41
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 274
+        width: 45
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70376105263cb6b70800000000000000
+      internalID: 8893416716191036167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_42
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 220
+        width: 50
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f37c1e264d12b410800000000000000
+      internalID: 1491286613871588338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_43
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 216
+        width: 58
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ce1a256a3531c740800000000000000
+      internalID: 5170472372119674562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_44
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 215
+        width: 38
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87abd13b724c1fb80800000000000000
+      internalID: -8362687358262461832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_45
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 217
+        width: 39
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b73b542ccc5cc9d20800000000000000
+      internalID: 3286719311296967547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_46
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 214
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b4365f8673345750800000000000000
+      internalID: 6292711163647374512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_47
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 218
+        width: 47
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb6da00591c15ba10800000000000000
+      internalID: 1924475310813402815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_48
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 215
+        width: 56
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a48192bf5820ee3c0800000000000000
+      internalID: -4328519417388787638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_49
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 225
+        width: 61
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20f76ed32890f7c50800000000000000
+      internalID: 6665056428520537858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_50
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 220
+        width: 50
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5736bb07060c5020800000000000000
+      internalID: 2331745334402103132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_51
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 216
+        width: 58
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a79309df67a3685f0800000000000000
+      internalID: -754851604803339910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_52
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 215
+        width: 38
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d015f4fb91555b30800000000000000
+      internalID: 4275413151529636048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_53
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 217
+        width: 39
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 661f460fb871cf520800000000000000
+      internalID: 2737088563335459174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_54
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 214
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4b8bf9f174b058a0800000000000000
+      internalID: -6318351875582489782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_55
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 218
+        width: 47
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97e1015e1a1b7bfc0800000000000000
+      internalID: -3479116878229528967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_56
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 145
+        width: 45
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe19322455ff73b60800000000000000
+      internalID: 7725924427424305647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_57
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 146
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56c40558c8acedbe0800000000000000
+      internalID: -1450499325085856667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_58
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 147
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 322f78345b33ff170800000000000000
+      internalID: 8214341098962154019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_59
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 147
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efdf8fec001cbce20800000000000000
+      internalID: 3372000955233533438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_60
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 147
+        width: 46
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c49e602ef6bc667d0800000000000000
+      internalID: -2925427226536646324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_61
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 146
+        width: 46
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7680ef19fa0759f0800000000000000
+      internalID: -479902770193725827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_62
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 146
+        width: 46
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fa7736d0e6874cc0800000000000000
+      internalID: -3726861866401039623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_63
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 87
+        width: 56
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 521a529bc512a8650800000000000000
+      internalID: 6235833316174831909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_64
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 97
+        width: 61
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a113b118f6b429590800000000000000
+      internalID: -7668984273179037414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_65
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 92
+        width: 50
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aee0b78768701640800000000000000
+      internalID: 5048667568335810214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_66
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 88
+        width: 58
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7a4b420df9161ee0800000000000000
+      internalID: -1290815668739159428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_67
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 87
+        width: 38
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f9b2ea0e703fd650800000000000000
+      internalID: 6259775324974922229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_68
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 89
+        width: 39
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7123ea9ddbfae4ce0800000000000000
+      internalID: -1419003602639375849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_69
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 86
+        width: 29
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fb11b98e1e032370800000000000000
+      internalID: 8296490462868478962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_70
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 99
+        width: 36
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8a8e1b3f0e604c00800000000000000
+      internalID: 882826538660039309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_71
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 104
+        width: 30
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0d39f41f7ef0b240800000000000000
+      internalID: 4805620624170499339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_72
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 93
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a61274c77895ed5c0800000000000000
+      internalID: -4188812164967489174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_73
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 86
+        width: 30
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75a657250ab732080800000000000000
+      internalID: -9213384484161492393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_74
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 87
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e8f19f46525c1ef0800000000000000
+      internalID: -136143358072325916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_75
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 81
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 264171491b07e7dc0800000000000000
+      internalID: -3639347540872719262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_76
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 83
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f052181070b7d5b0800000000000000
+      internalID: -5343608437365124874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_77
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 75
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 313b5a71b11814380800000000000000
+      internalID: -8988761427893964013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_78
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 81
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85d020bc786a63590800000000000000
+      internalID: -7694779811159208616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_79
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 17
+        width: 46
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b76c2a32e58d8930800000000000000
+      internalID: 4147118038563186608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_80
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 17
+        width: 46
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbc6e25da97b43150800000000000000
+      internalID: 5851503691490553023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_81
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 18
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9a89547d2b7e8360800000000000000
+      internalID: 7173806691603548831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_82
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 19
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f80415725cfe43a80800000000000000
+      internalID: -8487895767639310193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_83
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 19
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cac8c18928d91e810800000000000000
+      internalID: 1792887310893485228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_84
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 19
+        width: 46
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8bc9825789aadf50800000000000000
+      internalID: 6907019377196518282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_85
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 18
+        width: 45
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3566770a561f40510800000000000000
+      internalID: 1514600793489499731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_casting_86
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 18
+        width: 45
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75291c17e1c89ea20800000000000000
+      internalID: 3092156681551974999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_magenta_casting_0: -2257658821762066765
+      Lich_magenta_casting_1: 8254877223795385691
+      Lich_magenta_casting_10: -6407948801274241242
+      Lich_magenta_casting_11: -3482826820904134692
+      Lich_magenta_casting_12: 2139415779871223868
+      Lich_magenta_casting_13: -8764490971372894430
+      Lich_magenta_casting_14: 627731141132089645
+      Lich_magenta_casting_15: 8976429054455040651
+      Lich_magenta_casting_16: 8483289757121866249
+      Lich_magenta_casting_17: -3064378405830341232
+      Lich_magenta_casting_18: -7164443787767316409
+      Lich_magenta_casting_19: -7061318616853528626
+      Lich_magenta_casting_2: -6845556128749503555
+      Lich_magenta_casting_20: -8742125794361875334
+      Lich_magenta_casting_21: 3164832375474259716
+      Lich_magenta_casting_22: -3121362230811740331
+      Lich_magenta_casting_23: 2841825724616166934
+      Lich_magenta_casting_24: 4021460265158079998
+      Lich_magenta_casting_25: -6598066335706424552
+      Lich_magenta_casting_26: -1210836632216698856
+      Lich_magenta_casting_27: -6163032077222772953
+      Lich_magenta_casting_28: 6146892862172366797
+      Lich_magenta_casting_29: -9045922470589517845
+      Lich_magenta_casting_3: -7592122667736968289
+      Lich_magenta_casting_30: 7863617891329770458
+      Lich_magenta_casting_31: -1444617763870032352
+      Lich_magenta_casting_32: 5525657901188875221
+      Lich_magenta_casting_33: 5980767728654876620
+      Lich_magenta_casting_34: 3350910974748888277
+      Lich_magenta_casting_35: -4981693893311105627
+      Lich_magenta_casting_36: 2737093055671140810
+      Lich_magenta_casting_37: -1723912414908073453
+      Lich_magenta_casting_38: -7932945809776834700
+      Lich_magenta_casting_39: 6113562595763667297
+      Lich_magenta_casting_4: 5058105889216702955
+      Lich_magenta_casting_40: -5946522949694138402
+      Lich_magenta_casting_41: 8893416716191036167
+      Lich_magenta_casting_42: 1491286613871588338
+      Lich_magenta_casting_43: 5170472372119674562
+      Lich_magenta_casting_44: -8362687358262461832
+      Lich_magenta_casting_45: 3286719311296967547
+      Lich_magenta_casting_46: 6292711163647374512
+      Lich_magenta_casting_47: 1924475310813402815
+      Lich_magenta_casting_48: -4328519417388787638
+      Lich_magenta_casting_49: 6665056428520537858
+      Lich_magenta_casting_5: -6987243640471774740
+      Lich_magenta_casting_50: 2331745334402103132
+      Lich_magenta_casting_51: -754851604803339910
+      Lich_magenta_casting_52: 4275413151529636048
+      Lich_magenta_casting_53: 2737088563335459174
+      Lich_magenta_casting_54: -6318351875582489782
+      Lich_magenta_casting_55: -3479116878229528967
+      Lich_magenta_casting_56: 7725924427424305647
+      Lich_magenta_casting_57: -1450499325085856667
+      Lich_magenta_casting_58: 8214341098962154019
+      Lich_magenta_casting_59: 3372000955233533438
+      Lich_magenta_casting_6: -2521482385982959292
+      Lich_magenta_casting_60: -2925427226536646324
+      Lich_magenta_casting_61: -479902770193725827
+      Lich_magenta_casting_62: -3726861866401039623
+      Lich_magenta_casting_63: 6235833316174831909
+      Lich_magenta_casting_64: -7668984273179037414
+      Lich_magenta_casting_65: 5048667568335810214
+      Lich_magenta_casting_66: -1290815668739159428
+      Lich_magenta_casting_67: 6259775324974922229
+      Lich_magenta_casting_68: -1419003602639375849
+      Lich_magenta_casting_69: 8296490462868478962
+      Lich_magenta_casting_7: 6737600403667607398
+      Lich_magenta_casting_70: 882826538660039309
+      Lich_magenta_casting_71: 4805620624170499339
+      Lich_magenta_casting_72: -4188812164967489174
+      Lich_magenta_casting_73: -9213384484161492393
+      Lich_magenta_casting_74: -136143358072325916
+      Lich_magenta_casting_75: -3639347540872719262
+      Lich_magenta_casting_76: -5343608437365124874
+      Lich_magenta_casting_77: -8988761427893964013
+      Lich_magenta_casting_78: -7694779811159208616
+      Lich_magenta_casting_79: 4147118038563186608
+      Lich_magenta_casting_8: 2854332935824456767
+      Lich_magenta_casting_80: 5851503691490553023
+      Lich_magenta_casting_81: 7173806691603548831
+      Lich_magenta_casting_82: -8487895767639310193
+      Lich_magenta_casting_83: 1792887310893485228
+      Lich_magenta_casting_84: 6907019377196518282
+      Lich_magenta_casting_85: 1514600793489499731
+      Lich_magenta_casting_86: 3092156681551974999
+      Lich_magenta_casting_9: -5586386767136170122
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

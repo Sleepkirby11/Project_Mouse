@@ -1,0 +1,1365 @@
+fileFormatVersion: 2
+guid: 5612fcf5a260fae4d9df8af8dc5b5a35
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1192076338761156345
+    second: Lich_magenta_death_0
+  - first:
+      213: -7423551814974647495
+    second: Lich_magenta_death_1
+  - first:
+      213: 491669989261957001
+    second: Lich_magenta_death_2
+  - first:
+      213: -404935340925963108
+    second: Lich_magenta_death_3
+  - first:
+      213: -7734921909306818682
+    second: Lich_magenta_death_4
+  - first:
+      213: -7886084018718750874
+    second: Lich_magenta_death_5
+  - first:
+      213: -7727159133960876114
+    second: Lich_magenta_death_6
+  - first:
+      213: 5631010000868367787
+    second: Lich_magenta_death_7
+  - first:
+      213: -8640637087316216423
+    second: Lich_magenta_death_8
+  - first:
+      213: -1544842675951416010
+    second: Lich_magenta_death_9
+  - first:
+      213: -4272257439040064841
+    second: Lich_magenta_death_10
+  - first:
+      213: -7549095250457769462
+    second: Lich_magenta_death_11
+  - first:
+      213: 7474259947849919077
+    second: Lich_magenta_death_12
+  - first:
+      213: 235653815535954715
+    second: Lich_magenta_death_13
+  - first:
+      213: 4495595064538949776
+    second: Lich_magenta_death_14
+  - first:
+      213: -431733939956422794
+    second: Lich_magenta_death_15
+  - first:
+      213: 7026043981060583371
+    second: Lich_magenta_death_16
+  - first:
+      213: 4349926879657333172
+    second: Lich_magenta_death_17
+  - first:
+      213: -74976136463472813
+    second: Lich_magenta_death_18
+  - first:
+      213: 4136470293669855426
+    second: Lich_magenta_death_19
+  - first:
+      213: 7520007456555527791
+    second: Lich_magenta_death_20
+  - first:
+      213: 4908298033010408886
+    second: Lich_magenta_death_21
+  - first:
+      213: 5794855338170957449
+    second: Lich_magenta_death_22
+  - first:
+      213: 3803855818502337801
+    second: Lich_magenta_death_23
+  - first:
+      213: -7936958239924856567
+    second: Lich_magenta_death_24
+  - first:
+      213: 3477539108785339679
+    second: Lich_magenta_death_25
+  - first:
+      213: 911780419788073384
+    second: Lich_magenta_death_26
+  - first:
+      213: 5513182149426965753
+    second: Lich_magenta_death_27
+  - first:
+      213: 7825103908906068654
+    second: Lich_magenta_death_28
+  - first:
+      213: 1094297313683457380
+    second: Lich_magenta_death_29
+  - first:
+      213: 3878739263738913489
+    second: Lich_magenta_death_30
+  - first:
+      213: 5493708557742522913
+    second: Lich_magenta_death_31
+  - first:
+      213: -4796525313533935250
+    second: Lich_magenta_death_32
+  - first:
+      213: 2924674151676084375
+    second: Lich_magenta_death_33
+  - first:
+      213: 6439918454002715889
+    second: Lich_magenta_death_34
+  - first:
+      213: 5212312507858245401
+    second: Lich_magenta_death_35
+  - first:
+      213: -2040398433044299499
+    second: Lich_magenta_death_36
+  - first:
+      213: 5355938076048251074
+    second: Lich_magenta_death_37
+  - first:
+      213: -286445637763104766
+    second: Lich_magenta_death_38
+  - first:
+      213: -3670260668776915056
+    second: Lich_magenta_death_39
+  - first:
+      213: 3746071286202079644
+    second: Lich_magenta_death_40
+  - first:
+      213: -8052611820116690916
+    second: Lich_magenta_death_41
+  - first:
+      213: 8714972505627213212
+    second: Lich_magenta_death_42
+  - first:
+      213: -7774901013487347939
+    second: Lich_magenta_death_43
+  - first:
+      213: -1256968769582983989
+    second: Lich_magenta_death_44
+  - first:
+      213: 7748212196410244780
+    second: Lich_magenta_death_45
+  - first:
+      213: -964325289991263761
+    second: Lich_magenta_death_46
+  - first:
+      213: 8267949197441961421
+    second: Lich_magenta_death_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_magenta_death_0
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 195
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7093ef2c2e4e47fe0800000000000000
+      internalID: -1192076338761156345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_1
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 145
+        width: 45
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 933dab8b4fe3af890800000000000000
+      internalID: -7423551814974647495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_2
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 199
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 987dda01043c2d600800000000000000
+      internalID: 491669989261957001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_3
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 198
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c943b1fe371616af0800000000000000
+      internalID: -404935340925963108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_4
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 146
+        width: 45
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68f716e318908a490800000000000000
+      internalID: -7734921909306818682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_5
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 201
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66742630e500f8290800000000000000
+      internalID: -7886084018718750874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_6
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 143
+        width: 49
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eafc85935bd93c490800000000000000
+      internalID: -7727159133960876114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_7
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 140
+        width: 51
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bad5e6ce2cd552e40800000000000000
+      internalID: 5631010000868367787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_8
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 20
+        width: 122
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9957371695a461880800000000000000
+      internalID: -8640637087316216423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_9
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 19
+        width: 127
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63d4d0a65cd9f8ae0800000000000000
+      internalID: -1544842675951416010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_10
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 205
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b23ffc9e74e5b4c0800000000000000
+      internalID: -4272257439040064841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_11
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 177
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0a40e4ddd93c3790800000000000000
+      internalID: -7549095250457769462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_12
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 169
+        width: 25
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56a268e72d7e9b760800000000000000
+      internalID: 7474259947849919077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_13
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 156
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1b6cfc85e5354300800000000000000
+      internalID: 235653815535954715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_14
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 84
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 098e7db74ef836e30800000000000000
+      internalID: 4495595064538949776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_15
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 20
+        width: 24
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 677ea6fd44c220af0800000000000000
+      internalID: -431733939956422794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_16
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 83
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcf236376c5818160800000000000000
+      internalID: 7026043981060583371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_17
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 86
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b116ec337b0e5c30800000000000000
+      internalID: 4349926879657333172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_18
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 24
+        width: 12
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 357a673e991a5fef0800000000000000
+      internalID: -74976136463472813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_19
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 86
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c0c52ee0d1b76930800000000000000
+      internalID: 4136470293669855426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_20
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 88
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6ee74460fe6c5860800000000000000
+      internalID: 7520007456555527791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_21
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 28
+        width: 9
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd75554e07cd1440800000000000000
+      internalID: 4908298033010408886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_22
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 88
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98eb4744a367b6050800000000000000
+      internalID: 5794855338170957449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_23
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 89
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90572a696b20ac430800000000000000
+      internalID: 3803855818502337801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_24
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 41
+        width: 8
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9095b2858824ad190800000000000000
+      internalID: -7936958239924856567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_25
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 96
+        width: 22
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1dbda70563b24030800000000000000
+      internalID: 3477539108785339679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_26
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 59
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a9ef92067b47ac00800000000000000
+      internalID: 911780419788073384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_27
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 53
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fc6e9e64f1c28c40800000000000000
+      internalID: 5513182149426965753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_28
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 62
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaaedd4cb8a589c60800000000000000
+      internalID: 7825103908906068654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_29
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 55
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46544c4eb99bf2f00800000000000000
+      internalID: 1094297313683457380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_30
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 64
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d2a4875fcc04d530800000000000000
+      internalID: 3878739263738913489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_31
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 46
+        width: 17
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12244cb83d29d3c40800000000000000
+      internalID: 5493708557742522913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_32
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 72
+        width: 22
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6104a2f3a15f6db0800000000000000
+      internalID: -4796525313533935250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_33
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 58
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7908b6635a7869820800000000000000
+      internalID: 2924674151676084375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_34
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 50
+        width: 21
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc8059b6bf2f5950800000000000000
+      internalID: 6439918454002715889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_35
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 36
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91757312c9ad55840800000000000000
+      internalID: 5212312507858245401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_36
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 27
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51181268f6c0fa3e0800000000000000
+      internalID: -2040398433044299499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_37
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 41
+        width: 26
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c858dd9d4d145a40800000000000000
+      internalID: 5355938076048251074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_38
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 51
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2008ba9c537560cf0800000000000000
+      internalID: -286445637763104766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_39
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 34
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09fd67c1e5d901dc0800000000000000
+      internalID: -3670260668776915056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_40
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 25
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c999d5dbcf7bcf330800000000000000
+      internalID: 3746071286202079644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_41
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 43
+        width: 28
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1835d3d6306f3090800000000000000
+      internalID: -8052611820116690916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_42
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 52
+        width: 31
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9db439e15dc1f870800000000000000
+      internalID: 8714972505627213212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_43
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 32
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d17134fa8b00a1490800000000000000
+      internalID: -7774901013487347939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_44
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 23
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc41f3350995e8ee0800000000000000
+      internalID: -1256968769582983989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_45
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 44
+        width: 20
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caeb16bd0fd278b60800000000000000
+      internalID: 7748212196410244780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_46
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 31
+        width: 31
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe9252a02470e92f0800000000000000
+      internalID: -964325289991263761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_death_47
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 22
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcd01865df7adb270800000000000000
+      internalID: 8267949197441961421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_magenta_death_0: -1192076338761156345
+      Lich_magenta_death_1: -7423551814974647495
+      Lich_magenta_death_10: -4272257439040064841
+      Lich_magenta_death_11: -7549095250457769462
+      Lich_magenta_death_12: 7474259947849919077
+      Lich_magenta_death_13: 235653815535954715
+      Lich_magenta_death_14: 4495595064538949776
+      Lich_magenta_death_15: -431733939956422794
+      Lich_magenta_death_16: 7026043981060583371
+      Lich_magenta_death_17: 4349926879657333172
+      Lich_magenta_death_18: -74976136463472813
+      Lich_magenta_death_19: 4136470293669855426
+      Lich_magenta_death_2: 491669989261957001
+      Lich_magenta_death_20: 7520007456555527791
+      Lich_magenta_death_21: 4908298033010408886
+      Lich_magenta_death_22: 5794855338170957449
+      Lich_magenta_death_23: 3803855818502337801
+      Lich_magenta_death_24: -7936958239924856567
+      Lich_magenta_death_25: 3477539108785339679
+      Lich_magenta_death_26: 911780419788073384
+      Lich_magenta_death_27: 5513182149426965753
+      Lich_magenta_death_28: 7825103908906068654
+      Lich_magenta_death_29: 1094297313683457380
+      Lich_magenta_death_3: -404935340925963108
+      Lich_magenta_death_30: 3878739263738913489
+      Lich_magenta_death_31: 5493708557742522913
+      Lich_magenta_death_32: -4796525313533935250
+      Lich_magenta_death_33: 2924674151676084375
+      Lich_magenta_death_34: 6439918454002715889
+      Lich_magenta_death_35: 5212312507858245401
+      Lich_magenta_death_36: -2040398433044299499
+      Lich_magenta_death_37: 5355938076048251074
+      Lich_magenta_death_38: -286445637763104766
+      Lich_magenta_death_39: -3670260668776915056
+      Lich_magenta_death_4: -7734921909306818682
+      Lich_magenta_death_40: 3746071286202079644
+      Lich_magenta_death_41: -8052611820116690916
+      Lich_magenta_death_42: 8714972505627213212
+      Lich_magenta_death_43: -7774901013487347939
+      Lich_magenta_death_44: -1256968769582983989
+      Lich_magenta_death_45: 7748212196410244780
+      Lich_magenta_death_46: -964325289991263761
+      Lich_magenta_death_47: 8267949197441961421
+      Lich_magenta_death_5: -7886084018718750874
+      Lich_magenta_death_6: -7727159133960876114
+      Lich_magenta_death_7: 5631010000868367787
+      Lich_magenta_death_8: -8640637087316216423
+      Lich_magenta_death_9: -1544842675951416010
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
