@@ -1,64 +1,149 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+/*
+ * ë³´ìŠ¤ëŠ” í˜„ì¬ ìì‹ ì˜ ìƒíƒœì— ë”°ë¼ ì™¸ê´€ì´ ë³€í•¨
+Red Blue Green None ì´ 4ê°€ì§€ë¡œ ë‚˜ë‰˜ë©°
+í˜„ì¬ ìƒíƒœì— ë”°ë¼ ì‚¬ìš©í•˜ëŠ” ê³µê²© íŒ¨í„´ì´ ë‹¬ë¼ì§
+Red ì „ìš© íŒ¨í„´ 
+1. ë¶ˆ í†±ë‹ˆë°”í€´ : í”Œë ˆì´ì–´ ë°‘ì—ì„œ í†±ë‹ˆê°€ ë‚˜íƒ€ë‚˜ ìœ„ë¡œ ì´ë™
+íˆíŠ¸ ì‹œ í”Œë ˆì´ì–´ëŠ” ì†ë°•ë‹¹í•˜ë©° í†±ë‹ˆë°”í€´ì— ëŒë ¤ê°€ë©° ì§€ì†ëŒ€ë¯¸ì§€
+2. í­ë°œ : í”Œë ˆì´ì–´ ì£¼ë³€ ë²”ìœ„ì— 3ê°œì˜ í­ë°œì„ ì¼ìœ¼í‚´
 
-public class RgbBossAttack : MonoBehaviour
+Blue ì „ìš© íŒ¨í„´
+1. ì–¼ìŒë§ì¹˜ : í”Œë ˆì´ì–´ ì™¼ìª½ì— ì–¼ìŒ ë§ì¹˜ë¥¼ ìƒì„±
+ì–¼ìŒ ë§ì¹˜ê°€ ë•…ì— ë‹¿ì„ ì‹œ ë°”ë‹¥ì— ì–¼ìŒ ê¸°ë‘¥ ìƒì„±
+ë§Œì•½ ë•…ì— ë‹¿ê¸° ì „ì— "ê·¸ë¦°"ìœ¼ë¡œ ê³µê²© ì‹œ ë§ì¹˜ëŠ” ì‚¬ë¼ì§
+
+Green ì „ìš© íŒ¨í„´
+1. ë…ë²„ì„¯ : í”Œë ˆì´ì–´ ì£¼ë³€ ë•…ì— 3ê°œì˜ ë…ë²„ì„¯ì„ ìƒì„±
+ë…ë²„ì„¯ì€ ì¼ì • ì‹œê°„ì´ ê²½ê³¼í•˜ë©´ í„°ì§
+í„°ì§ˆ ì‹œ ë°”ë‹¥ì— ë…ì¥íŒ ìƒì„±
+ë§Œì•½ í„°ì§€ê¸° ì „ì— "ë ˆë“œ"ìƒíƒœë¡œ ê³µê²© ì‹œ ë²„ì„¯ì€ ì‚¬ë¼ì§
+
+ê³µìš© íŒ¨í„´ (ì´ íŒ¨í„´ì€ ëª¨ë“  ìƒíƒœì—ì„œ ì‚¬ìš©ë˜ë©° ìƒíƒœì— ë”°ë¼ íš¨ê³¼ë‚˜ ìŠ¤í”„ë¼ì´íŠ¸ê°€ ë°”ë€œ)
+1. íƒ„í™˜ : í”Œë ˆì´ì–´ì—ê²Œ ì¼ì§ì„ ìœ¼ë¡œ ì´ë™í•˜ëŠ” íƒ„í™˜ ë°œì‚¬
+íƒ„í™˜ ì´ë™ í›„ ëª…ì¤‘í•˜ì§€ ì•Šì„ ì‹œ ì ê¹ì˜ ê²½ì§ì„ ê°€ì§„ í›„ í”Œë ˆì´ì–´ì—ê²Œ ë‹¤ì‹œ ì´ë™í•¨
+ì´ 5íšŒì— ê±¸ì³ ì´ë™í•˜ë©° í”Œë ˆì´ì–´ê°€ ê°•ì ì¸ ìƒ‰ìœ¼ë¡œ ê³µê²© ì‹œ íƒ„í™˜ì€ ì‚¬ë¼ì§
+ìƒ‰ ë³„ íš¨ê³¼: Green ì²´ë ¥ íšŒë³µ, Blue ìŠ¤í„´, Red ê°•í•œ ëŒ€ë¯¸ì§€
+
+2. ë²ˆê°œ : ë³´ìŠ¤ëŠ”  í”Œë ˆì´ì–´ ë°©í–¥ìœ¼ë¡œ ë²ˆê°œë¥¼ ì¨
+ë²ˆê°œëŠ” í”Œë ˆì´ì–´ì˜ ì´ì „ ìœ„ì¹˜ë¥¼ ì¶”ì í•˜ì—¬ 2íšŒ ì—°ì†ìœ¼ë¡œ ê³µê²©í•¨
+ìƒ‰ ë³„ íš¨ê³¼: Green íšŒë³µ, Blue ìŠ¤í„´, Red ê°•í•œ ëŒ€ë¯¸ì§€
+
+3. ì†Œìš©ëŒì´ : ë³´ìŠ¤ ì•ì— ì†Œìš©ëŒì´ë¥¼ ì†Œí™˜í•˜ì—¬ í”Œë ˆì´ì–´ ìª½ìœ¼ë¡œ ë°œì‚¬
+ìƒ‰ ë³„ íš¨ê³¼: Green íšŒë³µ, Blue ìœ„ë¡œ ë‚ ë ¤ë³´ëƒ„, Red ê°•í•œ ëŒ€ë¯¸ì§€
+
+10% íŒ¨í„´
+ìƒíƒœê°€ None ìœ¼ë¡œ ë°”ë€Œë©° ë§ˆì  íƒ€ ìƒ‰ìœ¼ë¡œ ë³€í•˜ê²Œ ë¨
+ë³´ìŠ¤ëŠ” ë¬´ì  ìƒíƒœê°€ ë˜ë©°
+ë¯¸ë¦¬ ì§€ì •í•´ë‘ì—ˆë˜ ìœ„ì¹˜ì— ë¸”ë™í™€ì´ ìƒê¸°ê³  í”Œë ˆì´ì–´ë¥¼ ë¹¨ì•„ë“¤ì„
+ë¸”ë™í™€ì€ ì ì  í¬ê¸°ê°€ ì»¤ì§€ë©° í¡ì…ë ¥ë„ ê°•í•´ì§
+ë¸”ë™í™€ ê·¼ì²˜ì™€ ë‚´ë¶€ì—ëŠ” í­ë°œ íŒŒí‹°í´ì´ ìƒê¸°ë©° í”Œë ˆì´ì–´ê°€ ë‹¿ìœ¼ë©´ ëŒ€ë¯¸ì§€ë¥¼ ì…ìŒ
+ì¼ì • ì‹œê°„ì´ ëë‚˜ë©´ íŒ¨í„´ ì¢…ë£Œ í›„ ê¸°ì¡´ rgb ì‚¬ì´í´ë¡œ íšŒê·€
+
+í˜„ì¬ ë²„ê·¸ ë° ê°œì„ ì : 
+1. ì†Œìš©ëŒì´ê°€ ê³µì¤‘ì´ ì•„ë‹Œ ë°”ë‹¥ì—ì„œ ìƒê¸°ê²Œ ìˆ˜ì •
+2. ë¶ˆ í†±ë‹ˆì— ë’¤ëŠ¦ê²Œ ê±¸ë ¤ë„ í†±ë‹ˆê°€ ì‚¬ë¼ì§ˆë•Œ í’€ë¦¬ëŠ”ê²Œ ì•„ë‹Œ ê¸°ì¡´ ì†ë°•ì‹œê°„ì´ ì§€ë‚˜ì•¼ í’€ë ¤ì„œ ê³µì¤‘ì— ì–´ìƒ‰í•˜ê²Œ ë©ˆì¶°ìˆìŒ 
+3. ì•„ì´ìŠ¤í•´ë¨¸ì— í”¼ê²© ì‹œ ìŠ¤í„´ ì¶”ê°€? ì¼ë‹¨ì€ ê³ ë¯¼ì¤‘
+4. Blue íŒ¨í„´ì— WaterDragon ì¶”ê°€ ì˜ˆì •
+( GreenBossì˜ ìƒˆ íŒ¨í„´ê³¼ ìœ ì‚¬í•˜ê²Œ ì¼ìë¡œ ë§µì„ ì§€ë‚˜ê°ˆ ì˜ˆì •)
+5. 10% íŒ¨í„´ì´ ëë‚œ í›„ ì ì‹œ ì‰¬ëŠ” ì‹œê°„ì„ ì£¼ê³  ë‹¤ì‹œ ê³µê²© ë£¨í‹´ìœ¼ë¡œ ëŒì•„ê°€ê²Œ ìˆ˜ì •
+ */
+public enum BossAttackType
 {
-    [Header("È¸º¹·® ¼³Á¤")]
+    Burst,
+    FireGear,
+    MushRoom,
+    IceHammer,
+    Hurricane,
+    Bullet,
+    Lightning
+}
+
+public class RgbBossAttack : MonoBehaviour, IHitReaction
+{
+    #region Inspector Fields
+    [Header("íšŒë³µëŸ‰ ì„¤ì •")]
     [SerializeField] private int healAmount = 5;
 
     [Header("FireGear Spawn")]
     [SerializeField] private float spawnOffsetY = -1f;
-    [SerializeField] private float redAttackInterval = 3f;
 
-    [Header("Hurricane ¼³Á¤")]
+    [Header("Hurricane ì„¤ì •")]
     [SerializeField] private float spawnOffsetX = 1.5f;
 
-    [Header("¼Ó¼ºº° ÅºÈ¯ Ç® ÀÌ¸§ ¼³Á¤")]
-    [SerializeField] private string redBulletPoolName = "RedBullet";
-    [SerializeField] private string greenBulletPoolName = "GreenBullet";
-    [SerializeField] private string blueBulletPoolName = "BlueBullet";
+    [Header("ì†ì„±ë³„ íƒ„í™˜ í’€ í‚¤ ì„¤ì •")]
+    [SerializeField] private string redBulletPoolKey = "RedBullet";
+    [SerializeField] private string greenBulletPoolKey = "GreenBullet";
+    [SerializeField] private string blueBulletPoolKey = "BlueBullet";
 
-    [Header("Burst ÆĞÅÏ ¼³Á¤")]
-    [SerializeField] private string redBurstPoolName = "Burst";
+    [Header("Burst íŒ¨í„´ ì„¤ì •")]
+    [SerializeField] private string redBurstPoolKey = "Burst";
     [SerializeField] private float burstSpawnRadius = 3.5f;
 
-    [Header("µ¶¹ö¼¸ ÆĞÅÏ ¼³Á¤ (Green)")]
-    [SerializeField] private string mushroomPoolName = "Mushroom";
+    [Header("ë…ë²„ì„¯ íŒ¨í„´ ì„¤ì • (Green)")]
+    [SerializeField] private string mushroomPoolKey = "Mushroom";
     [SerializeField] private int mushroomSpawnCount = 3;
     [SerializeField] private float spawnRangeX = 5f;
     [SerializeField] private float mushroomOffsetY = 0f;
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("¹ø°³ ÆĞÅÏ ¼³Á¤")]
-    [SerializeField] private string redLightningPoolName = "RedLightning";
-    [SerializeField] private string greenLightningPoolName = "GreenLightning";
-    [SerializeField] private string blueLightningPoolName = "BlueLightning";
+    [Header("ë²ˆê°œ íŒ¨í„´ ì„¤ì •")]
+    [SerializeField] private string redLightningPoolKey = "RedLightning";
+    [SerializeField] private string greenLightningPoolKey = "GreenLightning";
+    [SerializeField] private string blueLightningPoolKey = "BlueLightning";
     [SerializeField] private int lightningCount = 3;
     [SerializeField] private float lightningInterval = 0.3f;
-    [SerializeField] private float posRecordInterval = 0.5f; // ¼ıÀÚ°¡ Å¬¼ö·Ï ÇÇÇÏ±â ½¬¿öÁü
+    [SerializeField] private float posRecordInterval = 0.5f;
 
     [Header("FirePoint")]
-    [SerializeField] private Transform firePoint;          // ¹ø°³
-    [SerializeField] private Transform bulletFirePoint;    // ÀÏ¹İ ÅºÈ¯
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform bulletFirePoint;
 
-    [Header("¾óÀ½ ¸ÁÄ¡ ¼³Á¤")]
+    [Header("ì–¼ìŒ ë§ì¹˜ ì„¤ì •")]
     [SerializeField] private float hammerOffsetX = 0f;
     [SerializeField] private float hammerOffsetY = 0f;
 
+    [Header("10%íŒ¨í„´ (ë¸”ë™í™€) ì„¤ì •")]
+    [SerializeField] private string blackHolePoolKey = "BlackHole";
+    [SerializeField] private Transform[] blackHoleSpawnPoints;
+    [SerializeField] private float finalPhaseDuration = 10f;
+
+    [Header("VFX í’€ í‚¤ ì„¤ì •")]
+    [SerializeField] private string hurricanePoolKey = "Hurricane";
+    [SerializeField] private string fireGearPoolKey = "FireGear";
+    [SerializeField] private string iceHammerPoolKey = "IceHammer";
+    #endregion
+
+    #region Private Fields
     private Vector3 lastPlayerPos;
     private Transform player;
     private EnemyStatus enemyStatus;
     private SpriteRenderer bossSpriteRenderer;
     private Animator animator;
     private RgbBossMove bossMove;
+    private RgbColorCycle colorCycle;
+
+    private BossAttackType lastAttackType = (BossAttackType)(-1);
+    private bool isFinalPhaseActive = false;
+
+    private bool isFinalPhaseTriggered = false;
+    private bool isInvincible = false;
+    private List<BlackHole> activeBlackHoles = new List<BlackHole>();
+
     private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
     private static readonly int CastingTrigger = Animator.StringToHash("Casting");
+    #endregion
+
+    #region Unity Lifecycle
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
         bossSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
         bossMove = GetComponent<RgbBossMove>();
+        colorCycle = GetComponent<RgbColorCycle>();
     }
 
     private void Start()
@@ -68,122 +153,175 @@ public class RgbBossAttack : MonoBehaviour
             player = playerObj.transform;
 
         StartCoroutine(RecordPlayerPosition());
-        //StartCoroutine(AttackRoutine());
+        StartCoroutine(AttackRoutine());
     }
 
     private void Update()
     {
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-            SpawnBurstPattern();
+        // ì²´ë ¥ì´ 10% ì´í•˜ì´ê³ , ì•„ì§ ë°œì•… íŒ¨í„´ì— ì§„ì…í•˜ì§€ ì•Šì•˜ë‹¤ë©´ ì‹¤í–‰
+        if (!isFinalPhaseTriggered && enemyStatus.GetHPRatio() <= 0.1f)
+        {
+            isFinalPhaseTriggered = true;
+            StartCoroutine(FinalPhaseRoutine());
         }
     }
+    #endregion
 
+    #region IHitReaction Implementation
+    public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
+    {
+        if (isInvincible)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void OnAfterTakeDamage(EnemyStatus status, int damage) { }
+    #endregion
+
+    #region Attack Loop & Selection
     private IEnumerator AttackRoutine()
     {
+        yield return new WaitForSeconds(2f);
+
         while (true)
         {
-            switch (enemyStatus.CurrentElement)
+            if (isFinalPhaseActive)
             {
-                case EnemyStatus.EnemyElement.Red:
-                    yield return StartCoroutine(RedAttack());
+                yield return null;
+                continue;
+            }
+
+            int attackCount = Random.Range(1, 3);
+
+            for (int i = 0; i < attackCount; i++)
+            {
+                if (isFinalPhaseActive)
                     break;
-                case EnemyStatus.EnemyElement.Green:
-                    yield return StartCoroutine(GreenAttack());
-                    break;
-                case EnemyStatus.EnemyElement.Blue:
-                    yield return StartCoroutine(BlueAttack());
-                    break;
-                default:
-                    yield return null;
-                    break;
+
+                BossAttackType chosenAttack = GetRandomAttack();
+                yield return StartCoroutine(ExecuteAttack(chosenAttack));
+            }
+
+            if (!isFinalPhaseActive)
+            {
+                if (colorCycle != null)
+                {
+                    colorCycle.ChangeElementRandom();
+                }
+                yield return new WaitForSeconds(1.5f);
             }
         }
     }
 
-    private IEnumerator RedAttack()
+    private BossAttackType GetRandomAttack()
     {
-        SpawnFireGears();
-        yield return new WaitForSeconds(redAttackInterval);
-    }
+        List<BossAttackType> availableAttacks = new List<BossAttackType>();
 
-    private IEnumerator GreenAttack()
-    {
-        SpawnPoisonMushrooms();
-        yield return new WaitForSeconds(3f);
-    }
-
-    private IEnumerator BlueAttack()
-    {
-        yield return new WaitForSeconds(5f);
-    }
-
-    // Animation Event¿¡¼­ È£Ãâ
-    public void SpawnLightning()
-    {
-        StartCoroutine(SpawnLightningBurst());
-    }
-
-    private string GetLightningPoolName()
-    {
-        return enemyStatus.CurrentElement switch
+        switch (enemyStatus.CurrentElement)
         {
-            EnemyStatus.EnemyElement.Red => redLightningPoolName,
-            EnemyStatus.EnemyElement.Green => greenLightningPoolName,
-            EnemyStatus.EnemyElement.Blue => blueLightningPoolName,
-            _ => redLightningPoolName
-        };
+            case EnemyStatus.EnemyElement.Red:
+                availableAttacks.Add(BossAttackType.Burst);
+                availableAttacks.Add(BossAttackType.FireGear);
+                break;
+            case EnemyStatus.EnemyElement.Green:
+                availableAttacks.Add(BossAttackType.MushRoom);
+                break;
+            case EnemyStatus.EnemyElement.Blue:
+                availableAttacks.Add(BossAttackType.IceHammer);
+                break;
+        }
+
+        availableAttacks.Add(BossAttackType.Hurricane);
+        availableAttacks.Add(BossAttackType.Bullet);
+        availableAttacks.Add(BossAttackType.Lightning);
+
+        if (availableAttacks.Count > 1)
+        {
+            availableAttacks.Remove(lastAttackType);
+        }
+
+        BossAttackType chosen = availableAttacks[Random.Range(0, availableAttacks.Count)];
+        lastAttackType = chosen;
+        return chosen;
     }
 
-    private IEnumerator SpawnLightningBurst()
+    private IEnumerator ExecuteAttack(BossAttackType attack)
     {
-        if (firePoint == null) yield break;
-
-        string poolName = GetLightningPoolName();
-
-        for (int i = 0; i < lightningCount; i++)
+        switch (attack)
         {
-            Vector2 dir = (lastPlayerPos - firePoint.position).normalized; // ÀÌÀü À§Ä¡·Î ¹ß»ç
+            case BossAttackType.Burst:
+                SpawnBurstPattern();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.FireGear:
+                SpawnFireGears();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.MushRoom:
+                SpawnPoisonMushrooms();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.IceHammer:
+                SpawnIceHammer();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.Hurricane:
+                SpawnHurricane();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.Bullet:
+                ShootBullet();
+                yield return new WaitForSeconds(2f);
+                break;
+            case BossAttackType.Lightning:
+                float waitTime = (lightningCount * lightningInterval) + 1.5f;
+                yield return new WaitForSeconds(waitTime);
+                break;
+        }
+    }
+    #endregion
 
-            GameObject obj = PoolingManager.Instance.Get(
-                poolName,
-                firePoint.position,
+    #region Red Pattern (Burst, FireGear)
+    private void SpawnBurstPattern()
+    {
+        if (player == null) return;
+
+        for (int i = 0; i < 3; i++)
+        {
+            Vector2 randomCircle = Random.insideUnitCircle * burstSpawnRadius;
+            Vector3 spawnPos = player.position + new Vector3(randomCircle.x, randomCircle.y, 0f);
+
+            GameObject burstObj = PoolingManager.Instance.Get(
+                redBurstPoolKey,
+                spawnPos,
                 Quaternion.identity);
 
-            if (obj != null)
+            if (burstObj != null)
             {
-                LightningBolt bolt = obj.GetComponent<LightningBolt>();
-                if (bolt != null)
-                {
-                    bolt.Initialize(poolName, dir, enemyStatus.CurrentElement);
-
-                    if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
-                        bolt.onHitPlayer = () => enemyStatus.Heal(healAmount);
-                    else
-                        bolt.onHitPlayer = null;
-                }
+                Burst burst = burstObj.GetComponent<Burst>();
+                burst?.InitializeBurst(redBurstPoolKey);
             }
-
-            yield return new WaitForSeconds(lightningInterval);
         }
     }
-    private IEnumerator RecordPlayerPosition()
+
+    private void SpawnFireGears()
     {
-        while (true)
-        {
-            lastPlayerPos = player.position;
-            yield return new WaitForSeconds(posRecordInterval);
-        }
+        if (player == null) return;
+
+        Vector3 spawnPos = new Vector3(
+            player.position.x,
+            player.position.y + spawnOffsetY,
+            0f);
+
+        PoolingManager.Instance.Get(fireGearPoolKey, spawnPos, Quaternion.identity);
     }
+    #endregion
 
-    // ¦¡¦¡¦¡ µ¶¹ö¼¸ ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-
+    #region Green Pattern (Mushroom)
     private void SpawnPoisonMushrooms()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
         if (player == null) return;
 
         int successfulSpawns = 0;
@@ -201,32 +339,56 @@ public class RgbBossAttack : MonoBehaviour
             if (hit.collider != null)
             {
                 Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, mushroomOffsetY, 0f);
-                PoolingManager.Instance.Get(mushroomPoolName, spawnPos, Quaternion.identity);
+                PoolingManager.Instance.Get(mushroomPoolKey, spawnPos, Quaternion.identity);
                 successfulSpawns++;
             }
         }
 
-        Debug.Log($"µ¶¹ö¼¸ »ı¼º ÆĞÅÏ ½ÇÇà: ÇÃ·¹ÀÌ¾î ÁÖº¯ ¹Ù´Ú¿¡ {successfulSpawns}°³ ½ºÆùµÊ.");
+        Debug.Log($"ë…ë²„ì„¯ ìƒì„± íŒ¨í„´ ì‹¤í–‰: í”Œë ˆì´ì–´ ì£¼ë³€ ë°”ë‹¥ì— {successfulSpawns}ê°œ ìŠ¤í°ë¨.");
     }
+    #endregion
 
-    // ¦¡¦¡¦¡ Hurricane ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+    #region Blue Pattern (IceHammer)
+    public void SpawnIceHammer()
+    {
+        if (player == null)
+            return;
 
+        Vector3 rayStart = player.position + new Vector3(hammerOffsetX, 5f, 0f);
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            rayStart,
+            Vector2.down,
+            15f,
+            groundLayer);
+
+        if (hit.collider == null)
+        {
+            Debug.LogWarning("ë§ì¹˜ ìƒì„± ì‹¤íŒ¨ : Groundë¥¼ ì°¾ì§€ ëª»í•¨");
+            return;
+        }
+
+        Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, hammerOffsetY, 0f);
+
+        PoolingManager.Instance.Get(
+            iceHammerPoolKey,
+            spawnPos,
+            Quaternion.identity);
+    }
+    #endregion
+
+    #region Common Pattern (Hurricane, Bullet, Lightning)
     private void SpawnHurricane()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
         Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
 
-        // spawnOffsetX ½ÇÁ¦·Î Àû¿ë
         Vector3 spawnPos = transform.position +
                       (spawnDirection * spawnOffsetX) +
                       (Vector3.up * spawnOffsetY);
 
         GameObject hurricaneObj = PoolingManager.Instance.Get(
-            "Hurricane",
-            spawnPos,          // transform.position ´ë½Å spawnPos »ç¿ë
+            hurricanePoolKey,
+            spawnPos,
             Quaternion.identity);
 
         if (hurricaneObj != null)
@@ -241,41 +403,32 @@ public class RgbBossAttack : MonoBehaviour
         }
     }
 
-    // ¦¡¦¡¦¡ FireGear ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-
-    private void SpawnFireGears()
+    public void ShootBullet()
     {
-        if (player == null) return;
+        if (animator == null)
+            return;
 
-        Vector3 spawnPos = new Vector3(
-            player.position.x,
-            player.position.y + spawnOffsetY,
-            0f);
-
-        PoolingManager.Instance.Get("FireGear", spawnPos, Quaternion.identity);
+        animator.SetTrigger(ShootTrigger);
     }
 
-    // ¦¡¦¡¦¡ ¼Ó¼º ÅºÈ¯ ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-
-    // ¾Ö´Ï¸ŞÀÌ¼Ç¿¡¼­ È£Ãâ
     public void SpawnBossBullet()
     {
         if (player == null || bulletFirePoint == null)
             return;
 
-        string targetPoolName = enemyStatus.CurrentElement switch
+        string targetPoolKey = enemyStatus.CurrentElement switch
         {
-            EnemyStatus.EnemyElement.Red => redBulletPoolName,
-            EnemyStatus.EnemyElement.Green => greenBulletPoolName,
-            EnemyStatus.EnemyElement.Blue => blueBulletPoolName,
+            EnemyStatus.EnemyElement.Red => redBulletPoolKey,
+            EnemyStatus.EnemyElement.Green => greenBulletPoolKey,
+            EnemyStatus.EnemyElement.Blue => blueBulletPoolKey,
             _ => ""
         };
 
-        if (string.IsNullOrEmpty(targetPoolName))
+        if (string.IsNullOrEmpty(targetPoolKey))
             return;
 
         GameObject bulletObj = PoolingManager.Instance.Get(
-            targetPoolName,
+            targetPoolKey,
             bulletFirePoint.position,
             Quaternion.identity);
 
@@ -285,7 +438,7 @@ public class RgbBossAttack : MonoBehaviour
 
             if (bullet != null)
             {
-                bullet.Initialize(player, targetPoolName);
+                bullet.Initialize(player, targetPoolKey);
 
                 if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
                     bullet.onHitPlayer = () => enemyStatus.Heal(healAmount);
@@ -294,70 +447,118 @@ public class RgbBossAttack : MonoBehaviour
             }
         }
     }
-    public void ShootBullet()
-    {
-        if (animator == null)
-            return;
 
-        animator.SetTrigger(ShootTrigger);
+    public void SpawnLightning()
+    {
+        StartCoroutine(SpawnLightningBurst());
     }
-    // ¦¡¦¡¦¡ Burst ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
 
-    private void SpawnBurstPattern()
+    private string GetLightningPoolKey()
     {
-        if (animator != null)
+        return enemyStatus.CurrentElement switch
         {
-            animator.SetTrigger(CastingTrigger);
-        }
-        if (player == null) return;
+            EnemyStatus.EnemyElement.Red => redLightningPoolKey,
+            EnemyStatus.EnemyElement.Green => greenLightningPoolKey,
+            EnemyStatus.EnemyElement.Blue => blueLightningPoolKey,
+            _ => redLightningPoolKey
+        };
+    }
 
-        for (int i = 0; i < 3; i++)
+    private IEnumerator SpawnLightningBurst()
+    {
+        if (firePoint == null) yield break;
+
+        string poolKey = GetLightningPoolKey();
+
+        for (int i = 0; i < lightningCount; i++)
         {
-            Vector2 randomCircle = Random.insideUnitCircle * burstSpawnRadius;
-            Vector3 spawnPos = player.position + new Vector3(randomCircle.x, randomCircle.y, 0f);
+            Vector2 dir = (lastPlayerPos - firePoint.position).normalized;
 
-            GameObject burstObj = PoolingManager.Instance.Get(
-                redBurstPoolName,
-                spawnPos,
+            GameObject obj = PoolingManager.Instance.Get(
+                poolKey,
+                firePoint.position,
                 Quaternion.identity);
 
-            if (burstObj != null)
+            if (obj != null)
             {
-                Burst burst = burstObj.GetComponent<Burst>();
-                burst?.InitializeBurst(redBurstPoolName);
+                LightningBolt bolt = obj.GetComponent<LightningBolt>();
+                if (bolt != null)
+                {
+                    bolt.Initialize(poolKey, dir, enemyStatus.CurrentElement);
+
+                    if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
+                        bolt.onHitPlayer = () => enemyStatus.Heal(healAmount);
+                    else
+                        bolt.onHitPlayer = null;
+                }
+            }
+
+            yield return new WaitForSeconds(lightningInterval);
+        }
+    }
+
+    private IEnumerator RecordPlayerPosition()
+    {
+        while (true)
+        {
+            lastPlayerPos = player.position;
+            yield return new WaitForSeconds(posRecordInterval);
+        }
+    }
+    #endregion
+
+    #region Final Phase (10% HP Pattern)
+    private IEnumerator FinalPhaseRoutine()
+    {
+        isFinalPhaseActive = true;
+        isInvincible = true;
+
+        if (colorCycle != null) colorCycle.EnterFinalPhase();
+
+        SpawnBlackHoles();
+
+        yield return new WaitForSeconds(finalPhaseDuration);
+
+        foreach (BlackHole bh in activeBlackHoles)
+        {
+            if (bh != null) bh.ReturnToPool();
+        }
+        activeBlackHoles.Clear();
+
+        isInvincible = false;
+        if (colorCycle != null)
+        {
+            colorCycle.ExitFinalPhase();
+        }
+        isFinalPhaseActive = false;
+    }
+
+    private void SpawnBlackHoles()
+    {
+        activeBlackHoles.Clear();
+
+        if (player == null || blackHoleSpawnPoints == null) return;
+
+        foreach (Transform spawnPoint in blackHoleSpawnPoints)
+        {
+            GameObject bhObj = PoolingManager.Instance.Get(
+                blackHolePoolKey,
+                spawnPoint.position,
+                Quaternion.identity
+            );
+
+            if (bhObj != null)
+            {
+                BlackHole blackHole = bhObj.GetComponent<BlackHole>();
+                if (blackHole != null)
+                {
+                    blackHole.Initialize(blackHolePoolKey, player);
+                    activeBlackHoles.Add(blackHole);
+                }
             }
         }
+
+        Debug.Log($"ë°œì•… íŒ¨í„´ ì‹œì‘! {blackHoleSpawnPoints.Length}ê°œì˜ ë¸”ë™í™€ ìƒì„±ë¨.");
     }
-    public void SpawnIceHammer()
-    {
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
-
-        if (player == null)
-            return;
-
-        // ÇÃ·¹ÀÌ¾î ±âÁØ X À§Ä¡¿¡¼­ À§ÂÊ¿¡¼­ ¾Æ·¡·Î ·¹ÀÌÄ³½ºÆ®
-        Vector3 rayStart = player.position + new Vector3(hammerOffsetX, 5f, 0f);
-
-        RaycastHit2D hit = Physics2D.Raycast(
-            rayStart,
-            Vector2.down,
-            15f,
-            groundLayer);
-
-        if (hit.collider == null)
-        {
-            Debug.LogWarning("¸ÁÄ¡ »ı¼º ½ÇÆĞ : Ground¸¦ Ã£Áö ¸øÇÔ");
-            return;
-        }
-
-        Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, hammerOffsetY, 0f);
-
-        PoolingManager.Instance.Get(
-            "IceHammer",
-            spawnPos,
-            Quaternion.identity);
-    }
+    #endregion
 }

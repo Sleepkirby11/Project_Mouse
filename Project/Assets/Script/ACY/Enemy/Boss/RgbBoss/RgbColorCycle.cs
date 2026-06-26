@@ -1,21 +1,24 @@
-using System.Collections;
 using UnityEngine;
 
 public class RgbColorCycle : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] private float changeInterval = 10f;
-
+    #region Inspector Fields
     [Header("Animator Overrides")]
-    [SerializeField] private RuntimeAnimatorController baseController; //Red
+    [SerializeField] private RuntimeAnimatorController baseController; // Red
     [SerializeField] private AnimatorOverrideController greenOverride;
     [SerializeField] private AnimatorOverrideController blueOverride;
     [SerializeField] private AnimatorOverrideController magentaOverride;
+    #endregion
 
+    #region Private Fields
     private bool isFinalPhase = false;
     private EnemyStatus enemyStatus;
     private Animator animator;
 
+    private static readonly int CastingTrigger = Animator.StringToHash("Casting");
+    #endregion
+
+    #region Unity Lifecycle
     private void Awake()
     {
         enemyStatus = GetComponent<EnemyStatus>();
@@ -25,26 +28,13 @@ public class RgbColorCycle : MonoBehaviour
     private void Start()
     {
         EnemyStatus.EnemyElement first = (EnemyStatus.EnemyElement)Random.Range(0, 3);
-
         enemyStatus.SetElement(first);
         ApplyController(GetController(first));
-        StartCoroutine(ColorCycleRoutine());
     }
+    #endregion
 
-    private IEnumerator ColorCycleRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(changeInterval);
-
-            if (isFinalPhase)
-                continue;
-
-            ChangeElementRandom();
-        }
-    }
-
-    private void ChangeElementRandom()
+    #region Public Methods
+    public void ChangeElementRandom()
     {
         EnemyStatus.EnemyElement current = enemyStatus.CurrentElement;
         EnemyStatus.EnemyElement next;
@@ -58,8 +48,47 @@ public class RgbColorCycle : MonoBehaviour
         enemyStatus.SetElement(next);
         ApplyController(GetController(next));
 
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
+
         Debug.Log($"RGB Boss Element & Animation Changed : {next}");
     }
+
+    public void EnterFinalPhase()
+    {
+        if (isFinalPhase)
+            return;
+        
+        isFinalPhase = true;
+
+        enemyStatus.SetElement(EnemyStatus.EnemyElement.None);
+        ApplyController(GetController(EnemyStatus.EnemyElement.None));
+
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
+
+        Debug.Log("Î∞úÏïÖ Ìå®ÌÑ¥ ÏãúÏûë");
+    }
+
+    public void ExitFinalPhase()
+    {
+        if (!isFinalPhase)
+            return;
+
+        isFinalPhase = false;
+
+        // Î∞úÏïÖ ÎÅùÎÇòÎ©¥ Ï¶âÏãú RGB ÌïòÎÇò ÏÑ†ÌÉùÌïòÎ©∞ ÏÇ¨Ïù¥ÌÅ¥ Ïû¨Í∞ú
+        ChangeElementRandom();
+
+        Debug.Log("Î∞úÏïÖ ÏÉÅÌÉú Ìï¥Ï†ú, RGB ÏÇ¨Ïù¥ÌÅ¥Î°ú Î≥µÍ∑Ä!");
+    }
+    #endregion
+
+    #region Private Methods
     private RuntimeAnimatorController GetController(EnemyStatus.EnemyElement element)
     {
         return element switch
@@ -67,10 +96,11 @@ public class RgbColorCycle : MonoBehaviour
             EnemyStatus.EnemyElement.Red => baseController,
             EnemyStatus.EnemyElement.Green => greenOverride,
             EnemyStatus.EnemyElement.Blue => blueOverride,
-            EnemyStatus.EnemyElement.None => magentaOverride, // πﬂæ« ªÛ≈¬
+            EnemyStatus.EnemyElement.None => magentaOverride, // Î∞úÏïÖ ÏÉÅÌÉú
             _ => baseController
         };
     }
+
     private void ApplyController(RuntimeAnimatorController targetController)
     {
         if (animator == null || targetController == null) return;
@@ -82,25 +112,5 @@ public class RgbColorCycle : MonoBehaviour
         animator.runtimeAnimatorController = targetController;
         animator.Play(stateHash, 0, normalizedTime);
     }
-    public void EnterFinalPhase()
-    {
-        if (isFinalPhase)
-            return;
-        
-        isFinalPhase = true;
-
-        enemyStatus.SetElement(EnemyStatus.EnemyElement.None);
-        ApplyController(GetController(EnemyStatus.EnemyElement.None));
-
-        Debug.Log("πﬂæ« ∆–≈œ Ω√¿€");
-    }
-    public void ExitFinalPhase()
-    {
-        if (isFinalPhase)
-            return;
-
-        isFinalPhase = false;
-
-        ChangeElementRandom();   // πﬂæ« ≥°≥™∏È ¡ÔΩ√ RGB «œ≥™ º±≈√
-    }
+    #endregion
 }

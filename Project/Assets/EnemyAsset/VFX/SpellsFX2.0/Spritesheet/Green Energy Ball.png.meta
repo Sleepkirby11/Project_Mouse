@@ -1,0 +1,949 @@
+fileFormatVersion: 2
+guid: 2369ffedd85dc624c931605eb7a3c813
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2184052987563763870
+    second: Green Energy Ball_0
+  - first:
+      213: 798189534146805247
+    second: Green Energy Ball_1
+  - first:
+      213: 3858410894788037578
+    second: Green Energy Ball_2
+  - first:
+      213: -867401778737434756
+    second: Green Energy Ball_3
+  - first:
+      213: 4081353770567809406
+    second: Green Energy Ball_4
+  - first:
+      213: 3162762132390144185
+    second: Green Energy Ball_5
+  - first:
+      213: 3180491832479391442
+    second: Green Energy Ball_6
+  - first:
+      213: -7800305506532557132
+    second: Green Energy Ball_7
+  - first:
+      213: 8225875327289756311
+    second: Green Energy Ball_8
+  - first:
+      213: -5654372798072377348
+    second: Green Energy Ball_9
+  - first:
+      213: -2364697197898756831
+    second: Green Energy Ball_10
+  - first:
+      213: -6028273338424005452
+    second: Green Energy Ball_11
+  - first:
+      213: -5512436789921581569
+    second: Green Energy Ball_12
+  - first:
+      213: -9049292108461305224
+    second: Green Energy Ball_13
+  - first:
+      213: 1591480906913785030
+    second: Green Energy Ball_14
+  - first:
+      213: 5603456461758497731
+    second: Green Energy Ball_15
+  - first:
+      213: 8281546817352652762
+    second: Green Energy Ball_16
+  - first:
+      213: -4634300099368941695
+    second: Green Energy Ball_17
+  - first:
+      213: -647782538609930562
+    second: Green Energy Ball_18
+  - first:
+      213: 5543065256535695331
+    second: Green Energy Ball_19
+  - first:
+      213: 5885890337608774007
+    second: Green Energy Ball_20
+  - first:
+      213: -9079070632878496532
+    second: Green Energy Ball_21
+  - first:
+      213: -5532002236336924627
+    second: Green Energy Ball_22
+  - first:
+      213: 1393832881865021752
+    second: Green Energy Ball_23
+  - first:
+      213: -529637656497672413
+    second: Green Energy Ball_24
+  - first:
+      213: -7181629673577565643
+    second: Green Energy Ball_25
+  - first:
+      213: 2628204709944015708
+    second: Green Energy Ball_26
+  - first:
+      213: -5398607656195391994
+    second: Green Energy Ball_27
+  - first:
+      213: -1799779493956431280
+    second: Green Energy Ball_28
+  - first:
+      213: 9016108996340917328
+    second: Green Energy Ball_29
+  - first:
+      213: -967627004100166752
+    second: Green Energy Ball_30
+  - first:
+      213: -7747009427063443604
+    second: Green Energy Ball_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Green Energy Ball_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 9
+        width: 48
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e986e5ede905f4e10800000000000000
+      internalID: 2184052987563763870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 41
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffd314ef62db31b00800000000000000
+      internalID: 798189534146805247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_2
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 43
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acb865d1444db8530800000000000000
+      internalID: 3858410894788037578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_3
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 34
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7f20dc8dae56f3f0800000000000000
+      internalID: -867401778737434756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_4
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 22
+        width: 28
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e79356161a1e3a830800000000000000
+      internalID: 4081353770567809406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_5
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 26
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b8eb22076364eb20800000000000000
+      internalID: 3162762132390144185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_6
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 34
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2de17fd7870632c20800000000000000
+      internalID: 3180491832479391442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_7
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 31
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4be7a97387fbfb390800000000000000
+      internalID: -7800305506532557132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_8
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 44
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79a81c1170e282270800000000000000
+      internalID: 8225875327289756311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_9
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 47
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cffa347f5e1a781b0800000000000000
+      internalID: -5654372798072377348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_10
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 17
+        width: 14
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12d02ed5d68ee2fd0800000000000000
+      internalID: -2364697197898756831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_11
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 12
+        width: 37
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bc674e7655475ca0800000000000000
+      internalID: -6028273338424005452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_12
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 16
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff5fde912f3ef73b0800000000000000
+      internalID: -5512436789921581569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_13
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 23
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8721b66c5c47a6280800000000000000
+      internalID: -9049292108461305224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_14
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 19
+        width: 31
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c4a96be373161610800000000000000
+      internalID: 1591480906913785030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_15
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 28
+        width: 23
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c38b7da6f973cd40800000000000000
+      internalID: 5603456461758497731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_16
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 29
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad7521fe3f6fde270800000000000000
+      internalID: 8281546817352652762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_17
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 19
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1878e8afc98afafb0800000000000000
+      internalID: -4634300099368941695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_18
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 35
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebe4476963d9207f0800000000000000
+      internalID: -647782538609930562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_19
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 27
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ef9e9e7b7cecec40800000000000000
+      internalID: 5543065256535695331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_20
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7713318c312eea150800000000000000
+      internalID: 5885890337608774007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_21
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 11
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce4a894cc59a00280800000000000000
+      internalID: -9079070632878496532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_22
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 13
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d28987e96416a33b0800000000000000
+      internalID: -5532002236336924627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_23
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 21
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 839d2d70f93e75310800000000000000
+      internalID: 1393832881865021752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_24
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 16
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32f29c88b5956a8f0800000000000000
+      internalID: -529637656497672413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_25
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 10
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 532310e9cd9b55c90800000000000000
+      internalID: -7181629673577565643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_26
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 12
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5bb8354242497420800000000000000
+      internalID: 2628204709944015708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_27
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 20
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60ef4c290fa4415b0800000000000000
+      internalID: -5398607656195391994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_28
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 16
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 052d1bcf516e507e0800000000000000
+      internalID: -1799779493956431280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_29
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 054aa1fdc57af1d70800000000000000
+      internalID: 9016108996340917328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_30
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 3
+        width: 23
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0abb881dd5c4292f0800000000000000
+      internalID: -967627004100166752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Energy Ball_31
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 10
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6fe744b8f71d7490800000000000000
+      internalID: -7747009427063443604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Green Energy Ball_0: 2184052987563763870
+      Green Energy Ball_1: 798189534146805247
+      Green Energy Ball_10: -2364697197898756831
+      Green Energy Ball_11: -6028273338424005452
+      Green Energy Ball_12: -5512436789921581569
+      Green Energy Ball_13: -9049292108461305224
+      Green Energy Ball_14: 1591480906913785030
+      Green Energy Ball_15: 5603456461758497731
+      Green Energy Ball_16: 8281546817352652762
+      Green Energy Ball_17: -4634300099368941695
+      Green Energy Ball_18: -647782538609930562
+      Green Energy Ball_19: 5543065256535695331
+      Green Energy Ball_2: 3858410894788037578
+      Green Energy Ball_20: 5885890337608774007
+      Green Energy Ball_21: -9079070632878496532
+      Green Energy Ball_22: -5532002236336924627
+      Green Energy Ball_23: 1393832881865021752
+      Green Energy Ball_24: -529637656497672413
+      Green Energy Ball_25: -7181629673577565643
+      Green Energy Ball_26: 2628204709944015708
+      Green Energy Ball_27: -5398607656195391994
+      Green Energy Ball_28: -1799779493956431280
+      Green Energy Ball_29: 9016108996340917328
+      Green Energy Ball_3: -867401778737434756
+      Green Energy Ball_30: -967627004100166752
+      Green Energy Ball_31: -7747009427063443604
+      Green Energy Ball_4: 4081353770567809406
+      Green Energy Ball_5: 3162762132390144185
+      Green Energy Ball_6: 3180491832479391442
+      Green Energy Ball_7: -7800305506532557132
+      Green Energy Ball_8: 8225875327289756311
+      Green Energy Ball_9: -5654372798072377348
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

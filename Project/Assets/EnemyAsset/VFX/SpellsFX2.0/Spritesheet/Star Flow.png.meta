@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: d436b5d5ec05d42439b54450b964d161
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6154734981542290032
+    second: Star Flow_0
+  - first:
+      213: -8346804836758967218
+    second: Star Flow_1
+  - first:
+      213: -957123690651492525
+    second: Star Flow_2
+  - first:
+      213: 4501292006481648196
+    second: Star Flow_3
+  - first:
+      213: -79789156927025327
+    second: Star Flow_4
+  - first:
+      213: -1809494400569126677
+    second: Star Flow_5
+  - first:
+      213: 1140356218936520870
+    second: Star Flow_6
+  - first:
+      213: -1173442888339158459
+    second: Star Flow_7
+  - first:
+      213: 947378550614827014
+    second: Star Flow_8
+  - first:
+      213: -6548461852711146820
+    second: Star Flow_9
+  - first:
+      213: -143555927441698180
+    second: Star Flow_10
+  - first:
+      213: -3819026911187429348
+    second: Star Flow_11
+  - first:
+      213: 1613009280759037967
+    second: Star Flow_12
+  - first:
+      213: 2484738752569721554
+    second: Star Flow_13
+  - first:
+      213: -7379362926352089675
+    second: Star Flow_14
+  - first:
+      213: -700605448500604833
+    second: Star Flow_15
+  - first:
+      213: -7607553423983392260
+    second: Star Flow_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Star Flow_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 206
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d508ab42df59aa0800000000000000
+      internalID: -6154734981542290032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_1
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 208
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4c287769313a2c80800000000000000
+      internalID: -8346804836758967218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 208
+        width: 25
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35f5b9c031d97b2f0800000000000000
+      internalID: -957123690651492525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 208
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44ad4a42b3dc77e30800000000000000
+      internalID: 4501292006481648196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 151
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15fcf6c3f2884eef0800000000000000
+      internalID: -79789156927025327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_5
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 150
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be0d4070e6263e6e0800000000000000
+      internalID: -1809494400569126677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_6
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 154
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a07e1370fb53df00800000000000000
+      internalID: 1140356218936520870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_7
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 149
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54a065409e717bfe0800000000000000
+      internalID: -1173442888339158459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_8
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 149
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600a839b5c3c52d00800000000000000
+      internalID: 947378550614827014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_9
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 146
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbaa4f3e3a03f15a0800000000000000
+      internalID: -6548461852711146820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_10
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 144
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c729f6305acf10ef0800000000000000
+      internalID: -143555927441698180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_11
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 143
+        width: 25
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1814032247100bc0800000000000000
+      internalID: -3819026911187429348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_12
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 93
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f000d0f056f826610800000000000000
+      internalID: 1613009280759037967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_13
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 95
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d2c0921bb09b7220800000000000000
+      internalID: 2484738752569721554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_14
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 98
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bdb81a148c379990800000000000000
+      internalID: -7379362926352089675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_15
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 106
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f501b6a7e03f646f0800000000000000
+      internalID: -700605448500604833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star Flow_16
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 45
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf9c9a9a77a8c6690800000000000000
+      internalID: -7607553423983392260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Star Flow_0: -6154734981542290032
+      Star Flow_1: -8346804836758967218
+      Star Flow_10: -143555927441698180
+      Star Flow_11: -3819026911187429348
+      Star Flow_12: 1613009280759037967
+      Star Flow_13: 2484738752569721554
+      Star Flow_14: -7379362926352089675
+      Star Flow_15: -700605448500604833
+      Star Flow_16: -7607553423983392260
+      Star Flow_2: -957123690651492525
+      Star Flow_3: 4501292006481648196
+      Star Flow_4: -79789156927025327
+      Star Flow_5: -1809494400569126677
+      Star Flow_6: 1140356218936520870
+      Star Flow_7: -1173442888339158459
+      Star Flow_8: 947378550614827014
+      Star Flow_9: -6548461852711146820
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
