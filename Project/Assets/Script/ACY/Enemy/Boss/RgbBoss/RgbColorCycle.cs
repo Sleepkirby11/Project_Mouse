@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class RgbColorCycle : MonoBehaviour
@@ -28,7 +28,7 @@ public class RgbColorCycle : MonoBehaviour
 
         enemyStatus.SetElement(first);
         ApplyController(GetController(first));
-        StartCoroutine(ColorCycleRoutine());
+        // StartCoroutine(ColorCycleRoutine());
     }
 
     private IEnumerator ColorCycleRoutine()
@@ -44,7 +44,7 @@ public class RgbColorCycle : MonoBehaviour
         }
     }
 
-    private void ChangeElementRandom()
+    public void ChangeElementRandom()
     {
         EnemyStatus.EnemyElement current = enemyStatus.CurrentElement;
         EnemyStatus.EnemyElement next;

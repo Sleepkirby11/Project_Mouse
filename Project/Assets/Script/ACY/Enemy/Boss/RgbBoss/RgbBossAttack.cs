@@ -1,6 +1,17 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum BossAttackType
+{
+    Burst,
+    FireGear,
+    MushRoom,
+    IceHammer,
+    Hurricane,
+    Bullet,
+    Lightning
+}
 
 public class RgbBossAttack : MonoBehaviour, IHitReaction
 {
@@ -59,6 +70,9 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     private RgbBossMove bossMove;
     private RgbColorCycle colorCycle;
 
+    private BossAttackType lastAttackType = (BossAttackType)(-1);
+    private bool isFinalPhaseActive = false;
+
     private bool isFinalPhaseTriggered = false;
     private bool isInvincible = false;
     private List<BlackHole> activeBlackHoles = new List<BlackHole>();
@@ -81,7 +95,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
             player = playerObj.transform;
 
         StartCoroutine(RecordPlayerPosition());
-        //StartCoroutine(AttackRoutine());
+        StartCoroutine(AttackRoutine());
     }
 
     private void Update()
@@ -112,41 +126,107 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     public void OnAfterTakeDamage(EnemyStatus status, int damage) {}
     private IEnumerator AttackRoutine()
     {
+        yield return new WaitForSeconds(2f);
+
         while (true)
         {
-            switch (enemyStatus.CurrentElement)
+            if (isFinalPhaseActive)
             {
-                case EnemyStatus.EnemyElement.Red:
-                    yield return StartCoroutine(RedAttack());
+                yield return null;
+                continue;
+            }
+
+            int attackCount = Random.Range(1, 3);
+            
+            for (int i = 0; i < attackCount; i++)
+            {
+                if (isFinalPhaseActive)
                     break;
-                case EnemyStatus.EnemyElement.Green:
-                    yield return StartCoroutine(GreenAttack());
-                    break;
-                case EnemyStatus.EnemyElement.Blue:
-                    yield return StartCoroutine(BlueAttack());
-                    break;
-                default:
-                    yield return null;
-                    break;
+
+                BossAttackType chosenAttack = GetRandomAttack();
+                yield return StartCoroutine(ExecuteAttack(chosenAttack));
+            }
+
+            if (!isFinalPhaseActive)
+            {
+                if (colorCycle != null)
+                {
+                    colorCycle.ChangeElementRandom();
+                }
+                yield return new WaitForSeconds(1.5f);
             }
         }
     }
 
-    private IEnumerator RedAttack()
+    private BossAttackType GetRandomAttack()
     {
-        SpawnFireGears();
-        yield return new WaitForSeconds(redAttackInterval);
+        List<BossAttackType> availableAttacks = new List<BossAttackType>();
+
+        switch (enemyStatus.CurrentElement)
+        {
+            case EnemyStatus.EnemyElement.Red:
+                availableAttacks.Add(BossAttackType.Burst);
+                availableAttacks.Add(BossAttackType.FireGear);
+                break;
+            case EnemyStatus.EnemyElement.Green:
+                availableAttacks.Add(BossAttackType.MushRoom);
+                break;
+            case EnemyStatus.EnemyElement.Blue:
+                availableAttacks.Add(BossAttackType.IceHammer);
+                break;
+        }
+
+        availableAttacks.Add(BossAttackType.Hurricane);
+        availableAttacks.Add(BossAttackType.Bullet);
+        availableAttacks.Add(BossAttackType.Lightning);
+
+        if (availableAttacks.Count > 1)
+        {
+            availableAttacks.Remove(lastAttackType);
+        }
+
+        BossAttackType chosen = availableAttacks[Random.Range(0, availableAttacks.Count)];
+        lastAttackType = chosen;
+        return chosen;
     }
 
-    private IEnumerator GreenAttack()
+    private IEnumerator ExecuteAttack(BossAttackType attack)
     {
-        SpawnPoisonMushrooms();
-        yield return new WaitForSeconds(3f);
-    }
-
-    private IEnumerator BlueAttack()
-    {
-        yield return new WaitForSeconds(5f);
+        switch (attack)
+        {
+            case BossAttackType.Burst:
+                SpawnBurstPattern();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.FireGear:
+                SpawnFireGears();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.MushRoom:
+                SpawnPoisonMushrooms();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.IceHammer:
+                SpawnIceHammer();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.Hurricane:
+                SpawnHurricane();
+                yield return new WaitForSeconds(3f);
+                break;
+            case BossAttackType.Bullet:
+                ShootBullet();
+                yield return new WaitForSeconds(2f);
+                break;
+            case BossAttackType.Lightning:
+                if (animator != null)
+                {
+                    animator.SetTrigger(CastingTrigger);
+                }
+                float waitTime = (lightningCount * lightningInterval) + 1.5f;
+                yield return new WaitForSeconds(waitTime);
+                break;
+        }
     }
 
     // Animation Event에서 호출
@@ -393,6 +473,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     }
     private IEnumerator FinalPhaseRoutine()
     {
+        isFinalPhaseActive = true;
         isInvincible = true; // 무적 켜기
 
         if (colorCycle != null) colorCycle.EnterFinalPhase();
@@ -413,6 +494,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         {
             colorCycle.ExitFinalPhase();
         }
+        isFinalPhaseActive = false;
     }
 
     private void SpawnBlackHoles()
