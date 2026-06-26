@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class RgbColorCycle : MonoBehaviour
@@ -67,7 +67,7 @@ public class RgbColorCycle : MonoBehaviour
             EnemyStatus.EnemyElement.Red => baseController,
             EnemyStatus.EnemyElement.Green => greenOverride,
             EnemyStatus.EnemyElement.Blue => blueOverride,
-            EnemyStatus.EnemyElement.None => magentaOverride, // ¹ß¾Ç »óÅÂ
+            EnemyStatus.EnemyElement.None => magentaOverride, // ë°œì•… ìƒíƒœ
             _ => baseController
         };
     }
@@ -92,15 +92,18 @@ public class RgbColorCycle : MonoBehaviour
         enemyStatus.SetElement(EnemyStatus.EnemyElement.None);
         ApplyController(GetController(EnemyStatus.EnemyElement.None));
 
-        Debug.Log("¹ß¾Ç ÆĞÅÏ ½ÃÀÛ");
+        Debug.Log("ë°œì•… íŒ¨í„´ ì‹œì‘");
     }
     public void ExitFinalPhase()
     {
-        if (isFinalPhase)
+        if (!isFinalPhase)
             return;
 
         isFinalPhase = false;
 
-        ChangeElementRandom();   // ¹ß¾Ç ³¡³ª¸é Áï½Ã RGB ÇÏ³ª ¼±ÅÃ
+        // ë°œì•… ëë‚˜ë©´ ì¦‰ì‹œ RGB í•˜ë‚˜ ì„ íƒí•˜ë©° ì‚¬ì´í´ ì¬ê°œ
+        ChangeElementRandom();
+
+        Debug.Log("ë°œì•… ìƒíƒœ í•´ì œ, RGB ì‚¬ì´í´ë¡œ ë³µê·€!");
     }
 }

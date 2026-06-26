@@ -1,49 +1,55 @@
-using System.Collections;
+ï»¿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class RgbBossAttack : MonoBehaviour
+public class RgbBossAttack : MonoBehaviour, IHitReaction
 {
-    [Header("È¸º¹·® ¼³Á¤")]
+    [Header("íšŒë³µëŸ‰ ì„¤ì •")]
     [SerializeField] private int healAmount = 5;
 
     [Header("FireGear Spawn")]
     [SerializeField] private float spawnOffsetY = -1f;
     [SerializeField] private float redAttackInterval = 3f;
 
-    [Header("Hurricane ¼³Á¤")]
+    [Header("Hurricane ì„¤ì •")]
     [SerializeField] private float spawnOffsetX = 1.5f;
 
-    [Header("¼Ó¼ºº° ÅºÈ¯ Ç® ÀÌ¸§ ¼³Á¤")]
+    [Header("ì†ì„±ë³„ íƒ„í™˜ í’€ ì´ë¦„ ì„¤ì •")]
     [SerializeField] private string redBulletPoolName = "RedBullet";
     [SerializeField] private string greenBulletPoolName = "GreenBullet";
     [SerializeField] private string blueBulletPoolName = "BlueBullet";
 
-    [Header("Burst ÆĞÅÏ ¼³Á¤")]
+    [Header("Burst íŒ¨í„´ ì„¤ì •")]
     [SerializeField] private string redBurstPoolName = "Burst";
     [SerializeField] private float burstSpawnRadius = 3.5f;
 
-    [Header("µ¶¹ö¼¸ ÆĞÅÏ ¼³Á¤ (Green)")]
+    [Header("ë…ë²„ì„¯ íŒ¨í„´ ì„¤ì • (Green)")]
     [SerializeField] private string mushroomPoolName = "Mushroom";
     [SerializeField] private int mushroomSpawnCount = 3;
     [SerializeField] private float spawnRangeX = 5f;
     [SerializeField] private float mushroomOffsetY = 0f;
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("¹ø°³ ÆĞÅÏ ¼³Á¤")]
+    [Header("ë²ˆê°œ íŒ¨í„´ ì„¤ì •")]
     [SerializeField] private string redLightningPoolName = "RedLightning";
     [SerializeField] private string greenLightningPoolName = "GreenLightning";
     [SerializeField] private string blueLightningPoolName = "BlueLightning";
     [SerializeField] private int lightningCount = 3;
     [SerializeField] private float lightningInterval = 0.3f;
-    [SerializeField] private float posRecordInterval = 0.5f; // ¼ıÀÚ°¡ Å¬¼ö·Ï ÇÇÇÏ±â ½¬¿öÁü
+    [SerializeField] private float posRecordInterval = 0.5f; // ìˆ«ìê°€ í´ìˆ˜ë¡ í”¼í•˜ê¸° ì‰¬ì›Œì§
 
     [Header("FirePoint")]
-    [SerializeField] private Transform firePoint;          // ¹ø°³
-    [SerializeField] private Transform bulletFirePoint;    // ÀÏ¹İ ÅºÈ¯
+    [SerializeField] private Transform firePoint;          // ë²ˆê°œ
+    [SerializeField] private Transform bulletFirePoint;    // ì¼ë°˜ íƒ„í™˜
 
-    [Header("¾óÀ½ ¸ÁÄ¡ ¼³Á¤")]
+    [Header("ì–¼ìŒ ë§ì¹˜ ì„¤ì •")]
     [SerializeField] private float hammerOffsetX = 0f;
     [SerializeField] private float hammerOffsetY = 0f;
+
+    [Header("10%íŒ¨í„´ (ë¸”ë™í™€) ì„¤ì •")]
+    [SerializeField] private string blackHolePoolName = "BlackHole";
+    [SerializeField] private Transform[] blackHoleSpawnPoints; // ë¯¸ë¦¬ ì§€ì •í•´ë‘˜ 3ê°œì˜ ìœ„ì¹˜
+    [SerializeField] private float finalPhaseDuration = 10f; // íŒ¨í„´ ì§€ì† ì‹œê°„
 
     private Vector3 lastPlayerPos;
     private Transform player;
@@ -51,6 +57,12 @@ public class RgbBossAttack : MonoBehaviour
     private SpriteRenderer bossSpriteRenderer;
     private Animator animator;
     private RgbBossMove bossMove;
+    private RgbColorCycle colorCycle;
+
+    private bool isFinalPhaseTriggered = false;
+    private bool isInvincible = false;
+    private List<BlackHole> activeBlackHoles = new List<BlackHole>();
+
     private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
     private static readonly int CastingTrigger = Animator.StringToHash("Casting");
     private void Awake()
@@ -59,6 +71,7 @@ public class RgbBossAttack : MonoBehaviour
         bossSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
         bossMove = GetComponent<RgbBossMove>();
+        colorCycle = GetComponent<RgbColorCycle>();
     }
 
     private void Start()
@@ -73,12 +86,30 @@ public class RgbBossAttack : MonoBehaviour
 
     private void Update()
     {
-            if (Input.GetKeyDown(KeyCode.L))
-            {
+        // í…ŒìŠ¤íŠ¸ìš© ë‹¨ì¶•í‚¤ ìœ ì§€
+        if (Input.GetKeyDown(KeyCode.L))
+        {
             SpawnBurstPattern();
         }
+
+        // ì²´ë ¥ì´ 10% ì´í•˜ì´ê³ , ì•„ì§ ë°œì•… íŒ¨í„´ì— ì§„ì…í•˜ì§€ ì•Šì•˜ë‹¤ë©´ ì‹¤í–‰
+        if (!isFinalPhaseTriggered && enemyStatus.GetHPRatio() <= 0.1f)
+        {
+            isFinalPhaseTriggered = true;
+
+            StartCoroutine(FinalPhaseRoutine());
+        }
+    }
+    public bool OnBeforeTakeDamage(EnemyStatus status, int damage) // ë¬´ì 
+    {
+        if (isInvincible)
+        {
+            return true;
+        }
+        return false;
     }
 
+    public void OnAfterTakeDamage(EnemyStatus status, int damage) {}
     private IEnumerator AttackRoutine()
     {
         while (true)
@@ -118,7 +149,7 @@ public class RgbBossAttack : MonoBehaviour
         yield return new WaitForSeconds(5f);
     }
 
-    // Animation Event¿¡¼­ È£Ãâ
+    // Animation Eventì—ì„œ í˜¸ì¶œ
     public void SpawnLightning()
     {
         StartCoroutine(SpawnLightningBurst());
@@ -143,7 +174,7 @@ public class RgbBossAttack : MonoBehaviour
 
         for (int i = 0; i < lightningCount; i++)
         {
-            Vector2 dir = (lastPlayerPos - firePoint.position).normalized; // ÀÌÀü À§Ä¡·Î ¹ß»ç
+            Vector2 dir = (lastPlayerPos - firePoint.position).normalized; // ì´ì „ ìœ„ì¹˜ë¡œ ë°œì‚¬
 
             GameObject obj = PoolingManager.Instance.Get(
                 poolName,
@@ -176,7 +207,7 @@ public class RgbBossAttack : MonoBehaviour
         }
     }
 
-    // ¦¡¦¡¦¡ µ¶¹ö¼¸ ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+    // â”€â”€â”€ ë…ë²„ì„¯ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void SpawnPoisonMushrooms()
     {
@@ -206,10 +237,10 @@ public class RgbBossAttack : MonoBehaviour
             }
         }
 
-        Debug.Log($"µ¶¹ö¼¸ »ı¼º ÆĞÅÏ ½ÇÇà: ÇÃ·¹ÀÌ¾î ÁÖº¯ ¹Ù´Ú¿¡ {successfulSpawns}°³ ½ºÆùµÊ.");
+        Debug.Log($"ë…ë²„ì„¯ ìƒì„± íŒ¨í„´ ì‹¤í–‰: í”Œë ˆì´ì–´ ì£¼ë³€ ë°”ë‹¥ì— {successfulSpawns}ê°œ ìŠ¤í°ë¨.");
     }
 
-    // ¦¡¦¡¦¡ Hurricane ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+    // â”€â”€â”€ Hurricane â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void SpawnHurricane()
     {
@@ -219,14 +250,14 @@ public class RgbBossAttack : MonoBehaviour
         }
         Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
 
-        // spawnOffsetX ½ÇÁ¦·Î Àû¿ë
+        // spawnOffsetX ì‹¤ì œë¡œ ì ìš©
         Vector3 spawnPos = transform.position +
                       (spawnDirection * spawnOffsetX) +
                       (Vector3.up * spawnOffsetY);
 
         GameObject hurricaneObj = PoolingManager.Instance.Get(
             "Hurricane",
-            spawnPos,          // transform.position ´ë½Å spawnPos »ç¿ë
+            spawnPos,          // transform.position ëŒ€ì‹  spawnPos ì‚¬ìš©
             Quaternion.identity);
 
         if (hurricaneObj != null)
@@ -241,7 +272,7 @@ public class RgbBossAttack : MonoBehaviour
         }
     }
 
-    // ¦¡¦¡¦¡ FireGear ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+    // â”€â”€â”€ FireGear â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void SpawnFireGears()
     {
@@ -255,9 +286,9 @@ public class RgbBossAttack : MonoBehaviour
         PoolingManager.Instance.Get("FireGear", spawnPos, Quaternion.identity);
     }
 
-    // ¦¡¦¡¦¡ ¼Ó¼º ÅºÈ¯ ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+    // â”€â”€â”€ ì†ì„± íƒ„í™˜ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç¿¡¼­ È£Ãâ
+    // ì• ë‹ˆë©”ì´ì…˜ì—ì„œ í˜¸ì¶œ
     public void SpawnBossBullet()
     {
         if (player == null || bulletFirePoint == null)
@@ -301,7 +332,7 @@ public class RgbBossAttack : MonoBehaviour
 
         animator.SetTrigger(ShootTrigger);
     }
-    // ¦¡¦¡¦¡ Burst ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+    // â”€â”€â”€ Burst â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void SpawnBurstPattern()
     {
@@ -338,7 +369,7 @@ public class RgbBossAttack : MonoBehaviour
         if (player == null)
             return;
 
-        // ÇÃ·¹ÀÌ¾î ±âÁØ X À§Ä¡¿¡¼­ À§ÂÊ¿¡¼­ ¾Æ·¡·Î ·¹ÀÌÄ³½ºÆ®
+        // í”Œë ˆì´ì–´ ê¸°ì¤€ X ìœ„ì¹˜ì—ì„œ ìœ„ìª½ì—ì„œ ì•„ë˜ë¡œ ë ˆì´ìºìŠ¤íŠ¸
         Vector3 rayStart = player.position + new Vector3(hammerOffsetX, 5f, 0f);
 
         RaycastHit2D hit = Physics2D.Raycast(
@@ -349,7 +380,7 @@ public class RgbBossAttack : MonoBehaviour
 
         if (hit.collider == null)
         {
-            Debug.LogWarning("¸ÁÄ¡ »ı¼º ½ÇÆĞ : Ground¸¦ Ã£Áö ¸øÇÔ");
+            Debug.LogWarning("ë§ì¹˜ ìƒì„± ì‹¤íŒ¨ : Groundë¥¼ ì°¾ì§€ ëª»í•¨");
             return;
         }
 
@@ -359,5 +390,59 @@ public class RgbBossAttack : MonoBehaviour
             "IceHammer",
             spawnPos,
             Quaternion.identity);
+    }
+    private IEnumerator FinalPhaseRoutine()
+    {
+        isInvincible = true; // ë¬´ì  ì¼œê¸°
+
+        if (colorCycle != null) colorCycle.EnterFinalPhase();
+        if (animator != null) animator.SetTrigger(CastingTrigger);
+
+        SpawnBlackHoles();
+
+        yield return new WaitForSeconds(finalPhaseDuration);
+
+        foreach (BlackHole bh in activeBlackHoles)
+        {
+            if (bh != null) bh.ReturnToPool();
+        }
+        activeBlackHoles.Clear();
+
+        isInvincible = false; // ë¬´ì  ë„ê¸°
+        if (colorCycle != null)
+        {
+            colorCycle.ExitFinalPhase();
+        }
+    }
+
+    private void SpawnBlackHoles()
+    {
+        activeBlackHoles.Clear(); // ğŸ”¥ ìƒì„± ì „ ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
+
+        if (player == null || blackHoleSpawnPoints == null) return;
+
+        // ì§€ì •ëœ ìœ„ì¹˜ ë°°ì—´ì„ ëŒë©° ë¸”ë™í™€ ìƒì„±
+        foreach (Transform spawnPoint in blackHoleSpawnPoints)
+        {
+            GameObject bhObj = PoolingManager.Instance.Get(
+                blackHolePoolName,
+                spawnPoint.position,
+                Quaternion.identity
+            );
+
+            if (bhObj != null)
+            {
+                BlackHole blackHole = bhObj.GetComponent<BlackHole>();
+                if (blackHole != null)
+                {
+                    blackHole.Initialize(blackHolePoolName, player);
+
+                    // ğŸ”¥ 4. ìƒì„±ëœ ë¸”ë™í™€ì„ ë¦¬ìŠ¤íŠ¸ì— ë‹´ì•„ì¤˜ì•¼ ë‚˜ì¤‘ì— ì§€ìš¸ ìˆ˜ ìˆìŒ!
+                    activeBlackHoles.Add(blackHole);
+                }
+            }
+        }
+
+        Debug.Log($"ë°œì•… íŒ¨í„´ ì‹œì‘! {blackHoleSpawnPoints.Length}ê°œì˜ ë¸”ë™í™€ ìƒì„±ë¨.");
     }
 }

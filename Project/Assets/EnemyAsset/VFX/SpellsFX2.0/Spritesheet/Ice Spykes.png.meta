@@ -1,0 +1,1053 @@
+fileFormatVersion: 2
+guid: 1567c1e9adc151f4aa13545065817a50
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6618304961281382777
+    second: Ice Spykes_0
+  - first:
+      213: -8070384079654667227
+    second: Ice Spykes_1
+  - first:
+      213: -3615806313040748756
+    second: Ice Spykes_2
+  - first:
+      213: 7197236948809484337
+    second: Ice Spykes_3
+  - first:
+      213: -7703871173347381025
+    second: Ice Spykes_4
+  - first:
+      213: 1192188534237848590
+    second: Ice Spykes_5
+  - first:
+      213: -2089864226967272788
+    second: Ice Spykes_6
+  - first:
+      213: 6032558586400424614
+    second: Ice Spykes_7
+  - first:
+      213: 8864654303027198217
+    second: Ice Spykes_8
+  - first:
+      213: -5137206111824089968
+    second: Ice Spykes_9
+  - first:
+      213: -3484723831667515881
+    second: Ice Spykes_10
+  - first:
+      213: -5846540393827351790
+    second: Ice Spykes_11
+  - first:
+      213: -6324189395843654495
+    second: Ice Spykes_12
+  - first:
+      213: -250312378661712219
+    second: Ice Spykes_13
+  - first:
+      213: -8492257410106500699
+    second: Ice Spykes_14
+  - first:
+      213: 2356750064975302120
+    second: Ice Spykes_15
+  - first:
+      213: 3025279044153096834
+    second: Ice Spykes_16
+  - first:
+      213: 8450457937317084107
+    second: Ice Spykes_17
+  - first:
+      213: -6143953807963638943
+    second: Ice Spykes_18
+  - first:
+      213: 4606943488992355634
+    second: Ice Spykes_19
+  - first:
+      213: -7933766316341877022
+    second: Ice Spykes_20
+  - first:
+      213: -4956298906743733328
+    second: Ice Spykes_21
+  - first:
+      213: -8135443389734207857
+    second: Ice Spykes_22
+  - first:
+      213: 5577916710420359905
+    second: Ice Spykes_23
+  - first:
+      213: 7917758222402207433
+    second: Ice Spykes_24
+  - first:
+      213: -4817059272483418596
+    second: Ice Spykes_25
+  - first:
+      213: -9048112582787837258
+    second: Ice Spykes_26
+  - first:
+      213: -7243867290554308091
+    second: Ice Spykes_27
+  - first:
+      213: -9135382130297977635
+    second: Ice Spykes_28
+  - first:
+      213: 5168709959626620420
+    second: Ice Spykes_29
+  - first:
+      213: -9190757634190768517
+    second: Ice Spykes_30
+  - first:
+      213: 2610344850915781425
+    second: Ice Spykes_31
+  - first:
+      213: 7814981014809926068
+    second: Ice Spykes_32
+  - first:
+      213: 6888505957619504500
+    second: Ice Spykes_33
+  - first:
+      213: 3993003814644888603
+    second: Ice Spykes_34
+  - first:
+      213: -936714698691604804
+    second: Ice Spykes_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ice Spykes_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 15
+        width: 70
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7862e97f3be0724a0800000000000000
+      internalID: -6618304961281382777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_1
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 15
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52c3733307c300090800000000000000
+      internalID: -8070384079654667227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_2
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 15
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2f579ec05312ddc0800000000000000
+      internalID: -3615806313040748756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_3
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 15
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1380b125fd8b1e360800000000000000
+      internalID: 7197236948809484337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_4
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 15
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd0f1451cf9561590800000000000000
+      internalID: -7703871173347381025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_5
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 15
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e046a88c7218b8010800000000000000
+      internalID: 1192188534237848590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_6
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 15
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca2c1d2ee8f4ff2e0800000000000000
+      internalID: -2089864226967272788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_7
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 15
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a2412d8214f7b350800000000000000
+      internalID: 6032558586400424614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_8
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 15
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 909f2942f14950b70800000000000000
+      internalID: 8864654303027198217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_9
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 15
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09c62c6624af4b8b0800000000000000
+      internalID: -5137206111824089968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_10
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 15
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71e9e115326c3afc0800000000000000
+      internalID: -3484723831667515881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_11
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 15
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 213c2f4fc7aecdea0800000000000000
+      internalID: -5846540393827351790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_12
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 15
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ac52706047fb38a0800000000000000
+      internalID: -6324189395843654495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_13
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 15
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ae4cf2c736b68cf0800000000000000
+      internalID: -250312378661712219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_14
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 15
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a95c6121e0752a80800000000000000
+      internalID: -8492257410106500699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_15
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 15
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ed4b3f82bbd4b020800000000000000
+      internalID: 2356750064975302120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_16
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 15
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28abd251343fbf920800000000000000
+      internalID: 3025279044153096834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_17
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 15
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb3a27b8be064570800000000000000
+      internalID: 8450457937317084107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_18
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 15
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1633bef409a4cbaa0800000000000000
+      internalID: -6143953807963638943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_19
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 15
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23520b1d1b62fef30800000000000000
+      internalID: 4606943488992355634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_20
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 15
+        width: 7
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e6ab77f19995e190800000000000000
+      internalID: -7933766316341877022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_21
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 15
+        width: 7
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b302e66760b73bb0800000000000000
+      internalID: -4956298906743733328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_22
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 15
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8eb7982759191f80800000000000000
+      internalID: -8135443389734207857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_23
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 15
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ea225fe1bdb86d40800000000000000
+      internalID: 5577916710420359905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_24
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 15
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ce36b7372781ed60800000000000000
+      internalID: 7917758222402207433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_25
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 15
+        width: 7
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1ecf911d1e562db0800000000000000
+      internalID: -4817059272483418596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_26
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 15
+        width: 7
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b2503f7b85ae6280800000000000000
+      internalID: -9048112582787837258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_27
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 15
+        width: 12
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50a6072341d987b90800000000000000
+      internalID: -7243867290554308091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_28
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 15
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd443249a5a983180800000000000000
+      internalID: -9135382130297977635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_29
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 15
+        width: 7
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40e7192c252fab740800000000000000
+      internalID: 5168709959626620420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_30
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 15
+        width: 9
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b76895d50aed37080800000000000000
+      internalID: -9190757634190768517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_31
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 15
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13bea1ccfcec93420800000000000000
+      internalID: 2610344850915781425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_32
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 15
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b9da22d3d3647c60800000000000000
+      internalID: 7814981014809926068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_33
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 15
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 475921deba3e89f50800000000000000
+      internalID: 6888505957619504500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_34
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 15
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1430b640dff96730800000000000000
+      internalID: 3993003814644888603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Spykes_35
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 15
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbe8998c1fe1003f0800000000000000
+      internalID: -936714698691604804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Ice Spykes_0: -6618304961281382777
+      Ice Spykes_1: -8070384079654667227
+      Ice Spykes_10: -3484723831667515881
+      Ice Spykes_11: -5846540393827351790
+      Ice Spykes_12: -6324189395843654495
+      Ice Spykes_13: -250312378661712219
+      Ice Spykes_14: -8492257410106500699
+      Ice Spykes_15: 2356750064975302120
+      Ice Spykes_16: 3025279044153096834
+      Ice Spykes_17: 8450457937317084107
+      Ice Spykes_18: -6143953807963638943
+      Ice Spykes_19: 4606943488992355634
+      Ice Spykes_2: -3615806313040748756
+      Ice Spykes_20: -7933766316341877022
+      Ice Spykes_21: -4956298906743733328
+      Ice Spykes_22: -8135443389734207857
+      Ice Spykes_23: 5577916710420359905
+      Ice Spykes_24: 7917758222402207433
+      Ice Spykes_25: -4817059272483418596
+      Ice Spykes_26: -9048112582787837258
+      Ice Spykes_27: -7243867290554308091
+      Ice Spykes_28: -9135382130297977635
+      Ice Spykes_29: 5168709959626620420
+      Ice Spykes_3: 7197236948809484337
+      Ice Spykes_30: -9190757634190768517
+      Ice Spykes_31: 2610344850915781425
+      Ice Spykes_32: 7814981014809926068
+      Ice Spykes_33: 6888505957619504500
+      Ice Spykes_34: 3993003814644888603
+      Ice Spykes_35: -936714698691604804
+      Ice Spykes_4: -7703871173347381025
+      Ice Spykes_5: 1192188534237848590
+      Ice Spykes_6: -2089864226967272788
+      Ice Spykes_7: 6032558586400424614
+      Ice Spykes_8: 8864654303027198217
+      Ice Spykes_9: -5137206111824089968
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

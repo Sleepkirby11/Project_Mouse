@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: dd17ed60e0644ac47ad81eefbe9e696b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2377960898419726647
+    second: Glacial Core_0
+  - first:
+      213: 4927490071297864308
+    second: Glacial Core_1
+  - first:
+      213: -2381171893410326804
+    second: Glacial Core_2
+  - first:
+      213: 3133543064803825242
+    second: Glacial Core_3
+  - first:
+      213: -1016552220478668959
+    second: Glacial Core_4
+  - first:
+      213: 1900882062429302230
+    second: Glacial Core_5
+  - first:
+      213: 1292535683018439137
+    second: Glacial Core_6
+  - first:
+      213: 7709428930076608111
+    second: Glacial Core_7
+  - first:
+      213: 319407605975244907
+    second: Glacial Core_8
+  - first:
+      213: 7402402161962523290
+    second: Glacial Core_9
+  - first:
+      213: 849169148126814547
+    second: Glacial Core_10
+  - first:
+      213: 1343303545230987597
+    second: Glacial Core_11
+  - first:
+      213: -2679366924978460721
+    second: Glacial Core_12
+  - first:
+      213: 4155638385682653784
+    second: Glacial Core_13
+  - first:
+      213: 4680775617918663740
+    second: Glacial Core_14
+  - first:
+      213: -1096620177670642705
+    second: Glacial Core_15
+  - first:
+      213: 5482018277266695555
+    second: Glacial Core_16
+  - first:
+      213: 4110825735743591087
+    second: Glacial Core_17
+  - first:
+      213: -2680912865735927239
+    second: Glacial Core_18
+  - first:
+      213: 5889195510726376239
+    second: Glacial Core_19
+  - first:
+      213: 2385273351706104732
+    second: Glacial Core_20
+  - first:
+      213: -46970705429471204
+    second: Glacial Core_21
+  - first:
+      213: 1416125193325022496
+    second: Glacial Core_22
+  - first:
+      213: 8769238596086230677
+    second: Glacial Core_23
+  - first:
+      213: 3450753479478415725
+    second: Glacial Core_24
+  - first:
+      213: 4680083232338386664
+    second: Glacial Core_25
+  - first:
+      213: 6475172151410738480
+    second: Glacial Core_26
+  - first:
+      213: 8564073979027721292
+    second: Glacial Core_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Glacial Core_0
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 166
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c66cef6929cffed0800000000000000
+      internalID: -2377960898419726647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 154
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47239f5ec16f16440800000000000000
+      internalID: 4927490071297864308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 161
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce6122867c064fed0800000000000000
+      internalID: -2381171893410326804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_3
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 152
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a565502b0d49c7b20800000000000000
+      internalID: 3133543064803825242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_4
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 167
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16ffbb2342b74e1f0800000000000000
+      internalID: -1016552220478668959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_5
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 148
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dda20b1a2a416a10800000000000000
+      internalID: 1900882062429302230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_6
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 153
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e9b4d50b5200f110800000000000000
+      internalID: 1292535683018439137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_7
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 151
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f66065ef3c46dfa60800000000000000
+      internalID: 7709428930076608111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_8
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 146
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6066bc7683ce6400800000000000000
+      internalID: 319407605975244907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_9
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 86
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9a1c54fb8d9ab660800000000000000
+      internalID: 7402402161962523290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_10
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 6
+        width: 52
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 351e15457dad8cb00800000000000000
+      internalID: 849169148126814547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_11
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 82
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41140f057f54a210800000000000000
+      internalID: 1343303545230987597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_12
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 81
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc76ab54af9f0dad0800000000000000
+      internalID: -2679366924978460721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_13
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 96
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 852a791281bcba930800000000000000
+      internalID: 4155638385682653784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_14
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 95
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3cf95bef9475f040800000000000000
+      internalID: 4680775617918663740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_15
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 80
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe36a6032c508c0f0800000000000000
+      internalID: -1096620177670642705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_16
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 35
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3852ea4049a041c40800000000000000
+      internalID: 5482018277266695555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_17
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 42
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa2d7800a369c0930800000000000000
+      internalID: 4110825735743591087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_18
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 33
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93a1904e3fb7bcad0800000000000000
+      internalID: -2680912865735927239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_19
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 17
+        width: 38
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2bbbad5d10aab150800000000000000
+      internalID: 5889195510726376239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_20
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 21
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c93d5a4c9713a1120800000000000000
+      internalID: 2385273351706104732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_21
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 15
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c10e60c6460295ff0800000000000000
+      internalID: -46970705429471204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_22
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 16
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02d8e914c5617a310800000000000000
+      internalID: 1416125193325022496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_23
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 15
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59e6d5eaa0892b970800000000000000
+      internalID: 8769238596086230677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_24
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 27
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6111c7b10a83ef20800000000000000
+      internalID: 3450753479478415725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_25
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 19
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ee9ac657eef2f040800000000000000
+      internalID: 4680083232338386664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_26
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 9
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 035c658c3ce6cd950800000000000000
+      internalID: 6475172151410738480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glacial Core_27
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 11
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4c0d16d8e3b9d670800000000000000
+      internalID: 8564073979027721292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Glacial Core_0: -2377960898419726647
+      Glacial Core_1: 4927490071297864308
+      Glacial Core_10: 849169148126814547
+      Glacial Core_11: 1343303545230987597
+      Glacial Core_12: -2679366924978460721
+      Glacial Core_13: 4155638385682653784
+      Glacial Core_14: 4680775617918663740
+      Glacial Core_15: -1096620177670642705
+      Glacial Core_16: 5482018277266695555
+      Glacial Core_17: 4110825735743591087
+      Glacial Core_18: -2680912865735927239
+      Glacial Core_19: 5889195510726376239
+      Glacial Core_2: -2381171893410326804
+      Glacial Core_20: 2385273351706104732
+      Glacial Core_21: -46970705429471204
+      Glacial Core_22: 1416125193325022496
+      Glacial Core_23: 8769238596086230677
+      Glacial Core_24: 3450753479478415725
+      Glacial Core_25: 4680083232338386664
+      Glacial Core_26: 6475172151410738480
+      Glacial Core_27: 8564073979027721292
+      Glacial Core_3: 3133543064803825242
+      Glacial Core_4: -1016552220478668959
+      Glacial Core_5: 1900882062429302230
+      Glacial Core_6: 1292535683018439137
+      Glacial Core_7: 7709428930076608111
+      Glacial Core_8: 319407605975244907
+      Glacial Core_9: 7402402161962523290
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

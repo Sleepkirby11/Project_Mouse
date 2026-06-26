@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 810b7af889f739b4a81e5096d405dc95
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7331442211675406842
+    second: Infernal Strike_0
+  - first:
+      213: -7481741641812275300
+    second: Infernal Strike_1
+  - first:
+      213: 1533460020649190004
+    second: Infernal Strike_2
+  - first:
+      213: 3638791788583530240
+    second: Infernal Strike_3
+  - first:
+      213: 1978220880472467130
+    second: Infernal Strike_4
+  - first:
+      213: -1248094030776027390
+    second: Infernal Strike_5
+  - first:
+      213: -6990138574246928832
+    second: Infernal Strike_6
+  - first:
+      213: -1694897496395576584
+    second: Infernal Strike_7
+  - first:
+      213: 7201849632757233461
+    second: Infernal Strike_8
+  - first:
+      213: 98443487322778275
+    second: Infernal Strike_9
+  - first:
+      213: -1050643811002038406
+    second: Infernal Strike_10
+  - first:
+      213: -7994587208104268113
+    second: Infernal Strike_11
+  - first:
+      213: 6418376292859192266
+    second: Infernal Strike_12
+  - first:
+      213: -3788642282146265299
+    second: Infernal Strike_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Infernal Strike_0
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 159
+        width: 9
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60e78c1f62c714a90800000000000000
+      internalID: -7331442211675406842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 145
+        width: 9
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9f0882ed938b2890800000000000000
+      internalID: -7481741641812275300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_2
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 140
+        width: 7
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 472ee00a3c1f74510800000000000000
+      internalID: 1533460020649190004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_3
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 140
+        width: 25
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00f21224ad59f7230800000000000000
+      internalID: 3638791788583530240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_4
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 76
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab662d3e86d047b10800000000000000
+      internalID: 1978220880472467130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_5
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 76
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2073f497711edaee0800000000000000
+      internalID: -1248094030776027390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_6
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 76
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04e9147800a0efe90800000000000000
+      internalID: -6990138574246928832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_7
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 76
+        width: 48
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fa84acf4b38a78e0800000000000000
+      internalID: -1694897496395576584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_8
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 12
+        width: 54
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 537b54e751c12f360800000000000000
+      internalID: 7201849632757233461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_9
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 12
+        width: 55
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa235484ddbd5100800000000000000
+      internalID: 98443487322778275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_10
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 12
+        width: 11
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a77c2cb350d5b61f0800000000000000
+      internalID: -1050643811002038406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_11
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 12
+        width: 12
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fae20179a458d0190800000000000000
+      internalID: -7994587208104268113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_12
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 12
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac329aa7b37a21950800000000000000
+      internalID: 6418376292859192266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Infernal Strike_13
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 12
+        width: 51
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2785afdae90c6bc0800000000000000
+      internalID: -3788642282146265299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Infernal Strike_0: -7331442211675406842
+      Infernal Strike_1: -7481741641812275300
+      Infernal Strike_10: -1050643811002038406
+      Infernal Strike_11: -7994587208104268113
+      Infernal Strike_12: 6418376292859192266
+      Infernal Strike_13: -3788642282146265299
+      Infernal Strike_2: 1533460020649190004
+      Infernal Strike_3: 3638791788583530240
+      Infernal Strike_4: 1978220880472467130
+      Infernal Strike_5: -1248094030776027390
+      Infernal Strike_6: -6990138574246928832
+      Infernal Strike_7: -1694897496395576584
+      Infernal Strike_8: 7201849632757233461
+      Infernal Strike_9: 98443487322778275
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
