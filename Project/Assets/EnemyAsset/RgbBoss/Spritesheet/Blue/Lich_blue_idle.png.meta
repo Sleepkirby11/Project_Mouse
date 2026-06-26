@@ -1,0 +1,629 @@
+fileFormatVersion: 2
+guid: 3ebd180ebeaf75840b6d2d291946b0e3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8496691286227482471
+    second: Lich_blue_idle_0
+  - first:
+      213: 6101515595773503112
+    second: Lich_blue_idle_1
+  - first:
+      213: 2865360137347606720
+    second: Lich_blue_idle_2
+  - first:
+      213: -2553559651063793488
+    second: Lich_blue_idle_3
+  - first:
+      213: 973025401869869999
+    second: Lich_blue_idle_4
+  - first:
+      213: -1925602129933655240
+    second: Lich_blue_idle_5
+  - first:
+      213: -5583511959895611873
+    second: Lich_blue_idle_6
+  - first:
+      213: 7555182852716518996
+    second: Lich_blue_idle_7
+  - first:
+      213: 2466153496061715945
+    second: Lich_blue_idle_8
+  - first:
+      213: 4324003311247389129
+    second: Lich_blue_idle_9
+  - first:
+      213: -6850840932238286877
+    second: Lich_blue_idle_10
+  - first:
+      213: 1835107780947805929
+    second: Lich_blue_idle_11
+  - first:
+      213: -8203598330993112881
+    second: Lich_blue_idle_12
+  - first:
+      213: 7016725436345186173
+    second: Lich_blue_idle_13
+  - first:
+      213: 4370308805512400456
+    second: Lich_blue_idle_14
+  - first:
+      213: -2037251330449020533
+    second: Lich_blue_idle_15
+  - first:
+      213: -1886530419060395835
+    second: Lich_blue_idle_16
+  - first:
+      213: 1704725003157691127
+    second: Lich_blue_idle_17
+  - first:
+      213: -6110531064679019804
+    second: Lich_blue_idle_18
+  - first:
+      213: -3941931234785855610
+    second: Lich_blue_idle_19
+  - first:
+      213: -7880338155805570211
+    second: Lich_blue_idle_20
+  - first:
+      213: -6593937438576533577
+    second: Lich_blue_idle_21
+  - first:
+      213: 7742745426634368986
+    second: Lich_blue_idle_22
+  - first:
+      213: 6271714503604956536
+    second: Lich_blue_idle_23
+  - first:
+      213: 3912035645102782080
+    second: Lich_blue_idle_24
+  - first:
+      213: -8624748816486952690
+    second: Lich_blue_idle_25
+  - first:
+      213: -6941341693956280715
+    second: Lich_blue_idle_26
+  - first:
+      213: 8345408626447028885
+    second: Lich_blue_idle_27
+  - first:
+      213: 7517282216010787491
+    second: Lich_blue_idle_28
+  - first:
+      213: -5700760936914061575
+    second: Lich_blue_idle_29
+  - first:
+      213: -8106751167135036509
+    second: Lich_blue_idle_30
+  - first:
+      213: 3566698250739742869
+    second: Lich_blue_idle_31
+  - first:
+      213: -446510386767964354
+    second: Lich_blue_idle_32
+  - first:
+      213: -7134921553371807224
+    second: Lich_blue_idle_33
+  - first:
+      213: -3308258816677905549
+    second: Lich_blue_idle_34
+  - first:
+      213: 7410144466372465707
+    second: Lich_blue_idle_35
+  - first:
+      213: 1383278717842223143
+    second: Lich_blue_idle_36
+  - first:
+      213: 6590022189323824517
+    second: Lich_blue_idle_37
+  - first:
+      213: 2778962691341308656
+    second: Lich_blue_idle_38
+  - first:
+      213: 6274433133116057582
+    second: Lich_blue_idle_39
+  - first:
+      213: -3521332075989733553
+    second: Lich_blue_idle_40
+  - first:
+      213: -4976682170013409399
+    second: Lich_blue_idle_41
+  - first:
+      213: -4529203241849276002
+    second: Lich_blue_idle_42
+  - first:
+      213: 7290074249605374269
+    second: Lich_blue_idle_43
+  - first:
+      213: -6843728913508188425
+    second: Lich_blue_idle_44
+  - first:
+      213: 670290797777558895
+    second: Lich_blue_idle_45
+  - first:
+      213: -3056425558227148355
+    second: Lich_blue_idle_46
+  - first:
+      213: 141543432588564963
+    second: Lich_blue_idle_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_blue_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 767feb915bf4ae570800000000000000
+      internalID: 8496691286227482471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 886e59d6b10fca450800000000000000
+      internalID: 6101515595773503112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c82b241dddc3c720800000000000000
+      internalID: 2865360137347606720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b87295d60fef8cd0800000000000000
+      internalID: -2553559651063793488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa3a2eb9271e08d00800000000000000
+      internalID: 973025401869869999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 833a19aa013e645e0800000000000000
+      internalID: -1925602129933655240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_6
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f16e64784716382b0800000000000000
+      internalID: -5583511959895611873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_7
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45e5a4586c669d860800000000000000
+      internalID: 7555182852716518996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e5a856d989893220800000000000000
+      internalID: 2466153496061715945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_9
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c1738e1a12f10c30800000000000000
+      internalID: 4324003311247389129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_10
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ef1b3d287cece0a0800000000000000
+      internalID: -6850840932238286877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_11
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e603ffcdcc977910800000000000000
+      internalID: 1835107780947805929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_12
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc80b2158c6f62e80800000000000000
+      internalID: -8203598330993112881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_13
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d777dcfab9a606160800000000000000
+      internalID: 7016725436345186173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_14
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84e045724b476ac30800000000000000
+      internalID: 4370308805512400456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_blue_idle_15
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b89e46275ba3ab3e0800000000000000
+      internalID: -2037251330449020533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 1324ffe2cf89d9c41bbe07151ee17acd
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_blue_idle_0: 8496691286227482471
+      Lich_blue_idle_1: 6101515595773503112
+      Lich_blue_idle_10: -6850840932238286877
+      Lich_blue_idle_11: 1835107780947805929
+      Lich_blue_idle_12: -8203598330993112881
+      Lich_blue_idle_13: 7016725436345186173
+      Lich_blue_idle_14: 4370308805512400456
+      Lich_blue_idle_15: -2037251330449020533
+      Lich_blue_idle_2: 2865360137347606720
+      Lich_blue_idle_3: -2553559651063793488
+      Lich_blue_idle_4: 973025401869869999
+      Lich_blue_idle_5: -1925602129933655240
+      Lich_blue_idle_6: -5583511959895611873
+      Lich_blue_idle_7: 7555182852716518996
+      Lich_blue_idle_8: 2466153496061715945
+      Lich_blue_idle_9: 4324003311247389129
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

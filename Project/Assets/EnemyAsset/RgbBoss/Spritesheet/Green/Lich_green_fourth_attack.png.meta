@@ -1,0 +1,713 @@
+fileFormatVersion: 2
+guid: b31478d02df5edd4386d83085566a273
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8761631182361940420
+    second: Lich_green_fourth_attack_0
+  - first:
+      213: -4590636096175366350
+    second: Lich_green_fourth_attack_1
+  - first:
+      213: -5531484665869355143
+    second: Lich_green_fourth_attack_2
+  - first:
+      213: -8057901066260340060
+    second: Lich_green_fourth_attack_3
+  - first:
+      213: 1124066490927471765
+    second: Lich_green_fourth_attack_4
+  - first:
+      213: -3004712434203977697
+    second: Lich_green_fourth_attack_5
+  - first:
+      213: -6218006110377806345
+    second: Lich_green_fourth_attack_6
+  - first:
+      213: 7122807031581053952
+    second: Lich_green_fourth_attack_7
+  - first:
+      213: 2490273216397080493
+    second: Lich_green_fourth_attack_8
+  - first:
+      213: 9136898618926720446
+    second: Lich_green_fourth_attack_9
+  - first:
+      213: -3103536496651974747
+    second: Lich_green_fourth_attack_10
+  - first:
+      213: -5306829342872686631
+    second: Lich_green_fourth_attack_11
+  - first:
+      213: -7188944845988300563
+    second: Lich_green_fourth_attack_12
+  - first:
+      213: 6270560859082651314
+    second: Lich_green_fourth_attack_13
+  - first:
+      213: -4010756922124037414
+    second: Lich_green_fourth_attack_14
+  - first:
+      213: 7829626112079758710
+    second: Lich_green_fourth_attack_15
+  - first:
+      213: 321713195876802375
+    second: Lich_green_fourth_attack_16
+  - first:
+      213: -4061984223482859756
+    second: Lich_green_fourth_attack_17
+  - first:
+      213: 8435613208351235504
+    second: Lich_green_fourth_attack_18
+  - first:
+      213: 8988478111604982521
+    second: Lich_green_fourth_attack_19
+  - first:
+      213: 1453819874941461474
+    second: Lich_green_fourth_attack_20
+  - first:
+      213: 9143109201839187503
+    second: Lich_green_fourth_attack_21
+  - first:
+      213: 6395885929229114470
+    second: Lich_green_fourth_attack_22
+  - first:
+      213: 7906659452693872555
+    second: Lich_green_fourth_attack_23
+  - first:
+      213: -275077272688417194
+    second: Lich_green_fourth_attack_24
+  - first:
+      213: 5902339250603532476
+    second: Lich_green_fourth_attack_25
+  - first:
+      213: -5617140878521169038
+    second: Lich_green_fourth_attack_26
+  - first:
+      213: 4112049057148745793
+    second: Lich_green_fourth_attack_27
+  - first:
+      213: -5389939781402848880
+    second: Lich_green_fourth_attack_28
+  - first:
+      213: -785960297613469220
+    second: Lich_green_fourth_attack_29
+  - first:
+      213: -8002171431351097141
+    second: Lich_green_fourth_attack_30
+  - first:
+      213: 9037807132383481375
+    second: Lich_green_fourth_attack_31
+  - first:
+      213: 5864304420193367581
+    second: Lich_green_fourth_attack_32
+  - first:
+      213: 6566254826266587546
+    second: Lich_green_fourth_attack_33
+  - first:
+      213: -4199636348616600767
+    second: Lich_green_fourth_attack_34
+  - first:
+      213: 2639936002431869220
+    second: Lich_green_fourth_attack_35
+  - first:
+      213: 3190212019451608298
+    second: Lich_green_fourth_attack_36
+  - first:
+      213: -8421552031800017970
+    second: Lich_green_fourth_attack_37
+  - first:
+      213: -6444000331112833709
+    second: Lich_green_fourth_attack_38
+  - first:
+      213: 4071940906541387100
+    second: Lich_green_fourth_attack_39
+  - first:
+      213: -3356227256970334059
+    second: Lich_green_fourth_attack_40
+  - first:
+      213: 2613943846562656846
+    second: Lich_green_fourth_attack_41
+  - first:
+      213: -8072563098370370806
+    second: Lich_green_fourth_attack_42
+  - first:
+      213: 7822048948050360230
+    second: Lich_green_fourth_attack_43
+  - first:
+      213: -4473037798548964207
+    second: Lich_green_fourth_attack_44
+  - first:
+      213: -7526631683568618130
+    second: Lich_green_fourth_attack_45
+  - first:
+      213: 7607141563274265593
+    second: Lich_green_fourth_attack_46
+  - first:
+      213: -3003132862599999146
+    second: Lich_green_fourth_attack_47
+  - first:
+      213: 6784752583291658164
+    second: Lich_green_fourth_attack_48
+  - first:
+      213: -8388676775041494282
+    second: Lich_green_fourth_attack_49
+  - first:
+      213: -4830374365191461828
+    second: Lich_green_fourth_attack_50
+  - first:
+      213: -4028621201985058734
+    second: Lich_green_fourth_attack_51
+  - first:
+      213: -7949737489995042491
+    second: Lich_green_fourth_attack_52
+  - first:
+      213: -74246596275865933
+    second: Lich_green_fourth_attack_53
+  - first:
+      213: 384465259315278559
+    second: Lich_green_fourth_attack_54
+  - first:
+      213: 1387958849308290977
+    second: Lich_green_fourth_attack_55
+  - first:
+      213: 3075545378282815586
+    second: Lich_green_fourth_attack_56
+  - first:
+      213: -4987152757026926535
+    second: Lich_green_fourth_attack_57
+  - first:
+      213: 8059472262835620818
+    second: Lich_green_fourth_attack_58
+  - first:
+      213: -4594817742748343926
+    second: Lich_green_fourth_attack_59
+  - first:
+      213: 1399191827287018986
+    second: Lich_green_fourth_attack_60
+  - first:
+      213: 5047124626864863172
+    second: Lich_green_fourth_attack_61
+  - first:
+      213: -2122304220114328015
+    second: Lich_green_fourth_attack_62
+  - first:
+      213: 4722079750890007425
+    second: Lich_green_fourth_attack_63
+  - first:
+      213: 5088030917183051312
+    second: Lich_green_fourth_attack_64
+  - first:
+      213: 9115312307240628179
+    second: Lich_green_fourth_attack_65
+  - first:
+      213: -1289468009505673529
+    second: Lich_green_fourth_attack_66
+  - first:
+      213: -1583621133711898354
+    second: Lich_green_fourth_attack_67
+  - first:
+      213: 3009096342760041597
+    second: Lich_green_fourth_attack_68
+  - first:
+      213: 1868193344029365992
+    second: Lich_green_fourth_attack_69
+  - first:
+      213: 5184007239720132792
+    second: Lich_green_fourth_attack_70
+  - first:
+      213: 3550495722586630884
+    second: Lich_green_fourth_attack_71
+  - first:
+      213: 196242380611863880
+    second: Lich_green_fourth_attack_72
+  - first:
+      213: 5224577348069954250
+    second: Lich_green_fourth_attack_73
+  - first:
+      213: 8742970436588150048
+    second: Lich_green_fourth_attack_74
+  - first:
+      213: 1896258105225775954
+    second: Lich_green_fourth_attack_75
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3ea45a5cde686680800000000000000
+      internalID: -8761631182361940420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23f9162fac8ca40c0800000000000000
+      internalID: -4590636096175366350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9773652e0083c33b0800000000000000
+      internalID: -5531484665869355143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a2af4e3ca59c2090800000000000000
+      internalID: -8057901066260340060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59cd6a7948c799f00800000000000000
+      internalID: 1124066490927471765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f189213f5fd1d46d0800000000000000
+      internalID: -3004712434203977697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_6
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f5f8b3136435b9a0800000000000000
+      internalID: -6218006110377806345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_7
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0041b09c14b49d260800000000000000
+      internalID: 7122807031581053952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da77409db4a3f8220800000000000000
+      internalID: 2490273216397080493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_9
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb562e172e8ccce70800000000000000
+      internalID: 9136898618926720446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_10
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a74991eff50ee4d0800000000000000
+      internalID: -3103536496651974747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_11
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9df247654da5a56b0800000000000000
+      internalID: -5306829342872686631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_12
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de8fdf050ccbb3c90800000000000000
+      internalID: -7188944845988300563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_13
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b6f614e0e1850750800000000000000
+      internalID: 6270560859082651314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_14
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad29b5844dde658c0800000000000000
+      internalID: -4010756922124037414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_fourth_attack_15
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67503ae377b68ac60800000000000000
+      internalID: 7829626112079758710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c6c65f66398f28c4fb15d4b17fa88c02
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_green_fourth_attack_0: -8761631182361940420
+      Lich_green_fourth_attack_1: -4590636096175366350
+      Lich_green_fourth_attack_10: -3103536496651974747
+      Lich_green_fourth_attack_11: -5306829342872686631
+      Lich_green_fourth_attack_12: -7188944845988300563
+      Lich_green_fourth_attack_13: 6270560859082651314
+      Lich_green_fourth_attack_14: -4010756922124037414
+      Lich_green_fourth_attack_15: 7829626112079758710
+      Lich_green_fourth_attack_2: -5531484665869355143
+      Lich_green_fourth_attack_3: -8057901066260340060
+      Lich_green_fourth_attack_4: 1124066490927471765
+      Lich_green_fourth_attack_5: -3004712434203977697
+      Lich_green_fourth_attack_6: -6218006110377806345
+      Lich_green_fourth_attack_7: 7122807031581053952
+      Lich_green_fourth_attack_8: 2490273216397080493
+      Lich_green_fourth_attack_9: 9136898618926720446
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

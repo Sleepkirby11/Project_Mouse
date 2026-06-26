@@ -1,0 +1,1045 @@
+fileFormatVersion: 2
+guid: 81c054c50ac3b984e8e3e2598f4e90f5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4680052309307525806
+    second: Lich_red_casting_0
+  - first:
+      213: 4341399615417691087
+    second: Lich_red_casting_1
+  - first:
+      213: 6493933273503453457
+    second: Lich_red_casting_2
+  - first:
+      213: -8764835148040812626
+    second: Lich_red_casting_3
+  - first:
+      213: -7897152377552011174
+    second: Lich_red_casting_4
+  - first:
+      213: 2107471475536433886
+    second: Lich_red_casting_5
+  - first:
+      213: -4037796598737312746
+    second: Lich_red_casting_6
+  - first:
+      213: -2348936292197010938
+    second: Lich_red_casting_7
+  - first:
+      213: -2976323692734696820
+    second: Lich_red_casting_8
+  - first:
+      213: -2267225829425372571
+    second: Lich_red_casting_9
+  - first:
+      213: 2792691020048448459
+    second: Lich_red_casting_10
+  - first:
+      213: 3468132649682813383
+    second: Lich_red_casting_11
+  - first:
+      213: 2433727870389852921
+    second: Lich_red_casting_12
+  - first:
+      213: 8819131693768827844
+    second: Lich_red_casting_13
+  - first:
+      213: -1943219406062226473
+    second: Lich_red_casting_14
+  - first:
+      213: 871585166237836953
+    second: Lich_red_casting_15
+  - first:
+      213: -1925339860207482658
+    second: Lich_red_casting_16
+  - first:
+      213: -3166197666627635231
+    second: Lich_red_casting_17
+  - first:
+      213: 5078169614641149290
+    second: Lich_red_casting_18
+  - first:
+      213: -7690365911477040985
+    second: Lich_red_casting_19
+  - first:
+      213: -3593041909724018711
+    second: Lich_red_casting_20
+  - first:
+      213: -7588518349631015405
+    second: Lich_red_casting_21
+  - first:
+      213: -2398563480329463749
+    second: Lich_red_casting_22
+  - first:
+      213: -1008907876751873297
+    second: Lich_red_casting_23
+  - first:
+      213: -2634170073139683319
+    second: Lich_red_casting_24
+  - first:
+      213: -1262484209202841652
+    second: Lich_red_casting_25
+  - first:
+      213: -432351082034486218
+    second: Lich_red_casting_26
+  - first:
+      213: 8564753254786954695
+    second: Lich_red_casting_27
+  - first:
+      213: -6115138474193902374
+    second: Lich_red_casting_28
+  - first:
+      213: -1578548552396834181
+    second: Lich_red_casting_29
+  - first:
+      213: 6313215761723245378
+    second: Lich_red_casting_30
+  - first:
+      213: 3141038859358021717
+    second: Lich_red_casting_31
+  - first:
+      213: -6845205654495158955
+    second: Lich_red_casting_32
+  - first:
+      213: 6025664704009429875
+    second: Lich_red_casting_33
+  - first:
+      213: 3988230625594491491
+    second: Lich_red_casting_34
+  - first:
+      213: -6779771904770725074
+    second: Lich_red_casting_35
+  - first:
+      213: -6991514454607420681
+    second: Lich_red_casting_36
+  - first:
+      213: 4352657942799604021
+    second: Lich_red_casting_37
+  - first:
+      213: 479207243509103510
+    second: Lich_red_casting_38
+  - first:
+      213: 2178971288388683768
+    second: Lich_red_casting_39
+  - first:
+      213: -767664676149753367
+    second: Lich_red_casting_40
+  - first:
+      213: 6581366789774197283
+    second: Lich_red_casting_41
+  - first:
+      213: 5898041025591872544
+    second: Lich_red_casting_42
+  - first:
+      213: 8141926367354725867
+    second: Lich_red_casting_43
+  - first:
+      213: -6710210808786925096
+    second: Lich_red_casting_44
+  - first:
+      213: 3694503944510797567
+    second: Lich_red_casting_45
+  - first:
+      213: -3452921273859923005
+    second: Lich_red_casting_46
+  - first:
+      213: 7349612146111199870
+    second: Lich_red_casting_47
+  - first:
+      213: -8093336238399005919
+    second: Lich_red_casting_48
+  - first:
+      213: 7403399531902158846
+    second: Lich_red_casting_49
+  - first:
+      213: 2187430178065317255
+    second: Lich_red_casting_50
+  - first:
+      213: 7903622907295250124
+    second: Lich_red_casting_51
+  - first:
+      213: 6884276532628321580
+    second: Lich_red_casting_52
+  - first:
+      213: -3341671029863603051
+    second: Lich_red_casting_53
+  - first:
+      213: -8603062513423079509
+    second: Lich_red_casting_54
+  - first:
+      213: -7626812954048605948
+    second: Lich_red_casting_55
+  - first:
+      213: 7432463867299857952
+    second: Lich_red_casting_56
+  - first:
+      213: 3820348419598909399
+    second: Lich_red_casting_57
+  - first:
+      213: 4944803072063395644
+    second: Lich_red_casting_58
+  - first:
+      213: -291063995002279224
+    second: Lich_red_casting_59
+  - first:
+      213: -7216480289288257771
+    second: Lich_red_casting_60
+  - first:
+      213: 3373330064298507378
+    second: Lich_red_casting_61
+  - first:
+      213: 1717326547864546744
+    second: Lich_red_casting_62
+  - first:
+      213: -4960551998114006391
+    second: Lich_red_casting_63
+  - first:
+      213: -3238028321760584717
+    second: Lich_red_casting_64
+  - first:
+      213: -2946140545117750135
+    second: Lich_red_casting_65
+  - first:
+      213: -4198860530396031393
+    second: Lich_red_casting_66
+  - first:
+      213: 5490006615564086765
+    second: Lich_red_casting_67
+  - first:
+      213: -5932599970113105366
+    second: Lich_red_casting_68
+  - first:
+      213: -6150811255768484873
+    second: Lich_red_casting_69
+  - first:
+      213: 7342467025627413898
+    second: Lich_red_casting_70
+  - first:
+      213: 3198672235028540631
+    second: Lich_red_casting_71
+  - first:
+      213: -3288407048986018163
+    second: Lich_red_casting_72
+  - first:
+      213: 3146540604639595124
+    second: Lich_red_casting_73
+  - first:
+      213: -5928965018547026337
+    second: Lich_red_casting_74
+  - first:
+      213: 6469318687919119904
+    second: Lich_red_casting_75
+  - first:
+      213: 6424325567325264988
+    second: Lich_red_casting_76
+  - first:
+      213: -4659875640384084278
+    second: Lich_red_casting_77
+  - first:
+      213: 5712980078186350048
+    second: Lich_red_casting_78
+  - first:
+      213: 8584351847269950493
+    second: Lich_red_casting_79
+  - first:
+      213: -7000513659721779627
+    second: Lich_red_casting_80
+  - first:
+      213: -1129442505142919463
+    second: Lich_red_casting_81
+  - first:
+      213: 99759609598091238
+    second: Lich_red_casting_82
+  - first:
+      213: -4620139168871409171
+    second: Lich_red_casting_83
+  - first:
+      213: -1620492104759206938
+    second: Lich_red_casting_84
+  - first:
+      213: -17212277606825862
+    second: Lich_red_casting_85
+  - first:
+      213: -8077396042910112916
+    second: Lich_red_casting_86
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_red_casting_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaa858287c2e2f040800000000000000
+      internalID: 4680052309307525806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcb2df0d2ffbf3c30800000000000000
+      internalID: 4341399615417691087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 111534ae7e51f1a50800000000000000
+      internalID: 6493933273503453457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea74b26fedc0d5680800000000000000
+      internalID: -8764835148040812626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5081e6e0cda76290800000000000000
+      internalID: -7897152377552011174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed21e91242e3f3d10800000000000000
+      internalID: 2107471475536433886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_6
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6146bf8f26dd6f7c0800000000000000
+      internalID: -4037796598737312746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 602f29f23e6e66fd0800000000000000
+      internalID: -2348936292197010938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_8
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8238f5ee59f1b6d0800000000000000
+      internalID: -2976323692734696820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_9
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 562a283de123980e0800000000000000
+      internalID: -2267225829425372571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_10
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb3969bfa1a1c620800000000000000
+      internalID: 2792691020048448459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_11
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c1474a1548412030800000000000000
+      internalID: 3468132649682813383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_12
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fa1e8a8a9656c120800000000000000
+      internalID: 2433727870389852921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_13
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c3ea7abc89d36a70800000000000000
+      internalID: 8819131693768827844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d3f30dee3c4805e0800000000000000
+      internalID: -1943219406062226473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_15
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9962b11471e781c00800000000000000
+      internalID: 871585166237836953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_16
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed8ce681991d745e0800000000000000
+      internalID: -1925339860207482658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_17
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e73df75ff76f04d0800000000000000
+      internalID: -3166197666627635231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_18
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a653ed5fb58497640800000000000000
+      internalID: 5078169614641149290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_19
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a843a5e2f4564590800000000000000
+      internalID: -7690365911477040985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_20
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e70fcb7b63f22ec0800000000000000
+      internalID: -3593041909724018711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 316b5b644ca20b690800000000000000
+      internalID: -7588518349631015405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_22
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b38dcb7093796bed0800000000000000
+      internalID: -2398563480329463749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_23
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fea6c1ba1a3aff1f0800000000000000
+      internalID: -1008907876751873297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_24
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9006b80664c817bd0800000000000000
+      internalID: -2634170073139683319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_25
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc7bce7fc41ca7ee0800000000000000
+      internalID: -1262484209202841652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_26
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63424194bfafff9f0800000000000000
+      internalID: -432351082034486218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_27
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c5727c05bd1cd670800000000000000
+      internalID: 8564753254786954695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_casting_28
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad4295505f9a22ba0800000000000000
+      internalID: -6115138474193902374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a93c2ab8b12a80044b2f255ce7e27c39
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_red_casting_0: 4680052309307525806
+      Lich_red_casting_1: 4341399615417691087
+      Lich_red_casting_10: 2792691020048448459
+      Lich_red_casting_11: 3468132649682813383
+      Lich_red_casting_12: 2433727870389852921
+      Lich_red_casting_13: 8819131693768827844
+      Lich_red_casting_14: -1943219406062226473
+      Lich_red_casting_15: 871585166237836953
+      Lich_red_casting_16: -1925339860207482658
+      Lich_red_casting_17: -3166197666627635231
+      Lich_red_casting_18: 5078169614641149290
+      Lich_red_casting_19: -7690365911477040985
+      Lich_red_casting_2: 6493933273503453457
+      Lich_red_casting_20: -3593041909724018711
+      Lich_red_casting_21: -7588518349631015405
+      Lich_red_casting_22: -2398563480329463749
+      Lich_red_casting_23: -1008907876751873297
+      Lich_red_casting_24: -2634170073139683319
+      Lich_red_casting_25: -1262484209202841652
+      Lich_red_casting_26: -432351082034486218
+      Lich_red_casting_27: 8564753254786954695
+      Lich_red_casting_28: -6115138474193902374
+      Lich_red_casting_3: -8764835148040812626
+      Lich_red_casting_4: -7897152377552011174
+      Lich_red_casting_5: 2107471475536433886
+      Lich_red_casting_6: -4037796598737312746
+      Lich_red_casting_7: -2348936292197010938
+      Lich_red_casting_8: -2976323692734696820
+      Lich_red_casting_9: -2267225829425372571
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

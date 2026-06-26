@@ -750,6 +750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 402445038}
   - component: {fileID: 402445039}
+  - component: {fileID: 402445040}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -767,7 +768,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 14.78, y: 14.78, z: 14.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1796119476}
@@ -816,7 +817,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 8496691286227482471, guid: 3ebd180ebeaf75840b6d2d291946b0e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -827,6 +828,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &402445040
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402445037}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9adc5c475ffd3384c9597b2090ff27ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,6 +2835,13 @@ MonoBehaviour:
   blueBulletPoolName: BlueBullet
   redBurstPoolName: RedBurst
   burstSpawnRadius: 9
+  mushroomPoolName: Mushroom
+  mushroomSpawnCount: 3
+  spawnRangeX: 8
+  mushroomOffsetY: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &1796119478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2825,6 +2855,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeInterval: 10
+  baseController: {fileID: 9100000, guid: 9adc5c475ffd3384c9597b2090ff27ae, type: 2}
+  greenOverride: {fileID: 22100000, guid: 6b97934f73c56644caebd088dc605ccd, type: 2}
+  blueOverride: {fileID: 22100000, guid: 1c02754289d5e0347b96428bbe85dc49, type: 2}
 --- !u!114 &1796119479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3724,106 +3757,6 @@ PrefabInstance:
     - target: {fileID: 2745340641527822589, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: m_Name
       value: PoolingManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.size
-      value: 27
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[19].key
-      value: FireGear
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[20].key
-      value: IceHammer
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[21].key
-      value: Ice
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[22].key
-      value: Hurricane
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[23].key
-      value: RedBullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[24].key
-      value: GreenBullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[25].key
-      value: BlueBullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[26].key
-      value: RedBurst
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[19].prefab
-      value: 
-      objectReference: {fileID: 3389551436745400444, guid: 9c8280d0d19cf924d928089866ecc2f4, type: 3}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[20].prefab
-      value: 
-      objectReference: {fileID: 8097830525786069665, guid: 48517b43338adec4fa740111c6fbb46f, type: 3}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[21].prefab
-      value: 
-      objectReference: {fileID: 2949338967925014390, guid: bb09129c5f0109148841ac40e33658fe, type: 3}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[22].prefab
-      value: 
-      objectReference: {fileID: 6183869501469882721, guid: 785e2873b368c9040bdbfead67b48247, type: 3}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[23].prefab
-      value: 
-      objectReference: {fileID: 3574707571005284272, guid: 8b29683a6f2e41b4b9c8726f69a2144f, type: 3}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[24].prefab
-      value: 
-      objectReference: {fileID: 4601374834408369703, guid: 85b0b38fe76ab2d45adb7031c740c76c, type: 3}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[25].prefab
-      value: 
-      objectReference: {fileID: 1586290619308133854, guid: 0cec7faec00ae194391cfd84f03fe088, type: 3}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[26].prefab
-      value: 
-      objectReference: {fileID: 7564561511071946436, guid: 6610734a1a1408f42987192c6c19eac4, type: 3}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[19].initialSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[20].initialSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[21].initialSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[22].initialSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[23].initialSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[24].initialSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[25].initialSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[26].initialSize
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6906194015661884017, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: m_LocalPosition.x

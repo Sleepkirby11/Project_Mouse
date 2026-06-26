@@ -1,0 +1,2015 @@
+fileFormatVersion: 2
+guid: c233084e96328d5479c2ca6ce12a0ad0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5563817511500764957
+    second: Lich_magenta_long_spin_attack_0
+  - first:
+      213: -7439341050105740806
+    second: Lich_magenta_long_spin_attack_1
+  - first:
+      213: 1708204267581304473
+    second: Lich_magenta_long_spin_attack_2
+  - first:
+      213: -1496291269918843124
+    second: Lich_magenta_long_spin_attack_3
+  - first:
+      213: 7568389726644811353
+    second: Lich_magenta_long_spin_attack_4
+  - first:
+      213: -6080154269815617394
+    second: Lich_magenta_long_spin_attack_5
+  - first:
+      213: -1889736076326189624
+    second: Lich_magenta_long_spin_attack_6
+  - first:
+      213: -8620707661973184723
+    second: Lich_magenta_long_spin_attack_7
+  - first:
+      213: -8942211778548875135
+    second: Lich_magenta_long_spin_attack_8
+  - first:
+      213: 7452031950305608269
+    second: Lich_magenta_long_spin_attack_9
+  - first:
+      213: 4311356694091704987
+    second: Lich_magenta_long_spin_attack_10
+  - first:
+      213: -81570831477556988
+    second: Lich_magenta_long_spin_attack_11
+  - first:
+      213: -1811715485944886
+    second: Lich_magenta_long_spin_attack_12
+  - first:
+      213: 4892918328786024389
+    second: Lich_magenta_long_spin_attack_13
+  - first:
+      213: 7641747742584572401
+    second: Lich_magenta_long_spin_attack_14
+  - first:
+      213: 3066022303198441417
+    second: Lich_magenta_long_spin_attack_15
+  - first:
+      213: -1480578500230273476
+    second: Lich_magenta_long_spin_attack_16
+  - first:
+      213: -1341539141461555003
+    second: Lich_magenta_long_spin_attack_17
+  - first:
+      213: 3914341463968153912
+    second: Lich_magenta_long_spin_attack_18
+  - first:
+      213: 8121446413431226630
+    second: Lich_magenta_long_spin_attack_19
+  - first:
+      213: 9111852999873462055
+    second: Lich_magenta_long_spin_attack_20
+  - first:
+      213: 790392460919732873
+    second: Lich_magenta_long_spin_attack_21
+  - first:
+      213: -2063121221892190581
+    second: Lich_magenta_long_spin_attack_22
+  - first:
+      213: -4460788121176924135
+    second: Lich_magenta_long_spin_attack_23
+  - first:
+      213: -6923346950424039686
+    second: Lich_magenta_long_spin_attack_24
+  - first:
+      213: -6954202892896664915
+    second: Lich_magenta_long_spin_attack_25
+  - first:
+      213: -2162887470187187347
+    second: Lich_magenta_long_spin_attack_26
+  - first:
+      213: 3731851137136379519
+    second: Lich_magenta_long_spin_attack_27
+  - first:
+      213: 1966518168485809653
+    second: Lich_magenta_long_spin_attack_28
+  - first:
+      213: 375339284136800148
+    second: Lich_magenta_long_spin_attack_29
+  - first:
+      213: 2271242564717175990
+    second: Lich_magenta_long_spin_attack_30
+  - first:
+      213: -8141825870639675437
+    second: Lich_magenta_long_spin_attack_31
+  - first:
+      213: 876317783367086031
+    second: Lich_magenta_long_spin_attack_32
+  - first:
+      213: 5045695348901384230
+    second: Lich_magenta_long_spin_attack_33
+  - first:
+      213: -3104544435526386440
+    second: Lich_magenta_long_spin_attack_34
+  - first:
+      213: -7334971039852645862
+    second: Lich_magenta_long_spin_attack_35
+  - first:
+      213: -4790062979973147660
+    second: Lich_magenta_long_spin_attack_36
+  - first:
+      213: -5978679873512012580
+    second: Lich_magenta_long_spin_attack_37
+  - first:
+      213: -4325392709280639623
+    second: Lich_magenta_long_spin_attack_38
+  - first:
+      213: -7723336138874671276
+    second: Lich_magenta_long_spin_attack_39
+  - first:
+      213: -3650041133762737290
+    second: Lich_magenta_long_spin_attack_40
+  - first:
+      213: 7279057362049649076
+    second: Lich_magenta_long_spin_attack_41
+  - first:
+      213: 755431689310660134
+    second: Lich_magenta_long_spin_attack_42
+  - first:
+      213: -7144342935410053339
+    second: Lich_magenta_long_spin_attack_43
+  - first:
+      213: -6834390600511787638
+    second: Lich_magenta_long_spin_attack_44
+  - first:
+      213: 6401329290970512597
+    second: Lich_magenta_long_spin_attack_45
+  - first:
+      213: -8220864818678497995
+    second: Lich_magenta_long_spin_attack_46
+  - first:
+      213: -6737764204084206205
+    second: Lich_magenta_long_spin_attack_47
+  - first:
+      213: -5514290776191981408
+    second: Lich_magenta_long_spin_attack_48
+  - first:
+      213: 3593095702227984822
+    second: Lich_magenta_long_spin_attack_49
+  - first:
+      213: 1420780860539117752
+    second: Lich_magenta_long_spin_attack_50
+  - first:
+      213: -6689764779297402035
+    second: Lich_magenta_long_spin_attack_51
+  - first:
+      213: -6585086956735359000
+    second: Lich_magenta_long_spin_attack_52
+  - first:
+      213: -4594856321770750317
+    second: Lich_magenta_long_spin_attack_53
+  - first:
+      213: 6318227483354751444
+    second: Lich_magenta_long_spin_attack_54
+  - first:
+      213: -9155356879830067957
+    second: Lich_magenta_long_spin_attack_55
+  - first:
+      213: 497959832068344544
+    second: Lich_magenta_long_spin_attack_56
+  - first:
+      213: -1341762687960647407
+    second: Lich_magenta_long_spin_attack_57
+  - first:
+      213: 8225350656469930359
+    second: Lich_magenta_long_spin_attack_58
+  - first:
+      213: 22775345848954939
+    second: Lich_magenta_long_spin_attack_59
+  - first:
+      213: -1371458115898173293
+    second: Lich_magenta_long_spin_attack_60
+  - first:
+      213: -161568680934908712
+    second: Lich_magenta_long_spin_attack_61
+  - first:
+      213: 3761360187605991946
+    second: Lich_magenta_long_spin_attack_62
+  - first:
+      213: -1699117705347994895
+    second: Lich_magenta_long_spin_attack_63
+  - first:
+      213: 1649362799139274360
+    second: Lich_magenta_long_spin_attack_64
+  - first:
+      213: -2032372518595341427
+    second: Lich_magenta_long_spin_attack_65
+  - first:
+      213: 8540481083116858422
+    second: Lich_magenta_long_spin_attack_66
+  - first:
+      213: -359000867983818133
+    second: Lich_magenta_long_spin_attack_67
+  - first:
+      213: 4763821977840954927
+    second: Lich_magenta_long_spin_attack_68
+  - first:
+      213: 3669328056998396064
+    second: Lich_magenta_long_spin_attack_69
+  - first:
+      213: 1018078519587321481
+    second: Lich_magenta_long_spin_attack_70
+  - first:
+      213: 3574749461109713906
+    second: Lich_magenta_long_spin_attack_71
+  - first:
+      213: -2847865137090107830
+    second: Lich_magenta_long_spin_attack_72
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_0
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 452
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e826ef937959c2b0800000000000000
+      internalID: -5563817511500764957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_1
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 401
+        width: 45
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af14771fab622c890800000000000000
+      internalID: -7439341050105740806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_2
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 457
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99e6dfc1bb2c4b710800000000000000
+      internalID: 1708204267581304473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_3
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 453
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0f18f7840b1c3be0800000000000000
+      internalID: -1496291269918843124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_4
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 401
+        width: 49
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 956316a7b52580960800000000000000
+      internalID: 7568389726644811353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_5
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 453
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e88c018d7e3fe9ba0800000000000000
+      internalID: -6080154269815617394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_6
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 454
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c546530d0f46c5e0800000000000000
+      internalID: -1889736076326189624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_7
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 402
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2f999f4e081d5880800000000000000
+      internalID: -8620707661973184723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_8
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 455
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 180c749e3c1e6e380800000000000000
+      internalID: -8942211778548875135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_9
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 403
+        width: 61
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d42c3d4839fea6760800000000000000
+      internalID: 7452031950305608269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_10
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 456
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9aa65b121405db30800000000000000
+      internalID: 4311356694091704987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_11
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 403
+        width: 55
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4093fbdc2c33edef0800000000000000
+      internalID: -81570831477556988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_12
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 454
+        width: 10
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac3b60e114099fff0800000000000000
+      internalID: -1811715485944886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_13
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 403
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c7f946db4327e340800000000000000
+      internalID: 4892918328786024389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_14
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 453
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f985eb8511fc0a60800000000000000
+      internalID: 7641747742584572401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_15
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 402
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cf619f4a03bc8a20800000000000000
+      internalID: 3066022303198441417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_16
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 451
+        width: 10
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c36a1bfc2bde37be0800000000000000
+      internalID: -1480578500230273476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_17
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 402
+        width: 60
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c8c6e43245e16de0800000000000000
+      internalID: -1341539141461555003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_18
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 324
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 831876982d8825630800000000000000
+      internalID: 3914341463968153912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_19
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 273
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60140f6db7c25b070800000000000000
+      internalID: 8121446413431226630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_20
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 325
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72ff807d60ec37e70800000000000000
+      internalID: 9111852999873462055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_21
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 273
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98a744a61c908fa00800000000000000
+      internalID: 790392460919732873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_22
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 326
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8ecb88fd225e53e0800000000000000
+      internalID: -2063121221892190581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_23
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 274
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 910a7fa86d81812c0800000000000000
+      internalID: -4460788121176924135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_24
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 327
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afee03b41a45bef90800000000000000
+      internalID: -6923346950424039686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_25
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 275
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da286e85055bd7f90800000000000000
+      internalID: -6954202892896664915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_26
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 328
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d63795a2e41ebf1e0800000000000000
+      internalID: -2162887470187187347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_27
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 275
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f76c6a746d23ac330800000000000000
+      internalID: 3731851137136379519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_28
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 326
+        width: 10
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fdc2fcead97a4b10800000000000000
+      internalID: 1966518168485809653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_29
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 275
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49f293d1719753500800000000000000
+      internalID: 375339284136800148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_30
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 325
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b4e6bc3413158f10800000000000000
+      internalID: 2271242564717175990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_31
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 274
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d7cf65028c620f80800000000000000
+      internalID: -8141825870639675437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_32
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 323
+        width: 10
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcfe3fb816e492c00800000000000000
+      internalID: 876317783367086031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_33
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 274
+        width: 60
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6209b14cf29e50640800000000000000
+      internalID: 5045695348901384230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_34
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 196
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fcb803d8417ae4d0800000000000000
+      internalID: -3104544435526386440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_35
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 145
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a123ecb93b2f43a90800000000000000
+      internalID: -7334971039852645862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_36
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 197
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f393fa3917468db0800000000000000
+      internalID: -4790062979973147660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_37
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 145
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd40a89d456770da0800000000000000
+      internalID: -5978679873512012580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_38
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 198
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97553417f3e19f3c0800000000000000
+      internalID: -4325392709280639623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_39
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 146
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45f2071a3b231d490800000000000000
+      internalID: -7723336138874671276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_40
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 199
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67b02867de2785dc0800000000000000
+      internalID: -3650041133762737290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_41
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 147
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b949acca18640560800000000000000
+      internalID: 7279057362049649076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_42
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 200
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6266f657e15db7a00800000000000000
+      internalID: 755431689310660134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_43
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 147
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52fef4dd3f13adc90800000000000000
+      internalID: -7144342935410053339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_44
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 198
+        width: 10
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8de93085fd5721a0800000000000000
+      internalID: -6834390600511787638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_45
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 147
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dcb99e031716d850800000000000000
+      internalID: 6401329290970512597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_46
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 197
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53d7920e00f99ed80800000000000000
+      internalID: -8220864818678497995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_47
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 146
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 385e7339727ae72a0800000000000000
+      internalID: -6737764204084206205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_48
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 195
+        width: 10
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a82dd841cd4973b0800000000000000
+      internalID: -5514290776191981408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_49
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 146
+        width: 54
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b1284f018d3dd130800000000000000
+      internalID: 3593095702227984822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_50
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 68
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b0ab104aa0a7b310800000000000000
+      internalID: 1420780860539117752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_51
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 17
+        width: 41
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d431f0b806e2923a0800000000000000
+      internalID: -6689764779297402035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_52
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 69
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e71bb85d421d94a0800000000000000
+      internalID: -6585086956735359000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_53
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 17
+        width: 45
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39e75ea158acb30c0800000000000000
+      internalID: -4594856321770750317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_54
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 74
+        width: 22
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d16873bb6adea750800000000000000
+      internalID: 6318227483354751444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_55
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 70
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b05dcc9cc63a1f080800000000000000
+      internalID: -9155356879830067957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_56
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 18
+        width: 50
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eac8d634db19e600800000000000000
+      internalID: 497959832068344544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_57
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 74
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1197b3bb1f9116de0800000000000000
+      internalID: -1341762687960647407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_58
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 71
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7719aef97d0562270800000000000000
+      internalID: 8225350656469930359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_59
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 19
+        width: 50
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b30b6fe6e0ae05000800000000000000
+      internalID: 22775345848954939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_60
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 73
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39810912c1a97fce0800000000000000
+      internalID: -1371458115898173293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_61
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 72
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dcdb06042ef1cdf0800000000000000
+      internalID: -161568680934908712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_62
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 19
+        width: 50
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a024d8e7929033430800000000000000
+      internalID: 3761360187605991946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_63
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 74
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fae72503758b68e0800000000000000
+      internalID: -1699117705347994895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_64
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 70
+        width: 10
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87eb0742ab6b3e610800000000000000
+      internalID: 1649362799139274360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_65
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 19
+        width: 50
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d83dbd956ff8bc3e0800000000000000
+      internalID: -2032372518595341427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_66
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 73
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63caf12bb42e58670800000000000000
+      internalID: 8540481083116858422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_67
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 69
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6284c5dc92940bf0800000000000000
+      internalID: -359000867983818133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_68
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 18
+        width: 45
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2ea86a59de7c1240800000000000000
+      internalID: 4763821977840954927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_69
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 75
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a083c94d621ce230800000000000000
+      internalID: 3669328056998396064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_70
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 67
+        width: 10
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98635710501f02e00800000000000000
+      internalID: 1018078519587321481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_71
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 18
+        width: 45
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fba67ee1bf0c9130800000000000000
+      internalID: 3574749461109713906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_long_spin_attack_72
+      rect:
+        serializedVersion: 2
+        x: 1338
+        y: 74
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4666871fb95a78d0800000000000000
+      internalID: -2847865137090107830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_magenta_long_spin_attack_0: -5563817511500764957
+      Lich_magenta_long_spin_attack_1: -7439341050105740806
+      Lich_magenta_long_spin_attack_10: 4311356694091704987
+      Lich_magenta_long_spin_attack_11: -81570831477556988
+      Lich_magenta_long_spin_attack_12: -1811715485944886
+      Lich_magenta_long_spin_attack_13: 4892918328786024389
+      Lich_magenta_long_spin_attack_14: 7641747742584572401
+      Lich_magenta_long_spin_attack_15: 3066022303198441417
+      Lich_magenta_long_spin_attack_16: -1480578500230273476
+      Lich_magenta_long_spin_attack_17: -1341539141461555003
+      Lich_magenta_long_spin_attack_18: 3914341463968153912
+      Lich_magenta_long_spin_attack_19: 8121446413431226630
+      Lich_magenta_long_spin_attack_2: 1708204267581304473
+      Lich_magenta_long_spin_attack_20: 9111852999873462055
+      Lich_magenta_long_spin_attack_21: 790392460919732873
+      Lich_magenta_long_spin_attack_22: -2063121221892190581
+      Lich_magenta_long_spin_attack_23: -4460788121176924135
+      Lich_magenta_long_spin_attack_24: -6923346950424039686
+      Lich_magenta_long_spin_attack_25: -6954202892896664915
+      Lich_magenta_long_spin_attack_26: -2162887470187187347
+      Lich_magenta_long_spin_attack_27: 3731851137136379519
+      Lich_magenta_long_spin_attack_28: 1966518168485809653
+      Lich_magenta_long_spin_attack_29: 375339284136800148
+      Lich_magenta_long_spin_attack_3: -1496291269918843124
+      Lich_magenta_long_spin_attack_30: 2271242564717175990
+      Lich_magenta_long_spin_attack_31: -8141825870639675437
+      Lich_magenta_long_spin_attack_32: 876317783367086031
+      Lich_magenta_long_spin_attack_33: 5045695348901384230
+      Lich_magenta_long_spin_attack_34: -3104544435526386440
+      Lich_magenta_long_spin_attack_35: -7334971039852645862
+      Lich_magenta_long_spin_attack_36: -4790062979973147660
+      Lich_magenta_long_spin_attack_37: -5978679873512012580
+      Lich_magenta_long_spin_attack_38: -4325392709280639623
+      Lich_magenta_long_spin_attack_39: -7723336138874671276
+      Lich_magenta_long_spin_attack_4: 7568389726644811353
+      Lich_magenta_long_spin_attack_40: -3650041133762737290
+      Lich_magenta_long_spin_attack_41: 7279057362049649076
+      Lich_magenta_long_spin_attack_42: 755431689310660134
+      Lich_magenta_long_spin_attack_43: -7144342935410053339
+      Lich_magenta_long_spin_attack_44: -6834390600511787638
+      Lich_magenta_long_spin_attack_45: 6401329290970512597
+      Lich_magenta_long_spin_attack_46: -8220864818678497995
+      Lich_magenta_long_spin_attack_47: -6737764204084206205
+      Lich_magenta_long_spin_attack_48: -5514290776191981408
+      Lich_magenta_long_spin_attack_49: 3593095702227984822
+      Lich_magenta_long_spin_attack_5: -6080154269815617394
+      Lich_magenta_long_spin_attack_50: 1420780860539117752
+      Lich_magenta_long_spin_attack_51: -6689764779297402035
+      Lich_magenta_long_spin_attack_52: -6585086956735359000
+      Lich_magenta_long_spin_attack_53: -4594856321770750317
+      Lich_magenta_long_spin_attack_54: 6318227483354751444
+      Lich_magenta_long_spin_attack_55: -9155356879830067957
+      Lich_magenta_long_spin_attack_56: 497959832068344544
+      Lich_magenta_long_spin_attack_57: -1341762687960647407
+      Lich_magenta_long_spin_attack_58: 8225350656469930359
+      Lich_magenta_long_spin_attack_59: 22775345848954939
+      Lich_magenta_long_spin_attack_6: -1889736076326189624
+      Lich_magenta_long_spin_attack_60: -1371458115898173293
+      Lich_magenta_long_spin_attack_61: -161568680934908712
+      Lich_magenta_long_spin_attack_62: 3761360187605991946
+      Lich_magenta_long_spin_attack_63: -1699117705347994895
+      Lich_magenta_long_spin_attack_64: 1649362799139274360
+      Lich_magenta_long_spin_attack_65: -2032372518595341427
+      Lich_magenta_long_spin_attack_66: 8540481083116858422
+      Lich_magenta_long_spin_attack_67: -359000867983818133
+      Lich_magenta_long_spin_attack_68: 4763821977840954927
+      Lich_magenta_long_spin_attack_69: 3669328056998396064
+      Lich_magenta_long_spin_attack_7: -8620707661973184723
+      Lich_magenta_long_spin_attack_70: 1018078519587321481
+      Lich_magenta_long_spin_attack_71: 3574749461109713906
+      Lich_magenta_long_spin_attack_72: -2847865137090107830
+      Lich_magenta_long_spin_attack_8: -8942211778548875135
+      Lich_magenta_long_spin_attack_9: 7452031950305608269
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
