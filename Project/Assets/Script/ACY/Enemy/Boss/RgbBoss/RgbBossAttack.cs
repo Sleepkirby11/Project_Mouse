@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class RgbBossAttack : MonoBehaviour
 {
+    [Header("회복량 설정")]
+    [SerializeField] private int healAmount = 5;
     [Header("FireGear Spawn")]
     [SerializeField] private float spawnOffsetY = -1f;
     [SerializeField] private float redAttackInterval = 3f;
@@ -142,7 +144,15 @@ public class RgbBossAttack : MonoBehaviour
             if (obj != null)
             {
                 LightningBolt bolt = obj.GetComponent<LightningBolt>();
-                bolt?.Initialize(poolName, dir);
+                if (bolt != null)
+                {
+                    bolt.Initialize(poolName, dir, enemyStatus.CurrentElement);
+
+                    if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
+                        bolt.onHitPlayer = () => enemyStatus.Heal(healAmount);
+                    else
+                        bolt.onHitPlayer = null;
+                }
             }
 
             yield return new WaitForSeconds(lightningInterval);
@@ -208,7 +218,7 @@ public class RgbBossAttack : MonoBehaviour
             hurricane.Initialize(enemyStatus.CurrentElement, spawnDirection);
 
             if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
-                hurricane.onHitPlayer = () => enemyStatus.Heal(20);
+                hurricane.onHitPlayer = () => enemyStatus.Heal(healAmount);
             else
                 hurricane.onHitPlayer = null;
         }
@@ -252,7 +262,15 @@ public class RgbBossAttack : MonoBehaviour
         if (bulletObj != null)
         {
             RgbBullet bullet = bulletObj.GetComponent<RgbBullet>();
-            bullet?.Initialize(player, targetPoolName);
+            if (bullet != null)
+            {
+                bullet.Initialize(player, targetPoolName);
+
+                if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
+                    bullet.onHitPlayer = () => enemyStatus.Heal(healAmount);
+                else
+                    bullet.onHitPlayer = null;
+            }
         }
     }
 
