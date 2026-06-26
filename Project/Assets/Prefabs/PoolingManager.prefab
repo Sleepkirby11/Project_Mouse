@@ -102,3 +102,33 @@ MonoBehaviour:
   - key: WarningLine
     prefab: {fileID: 9168699527130250196, guid: 4e16ca2ed380bcd4a809df1ee3de8bd8, type: 3}
     initialSize: 4
+  - key: FireGear
+    prefab: {fileID: 3389551436745400444, guid: 9c8280d0d19cf924d928089866ecc2f4, type: 3}
+    initialSize: 4
+  - key: IceHammer
+    prefab: {fileID: 8097830525786069665, guid: 48517b43338adec4fa740111c6fbb46f, type: 3}
+    initialSize: 4
+  - key: Ice
+    prefab: {fileID: 2949338967925014390, guid: bb09129c5f0109148841ac40e33658fe, type: 3}
+    initialSize: 4
+  - key: Hurricane
+    prefab: {fileID: 6183869501469882721, guid: 785e2873b368c9040bdbfead67b48247, type: 3}
+    initialSize: 4
+  - key: RedBullet
+    prefab: {fileID: 3574707571005284272, guid: 8b29683a6f2e41b4b9c8726f69a2144f, type: 3}
+    initialSize: 4
+  - key: GreenBullet
+    prefab: {fileID: 4601374834408369703, guid: 85b0b38fe76ab2d45adb7031c740c76c, type: 3}
+    initialSize: 4
+  - key: BlueBullet
+    prefab: {fileID: 1586290619308133854, guid: 0cec7faec00ae194391cfd84f03fe088, type: 3}
+    initialSize: 4
+  - key: RedBurst
+    prefab: {fileID: 7564561511071946436, guid: 6610734a1a1408f42987192c6c19eac4, type: 3}
+    initialSize: 4
+  - key: Mushroom
+    prefab: {fileID: 8587005478963996705, guid: 8f6fa77e94323a241bb18514d77d6b56, type: 3}
+    initialSize: 4
+  - key: PoisonArea
+    prefab: {fileID: 4056799554950685891, guid: 795546fe7c55a474bb536d72ea302710, type: 3}
+    initialSize: 4

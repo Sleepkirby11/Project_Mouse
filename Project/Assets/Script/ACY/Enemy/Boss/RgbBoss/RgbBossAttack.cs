@@ -20,6 +20,13 @@ public class RgbBossAttack : MonoBehaviour
     [SerializeField] private string redBurstPoolName = "Burst";
     [SerializeField] private float burstSpawnRadius = 3.5f;
 
+    [Header("독버섯 패턴 설정 (Green)")]
+    [SerializeField] private string mushroomPoolName = "Mushroom";
+    [SerializeField] private int mushroomSpawnCount = 3; // 한 번에 소환할 버섯 개수
+    [SerializeField] private float spawnRangeX = 5f;     // 플레이어 기준 좌우 스폰 범위
+    [SerializeField] private float mushroomOffsetY = 0f; // 독버섯 생성 위치 Y 오프셋
+    [SerializeField] private LayerMask groundLayer;
+
     private Transform player;
     private EnemyStatus enemyStatus;
     private SpriteRenderer bossSpriteRenderer;
@@ -41,9 +48,9 @@ public class RgbBossAttack : MonoBehaviour
     }
     private void Update() // 테스트용 
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            SpawnBurstPattern();
+            SpawnPoisonMushrooms();
         }
     }
     private IEnumerator AttackRoutine()
@@ -96,6 +103,38 @@ public class RgbBossAttack : MonoBehaviour
             Quaternion.identity);
 
         yield return new WaitForSeconds(5f);
+    }
+    private void SpawnPoisonMushrooms()
+    {
+        if (player == null) return;
+
+        int successfulSpawns = 0;
+        int attempts = 0;
+        int maxAttempts = mushroomSpawnCount * 3;
+
+        while (successfulSpawns < mushroomSpawnCount && attempts < maxAttempts)
+        {
+            attempts++;
+
+            // 1. 플레이어 위치 기준으로 좌우 랜덤 X 좌표 산출
+            float randomX = Random.Range(-spawnRangeX, spawnRangeX);
+
+            // 플레이어 머리 위 공중에서 아래로 레이를 쏨
+            Vector3 rayStartPos = player.position + new Vector3(randomX, 5f, 0f);
+
+            // 2. 아래 방향으로 바닥 레이캐스트 발사
+            RaycastHit2D hit = Physics2D.Raycast(rayStartPos, Vector2.down, 15f, groundLayer);
+
+            if (hit.collider != null)
+            {
+                Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, mushroomOffsetY, 0f);
+
+                PoolingManager.Instance.Get(mushroomPoolName, spawnPos, Quaternion.identity);
+                successfulSpawns++;
+            }
+        }
+
+        Debug.Log($"독버섯 생성 패턴 실행: 플레이어 주변 바닥에 {successfulSpawns}개 스폰됨.");
     }
     private void SpawnHurricane()
     {

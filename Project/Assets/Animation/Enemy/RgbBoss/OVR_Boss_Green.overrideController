@@ -7,5 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: OVR_Boss_Green
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 9adc5c475ffd3384c9597b2090ff27ae, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 5caeed06bf1e50d4d8f2e7f459951b7f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7dd62c303e0d77f439f43a340e444be2, type: 2}

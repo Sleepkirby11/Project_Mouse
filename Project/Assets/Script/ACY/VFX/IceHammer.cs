@@ -42,15 +42,13 @@ public class IceHammer : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("망치가 맞긴 맞았음!");
         if (destroyed)
             return;
 
         if (player == null)
             return;
 
-        // Red 상태에서만 파괴 가능
-        if (player.currentStance != PlayerStatus.Stance.Red)
+        if (player.currentStance != PlayerStatus.Stance.Green)
             return;
 
         destroyed = true;
