@@ -140,7 +140,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
         try
         {
-            FlowerTrap[] activeTraps = FindObjectsOfType<FlowerTrap>();
+            FlowerTrap[] activeTraps = FindObjectsByType<FlowerTrap>(FindObjectsSortMode.None);
             foreach (FlowerTrap trap in activeTraps)
             {
                 if (trap != null)
