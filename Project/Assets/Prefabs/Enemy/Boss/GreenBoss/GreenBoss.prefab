@@ -368,6 +368,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 10
   dieAnimationLength: 1
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
   isBoss: 1
 --- !u!1 &6280919845566060893
 GameObject:
