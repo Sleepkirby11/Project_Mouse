@@ -102,6 +102,10 @@ public class FireGear : MonoBehaviour
 
     private void ReleasePlayer()
     {
+        if (capturedPlayer != null)
+        {
+            capturedPlayer.ReleaseBind();
+        }
         capturedRb = null;
         capturedPlayer = null;
     }

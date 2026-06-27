@@ -72,6 +72,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
     [Header("Hurricane 설정")]
     [SerializeField] private float spawnOffsetX = 1.5f;
+    [SerializeField] private float hurricaneOffsetY = 0f;
 
     [Header("속성별 탄환 풀 키 설정")]
     [SerializeField] private string redBulletPoolKey = "RedBullet";
@@ -109,6 +110,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     [SerializeField] private string blackHolePoolKey = "BlackHole";
     [SerializeField] private Transform[] blackHoleSpawnPoints;
     [SerializeField] private float finalPhaseDuration = 10f;
+    [SerializeField] private float finalPhaseRestDuration = 2f;
 
     [Header("VFX 풀 키 설정")]
     [SerializeField] private string hurricanePoolKey = "Hurricane";
@@ -382,9 +384,20 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     {
         Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
 
-        Vector3 spawnPos = transform.position +
-                      (spawnDirection * spawnOffsetX) +
-                      (Vector3.up * spawnOffsetY);
+        Vector3 rayStart = transform.position + (spawnDirection * spawnOffsetX) + Vector3.up * 5f;
+        RaycastHit2D hit = Physics2D.Raycast(rayStart, Vector2.down, 15f, groundLayer);
+
+        Vector3 spawnPos;
+        if (hit.collider != null)
+        {
+            spawnPos = (Vector3)hit.point + new Vector3(0f, hurricaneOffsetY, 0f);
+        }
+        else
+        {
+            spawnPos = transform.position +
+                          (spawnDirection * spawnOffsetX) +
+                          (Vector3.up * spawnOffsetY);
+        }
 
         GameObject hurricaneObj = PoolingManager.Instance.Get(
             hurricanePoolKey,
@@ -530,6 +543,9 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         {
             colorCycle.ExitFinalPhase();
         }
+
+        yield return new WaitForSeconds(finalPhaseRestDuration);
+
         isFinalPhaseActive = false;
     }
 

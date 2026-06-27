@@ -2852,7 +2852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1766277475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3034,6 +3034,7 @@ MonoBehaviour:
   healAmount: 5
   spawnOffsetY: -5
   spawnOffsetX: 1.5
+  hurricaneOffsetY: 0
   redBulletPoolKey: RedBullet
   greenBulletPoolKey: GreenBullet
   blueBulletPoolKey: BlueBullet
@@ -3064,6 +3065,7 @@ MonoBehaviour:
   - {fileID: 1302167156}
   - {fileID: 43234244}
   finalPhaseDuration: 10
+  finalPhaseRestDuration: 2
   hurricanePoolKey: Hurricane
   fireGearPoolKey: FireGear
   iceHammerPoolKey: IceHammer
