@@ -123,7 +123,7 @@ MonoBehaviour:
   - key: BlueBullet
     prefab: {fileID: 1586290619308133854, guid: 0cec7faec00ae194391cfd84f03fe088, type: 3}
     initialSize: 4
-  - key: RedBurst
+  - key: Burst
     prefab: {fileID: 7564561511071946436, guid: 6610734a1a1408f42987192c6c19eac4, type: 3}
     initialSize: 4
   - key: Mushroom
@@ -132,3 +132,18 @@ MonoBehaviour:
   - key: PoisonArea
     prefab: {fileID: 4056799554950685891, guid: 795546fe7c55a474bb536d72ea302710, type: 3}
     initialSize: 4
+  - key: RedLightning
+    prefab: {fileID: 4854655057760737446, guid: ad135b20f6ec06144818f4453391ef98, type: 3}
+    initialSize: 4
+  - key: GreenLightning
+    prefab: {fileID: 4561692669671582894, guid: d1d18af201bd81a41a2e89d461a4ed6e, type: 3}
+    initialSize: 4
+  - key: BlueLightning
+    prefab: {fileID: 5711908785111231153, guid: 1c71cf27169688d489ca14755ddb4d5f, type: 3}
+    initialSize: 4
+  - key: BlackHole
+    prefab: {fileID: 4731838150192954104, guid: 6451abfb8ff0f504ebadb746e4c5bde0, type: 3}
+    initialSize: 5
+  - key: Explosion
+    prefab: {fileID: 9013588410115159912, guid: e22c45c9835319849b0c99cc1c3e3de4, type: 3}
+    initialSize: 30
