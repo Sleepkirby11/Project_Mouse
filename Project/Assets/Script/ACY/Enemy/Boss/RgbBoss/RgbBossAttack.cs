@@ -385,7 +385,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
 
         Vector3 rayStart = transform.position + (spawnDirection * spawnOffsetX) + Vector3.up * 5f;
-        RaycastHit2D hit = Physics2D.Raycast(rayStart, Vector2.down, 15f, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(rayStart, Vector2.down, 50f, groundLayer);
 
         Vector3 spawnPos;
         if (hit.collider != null)

@@ -1,7 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
-public class KillerPlantAttack : MonoBehaviour
+public class KillerPlantAttack : MonoBehaviour, IHitReaction
 {
     #region Settings & Variables
 
@@ -187,6 +187,26 @@ public class KillerPlantAttack : MonoBehaviour
         }
 
         obj.GetComponent<KillerPlantBullet>()?.Launch(dirX, projectileSpeed);
+    }
+
+    #endregion
+
+    #region IHitReaction Implementation
+
+    public bool OnBeforeTakeDamage(EnemyStatus status, int damage)
+    {
+        return false;
+    }
+
+    public void OnAfterTakeDamage(EnemyStatus status, int damage)
+    {
+        if (movement != null)
+        {
+            movement.isAttacking = false;
+            movement.intent = PlantIntent.Approach;
+        }
+        actionRunning = false;
+        StopAllCoroutines();
     }
 
     #endregion

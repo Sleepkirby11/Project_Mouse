@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputScript : MonoBehaviour
@@ -15,8 +15,8 @@ public class PlayerInputScript : MonoBehaviour
     {
         //이동 키 변화 감지 시 true
         player.isCanMove = true;
-        //이동 제한 조건식
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        //사망 시에는 입력 무시
+        if (player.status.HP <= 0)
         {
             return;
         }
@@ -26,8 +26,11 @@ public class PlayerInputScript : MonoBehaviour
             player.anim.SetBool("IsWalk", true);
             player.inputVec.x = context.ReadValue<Vector2>().x * player.speed;
 
-            player.rigid.linearVelocityX = player.inputVec.x;
-            player.SpriteFlip();
+            if (player.status.CanMove)
+            {
+                player.rigid.linearVelocityX = player.inputVec.x;
+                player.SpriteFlip();
+            }
         }
         //키 입력 종료
         if (context.canceled)

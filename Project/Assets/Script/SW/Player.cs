@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
     SpriteRenderer sprite;
     LineRenderer dashLine;
     [HideInInspector] public ParticleSystem particle;
+    private PlayerInput playerInput;
 
     //이동값 변수
     [HideInInspector] public float speed;
@@ -104,6 +105,7 @@ public class Player : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
         dashLine = GetComponentInChildren<LineRenderer>();
         particle = GetComponentInChildren<ParticleSystem>();
+        playerInput = GetComponent<PlayerInput>();
 
         attackCursor.GetComponent<AttackCursor>().target = transform;
         cursor = cursorObject.GetComponent<Cursor>();
@@ -384,11 +386,24 @@ public class Player : MonoBehaviour
     //넉백 상태 종료 후 처리 함수
     public void OnKnockbackEnd()
     {
-        // 현재 키가 눌려있으면 그 값 그대로 복원, 안눌려있으면 0
-        inputVec.x = Keyboard.current != null
-            ? (Keyboard.current.dKey.isPressed ? speed : 0)
-            + (Keyboard.current.aKey.isPressed ? -speed : 0)
-            : 0;
+        // 인풋 시스템에서 현재 이동 입력 값을 직접 읽어옴 (WASD, 방향키, 패드 등 모두 지원)
+        if (playerInput != null)
+        {
+            var moveAction = playerInput.actions["Move"];
+            if (moveAction != null)
+            {
+                Vector2 moveVal = moveAction.ReadValue<Vector2>();
+                inputVec.x = moveVal.x * speed;
+            }
+        }
+        else
+        {
+            // 현재 키가 눌려있으면 그 값 그대로 복원, 안눌려있으면 0 (폴백)
+            inputVec.x = Keyboard.current != null
+                ? (Keyboard.current.dKey.isPressed ? speed : 0)
+                + (Keyboard.current.aKey.isPressed ? -speed : 0)
+                : 0;
+        }
         if (inputVec.x > 0)
         {
             sprite.flipX = false;
