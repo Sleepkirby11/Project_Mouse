@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -137,6 +137,19 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private void OnDisable()
     {
         StopAllBossCoroutines();
+
+        try
+        {
+            FlowerTrap[] activeTraps = FindObjectsOfType<FlowerTrap>();
+            foreach (FlowerTrap trap in activeTraps)
+            {
+                if (trap != null)
+                {
+                    trap.ForceClear();
+                }
+            }
+        }
+        catch {}
     }
 
     private void OnDestroy()

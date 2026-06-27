@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -220,6 +220,34 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
                 StopCoroutine(bindCoroutine);
             }
             bindCoroutine = StartCoroutine(BindRoutine(duration));
+        }
+    }
+
+    public void ReleaseBind()
+    {
+        if (bindCoroutine != null)
+        {
+            StopCoroutine(bindCoroutine);
+            bindCoroutine = null;
+        }
+
+        if (isBound)
+        {
+            isBound = false;
+            if (rb != null)
+            {
+                rb.gravityScale = 1f;
+                rb.linearVelocity = Vector2.zero;
+            }
+            if (playerComp != null)
+            {
+                playerComp.OnKnockbackEnd();
+            }
+            if (playerAnim != null)
+            {
+                playerAnim.SetBool("IsJump", false);
+                playerAnim.SetBool("IsFalling", true);
+            }
         }
     }
     private IEnumerator BindRoutine(float duration)

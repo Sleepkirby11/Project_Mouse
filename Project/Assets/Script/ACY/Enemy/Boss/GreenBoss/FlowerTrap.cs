@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -37,6 +37,7 @@ public class FlowerTrap : MonoBehaviour
     private bool isDetecting = false;
     private bool isReturning = false;
     private GameObject lockIconInstance;
+    private PlayerStatus boundPlayer;
 
     // 애니메이션 State 
     private const string S_BLOOM = "bloom";
@@ -59,6 +60,8 @@ public class FlowerTrap : MonoBehaviour
     {
         myPoolKey = poolKey;
         isDetecting = false;
+        isReturning = false;
+        boundPlayer = null;
 
         if (lockIconInstance != null)
         {
@@ -140,6 +143,8 @@ public class FlowerTrap : MonoBehaviour
             ReturnToPool();
             yield break;
         }
+
+        boundPlayer = hit.GetComponentInParent<PlayerStatus>();
 
         // 속박
         anim.Play(S_VINED);
@@ -260,11 +265,46 @@ public class FlowerTrap : MonoBehaviour
     // 풀 반납
     // ────────────────────────────────────────────
 
+    public void ForceClear()
+    {
+        if (isReturning) return;
+
+        if (boundPlayer != null)
+        {
+            boundPlayer.ReleaseBind();
+            boundPlayer = null;
+        }
+        HideLockIcon();
+
+        bool isFlower = isDetecting;
+        isDetecting = false;
+
+        StopAllCoroutines();
+
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(VanishSequence(isFlower));
+        }
+        else
+        {
+            ReturnToPool();
+        }
+    }
+
     private void ReturnToPool()
     {
         StopAllCoroutines();
         isDetecting = false;
-        PoolingManager.Instance.Return(myPoolKey, gameObject);
+        isReturning = false;
+        boundPlayer = null;
+        if (PoolingManager.Instance != null)
+        {
+            PoolingManager.Instance.Return(myPoolKey, gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private float GetClipLength(string clipName)
