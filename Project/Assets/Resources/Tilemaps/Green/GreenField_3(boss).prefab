@@ -119515,6 +119515,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 8732577864060861115}
     m_Modifications:
     - target: {fileID: 5457072670886858985, guid: 646319e1522772f499c12670c7a44413, type: 3}
+      propertyPath: activateDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5457072670886858985, guid: 646319e1522772f499c12670c7a44413, type: 3}
       propertyPath: enemies.Array.size
       value: 1
       objectReference: {fileID: 0}
