@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 /*
@@ -18,14 +18,20 @@ public class BasicEnemyAttack : MonoBehaviour
 
     private Animator anim;
     private bool canAttack = true;
+    private EnemyStatus enemyStatus;
 
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
         CheckAttackRange();
     }
 
@@ -55,7 +61,10 @@ public class BasicEnemyAttack : MonoBehaviour
 
             Debug.Log("적 공격 시도");
         yield return new WaitForSeconds(0.5f); //약간 딜레이
-        AttackHit();
+        if (enemyStatus == null || !enemyStatus.isStunned)
+        {
+            AttackHit();
+        }
 
         yield return new WaitForSeconds(attackCooldown);
 

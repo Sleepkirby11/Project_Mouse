@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,6 +40,7 @@ public class GhostEnemyAttack : MonoBehaviour
     private bool isPossessing;
 
     private Coroutine possessionCoroutine;
+    private EnemyStatus enemyStatus;
 
     #endregion
 
@@ -48,10 +49,20 @@ public class GhostEnemyAttack : MonoBehaviour
     private void Awake()
     {
         ghostMove = GetComponent<GhostEnemyMove>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (isPossessing)
+            {
+                EndPossession();
+            }
+            return;
+        }
+
         if (!isPossessing) // 빙의 중이 아닐 때는 연산 안 함
         {
             return;
@@ -63,6 +74,11 @@ public class GhostEnemyAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
+
         if (!isPossessing)
         {
             return;
@@ -77,6 +93,11 @@ public class GhostEnemyAttack : MonoBehaviour
 
     public void StartPossession(Transform player)
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
+
         if (player == null)
         {
             return;

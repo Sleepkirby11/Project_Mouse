@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 /*
@@ -42,6 +42,8 @@ public class BasicEnemyMove : MonoBehaviour
     private static readonly int IsChasing = Animator.StringToHash("IsChasing"); 
 
     private WaitForSeconds scanIntervalWFS;
+    private EnemyStatus enemyStatus;
+    private Rigidbody2D rb;
 
     #endregion
 
@@ -56,6 +58,8 @@ public class BasicEnemyMove : MonoBehaviour
 
         scanIntervalWFS = new WaitForSeconds(0.2f); // 0.2초 주기 스캔
         animator = GetComponentInChildren<Animator>();
+        enemyStatus = GetComponent<EnemyStatus>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -67,6 +71,20 @@ public class BasicEnemyMove : MonoBehaviour
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (animator != null)
+            {
+                animator.SetBool(IsMoving, false);
+                animator.SetBool(IsChasing, false);
+            }
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            return;
+        }
+
         switch (currentState) // 상태에 따른 행동 분기
         {
             case EnemyState.Patrol: // 배회 상태에서는 좌우로 이동

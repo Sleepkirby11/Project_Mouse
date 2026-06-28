@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,6 +57,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     private Animator anim;
     private Transform target;
     private State state = State.Patrol; // 초기 상태는 배회
+    private EnemyStatus enemyStatus;
 
     private Vector2 patrolOrigin; // 배회 시작 위치
     private float patrolDir = 1f; // 배회 방향 (1: 오른쪽, -1: 왼쪽)
@@ -83,6 +84,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         }
         anim = GetComponentInChildren<Animator>();
+        enemyStatus = GetComponent<EnemyStatus>();
 
         // 패링 타이머 캐싱
         parryWait = new WaitForSeconds(parryDuration);
@@ -111,6 +113,19 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+            if (anim != null)
+            {
+                anim.SetBool("IsMoving", false);
+            }
+            return;
+        }
+
         FlipToTarget();
 
         UpdateAnimator();
@@ -207,6 +222,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             // 플레이어를 추적 중일 때만 패링 시도
             if (target != null && state == State.Tracking)
             {
+                if (enemyStatus != null && enemyStatus.isStunned)
+                {
+                    continue;
+                }
                 state = State.Parrying;
                 if (rb != null)
                 {
@@ -225,6 +244,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     public bool OnHitByPlayer()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return false;
+        }
         if (state != State.Parrying || target == null)
         {
             return false;
@@ -276,6 +299,11 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void OnCollisionEnter2D(Collision2D collision) // 충돌처리
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
+
         if (collision == null || collision.gameObject == null)
         {
             return;
