@@ -33,6 +33,9 @@ public class UI : MonoBehaviour
     [Header("팔레트")]
     public GameObject pal;
 
+    [Header("시작 메뉴")]
+    public GameObject startMenu;
+
     void Awake()
     {
         // 싱글톤 초기화
@@ -53,6 +56,8 @@ public class UI : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Tutorial");
+        if(startMenu != null)
+            startMenu.gameObject.SetActive(false);
     }
 
     //설정 메뉴 추가 예정
