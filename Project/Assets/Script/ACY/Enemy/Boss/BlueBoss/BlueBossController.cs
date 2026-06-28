@@ -117,6 +117,7 @@ public class BossController : MonoBehaviour, IHitReaction
         }
 
         currentLoop = StartCoroutine(Phase1Loop());
+        waterSpoutLoop = StartCoroutine(WaterSpoutLoop());
     }
 
     private void Update()
@@ -550,9 +551,9 @@ public class BossController : MonoBehaviour, IHitReaction
             float randomX = player.position.x + Random.Range(-waterSpoutSpread, waterSpoutSpread);
 
             RaycastHit2D hit = Physics2D.Raycast(
-                new Vector2(randomX, -20f),
-                Vector2.up,
-                100f,
+                new Vector2(randomX,-98f),
+                Vector2.down,              
+                50f,                     
                 groundLayer
             );
 
