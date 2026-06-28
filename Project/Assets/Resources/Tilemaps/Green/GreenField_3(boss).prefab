@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 6250457471374065178}
   - component: {fileID: 8767547414998607582}
   - component: {fileID: 4635715104422590317}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Green_3_Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
