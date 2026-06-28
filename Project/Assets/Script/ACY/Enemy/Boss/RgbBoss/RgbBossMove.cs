@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class RgbBossMove : MonoBehaviour
 {
-    [Header("Å¸°Ù ¼³Á¤")]
+    [Header("íƒ€ê²Ÿ ì„¤ì •")]
     [SerializeField] private Transform playerTransform;
     public bool isFacingRight = true;
 

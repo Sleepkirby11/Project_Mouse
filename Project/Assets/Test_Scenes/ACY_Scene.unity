@@ -4386,26 +4386,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoss
       objectReference: {fileID: 0}
-    - target: {fileID: 1823950582210720561, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3191931018660831823, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3191931018660831823, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3191931018660831823, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3372036266355469166, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: appearVFX
       value: 
@@ -4434,10 +4414,6 @@ PrefabInstance:
       propertyPath: 'teleportPoints.Array.data[4]'
       value: 
       objectReference: {fileID: 842367732}
-    - target: {fileID: 5189355176662487042, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: dieAnimationLength
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 7047756458394531367, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7

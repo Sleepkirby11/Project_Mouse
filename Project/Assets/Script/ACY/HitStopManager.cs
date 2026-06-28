@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class HitStopManager : MonoBehaviour
@@ -9,7 +9,7 @@ public class HitStopManager : MonoBehaviour
         get
         {
             if (_instance == null)
-                Debug.LogError("[HitStopManager] ¾À¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogError("[HitStopManager] ì”¬ì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return _instance;
         }
     }

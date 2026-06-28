@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ public class PoisonArea : MonoBehaviour
             {
                 if (player != null)
                 {
-                    // ¼öÁ¤ ¾øÀÌ ±âÁ¸ ÇÃ·¹ÀÌ¾îÀÇ TakeDamage ±×´ë·Î »ç¿ë
+                    // ìˆ˜ì • ì—†ì´ ê¸°ì¡´ í”Œë ˆì´ì–´ì˜ TakeDamage ê·¸ëŒ€ë¡œ ì‚¬ìš©
                     player.TakeDamage(damagePerTick);
                 }
             }
