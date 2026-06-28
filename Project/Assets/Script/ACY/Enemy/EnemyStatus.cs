@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyStatus : MonoBehaviour, IDamageable
+public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 {
     #region Settings & Variables
     public enum EnemyElement { Red, Green, Blue, None }
@@ -14,6 +14,9 @@ public class EnemyStatus : MonoBehaviour, IDamageable
     [Header("사망 연출 설정")]
     [SerializeField] private float dieAnimationLength = 1f; // 사망 애니메이션 길이에 맞춰 설정 
     private Animator anim;
+
+    [Header("상태 이상")]
+    public bool isStunned { get; private set; }
 
     [Header("속성 설정")]
     [SerializeField] private EnemyElement element = EnemyElement.None;
@@ -166,6 +169,29 @@ public class EnemyStatus : MonoBehaviour, IDamageable
             return; // 이미 죽은 적은 회복 불가
         }
         currentHP = Mathf.Min(currentHP + amount, maxHP);
+    }
+
+    #endregion
+
+    #region Stun Logic
+
+    public void ApplyStun(float duration)
+    {
+        if (isBoss || currentHP <= 0 || isStunned)
+        {
+            return;
+        }
+
+        StartCoroutine(StunRoutine(duration));
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        isStunned = true;
+
+        yield return new WaitForSeconds(duration);
+
+        isStunned = false;
     }
 
     #endregion
