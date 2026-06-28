@@ -5774,6 +5774,37 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 469775223506144090}
+--- !u!1 &701284605852044528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6861556528700016539}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6861556528700016539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701284605852044528}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4169286712872263522}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &732240460072261460
 GameObject:
   m_ObjectHideFlags: 0
@@ -51442,6 +51473,7 @@ Transform:
   m_Children:
   - {fileID: 5579370154473649049}
   - {fileID: 6322076077094529759}
+  - {fileID: 6861556528700016539}
   - {fileID: 4133030207291751607}
   - {fileID: 8788635813541181105}
   - {fileID: 7675505333859735062}
@@ -51680,7 +51712,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3452495524052986724, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
       propertyPath: nextSceneName
-      value: Blue
+      value: RGB
       objectReference: {fileID: 0}
     - target: {fileID: 7758221207617996518, guid: cfe44826f9314cd4485c09bd2c11ec1f, type: 3}
       propertyPath: m_Name
