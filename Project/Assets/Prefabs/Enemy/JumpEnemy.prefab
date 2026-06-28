@@ -130,6 +130,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 5
   dieAnimationLength: 0.5
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
+  isBoss: 0
 --- !u!61 &9124705101422008266
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -252,7 +256,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 250
   m_Sprite: {fileID: 1804864146, guid: 7cabb531e28bd844aa6d0a737a10fddb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1

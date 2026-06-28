@@ -77,14 +77,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   patrolDistance: 4
-  jumpForce: 7
   detectRange: 10
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 8
   parryDuration: 1
   parryInterval: 1.8
   contactDamage: 1
@@ -158,6 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 4
   dieAnimationLength: 0.5
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
   isBoss: 0
 --- !u!1 &9001307576677388265
 GameObject:
@@ -235,7 +234,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 250
   m_Sprite: {fileID: 4035959289877228764, guid: 30ad930b0d3d8de4ca644ad8ea35f675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
