@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc31ea34eec75e449a4e4f89335d89eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleSceneName: KSW_Scene
+  titleSceneName: MainMenu
 --- !u!114 &1899340233
 MonoBehaviour:
   m_ObjectHideFlags: 0
