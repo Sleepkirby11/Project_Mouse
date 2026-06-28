@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Burst : MonoBehaviour
 {
-    [Header("´ë¹ÌÁö ¼³Á¤")]
+    [Header("ëŒ€ë¯¸ì§€ ì„¤ì •")]
     [SerializeField] private int explosionDamage = 10;
 
     private string myPoolName;
@@ -24,7 +24,7 @@ public class Burst : MonoBehaviour
         }
     }
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç ¸Ç ¸¶Áö¸· ÇÁ·¹ÀÓ¿¡ ÀÌº¥Æ®·Î µî·Ï
+    // ì• ë‹ˆë©”ì´ì…˜ ë§¨ ë§ˆì§€ë§‰ í”„ë ˆì„ì— ì´ë²¤íŠ¸ë¡œ ë“±ë¡
     public void ReturnToPoolEvent()
     {
         PoolingManager.Instance.Return(myPoolName, gameObject);

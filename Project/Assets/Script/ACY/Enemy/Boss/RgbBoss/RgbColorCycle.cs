@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RgbColorCycle : MonoBehaviour
 {
@@ -83,8 +83,6 @@ public class RgbColorCycle : MonoBehaviour
 
         // 발악 끝나면 즉시 RGB 하나 선택하며 사이클 재개
         ChangeElementRandom();
-
-        Debug.Log("발악 상태 해제, RGB 사이클로 복귀!");
     }
     #endregion
 
