@@ -4361,6 +4361,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1150381092}
+    - target: {fileID: 4814064938279372456, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4834161149477849590, guid: 192c29c66ebf02f41a12cc1229ba6589, type: 3}
       propertyPath: m_Name
       value: GhostEnemy
