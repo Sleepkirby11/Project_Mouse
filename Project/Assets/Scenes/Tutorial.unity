@@ -1524,6 +1524,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 493103689797142013, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 493103689797142013, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493103689797142013, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2024216536}
+    - target: {fileID: 493103689797142013, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 493103689797142013, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActionCheatHeal
+      objectReference: {fileID: 0}
+    - target: {fileID: 493103689797142013, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerInputScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 493103689797142013, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1421529219847481145, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1589,6 +1617,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+--- !u!114 &2024216536 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 59548725156804224, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+  m_PrefabInstance: {fileID: 2024216535}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d671cad03c85546aa91317a254ea3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2067195245
 PrefabInstance:
   m_ObjectHideFlags: 0
