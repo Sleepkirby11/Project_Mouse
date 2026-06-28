@@ -149,6 +149,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 1
   dieAnimationLength: 0.4
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
+  isBoss: 0
 --- !u!1 &8624189645729721287
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +229,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 250
   m_Sprite: {fileID: 8889585205050195683, guid: 37afed20dc0daaa4ab774aae767138f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

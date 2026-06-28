@@ -53,8 +53,8 @@ MonoBehaviour:
   waveSpeed: 3
   waveAmount: 0.3
   arrivalDistance: 0.5
-  mapCenter: {x: 461, y: 90}
-  mapRange: {x: 30, y: 15}
+  mapCenter: {x: 461, y: 100}
+  mapRange: {x: 30, y: 10}
   spawnInvincibleTime: 1.5
   roamDuration: 8
   returnSpeed: 6

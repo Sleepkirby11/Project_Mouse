@@ -210,7 +210,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 7773031391787181946, guid: 2b6433975551f724fafc05b28571e8b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -260,3 +260,6 @@ MonoBehaviour:
   iceCount: 5
   iceOffset: {x: 15, y: -1}
   hammerHitbox: {fileID: 9037451367606941842}
+  fadeDuration: 0.5
+  poolKey: IceHammer
+  icePoolKey: Ice
