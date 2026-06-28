@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 /*
  * 행동패턴: 자리에 고정 
@@ -29,6 +29,7 @@ public class ArcherEnemyMove : MonoBehaviour
     private float backstepEndTimer;
     private bool isBackstepping = false; // 백스텝 여부
     private bool isFacingRight = true;
+    private EnemyStatus enemyStatus;
 
     private static readonly int BackstepHash = Animator.StringToHash("Backstep");
 
@@ -49,10 +50,21 @@ public class ArcherEnemyMove : MonoBehaviour
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         }
         anim = GetComponentInChildren<Animator>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            isBackstepping = false;
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            return;
+        }
+
         if (backstepCooldownTimer > 0f)
         {
             backstepCooldownTimer -= Time.deltaTime;
@@ -75,6 +87,12 @@ public class ArcherEnemyMove : MonoBehaviour
     private void FixedUpdate()
     {
         if (rb == null) return;
+
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
 
         // 백스텝 상태일 때만 이동
         if (isBackstepping && player != null)

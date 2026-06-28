@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,13 +38,13 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     [SerializeField] private int contactDamage = 1;
     [SerializeField] private float contactKnockbackX = 6f;   // 옆으로 밀려나는 힘
     [SerializeField] private float contactKnockbackY = 5f;   // 약하게 뜨는 힘
-    [SerializeField] private float contactCooldown = 0.8f; // 재접촉 무적 시간
+    [SerializeField] private float contactCooldown = 0.8f;   // 재접촉 무적 시간
 
     [Header("카운터 공격")]
     [SerializeField] private float counterDashForce = 22f;  // 돌진 힘
-    [SerializeField] private float counterDashTime = 0.6f; // 돌진 유지 시간
-    [SerializeField] private float counterLaunchY = 18f;  // 카운터 히트 공중부양 힘
-    [SerializeField] private float counterStunTime = 1.5f; // 스턴 지속 시간
+    [SerializeField] private float counterDashTime = 0.6f;  // 돌진 유지 시간
+    [SerializeField] private float counterLaunchY = 18f;    // 카운터 히트 공중부양 힘
+    [SerializeField] private float counterStunTime = 1.5f;  // 스턴 지속 시간
     [SerializeField] private float counterRecoverTime = 0.3f;
 
     [Header("타겟 설정")]
@@ -54,11 +54,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     private enum State { Patrol, Tracking, Parrying, Countering, Recovering } 
 
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
     private Animator anim;
-    private Color originalColor;
     private Transform target;
     private State state = State.Patrol; // 초기 상태는 배회
+    private EnemyStatus enemyStatus;
 
     private Vector2 patrolOrigin; // 배회 시작 위치
     private float patrolDir = 1f; // 배회 방향 (1: 오른쪽, -1: 왼쪽)
@@ -84,13 +83,8 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         }
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
-
-        if (spriteRenderer != null)
-        {
-            originalColor = spriteRenderer.color;
-        }
+        enemyStatus = GetComponent<EnemyStatus>();
 
         // 패링 타이머 캐싱
         parryWait = new WaitForSeconds(parryDuration);
@@ -119,10 +113,20 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void Update()
     {
-        if (state != State.Patrol)
+        if (enemyStatus != null && enemyStatus.isStunned)
         {
-            FlipToTarget();
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+            if (anim != null)
+            {
+                anim.SetBool("IsMoving", false);
+            }
+            return;
         }
+
+        FlipToTarget();
 
         UpdateAnimator();
 
@@ -175,14 +179,20 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void MoveToward(Vector3 destination) // 플레이어 방향으로 이동
     {
-        if (rb == null) return;
+        if (rb == null)
+        {
+            return;
+        }
         float dirX = destination.x > transform.position.x ? 1f : -1f; // 이동 방향 계산
         rb.linearVelocity = new Vector2(dirX * moveSpeed, rb.linearVelocity.y);
     }
 
     private void Patrol()
     {
-        if (rb == null) return;
+        if (rb == null)
+        {
+            return;
+        }
         // 배회 반경 도달 시 방향 전환
         float distFromOrigin = transform.position.x - patrolOrigin.x;
         if (distFromOrigin > patrolDistance && patrolDir == 1f)
@@ -210,9 +220,12 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             yield return parryIntervalWait;
 
             // 플레이어를 추적 중일 때만 패링 시도
-            if (target != null)
+            if (target != null && state == State.Tracking)
             {
-                Debug.Log("패링 시도");
+                if (enemyStatus != null && enemyStatus.isStunned)
+                {
+                    continue;
+                }
                 state = State.Parrying;
                 if (rb != null)
                 {
@@ -231,6 +244,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     public bool OnHitByPlayer()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return false;
+        }
         if (state != State.Parrying || target == null)
         {
             return false;
@@ -282,6 +299,11 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void OnCollisionEnter2D(Collision2D collision) // 충돌처리
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
+
         if (collision == null || collision.gameObject == null)
         {
             return;
@@ -378,6 +400,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             return;
         }
+        if (state == State.Countering)
+        {
+            return;
+        }
         anim.SetBool("IsParrying", state == State.Parrying);
         anim.SetBool("IsMoving", state == State.Tracking || state == State.Patrol);
         if (rb != null)
@@ -388,14 +414,33 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void FlipToTarget()
     {
-        Transform activeTarget = playerTransform != null ? playerTransform : target;
+        // Patrol 중엔 움직이는 방향 기준
+        if (state == State.Patrol)
+        {
+            if (patrolDir > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if (patrolDir < 0 && isFacingRight)
+            {
+                Flip();
+            }
+
+            return;
+        }
+
+        // 추적, 패링, 카운터 중엔 실제 감지된 target 기준
+        Transform activeTarget = target ?? playerTransform;
         if (activeTarget == null)
         {
             return;
         }
 
         float direction = activeTarget.position.x - transform.position.x;
-
+        if (Mathf.Abs(direction) < 0.1f) // 너무가까우면 Flip 안함
+        {
+            return;
+        }
         if (direction > 0 && !isFacingRight)
         {
             Flip();

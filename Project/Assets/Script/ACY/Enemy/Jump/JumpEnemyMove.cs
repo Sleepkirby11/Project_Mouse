@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 /*
  * 점프형 적 - 이동 및 배회 제어 (Move)
@@ -26,6 +26,7 @@ public class JumpEnemyMove : MonoBehaviour
 
     private Transform targetPlayer;
     private bool foundPlayer = false; // 한 번 인식하면 끝까지 추적
+    private EnemyStatus enemyStatus;
 
     // 공격 스크립트가 가져다 쓸 정보
     public Transform TargetPlayer => targetPlayer;
@@ -40,6 +41,7 @@ public class JumpEnemyMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         attackScript = GetComponent<JumpEnemyAttack>();
         anim = GetComponentInChildren<Animator>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Start()
@@ -56,6 +58,15 @@ public class JumpEnemyMove : MonoBehaviour
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+            return;
+        }
+
         FlipToTarget();
         UpdateAnimator();
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,6 +40,7 @@ public class GhostEnemyAttack : MonoBehaviour
     private bool isPossessing;
 
     private Coroutine possessionCoroutine;
+    private EnemyStatus enemyStatus;
 
     #endregion
 
@@ -48,10 +49,20 @@ public class GhostEnemyAttack : MonoBehaviour
     private void Awake()
     {
         ghostMove = GetComponent<GhostEnemyMove>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (isPossessing)
+            {
+                EndPossession();
+            }
+            return;
+        }
+
         if (!isPossessing) // 빙의 중이 아닐 때는 연산 안 함
         {
             return;
@@ -63,6 +74,11 @@ public class GhostEnemyAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
+
         if (!isPossessing)
         {
             return;
@@ -77,6 +93,11 @@ public class GhostEnemyAttack : MonoBehaviour
 
     public void StartPossession(Transform player)
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
+
         if (player == null)
         {
             return;
@@ -96,6 +117,7 @@ public class GhostEnemyAttack : MonoBehaviour
             return;
         }
 
+        FindPossessionUI();
         isPossessing = true;
         possessionTimer = possessionDuration;
 
@@ -115,7 +137,33 @@ public class GhostEnemyAttack : MonoBehaviour
 
         possessionCoroutine = StartCoroutine(PossessionRoutine());
     }
+    private void FindPossessionUI()
+    {
+        // 플레이어 오브젝트의 자식 중에서 빙의UI 캔버스 가져오기
+        if (possessionGaugeObject == null && possessedPlayer != null)
+        {
+            Transform canvasTransform = possessedPlayer.Find("PossessionGaugeCanvas");
+            if (canvasTransform != null)
+            {
+                possessionGaugeObject = canvasTransform.gameObject;
+            }
+            else
+            {
+                Debug.LogWarning($"[GhostEnemyAttack] {possessedPlayer.name}의 자식에서 'PossessionGaugeCanvas'를 찾을 수 없음");
+            }
+        }
 
+        // 슬라이더까지 연결
+        if (possessionGaugeObject != null && possessionSlider == null)
+        {
+            possessionSlider = possessionGaugeObject.GetComponentInChildren<Slider>(true);
+        }
+
+        if (possessionSlider == null)
+        {
+            Debug.LogWarning("[GhostEnemyAttack] PossessionGaugeCanvas의 자식에서 Slider(GaugeBar) 컴포넌트를 찾을 수 없습니다.");
+        }
+    }
     private IEnumerator PossessionRoutine()
     {
         float damageTimer = 0f;

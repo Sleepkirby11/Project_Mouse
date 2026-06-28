@@ -1,0 +1,629 @@
+fileFormatVersion: 2
+guid: b44993a651959d54c8da94783b83cd11
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8491617095985094413
+    second: Lich_magenta_idle_0
+  - first:
+      213: -2147255546334188485
+    second: Lich_magenta_idle_1
+  - first:
+      213: 6287955101465583754
+    second: Lich_magenta_idle_2
+  - first:
+      213: 2631194217603467415
+    second: Lich_magenta_idle_3
+  - first:
+      213: 5187596473537640660
+    second: Lich_magenta_idle_4
+  - first:
+      213: 5252746263499791449
+    second: Lich_magenta_idle_5
+  - first:
+      213: 2528983784146989414
+    second: Lich_magenta_idle_6
+  - first:
+      213: 3857022745802089591
+    second: Lich_magenta_idle_7
+  - first:
+      213: 4688914466813307324
+    second: Lich_magenta_idle_8
+  - first:
+      213: 211006297793779943
+    second: Lich_magenta_idle_9
+  - first:
+      213: -1928185426552099049
+    second: Lich_magenta_idle_10
+  - first:
+      213: 5831893048408329027
+    second: Lich_magenta_idle_11
+  - first:
+      213: -2344757361390828534
+    second: Lich_magenta_idle_12
+  - first:
+      213: -4276748140033607856
+    second: Lich_magenta_idle_13
+  - first:
+      213: -3872167793689979355
+    second: Lich_magenta_idle_14
+  - first:
+      213: -8591238597618892341
+    second: Lich_magenta_idle_15
+  - first:
+      213: 2409236249840515287
+    second: Lich_magenta_idle_16
+  - first:
+      213: -9222660403276580171
+    second: Lich_magenta_idle_17
+  - first:
+      213: -6292541383082955598
+    second: Lich_magenta_idle_18
+  - first:
+      213: 7453805995137145445
+    second: Lich_magenta_idle_19
+  - first:
+      213: -9222577122995624175
+    second: Lich_magenta_idle_20
+  - first:
+      213: -3564814461050676614
+    second: Lich_magenta_idle_21
+  - first:
+      213: 3947674678347980722
+    second: Lich_magenta_idle_22
+  - first:
+      213: 4118526965269981807
+    second: Lich_magenta_idle_23
+  - first:
+      213: -1116478771864641447
+    second: Lich_magenta_idle_24
+  - first:
+      213: -2300393175407645513
+    second: Lich_magenta_idle_25
+  - first:
+      213: 5734310404127510184
+    second: Lich_magenta_idle_26
+  - first:
+      213: 5119018258804533381
+    second: Lich_magenta_idle_27
+  - first:
+      213: 1661347009169469736
+    second: Lich_magenta_idle_28
+  - first:
+      213: -7962714301345732564
+    second: Lich_magenta_idle_29
+  - first:
+      213: 5451829992632893870
+    second: Lich_magenta_idle_30
+  - first:
+      213: -1647866675035466238
+    second: Lich_magenta_idle_31
+  - first:
+      213: -1600531339362166095
+    second: Lich_magenta_idle_32
+  - first:
+      213: 1879448894089177685
+    second: Lich_magenta_idle_33
+  - first:
+      213: 2436932865845996745
+    second: Lich_magenta_idle_34
+  - first:
+      213: -8424752140589993961
+    second: Lich_magenta_idle_35
+  - first:
+      213: 2636343738404678106
+    second: Lich_magenta_idle_36
+  - first:
+      213: 8312948450058445863
+    second: Lich_magenta_idle_37
+  - first:
+      213: -1220425577829645974
+    second: Lich_magenta_idle_38
+  - first:
+      213: 703276757108273146
+    second: Lich_magenta_idle_39
+  - first:
+      213: -3553651056623742367
+    second: Lich_magenta_idle_40
+  - first:
+      213: 4088522796111137826
+    second: Lich_magenta_idle_41
+  - first:
+      213: -1925024654294877500
+    second: Lich_magenta_idle_42
+  - first:
+      213: 84647746888100511
+    second: Lich_magenta_idle_43
+  - first:
+      213: 8609073382486010309
+    second: Lich_magenta_idle_44
+  - first:
+      213: -2795015400740530801
+    second: Lich_magenta_idle_45
+  - first:
+      213: -7006522057755506737
+    second: Lich_magenta_idle_46
+  - first:
+      213: 864321654933411950
+    second: Lich_magenta_idle_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_magenta_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f53de12c848d570800000000000000
+      internalID: 8491617095985094413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3c63ce057a6332e0800000000000000
+      internalID: -2147255546334188485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a80267a89dd434750800000000000000
+      internalID: 6287955101465583754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79801534331e38420800000000000000
+      internalID: 2631194217603467415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d8b743f18b0ef740800000000000000
+      internalID: 5187596473537640660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95c5a2b75e085e840800000000000000
+      internalID: 5252746263499791449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_6
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 661fdc04a51c81320800000000000000
+      internalID: 2528983784146989414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_7
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 774a22e70c5e68530800000000000000
+      internalID: 3857022745802089591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb9e8985dde521140800000000000000
+      internalID: 4688914466813307324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_9
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e85e512c15ade200800000000000000
+      internalID: 211006297793779943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_10
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71fe64d0295bd35e0800000000000000
+      internalID: -1928185426552099049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_11
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34bc27e24db0fe050800000000000000
+      internalID: 5831893048408329027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_12
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0441d55a9fb57fd0800000000000000
+      internalID: -2344757361390828534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_13
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 057fb7fc930f5a4c0800000000000000
+      internalID: -4276748140033607856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_14
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 526966248eb434ac0800000000000000
+      internalID: -3872167793689979355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_magenta_idle_15
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc10d48830ac5c880800000000000000
+      internalID: -8591238597618892341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 6dce60f8df6bc144c93afe1a3a504c05
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_magenta_idle_0: 8491617095985094413
+      Lich_magenta_idle_1: -2147255546334188485
+      Lich_magenta_idle_10: -1928185426552099049
+      Lich_magenta_idle_11: 5831893048408329027
+      Lich_magenta_idle_12: -2344757361390828534
+      Lich_magenta_idle_13: -4276748140033607856
+      Lich_magenta_idle_14: -3872167793689979355
+      Lich_magenta_idle_15: -8591238597618892341
+      Lich_magenta_idle_2: 6287955101465583754
+      Lich_magenta_idle_3: 2631194217603467415
+      Lich_magenta_idle_4: 5187596473537640660
+      Lich_magenta_idle_5: 5252746263499791449
+      Lich_magenta_idle_6: 2528983784146989414
+      Lich_magenta_idle_7: 3857022745802089591
+      Lich_magenta_idle_8: 4688914466813307324
+      Lich_magenta_idle_9: 211006297793779943
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

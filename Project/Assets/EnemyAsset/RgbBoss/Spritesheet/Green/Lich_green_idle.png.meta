@@ -1,0 +1,629 @@
+fileFormatVersion: 2
+guid: bfb88fb1c0c52744e94303a56490a1c3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6806827228803646712
+    second: Lich_green_idle_0
+  - first:
+      213: -3974595634989975038
+    second: Lich_green_idle_1
+  - first:
+      213: -89917052631127599
+    second: Lich_green_idle_2
+  - first:
+      213: 4552281176141471786
+    second: Lich_green_idle_3
+  - first:
+      213: -5337412183781786448
+    second: Lich_green_idle_4
+  - first:
+      213: -4250850802768409453
+    second: Lich_green_idle_5
+  - first:
+      213: -7544609014563705785
+    second: Lich_green_idle_6
+  - first:
+      213: -9169025274168610039
+    second: Lich_green_idle_7
+  - first:
+      213: -8370164108914600055
+    second: Lich_green_idle_8
+  - first:
+      213: -8133305426232501305
+    second: Lich_green_idle_9
+  - first:
+      213: 452581998706138869
+    second: Lich_green_idle_10
+  - first:
+      213: 6800036812358149866
+    second: Lich_green_idle_11
+  - first:
+      213: 2023269866013911604
+    second: Lich_green_idle_12
+  - first:
+      213: -5298302436100517899
+    second: Lich_green_idle_13
+  - first:
+      213: -6859042293222907676
+    second: Lich_green_idle_14
+  - first:
+      213: 3213297034834261902
+    second: Lich_green_idle_15
+  - first:
+      213: -6561718968462897481
+    second: Lich_green_idle_16
+  - first:
+      213: -4752705086323257111
+    second: Lich_green_idle_17
+  - first:
+      213: 80873659303414448
+    second: Lich_green_idle_18
+  - first:
+      213: -1347155826003151066
+    second: Lich_green_idle_19
+  - first:
+      213: -4788602332027264693
+    second: Lich_green_idle_20
+  - first:
+      213: -7860997095935904480
+    second: Lich_green_idle_21
+  - first:
+      213: -5514056103864284722
+    second: Lich_green_idle_22
+  - first:
+      213: 5262757006846163120
+    second: Lich_green_idle_23
+  - first:
+      213: 5326778320528676221
+    second: Lich_green_idle_24
+  - first:
+      213: 3874257845826010159
+    second: Lich_green_idle_25
+  - first:
+      213: 416479152310030570
+    second: Lich_green_idle_26
+  - first:
+      213: -3109704631349260028
+    second: Lich_green_idle_27
+  - first:
+      213: -6775866583034661901
+    second: Lich_green_idle_28
+  - first:
+      213: 3943391971669413498
+    second: Lich_green_idle_29
+  - first:
+      213: 8895710594710861116
+    second: Lich_green_idle_30
+  - first:
+      213: 5451945191348657162
+    second: Lich_green_idle_31
+  - first:
+      213: -7752053042002236192
+    second: Lich_green_idle_32
+  - first:
+      213: 4393917989344847028
+    second: Lich_green_idle_33
+  - first:
+      213: -8165656350814956709
+    second: Lich_green_idle_34
+  - first:
+      213: 5514771525274663818
+    second: Lich_green_idle_35
+  - first:
+      213: -8405126513702000468
+    second: Lich_green_idle_36
+  - first:
+      213: -2754459244347869808
+    second: Lich_green_idle_37
+  - first:
+      213: -5037072731143491024
+    second: Lich_green_idle_38
+  - first:
+      213: 8277741025693159223
+    second: Lich_green_idle_39
+  - first:
+      213: -238650572948499781
+    second: Lich_green_idle_40
+  - first:
+      213: 2795552873938846669
+    second: Lich_green_idle_41
+  - first:
+      213: -1720316547599885151
+    second: Lich_green_idle_42
+  - first:
+      213: -3524114279930807484
+    second: Lich_green_idle_43
+  - first:
+      213: 8136794402694636251
+    second: Lich_green_idle_44
+  - first:
+      213: 4716645260478784601
+    second: Lich_green_idle_45
+  - first:
+      213: 8881173335122805920
+    second: Lich_green_idle_46
+  - first:
+      213: 4465545880166458201
+    second: Lich_green_idle_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_green_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f44c4cec45b67e50800000000000000
+      internalID: 6806827228803646712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20aba9a045667d8c0800000000000000
+      internalID: -3974595634989975038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d9eba2caec80cef0800000000000000
+      internalID: -89917052631127599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a202c955c93fc2f30800000000000000
+      internalID: 4552281176141471786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bc38ddc5e3bde5b0800000000000000
+      internalID: -5337412183781786448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39c0ec387b1f105c0800000000000000
+      internalID: -4250850802768409453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_6
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74c68b5031a2c4790800000000000000
+      internalID: -7544609014563705785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_7
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 903f99cb71411c080800000000000000
+      internalID: -9169025274168610039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 987db68071437db80800000000000000
+      internalID: -8370164108914600055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_9
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb97a39ec1b02f80800000000000000
+      internalID: -8133305426232501305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_10
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fe9d901ee4e74600800000000000000
+      internalID: 452581998706138869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_11
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae6ef24e3759e5e50800000000000000
+      internalID: 6800036812358149866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_12
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43ae2803939141c10800000000000000
+      internalID: 2023269866013911604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_13
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ff44a78106a876b0800000000000000
+      internalID: -5298302436100517899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_14
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e061150069cfc0a0800000000000000
+      internalID: -6859042293222907676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_green_idle_15
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e87bc1fd0ace79c20800000000000000
+      internalID: 3213297034834261902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f8dab94d348619d49a9f2314ad22fb1d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_green_idle_0: 6806827228803646712
+      Lich_green_idle_1: -3974595634989975038
+      Lich_green_idle_10: 452581998706138869
+      Lich_green_idle_11: 6800036812358149866
+      Lich_green_idle_12: 2023269866013911604
+      Lich_green_idle_13: -5298302436100517899
+      Lich_green_idle_14: -6859042293222907676
+      Lich_green_idle_15: 3213297034834261902
+      Lich_green_idle_2: -89917052631127599
+      Lich_green_idle_3: 4552281176141471786
+      Lich_green_idle_4: -5337412183781786448
+      Lich_green_idle_5: -4250850802768409453
+      Lich_green_idle_6: -7544609014563705785
+      Lich_green_idle_7: -9169025274168610039
+      Lich_green_idle_8: -8370164108914600055
+      Lich_green_idle_9: -8133305426232501305
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -78,7 +78,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 201
   m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 0.5
   isMove: 0
+  isSkill: 0
   trailLength: 0
   lastLength: 0
   mouse: {fileID: 7354637404276066719, guid: bfca6e5d9defd654ab8a081997886f5c, type: 3}

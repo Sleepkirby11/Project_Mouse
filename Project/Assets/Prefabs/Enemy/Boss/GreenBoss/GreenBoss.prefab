@@ -339,7 +339,6 @@ MonoBehaviour:
   finalEffectPrefab: {fileID: 4819108403631408140, guid: ffa440a0637c5d54abfc6b08286523e6, type: 3}
   finalMonsterPrefab: {fileID: 3875869934082963179, guid: a1fd9e17d11c9ef41bb311a31b09180e, type: 3}
   effectOffset: 0.8
-  kpOffset: 2
   fadeOutDuration: 1
 --- !u!114 &4624539507042879024
 MonoBehaviour:
@@ -369,6 +368,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 10
   dieAnimationLength: 1
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
+  isBoss: 1
 --- !u!1 &6280919845566060893
 GameObject:
   m_ObjectHideFlags: 0

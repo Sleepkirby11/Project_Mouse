@@ -181,7 +181,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 2
-  dieAnimationLength: 0
+  dieAnimationLength: 1
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
+  isBoss: 0
 --- !u!1 &6841908936778725946
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,12 +263,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -575696589628924425, guid: 63417a331b999f04eb77577547dd935d, type: 3}
+  m_Sprite: {fileID: -5119883765333634511, guid: 1695e6bc71d01a94387860762c29b7d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 1.6666666, y: 1.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

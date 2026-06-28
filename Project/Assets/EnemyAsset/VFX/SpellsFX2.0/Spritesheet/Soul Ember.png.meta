@@ -1,0 +1,767 @@
+fileFormatVersion: 2
+guid: be13ec0653adb90459b11ecab5ba6453
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1497538865065058956
+    second: Soul Ember_0
+  - first:
+      213: -6616517866174171664
+    second: Soul Ember_1
+  - first:
+      213: -8690534583876349277
+    second: Soul Ember_2
+  - first:
+      213: -8881432766569676393
+    second: Soul Ember_3
+  - first:
+      213: -4096286622482431970
+    second: Soul Ember_4
+  - first:
+      213: 1590954541463296013
+    second: Soul Ember_5
+  - first:
+      213: -6483600036656827570
+    second: Soul Ember_6
+  - first:
+      213: 6382514855262263505
+    second: Soul Ember_7
+  - first:
+      213: 4911630209198902269
+    second: Soul Ember_8
+  - first:
+      213: -494818493509494001
+    second: Soul Ember_9
+  - first:
+      213: 6707430532625666187
+    second: Soul Ember_10
+  - first:
+      213: 6374991434970200853
+    second: Soul Ember_11
+  - first:
+      213: -4083198518702888250
+    second: Soul Ember_12
+  - first:
+      213: 1277597382070267413
+    second: Soul Ember_13
+  - first:
+      213: 3093609342250809458
+    second: Soul Ember_14
+  - first:
+      213: -9105765480843177624
+    second: Soul Ember_15
+  - first:
+      213: 3771679309386094901
+    second: Soul Ember_16
+  - first:
+      213: -3720509946328760467
+    second: Soul Ember_17
+  - first:
+      213: 3700042719309536056
+    second: Soul Ember_18
+  - first:
+      213: -3268023446514179183
+    second: Soul Ember_19
+  - first:
+      213: 1184325594154643206
+    second: Soul Ember_20
+  - first:
+      213: 2159002247765248523
+    second: Soul Ember_21
+  - first:
+      213: 8316378005717582034
+    second: Soul Ember_22
+  - first:
+      213: -6455749667201531673
+    second: Soul Ember_23
+  - first:
+      213: -1119428988674813902
+    second: Soul Ember_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Soul Ember_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 137
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c826b89d9a358c410800000000000000
+      internalID: 1497538865065058956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 134
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f5b9a87e086d24a0800000000000000
+      internalID: -6616517866174171664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 134
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a29dc327d4056780800000000000000
+      internalID: -8690534583876349277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 135
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 791891464ffceb480800000000000000
+      internalID: -8881432766569676393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_4
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 69
+        width: 27
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1000c815011727c0800000000000000
+      internalID: -4096286622482431970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_5
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 71
+        width: 29
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d08d6b9e9b4341610800000000000000
+      internalID: 1590954541463296013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_6
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 68
+        width: 31
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e433c554e10a506a0800000000000000
+      internalID: -6483600036656827570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_7
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 70
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d89f81e17f339850800000000000000
+      internalID: 6382514855262263505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_8
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 115
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfbc06ff6ad992440800000000000000
+      internalID: 4911630209198902269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_9
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 31
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0b921aa33d0229f0800000000000000
+      internalID: -494818493509494001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_10
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 52
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8013cc2884951d50800000000000000
+      internalID: 6707430532625666187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_11
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 45
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51b7e871fe4887850800000000000000
+      internalID: 6374991434970200853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_12
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 49
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ca2059b4909557c0800000000000000
+      internalID: -4083198518702888250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_13
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 48
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51e644ccc00fab110800000000000000
+      internalID: 1277597382070267413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_14
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 52
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27870be5e45beea20800000000000000
+      internalID: 3093609342250809458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_15
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 34
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86114522a82d1a180800000000000000
+      internalID: -9105765480843177624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_16
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 37
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53916a24952b75430800000000000000
+      internalID: 3771679309386094901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_17
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 37
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6f34c97ae71e5cc0800000000000000
+      internalID: -3720509946328760467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_18
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 36
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83b1732ef31395330800000000000000
+      internalID: 3700042719309536056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_19
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 39
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 193efd87df5a5a2d0800000000000000
+      internalID: -3268023446514179183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_20
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 13
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60fadf16ad19f6010800000000000000
+      internalID: 1184325594154643206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_21
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 15
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0a415ffa1156fd10800000000000000
+      internalID: 2159002247765248523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_22
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 26
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d00ba0fbb5b96370800000000000000
+      internalID: 8316378005717582034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_23
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 23
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e04b97b1e19866a0800000000000000
+      internalID: -6455749667201531673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul Ember_24
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 20
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23053ca044df670f0800000000000000
+      internalID: -1119428988674813902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Soul Ember_0: 1497538865065058956
+      Soul Ember_1: -6616517866174171664
+      Soul Ember_10: 6707430532625666187
+      Soul Ember_11: 6374991434970200853
+      Soul Ember_12: -4083198518702888250
+      Soul Ember_13: 1277597382070267413
+      Soul Ember_14: 3093609342250809458
+      Soul Ember_15: -9105765480843177624
+      Soul Ember_16: 3771679309386094901
+      Soul Ember_17: -3720509946328760467
+      Soul Ember_18: 3700042719309536056
+      Soul Ember_19: -3268023446514179183
+      Soul Ember_2: -8690534583876349277
+      Soul Ember_20: 1184325594154643206
+      Soul Ember_21: 2159002247765248523
+      Soul Ember_22: 8316378005717582034
+      Soul Ember_23: -6455749667201531673
+      Soul Ember_24: -1119428988674813902
+      Soul Ember_3: -8881432766569676393
+      Soul Ember_4: -4096286622482431970
+      Soul Ember_5: 1590954541463296013
+      Soul Ember_6: -6483600036656827570
+      Soul Ember_7: 6382514855262263505
+      Soul Ember_8: 4911630209198902269
+      Soul Ember_9: -494818493509494001
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

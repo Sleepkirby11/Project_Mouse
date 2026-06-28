@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     public static Player instance;
     [HideInInspector] public PlayerStatus status;
  
-    public GameObject eventSystem;
     public GameObject cam;
 
     [Header("공격")]
@@ -46,6 +45,7 @@ public class Player : MonoBehaviour
     SpriteRenderer sprite;
     LineRenderer dashLine;
     [HideInInspector] public ParticleSystem particle;
+    private PlayerInput playerInput;
 
     //이동값 변수
     [HideInInspector] public float speed;
@@ -86,8 +86,6 @@ public class Player : MonoBehaviour
                 DontDestroyOnLoad(attackCursor);
             if(cam != null)
                 DontDestroyOnLoad(cam);
-            if(eventSystem != null)
-                DontDestroyOnLoad(eventSystem);
         }
         else
         {
@@ -95,7 +93,6 @@ public class Player : MonoBehaviour
             if (groundLine != null) Destroy(groundLine);
             if (attackCursor != null) Destroy(attackCursor);
             if (cam != null) Destroy(cam);
-            if (eventSystem != null) Destroy(eventSystem);
 
             Destroy(gameObject);
             return;
@@ -108,6 +105,7 @@ public class Player : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
         dashLine = GetComponentInChildren<LineRenderer>();
         particle = GetComponentInChildren<ParticleSystem>();
+        playerInput = GetComponent<PlayerInput>();
 
         attackCursor.GetComponent<AttackCursor>().target = transform;
         cursor = cursorObject.GetComponent<Cursor>();
@@ -134,7 +132,7 @@ public class Player : MonoBehaviour
         {
             Move();
         }
-        else if (!status.CanMove && !status.IsPossessed && !status.IsKnockbacked)
+        else if (!status.CanMove && !status.IsPossessed && !status.IsKnockbacked && !status.IsBound)
         {
             rigid.linearVelocityX = 0;
         }
@@ -183,10 +181,8 @@ public class Player : MonoBehaviour
     //착지 판정 검사
     void GroundCheck()
     {
-        if (!status.CanMove) //추가함
-        {
-            return;
-        }
+        if (status.IsBound) return;
+        if (!status.CanMove) return;
         //낙하중 + BoxCast로 착지 판정 검사
 
         if (rigid.linearVelocityY <= 0)
@@ -308,7 +304,10 @@ public class Player : MonoBehaviour
         if (isGroundCursor)
             isGroundCursor = false;
         if(isSkill)
+        {
             SkillBool(false);
+            StatusImage.instance.ChangeImage((int)status.currentStance, isSkill);
+        }
     }
 
     //공격 | 스킬의 대미지 계산 함수
@@ -353,13 +352,15 @@ public class Player : MonoBehaviour
         cursor.damage = (int)nowDamage;
     }
 
-    //외부 참조가 가능하게 한 선 그리기 캔슬
+    //외부 참조가 가능하게 한 선 그리기 및 행동 캔슬
     public void CancleCursor()
     {
         if (cursor.isMove == true)
             ActiveAttack(cursor);
         if (groundCursor.isMove == true)
             ActiveAttack(groundCursor);
+        dashLine.enabled = false;
+        isDashReady = false;
     }
 
     //Ink UI를 업데이트하는 함수
@@ -376,21 +377,33 @@ public class Player : MonoBehaviour
     //이동 함수
     void Move()
     {
-        if (status.IsKnockbacked) //추가함
-        {
-            return;
-        }
+        if (status.IsKnockbacked) return;
+        if (status.IsBound) return;
+
         rigid.linearVelocityX = inputVec.x;
     }
 
     //넉백 상태 종료 후 처리 함수
     public void OnKnockbackEnd()
     {
-        // 현재 키가 눌려있으면 그 값 그대로 복원, 안눌려있으면 0
-        inputVec.x = Keyboard.current != null
-            ? (Keyboard.current.dKey.isPressed ? speed : 0)
-            + (Keyboard.current.aKey.isPressed ? -speed : 0)
-            : 0;
+        // 인풋 시스템에서 현재 이동 입력 값을 직접 읽어옴 (WASD, 방향키, 패드 등 모두 지원)
+        if (playerInput != null)
+        {
+            var moveAction = playerInput.actions["Move"];
+            if (moveAction != null)
+            {
+                Vector2 moveVal = moveAction.ReadValue<Vector2>();
+                inputVec.x = moveVal.x * speed;
+            }
+        }
+        else
+        {
+            // 현재 키가 눌려있으면 그 값 그대로 복원, 안눌려있으면 0 (폴백)
+            inputVec.x = Keyboard.current != null
+                ? (Keyboard.current.dKey.isPressed ? speed : 0)
+                + (Keyboard.current.aKey.isPressed ? -speed : 0)
+                : 0;
+        }
         if (inputVec.x > 0)
         {
             sprite.flipX = false;
@@ -400,6 +413,7 @@ public class Player : MonoBehaviour
             sprite.flipX = true;
         }
     }
+
 
     //점프 후 착지 판정 보완
     private void OnCollisionEnter2D(Collision2D collision)
@@ -432,6 +446,8 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    //레버 상호작용 감지
    void OnTriggerEnter2D(Collider2D collision)
 {
     if (collision.transform.parent != null)

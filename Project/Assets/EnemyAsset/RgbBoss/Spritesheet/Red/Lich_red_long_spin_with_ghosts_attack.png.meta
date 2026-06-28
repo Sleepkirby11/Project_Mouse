@@ -1,0 +1,1129 @@
+fileFormatVersion: 2
+guid: 5b9ccacad9452ed4690b0dce052f7aee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 882825107027735234
+    second: Lich_red_long_spin_with_ghosts_attack_0
+  - first:
+      213: -6343991979332780645
+    second: Lich_red_long_spin_with_ghosts_attack_1
+  - first:
+      213: 3115686677323870639
+    second: Lich_red_long_spin_with_ghosts_attack_2
+  - first:
+      213: -7356656259601545740
+    second: Lich_red_long_spin_with_ghosts_attack_3
+  - first:
+      213: -608063298469199695
+    second: Lich_red_long_spin_with_ghosts_attack_4
+  - first:
+      213: 6908630204453130886
+    second: Lich_red_long_spin_with_ghosts_attack_5
+  - first:
+      213: 1023696869841058412
+    second: Lich_red_long_spin_with_ghosts_attack_6
+  - first:
+      213: 930472742360039556
+    second: Lich_red_long_spin_with_ghosts_attack_7
+  - first:
+      213: 7959288657337751932
+    second: Lich_red_long_spin_with_ghosts_attack_8
+  - first:
+      213: -5743105429659487930
+    second: Lich_red_long_spin_with_ghosts_attack_9
+  - first:
+      213: -7586540810877822246
+    second: Lich_red_long_spin_with_ghosts_attack_10
+  - first:
+      213: 5829381490785705553
+    second: Lich_red_long_spin_with_ghosts_attack_11
+  - first:
+      213: -1651418595695936480
+    second: Lich_red_long_spin_with_ghosts_attack_12
+  - first:
+      213: 3928468458564502442
+    second: Lich_red_long_spin_with_ghosts_attack_13
+  - first:
+      213: 1599874652265169752
+    second: Lich_red_long_spin_with_ghosts_attack_14
+  - first:
+      213: 1090917445156858898
+    second: Lich_red_long_spin_with_ghosts_attack_15
+  - first:
+      213: -3042285582309347746
+    second: Lich_red_long_spin_with_ghosts_attack_16
+  - first:
+      213: 4694094511136770236
+    second: Lich_red_long_spin_with_ghosts_attack_17
+  - first:
+      213: -5065765807148588509
+    second: Lich_red_long_spin_with_ghosts_attack_18
+  - first:
+      213: -2633211007999880555
+    second: Lich_red_long_spin_with_ghosts_attack_19
+  - first:
+      213: -1703502459149524132
+    second: Lich_red_long_spin_with_ghosts_attack_20
+  - first:
+      213: -7672997858258757725
+    second: Lich_red_long_spin_with_ghosts_attack_21
+  - first:
+      213: 3720399660577234219
+    second: Lich_red_long_spin_with_ghosts_attack_22
+  - first:
+      213: 1669082967438233192
+    second: Lich_red_long_spin_with_ghosts_attack_23
+  - first:
+      213: -6306322399683023432
+    second: Lich_red_long_spin_with_ghosts_attack_24
+  - first:
+      213: -3074780955942216516
+    second: Lich_red_long_spin_with_ghosts_attack_25
+  - first:
+      213: 7132682121688781190
+    second: Lich_red_long_spin_with_ghosts_attack_26
+  - first:
+      213: 1438408383010235389
+    second: Lich_red_long_spin_with_ghosts_attack_27
+  - first:
+      213: -8274857489441242410
+    second: Lich_red_long_spin_with_ghosts_attack_28
+  - first:
+      213: -1144777484325447357
+    second: Lich_red_long_spin_with_ghosts_attack_29
+  - first:
+      213: -9099205634972592822
+    second: Lich_red_long_spin_with_ghosts_attack_30
+  - first:
+      213: -8135838066418828409
+    second: Lich_red_long_spin_with_ghosts_attack_31
+  - first:
+      213: -7304352597551059211
+    second: Lich_red_long_spin_with_ghosts_attack_32
+  - first:
+      213: -3779487081674665418
+    second: Lich_red_long_spin_with_ghosts_attack_33
+  - first:
+      213: -3719928789180091115
+    second: Lich_red_long_spin_with_ghosts_attack_34
+  - first:
+      213: 7727273378019278665
+    second: Lich_red_long_spin_with_ghosts_attack_35
+  - first:
+      213: -796542226032928288
+    second: Lich_red_long_spin_with_ghosts_attack_36
+  - first:
+      213: -5539873226507904896
+    second: Lich_red_long_spin_with_ghosts_attack_37
+  - first:
+      213: -4338877885904386238
+    second: Lich_red_long_spin_with_ghosts_attack_38
+  - first:
+      213: -4122978887367018652
+    second: Lich_red_long_spin_with_ghosts_attack_39
+  - first:
+      213: -6026976786316966567
+    second: Lich_red_long_spin_with_ghosts_attack_40
+  - first:
+      213: -9090038465250663303
+    second: Lich_red_long_spin_with_ghosts_attack_41
+  - first:
+      213: -6828669428941532698
+    second: Lich_red_long_spin_with_ghosts_attack_42
+  - first:
+      213: 8692299490700759389
+    second: Lich_red_long_spin_with_ghosts_attack_43
+  - first:
+      213: -8582511899922024273
+    second: Lich_red_long_spin_with_ghosts_attack_44
+  - first:
+      213: -9128303700478465294
+    second: Lich_red_long_spin_with_ghosts_attack_45
+  - first:
+      213: -914817437187877956
+    second: Lich_red_long_spin_with_ghosts_attack_46
+  - first:
+      213: -1819646077923339245
+    second: Lich_red_long_spin_with_ghosts_attack_47
+  - first:
+      213: -5397503564805124217
+    second: Lich_red_long_spin_with_ghosts_attack_48
+  - first:
+      213: 4572090877196183075
+    second: Lich_red_long_spin_with_ghosts_attack_49
+  - first:
+      213: -446600639442413536
+    second: Lich_red_long_spin_with_ghosts_attack_50
+  - first:
+      213: 1618422226937617272
+    second: Lich_red_long_spin_with_ghosts_attack_51
+  - first:
+      213: 7249845191068394271
+    second: Lich_red_long_spin_with_ghosts_attack_52
+  - first:
+      213: 7216061206057524860
+    second: Lich_red_long_spin_with_ghosts_attack_53
+  - first:
+      213: -3077737527669698947
+    second: Lich_red_long_spin_with_ghosts_attack_54
+  - first:
+      213: -1024509126764158115
+    second: Lich_red_long_spin_with_ghosts_attack_55
+  - first:
+      213: 6068434276853802146
+    second: Lich_red_long_spin_with_ghosts_attack_56
+  - first:
+      213: 3566998211899930155
+    second: Lich_red_long_spin_with_ghosts_attack_57
+  - first:
+      213: -414116912326501149
+    second: Lich_red_long_spin_with_ghosts_attack_58
+  - first:
+      213: 1478627514312344879
+    second: Lich_red_long_spin_with_ghosts_attack_59
+  - first:
+      213: -2148062965495256126
+    second: Lich_red_long_spin_with_ghosts_attack_60
+  - first:
+      213: 6910742946502913548
+    second: Lich_red_long_spin_with_ghosts_attack_61
+  - first:
+      213: 2678966713488435021
+    second: Lich_red_long_spin_with_ghosts_attack_62
+  - first:
+      213: -8887968382173559289
+    second: Lich_red_long_spin_with_ghosts_attack_63
+  - first:
+      213: 7949705075331675123
+    second: Lich_red_long_spin_with_ghosts_attack_64
+  - first:
+      213: 2939350987385724726
+    second: Lich_red_long_spin_with_ghosts_attack_65
+  - first:
+      213: -2524996090214390641
+    second: Lich_red_long_spin_with_ghosts_attack_66
+  - first:
+      213: 5283579620895242181
+    second: Lich_red_long_spin_with_ghosts_attack_67
+  - first:
+      213: 4083170941737395585
+    second: Lich_red_long_spin_with_ghosts_attack_68
+  - first:
+      213: 7947670114918283120
+    second: Lich_red_long_spin_with_ghosts_attack_69
+  - first:
+      213: -929114479520987752
+    second: Lich_red_long_spin_with_ghosts_attack_70
+  - first:
+      213: -4233272214034940907
+    second: Lich_red_long_spin_with_ghosts_attack_71
+  - first:
+      213: 7695026799868060555
+    second: Lich_red_long_spin_with_ghosts_attack_72
+  - first:
+      213: -7634877895285222901
+    second: Lich_red_long_spin_with_ghosts_attack_73
+  - first:
+      213: 4214023702797645472
+    second: Lich_red_long_spin_with_ghosts_attack_74
+  - first:
+      213: -3440786483217902549
+    second: Lich_red_long_spin_with_ghosts_attack_75
+  - first:
+      213: -8476735800923043668
+    second: Lich_red_long_spin_with_ghosts_attack_76
+  - first:
+      213: -2147503183470859658
+    second: Lich_red_long_spin_with_ghosts_attack_77
+  - first:
+      213: -5452115433044131054
+    second: Lich_red_long_spin_with_ghosts_attack_78
+  - first:
+      213: 3663702453169360594
+    second: Lich_red_long_spin_with_ghosts_attack_79
+  - first:
+      213: -2996716610426858436
+    second: Lich_red_long_spin_with_ghosts_attack_80
+  - first:
+      213: -8274024113971982496
+    second: Lich_red_long_spin_with_ghosts_attack_81
+  - first:
+      213: 2455130517125249897
+    second: Lich_red_long_spin_with_ghosts_attack_82
+  - first:
+      213: -4667106647093641132
+    second: Lich_red_long_spin_with_ghosts_attack_83
+  - first:
+      213: 6777218480680509719
+    second: Lich_red_long_spin_with_ghosts_attack_84
+  - first:
+      213: 6781879121491042738
+    second: Lich_red_long_spin_with_ghosts_attack_85
+  - first:
+      213: -1906559445427156149
+    second: Lich_red_long_spin_with_ghosts_attack_86
+  - first:
+      213: -2442055941616081120
+    second: Lich_red_long_spin_with_ghosts_attack_87
+  - first:
+      213: 1373607084790547953
+    second: Lich_red_long_spin_with_ghosts_attack_88
+  - first:
+      213: 582094562896125545
+    second: Lich_red_long_spin_with_ghosts_attack_89
+  - first:
+      213: -2284339753346913196
+    second: Lich_red_long_spin_with_ghosts_attack_90
+  - first:
+      213: 2440499915392460051
+    second: Lich_red_long_spin_with_ghosts_attack_91
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c23f27e1cc604c00800000000000000
+      internalID: 882825107027735234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9d31fd18ec95f7a0800000000000000
+      internalID: -6343991979332780645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa17e4186842d3b20800000000000000
+      internalID: 3115686677323870639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_3
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f5cbcfeb18e7e990800000000000000
+      internalID: -7356656259601545740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b08ac5d6a9bf87f0800000000000000
+      internalID: -608063298469199695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_5
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68296f4419260ef50800000000000000
+      internalID: 6908630204453130886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_6
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6a3e8c11e6e43e00800000000000000
+      internalID: 1023696869841058412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_7
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 384
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 480cd818704b9ec00800000000000000
+      internalID: 930472742360039556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c79996d1dd2157e60800000000000000
+      internalID: 7959288657337751932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_9
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 641778d3a046c40b0800000000000000
+      internalID: -5743105429659487930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_10
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ada9f95e35137b690800000000000000
+      internalID: -7586540810877822246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_11
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15ed48a949f16e050800000000000000
+      internalID: 5829381490785705553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_12
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02cb11c698bf419e0800000000000000
+      internalID: -1651418595695936480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_13
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa34018cf39b48630800000000000000
+      internalID: 3928468458564502442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_14
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 853ca6d0585e33610800000000000000
+      internalID: 1599874652265169752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_15
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 256
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21ce9dde2a7b32f00800000000000000
+      internalID: 1090917445156858898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5ea821b161a7c5d0800000000000000
+      internalID: -3042285582309347746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_17
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb80b666616c42140800000000000000
+      internalID: 4694094511136770236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_18
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 322a69586d8c2b9b0800000000000000
+      internalID: -5065765807148588509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_19
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 592d4812a84f47bd0800000000000000
+      internalID: -2633211007999880555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_20
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c536368f981fb58e0800000000000000
+      internalID: -1703502459149524132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_21
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a75728e919048590800000000000000
+      internalID: -7672997858258757725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_22
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2d903f97c381a330800000000000000
+      internalID: 3720399660577234219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_23
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 128
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86e8fce9d16c92710800000000000000
+      internalID: 1669082967438233192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bdedc790317b78a0800000000000000
+      internalID: -6306322399683023432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_25
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbc9deee20f2455d0800000000000000
+      internalID: -3074780955942216516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_26
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6811a0f59906cf260800000000000000
+      internalID: 7132682121688781190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_27
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df3e447adc046f310800000000000000
+      internalID: 1438408383010235389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_28
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d2cfd694fcc92d80800000000000000
+      internalID: -8274857489441242410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_29
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3499aeb71feec10f0800000000000000
+      internalID: -1144777484325447357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_30
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a45d9354fa029b180800000000000000
+      internalID: -9099205634972592822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lich_red_long_spin_with_ghosts_attack_31
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 176
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78b31055262b71f80800000000000000
+      internalID: -8135838066418828409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7bc4ed9788ba2fb4e8a169b7aed33598
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lich_red_long_spin_with_ghosts_attack_0: 882825107027735234
+      Lich_red_long_spin_with_ghosts_attack_1: -6343991979332780645
+      Lich_red_long_spin_with_ghosts_attack_10: -7586540810877822246
+      Lich_red_long_spin_with_ghosts_attack_11: 5829381490785705553
+      Lich_red_long_spin_with_ghosts_attack_12: -1651418595695936480
+      Lich_red_long_spin_with_ghosts_attack_13: 3928468458564502442
+      Lich_red_long_spin_with_ghosts_attack_14: 1599874652265169752
+      Lich_red_long_spin_with_ghosts_attack_15: 1090917445156858898
+      Lich_red_long_spin_with_ghosts_attack_16: -3042285582309347746
+      Lich_red_long_spin_with_ghosts_attack_17: 4694094511136770236
+      Lich_red_long_spin_with_ghosts_attack_18: -5065765807148588509
+      Lich_red_long_spin_with_ghosts_attack_19: -2633211007999880555
+      Lich_red_long_spin_with_ghosts_attack_2: 3115686677323870639
+      Lich_red_long_spin_with_ghosts_attack_20: -1703502459149524132
+      Lich_red_long_spin_with_ghosts_attack_21: -7672997858258757725
+      Lich_red_long_spin_with_ghosts_attack_22: 3720399660577234219
+      Lich_red_long_spin_with_ghosts_attack_23: 1669082967438233192
+      Lich_red_long_spin_with_ghosts_attack_24: -6306322399683023432
+      Lich_red_long_spin_with_ghosts_attack_25: -3074780955942216516
+      Lich_red_long_spin_with_ghosts_attack_26: 7132682121688781190
+      Lich_red_long_spin_with_ghosts_attack_27: 1438408383010235389
+      Lich_red_long_spin_with_ghosts_attack_28: -8274857489441242410
+      Lich_red_long_spin_with_ghosts_attack_29: -1144777484325447357
+      Lich_red_long_spin_with_ghosts_attack_3: -7356656259601545740
+      Lich_red_long_spin_with_ghosts_attack_30: -9099205634972592822
+      Lich_red_long_spin_with_ghosts_attack_31: -8135838066418828409
+      Lich_red_long_spin_with_ghosts_attack_4: -608063298469199695
+      Lich_red_long_spin_with_ghosts_attack_5: 6908630204453130886
+      Lich_red_long_spin_with_ghosts_attack_6: 1023696869841058412
+      Lich_red_long_spin_with_ghosts_attack_7: 930472742360039556
+      Lich_red_long_spin_with_ghosts_attack_8: 7959288657337751932
+      Lich_red_long_spin_with_ghosts_attack_9: -5743105429659487930
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

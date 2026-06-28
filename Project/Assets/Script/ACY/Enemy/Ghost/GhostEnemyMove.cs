@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 /*
  * 유령 이동 스크립트
@@ -85,6 +85,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
 
     private bool hasDetectedPlayer = false;
     private bool isDead = false;
+    private EnemyStatus enemyStatus;
 
     #endregion
 
@@ -96,7 +97,8 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         ghostEnemyAttack = GetComponent<GhostEnemyAttack>();
         ghostCollider = GetComponent<Collider2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Start()
@@ -122,18 +124,35 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             return;
         }
 
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            return;
+        }
+
         if (!hasDetectedPlayer)
         {
             CheckPlayerDetection();
         }
         HandleFacingDirection();
-        UpdateMovementAnimation();
     }
 
     private void FixedUpdate()
     {
         if (isDead)
         {
+            return;
+        }
+
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
             return;
         }
 
@@ -435,23 +454,6 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         hasDetectedPlayer = true;
 
         StartSlowChase();
-    }
-
-    private void UpdateMovementAnimation()
-    {
-        if (animator == null || rb == null)
-        {
-            return;
-        }
-
-        if (currentState == GhostState.Possessing)
-        {
-            animator.SetBool("IsMoving", false);
-            return;
-        }
-
-        bool isMoving = rb.linearVelocity.magnitude > 0.1f;
-        animator.SetBool("IsMoving", isMoving);
     }
 
     private void HandleFacingDirection()

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 /*
@@ -44,6 +44,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     private Rigidbody2D rb;
     private JumpEnemyMove moveScript;
     private SpriteRenderer spriteRenderer;
+    private EnemyStatus enemyStatus;
 
     private bool isAttackingOrReady = false;
     private bool hasDirectHit = false;
@@ -70,10 +71,20 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 
         // 자식 객체(스프라이트)에서 컴포넌트들을 찾음
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (isAttackingOrReady)
+            {
+                CancelJumpAttackByHit();
+            }
+            return;
+        }
+
         // 이미 공격 중이거나, 아직 플레이어를 발견하지 못했다면 리턴
         if (isAttackingOrReady || moveScript == null || !moveScript.FoundPlayer)
         {

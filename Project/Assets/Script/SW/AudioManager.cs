@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
@@ -29,8 +29,10 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
 
-        Init();
-    }
+		Init();
+
+		PlayBGM(true);
+	}
 
 
     void Init()

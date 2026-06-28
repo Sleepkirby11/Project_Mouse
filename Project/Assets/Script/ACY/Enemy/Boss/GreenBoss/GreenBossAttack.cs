@@ -137,6 +137,19 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private void OnDisable()
     {
         StopAllBossCoroutines();
+
+        try
+        {
+            FlowerTrap[] activeTraps = FindObjectsByType<FlowerTrap>(FindObjectsSortMode.None);
+            foreach (FlowerTrap trap in activeTraps)
+            {
+                if (trap != null)
+                {
+                    trap.ForceClear();
+                }
+            }
+        }
+        catch {}
     }
 
     private void OnDestroy()
@@ -480,7 +493,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void SpawnOneFlower(float x)
     {
-        Vector2 rayOrigin = new Vector2(x, 10f);
+        Vector2 rayOrigin = new Vector2(x, 90f);
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 30f, groundLayer);
 
         if (hit.collider == null)

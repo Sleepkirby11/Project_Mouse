@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OVR_Boss_Blue
+  m_Controller: {fileID: 9100000, guid: 9adc5c475ffd3384c9597b2090ff27ae, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 5caeed06bf1e50d4d8f2e7f459951b7f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e5bbe3b6a3286ac4fbe2f1ce77eabc69, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 41af935226262ad408fc16b67b1cb21f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 055fe58e3f2770b47808025b8175c80d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6eeddc54e8b33694c9f13e78ac5a001c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a0cceb1343c9d624eacdfeb3085bbbc1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e7c5aafdff904c0488c6499c1a672fc2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0b7dc8d3351fd954fa96103ae9fc5342, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0cff6231e75fb04449dbfbdc3ec6ba75, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7180f57d2cc9dbd4dadb2c72cee778b9, type: 2}

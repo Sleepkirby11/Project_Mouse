@@ -2,9 +2,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyStatus : MonoBehaviour, IDamageable
+public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 {
     #region Settings & Variables
+    public enum EnemyElement { Red, Green, Blue, None }
 
     [Header("적 체력 설정")]
     [SerializeField] private int maxHP = 10; // 기본 체력, 적마다 인스펙터창에서 설정
@@ -14,7 +15,22 @@ public class EnemyStatus : MonoBehaviour, IDamageable
     [SerializeField] private float dieAnimationLength = 1f; // 사망 애니메이션 길이에 맞춰 설정 
     private Animator anim;
 
-    public event Action OnEnemyDeath; // 사망 시 보고 받을 리스너 (예: GreenBoss 등)
+    [Header("상태 이상")]
+    public bool isStunned { get; private set; }
+
+    [Header("속성 설정")]
+    [SerializeField] private EnemyElement element = EnemyElement.None;
+    [SerializeField] private float weaknessMultiplier = 1.5f; // 약점 배율
+    [SerializeField] private float resistMultiplier = 0.5f; // 감소 배율
+
+    public event Action OnEnemyDeath; // 사망 시 보고 받을 리스너
+
+    [Header("보스 설정")]
+    [SerializeField] private bool isBoss = false; // 보스인지 판별
+
+    private GameObject cachedPortalVisual;
+    private PlayerStatus cachedPlayer;
+    public EnemyElement CurrentElement => element;
 
     #endregion
 
@@ -23,9 +39,21 @@ public class EnemyStatus : MonoBehaviour, IDamageable
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        cachedPlayer = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
         currentHP = maxHP;
     }
-
+    private void Start()
+    {
+        if (isBoss)
+        {
+            CachePortal();
+        }
+    }
+    public void SetElement(EnemyElement newElement)
+    {
+        element = newElement;
+        Debug.Log($"{gameObject.name} 속성 변경 : {element}");
+    }
     #endregion
 
     #region HP Getters & Utility
@@ -79,6 +107,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable
                 return;
             }
         }
+            damage = ApplyElementalDamage(damage);
         CameraShake.instance.Impulse();
         if (anim != null)
         {
@@ -105,7 +134,34 @@ public class EnemyStatus : MonoBehaviour, IDamageable
             Die();
         }
     }
+    private int ApplyElementalDamage(int damage)
+    {
+        if (cachedPlayer == null) return damage;
+        PlayerStatus.Stance stance = cachedPlayer.currentStance;
 
+        bool isWeakness =
+            (element == EnemyElement.Green && stance == PlayerStatus.Stance.Red) ||
+            (element == EnemyElement.Blue && stance == PlayerStatus.Stance.Green) ||
+            (element == EnemyElement.Red && stance == PlayerStatus.Stance.Blue);
+
+        bool isResist =
+         (element == EnemyElement.Red && stance == PlayerStatus.Stance.Green) ||
+         (element == EnemyElement.Green && stance == PlayerStatus.Stance.Blue) ||
+         (element == EnemyElement.Blue && stance == PlayerStatus.Stance.Red);
+
+        if (isWeakness)
+        {
+            Debug.Log($"[EnemyStatus] 약점! {damage} → {Mathf.RoundToInt(damage * weaknessMultiplier)}");
+            return Mathf.RoundToInt(damage * weaknessMultiplier);
+        }
+        if (isResist)
+        {
+            Debug.Log($"[EnemyStatus] 저항! {damage} → {Mathf.RoundToInt(damage * resistMultiplier)}");
+            return Mathf.RoundToInt(damage * resistMultiplier);
+        }
+
+        return damage;
+    }
     public void Heal(int amount)
     {
         if (currentHP <= 0)
@@ -113,7 +169,29 @@ public class EnemyStatus : MonoBehaviour, IDamageable
             return; // 이미 죽은 적은 회복 불가
         }
         currentHP = Mathf.Min(currentHP + amount, maxHP);
-        Debug.Log($"{gameObject.name} 회복. 현재 HP : {currentHP}/{maxHP}");
+    }
+
+    #endregion
+
+    #region Stun Logic
+
+    public void ApplyStun(float duration)
+    {
+        if (isBoss || currentHP <= 0 || isStunned)
+        {
+            return;
+        }
+
+        StartCoroutine(StunRoutine(duration));
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        isStunned = true;
+
+        yield return new WaitForSeconds(duration);
+
+        isStunned = false;
     }
 
     #endregion
@@ -130,6 +208,11 @@ public class EnemyStatus : MonoBehaviour, IDamageable
 
         OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
 
+        if (isBoss && cachedPortalVisual != null) // 포탈 활성화
+        {
+            cachedPortalVisual.SetActive(true);
+        }
+
         if (anim != null)
         {
             if (HasParameter("Death"))
@@ -142,18 +225,37 @@ public class EnemyStatus : MonoBehaviour, IDamageable
             }
         }
 
-        if (TryGetComponent(out Collider2D col)) // 사망 시 충돌 검출 차단
+        if (!isBoss)
         {
-            col.enabled = false;
-        }
+            if (TryGetComponent(out Collider2D col))
+            {
+                col.enabled = false;
+            }
 
-        if (TryGetComponent(out Rigidbody2D rb)) // 사망 시 관성 멈춤 및 미끄러짐 방지
-        {
-            rb.linearVelocity = Vector2.zero;
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            if (TryGetComponent(out Rigidbody2D rb))
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.bodyType = RigidbodyType2D.Kinematic;
+            }
         }
 
         Destroy(gameObject, dieAnimationLength); // 애니메이션 대기 후 파괴
+    }
+    private void CachePortal()
+    {
+        GameObject portalParent = GameObject.FindWithTag("Portal");
+
+        if (portalParent != null)
+        {
+            if (portalParent.transform.childCount > 0)
+            {
+                cachedPortalVisual = portalParent.transform.GetChild(0).gameObject;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Portal 태그 없음");
+        }
     }
 
     #endregion

@@ -1,0 +1,114 @@
+﻿using UnityEngine;
+
+public class RgbColorCycle : MonoBehaviour
+{
+    #region Inspector Fields
+    [Header("Animator Overrides")]
+    [SerializeField] private RuntimeAnimatorController baseController; // Red
+    [SerializeField] private AnimatorOverrideController greenOverride;
+    [SerializeField] private AnimatorOverrideController blueOverride;
+    [SerializeField] private AnimatorOverrideController magentaOverride;
+    #endregion
+
+    #region Private Fields
+    private bool isFinalPhase = false;
+    private EnemyStatus enemyStatus;
+    private Animator animator;
+
+    private static readonly int CastingTrigger = Animator.StringToHash("Casting");
+    #endregion
+
+    #region Unity Lifecycle
+    private void Awake()
+    {
+        enemyStatus = GetComponent<EnemyStatus>();
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Start()
+    {
+        EnemyStatus.EnemyElement first = (EnemyStatus.EnemyElement)Random.Range(0, 3);
+        enemyStatus.SetElement(first);
+        ApplyController(GetController(first));
+    }
+    #endregion
+
+    #region Public Methods
+    public void ChangeElementRandom()
+    {
+        EnemyStatus.EnemyElement current = enemyStatus.CurrentElement;
+        EnemyStatus.EnemyElement next;
+
+        do
+        {
+            next = (EnemyStatus.EnemyElement)Random.Range(0, 3);
+        }
+        while (next == current);
+
+        enemyStatus.SetElement(next);
+        ApplyController(GetController(next));
+
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
+
+        Debug.Log($"RGB Boss Element & Animation Changed : {next}");
+    }
+
+    public void EnterFinalPhase()
+    {
+        if (isFinalPhase)
+            return;
+        
+        isFinalPhase = true;
+
+        enemyStatus.SetElement(EnemyStatus.EnemyElement.None);
+        ApplyController(GetController(EnemyStatus.EnemyElement.None));
+
+        if (animator != null)
+        {
+            animator.SetTrigger(CastingTrigger);
+        }
+
+        Debug.Log("발악 패턴 시작");
+    }
+
+    public void ExitFinalPhase()
+    {
+        if (!isFinalPhase)
+            return;
+
+        isFinalPhase = false;
+
+        // 발악 끝나면 즉시 RGB 하나 선택하며 사이클 재개
+        ChangeElementRandom();
+    }
+    #endregion
+
+    #region Private Methods
+    private RuntimeAnimatorController GetController(EnemyStatus.EnemyElement element)
+    {
+        return element switch
+        {
+            EnemyStatus.EnemyElement.Red => baseController,
+            EnemyStatus.EnemyElement.Green => greenOverride,
+            EnemyStatus.EnemyElement.Blue => blueOverride,
+            EnemyStatus.EnemyElement.None => magentaOverride, // 발악 상태
+            _ => baseController
+        };
+    }
+
+    private void ApplyController(RuntimeAnimatorController targetController)
+    {
+        if (animator == null || targetController == null) return;
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float normalizedTime = stateInfo.normalizedTime;
+        int stateHash = stateInfo.shortNameHash;
+
+        animator.runtimeAnimatorController = targetController;
+        animator.Play(stateHash, 0, normalizedTime);
+    }
+    #endregion
+}

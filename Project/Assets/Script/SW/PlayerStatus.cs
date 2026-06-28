@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, IBindable
 {
@@ -50,6 +51,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
 
     private Rigidbody2D rb;
+    private Animator playerAnim;
+    private SpriteRenderer sprite;
+    private Player playerComp;
+
     private bool isKnockbacked; // 넉백 상태 여부
     private bool isStunned; // 스턴 상태 여부
     private bool isPossessed; // 빙의 상태 여부
@@ -58,9 +63,14 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public bool IsPossessed => isPossessed;
     public bool IsKnockbacked => isKnockbacked;
     public bool IsInvincible => isInvincible;
+    public bool IsBound => isBound;
+    private Coroutine bindCoroutine;
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
+        playerAnim = GetComponentInChildren<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
+        playerComp = GetComponent<Player>();
 
         //리지드바디 세팅
         if (rb != null)
@@ -88,7 +98,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         hp -= damage;
         Debug.Log($"[PlayerStatus] 플레이어 피격 현재 HP: {hp}/{maxHp}");
-        Animator playerAnim = GetComponentInChildren<Animator>();
 
         if (UI.Instance != null)
         {
@@ -98,7 +107,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         //점프 애니메이션 실행 이전 Invincible 활성화
         SetInvincible(true);
 
-        //플레이어 애니메이션 초기화
+        //플레이어 애니메이션 및 행동 초기화
         playerAnim.SetBool("IsJump", false);
         playerAnim.SetBool("IsFalling", false);
 
@@ -162,7 +171,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isKnockbacked = true;
 
         //넉백 전 행동 캔슬
-        GetComponent<Player>().CancleCursor();
+        playerComp.CancleCursor();
 
         // 순간 관성 제거 후 방패병의 충격량 대입
         rb.linearVelocity = Vector2.zero;
@@ -172,13 +181,14 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         isKnockbacked = false;
         rb.linearVelocityX = 0;// 넉백 종료 시 잔여 속도 제거
-        GetComponent<Player>().OnKnockbackEnd();
+        playerComp.OnKnockbackEnd();
     }
 
     private IEnumerator StunRoutine(float duration) // 스턴
     {
         isStunned = true;
         Debug.Log($"[PlayerStatus] 패링 성공 {duration}초간 스턴");
+        playerComp.CancleCursor();
 
         yield return new WaitForSeconds(duration);
 
@@ -188,6 +198,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public void SetPossessed(bool value)    //빙의
     {
         isPossessed = value;
+        playerComp.CancleCursor();
 
         if (rb != null && value)
         {
@@ -204,7 +215,39 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         if (gameObject.activeInHierarchy)
         {
-            StartCoroutine(BindRoutine(duration));
+            if (bindCoroutine != null)
+            {
+                StopCoroutine(bindCoroutine);
+            }
+            bindCoroutine = StartCoroutine(BindRoutine(duration));
+        }
+    }
+
+    public void ReleaseBind()
+    {
+        if (bindCoroutine != null)
+        {
+            StopCoroutine(bindCoroutine);
+            bindCoroutine = null;
+        }
+
+        if (isBound)
+        {
+            isBound = false;
+            if (rb != null)
+            {
+                rb.gravityScale = 1f;
+                rb.linearVelocity = Vector2.zero;
+            }
+            if (playerComp != null)
+            {
+                playerComp.OnKnockbackEnd();
+            }
+            if (playerAnim != null)
+            {
+                playerAnim.SetBool("IsJump", false);
+                playerAnim.SetBool("IsFalling", true);
+            }
         }
     }
     private IEnumerator BindRoutine(float duration)
@@ -213,7 +256,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0f;
 
-        Animator playerAnim = GetComponentInChildren<Animator>();
         if (playerAnim != null)
         {
             playerAnim.SetBool("IsWalk", false);
@@ -223,11 +265,18 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         yield return new WaitForSeconds(duration);
 
-        rb.gravityScale = 1f;
         isBound = false;
-        rb.linearVelocityX = 0;
+        bindCoroutine = null;
+        rb.gravityScale = 1f;
 
-        GetComponent<Player>().OnKnockbackEnd();
+        rb.linearVelocity = Vector2.zero;
+        playerComp.OnKnockbackEnd();
+
+        if (playerAnim != null)
+        {
+            playerAnim.SetBool("IsJump", false);
+            playerAnim.SetBool("IsFalling", true); 
+        }
     }
     public void LaunchByWater(float forceY) // 물기둥
     {
@@ -237,7 +286,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     private IEnumerator WaterLaunchRoutine(float forceY) 
     {
         isKnockbacked = true;
-        GetComponent<Player>().CancleCursor();
+        playerComp.CancleCursor();
 
         rb.linearVelocity = Vector2.zero;
 
@@ -255,7 +304,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         isKnockbacked = false;
         rb.linearVelocityX = 0f;
-        GetComponent<Player>().OnKnockbackEnd();
+        playerComp.OnKnockbackEnd();
     }
 
     public void SetInvincible(bool value)   //무적

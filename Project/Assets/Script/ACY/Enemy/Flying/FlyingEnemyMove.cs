@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -26,6 +26,7 @@ public class FlyingEnemyMove : MonoBehaviour
     private float patrolTimer;
     private EnemyState state = EnemyState.Patrol; // 초기 상태는 배회
     private float prevX;
+    private EnemyStatus enemyStatus;
 
     private ContactFilter2D playerFilter; // 플레이어 감지용 필터
     private readonly List<RaycastHit2D> hitResults = new List<RaycastHit2D>(1); // BoxCast 결과 저장용 리스트 
@@ -42,6 +43,7 @@ public class FlyingEnemyMove : MonoBehaviour
         FlyingAttack = GetComponent<FlyingEnemyAttack>();
         anim = GetComponentInChildren<Animator>();
         originPos = rb.position;
+        enemyStatus = GetComponent<EnemyStatus>();
 
         // 물리 설정 최적화
         rb.gravityScale = 0;
@@ -55,6 +57,23 @@ public class FlyingEnemyMove : MonoBehaviour
 
     void Update() 
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            if (state == EnemyState.Action)
+            {
+                state = EnemyState.Return;
+                if (FlyingAttack != null)
+                {
+                    FlyingAttack.CancelDive();
+                }
+            }
+            return;
+        }
+
         UpdateAnimator();
 
         if (state == EnemyState.Patrol)

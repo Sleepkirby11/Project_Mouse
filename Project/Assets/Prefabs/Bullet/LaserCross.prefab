@@ -148,9 +148,6 @@ MonoBehaviour:
   - {fileID: 712725683699678089}
   audioSource: {fileID: 0}
   laserSFX: {fileID: 0}
-  startRotateSpeed: 8
-  maxRotateSpeed: 45
-  acceleration: 8
   laserThickness: 2
 --- !u!1 &3826695801248785491
 GameObject:
@@ -375,7 +372,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.3137255}
   m_FlipX: 0

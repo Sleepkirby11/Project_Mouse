@@ -41323,7 +41323,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 30
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -41407,7 +41407,7 @@ CompositeCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f894e2d9b7109c543aef6caa8bd29a84, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -41568,14 +41568,6 @@ CompositeCollider2D:
         Y: 90000000
       - X: 470000000
         Y: 90000000
-    - - X: 330000000
-        Y: 50000000
-      - X: 210000000
-        Y: 50000000
-      - X: 210000000
-        Y: 40000000
-      - X: 330000000
-        Y: 40000000
     - - X: 590000000
         Y: 50000000
       - X: 470000000
@@ -41583,6 +41575,14 @@ CompositeCollider2D:
       - X: 470000000
         Y: 40000000
       - X: 590000000
+        Y: 40000000
+    - - X: 330000000
+        Y: 50000000
+      - X: 210000000
+        Y: 50000000
+      - X: 210000000
+        Y: 40000000
+      - X: 330000000
         Y: 40000000
   m_CompositePaths:
     m_Paths:
@@ -49668,7 +49668,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 400
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -50186,7 +50186,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2402550210240820376, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1904359348216939170, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50234,7 +50234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6904492949186533482, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
       propertyPath: m_BodyType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -50824,6 +50824,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8402703337166098147}
     m_Modifications:
+    - target: {fileID: -2402550210240820376, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1904359348216939170, guid: 4b33fc6e959fcf64eb5c1ecf14dfc1c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -194.53845

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8400757831654951877}
   - component: {fileID: 371881741901354694}
+  - component: {fileID: 1143131031921362728}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -45,7 +46,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpSlider: {fileID: 0}
-  hpText: {fileID: 0}
-  maxHP: 100
   inkSlider: {fileID: 0}
-  maxInk: 5
+  specialInkSlider: {fileID: 0}
+  talkPanel: {fileID: 0}
+  talkText: {fileID: 0}
+  scanObject: {fileID: 0}
+  isAction: 0
+  talkIndex: 0
+  pal: {fileID: 0}
+--- !u!114 &1143131031921362728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966459079812718079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfabb2e349db004aaf251d073d6ec9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: 16f60ca3995c5c4449be4c0ee3c0b697
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6405245798056776142
+    second: Spell Mist_0
+  - first:
+      213: -3208065041290535340
+    second: Spell Mist_1
+  - first:
+      213: -3583674609466806267
+    second: Spell Mist_2
+  - first:
+      213: 1042812468467839625
+    second: Spell Mist_3
+  - first:
+      213: -4129060653840955319
+    second: Spell Mist_4
+  - first:
+      213: 795538864099219451
+    second: Spell Mist_5
+  - first:
+      213: 771203644765335446
+    second: Spell Mist_6
+  - first:
+      213: 3710498477811110568
+    second: Spell Mist_7
+  - first:
+      213: 1243698916733348299
+    second: Spell Mist_8
+  - first:
+      213: 6277179961075185864
+    second: Spell Mist_9
+  - first:
+      213: -3544437823245691270
+    second: Spell Mist_10
+  - first:
+      213: -7698641138644595140
+    second: Spell Mist_11
+  - first:
+      213: -367187747291654806
+    second: Spell Mist_12
+  - first:
+      213: 1089677817758735541
+    second: Spell Mist_13
+  - first:
+      213: 642202322138821808
+    second: Spell Mist_14
+  - first:
+      213: -653733117765572083
+    second: Spell Mist_15
+  - first:
+      213: 6529052450509655349
+    second: Spell Mist_16
+  - first:
+      213: -3197056338928736623
+    second: Spell Mist_17
+  - first:
+      213: -2424355638335104711
+    second: Spell Mist_18
+  - first:
+      213: -8142632898890611273
+    second: Spell Mist_19
+  - first:
+      213: 223048199436188641
+    second: Spell Mist_20
+  - first:
+      213: 6346316303966758974
+    second: Spell Mist_21
+  - first:
+      213: -6475485776557840691
+    second: Spell Mist_22
+  - first:
+      213: 8260861586460911392
+    second: Spell Mist_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Spell Mist_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 207
+        width: 16
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23e23c312eefb17a0800000000000000
+      internalID: -6405245798056776142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 207
+        width: 7
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45e578d87d9aa73d0800000000000000
+      internalID: -3208065041290535340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_2
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 207
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 500f4280eea344ec0800000000000000
+      internalID: -3583674609466806267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_3
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 208
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 982bf5e3a60d87e00800000000000000
+      internalID: 1042812468467839625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_4
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 215
+        width: 7
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94884c74631a2b6c0800000000000000
+      internalID: -4129060653840955319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_5
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 208
+        width: 12
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf7d6a7c1625a0b00800000000000000
+      internalID: 795538864099219451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_6
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 209
+        width: 19
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69f69bff0add3ba00800000000000000
+      internalID: 771203644765335446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_7
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 208
+        width: 9
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a21f8dd4b65e7330800000000000000
+      internalID: 3710498477811110568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_8
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 149
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc9ed6b4391824110800000000000000
+      internalID: 1243698916733348299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_9
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 154
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c8361baae50d1750800000000000000
+      internalID: 6277179961075185864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_10
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 145
+        width: 11
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a765bf83490afcec0800000000000000
+      internalID: -3544437823245691270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_11
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 142
+        width: 24
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e41ed6caee82590800000000000000
+      internalID: -7698641138644595140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_12
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 150
+        width: 14
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a651ec470bc77eaf0800000000000000
+      internalID: -367187747291654806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_13
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 160
+        width: 9
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bcd12fa3305f1f00800000000000000
+      internalID: 1089677817758735541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_14
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 143
+        width: 30
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b4f3050c9f89e800800000000000000
+      internalID: 642202322138821808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_15
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 144
+        width: 11
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0aaca961397de6f0800000000000000
+      internalID: -653733117765572083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_16
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 146
+        width: 12
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53d85808c9adb9a50800000000000000
+      internalID: 6529052450509655349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_17
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 161
+        width: 6
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 196ed3fc236c1a3d0800000000000000
+      internalID: -3197056338928736623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_18
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 82
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93912d74465fa5ed0800000000000000
+      internalID: -2424355638335104711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_19
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 86
+        width: 6
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b5473d158e8ffe80800000000000000
+      internalID: -8142632898890611273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_20
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 85
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eb3f27d72d681300800000000000000
+      internalID: 223048199436188641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_21
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 87
+        width: 11
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e386532ed05a21850800000000000000
+      internalID: 6346316303966758974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_22
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 89
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc6ec2caef37226a0800000000000000
+      internalID: -6475485776557840691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Mist_23
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 29
+        width: 11
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0272caf48d974a270800000000000000
+      internalID: 8260861586460911392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Spell Mist_0: -6405245798056776142
+      Spell Mist_1: -3208065041290535340
+      Spell Mist_10: -3544437823245691270
+      Spell Mist_11: -7698641138644595140
+      Spell Mist_12: -367187747291654806
+      Spell Mist_13: 1089677817758735541
+      Spell Mist_14: 642202322138821808
+      Spell Mist_15: -653733117765572083
+      Spell Mist_16: 6529052450509655349
+      Spell Mist_17: -3197056338928736623
+      Spell Mist_18: -2424355638335104711
+      Spell Mist_19: -8142632898890611273
+      Spell Mist_2: -3583674609466806267
+      Spell Mist_20: 223048199436188641
+      Spell Mist_21: 6346316303966758974
+      Spell Mist_22: -6475485776557840691
+      Spell Mist_23: 8260861586460911392
+      Spell Mist_3: 1042812468467839625
+      Spell Mist_4: -4129060653840955319
+      Spell Mist_5: 795538864099219451
+      Spell Mist_6: 771203644765335446
+      Spell Mist_7: 3710498477811110568
+      Spell Mist_8: 1243698916733348299
+      Spell Mist_9: 6277179961075185864
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
