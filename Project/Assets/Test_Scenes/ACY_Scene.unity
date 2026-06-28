@@ -2698,7 +2698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1766277475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3884,7 +3884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 952050263766178938, guid: fe7cafadf75fb2e4aa612b20cc7e5ac6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2611043575802034429, guid: fe7cafadf75fb2e4aa612b20cc7e5ac6, type: 3}
       propertyPath: 'blackHoleSpawnPoints.Array.data[0]'

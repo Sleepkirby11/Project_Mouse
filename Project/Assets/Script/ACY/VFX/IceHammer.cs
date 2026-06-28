@@ -60,7 +60,7 @@ public class IceHammer : MonoBehaviour, IDamageable
         if (player == null)
             return;
 
-        // 초록(Green) 스탠스인 상태의 플레이어만 얼음망치를 때려 파괴할 수 있음
+        // 초록(Green) 스탠스만 얼음망치를 파괴할 수 있음
         if (player.currentStance != PlayerStatus.Stance.Green)
             return;
 

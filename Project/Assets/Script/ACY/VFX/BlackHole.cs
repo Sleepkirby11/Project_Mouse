@@ -56,7 +56,7 @@ public class BlackHole : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 2. 플레이어 끌어당기기 (FixedUpdate 기반 물리 연산)
+        // 2. 플레이어 끌어당기기
         PullPlayer();
     }
 

@@ -57,16 +57,12 @@ public class Explosion : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // 프로젝트 내 플레이어 피격 로직에 맞게 호출
-            // 예: IDamageable 인터페이스나 PlayerStatus 스크립트 사용
             PlayerStatus playerStatus = collision.GetComponent<PlayerStatus>();
             if (playerStatus != null)
             {
-                // playerStatus.TakeDamage(damage); // 실제 사용하시는 함수로 변경하세요!
-                Debug.Log($"[Explosion] 플레이어 피격! 데미지: {damage}");
+                playerStatus.TakeDamage(damage);
             }
 
-            // 데미지를 1회만 주길 원한다면 맞춘 즉시 콜라이더를 끕니다.
             DisableHitbox();
         }
     }

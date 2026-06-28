@@ -338,8 +338,6 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                 successfulSpawns++;
             }
         }
-
-        Debug.Log($"독버섯 생성 패턴 실행: 플레이어 주변 바닥에 {successfulSpawns}개 스폰됨.");
     }
     #endregion
 
@@ -359,7 +357,6 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
         if (hit.collider == null)
         {
-            Debug.LogWarning("망치 생성 실패 : Ground를 찾지 못함");
             return;
         }
 
@@ -566,8 +563,6 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                 }
             }
         }
-
-        Debug.Log($"발악 패턴 시작! {blackHoleSpawnPoints.Length}개의 블랙홀 생성됨.");
     }
     #endregion
 }

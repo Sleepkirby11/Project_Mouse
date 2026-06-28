@@ -52,8 +52,6 @@ public class RgbColorCycle : MonoBehaviour
         {
             animator.SetTrigger(CastingTrigger);
         }
-
-        Debug.Log($"RGB Boss Element & Animation Changed : {next}");
     }
 
     public void EnterFinalPhase()
@@ -70,8 +68,6 @@ public class RgbColorCycle : MonoBehaviour
         {
             animator.SetTrigger(CastingTrigger);
         }
-
-        Debug.Log("발악 패턴 시작");
     }
 
     public void ExitFinalPhase()
