@@ -4204,10 +4204,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueBoss
       objectReference: {fileID: 0}
-    - target: {fileID: 1629685381488659163, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
       propertyPath: 'restPoints.Array.data[0]'
       value: 
@@ -4228,10 +4224,6 @@ PrefabInstance:
       propertyPath: 'restPoints.Array.data[4]'
       value: 
       objectReference: {fileID: 765831991}
-    - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
-      propertyPath: 'restPoints.Array.data[5]'
-      value: 
-      objectReference: {fileID: 1251229202}
     - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
       propertyPath: 'mapBoundaryColliders.Array.data[0]'
       value: 

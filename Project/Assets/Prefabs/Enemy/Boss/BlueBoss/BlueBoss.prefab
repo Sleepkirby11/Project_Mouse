@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1116401776335420760}
   - component: {fileID: 2183927895254140913}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DeathCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415424866548822480}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -170,6 +170,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   restPointOffset: {x: 0, y: 3.5}
   restJumpHeight: 8
   clawHitbox: {fileID: 5999535619754719866}
@@ -197,7 +198,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  deathCollider: {fileID: 2183927895254140913}
+  deathCollider: {fileID: 0}
 --- !u!61 &8983735407669826811
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -258,6 +259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 10
   dieAnimationLength: 3
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
   isBoss: 1
 --- !u!114 &878273054086867009
 MonoBehaviour:
@@ -635,7 +639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3471223895787820529}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

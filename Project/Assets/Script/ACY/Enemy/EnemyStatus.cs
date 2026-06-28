@@ -199,15 +199,18 @@ public class EnemyStatus : MonoBehaviour, IDamageable
             }
         }
 
-        if (TryGetComponent(out Collider2D col)) // 사망 시 충돌 검출 차단
+        if (!isBoss)
         {
-            col.enabled = false;
-        }
+            if (TryGetComponent(out Collider2D col))
+            {
+                col.enabled = false;
+            }
 
-        if (TryGetComponent(out Rigidbody2D rb)) // 사망 시 관성 멈춤 및 미끄러짐 방지
-        {
-            rb.linearVelocity = Vector2.zero;
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            if (TryGetComponent(out Rigidbody2D rb))
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.bodyType = RigidbodyType2D.Kinematic;
+            }
         }
 
         Destroy(gameObject, dieAnimationLength); // 애니메이션 대기 후 파괴
