@@ -54272,6 +54272,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
+      propertyPath: waterSpoutYOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589841841045340884, guid: bdde9e731d8205b4185d6813ca250e7c, type: 3}
       propertyPath: 'restPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 5197050355136067015}
