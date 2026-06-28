@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25da0a2af2b2e642a45a772efea8a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growSpeed: 1.5
+  growSpeed: 1
   maxScale: 5
   basePullForce: 30
   pullRadius: 40
