@@ -33,8 +33,11 @@ public class UI : MonoBehaviour
     [Header("팔레트")]
     public GameObject pal;
 
-    [Header("시작 메뉴")]
-    public GameObject startMenu;
+    [Header("설정 패널")]
+    public GameObject settingPanel;
+
+    [Header("라이센스 패널")]
+    public GameObject licensePanel; 
 
     void Awake()
     {
@@ -56,8 +59,6 @@ public class UI : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Tutorial");
-        if(startMenu != null)
-            startMenu.gameObject.SetActive(false);
     }
 
     //설정 메뉴 추가 예정
@@ -145,5 +146,28 @@ public class UI : MonoBehaviour
 
         isAction = true;
         talkIndex++;
+    }
+    
+    // 설정창 열기/닫기
+    public void OpenSetting()
+    {
+        if (settingPanel != null) settingPanel.SetActive(true);
+    }
+
+    public void CloseSetting()
+    {
+        if (settingPanel != null) settingPanel.SetActive(false);
+    }
+
+    // [추가] 라이선스창 열기
+    public void OpenLicense()
+    {
+        if (licensePanel != null) licensePanel.SetActive(true);
+    }
+
+    // [추가] 라이선스창 닫기
+    public void CloseLicense()
+    {
+        if (licensePanel != null) licensePanel.SetActive(false);
     }
 }
