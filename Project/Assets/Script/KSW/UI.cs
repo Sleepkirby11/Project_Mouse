@@ -42,7 +42,8 @@ public class UI : MonoBehaviour
     void Awake()
     {
         // 싱글톤 초기화
-        if (Instance == null) Instance = this;
+        if (Instance == null)
+            Instance = this;
     }
 
     void Start()
