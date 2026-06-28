@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class FlyingEnemyAttack : MonoBehaviour
@@ -24,6 +24,13 @@ public class FlyingEnemyAttack : MonoBehaviour
     {
         isDiving = true;
         rb.linearVelocity = Vector2.down * diveSpeed;
+    }
+
+    public void CancelDive()
+    {
+        isDiving = false;
+        rb.linearVelocity = Vector2.zero;
+        StopAllCoroutines();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

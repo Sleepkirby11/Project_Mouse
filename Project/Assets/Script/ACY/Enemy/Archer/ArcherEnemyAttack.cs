@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 //공격패턴: 일정 간격으로 플레이어에게 화살을 발사
 public class ArcherEnemyAttack : MonoBehaviour
@@ -11,6 +11,7 @@ public class ArcherEnemyAttack : MonoBehaviour
     private ArcherEnemyMove archerMove;
     private Animator anim;
     private float nextAttackTime; // 다음 공격 가능 시간
+    private EnemyStatus enemyStatus;
 
     private const string ARROW_KEY = "Arrow";
     private static readonly int AttackHash = Animator.StringToHash("Attack");
@@ -20,10 +21,16 @@ public class ArcherEnemyAttack : MonoBehaviour
         //캐싱
         archerMove = GetComponent<ArcherEnemyMove>();
         anim = GetComponentInChildren<Animator>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Update()
     {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
+
         Transform target = archerMove.TargetPlayer;
 
         // 타겟이 있고 백스텝 중이 아닐 때만 공격 시도
@@ -44,7 +51,10 @@ public class ArcherEnemyAttack : MonoBehaviour
         }
         yield return new WaitForSeconds(0.3f); // 공격 딜레이
 
-        Fire(targetPos);
+        if (enemyStatus == null || !enemyStatus.isStunned)
+        {
+            Fire(targetPos);
+        }
     }
     private void Fire(Vector3 targetPos)
     {

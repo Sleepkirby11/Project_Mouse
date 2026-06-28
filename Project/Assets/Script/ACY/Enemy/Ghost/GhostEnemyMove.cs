@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 /*
  * 유령 이동 스크립트
@@ -85,6 +85,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
 
     private bool hasDetectedPlayer = false;
     private bool isDead = false;
+    private EnemyStatus enemyStatus;
 
     #endregion
 
@@ -97,6 +98,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
         ghostEnemyAttack = GetComponent<GhostEnemyAttack>();
         ghostCollider = GetComponent<Collider2D>();
         animator = GetComponentInChildren<Animator>();
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     private void Start()
@@ -122,6 +124,15 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             return;
         }
 
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            return;
+        }
+
         if (!hasDetectedPlayer)
         {
             CheckPlayerDetection();
@@ -133,6 +144,15 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     {
         if (isDead)
         {
+            return;
+        }
+
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
             return;
         }
 
