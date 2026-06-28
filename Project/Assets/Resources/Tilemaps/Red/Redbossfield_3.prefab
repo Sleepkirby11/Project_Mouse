@@ -24343,6 +24343,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5026156332997557328}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: meteorTargetY
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: laserSpawnPoint
       value: 
       objectReference: {fileID: 5026156332997557328}
@@ -24352,11 +24356,11 @@ PrefabInstance:
       objectReference: {fileID: 7323537915668664570, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: meteorSpawnXRange.x
-      value: 177
+      value: 422
       objectReference: {fileID: 0}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: meteorSpawnXRange.y
-      value: 219
+      value: 460
       objectReference: {fileID: 0}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: meteorSpawnYRange.x
@@ -24364,7 +24368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: meteorSpawnYRange.y
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: teleportPoints.Array.size
