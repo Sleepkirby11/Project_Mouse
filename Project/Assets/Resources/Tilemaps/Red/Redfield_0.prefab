@@ -41407,7 +41407,7 @@ CompositeCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f894e2d9b7109c543aef6caa8bd29a84, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -41568,14 +41568,6 @@ CompositeCollider2D:
         Y: 90000000
       - X: 470000000
         Y: 90000000
-    - - X: 330000000
-        Y: 50000000
-      - X: 210000000
-        Y: 50000000
-      - X: 210000000
-        Y: 40000000
-      - X: 330000000
-        Y: 40000000
     - - X: 590000000
         Y: 50000000
       - X: 470000000
@@ -41583,6 +41575,14 @@ CompositeCollider2D:
       - X: 470000000
         Y: 40000000
       - X: 590000000
+        Y: 40000000
+    - - X: 330000000
+        Y: 50000000
+      - X: 210000000
+        Y: 50000000
+      - X: 210000000
+        Y: 40000000
+      - X: 330000000
         Y: 40000000
   m_CompositePaths:
     m_Paths:
