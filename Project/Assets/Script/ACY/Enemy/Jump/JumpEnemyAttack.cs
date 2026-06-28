@@ -122,59 +122,62 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         isCharging = false;
 
         Vector2 startPos = transform.position;
-
-        // 준비 끝난 순간의 플레이어 위치로 점프
         Vector2 targetPos = player.position;
 
-        float elapsed = 0f;
+        // 물리 점프 속도 및 중력 계산
+        float T = jumpDuration;
+        float dy = targetPos.y - startPos.y;
+        float dx = targetPos.x - startPos.x;
 
-        // 포물선 이동 중 직접 제어
-        if (rb != null)
+        // 9.81f 대신 Physics2D.gravity.y 크기 사용 (음수일 수 있으므로 절대값 처리)
+        float gravityMagnitude = Mathf.Abs(Physics2D.gravity.y);
+        if (gravityMagnitude < 0.1f) gravityMagnitude = 9.81f;
+
+        // 원하는 최고 높이(jumpHeight)에 도달하기 위한 가상 중력 및 중력 배율 계산
+        float desiredGravity = (8f * jumpHeight) / (T * T);
+        float customGravityScale = desiredGravity / gravityMagnitude;
+
+        // Y축 초기 속도: dy와 T를 이용한 포물선 공식 + 최소 점프 높이 보장
+        float vy = (dy / T) + (0.5f * desiredGravity * T);
+        float minVy = (4f * jumpHeight) / T;
+        if (vy < minVy)
         {
-            rb.gravityScale = 0f;
-            rb.linearVelocity = Vector2.zero;
+            vy = minVy;
         }
 
-        while (elapsed < jumpDuration)
+        // X축 초기 속도
+        float vx = dx / T;
+
+        if (rb != null)
+        {
+            rb.gravityScale = customGravityScale;
+            rb.linearVelocity = new Vector2(vx, vy);
+        }
+
+        // 아주 짧은 시간(예: 0.15초) 동안은 바닥 체크를 무시하여 발사 직후 착지 처리되는 것을 방지
+        float minJumpTime = 0.15f;
+        float elapsed = 0f;
+        while (elapsed < minJumpTime)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / jumpDuration);
+            CheckDirectHit();
+            yield return null;
+        }
 
-            Vector2 linearPos = Vector2.Lerp(startPos, targetPos, t);
-            float arc = jumpHeight * Mathf.Sin(Mathf.PI * t);
-
-            if (rb != null)
-            {
-                rb.MovePosition(new Vector2(linearPos.x, linearPos.y + arc));
-            }
-
+        // 착지할 때까지 혹은 최대 비행 시간(3초)을 넘을 때까지 대기
+        float maxAirTime = 3.0f;
+        elapsed = 0f;
+        while (!IsGrounded() && elapsed < maxAirTime)
+        {
+            elapsed += Time.deltaTime;
             CheckDirectHit();
             yield return null;
         }
 
         if (rb != null)
         {
-            Vector2 landingStart = rb.position;
-            float landingElapsed = 0f;
-            float landingSpeedY = jumpHeight * Mathf.PI / jumpDuration; // 포물선 끝 하강 속도
-            float landingSpeedX = (targetPos.x - startPos.x) / jumpDuration; // 포물선 X 속도 유지
-
-            // 포물선을 착지할 때까지 계속 연장
-            while (!IsGrounded())
-            {
-                landingElapsed += Time.deltaTime;
-                float dx = landingSpeedX * landingElapsed;
-                float dy = -landingSpeedY * landingElapsed - 0.5f * 9.8f * rb.gravityScale * landingElapsed * landingElapsed;
-
-                rb.MovePosition(landingStart + new Vector2(dx, dy));
-
-                CheckDirectHit();
-                yield return null;
-            }
-
+            // 착지 시 기존 중력 복원 및 정지
             rb.gravityScale = originGravity;
-
-            // 착지 정지
             rb.linearVelocity = Vector2.zero;
         }
 
@@ -182,7 +185,6 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         ExecuteShockwave();
 
         lastAttackTime = Time.time;
-
         isAttackingOrReady = false;
         jumpRoutine = null;
     }
