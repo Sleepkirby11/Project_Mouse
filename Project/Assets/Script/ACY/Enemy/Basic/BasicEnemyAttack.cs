@@ -4,8 +4,6 @@ using UnityEngine;
 /*
  근접 공격 스크립트
  - 공격 범위 안에 플레이어가 들어오면 공격
- - 공격 쿨타임 적용
- - 공격 판정은 Animation Event로 실행 예정
  */
 public class BasicEnemyAttack : MonoBehaviour
 {
@@ -60,7 +58,7 @@ public class BasicEnemyAttack : MonoBehaviour
             }
 
             Debug.Log("적 공격 시도");
-        yield return new WaitForSeconds(0.5f); //약간 딜레이
+        yield return new WaitForSeconds(1f); //약간 딜레이
         if (enemyStatus == null || !enemyStatus.isStunned)
         {
             AttackHit();
@@ -70,21 +68,7 @@ public class BasicEnemyAttack : MonoBehaviour
 
         canAttack = true;
     }
-    // 애니메이션 완성 시 AttackHit() 함수를 Animation Event로 호출하도록 변경
-    //private IEnumerator AttackRoutine()
-    //{
-    //    canAttack = false;
 
-    //    if (anim != null)
-    //    {
-    //        anim.SetTrigger("Attack");
-    //    }
-
-    //    yield return new WaitForSeconds(attackCooldown);
-
-    //    canAttack = true;
-    //}
-    // Animation Event로 호출할 함수
     public void AttackHit()
     {
         Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);
