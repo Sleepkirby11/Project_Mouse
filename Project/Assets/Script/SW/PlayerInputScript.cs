@@ -235,4 +235,12 @@ public class PlayerInputScript : MonoBehaviour
             player.ActiveAttack(player.groundCursor);
         }
     }
+
+    public void ActionCheatHeal(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            player.status.Heal(100);
+        }
+    }
 }
