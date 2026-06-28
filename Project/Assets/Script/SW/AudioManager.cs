@@ -29,8 +29,10 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
 
-        Init();
-    }
+		Init();
+
+		PlayBGM(true);
+	}
 
 
     void Init()
