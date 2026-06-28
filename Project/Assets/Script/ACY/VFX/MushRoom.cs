@@ -58,16 +58,16 @@ public class PoisonMushroom : MonoBehaviour, IDamageable
     #region Mushroom Routines
     private IEnumerator MushroomLifeRoutine()
     {
-        // 1. 대기 시간만큼 대기 (자라나는 중)
+        // 대기 시간만큼 대기 
         yield return new WaitForSeconds(timeToExplode);
 
         if (destroyed) yield break;
 
-        // 2. 폭발 시작 (콜라이더 비활성화 및 폭발 애니메이션 재생)
+        // 폭발 시작 (콜라이더 비활성화 및 폭발 애니메이션 재생)
         if (mushroomCollider != null) mushroomCollider.enabled = false;
         if (animator != null) animator.SetTrigger("Explode");
 
-        // 이 후 폭발 및 이펙트 소멸 처리는 애니메이션 클립 내부의 이벤트를 통해 아래 메서드들을 호출합니다.
+        // 이 후 폭발 및 이펙트 소멸 처리는 애니메이션 클립을 통해 호출
     }
 
     private IEnumerator FadeAndReturnRoutine()

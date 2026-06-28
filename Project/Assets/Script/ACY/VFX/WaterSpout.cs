@@ -63,7 +63,6 @@ public class WaterSpout : MonoBehaviour
         if (other.TryGetComponent(out IDamageable damageable))
             damageable.TakeDamage(damage);
 
-        // TakeHit 대신 LaunchByWater 호출
         if (other.TryGetComponent(out PlayerStatus playerStatus))
             playerStatus.LaunchByWater(launchForceY);
 

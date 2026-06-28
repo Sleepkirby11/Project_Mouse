@@ -34,7 +34,6 @@ public class PoisonArea : MonoBehaviour
             {
                 if (player != null)
                 {
-                    // 수정 없이 기존 플레이어의 TakeDamage 그대로 사용
                     player.TakeDamage(damagePerTick);
                 }
             }
