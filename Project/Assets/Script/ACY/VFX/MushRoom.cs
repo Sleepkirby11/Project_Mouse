@@ -1,7 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
-public class PoisonMushroom : MonoBehaviour, IDamageable
+public class Mushroom : MonoBehaviour, IDamageable
 {
     #region Inspector Fields
     [Header("Pool Keys")]
@@ -50,6 +50,7 @@ public class PoisonMushroom : MonoBehaviour, IDamageable
 
         if (mushroomCollider != null) mushroomCollider.enabled = true;
         if (spriteRenderer != null) spriteRenderer.color = originalColor;
+        if (animator != null) animator.enabled = true;
 
         lifeCoroutine = StartCoroutine(MushroomLifeRoutine());
     }
