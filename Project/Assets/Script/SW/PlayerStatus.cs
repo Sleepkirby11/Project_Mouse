@@ -89,6 +89,21 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isInvincible = false;
     }
 
+    void Update()
+    {
+        if(!Player.instance.cursor.isMove)
+            ChargeInk();
+        if(!Player.instance.groundCursor.isMove)
+        {
+            if(Player.instance.isSkill && Player.instance.cursor.isMove)
+            {
+                return;
+            }
+            ChargeSpecialInk();
+        }
+        Player.instance.InkUIUpdate();
+    }
+
     public bool CanMove => !isKnockbacked && !isStunned && !isPossessed && !isBound; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
 
     // IDamageable 인터페이스 구현을 통한 대미지 처리
@@ -131,6 +146,32 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         if(hp >= maxHp) hp = maxHp;
 
         UI.Instance.UpdateHPBar();
+    }
+
+    void ChargeInk()
+    {
+        if(ink > maxInk)
+        {
+            ink = maxInk;
+            return;
+        }
+        else if(ink < maxInk)
+        {
+            ink += Time.deltaTime;
+        }
+    }
+
+    void ChargeSpecialInk()
+    {
+        if(specialInk > maxSpecialInk)
+        {
+            specialInk = maxSpecialInk;
+            return;
+        }
+        else if(specialInk < maxSpecialInk)
+        {
+            specialInk += Time.deltaTime;
+        }
     }
 
     // IHittable 구현 : 넉백

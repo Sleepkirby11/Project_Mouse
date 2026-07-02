@@ -12,12 +12,19 @@ public class SoundControl : MonoBehaviour
     void Start()
     {
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
-
-        OnVolumeChanged(volumeSlider.value);
+        volumeSlider.value = GameManager.instance.volume;
+        if(GameManager.instance != null)
+            OnVolumeChanged(GameManager.instance.volume);
     }
 
     void OnVolumeChanged(float value)
     {
+        if(GameManager.instance != null && AudioManager.instance != null)
+        {
+            GameManager.instance.volume = volumeSlider.value;
+            AudioManager.instance.UpdateSound();
+        }
+        
         if (value <= 0)
         {
             volumeIcon.sprite = soundMuteSprite;
