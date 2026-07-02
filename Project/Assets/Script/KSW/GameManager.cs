@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public int id;
     public bool isNPC;
 
+    [Header("사운드")]
+    public float volume;
+
     //대화 데이터 관리 인스펙터 연결 잊지 말것
     Dictionary<int, string[]> talkData;
 
@@ -50,4 +53,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
+
+    
 }

@@ -43,7 +43,14 @@ public class UI : MonoBehaviour
     {
         // 싱글톤 초기화
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()

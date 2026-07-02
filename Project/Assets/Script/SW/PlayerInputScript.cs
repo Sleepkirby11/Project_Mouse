@@ -1,13 +1,18 @@
-﻿using UnityEngine;
+﻿using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputScript : MonoBehaviour
 {
     private Player player;
 
+    bool isSetting;
+
     private void Awake()
     {
         player = GetComponent<Player>();
+        isSetting = false;
     }
 
     //플레이어 이동
@@ -16,7 +21,7 @@ public class PlayerInputScript : MonoBehaviour
         //이동 키 변화 감지 시 true
         player.isCanMove = true;
         //사망 시에는 입력 무시
-        if (player.status.HP <= 0)
+        if (player.status.HP <= 0 || isSetting)
         {
             return;
         }
@@ -46,7 +51,7 @@ public class PlayerInputScript : MonoBehaviour
         //이동 키 변화 감지 시 true
         player.isCanMove = true;
         //이동 제한 조건식
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
         {
             return;
         }
@@ -62,7 +67,7 @@ public class PlayerInputScript : MonoBehaviour
     public void ActionJump(InputAction.CallbackContext context)
     {
         //점프 제한 조건식
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
         {
             return;
         }
@@ -91,6 +96,11 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionInteract(InputAction.CallbackContext context)
     {
+        if(isSetting)
+        {
+            return;
+        }
+
         if(context.started && player.interactable != null)
         {
             player.interactable.Interact();
@@ -100,7 +110,7 @@ public class PlayerInputScript : MonoBehaviour
     //대시 키 받아오기
     public void ActionDash(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
         {
             return;
         }
@@ -136,7 +146,7 @@ public class PlayerInputScript : MonoBehaviour
     //공격 키 받아오기
     public void ActionAttack(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
         {
             return;
         }
@@ -145,7 +155,7 @@ public class PlayerInputScript : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.cursorObject.GetComponent<TrailRenderer>();
-        if (context.started && player.status.ink > 0)
+        if (context.started && player.status.ink > 1)
         {
             //초기화
             player.cursorObject.transform.position = player.mouse.transform.position;
@@ -164,7 +174,7 @@ public class PlayerInputScript : MonoBehaviour
     //키 입력 종료 시 UI의 상태에 따른 스탠스 변환
     public void ActionStance(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
         {
             return;
         }
@@ -194,7 +204,7 @@ public class PlayerInputScript : MonoBehaviour
     //원 버튼으로 On/Off
     public void ActionSkill(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
         {
             return;
         }
@@ -211,7 +221,7 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionMakeGround(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
         {
             return;
         }
@@ -220,7 +230,7 @@ public class PlayerInputScript : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.groundLine.GetComponent<TrailRenderer>();
-        if (context.started && player.status.ink > 0)
+        if (context.started && player.status.specialInk > 1)
         {
             //초기화
             player.groundLine.transform.position = player.mouse.transform.position;
@@ -238,9 +248,33 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionCheatHeal(InputAction.CallbackContext context)
     {
+        if(isSetting)
+        {
+            return;
+        }
         if(context.started)
         {
             player.status.Heal(100);
+            player.status.ink = player.status.maxInk;
+            player.status.specialInk = player.status.maxSpecialInk;
+        }
+    }
+
+    public void ActionMenu(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            player.settingPanel.SetActive(!player.settingPanel.activeSelf);
+            if(player.settingPanel.activeSelf)
+            {
+                Time.timeScale = 0;
+                isSetting = true;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                isSetting = false;
+            }
         }
     }
 }

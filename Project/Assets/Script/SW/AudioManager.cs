@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class AudioManager : MonoBehaviour
 	}
 
 
+
     void Init()
     {
         //배경음 플레이어 초기화
@@ -43,7 +45,10 @@ public class AudioManager : MonoBehaviour
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
-        bgmPlayer.volume = bgmVolume;
+        if(GameManager.instance != null)
+            bgmPlayer.volume = GameManager.instance.volume;
+        else
+            bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
 
         //효과음 플레이어 초기화
@@ -55,15 +60,24 @@ public class AudioManager : MonoBehaviour
         {
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
-            sfxPlayers[i].volume = sfxVolume;
+            if(GameManager.instance != null)
+                sfxPlayers[i].volume = GameManager.instance.volume;
+            else
+                sfxPlayers[i].volume = sfxVolume;
         }
     }
     public void UpdateSound()
     {
-        bgmPlayer.volume = bgmVolume;
+        if(GameManager.instance != null)
+            bgmPlayer.volume = GameManager.instance.volume;
+        else
+            bgmPlayer.volume = bgmVolume;
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
-            sfxPlayers[i].volume = sfxVolume;
+            if(GameManager.instance != null)
+                sfxPlayers[i].volume = GameManager.instance.volume;
+            else
+                sfxPlayers[i].volume = sfxVolume;
         }
     }
     public void PlaySFX(SFX sfx)

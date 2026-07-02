@@ -36,6 +36,10 @@ public class Player : MonoBehaviour
     [Header("공격 표시 커서")]
     public GameObject attackCursor;
 
+    [Header("캔버스")]
+    public GameObject canvas;
+    public GameObject settingPanel;
+
 
     //유니티 컴포넌트
     [HideInInspector] public Rigidbody2D rigid;
@@ -85,6 +89,8 @@ public class Player : MonoBehaviour
                 DontDestroyOnLoad(attackCursor);
             if(cam != null)
                 DontDestroyOnLoad(cam);
+            if(canvas != null)
+                DontDestroyOnLoad(canvas);
         }
         else
         {
@@ -92,6 +98,7 @@ public class Player : MonoBehaviour
             if (groundLine != null) Destroy(groundLine);
             if (attackCursor != null) Destroy(attackCursor);
             if (cam != null) Destroy(cam);
+            if(canvas != null) Destroy(canvas);
 
             Destroy(gameObject);
             return;
@@ -288,16 +295,6 @@ public class Player : MonoBehaviour
 
         cursor.SetColliderPointsFromTrail();
 
-        //잉크 초기화
-        if (isSkill || isGroundCursor)
-        {
-            status.specialInk = status.maxSpecialInk;
-        }
-        else
-        {
-            status.ink = status.maxInk;
-        }
-        InkUIUpdate();
 
         //후처리
         if (isGroundCursor)
@@ -363,7 +360,7 @@ public class Player : MonoBehaviour
     }
 
     //Ink UI를 업데이트하는 함수
-    void InkUIUpdate()
+    public void InkUIUpdate()
     {
         if (UI.Instance != null)
         {
