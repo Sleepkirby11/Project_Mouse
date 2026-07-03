@@ -3357,6 +3357,7 @@ GameObject:
   - component: {fileID: 2805593847332318767}
   - component: {fileID: 4671063651639909012}
   - component: {fileID: 5966127517439500286}
+  - component: {fileID: 74689088851564244}
   m_Layer: 0
   m_Name: BlueBossfield_2
   m_TagString: Untagged
@@ -3455,6 +3456,18 @@ MonoBehaviour:
   zoneId: 0
   spawnPoint: {fileID: 0}
   connectedZoneIds: 01000000
+--- !u!114 &74689088851564244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911106931617480762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c81eb68b42d20c438cab87eeb332ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4494270312788555575
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string index)
     {
         SceneManager.LoadScene(index);
+        CameraSetting.instance.colliders.Clear();
     }
 
-    
 }

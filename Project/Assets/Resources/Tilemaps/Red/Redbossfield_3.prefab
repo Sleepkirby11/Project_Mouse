@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5293274424264634423}
   - component: {fileID: 4136045388893134893}
   - component: {fileID: 8151966644676684259}
+  - component: {fileID: 1050554334825942831}
   m_Layer: 0
   m_Name: Redbossfield_3
   m_TagString: Untagged
@@ -137,6 +138,18 @@ MonoBehaviour:
   zoneId: 3
   spawnPoint: {fileID: 0}
   connectedZoneIds: 02000000
+--- !u!114 &1050554334825942831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857360865113973333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c81eb68b42d20c438cab87eeb332ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5259853656532789114
 GameObject:
   m_ObjectHideFlags: 0

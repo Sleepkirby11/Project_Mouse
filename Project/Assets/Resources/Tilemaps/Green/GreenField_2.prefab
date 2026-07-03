@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4452848290756249380}
   - component: {fileID: 7111828718547784309}
   - component: {fileID: 8670216872369300998}
+  - component: {fileID: -850199894033572507}
   m_Layer: 0
   m_Name: GreenField_2
   m_TagString: Untagged
@@ -114,6 +115,18 @@ MonoBehaviour:
   zoneId: -1
   spawnPoint: {fileID: 0}
   connectedZoneIds: 0100000003000000
+--- !u!114 &-850199894033572507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7445721056531100163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c81eb68b42d20c438cab87eeb332ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7683391898992999121
 GameObject:
   m_ObjectHideFlags: 0

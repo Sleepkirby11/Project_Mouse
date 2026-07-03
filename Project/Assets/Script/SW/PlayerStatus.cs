@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -148,6 +148,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         UI.Instance.UpdateHPBar();
     }
 
+    //잉크 충전
     void ChargeInk()
     {
         if(ink > maxInk)
