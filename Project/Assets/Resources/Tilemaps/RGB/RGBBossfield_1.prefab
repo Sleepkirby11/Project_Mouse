@@ -148959,6 +148959,7 @@ GameObject:
   - component: {fileID: 2632774181380538909}
   - component: {fileID: 302621387580444892}
   - component: {fileID: 1998543067029465108}
+  - component: {fileID: 7581112036656215250}
   m_Layer: 0
   m_Name: RGBBossfield_1
   m_TagString: Untagged
@@ -149053,6 +149054,18 @@ MonoBehaviour:
   zoneId: 0
   spawnPoint: {fileID: 0}
   connectedZoneIds: 00000000
+--- !u!114 &7581112036656215250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8622568224638646302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c81eb68b42d20c438cab87eeb332ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9214634553338679247
 GameObject:
   m_ObjectHideFlags: 0

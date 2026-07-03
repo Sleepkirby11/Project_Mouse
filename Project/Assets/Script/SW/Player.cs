@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
     [HideInInspector] public PlayerStatus status;
- 
+
     public GameObject cam;
 
     [Header("공격")]
@@ -81,15 +81,15 @@ public class Player : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            if(cursorObject != null)
+            if (cursorObject != null)
                 DontDestroyOnLoad(cursorObject);
-            if(groundLine != null)
+            if (groundLine != null)
                 DontDestroyOnLoad(groundLine);
-            if(attackCursor != null)
+            if (attackCursor != null)
                 DontDestroyOnLoad(attackCursor);
-            if(cam != null)
+            if (cam != null)
                 DontDestroyOnLoad(cam);
-            if(canvas != null)
+            if (canvas != null)
                 DontDestroyOnLoad(canvas);
         }
         else
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
             if (groundLine != null) Destroy(groundLine);
             if (attackCursor != null) Destroy(attackCursor);
             if (cam != null) Destroy(cam);
-            if(canvas != null) Destroy(canvas);
+            if (canvas != null) Destroy(canvas);
 
             Destroy(gameObject);
             return;
@@ -235,7 +235,7 @@ public class Player : MonoBehaviour
             //스킬 | 커서 | 일반 공격 종류 걸러내기
             if (isSkill)
                 status.specialInk -= cursor.lastLength / 6;
-            else if(groundCursor.isMove)
+            else if (groundCursor.isMove)
                 status.specialInk -= cursor.lastLength / 8;
             else
                 status.ink -= cursor.lastLength / 4;
@@ -299,7 +299,7 @@ public class Player : MonoBehaviour
         //후처리
         if (isGroundCursor)
             isGroundCursor = false;
-        if(isSkill)
+        if (isSkill)
         {
             SkillBool(false);
             StatusImage.instance.ChangeImage((int)status.currentStance, isSkill);
@@ -444,29 +444,29 @@ public class Player : MonoBehaviour
     }
 
     //레버 상호작용 감지
-   void OnTriggerEnter2D(Collider2D collision)
-{
-    if (collision.transform.parent != null)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject parentObj = collision.transform.parent.gameObject;
-        
-        if (parentObj.CompareTag("Interactable"))
+        if (collision.transform.parent != null)
         {
-            interactable = parentObj.GetComponent<IInteractable>();
-        }
-    }
-}
+            GameObject parentObj = collision.transform.parent.gameObject;
 
-void OnTriggerExit2D(Collider2D collision)
-{
-    if (collision.transform.parent != null)
-    {
-        GameObject parentObj = collision.transform.parent.gameObject;
-        
-        if (parentObj.CompareTag("Interactable"))
-        {
-            interactable = null;
+            if (parentObj.CompareTag("Interactable"))
+            {
+                interactable = parentObj.GetComponent<IInteractable>();
+            }
         }
     }
-}
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.parent != null)
+        {
+            GameObject parentObj = collision.transform.parent.gameObject;
+
+            if (parentObj.CompareTag("Interactable"))
+            {
+                interactable = null;
+            }
+        }
+    }
 }

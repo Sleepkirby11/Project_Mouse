@@ -49984,6 +49984,7 @@ GameObject:
   - component: {fileID: 8402703337166098147}
   - component: {fileID: 1015581946012191456}
   - component: {fileID: 4278934732396176558}
+  - component: {fileID: 7108744100610449026}
   m_Layer: 0
   m_Name: Redfield_0
   m_TagString: Untagged
@@ -50079,6 +50080,18 @@ MonoBehaviour:
   zoneId: 0
   spawnPoint: {fileID: 2679194210760481878}
   connectedZoneIds: 01000000
+--- !u!114 &7108744100610449026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6726105636291395821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c81eb68b42d20c438cab87eeb332ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &127007774331406881
 PrefabInstance:
   m_ObjectHideFlags: 0
