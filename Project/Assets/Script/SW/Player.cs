@@ -236,7 +236,7 @@ public class Player : MonoBehaviour
             if (isSkill)
                 status.specialInk -= cursor.lastLength / 6;
             else if (groundCursor.isMove)
-                status.specialInk -= cursor.lastLength / 8;
+                status.specialInk -= cursor.lastLength / 2;
             else
                 status.ink -= cursor.lastLength / 4;
             InkUIUpdate();
