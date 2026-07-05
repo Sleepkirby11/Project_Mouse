@@ -29,7 +29,7 @@ public class PlayerInputScript : MonoBehaviour
         if (context.started)
         {
             player.anim.SetBool("IsWalk", true);
-            player.inputVec.x = context.ReadValue<Vector2>().x * player.speed;
+            player.inputVec.x = context.ReadValue<Vector2>().x * player.status.speed;
 
             if (player.status.CanMove)
             {
