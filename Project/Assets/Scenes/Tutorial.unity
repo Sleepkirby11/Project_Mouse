@@ -2866,6 +2866,30 @@ PrefabInstance:
       propertyPath: settingPanel
       value: 
       objectReference: {fileID: 318810792}
+    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: maxInk
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: dashForce
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: chargeSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
+      propertyPath: maxSpecialInk
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8980805245238387335, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.788559
