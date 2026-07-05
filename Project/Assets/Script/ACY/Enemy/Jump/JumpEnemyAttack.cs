@@ -196,6 +196,12 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             return;
         }
 
+        // 기 모으는 중(지상)에 공격받은 경우에는 취소하지 않음
+        if (isCharging)
+        {
+            return;
+        }
+
         if (jumpRoutine != null)
         {
             StopCoroutine(jumpRoutine);

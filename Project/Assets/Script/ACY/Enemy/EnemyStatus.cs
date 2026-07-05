@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -27,6 +27,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
     [Header("보스 설정")]
     [SerializeField] private bool isBoss = false; // 보스인지 판별
+
+    public bool IsDead { get; private set; } // 사망 여부 플래그
 
     private GameObject cachedPortalVisual;
     private PlayerStatus cachedPlayer;
@@ -206,6 +208,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             return;
         }
 
+        IsDead = true; // 사망 상태 설정
+
         OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
 
         if (isBoss && cachedPortalVisual != null) // 포탈 활성화
@@ -236,6 +240,16 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             {
                 rb.linearVelocity = Vector2.zero;
                 rb.bodyType = RigidbodyType2D.Kinematic;
+            }
+
+            // 본인을 제외한 모든 MonoBehaviour 스크립트 비활성화
+            MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+            foreach (MonoBehaviour script in scripts)
+            {
+                if (script != null && script != this)
+                {
+                    script.enabled = false;
+                }
             }
         }
 

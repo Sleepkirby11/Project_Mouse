@@ -3823,11 +3823,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1114137132973608061, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.97
+      value: 14.01
       objectReference: {fileID: 0}
     - target: {fileID: 8270254223933073532, guid: b14c12d3dd1411b49abe2a967e808d82, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3884,7 +3884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 952050263766178938, guid: fe7cafadf75fb2e4aa612b20cc7e5ac6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2611043575802034429, guid: fe7cafadf75fb2e4aa612b20cc7e5ac6, type: 3}
       propertyPath: 'blackHoleSpawnPoints.Array.data[0]'
