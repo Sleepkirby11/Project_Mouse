@@ -49,6 +49,9 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     [Header("플레이어 콤보")]
     public int combo;
 
+    [Header("잉크 차징 속도")]
+    public float chargeSpeed;
+
 
     private Rigidbody2D rb;
     private Animator playerAnim;
@@ -158,7 +161,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         else if(ink < maxInk)
         {
-            ink += Time.deltaTime;
+            ink += Time.deltaTime * chargeSpeed;
         }
     }
 
@@ -171,7 +174,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         else if(specialInk < maxSpecialInk)
         {
-            specialInk += Time.deltaTime;
+            specialInk += Time.deltaTime * chargeSpeed;
         }
     }
 
