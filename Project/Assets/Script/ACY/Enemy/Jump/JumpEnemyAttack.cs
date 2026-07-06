@@ -34,7 +34,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 
     [Header("착지 체크")]
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.15f;
+    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
     [SerializeField] private LayerMask groundLayer;
 
     private Coroutine jumpRoutine;
@@ -289,7 +289,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             return false;
         }
 
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        return Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
     }
 
     #endregion
@@ -311,7 +311,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         if (groundCheck != null)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            Gizmos.DrawWireCube(groundCheck.position, groundCheckSize);
         }
     }
 
