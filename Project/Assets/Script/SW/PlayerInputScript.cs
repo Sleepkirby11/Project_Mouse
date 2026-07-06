@@ -208,6 +208,10 @@ public class PlayerInputScript : MonoBehaviour
         {
             return;
         }
+        if(player.status.currentCoolTime < player.status.coolTime)
+        {
+            return;
+        }
 
         if (context.started)
         {
