@@ -73,6 +73,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public bool IsInvincible => isInvincible;
     public bool IsBound => isBound;
     private Coroutine bindCoroutine;
+    private float originGravityScale;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -85,6 +86,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            originGravityScale = rb.gravityScale;
         }
     }
     //상태 초기화
@@ -301,7 +303,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             isBound = false;
             if (rb != null)
             {
-                rb.gravityScale = 1f;
+                rb.gravityScale = originGravityScale;
                 rb.linearVelocity = Vector2.zero;
             }
             if (playerComp != null)
@@ -332,7 +334,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         isBound = false;
         bindCoroutine = null;
-        rb.gravityScale = 1f;
+        rb.gravityScale = originGravityScale;
 
         rb.linearVelocity = Vector2.zero;
         playerComp.OnKnockbackEnd();
