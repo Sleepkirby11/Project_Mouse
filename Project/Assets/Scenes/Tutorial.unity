@@ -1738,7 +1738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: damage
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7994187737598852400, guid: 9f9e47b2203fbc34196091a0cc2bdfd4, type: 3}
       propertyPath: maxInk
