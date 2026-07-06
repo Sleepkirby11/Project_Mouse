@@ -84,7 +84,7 @@ MonoBehaviour:
   readyDuration: 0.6
   directHitDamage: 1
   directHitRadius: 0.6
-  shockwaveDamage: 1
+  shockwaveDamage: 2
   shockwaveBoxSize: {x: 4, y: 0.6}
   shockwaveBoxOffset: {x: 0, y: -0.4}
   playerLayer:
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_Bits: 64
   shockwavePoolKey: Shockwave
   groundCheck: {fileID: 5472526186819999629}
-  groundCheckRadius: 0.15
+  groundCheckSize: {x: 0.5, y: 0.1}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

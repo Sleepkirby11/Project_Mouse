@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myElement: 2
-  bulletDamage: 5
+  bulletDamage: 2
   stunDuration: 1
   moveSpeed: 20
   pauseDuration: 0.5

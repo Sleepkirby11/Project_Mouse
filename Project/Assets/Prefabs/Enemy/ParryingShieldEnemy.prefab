@@ -77,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   patrolDistance: 4
+  stopDistance: 0.8
   detectRange: 10
   playerLayer:
     serializedVersion: 2
@@ -89,6 +90,7 @@ MonoBehaviour:
   contactCooldown: 0.5
   counterDashForce: 22
   counterDashTime: 0.6
+  counterDamage: 3
   counterLaunchY: 18
   counterStunTime: 1
   counterRecoverTime: 1

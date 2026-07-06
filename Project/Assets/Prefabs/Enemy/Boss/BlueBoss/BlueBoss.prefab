@@ -179,7 +179,7 @@ MonoBehaviour:
   sonicSpawnPoint: {fileID: 3471223895787820529}
   sonicAngle: 45
   sonicRange: 20
-  sonicDamage: 10
+  sonicDamage: 5
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a34d9a8d55d50848a84bc2093c37fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
 --- !u!60 &7466204892382239570
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a34d9a8d55d50848a84bc2093c37fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 3
 --- !u!1 &7850722398097481595
 GameObject:
   m_ObjectHideFlags: 0

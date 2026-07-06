@@ -185,7 +185,7 @@ MonoBehaviour:
   despawnX: 20
   warningLine: {fileID: 6911326296446247475}
   warningTime: 1.5
-  damage: 10
+  damage: 3
 --- !u!50 &1794100229489867295
 Rigidbody2D:
   serializedVersion: 5

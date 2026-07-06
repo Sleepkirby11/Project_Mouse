@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diveSpeed: 20
   waitTime: 1
-  damage: 1
+  damage: 2
 --- !u!114 &8854847022435032799
 MonoBehaviour:
   m_ObjectHideFlags: 0

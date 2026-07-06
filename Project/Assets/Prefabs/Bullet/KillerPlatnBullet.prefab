@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolKey: KillerPlantBullet
-  damage: 8
+  damage: 5
   lifetime: 4
 --- !u!50 &7003576021561141301
 Rigidbody2D:
