@@ -85,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minfallSpeed: 8
   maxfallSpeed: 10
-  damage: 1
+  damage: 5
 --- !u!50 &2558072380318425221
 Rigidbody2D:
   serializedVersion: 5

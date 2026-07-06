@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,6 +44,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     [Header("카운터 공격")]
     [SerializeField] private float counterDashForce = 22f;  // 돌진 힘
     [SerializeField] private float counterDashTime = 0.6f;  // 돌진 유지 시간
+    [SerializeField] private int counterDamage = 3;
     [SerializeField] private float counterLaunchY = 18f;    // 카운터 히트 공중부양 힘
     [SerializeField] private float counterStunTime = 1.5f;  // 스턴 지속 시간
     [SerializeField] private float counterRecoverTime = 0.3f;
@@ -393,7 +394,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         // 카운터 공격 성공 시 대미지 + 넉백 + 스턴
         if (playerObj.TryGetComponent(out IDamageable damageable))
         {
-            damageable.TakeDamage(contactDamage);
+            damageable.TakeDamage(counterDamage);
         }
 
         if (playerObj.TryGetComponent(out IHittable hittable))

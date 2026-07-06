@@ -96,7 +96,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 180
   lifeTime: 6
-  damage: 5
+  damage: 3
   bombDuration: 0.3
   bombSound: 2
   flightSound: {fileID: 0}
