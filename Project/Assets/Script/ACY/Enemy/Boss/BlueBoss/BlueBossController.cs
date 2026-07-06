@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -304,6 +304,10 @@ public class BossController : MonoBehaviour, IHitReaction
                 {
                     anim.SetTrigger(AnimClaw);
                 }
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossClaw);
+                }
             }
 
             rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * 2f * Time.fixedDeltaTime));
@@ -317,6 +321,10 @@ public class BossController : MonoBehaviour, IHitReaction
         if (!attackStarted && anim != null)
         {
             anim.SetTrigger(AnimClaw);
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossClaw);
+            }
         }
 
         yield return new WaitForSeconds(GetAnimLength("Claw"));
@@ -346,6 +354,10 @@ public class BossController : MonoBehaviour, IHitReaction
         if (anim != null)
         {
             anim.SetTrigger(AnimDash);
+        }
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossDash);
         }
         if (dashHitbox != null)
         {
@@ -475,6 +487,11 @@ public class BossController : MonoBehaviour, IHitReaction
         if (laser != null)
         {
             laser.transform.localScale = Vector3.one;
+        }
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossLaser);
         }
 
         Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;

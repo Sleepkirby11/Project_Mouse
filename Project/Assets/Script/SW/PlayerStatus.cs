@@ -357,17 +357,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         rb.linearVelocity = Vector2.zero;
 
-        int playerLayer = LayerMask.NameToLayer("Player");
-        int groundLayer = LayerMask.NameToLayer("Ground");
-        Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, true);
-
         rb.AddForce(Vector2.up * forceY, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.15f);
         yield return new WaitUntil(() => rb.linearVelocityY <= 0f);
         yield return new WaitForFixedUpdate();
-
-        Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
 
         isKnockbacked = false;
         rb.linearVelocityX = 0f;

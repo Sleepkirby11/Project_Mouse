@@ -57,7 +57,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c43c2f156376f3d41a8c0b838361079e, type: 3}
     volumeScale: 1
   - name: Blue_Dash
-    clip: {fileID: 8300000, guid: 244362fa6db6fc1418ec9271b4c64fc0, type: 3}
+    clip: {fileID: 8300000, guid: a3da1cce2b0a12f4c80c1d1b6ab85703, type: 3}
     volumeScale: 1
   - name: Blue_Laser
     clip: {fileID: 8300000, guid: e698b691a7b76ee4ba54dc54e1c76a40, type: 3}
