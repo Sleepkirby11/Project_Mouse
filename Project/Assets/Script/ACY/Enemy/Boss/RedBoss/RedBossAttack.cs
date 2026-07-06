@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -914,7 +914,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
                     GameObject obj = PoolingManager.Instance.Get(ARROW_KEY, spawnPos, Quaternion.identity);
                     if (obj != null)
                     {
-                        obj.GetComponent<FireArrow>()?.Init(finalAngle, false);
+                        obj.GetComponent<FireArrow>()?.Init(finalAngle, false, true);
                     }
                 }
             }
