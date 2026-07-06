@@ -57,6 +57,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public float coolTime;
     public float currentCoolTime;
 
+    private string particleName = "Particle_PlayerHit";
+
 
     private Rigidbody2D rb;
     private Animator playerAnim;
@@ -150,6 +152,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         else
         {
             playerAnim.SetTrigger("Hit");
+            if(PoolingManager.Instance != null)
+            {
+                GameObject hitParticle = PoolingManager.Instance.Get(particleName, this.transform.position, this.transform.rotation);
+            }
         }
     }
 
