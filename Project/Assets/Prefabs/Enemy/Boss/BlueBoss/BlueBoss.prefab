@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1116401776335420760}
   - component: {fileID: 2183927895254140913}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DeathCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415424866548822480}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3059026989955239514
 Transform:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  restPointOffset: {x: 0, y: 3.5}
+  restPointOffset: {x: 0, y: 3}
   restJumpHeight: 8
   clawHitbox: {fileID: 5999535619754719866}
   dashHitbox: {fileID: 7466204892382239570}
@@ -186,7 +186,7 @@ MonoBehaviour:
   waterSpoutPoolKey: WaterSpout
   waterSpoutInterval: 5
   waterSpoutSpread: 3
-  waterSpoutYOffset: 2
+  waterSpoutYOffset: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -198,7 +198,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  deathCollider: {fileID: 0}
+  deathCollider: {fileID: 2183927895254140913}
 --- !u!61 &8983735407669826811
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -257,9 +257,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 400
   dieAnimationLength: 3
-  element: 3
+  element: 2
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
