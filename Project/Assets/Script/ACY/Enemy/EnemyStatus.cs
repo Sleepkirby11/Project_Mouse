@@ -129,6 +129,13 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         }
             damage = ApplyElementalDamage(damage);
         CameraShake.instance.Impulse();
+
+        // 피격 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.EnemyHurt);
+        }
+
         if (anim != null)
         {
             if (HasParameter("Hurt"))

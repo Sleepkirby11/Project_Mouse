@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -277,6 +277,13 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             StopCoroutine(counterRoutine);
         }
+
+        // 카운터(패링 성공) 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.ParryingCounter);
+        }
+
         counterRoutine = StartCoroutine(CounterRoutine());
         return true;
     }
@@ -370,6 +377,13 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             anim.SetTrigger("Attack");
         }
+
+        // 검 공격 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.ParryingShield_attackSword);
+        }
+
         float dirX = playerObj.transform.position.x > transform.position.x ? 1f : -1f;
         Vector2 knockback = new Vector2(dirX * contactKnockbackX, contactKnockbackY);
 
