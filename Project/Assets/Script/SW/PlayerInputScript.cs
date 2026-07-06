@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -164,6 +164,13 @@ public class PlayerInputScript : MonoBehaviour
                 //normalized된 방향으로 AddForce
                 player.rigid.linearVelocity = Vector2.zero;
                 player.rigid.AddForce(dir.normalized * player.status.dashForce, ForceMode2D.Impulse);
+                
+                // 대시 효과음 재생
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.PlayerDash);
+                }
+
                 //키 입력 영향 임시 제한
                 player.isCanMove = false;
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -63,6 +63,10 @@ public class Player : MonoBehaviour
 
     private bool isChargeInk;
     private bool isChargeSpecial;
+
+    // 발소리 타이머 관련 변수
+    private float footstepTimer;
+    [SerializeField] private float footstepInterval = 0.35f;
 
     //마우스
     [HideInInspector] public Transform mouse;
@@ -151,6 +155,24 @@ public class Player : MonoBehaviour
         if (isDashReady && jumpCount == 1)
             DashLine();
         GroundCheck();
+
+        // 발소리 처리
+        if (isCanMove && status.CanMove && anim.GetBool("IsWalk") && jumpCount == 2 && Mathf.Abs(rigid.linearVelocityX) > 0.1f)
+        {
+            footstepTimer += Time.fixedDeltaTime;
+            if (footstepTimer >= footstepInterval)
+            {
+                footstepTimer = 0f;
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.PlayerWalk);
+                }
+            }
+        }
+        else
+        {
+            footstepTimer = footstepInterval;
+        }
     }
 
     public void SpriteFlip()

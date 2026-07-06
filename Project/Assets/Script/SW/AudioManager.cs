@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
@@ -20,7 +20,27 @@ public class AudioManager : MonoBehaviour
     //효과음 추가 시 순서대로 입력할 것
     public enum SFX
     {
-        
+        ArcherArrow,
+        BasicEnemyAttack,
+        BlueBossClaw,
+        BlueBossDash,
+        BlueBossLaser,
+        EnemyHurt,
+        GreenBossWind,
+        Ice,
+        IceHammer,
+        JumpEnemy_Jump,
+        JumpEnemy_Land,
+        ParryingCounter,
+        ParryingShield_attackSword,
+        PlayerDash,
+        PlayerWalk,
+        RGB_Gear,
+        RGB_Hurricane,
+        RGB_explosion,
+        RedBossDie,
+        RedBossFire,
+        RedBossTP
     }
 
     private void Awake()
@@ -87,6 +107,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX_Int(int sfx)
     {
+        if (sfxClips == null || sfx < 0 || sfx >= sfxClips.Length)
+        {
+            Debug.LogWarning($"[AudioManager] SFX index {sfx} is out of bounds of sfxClips (Length: {sfxClips?.Length ?? 0}). Please assign all 21 clips in the AudioManager Inspector.");
+            return;
+        }
+
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             int loopIndex = (i + channelIndex) % sfxPlayers.Length;
