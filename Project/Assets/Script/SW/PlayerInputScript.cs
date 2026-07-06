@@ -7,12 +7,10 @@ public class PlayerInputScript : MonoBehaviour
 {
     private Player player;
 
-    bool isSetting;
 
     private void Awake()
     {
         player = GetComponent<Player>();
-        isSetting = false;
     }
 
     //플레이어 이동
@@ -21,9 +19,16 @@ public class PlayerInputScript : MonoBehaviour
         //이동 키 변화 감지 시 true
         player.isCanMove = true;
         //사망 시에는 입력 무시
-        if (player.status.HP <= 0 || isSetting)
+        if (player.status.HP <= 0)
         {
             return;
+        }
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
         //키 입력 시작
         if (context.started)
@@ -51,9 +56,17 @@ public class PlayerInputScript : MonoBehaviour
         //이동 키 변화 감지 시 true
         player.isCanMove = true;
         //이동 제한 조건식
-        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
+        if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         if (context.started)
@@ -67,9 +80,17 @@ public class PlayerInputScript : MonoBehaviour
     public void ActionJump(InputAction.CallbackContext context)
     {
         //점프 제한 조건식
-        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
+        if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         if (context.started)
@@ -96,9 +117,12 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionInteract(InputAction.CallbackContext context)
     {
-        if(isSetting)
+        if(GameManager.instance != null)
         {
-            return;
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         if(context.started && player.interactable != null)
@@ -110,9 +134,17 @@ public class PlayerInputScript : MonoBehaviour
     //대시 키 받아오기
     public void ActionDash(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
+        if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         if (context.started)
@@ -146,9 +178,17 @@ public class PlayerInputScript : MonoBehaviour
     //공격 키 받아오기
     public void ActionAttack(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
+        if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         //스킬과 일반 공격 구분
@@ -174,9 +214,17 @@ public class PlayerInputScript : MonoBehaviour
     //키 입력 종료 시 UI의 상태에 따른 스탠스 변환
     public void ActionStance(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
+        if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         if (context.started)
@@ -204,9 +252,16 @@ public class PlayerInputScript : MonoBehaviour
     //원 버튼으로 On/Off
     public void ActionSkill(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
+        if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
         if(player.status.currentCoolTime < player.status.coolTime)
         {
@@ -225,9 +280,17 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionMakeGround(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove || isSetting)
+        if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         //스킬과 일반 공격 구분
@@ -252,9 +315,12 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionCheatHeal(InputAction.CallbackContext context)
     {
-        if(isSetting)
+        if(GameManager.instance != null)
         {
-            return;
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
         if(context.started)
         {
@@ -269,15 +335,9 @@ public class PlayerInputScript : MonoBehaviour
         if(context.started)
         {
             player.settingPanel.SetActive(!player.settingPanel.activeSelf);
-            if(player.settingPanel.activeSelf)
+            if(GameManager.instance != null)
             {
-                Time.timeScale = 0;
-                isSetting = true;
-            }
-            else
-            {
-                Time.timeScale = 1;
-                isSetting = false;
+                GameManager.instance.PauseOnOff();
             }
         }
     }

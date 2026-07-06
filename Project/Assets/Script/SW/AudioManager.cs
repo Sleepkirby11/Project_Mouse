@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
         if(GameManager.instance != null)
-            bgmPlayer.volume = GameManager.instance.volume;
+            bgmPlayer.volume = GameManager.instance.bgmVolume;
         else
             bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
             if(GameManager.instance != null)
-                sfxPlayers[i].volume = GameManager.instance.volume;
+                sfxPlayers[i].volume = GameManager.instance.sfxVolume;
             else
                 sfxPlayers[i].volume = sfxVolume;
         }
@@ -69,13 +69,13 @@ public class AudioManager : MonoBehaviour
     public void UpdateSound()
     {
         if(GameManager.instance != null)
-            bgmPlayer.volume = GameManager.instance.volume;
+            bgmPlayer.volume = GameManager.instance.bgmVolume;
         else
             bgmPlayer.volume = bgmVolume;
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             if(GameManager.instance != null)
-                sfxPlayers[i].volume = GameManager.instance.volume;
+                sfxPlayers[i].volume = GameManager.instance.sfxVolume;
             else
                 sfxPlayers[i].volume = sfxVolume;
         }

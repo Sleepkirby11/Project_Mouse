@@ -28,6 +28,7 @@ public class GameStarting : MonoBehaviour
     public void CloseSetting()
     {
         if (settingPanel != null) settingPanel.SetActive(false);
+        if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
 
     // [추가] 라이선스창 열기
