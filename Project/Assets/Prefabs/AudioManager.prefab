@@ -93,8 +93,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4cb1ea08de557254981d237062fd83da, type: 3}
     volumeScale: 1
   - name: Red_Die
-    clip: {fileID: 8300000, guid: 02f51699637e67e4f9e470d465de28db, type: 3}
-    volumeScale: 1
+    clip: {fileID: 8300000, guid: 7d0fa75a4c1432d41ba60d9c93cc99e4, type: 3}
+    volumeScale: 0.7
   - name: Red_Fire
     clip: {fileID: 8300000, guid: e245b10a4fad5324793fbe9c94b1998e, type: 3}
     volumeScale: 1
