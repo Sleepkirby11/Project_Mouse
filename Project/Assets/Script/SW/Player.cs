@@ -234,11 +234,11 @@ public class Player : MonoBehaviour
         {
             //스킬 | 커서 | 일반 공격 종류 걸러내기
             if (isSkill)
-                status.specialInk -= cursor.lastLength / 6;
+                status.specialInk -= cursor.lastLength;
             else if (groundCursor.isMove)
-                status.specialInk -= cursor.lastLength / 2;
+                status.specialInk -= cursor.lastLength;
             else
-                status.ink -= cursor.lastLength / 4;
+                status.ink -= cursor.lastLength;
             InkUIUpdate();
             usedInk = 0;
             cursor.lastLength = 0;

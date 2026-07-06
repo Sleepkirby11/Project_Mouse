@@ -155,9 +155,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   teleportInterval: 3
-  disappearVFX: {fileID: 0}
-  appearVFX: {fileID: 0}
+  disappearVFX: {fileID: 7323537915668664570, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
+  appearVFX: {fileID: 3268619075305744560, guid: 771cca234fa3d5e4080958e572a7f350, type: 3}
 --- !u!114 &5189355176662487042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,9 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 400
   dieAnimationLength: 0.8
-  element: 3
+  element: 0
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
@@ -197,9 +198,9 @@ MonoBehaviour:
   meteorPerWave: 7
   waveInterval: 1.5
   meteorCastTime: 2
-  meteorSpawnXRange: {x: -25, y: 25}
-  meteorSpawnYRange: {x: 23, y: 18}
-  meteorTargetY: -15
+  meteorSpawnXRange: {x: 422, y: 460}
+  meteorSpawnYRange: {x: 16, y: 20}
+  meteorTargetY: -20
   stunDuration: 3
   teleportPoints:
   - {fileID: 0}
@@ -207,7 +208,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  cloneDisappearVFX: {fileID: 0}
+  - {fileID: 0}
+  cloneDisappearVFX: {fileID: 7323537915668664570, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
   cloneSpawnVFX: {fileID: 3268619075305744560, guid: 771cca234fa3d5e4080958e572a7f350, type: 3}
   laserCrossPrefab: {fileID: 2214707613065288430, guid: 39eb1a22691993f45bb0c0266a835624, type: 3}
   laserSpawnPoint: {fileID: 0}

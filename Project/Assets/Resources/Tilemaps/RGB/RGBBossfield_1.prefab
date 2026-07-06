@@ -149302,10 +149302,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RGB_Boss
       objectReference: {fileID: 0}
-    - target: {fileID: 952050263766178938, guid: fe7cafadf75fb2e4aa612b20cc7e5ac6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2611043575802034429, guid: fe7cafadf75fb2e4aa612b20cc7e5ac6, type: 3}
       propertyPath: 'blackHoleSpawnPoints.Array.data[0]'
       value: 
@@ -149365,10 +149361,6 @@ PrefabInstance:
     - target: {fileID: 5372984818383490697, guid: fe7cafadf75fb2e4aa612b20cc7e5ac6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5376113748329740870, guid: fe7cafadf75fb2e4aa612b20cc7e5ac6, type: 3}
-      propertyPath: maxHP
-      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

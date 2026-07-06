@@ -119440,38 +119440,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenBoss
       objectReference: {fileID: 0}
-    - target: {fileID: 3986874546270545098, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4792473616297398474, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: maxY
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4792473616297398474, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: minY
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 4792473616297398474, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: spawnX
-      value: 490
-      objectReference: {fileID: 0}
-    - target: {fileID: 4792473616297398474, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: flowerMaxX
-      value: 485
-      objectReference: {fileID: 0}
-    - target: {fileID: 4792473616297398474, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: flowerMinX
-      value: 435
-      objectReference: {fileID: 0}
-    - target: {fileID: 6311063857778916828, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: maxHP
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6311063857778916828, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
-      propertyPath: element
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9003603150043872871, guid: 01eddb0bf32bafd4291fb5edd63796da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 391.78

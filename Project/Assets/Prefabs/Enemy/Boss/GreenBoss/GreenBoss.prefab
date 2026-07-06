@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9003603150043872871
 Transform:
   m_ObjectHideFlags: 0
@@ -305,9 +305,9 @@ MonoBehaviour:
   warningTime: 1
   spawnInterval: 3
   birdGap: 2
-  spawnX: 80
-  minY: -8.4
-  maxY: 0
+  spawnX: 490
+  minY: 80
+  maxY: 90
   shieldObject: {fileID: 1400492813834309669}
   healPerReturnedSpirit: 1
   castingDuration: 1
@@ -329,8 +329,8 @@ MonoBehaviour:
   flowerSpawnCount: 3
   flowerSpawnInterval: 0.4
   flowerPatternInterval: 12
-  flowerMinX: 45
-  flowerMaxX: 65
+  flowerMinX: 435
+  flowerMaxX: 485
   flowerMinGap: 2
   flowerSpawnOffsetY: 0.7
   groundLayer:
@@ -366,9 +366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 550
   dieAnimationLength: 1
-  element: 3
+  element: 1
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1

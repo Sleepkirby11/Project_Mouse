@@ -24267,26 +24267,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoss
       objectReference: {fileID: 0}
-    - target: {fileID: 1823950582210720561, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3372036266355469166, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: appearVFX
-      value: 
-      objectReference: {fileID: 3268619075305744560, guid: 771cca234fa3d5e4080958e572a7f350, type: 3}
-    - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: disappearVFX
-      value: 
-      objectReference: {fileID: 7323537915668664570, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
-    - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: teleportPoints.Array.size
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 5172886122121002780, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: 'teleportPoints.Array.data[0]'
       value: 
@@ -24311,14 +24291,6 @@ PrefabInstance:
       propertyPath: 'teleportPoints.Array.data[5]'
       value: 
       objectReference: {fileID: 3223670796817574537}
-    - target: {fileID: 5189355176662487042, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: maxHP
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 5189355176662487042, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: element
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7047756458394531367, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 198.51
@@ -24364,37 +24336,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5026156332997557328}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: meteorTargetY
-      value: -20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: laserSpawnPoint
       value: 
       objectReference: {fileID: 5026156332997557328}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: cloneDisappearVFX
-      value: 
-      objectReference: {fileID: 7323537915668664570, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: meteorSpawnXRange.x
-      value: 422
-      objectReference: {fileID: 0}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: meteorSpawnXRange.y
-      value: 460
-      objectReference: {fileID: 0}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: meteorSpawnYRange.x
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: meteorSpawnYRange.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
-      propertyPath: teleportPoints.Array.size
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 7442515793938700868, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: 'teleportPoints.Array.data[0]'
       value: 
