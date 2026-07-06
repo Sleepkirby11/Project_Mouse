@@ -20,6 +20,9 @@ public class UI : MonoBehaviour
     [Header("잉크 게이지 설정")]
     [SerializeField] private Slider inkSlider;
 
+    [Header("쿨타임 게이지 설정")]
+    [SerializeField] private Slider coolTimeSlider;
+
     [Header("특수 잉크 게이지 설정")]
     [SerializeField] private Slider specialInkSlider;
 
@@ -63,6 +66,8 @@ public class UI : MonoBehaviour
         {
             playerStatus = playerObj.GetComponent<PlayerStatus>();
             UpdateHPBar();
+            UpdateCoolTimeBar();
+            UpdateInkBar();
         }
     }
 
@@ -114,6 +119,14 @@ public class UI : MonoBehaviour
         else if (bossHpSlider == null)
         {
             Debug.LogWarning("[UI] UpdateBossHPBar: bossHpSlider가 null입니다.");
+        }
+    }
+
+    public void UpdateCoolTimeBar()
+    {
+        if (coolTimeSlider != null && playerStatus != null)
+        {
+            coolTimeSlider.value = playerStatus.currentCoolTime / playerStatus.coolTime;
         }
     }
 
