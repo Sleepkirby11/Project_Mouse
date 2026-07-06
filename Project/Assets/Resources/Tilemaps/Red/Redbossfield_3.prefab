@@ -24315,6 +24315,10 @@ PrefabInstance:
       propertyPath: maxHP
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 5189355176662487042, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
+      propertyPath: element
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7047756458394531367, guid: 3cb4df62a15b7994eb237f7f7bdeeb2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 198.51
