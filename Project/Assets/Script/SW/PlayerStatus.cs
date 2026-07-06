@@ -51,6 +51,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
     [Header("잉크 차징 속도")]
     public float chargeSpeed;
+    public float specialChargeSpeed;
+
+    [Header("쿨타임")]
+    public float coolTime;
 
 
     private Rigidbody2D rb;
@@ -174,7 +178,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         else if(specialInk < maxSpecialInk)
         {
-            specialInk += Time.deltaTime * chargeSpeed;
+            specialInk += Time.deltaTime * specialChargeSpeed;
         }
     }
 
