@@ -241,11 +241,11 @@ public class Player : MonoBehaviour
     }
 
     //매개변수 상태와 무적 판정에 따른 Animation 전환
-    public void JumpAnimUpdate(bool isUpate)
+    public void JumpAnimUpdate(bool isUpdate)
     {
         if (!status.IsInvincible)
         {
-            anim.SetBool("IsJump", isUpate);
+            anim.SetBool("IsJump", isUpdate);
         }
     }
 
