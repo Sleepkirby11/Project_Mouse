@@ -301,6 +301,7 @@ public class Player : MonoBehaviour
             isGroundCursor = false;
         if (isSkill)
         {
+            status.currentCoolTime = 0;
             SkillBool(false);
             StatusImage.instance.ChangeImage((int)status.currentStance, isSkill);
         }

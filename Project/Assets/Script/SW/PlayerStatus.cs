@@ -55,6 +55,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
     [Header("쿨타임")]
     public float coolTime;
+    public float currentCoolTime;
 
 
     private Rigidbody2D rb;
@@ -109,6 +110,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             ChargeSpecialInk();
         }
         Player.instance.InkUIUpdate();
+        if(currentCoolTime  < coolTime)
+        {
+            CoolTimeUpdate();
+            UI.Instance.UpdateCoolTimeBar();
+        }
     }
 
     public bool CanMove => !isKnockbacked && !isStunned && !isPossessed && !isBound; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
@@ -180,6 +186,16 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             specialInk += Time.deltaTime * specialChargeSpeed;
         }
+    }
+
+    public void CoolTimeUpdate()
+    {
+        if(currentCoolTime >= coolTime)
+        {
+            currentCoolTime = coolTime;
+            return;
+        }
+        currentCoolTime += Time.deltaTime;
     }
 
     // IHittable 구현 : 넉백

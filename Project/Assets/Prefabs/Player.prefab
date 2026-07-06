@@ -182,10 +182,6 @@ MonoBehaviour:
     m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
-    m_ActionName: 'Player/Look[/Mouse/delta,/Pen/delta]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6404161621859968284}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
@@ -321,6 +317,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 546fc94f-b03a-49cf-b194-51783af7a7e9
     m_ActionName: 'Player/Make[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7d22341-d951-4ce3-9e9d-8ca072ecec12
+    m_ActionName: 'Player/Menu[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -411,10 +411,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4d45d7b17bad54fae3b03291c0912c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: {fileID: 0}
+  cam: {fileID: 0}
   cursorObject: {fileID: 0}
+  cursor: {fileID: 0}
   groundLine: {fileID: 0}
+  groundCursor: {fileID: 0}
   attackCursor: {fileID: 0}
+  canvas: {fileID: 0}
+  settingPanel: {fileID: 0}
+  rigid: {fileID: 0}
+  anim: {fileID: 0}
+  particle: {fileID: 0}
+  speed: 0
+  inputVec: {x: 0, y: 0}
+  isCanMove: 0
+  jumpCount: 0
+  isDashReady: 0
+  mouse: {fileID: 0}
   maxDist: 7.5
+  isSkill: 0
 --- !u!114 &7994187737598852400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,6 +447,8 @@ MonoBehaviour:
   hp: 0
   maxInk: 5
   ink: 0
+  maxSpecialInk: 0
+  specialInk: 0
   speed: 5
   damage: 1
   jumpForce: 10
@@ -555,6 +573,12 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  currentStance: 0
+  combo: 0
+  chargeSpeed: 0
+  specialChargeSpeed: 0
+  coolTime: 3
+  currentCoolTime: 3
 --- !u!1 &4407140826386702890
 GameObject:
   m_ObjectHideFlags: 0
