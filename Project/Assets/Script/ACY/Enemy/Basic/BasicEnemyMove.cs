@@ -44,6 +44,7 @@ public class BasicEnemyMove : MonoBehaviour
     private WaitForSeconds scanIntervalWFS;
     private EnemyStatus enemyStatus;
     private Rigidbody2D rb;
+    private BasicEnemyAttack enemyAttack;
 
     #endregion
 
@@ -59,6 +60,7 @@ public class BasicEnemyMove : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         enemyStatus = GetComponent<EnemyStatus>();
         rb = GetComponent<Rigidbody2D>();
+        enemyAttack = GetComponent<BasicEnemyAttack>();
     }
 
     private void Start()
@@ -81,6 +83,21 @@ public class BasicEnemyMove : MonoBehaviour
             if (rb != null)
             {
                 rb.linearVelocity = Vector2.zero;
+            }
+            return;
+        }
+
+        // 공격 중일 때는 움직이지 않고 멈춤
+        if (enemyAttack != null && enemyAttack.IsAttacking)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+            if (animator != null)
+            {
+                animator.SetBool(IsMoving, false);
+                animator.SetBool(IsChasing, false);
             }
             return;
         }
