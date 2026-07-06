@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour
         else if(Time.timeScale == 1f)
             Time.timeScale = 0f;
         isSetting = !isSetting;
-        Player.instance.CloseSetting();
+        if(Player.instance != null)
+            Player.instance.CloseSetting();
     }
 
 }
