@@ -23,6 +23,7 @@ public class GameStarting : MonoBehaviour
     public void OpenSetting()
     {
         if (settingPanel != null) settingPanel.SetActive(true);
+        if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
 
     public void CloseSetting()
