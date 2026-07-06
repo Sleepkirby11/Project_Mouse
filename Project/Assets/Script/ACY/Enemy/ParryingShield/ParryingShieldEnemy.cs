@@ -25,6 +25,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     [Header("이동")]
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float patrolDistance = 4f;   // 배회 반경
+    [SerializeField] private float stopDistance = 0.8f;     // 플레이어와 최소 유지 거리 (진동 방지)
 
     [Header("감지")]
     [SerializeField] private float detectRange = 6f;
@@ -181,6 +182,12 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     {
         if (rb == null)
         {
+            return;
+        }
+        float xDistance = Mathf.Abs(destination.x - transform.position.x);
+        if (xDistance <= stopDistance)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // 너무 가까우면 X축 이동 정지 (떨림 방지)
             return;
         }
         float dirX = destination.x > transform.position.x ? 1f : -1f; // 이동 방향 계산
@@ -465,15 +472,6 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         // 감지 범위
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectRange);
-
-        // 배회 범위
-        Gizmos.color = Color.cyan;
-        Vector3 origin = Application.isPlaying ? (Vector3)patrolOrigin : transform.position;
-        Gizmos.DrawLine(origin + Vector3.left * patrolDistance, origin + Vector3.right * patrolDistance);
-    }
-
-    #endregion
-}       Gizmos.DrawWireSphere(transform.position, detectRange);
 
         // 배회 범위
         Gizmos.color = Color.cyan;
