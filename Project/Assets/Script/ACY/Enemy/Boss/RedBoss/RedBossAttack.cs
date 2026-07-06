@@ -670,6 +670,18 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         hasClones = false;
     }
 
+    public void OnCloneDestroyed(GameObject cloneObj)
+    {
+        if (currentClones == null) return;
+        for (int i = 0; i < currentClones.Length; i++)
+        {
+            if (currentClones[i] == cloneObj)
+            {
+                currentClones[i] = null;
+            }
+        }
+    }
+
     #endregion
 
     #region Laser Pattern
