@@ -533,6 +533,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5433796239822752642, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
       propertyPath: bgmClip
       value: 
@@ -560,7 +564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &719481103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1489,7 +1493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1101386003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,7 +1573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1265479934
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1704,7 +1708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1382944051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2240,7 +2244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1881301655
 MonoBehaviour:
   m_ObjectHideFlags: 0
