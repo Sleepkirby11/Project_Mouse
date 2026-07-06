@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class RedBossClone : MonoBehaviour, IDamageable
 {
@@ -119,6 +119,10 @@ public class RedBossClone : MonoBehaviour, IDamageable
         // 제거 이펙트 재생
         PlayVFX(disappearVFX);
 
+        if (owner != null)
+        {
+            owner.OnCloneDestroyed(gameObject);
+        }
         owner = null;
 
         // 풀로 반환

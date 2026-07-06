@@ -69,6 +69,11 @@ public class BasicEnemyAttack : MonoBehaviour
             anim.SetTrigger("Attack");
         }
 
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.BasicEnemyAttack);
+        }
+
         Debug.Log("적 공격 시도");
         yield return new WaitForSeconds(1f); //선딜레이
         

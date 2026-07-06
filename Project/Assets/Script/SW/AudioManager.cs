@@ -10,8 +10,16 @@ public class AudioManager : MonoBehaviour
     public float bgmVolume;
     AudioSource bgmPlayer;
 
+    [System.Serializable]
+    public struct SFXData
+    {
+        public string name; // 식별용 이름
+        public AudioClip clip;
+        [Range(0f, 1f)] public float volumeScale;
+    }
+
     [Header("#SFX")]
-    public AudioClip[] sfxClips;
+    public SFXData[] sfxClips;
     public float sfxVolume;
     public int channels;
     AudioSource[] sfxPlayers;
@@ -35,12 +43,12 @@ public class AudioManager : MonoBehaviour
         ParryingShield_attackSword,
         PlayerDash,
         PlayerWalk,
-        RGB_Gear,
-        RGB_Hurricane,
-        RGB_explosion,
         RedBossDie,
         RedBossFire,
-        RedBossTP
+        RedBossTP,
+        RGB_explosion,
+        RGB_Gear,
+        RGB_Hurricane
     }
 
     private void Awake()
@@ -92,12 +100,23 @@ public class AudioManager : MonoBehaviour
             bgmPlayer.volume = GameManager.instance.bgmVolume;
         else
             bgmPlayer.volume = bgmVolume;
+
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
-            if(GameManager.instance != null)
-                sfxPlayers[i].volume = GameManager.instance.sfxVolume;
-            else
-                sfxPlayers[i].volume = sfxVolume;
+            float scale = 1f;
+            if (sfxPlayers[i].isPlaying && sfxPlayers[i].clip != null)
+            {
+                foreach (var sfxData in sfxClips)
+                {
+                    if (sfxData.clip == sfxPlayers[i].clip)
+                    {
+                        scale = sfxData.volumeScale;
+                        break;
+                    }
+                }
+            }
+            sfxPlayers[i].volume = globalVol * scale;
         }
     }
     public void PlaySFX(SFX sfx)
@@ -120,7 +139,9 @@ public class AudioManager : MonoBehaviour
                 continue;
 
             channelIndex = loopIndex;
-            sfxPlayers[loopIndex].clip = sfxClips[sfx];
+            sfxPlayers[loopIndex].clip = sfxClips[sfx].clip;
+            float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
+            sfxPlayers[loopIndex].volume = globalVol * sfxClips[sfx].volumeScale;
             sfxPlayers[loopIndex].Play();
             break;
         }

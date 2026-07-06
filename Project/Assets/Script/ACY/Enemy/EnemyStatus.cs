@@ -129,6 +129,13 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         }
             damage = ApplyElementalDamage(damage);
         CameraShake.instance.Impulse();
+
+        // 피격 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.EnemyHurt);
+        }
+
         if (anim != null)
         {
             if (HasParameter("Hurt"))
@@ -245,6 +252,16 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         if (isBoss)
         {
             Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}' 사망. 체력바를 비활성화합니다.");
+
+            // 레드 보스 사망 효과음 재생
+            if (GetComponent<RedBossAttack>() != null)
+            {
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.RedBossDie);
+                }
+            }
+
             if (UI.Instance != null)
             {
                 UI.Instance.HideBossHPBar();

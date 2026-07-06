@@ -154,6 +154,12 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             rb.linearVelocity = new Vector2(vx, vy);
         }
 
+        // 점프 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.JumpEnemy_Jump);
+        }
+
         // 아주 짧은 시간(예: 0.15초) 동안은 바닥 체크를 무시하여 발사 직후 착지 처리되는 것을 방지
         float minJumpTime = 0.15f;
         float elapsed = 0f;
@@ -179,6 +185,12 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
             // 착지 시 기존 중력 복원 및 정지
             rb.gravityScale = originGravity;
             rb.linearVelocity = Vector2.zero;
+        }
+
+        // 착지 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.JumpEnemy_Land);
         }
 
         // 착지 충격파

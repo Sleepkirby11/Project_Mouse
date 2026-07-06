@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -258,6 +258,12 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         if (windObj == null)
         {
             Debug.LogWarning("Failed to pool wind effect object!");
+        }
+
+        // 바람 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.GreenBossWind);
         }
 
         // 왼쪽 넉백
