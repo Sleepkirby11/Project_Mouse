@@ -59,7 +59,29 @@ public class UI : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     void Start()
+    {
+        RefreshPlayerReference();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 씬이 전환되거나 플레이어 사망 후 재시작될 때 보스 HP 바 숨김
+        HideBossHPBar();
+        RefreshPlayerReference();
+    }
+
+    private void RefreshPlayerReference()
     {
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
