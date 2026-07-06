@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
@@ -29,6 +30,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     [SerializeField] private bool isBoss = false; // 보스인지 판별
 
     public bool IsDead { get; private set; } // 사망 여부 플래그
+
+    private string particleName = "Particle_Hit";
 
     private GameObject cachedPortalVisual;
     private PlayerStatus cachedPlayer;
@@ -134,6 +137,35 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         if (AudioManager.instance != null)
         {
             AudioManager.instance.PlaySFX(AudioManager.SFX.EnemyHurt);
+        }
+        if(PoolingManager.Instance != null)
+        {
+            GameObject hitParticle = PoolingManager.Instance.Get(particleName, this.transform.position, this.transform.rotation);
+            var main = hitParticle.GetComponent<ParticleSystem>().main;
+            if(Player.instance != null)
+            {
+                Color currentColor;
+                currentColor = Color.white;
+                switch(Player.instance.status.currentStance)
+                {
+                    case PlayerStatus.Stance.White:
+                        currentColor = Color.white;
+                        break;
+                    case PlayerStatus.Stance.Red:
+                        currentColor = Color.red;
+                        break;
+                    case PlayerStatus.Stance.Green:
+                        currentColor = Color.green;
+                        break;
+                    case PlayerStatus.Stance.Blue:
+                        currentColor = Color.blue;
+                        break;
+                }
+                currentColor.a = 0.25f;
+                main.startColor = currentColor;
+                Debug.Log(main.startColor.color.a);
+                Debug.Log(currentColor.a);
+            }
         }
 
         if (anim != null)

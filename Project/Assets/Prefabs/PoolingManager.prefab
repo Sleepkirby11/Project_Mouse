@@ -147,3 +147,9 @@ MonoBehaviour:
   - key: Explosion
     prefab: {fileID: 9013588410115159912, guid: e22c45c9835319849b0c99cc1c3e3de4, type: 3}
     initialSize: 30
+  - key: Particle_Hit
+    prefab: {fileID: 2068004649494595546, guid: 332e7892559585c488fe36684c66c4db, type: 3}
+    initialSize: 1
+  - key: Particle_PlayerHit
+    prefab: {fileID: 4611046374343181166, guid: bdd6d7379a030b84f8991ae737c766d2, type: 3}
+    initialSize: 1
