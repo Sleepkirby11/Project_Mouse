@@ -44,11 +44,29 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         cachedPlayer = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
         currentHP = maxHP;
     }
-    private void Start()
+    private IEnumerator Start()
     {
         if (isBoss)
         {
             CachePortal();
+
+            // UI.Instance가 초기화될 때까지 대기
+            float elapsed = 0f;
+            while (UI.Instance == null && elapsed < 1f)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            if (UI.Instance != null)
+            {
+                Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}'가 활성화되었습니다. 보스 체력바를 활성화합니다. 비율: {GetHPRatio()}");
+                UI.Instance.ShowBossHPBar(GetHPRatio());
+            }
+            else
+            {
+                Debug.LogError($"[EnemyStatus] 보스 '{gameObject.name}'가 활성화되었지만 UI.Instance가 null입니다!");
+            }
         }
     }
     public void SetElement(EnemyElement newElement)
@@ -126,6 +144,12 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         currentHP -= damage;
         Debug.Log($"{gameObject.name}이 피해를 {damage}만큼 입음. 남은 HP : {currentHP}/{maxHP}");
 
+        if (isBoss && UI.Instance != null)
+        {
+            Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}' 피격. 체력바 갱신: {currentHP}/{maxHP}");
+            UI.Instance.UpdateBossHPBar(currentHP, maxHP);
+        }
+
         if (hitReaction != null)
         {
             hitReaction.OnAfterTakeDamage(this, damage);
@@ -171,6 +195,12 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             return; // 이미 죽은 적은 회복 불가
         }
         currentHP = Mathf.Min(currentHP + amount, maxHP);
+
+        if (isBoss && UI.Instance != null)
+        {
+            Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}' 회복. 체력바 갱신: {currentHP}/{maxHP}");
+            UI.Instance.UpdateBossHPBar(currentHP, maxHP);
+        }
     }
 
     #endregion
@@ -212,9 +242,17 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
         OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
 
-        if (isBoss && cachedPortalVisual != null) // 포탈 활성화
+        if (isBoss)
         {
-            cachedPortalVisual.SetActive(true);
+            Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}' 사망. 체력바를 비활성화합니다.");
+            if (UI.Instance != null)
+            {
+                UI.Instance.HideBossHPBar();
+            }
+            if (cachedPortalVisual != null) // 포탈 활성화
+            {
+                cachedPortalVisual.SetActive(true);
+            }
         }
 
         if (anim != null)
