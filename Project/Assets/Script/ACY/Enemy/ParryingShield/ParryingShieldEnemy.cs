@@ -71,6 +71,9 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     private ContactFilter2D contactFilter;
     private readonly List<Collider2D> overlapBuffer = new List<Collider2D>(1);
 
+    // 코루틴 추적
+    private Coroutine counterRoutine;
+
     #endregion
 
     #region Unity Lifecycle
@@ -123,6 +126,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             {
                 anim.SetBool("IsMoving", false);
             }
+            UpdateAnimator(); // 스턴 중에도 애니메이터 상태 업데이트 (패링 자세 풀림 반영 등)
             return;
         }
 
@@ -252,7 +256,11 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             return false;
         }
-        StartCoroutine(CounterRoutine());
+        if (counterRoutine != null)
+        {
+            StopCoroutine(counterRoutine);
+        }
+        counterRoutine = StartCoroutine(CounterRoutine());
         return true;
     }
 
@@ -282,6 +290,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             state = State.Tracking;
         }
+        counterRoutine = null;
     }
 
     private IEnumerator CounterRecoverRoutine()
@@ -319,6 +328,12 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             if (rb != null)
             {
                 rb.linearVelocity = Vector2.zero; // 충돌 시 제동력 부여
+            }
+
+            if (counterRoutine != null)
+            {
+                StopCoroutine(counterRoutine);
+                counterRoutine = null;
             }
 
             ApplyCounterHit(collision.gameObject);
