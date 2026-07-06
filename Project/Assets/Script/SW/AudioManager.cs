@@ -43,12 +43,12 @@ public class AudioManager : MonoBehaviour
         ParryingShield_attackSword,
         PlayerDash,
         PlayerWalk,
-        RGB_Gear,
-        RGB_Hurricane,
-        RGB_explosion,
         RedBossDie,
         RedBossFire,
-        RedBossTP
+        RedBossTP,
+        RGB_explosion,
+        RGB_Gear,
+        RGB_Hurricane
     }
 
     private void Awake()

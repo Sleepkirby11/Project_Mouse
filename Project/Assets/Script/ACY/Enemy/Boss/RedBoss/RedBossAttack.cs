@@ -292,6 +292,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             float waitTime = (i == 0) ? 1.2f : burstDelay;
             yield return new WaitForSeconds(waitTime);
 
+            // 유도탄 발사 효과음 재생
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySFX(AudioManager.SFX.RedBossFire);
+            }
+
             SpawnArrow(0f);              // 가운데
             SpawnArrow(-angleSpread);    // 아래쪽/왼쪽 방향
             SpawnArrow(angleSpread);     // 위쪽/오른쪽 방향
