@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class FireArrow : MonoBehaviour, IDamageable
@@ -29,6 +29,7 @@ public class FireArrow : MonoBehaviour, IDamageable
     private bool isExploding = false;
     private float angleOffset = 0f;    // 각도 오프셋 (3연발 각도 차이)
     private bool isHoming = true;      // 유도 여부
+    private bool isIndestructible = false; // 공격 파괴 불가능 여부
 
     private const string POOL_KEY = "RedBossArrow";
 
@@ -102,10 +103,11 @@ public class FireArrow : MonoBehaviour, IDamageable
     #region Arrow Initialization
 
     // 발사 시 초기화
-    public void Init(float angleOffset = 0f, bool enableHoming = true)
+    public void Init(float angleOffset = 0f, bool enableHoming = true, bool isIndestructible = false)
     {
         this.angleOffset = angleOffset;
         this.isHoming = enableHoming;
+        this.isIndestructible = isIndestructible;
         timer = 0f;
         isExploding = false;
 
@@ -151,12 +153,21 @@ public class FireArrow : MonoBehaviour, IDamageable
 
         if (other.CompareTag("Cursor"))
         {
-            Explode();
+            if (!isIndestructible)
+            {
+                Explode();
+            }
             return;
         }
     }
 
-    public void TakeDamage(int damage) => Explode();
+    public void TakeDamage(int damage)
+    {
+        if (!isIndestructible)
+        {
+            Explode();
+        }
+    }
 
     public void Explode()
     {
