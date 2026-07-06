@@ -325,22 +325,22 @@ public class Player : MonoBehaviour
             switch (inkBonus)
             {
                 case float f when f <= 1f && f > 0.8f:    //ink 잔여량 100%
-                    inkBonus = 1;
+                    inkBonus = 0.1f;
                     break;
                 case float f when f <= 0.8f && f > 0.6f:
-                    inkBonus = 0.7f;
-                    break;
-                case float f when f <= 0.6f && f > 0.4f:
-                    inkBonus = 0.5f;
-                    break;
-                case float f when f <= 0.4f && f > 0.2f:
-                    inkBonus = 0.35f;
-                    break;
-                case float f when f <= 0.2f && f > 0:
                     inkBonus = 0.2f;
                     break;
+                case float f when f <= 0.6f && f > 0.4f:
+                    inkBonus = 0.35f;
+                    break;
+                case float f when f <= 0.4f && f > 0.2f:
+                    inkBonus = 0.5f;
+                    break;
+                case float f when f <= 0.2f && f > 0:
+                    inkBonus = 0.7f;
+                    break;
                 case float f when f <= 0:
-                    inkBonus = 0.1f;
+                    inkBonus = 1;
                     break;
             }
             calculateNum += inkBonus;
@@ -378,6 +378,13 @@ public class Player : MonoBehaviour
         if (status.IsBound) return;
 
         rigid.linearVelocityX = inputVec.x;
+    }
+
+    public void CloseSetting()
+    {
+        inputVec = Vector2.zero;
+        anim.SetBool("IsWalk", false);
+        CancleCursor();
     }
 
     //넉백 상태 종료 후 처리 함수
