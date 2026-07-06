@@ -310,7 +310,6 @@ public class Player : MonoBehaviour
     //공격 | 스킬의 대미지 계산 함수
     void DamageCalculate(Cursor cursor)
     {
-        float nowSpecialInk = status.specialInk;
         float nowDamage = status.damage;
         float calculateNum = 0;
         float inkBonus;
@@ -322,7 +321,7 @@ public class Player : MonoBehaviour
                 calculateNum += 1;
             }
             //잉크 소모량에 비례한 공격 보너스 계산
-            inkBonus = status.specialInk / nowSpecialInk;
+            inkBonus = status.specialInk / status.maxSpecialInk;
             switch (inkBonus)
             {
                 case float f when f <= 1f && f > 0.8f:    //ink 잔여량 100%
