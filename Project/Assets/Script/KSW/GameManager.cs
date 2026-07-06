@@ -14,10 +14,14 @@ public class GameManager : MonoBehaviour
     public bool isNPC;
 
     [Header("사운드")]
-    public float volume;
+    public float bgmVolume;
+    public float sfxVolume;
 
     //대화 데이터 관리 인스펙터 연결 잊지 말것
     Dictionary<int, string[]> talkData;
+
+    public bool isSetting;
+
 
     void Awake()
     {
@@ -53,6 +57,15 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(index);
         CameraSetting.instance.colliders.Clear();
+    }
+
+    public void PauseOnOff()
+    {
+        if(Time.timeScale == 0f)
+            Time.timeScale = 1f;
+        else if(Time.timeScale == 1f)
+            Time.timeScale = 0f;
+        isSetting = !isSetting;
     }
 
 }

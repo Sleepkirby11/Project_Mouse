@@ -221,11 +221,13 @@ public class UI : MonoBehaviour
     public void OpenSetting()
     {
         if (settingPanel != null) settingPanel.SetActive(true);
+        if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
 
     public void CloseSetting()
     {
         if (settingPanel != null) settingPanel.SetActive(false);
+        if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
 
     // [추가] 라이선스창 열기
