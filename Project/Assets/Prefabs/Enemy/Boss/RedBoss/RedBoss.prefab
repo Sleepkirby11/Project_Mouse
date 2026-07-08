@@ -211,7 +211,7 @@ MonoBehaviour:
   meteorWaveCount: 3
   meteorPerWave: 7
   waveInterval: 1.5
-  meteorCastTime: 2
+  meteorCastTime: 1.5
   meteorSpawnXRange: {x: 422, y: 460}
   meteorSpawnYRange: {x: 16, y: 20}
   meteorTargetY: -20
