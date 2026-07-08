@@ -369,6 +369,71 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (enemyStatus != null && enemyStatus.isStunned)
+        {
+            return;
+        }
+
+        if (collision == null || collision.gameObject == null)
+        {
+            return;
+        }
+
+        if (!collision.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
+
+        if (state == State.Countering)
+        {
+            return;
+        }
+
+        // 1. 벽 밀착 상태 등에서 쿨타임이 끝났을 때 주기적인 넉백 처리
+        if (Time.time - lastContactTime > contactCooldown)
+        {
+            ApplyContactHit(collision.gameObject);
+        }
+
+        // 2. 캐릭터 겹침/올라타기 상황 방지를 위한 슬라이드 밀어내기
+        HandleSlideOff(collision);
+    }
+
+    private void HandleSlideOff(Collision2D collision)
+    {
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            // 접촉 노멀 벡터의 Y 성분이 크면 수직 겹침/올라타기로 판정
+            if (Mathf.Abs(contact.normal.y) > 0.5f)
+            {
+                float slideDir = (collision.transform.position.x >= transform.position.x) ? 1f : -1f;
+
+                // 서로 양옆으로 밀어냄
+                Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+                if (playerRb != null)
+                {
+                    playerRb.linearVelocityX = slideDir * 4f;
+                }
+                if (rb != null)
+                {
+                    rb.linearVelocityX = -slideDir * 4f;
+                }
+
+                // 위치 미세 조정으로 겹침 해제 강제
+                Vector3 playerPos = collision.transform.position;
+                playerPos.x += slideDir * 0.02f;
+                collision.transform.position = playerPos;
+
+                Vector3 enemyPos = transform.position;
+                enemyPos.x -= slideDir * 0.02f;
+                transform.position = enemyPos;
+                break;
+            }
+        }
+    }
+
     private void ApplyContactHit(GameObject playerObj)
     {
         lastContactTime = Time.time;
