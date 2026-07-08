@@ -76,6 +76,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public bool IsBound => isBound;
     private Coroutine bindCoroutine;
     private float originGravityScale;
+    private System.Collections.Generic.List<Collider2D> ignoredColliders = new System.Collections.Generic.List<Collider2D>();
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -378,6 +379,52 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     {
         isInvincible = value;
         Debug.Log(value ? "[PlayerStatus] 무적 상태" : "[PlayerStatus] 무적 해제");
+
+        if (!value)
+        {
+            // 무적 해제 시, 무시했던 에너미 콜라이더들과의 충돌을 다시 활성화
+            Collider2D playerCollider = GetComponent<Collider2D>();
+            if (playerCollider != null)
+            {
+                foreach (var otherCol in ignoredColliders)
+                {
+                    if (otherCol != null)
+                    {
+                        Physics2D.IgnoreCollision(playerCollider, otherCol, false);
+                    }
+                }
+            }
+            ignoredColliders.Clear();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleEnemyCollisionIgnore(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        HandleEnemyCollisionIgnore(collision);
+    }
+
+    private void HandleEnemyCollisionIgnore(Collision2D collision)
+    {
+        if (collision == null || collision.gameObject == null) return;
+
+        // 플레이어가 무적 상태일 때, "Enemy" 태그를 가졌거나 EnemyStatus 컴포넌트가 있는 대상과의 충돌을 무시
+        if (isInvincible && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.GetComponent<EnemyStatus>() != null))
+        {
+            Collider2D playerCollider = GetComponent<Collider2D>();
+            if (playerCollider != null && collision.collider != null)
+            {
+                Physics2D.IgnoreCollision(playerCollider, collision.collider, true);
+                if (!ignoredColliders.Contains(collision.collider))
+                {
+                    ignoredColliders.Add(collision.collider);
+                }
+            }
+        }
     }
 
     public Gradient ChangeStance(Stance newStance)   //스탠스 체인지
