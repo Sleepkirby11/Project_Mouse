@@ -217,7 +217,7 @@ public class Player : MonoBehaviour
         {
             bool isGround;
             isGround = Physics2D.BoxCast
-                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground"));
+                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground", "PlayerGround"));
             if (isGround)
             {
                 //이동 가능 + input 값 이어서 받기
