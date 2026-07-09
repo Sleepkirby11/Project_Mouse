@@ -148,8 +148,26 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         if (playerObj != null)
             player = playerObj.transform;
 
+        if (enemyStatus != null)
+        {
+            enemyStatus.OnEnemyDeath += HandleDeath;
+        }
+
         StartCoroutine(RecordPlayerPosition());
         StartCoroutine(AttackRoutine());
+    }
+
+    private void HandleDeath()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnDestroy()
+    {
+        if (enemyStatus != null)
+        {
+            enemyStatus.OnEnemyDeath -= HandleDeath;
+        }
     }
 
     private void Update()

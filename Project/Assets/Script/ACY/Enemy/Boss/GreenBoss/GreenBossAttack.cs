@@ -117,9 +117,18 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void Start()
     {
+        if (enemyStatus != null)
+        {
+            enemyStatus.OnEnemyDeath += HandleDeath;
+        }
         StartBirdAttack();
         StartFrogAttack();
         StartFlowerAttack();
+    }
+
+    private void HandleDeath()
+    {
+        StopAllBossCoroutines();
     }
 
     private void Update()
@@ -155,6 +164,11 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void OnDestroy()
     {
+        if (enemyStatus != null)
+        {
+            enemyStatus.OnEnemyDeath -= HandleDeath;
+        }
+
         if (activeKpStatus != null)
         {
             activeKpStatus.OnEnemyDeath -= RevealBossAfterKP;
