@@ -200,8 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolKey: Mushroom
   poisonAreaPoolKey: PoisonArea
-  timeToExplode: 3
+  timeToExplode: 2
   fadeDuration: 0.5
   poisonAreaOffsetY: -1
   explosionRadius: 1.5
-  explosionDamage: 15
+  explosionDamage: 3

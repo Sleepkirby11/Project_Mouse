@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolKey: WaterSpout
   hitbox: {fileID: 8427086041673145827}
-  damage: 5
+  damage: 2
   launchForceY: 30
   stunTime: 0.3
 --- !u!95 &3702629276771431473
