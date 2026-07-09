@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -191,6 +191,9 @@ public class ZoneManager : MonoBehaviour
             if(onPlayerZone.Contains(playerZone))
                 onPlayerZone.Remove(playerZone);
         }
-        OnPlayerEnterZone(onPlayerZone.Last().GetComponent<Zone>());
+        if (onPlayerZone.Count > 0)
+        {
+            OnPlayerEnterZone(onPlayerZone.Last().GetComponent<Zone>());
+        }
     }
 }

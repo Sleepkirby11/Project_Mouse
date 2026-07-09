@@ -332,7 +332,7 @@ MonoBehaviour:
   - MintSpirit
   - YellowGreenSpirit
   detectRange: 4
-  pushCooldown: 3
+  pushCooldown: 1
   pushForce: 60
   lockDuration: 0.65
   windPoolKey: BossWindBlast
