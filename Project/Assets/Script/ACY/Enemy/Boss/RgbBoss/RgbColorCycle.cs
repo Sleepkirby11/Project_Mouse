@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class RgbColorCycle : MonoBehaviour
 {
@@ -99,12 +99,8 @@ public class RgbColorCycle : MonoBehaviour
     {
         if (animator == null || targetController == null) return;
 
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        float normalizedTime = stateInfo.normalizedTime;
-        int stateHash = stateInfo.shortNameHash;
-
         animator.runtimeAnimatorController = targetController;
-        animator.Play(stateHash, 0, normalizedTime);
+        animator.Play("Idle", 0, 0f);
     }
     #endregion
 }
