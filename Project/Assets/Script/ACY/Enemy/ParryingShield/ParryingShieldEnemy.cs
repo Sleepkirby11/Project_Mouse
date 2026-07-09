@@ -170,9 +170,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     {
         if (target != null)
         {
-            // 범위 이탈 시 추적 해제 → 배회 복귀
+            // 범위 이탈 시 추적 해제 범위는 2f 정도 더 여유롭게
+            float loseRange = detectRange + 2.0f;
             float sqrDist = (target.position - transform.position).sqrMagnitude;
-            if (sqrDist > detectRange * detectRange)
+            if (sqrDist > loseRange * loseRange)
             {
                 target = null;
                 state = State.Patrol;
