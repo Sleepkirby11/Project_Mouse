@@ -524,10 +524,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MadeGround
       objectReference: {fileID: 0}
-    - target: {fileID: 5008746764441576614, guid: 359622b585f6df440ae11d46ea755728, type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
     - target: {fileID: 7431690549500522656, guid: 359622b585f6df440ae11d46ea755728, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
