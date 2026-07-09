@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
@@ -129,6 +129,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
     private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
     private static readonly int CastingTrigger = Animator.StringToHash("Casting");
+    private static readonly int LightningTrigger = Animator.StringToHash("LightningAttack");
     #endregion
 
     #region Unity Lifecycle
@@ -271,6 +272,10 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                 yield return new WaitForSeconds(2f);
                 break;
             case BossAttackType.Lightning:
+                if (animator != null)
+                {
+                    animator.SetTrigger(LightningTrigger);
+                }
                 float waitTime = (lightningCount * lightningInterval) + 1.5f;
                 yield return new WaitForSeconds(waitTime);
                 break;
