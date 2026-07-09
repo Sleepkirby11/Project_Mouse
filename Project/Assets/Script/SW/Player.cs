@@ -225,6 +225,7 @@ public class Player : MonoBehaviour
                     rigid.linearVelocityX = inputVec.x;
                 jumpCount = 2;
                 isCanMove = true;
+                JumpAnimUpdate(false);
                 anim.SetBool("IsFalling", false);
                 return;
             }

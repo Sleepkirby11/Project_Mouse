@@ -30,7 +30,17 @@ public class Zone : MonoBehaviour
         {
             if (ZoneManager.Instance != null)
             {
-                ZoneManager.Instance.OnPlayerEnterZone(this);
+                ZoneManager.Instance.UpdateOnPlayerZone(this.gameObject, true);
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (ZoneManager.Instance != null)
+            {
+                ZoneManager.Instance.UpdateOnPlayerZone(this.gameObject, false);
             }
         }
     }
