@@ -401,6 +401,7 @@ public class Player : MonoBehaviour
         if (status.IsBound) return;
 
         rigid.linearVelocityX = inputVec.x;
+        SpriteFlip();
     }
 
     public void CloseSetting()
