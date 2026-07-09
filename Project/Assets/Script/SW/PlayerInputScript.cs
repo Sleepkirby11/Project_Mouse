@@ -39,7 +39,6 @@ public class PlayerInputScript : MonoBehaviour
             if (player.status.CanMove)
             {
                 player.rigid.linearVelocityX = player.inputVec.x;
-                player.SpriteFlip();
             }
         }
         //키 입력 종료
