@@ -115,9 +115,9 @@ TextureImporter:
       name: Sword Channel_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 19
+        width: 22
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -137,9 +137,9 @@ TextureImporter:
       name: Sword Channel_1
       rect:
         serializedVersion: 2
-        x: 23
+        x: 22
         y: 0
-        width: 19
+        width: 22
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -159,9 +159,9 @@ TextureImporter:
       name: Sword Channel_2
       rect:
         serializedVersion: 2
-        x: 45
+        x: 44
         y: 0
-        width: 19
+        width: 22
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -181,9 +181,9 @@ TextureImporter:
       name: Sword Channel_3
       rect:
         serializedVersion: 2
-        x: 67
+        x: 66
         y: 0
-        width: 19
+        width: 22
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -203,9 +203,9 @@ TextureImporter:
       name: Sword Channel_4
       rect:
         serializedVersion: 2
-        x: 89
+        x: 88
         y: 0
-        width: 19
+        width: 22
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -213,9 +213,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9afa07ec1b1fe8340800000000000000
+      spriteID: 3e5d266bd8963f141821a4013e0dbe98
       internalID: 4868093993209081769
       vertices: []
       indices: 
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 18dda23d2af4a7042b52c0ace3f4bc35
     internalID: 0
     vertices: []
     indices: 
