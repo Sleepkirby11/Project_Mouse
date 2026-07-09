@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class IceHammer : MonoBehaviour, IDamageable
@@ -12,6 +12,10 @@ public class IceHammer : MonoBehaviour, IDamageable
     [Header("Hitbox Setup")]
     [SerializeField] private Collider2D hammerHitbox; // 타격 판정 콜라이더 (플레이어가 닿는 영역)
     [SerializeField] private float fadeDuration = 0.5f; // 페이드아웃 지속 시간
+
+    [Header("Player Collision Setup")]
+    [SerializeField] private float stunDuration = 0.5f; // 스턴 지속 시간
+    [SerializeField] private Vector2 knockbackForce = new Vector2(15f, 5f); // 오른쪽 밀어내기 힘
 
     [Header("Pool Settings")]
     [SerializeField] private string poolKey = "IceHammer";
@@ -161,6 +165,35 @@ public class IceHammer : MonoBehaviour, IDamageable
             if (sr == null) continue;
             Color c = sr.color;
             sr.color = new Color(c.r, c.g, c.b, 1f); // 알파값을 다시 1로 초기화
+        }
+    }
+    #endregion
+
+    #region Player Collision Handling
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        HandlePlayerCollision(collision.gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandlePlayerCollision(collision.gameObject);
+    }
+
+    public void HandlePlayerCollision(GameObject obj)
+    {
+        if (destroyed) return;
+
+        if (obj.CompareTag("Player"))
+        {
+            PlayerStatus hitPlayer = obj.GetComponent<PlayerStatus>();
+            if (hitPlayer != null && hitPlayer.CanMove)
+            {
+                // 약간의 스턴 적용
+                hitPlayer.ApplyStun(stunDuration);
+                // 오른쪽으로 밀어내기 효과 (넉백)
+                hitPlayer.TakeHit(knockbackForce);
+            }
         }
     }
     #endregion

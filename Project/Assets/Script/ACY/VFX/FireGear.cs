@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class FireGear : MonoBehaviour
@@ -93,9 +93,6 @@ public class FireGear : MonoBehaviour
 
             yield return null;
         }
-
-        // 상승 완료 시 플레이어 속박 해제
-        ReleasePlayer();
 
         riseRoutine = null;
     }

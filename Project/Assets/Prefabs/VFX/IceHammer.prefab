@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3773911212599780965}
-  - component: {fileID: 9037451367606941842}
   - component: {fileID: 9096365477416024911}
   - component: {fileID: 7397481768294127639}
-  m_Layer: 7
+  - component: {fileID: 7607334409802430321}
+  m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,65 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5732347385598818635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &9037451367606941842
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5544068754320729569}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -3.3785002, y: 2.4142148}
-      - {x: -5.2677026, y: 2.7942393}
-      - {x: -5.9772267, y: 2.1377609}
-      - {x: -6.991201, y: 0.46358192}
-      - {x: -5.9959855, y: -0.3096796}
-      - {x: -5.1531343, y: -0.24226063}
-      - {x: -4.709086, y: -0.19213456}
-      - {x: -3.6375656, y: -3.0402942}
-      - {x: -3.4048126, y: -2.859726}
-      - {x: -4.162135, y: 0.17575026}
-      - {x: -3.7172675, y: 0.12286943}
-      - {x: -2.5534358, y: 1.8866441}
-  m_UseDelaunayMesh: 0
 --- !u!114 &9096365477416024911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +73,52 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!61 &7607334409802430321
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5544068754320729569}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -4.32195, y: 0.026623964}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 4.567606, y: 5.9875474}
+  m_EdgeRadius: 0
 --- !u!1 &8097830525786069665
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +131,7 @@ GameObject:
   - component: {fileID: 1582196870673275302}
   - component: {fileID: 7890987044186070514}
   - component: {fileID: 3611477793765154343}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: IceHammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +246,9 @@ MonoBehaviour:
   iceSpacing: 2
   iceCount: 5
   iceOffset: {x: 15, y: -1}
-  hammerHitbox: {fileID: 9037451367606941842}
+  hammerHitbox: {fileID: 0}
   fadeDuration: 0.5
+  stunDuration: 0.5
+  knockbackForce: {x: 15, y: 5}
   poolKey: IceHammer
   icePoolKey: Ice
