@@ -207,6 +207,9 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         currentCoolTime += Time.deltaTime;
     }
 
+    private Coroutine stunCoroutine;
+    private Coroutine knockbackCoroutine;
+
     // IHittable 구현 : 넉백
     public void TakeHit(Vector2 knockbackForce)
     {
@@ -220,7 +223,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         if (gameObject.activeInHierarchy)
         {
-            StartCoroutine(KnockbackRoutine(knockbackForce));
+            if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
+            knockbackCoroutine = StartCoroutine(KnockbackRoutine(knockbackForce));
         }
     }
 
@@ -237,7 +241,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         if (gameObject.activeInHierarchy)
         {
-            StartCoroutine(StunRoutine(duration));
+            if (stunCoroutine != null) StopCoroutine(stunCoroutine);
+            stunCoroutine = StartCoroutine(StunRoutine(duration));
         }
     }
     private IEnumerator KnockbackRoutine(Vector2 force) // 넉백

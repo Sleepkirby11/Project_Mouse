@@ -200,5 +200,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaKey: PoisonArea
   duration: 5
-  damagePerTick: 5
-  tickInterval: 0.5
+  damagePerTick: 2
+  tickInterval: 0.2
