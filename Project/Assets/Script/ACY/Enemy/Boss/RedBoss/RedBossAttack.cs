@@ -122,6 +122,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
 
+        EnemyStatus status = GetComponent<EnemyStatus>();
+        if (status != null)
+        {
+            status.OnEnemyDeath += HandleDeath;
+        }
+
         if (sr != null)
         {
             originalColor = sr.color;
@@ -143,6 +149,20 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         }
 
         attackRoutine = StartCoroutine(AttackRoutine());
+    }
+
+    private void HandleDeath()
+    {
+        StopAllBossCoroutines();
+    }
+
+    private void OnDestroy()
+    {
+        EnemyStatus status = GetComponent<EnemyStatus>();
+        if (status != null)
+        {
+            status.OnEnemyDeath -= HandleDeath;
+        }
     }
 
     #endregion
