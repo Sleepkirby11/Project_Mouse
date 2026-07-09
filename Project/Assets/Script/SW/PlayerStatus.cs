@@ -266,13 +266,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     private IEnumerator StunRoutine(float duration) // 스턴
     {
         isStunned = true;
-        Debug.Log($"[PlayerStatus] 패링 성공 {duration}초간 스턴");
         playerComp.CancleCursor();
 
         yield return new WaitForSeconds(duration);
 
         isStunned = false;
-        Debug.Log("[PlayerStatus] 플레이어 스턴 해제");
     }
     public void SetPossessed(bool value)    //빙의
     {
@@ -283,8 +281,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             rb.linearVelocity = Vector2.zero;
         }
-
-        Debug.Log(value ? "[PlayerStatus] 빙의 상태" : "[PlayerStatus] 빙의 해제");
     }
     public void ApplyBind(float duration) //속박
     {
@@ -457,5 +453,37 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     void Die()  //사망
     {
         Debug.Log("Die");
+    }
+
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // 다음 씬으로 넘어갈때 모든 상태이상 해제 
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        if (isPossessed)
+        {
+            SetPossessed(false);
+            Transform possessionCanvas = transform.Find("PossessionGaugeCanvas");
+            if (possessionCanvas != null)
+            {
+                possessionCanvas.gameObject.SetActive(false);
+            }
+        }
+
+        if (isStunned) isStunned = false;
+        if (isKnockbacked)
+        {
+            isKnockbacked = false;
+            if (playerComp != null) playerComp.OnKnockbackEnd();
+        }
+        if (isBound) ReleaseBind();
     }
 }
