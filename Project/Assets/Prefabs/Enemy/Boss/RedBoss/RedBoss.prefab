@@ -624,6 +624,7 @@ GameObject:
   - component: {fileID: 8425833466626688838}
   - component: {fileID: 3191931018660831823}
   - component: {fileID: 207768626136934691}
+  - component: {fileID: 4181069185343613269}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -723,6 +724,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4181069185343613269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6828886195570509130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8248a1124183140a9bf4bcccca3b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossColor: 0
 --- !u!1 &7574924737197752517
 GameObject:
   m_ObjectHideFlags: 0

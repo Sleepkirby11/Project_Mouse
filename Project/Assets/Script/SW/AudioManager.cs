@@ -48,7 +48,8 @@ public class AudioManager : MonoBehaviour
         RedBossTP,
         RGB_explosion,
         RGB_Gear,
-        RGB_Hurricane
+        RGB_Hurricane,
+        Death
     }
 
     private void Awake()
@@ -58,10 +59,10 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
 
-		Init();
+        Init();
 
-		PlayBGM(true);
-	}
+        PlayBGM(true);
+    }
 
 
 
@@ -73,7 +74,7 @@ public class AudioManager : MonoBehaviour
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
-        if(GameManager.instance != null)
+        if (GameManager.instance != null)
             bgmPlayer.volume = GameManager.instance.bgmVolume;
         else
             bgmPlayer.volume = bgmVolume;
@@ -88,7 +89,7 @@ public class AudioManager : MonoBehaviour
         {
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
-            if(GameManager.instance != null)
+            if (GameManager.instance != null)
                 sfxPlayers[i].volume = GameManager.instance.sfxVolume;
             else
                 sfxPlayers[i].volume = sfxVolume;
@@ -96,7 +97,7 @@ public class AudioManager : MonoBehaviour
     }
     public void UpdateSound()
     {
-        if(GameManager.instance != null)
+        if (GameManager.instance != null)
             bgmPlayer.volume = GameManager.instance.bgmVolume;
         else
             bgmPlayer.volume = bgmVolume;

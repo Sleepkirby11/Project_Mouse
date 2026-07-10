@@ -153,3 +153,6 @@ MonoBehaviour:
   - key: Particle_PlayerHit
     prefab: {fileID: 4611046374343181166, guid: bdd6d7379a030b84f8991ae737c766d2, type: 3}
     initialSize: 1
+  - key: Particle_BossDeath
+    prefab: {fileID: 6623993348973278131, guid: 7feb45b1150bd6242afdc978e07f5d57, type: 3}
+    initialSize: 1
