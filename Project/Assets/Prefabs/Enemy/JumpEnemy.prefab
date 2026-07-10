@@ -84,7 +84,7 @@ MonoBehaviour:
   readyDuration: 0.6
   directHitDamage: 1
   directHitRadius: 0.6
-  shockwaveDamage: 1
+  shockwaveDamage: 2
   shockwaveBoxSize: {x: 4, y: 0.6}
   shockwaveBoxOffset: {x: 0, y: -0.4}
   playerLayer:
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_Bits: 64
   shockwavePoolKey: Shockwave
   groundCheck: {fileID: 5472526186819999629}
-  groundCheckRadius: 0.15
+  groundCheckSize: {x: 0.5, y: 0.1}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -128,8 +128,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 5
+  maxHP: 30
   dieAnimationLength: 0.5
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
+  isBoss: 0
 --- !u!61 &9124705101422008266
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -252,7 +256,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 250
   m_Sprite: {fileID: 1804864146, guid: 7cabb531e28bd844aa6d0a737a10fddb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1

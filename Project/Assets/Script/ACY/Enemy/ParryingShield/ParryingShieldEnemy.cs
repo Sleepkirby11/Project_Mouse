@@ -25,6 +25,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     [Header("이동")]
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float patrolDistance = 4f;   // 배회 반경
+    [SerializeField] private float stopDistance = 0.8f;     // 플레이어와 최소 유지 거리 (진동 방지)
 
     [Header("감지")]
     [SerializeField] private float detectRange = 6f;
@@ -43,6 +44,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     [Header("카운터 공격")]
     [SerializeField] private float counterDashForce = 22f;  // 돌진 힘
     [SerializeField] private float counterDashTime = 0.6f;  // 돌진 유지 시간
+    [SerializeField] private int counterDamage = 3;
     [SerializeField] private float counterLaunchY = 18f;    // 카운터 히트 공중부양 힘
     [SerializeField] private float counterStunTime = 1.5f;  // 스턴 지속 시간
     [SerializeField] private float counterRecoverTime = 0.3f;
@@ -70,6 +72,9 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     private WaitForSeconds parryIntervalWait;
     private ContactFilter2D contactFilter;
     private readonly List<Collider2D> overlapBuffer = new List<Collider2D>(1);
+
+    // 코루틴 추적
+    private Coroutine counterRoutine;
 
     #endregion
 
@@ -123,6 +128,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             {
                 anim.SetBool("IsMoving", false);
             }
+            UpdateAnimator(); // 스턴 중에도 애니메이터 상태 업데이트 (패링 자세 풀림 반영 등)
             return;
         }
 
@@ -130,7 +136,16 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
         UpdateAnimator();
 
-        if (state == State.Parrying || state == State.Countering || state == State.Recovering)
+        if (state == State.Parrying || state == State.Recovering)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // 물리 충돌로 밀리지 않도록 고정
+            }
+            return;
+        }
+
+        if (state == State.Countering)
         {
             return;
         }
@@ -155,9 +170,10 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     {
         if (target != null)
         {
-            // 범위 이탈 시 추적 해제 → 배회 복귀
+            // 범위 이탈 시 추적 해제 범위는 2f 정도 더 여유롭게
+            float loseRange = detectRange + 2.0f;
             float sqrDist = (target.position - transform.position).sqrMagnitude;
-            if (sqrDist > detectRange * detectRange)
+            if (sqrDist > loseRange * loseRange)
             {
                 target = null;
                 state = State.Patrol;
@@ -181,6 +197,12 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     {
         if (rb == null)
         {
+            return;
+        }
+        float xDistance = Mathf.Abs(destination.x - transform.position.x);
+        if (xDistance <= stopDistance)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // 너무 가까우면 X축 이동 정지 (떨림 방지)
             return;
         }
         float dirX = destination.x > transform.position.x ? 1f : -1f; // 이동 방향 계산
@@ -252,7 +274,18 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             return false;
         }
-        StartCoroutine(CounterRoutine());
+        if (counterRoutine != null)
+        {
+            StopCoroutine(counterRoutine);
+        }
+
+        // 카운터(패링 성공) 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.ParryingCounter);
+        }
+
+        counterRoutine = StartCoroutine(CounterRoutine());
         return true;
     }
 
@@ -266,6 +299,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         }
         // 플레이어 방향으로 즉각 돌진
         Vector2 dashDir = ((Vector2)(target.position - transform.position)).normalized;
+
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
@@ -280,13 +314,29 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         }
         if (state == State.Countering)
         {
-            state = State.Tracking;
+            // 허공에 헛스윙으로 끝났을 때도 회복 루틴 실행
+            StartCoroutine(CounterRecoverRoutine());
         }
+        counterRoutine = null;
     }
 
     private IEnumerator CounterRecoverRoutine()
     {
+        // 중력이 적용될 때까지 물리 프레임 하나 대기
+        yield return new WaitForFixedUpdate();
+
+        // 공중에 떠서 낙하 중이라면 회복 모션을 생략하고 바로 추적(Fall -> Walk) 상태로 복귀
+        if (rb != null && rb.linearVelocity.y < -0.05f)
+        {
+            state = State.Tracking;
+            yield break;
+        }
+
         state = State.Recovering;
+        if (anim != null)
+        {
+            anim.SetTrigger("Recover");
+        }
 
         yield return new WaitForSeconds(counterRecoverTime);
 
@@ -321,12 +371,71 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
                 rb.linearVelocity = Vector2.zero; // 충돌 시 제동력 부여
             }
 
-            ApplyCounterHit(collision.gameObject);
-            StartCoroutine(CounterRecoverRoutine());
+            if (counterRoutine != null)
+            {
+                StopCoroutine(counterRoutine);
+                counterRoutine = null; // 중복 실행 방지
+
+                ApplyCounterHit(collision.gameObject);
+                StartCoroutine(CounterRecoverRoutine());
+            }
         }
         else if (Time.time - lastContactTime > contactCooldown)
         {
             ApplyContactHit(collision.gameObject);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (enemyStatus != null && enemyStatus.isStunned) return;
+        if (collision == null || collision.gameObject == null) return;
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (state == State.Countering) return;
+
+        // 패링 중이거나 회복 중일 때는 일반 접촉 공격을 하지 않음
+        if (state != State.Parrying && state != State.Recovering)
+        {
+            if (Time.time - lastContactTime > contactCooldown)
+            {
+                ApplyContactHit(collision.gameObject);
+            }
+        }
+
+        // 캐릭터 겹침/올라타기 상황 방지를 위한 슬라이드 밀어내기
+        HandleSlideOff(collision);
+    }
+
+    private void HandleSlideOff(Collision2D collision)
+    {
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (Mathf.Abs(contact.normal.y) > 0.5f)
+            {
+                float slideDir = (collision.transform.position.x >= transform.position.x) ? 1f : -1f;
+
+                Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+                if (playerRb != null)
+                {
+                    playerRb.linearVelocityX = slideDir * 4f;
+                }
+
+                // 패링이나 회복 중일 때는 적이 밀리지 않도록 고정
+                if (rb != null && state != State.Parrying && state != State.Recovering)
+                {
+                    rb.linearVelocityX = -slideDir * 4f;
+                    
+                    Vector3 enemyPos = transform.position;
+                    enemyPos.x -= slideDir * 0.02f;
+                    transform.position = enemyPos;
+                }
+
+                Vector3 playerPos = collision.transform.position;
+                playerPos.x += slideDir * 0.02f;
+                collision.transform.position = playerPos;
+                
+                break;
+            }
         }
     }
 
@@ -338,6 +447,13 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             anim.SetTrigger("Attack");
         }
+
+        // 검 공격 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.ParryingShield_attackSword);
+        }
+
         float dirX = playerObj.transform.position.x > transform.position.x ? 1f : -1f;
         Vector2 knockback = new Vector2(dirX * contactKnockbackX, contactKnockbackY);
 
@@ -362,7 +478,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         // 카운터 공격 성공 시 대미지 + 넉백 + 스턴
         if (playerObj.TryGetComponent(out IDamageable damageable))
         {
-            damageable.TakeDamage(contactDamage);
+            damageable.TakeDamage(counterDamage);
         }
 
         if (playerObj.TryGetComponent(out IHittable hittable))

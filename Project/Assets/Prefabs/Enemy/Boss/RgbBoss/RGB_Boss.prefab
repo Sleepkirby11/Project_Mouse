@@ -15,13 +15,14 @@ GameObject:
   - component: {fileID: 3560122471953931004}
   - component: {fileID: 3849390451943329625}
   - component: {fileID: 7494368891630312394}
+  - component: {fileID: -161775779480546646}
   m_Layer: 7
   m_Name: RGB_Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5372984818383490697
 Transform:
   m_ObjectHideFlags: 0
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 1000
   dieAnimationLength: 1
   element: 3
   weaknessMultiplier: 1.5
@@ -202,6 +203,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &-161775779480546646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952050263766178938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311892d41189616429cc618af69976f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newBGM: {fileID: 8300000, guid: 602c813df03048a4393520360a3c4be3, type: 3}
 --- !u!1 &1600457405175722663
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +355,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 250
   m_Sprite: {fileID: -5443343911616032526, guid: 262412c6bb60f57458e37ff73c185fe2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

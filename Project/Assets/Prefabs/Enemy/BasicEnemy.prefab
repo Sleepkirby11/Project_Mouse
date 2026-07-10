@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc993ada18b2e247abb53d5649e564e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
+  attackDamage: 2
   attackCooldown: 1.5
   attackPoint: {fileID: 4773862176804746005}
   attackRadius: 0.7
@@ -148,8 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 2
+  maxHP: 30
   dieAnimationLength: 0.5
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
+  isBoss: 0
 --- !u!61 &3298864769083811923
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -272,7 +276,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 250
   m_Sprite: {fileID: 685267539325443055, guid: 6d2c1df5e1d9ba540886c20708cb0e8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

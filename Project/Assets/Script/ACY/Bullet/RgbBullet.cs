@@ -4,7 +4,6 @@ using UnityEngine;
 public class RgbBullet : MonoBehaviour, IDamageable
 {
     [Header("탄환 고유 속성 설정")]
-    [Tooltip("이 프리팹의 속성을 인스펙터에서 지정하세요.")]
     [SerializeField] private EnemyStatus.EnemyElement myElement;
 
     [Header("대미지 설정")]
@@ -17,7 +16,6 @@ public class RgbBullet : MonoBehaviour, IDamageable
     [SerializeField] private float fadeDuration = 0.3f;  // 페이드아웃 지속 시간
 
     [Header("반복 설정")]
-    [Tooltip("일직선 발사 -> 경직을 몇 번 반복할지 설정합니다.")]
     [SerializeField] private int maxAttackCount = 3;
 
     private EnemyStatus.EnemyElement weakElement;
@@ -96,7 +94,6 @@ public class RgbBullet : MonoBehaviour, IDamageable
             }
         }
 
-        // ★ 핵심 수정: 모든 공격 횟수가 끝나서 자연 소멸할 때도 페이드아웃 코루틴을 실행합니다.
         if (!destroyed)
         {
             StartFadeOut();
@@ -126,7 +123,6 @@ public class RgbBullet : MonoBehaviour, IDamageable
 
         if (isWeaknessHit)
         {
-            Debug.Log($"[{gameObject.name}] 약점 속성 적중! 페이드아웃.");
             StartFadeOut();
         }
     }
@@ -155,7 +151,6 @@ public class RgbBullet : MonoBehaviour, IDamageable
         }
     }
 
-    // ★ 추가: 자연 소멸과 약점 파괴 시 공용으로 사용할 페이드아웃 시작 메서드
     private void StartFadeOut()
     {
         destroyed = true;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -9,8 +10,16 @@ public class AudioManager : MonoBehaviour
     public float bgmVolume;
     AudioSource bgmPlayer;
 
+    [System.Serializable]
+    public struct SFXData
+    {
+        public string name; // 식별용 이름
+        public AudioClip clip;
+        [Range(0f, 1f)] public float volumeScale;
+    }
+
     [Header("#SFX")]
-    public AudioClip[] sfxClips;
+    public SFXData[] sfxClips;
     public float sfxVolume;
     public int channels;
     AudioSource[] sfxPlayers;
@@ -19,7 +28,27 @@ public class AudioManager : MonoBehaviour
     //효과음 추가 시 순서대로 입력할 것
     public enum SFX
     {
-        
+        ArcherArrow,
+        BasicEnemyAttack,
+        BlueBossClaw,
+        BlueBossDash,
+        BlueBossLaser,
+        EnemyHurt,
+        GreenBossWind,
+        Ice,
+        IceHammer,
+        JumpEnemy_Jump,
+        JumpEnemy_Land,
+        ParryingCounter,
+        ParryingShield_attackSword,
+        PlayerDash,
+        PlayerWalk,
+        RedBossDie,
+        RedBossFire,
+        RedBossTP,
+        RGB_explosion,
+        RGB_Gear,
+        RGB_Hurricane
     }
 
     private void Awake()
@@ -35,6 +64,7 @@ public class AudioManager : MonoBehaviour
 	}
 
 
+
     void Init()
     {
         //배경음 플레이어 초기화
@@ -43,7 +73,10 @@ public class AudioManager : MonoBehaviour
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
-        bgmPlayer.volume = bgmVolume;
+        if(GameManager.instance != null)
+            bgmPlayer.volume = GameManager.instance.bgmVolume;
+        else
+            bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
 
         //효과음 플레이어 초기화
@@ -55,15 +88,35 @@ public class AudioManager : MonoBehaviour
         {
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
-            sfxPlayers[i].volume = sfxVolume;
+            if(GameManager.instance != null)
+                sfxPlayers[i].volume = GameManager.instance.sfxVolume;
+            else
+                sfxPlayers[i].volume = sfxVolume;
         }
     }
     public void UpdateSound()
     {
-        bgmPlayer.volume = bgmVolume;
+        if(GameManager.instance != null)
+            bgmPlayer.volume = GameManager.instance.bgmVolume;
+        else
+            bgmPlayer.volume = bgmVolume;
+
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
-            sfxPlayers[i].volume = sfxVolume;
+            float scale = 1f;
+            if (sfxPlayers[i].isPlaying && sfxPlayers[i].clip != null)
+            {
+                foreach (var sfxData in sfxClips)
+                {
+                    if (sfxData.clip == sfxPlayers[i].clip)
+                    {
+                        scale = sfxData.volumeScale;
+                        break;
+                    }
+                }
+            }
+            sfxPlayers[i].volume = globalVol * scale;
         }
     }
     public void PlaySFX(SFX sfx)
@@ -73,6 +126,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX_Int(int sfx)
     {
+        if (sfxClips == null || sfx < 0 || sfx >= sfxClips.Length)
+        {
+            Debug.LogWarning($"[AudioManager] SFX index {sfx} is out of bounds of sfxClips (Length: {sfxClips?.Length ?? 0}). Please assign all 21 clips in the AudioManager Inspector.");
+            return;
+        }
+
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             int loopIndex = (i + channelIndex) % sfxPlayers.Length;
@@ -80,10 +139,19 @@ public class AudioManager : MonoBehaviour
                 continue;
 
             channelIndex = loopIndex;
-            sfxPlayers[loopIndex].clip = sfxClips[sfx];
+            sfxPlayers[loopIndex].clip = sfxClips[sfx].clip;
+            float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
+            sfxPlayers[loopIndex].volume = globalVol * sfxClips[sfx].volumeScale;
             sfxPlayers[loopIndex].Play();
             break;
         }
+    }
+
+    public void ChangeBGM(AudioClip newBGM)
+    {
+        bgmPlayer.Stop();
+        bgmPlayer.clip = newBGM;
+        PlayBGM(true);
     }
 
     public void PlayBGM(bool isPlay)

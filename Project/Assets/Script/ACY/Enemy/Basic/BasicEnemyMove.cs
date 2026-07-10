@@ -44,6 +44,7 @@ public class BasicEnemyMove : MonoBehaviour
     private WaitForSeconds scanIntervalWFS;
     private EnemyStatus enemyStatus;
     private Rigidbody2D rb;
+    private BasicEnemyAttack enemyAttack;
 
     #endregion
 
@@ -52,7 +53,6 @@ public class BasicEnemyMove : MonoBehaviour
     private void Awake()
     {
         myTransform = transform;
-        startPosition = myTransform.position;
 
         detectionRadiusSqr = detectionRadius * detectionRadius;
 
@@ -60,10 +60,12 @@ public class BasicEnemyMove : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         enemyStatus = GetComponent<EnemyStatus>();
         rb = GetComponent<Rigidbody2D>();
+        enemyAttack = GetComponent<BasicEnemyAttack>();
     }
 
     private void Start()
     {
+        startPosition = myTransform.position;
         // 최초 배회 목표 지점 설정
         UpdatePatrolTarget();
         StartCoroutine(EnvironmentScanRoutine()); // 감지 코루틴 시작
@@ -81,6 +83,21 @@ public class BasicEnemyMove : MonoBehaviour
             if (rb != null)
             {
                 rb.linearVelocity = Vector2.zero;
+            }
+            return;
+        }
+
+        // 공격 중일 때는 움직이지 않고 멈춤
+        if (enemyAttack != null && enemyAttack.IsAttacking)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+            if (animator != null)
+            {
+                animator.SetBool(IsMoving, false);
+                animator.SetBool(IsChasing, false);
             }
             return;
         }
@@ -124,15 +141,21 @@ public class BasicEnemyMove : MonoBehaviour
                 Collider2D hit = Physics2D.OverlapCircle(myTransform.position, detectionRadius, targetLayer); 
                 if (hit != null) // 감지되면 추적
                 {
-                    targetTransform = hit.transform;
-                    SetState(EnemyState.Chase);
+                    PlayerStatus playerStatus = hit.GetComponentInParent<PlayerStatus>();
+                    if (playerStatus != null && playerStatus.HP > 0)
+                    {
+                        targetTransform = hit.transform;
+                        SetState(EnemyState.Chase);
+                    }
                 }
             }
             else
             {
+                PlayerStatus playerStatus = targetTransform.GetComponentInParent<PlayerStatus>();
                 float sqrDistance = (targetTransform.position - myTransform.position).sqrMagnitude; // 타겟과의 거리 계산
 
-                if (sqrDistance > detectionRadiusSqr) // 감지 범위를 벗어나면 배회 상태로
+                // 감지 범위를 벗어나거나 플레이어가 사망한 경우 배회 상태로
+                if (sqrDistance > detectionRadiusSqr || (playerStatus != null && playerStatus.HP <= 0))
                 {
                     targetTransform = null;
                     SetState(EnemyState.Patrol); 
@@ -158,10 +181,15 @@ public class BasicEnemyMove : MonoBehaviour
         {
             Flip();
         }
-        myTransform.position = Vector3.MoveTowards(myTransform.position, patrolTarget, moveSpeed * Time.deltaTime); // 배회 목표 지점으로 이동
 
-        // 목표 지점에 도달했는지 확인
-        if ((patrolTarget - myTransform.position).sqrMagnitude < 0.01f)
+        float dirX = direction > 0 ? 1f : -1f;
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(dirX * moveSpeed * 0.6f, rb.linearVelocity.y);
+        }
+
+        // 목표 지점에 도달했는지 확인 (X축 거리 기준)
+        if (Mathf.Abs(patrolTarget.x - myTransform.position.x) < 0.2f)
         {
             UpdatePatrolTarget(); // 새로운 배회 목표 지점 설정
         }
@@ -174,6 +202,15 @@ public class BasicEnemyMove : MonoBehaviour
             return;
         }
 
+        PlayerStatus playerStatus = targetTransform.GetComponentInParent<PlayerStatus>();
+        if (playerStatus != null && playerStatus.HP <= 0)
+        {
+            targetTransform = null;
+            SetState(EnemyState.Patrol);
+            UpdatePatrolTarget();
+            return;
+        }
+
         // 방향 전환
         FlipToTarget();
 
@@ -183,17 +220,18 @@ public class BasicEnemyMove : MonoBehaviour
         // 너무 가까우면 멈춤
         if (xDistance <= stopDistance)
         {
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
             return;
         }
 
-        Vector3 targetPos = new Vector3(targetTransform.position.x, myTransform.position.y, myTransform.position.z); // x축으로만 이동
-
-        myTransform.position = Vector3.MoveTowards // 타겟을 향해 이동
-        ( 
-            myTransform.position,
-            targetPos,
-            moveSpeed * Time.deltaTime
-        );
+        float dirX = targetTransform.position.x > myTransform.position.x ? 1f : -1f;
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(dirX * moveSpeed, rb.linearVelocity.y);
+        }
     }
 
     #endregion

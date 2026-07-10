@@ -66,6 +66,11 @@ public class ArcherEnemyAttack : MonoBehaviour
             return;
         }
 
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.ArcherArrow);
+        }
+
         if (arrowObj.TryGetComponent<Arrow>(out var arrow))
         {
             arrow.Initialize(spawnPos, targetPos);

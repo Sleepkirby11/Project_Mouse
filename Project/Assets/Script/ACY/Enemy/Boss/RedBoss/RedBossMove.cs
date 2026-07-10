@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -84,6 +84,12 @@ public class RedBossMove : MonoBehaviour
         }
 
         int oldIndex = currentPointIndex; // 이동 전 현재 위치 인덱스 백업
+
+        // 텔레포트 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.RedBossTP);
+        }
 
         // 사라지는 이펙트 재생
         SpawnVFX(disappearVFX, transform.position);

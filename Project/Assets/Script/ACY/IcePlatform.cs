@@ -26,7 +26,7 @@ public class IcePlatform : MonoBehaviour
         // 플레이어 태그 확인 및 중복 발동 방지
         if (collision.gameObject.CompareTag("Player") && !isTriggered)
         {
-            // 플레이어가 '위'에서 밟았는지 확인 (정교한 판정을 원할 때 사용)
+            // 플레이어가 위에서 밟았는지 확인
             if (collision.contacts[0].normal.y < -0.5f)
             {
                 StartCoroutine(ShakeAndFall());
@@ -39,7 +39,7 @@ public class IcePlatform : MonoBehaviour
         isTriggered = true;
         float elapsed = 0.0f;
 
-        // 1. 흔들리는 단계
+        // 흔들리는 단계
         while (elapsed < shakeDuration)
         {
             // 원래 위치 기준 매 프레임 랜덤한 미세 오프셋 계산
@@ -55,10 +55,10 @@ public class IcePlatform : MonoBehaviour
         // 흔들림이 끝나면 위치를 원래대로 살짝 맞추고 복귀
         transform.localPosition = originalPos;
 
-        // 2. 떨어지는 단계 (Dynamic으로 변경하여 중력 적용)
+        // 떨어지는 단계 (Dynamic으로 변경하여 중력 적용)
         rb.bodyType = RigidbodyType2D.Dynamic;
 
-        // 3. 메모리 관리를 위해 일정 시간 뒤 삭제
+        // 일정 시간 뒤 삭제
         Destroy(gameObject, destroyDelay);
     }
 }

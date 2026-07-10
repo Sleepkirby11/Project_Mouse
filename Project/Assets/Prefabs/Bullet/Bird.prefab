@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.3137255}
   m_FlipX: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   despawnX: 20
   warningLine: {fileID: 6911326296446247475}
   warningTime: 1.5
-  damage: 10
+  damage: 3
 --- !u!50 &1794100229489867295
 Rigidbody2D:
   serializedVersion: 5
@@ -289,7 +289,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 9123963057461422345, guid: 3fe3c92a0f3221d4f8192a25cb7b0a05, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1

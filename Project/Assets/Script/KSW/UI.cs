@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -20,8 +20,14 @@ public class UI : MonoBehaviour
     [Header("잉크 게이지 설정")]
     [SerializeField] private Slider inkSlider;
 
+    [Header("쿨타임 게이지 설정")]
+    [SerializeField] private Slider coolTimeSlider;
+
     [Header("특수 잉크 게이지 설정")]
     [SerializeField] private Slider specialInkSlider;
+
+    [Header("보스 체력바 설정")]
+    [SerializeField] private Slider bossHpSlider;
 
     [Header("대화창")]
     public GameObject talkPanel;
@@ -33,19 +39,57 @@ public class UI : MonoBehaviour
     [Header("팔레트")]
     public GameObject pal;
 
+    [Header("설정 패널")]
+    public GameObject settingPanel;
+
+    [Header("라이센스 패널")]
+    public GameObject licensePanel; 
+
     void Awake()
     {
         // 싱글톤 초기화
-        if (Instance == null) Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Start()
+    {
+        RefreshPlayerReference();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 씬이 전환되거나 플레이어 사망 후 재시작될 때 보스 HP 바 숨김
+        HideBossHPBar();
+        RefreshPlayerReference();
+    }
+
+    private void RefreshPlayerReference()
     {
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
         {
             playerStatus = playerObj.GetComponent<PlayerStatus>();
             UpdateHPBar();
+            UpdateCoolTimeBar();
+            UpdateInkBar();
         }
     }
 
@@ -68,6 +112,59 @@ public class UI : MonoBehaviour
     public void UpdateHPBar()
     {
         if (hpSlider != null && playerStatus != null) hpSlider.value = playerStatus.HP / playerStatus.MaxHP;
+    }
+
+    // 보스 체력바 활성화 및 초기 체력 설정
+    public void ShowBossHPBar(float initialRatio)
+    {
+        Debug.Log($"[UI] ShowBossHPBar 호출됨. 초기 비율: {initialRatio}");
+        if (bossHpSlider != null)
+        {
+            bossHpSlider.gameObject.SetActive(true);
+            bossHpSlider.value = initialRatio;
+            Debug.Log($"[UI] bossHpSlider가 이제 활성화되었습니다. 값: {bossHpSlider.value}");
+        }
+        else
+        {
+            Debug.LogError("[UI] bossHpSlider가 null입니다! 인스펙터에서 UIManager (UI 스크립트)의 Boss HP Slider 필드에 EnemyHP 슬라이더를 할당해 주세요.");
+        }
+    }
+
+    // 보스 체력바 상태 업데이트
+    public void UpdateBossHPBar(float currentHP, float maxHP)
+    {
+        Debug.Log($"[UI] UpdateBossHPBar 호출됨: {currentHP}/{maxHP}");
+        if (bossHpSlider != null && maxHP > 0)
+        {
+            bossHpSlider.value = currentHP / maxHP;
+        }
+        else if (bossHpSlider == null)
+        {
+            Debug.LogWarning("[UI] UpdateBossHPBar: bossHpSlider가 null입니다.");
+        }
+    }
+
+    public void UpdateCoolTimeBar()
+    {
+        if (coolTimeSlider != null && playerStatus != null)
+        {
+            coolTimeSlider.value = playerStatus.currentCoolTime / playerStatus.coolTime;
+        }
+    }
+
+    // 보스 체력바 비활성화
+    public void HideBossHPBar()
+    {
+        Debug.Log("[UI] HideBossHPBar 호출됨.");
+        if (bossHpSlider != null)
+        {
+            bossHpSlider.gameObject.SetActive(false);
+            Debug.Log("[UI] bossHpSlider가 비활성화되었습니다.");
+        }
+        else
+        {
+            Debug.LogWarning("[UI] HideBossHPBar: bossHpSlider가 null입니다.");
+        }
     }
 
     public void ActivePal(bool isActive)
@@ -140,5 +237,30 @@ public class UI : MonoBehaviour
 
         isAction = true;
         talkIndex++;
+    }
+    
+    // 설정창 열기/닫기
+    public void OpenSetting()
+    {
+        if (settingPanel != null) settingPanel.SetActive(true);
+        if (GameManager.instance != null) GameManager.instance.PauseOnOff();
+    }
+
+    public void CloseSetting()
+    {
+        if (settingPanel != null) settingPanel.SetActive(false);
+        if (GameManager.instance != null) GameManager.instance.PauseOnOff();
+    }
+
+    // [추가] 라이선스창 열기
+    public void OpenLicense()
+    {
+        if (licensePanel != null) licensePanel.SetActive(true);
+    }
+
+    // [추가] 라이선스창 닫기
+    public void CloseLicense()
+    {
+        if (licensePanel != null) licensePanel.SetActive(false);
     }
 }

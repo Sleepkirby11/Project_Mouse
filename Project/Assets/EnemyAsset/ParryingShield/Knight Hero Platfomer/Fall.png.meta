@@ -114,10 +114,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 17
+        width: 22
         height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: Fall_1
       rect:
         serializedVersion: 2
-        x: 21
+        x: 22
         y: 0
-        width: 18
+        width: 22
         height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,12 +156,12 @@ TextureImporter:
       name: Fall_2
       rect:
         serializedVersion: 2
-        x: 43
+        x: 44
         y: 0
-        width: 18
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: Fall_3
       rect:
         serializedVersion: 2
-        x: 65
+        x: 66
         y: 0
-        width: 18
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: dc4c0d38a626ca54ba7fae9091ce213c
     internalID: 0
     vertices: []
     indices: 

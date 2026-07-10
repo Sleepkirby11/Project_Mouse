@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class KillerPlantBullet : MonoBehaviour
@@ -66,15 +66,28 @@ public class KillerPlantBullet : MonoBehaviour
             return;
         }
 
+        // 플레이어 피격 처리
         if (other.CompareTag("Player"))
         {
             other.GetComponent<IDamageable>()?.TakeDamage(damage);
             StartCoroutine(DestroySequence());
+            return;
         }
-        else if (!other.CompareTag("Enemy"))
+
+        // 적(자신 포함) 또는 적 캐릭터 컴포넌트가 있는 경우 통과 (무시)
+        if (other.CompareTag("Enemy") || other.GetComponent<EnemyStatus>() != null || other.GetComponentInParent<EnemyStatus>() != null)
         {
-            StartCoroutine(DestroySequence()); 
+            return;
         }
+
+        // 트리거 콜라이더(구역 센서, 카메라 경계 등)인 경우 통과 (무시)
+        if (other.isTrigger)
+        {
+            return;
+        }
+
+        // 그 외(바닥, 벽 등) 장애물 충돌 시 소멸
+        StartCoroutine(DestroySequence());
     }
 
     IEnumerator DestroySequence()

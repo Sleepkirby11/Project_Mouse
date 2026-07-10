@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53d6ad36d1635143918b627ddc844fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeDamage: 15
+  meleeDamage: 5
   meleeRate: 1.2
   projectilePoolKey: KillerPlantBullet
   projectileSpeed: 13
@@ -181,7 +181,7 @@ MonoBehaviour:
   runChance: 0.3
   runDuration: 2
   runCooldown: 5
-  rangedAttackChance: 0.4
+  rangedAttackChance: 0.5
   playerTransform: {fileID: 0}
   isFacingRight: 1
   intent: 0
@@ -198,8 +198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 300
   dieAnimationLength: 1
+  element: 1
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
+  isBoss: 0
 --- !u!1 &7678791527145004352
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +281,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 250
   m_Sprite: {fileID: -3684568011471075414, guid: edc08564f7e15844e94c01ee89b0da40, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Mono.Cecil.Cil;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -23,7 +22,7 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
     [HideInInspector] public PlayerStatus status;
- 
+
     public GameObject cam;
 
     [Header("공격")]
@@ -36,6 +35,10 @@ public class Player : MonoBehaviour
 
     [Header("공격 표시 커서")]
     public GameObject attackCursor;
+
+    [Header("캔버스")]
+    public GameObject canvas;
+    public GameObject settingPanel;
 
 
     //유니티 컴포넌트
@@ -61,6 +64,10 @@ public class Player : MonoBehaviour
     private bool isChargeInk;
     private bool isChargeSpecial;
 
+    // 발소리 타이머 관련 변수
+    private float footstepTimer;
+    [SerializeField] private float footstepInterval = 0.35f;
+
     //마우스
     [HideInInspector] public Transform mouse;
     Vector2 mouseDist;
@@ -78,14 +85,16 @@ public class Player : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            if(cursorObject != null)
+            if (cursorObject != null)
                 DontDestroyOnLoad(cursorObject);
-            if(groundLine != null)
+            if (groundLine != null)
                 DontDestroyOnLoad(groundLine);
-            if(attackCursor != null)
+            if (attackCursor != null)
                 DontDestroyOnLoad(attackCursor);
-            if(cam != null)
+            if (cam != null)
                 DontDestroyOnLoad(cam);
+            if (canvas != null)
+                DontDestroyOnLoad(canvas);
         }
         else
         {
@@ -93,6 +102,7 @@ public class Player : MonoBehaviour
             if (groundLine != null) Destroy(groundLine);
             if (attackCursor != null) Destroy(attackCursor);
             if (cam != null) Destroy(cam);
+            if (canvas != null) Destroy(canvas);
 
             Destroy(gameObject);
             return;
@@ -145,6 +155,24 @@ public class Player : MonoBehaviour
         if (isDashReady && jumpCount == 1)
             DashLine();
         GroundCheck();
+
+        // 발소리 처리
+        if (isCanMove && status.CanMove && anim.GetBool("IsWalk") && jumpCount == 2 && Mathf.Abs(rigid.linearVelocityX) > 0.1f)
+        {
+            footstepTimer += Time.fixedDeltaTime;
+            if (footstepTimer >= footstepInterval)
+            {
+                footstepTimer = 0f;
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.PlayerWalk);
+                }
+            }
+        }
+        else
+        {
+            footstepTimer = footstepInterval;
+        }
     }
 
     public void SpriteFlip()
@@ -189,7 +217,7 @@ public class Player : MonoBehaviour
         {
             bool isGround;
             isGround = Physics2D.BoxCast
-                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground"));
+                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground", "PlayerGround"));
             if (isGround)
             {
                 //이동 가능 + input 값 이어서 받기
@@ -197,6 +225,7 @@ public class Player : MonoBehaviour
                     rigid.linearVelocityX = inputVec.x;
                 jumpCount = 2;
                 isCanMove = true;
+                JumpAnimUpdate(false);
                 anim.SetBool("IsFalling", false);
                 return;
             }
@@ -213,11 +242,11 @@ public class Player : MonoBehaviour
     }
 
     //매개변수 상태와 무적 판정에 따른 Animation 전환
-    public void JumpAnimUpdate(bool isUpate)
+    public void JumpAnimUpdate(bool isUpdate)
     {
         if (!status.IsInvincible)
         {
-            anim.SetBool("IsJump", isUpate);
+            anim.SetBool("IsJump", isUpdate);
         }
     }
 
@@ -228,11 +257,11 @@ public class Player : MonoBehaviour
         {
             //스킬 | 커서 | 일반 공격 종류 걸러내기
             if (isSkill)
-                status.specialInk -= cursor.lastLength / 6;
-            else if(groundCursor.isMove)
-                status.specialInk -= cursor.lastLength / 8;
+                status.specialInk -= cursor.lastLength;
+            else if (groundCursor.isMove)
+                status.specialInk -= cursor.lastLength;
             else
-                status.ink -= cursor.lastLength / 4;
+                status.ink -= cursor.lastLength;
             InkUIUpdate();
             usedInk = 0;
             cursor.lastLength = 0;
@@ -289,22 +318,13 @@ public class Player : MonoBehaviour
 
         cursor.SetColliderPointsFromTrail();
 
-        //잉크 초기화
-        if (isSkill || isGroundCursor)
-        {
-            status.specialInk = status.maxSpecialInk;
-        }
-        else
-        {
-            status.ink = status.maxInk;
-        }
-        InkUIUpdate();
 
         //후처리
         if (isGroundCursor)
             isGroundCursor = false;
-        if(isSkill)
+        if (isSkill)
         {
+            status.currentCoolTime = 0;
             SkillBool(false);
             StatusImage.instance.ChangeImage((int)status.currentStance, isSkill);
         }
@@ -328,22 +348,22 @@ public class Player : MonoBehaviour
             switch (inkBonus)
             {
                 case float f when f <= 1f && f > 0.8f:    //ink 잔여량 100%
-                    inkBonus = 1;
+                    inkBonus = 0.1f;
                     break;
                 case float f when f <= 0.8f && f > 0.6f:
-                    inkBonus = 0.7f;
-                    break;
-                case float f when f <= 0.6f && f > 0.4f:
-                    inkBonus = 0.5f;
-                    break;
-                case float f when f <= 0.4f && f > 0.2f:
-                    inkBonus = 0.35f;
-                    break;
-                case float f when f <= 0.2f && f > 0:
                     inkBonus = 0.2f;
                     break;
+                case float f when f <= 0.6f && f > 0.4f:
+                    inkBonus = 0.35f;
+                    break;
+                case float f when f <= 0.4f && f > 0.2f:
+                    inkBonus = 0.5f;
+                    break;
+                case float f when f <= 0.2f && f > 0:
+                    inkBonus = 0.7f;
+                    break;
                 case float f when f <= 0:
-                    inkBonus = 0.1f;
+                    inkBonus = 1;
                     break;
             }
             calculateNum += inkBonus;
@@ -364,7 +384,7 @@ public class Player : MonoBehaviour
     }
 
     //Ink UI를 업데이트하는 함수
-    void InkUIUpdate()
+    public void InkUIUpdate()
     {
         if (UI.Instance != null)
         {
@@ -381,6 +401,14 @@ public class Player : MonoBehaviour
         if (status.IsBound) return;
 
         rigid.linearVelocityX = inputVec.x;
+        SpriteFlip();
+    }
+
+    public void CloseSetting()
+    {
+        inputVec = Vector2.zero;
+        anim.SetBool("IsWalk", false);
+        CancleCursor();
     }
 
     //넉백 상태 종료 후 처리 함수
@@ -448,29 +476,29 @@ public class Player : MonoBehaviour
     }
 
     //레버 상호작용 감지
-   void OnTriggerEnter2D(Collider2D collision)
-{
-    if (collision.transform.parent != null)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject parentObj = collision.transform.parent.gameObject;
-        
-        if (parentObj.CompareTag("Interactable"))
+        if (collision.transform.parent != null)
         {
-            interactable = parentObj.GetComponent<IInteractable>();
-        }
-    }
-}
+            GameObject parentObj = collision.transform.parent.gameObject;
 
-void OnTriggerExit2D(Collider2D collision)
-{
-    if (collision.transform.parent != null)
-    {
-        GameObject parentObj = collision.transform.parent.gameObject;
-        
-        if (parentObj.CompareTag("Interactable"))
-        {
-            interactable = null;
+            if (parentObj.CompareTag("Interactable"))
+            {
+                interactable = parentObj.GetComponent<IInteractable>();
+            }
         }
     }
-}
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.parent != null)
+        {
+            GameObject parentObj = collision.transform.parent.gameObject;
+
+            if (parentObj.CompareTag("Interactable"))
+            {
+                interactable = null;
+            }
+        }
+    }
 }

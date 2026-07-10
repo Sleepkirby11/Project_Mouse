@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -122,6 +122,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
 
+        EnemyStatus status = GetComponent<EnemyStatus>();
+        if (status != null)
+        {
+            status.OnEnemyDeath += HandleDeath;
+        }
+
         if (sr != null)
         {
             originalColor = sr.color;
@@ -143,6 +149,20 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         }
 
         attackRoutine = StartCoroutine(AttackRoutine());
+    }
+
+    private void HandleDeath()
+    {
+        StopAllBossCoroutines();
+    }
+
+    private void OnDestroy()
+    {
+        EnemyStatus status = GetComponent<EnemyStatus>();
+        if (status != null)
+        {
+            status.OnEnemyDeath -= HandleDeath;
+        }
     }
 
     #endregion
@@ -291,6 +311,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             // 첫 번째 발사는 1.2초, 이후 발사는 0.5초
             float waitTime = (i == 0) ? 1.2f : burstDelay;
             yield return new WaitForSeconds(waitTime);
+
+            // 유도탄 발사 효과음 재생
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySFX(AudioManager.SFX.RedBossFire);
+            }
 
             SpawnArrow(0f);              // 가운데
             SpawnArrow(-angleSpread);    // 아래쪽/왼쪽 방향
@@ -664,6 +690,18 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         hasClones = false;
     }
 
+    public void OnCloneDestroyed(GameObject cloneObj)
+    {
+        if (currentClones == null) return;
+        for (int i = 0; i < currentClones.Length; i++)
+        {
+            if (currentClones[i] == cloneObj)
+            {
+                currentClones[i] = null;
+            }
+        }
+    }
+
     #endregion
 
     #region Laser Pattern
@@ -914,7 +952,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
                     GameObject obj = PoolingManager.Instance.Get(ARROW_KEY, spawnPos, Quaternion.identity);
                     if (obj != null)
                     {
-                        obj.GetComponent<FireArrow>()?.Init(finalAngle, false);
+                        obj.GetComponent<FireArrow>()?.Init(finalAngle, false, true);
                     }
                 }
             }

@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
@@ -28,6 +29,10 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     [Header("보스 설정")]
     [SerializeField] private bool isBoss = false; // 보스인지 판별
 
+    public bool IsDead { get; private set; } // 사망 여부 플래그
+
+    private string particleName = "Particle_Hit";
+
     private GameObject cachedPortalVisual;
     private PlayerStatus cachedPlayer;
     public EnemyElement CurrentElement => element;
@@ -42,11 +47,29 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         cachedPlayer = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
         currentHP = maxHP;
     }
-    private void Start()
+    private IEnumerator Start()
     {
         if (isBoss)
         {
             CachePortal();
+
+            // UI.Instance가 초기화될 때까지 대기
+            float elapsed = 0f;
+            while (UI.Instance == null && elapsed < 1f)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            if (UI.Instance != null)
+            {
+                Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}'가 활성화되었습니다. 보스 체력바를 활성화합니다. 비율: {GetHPRatio()}");
+                UI.Instance.ShowBossHPBar(GetHPRatio());
+            }
+            else
+            {
+                Debug.LogError($"[EnemyStatus] 보스 '{gameObject.name}'가 활성화되었지만 UI.Instance가 null입니다!");
+            }
         }
     }
     public void SetElement(EnemyElement newElement)
@@ -109,6 +132,42 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         }
             damage = ApplyElementalDamage(damage);
         CameraShake.instance.Impulse();
+
+        // 피격 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.EnemyHurt);
+        }
+        if(PoolingManager.Instance != null)
+        {
+            GameObject hitParticle = PoolingManager.Instance.Get(particleName, this.transform.position, this.transform.rotation);
+            var main = hitParticle.GetComponent<ParticleSystem>().main;
+            if(Player.instance != null)
+            {
+                Color currentColor;
+                currentColor = Color.white;
+                switch(Player.instance.status.currentStance)
+                {
+                    case PlayerStatus.Stance.White:
+                        currentColor = Color.white;
+                        break;
+                    case PlayerStatus.Stance.Red:
+                        currentColor = Color.red;
+                        break;
+                    case PlayerStatus.Stance.Green:
+                        currentColor = Color.green;
+                        break;
+                    case PlayerStatus.Stance.Blue:
+                        currentColor = Color.blue;
+                        break;
+                }
+                currentColor.a = 0.25f;
+                main.startColor = currentColor;
+                Debug.Log(main.startColor.color.a);
+                Debug.Log(currentColor.a);
+            }
+        }
+
         if (anim != null)
         {
             if (HasParameter("Hurt"))
@@ -123,6 +182,12 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
         currentHP -= damage;
         Debug.Log($"{gameObject.name}이 피해를 {damage}만큼 입음. 남은 HP : {currentHP}/{maxHP}");
+
+        if (isBoss && UI.Instance != null)
+        {
+            Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}' 피격. 체력바 갱신: {currentHP}/{maxHP}");
+            UI.Instance.UpdateBossHPBar(currentHP, maxHP);
+        }
 
         if (hitReaction != null)
         {
@@ -169,6 +234,12 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             return; // 이미 죽은 적은 회복 불가
         }
         currentHP = Mathf.Min(currentHP + amount, maxHP);
+
+        if (isBoss && UI.Instance != null)
+        {
+            Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}' 회복. 체력바 갱신: {currentHP}/{maxHP}");
+            UI.Instance.UpdateBossHPBar(currentHP, maxHP);
+        }
     }
 
     #endregion
@@ -206,11 +277,31 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             return;
         }
 
+        IsDead = true; // 사망 상태 설정
+
         OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
 
-        if (isBoss && cachedPortalVisual != null) // 포탈 활성화
+        if (isBoss)
         {
-            cachedPortalVisual.SetActive(true);
+            Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}' 사망. 체력바를 비활성화합니다.");
+
+            // 레드 보스 사망 효과음 재생
+            if (GetComponent<RedBossAttack>() != null)
+            {
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.RedBossDie);
+                }
+            }
+
+            if (UI.Instance != null)
+            {
+                UI.Instance.HideBossHPBar();
+            }
+            if (cachedPortalVisual != null) // 포탈 활성화
+            {
+                cachedPortalVisual.SetActive(true);
+            }
         }
 
         if (anim != null)
@@ -236,6 +327,16 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             {
                 rb.linearVelocity = Vector2.zero;
                 rb.bodyType = RigidbodyType2D.Kinematic;
+            }
+
+            // 본인을 제외한 모든 MonoBehaviour 스크립트 비활성화
+            MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+            foreach (MonoBehaviour script in scripts)
+            {
+                if (script != null && script != this)
+                {
+                    script.enabled = false;
+                }
             }
         }
 

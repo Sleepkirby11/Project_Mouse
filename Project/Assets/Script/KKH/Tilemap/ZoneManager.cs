@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,8 @@ public class ZoneManager : MonoBehaviour
     [Tooltip("인스펙터의 Element 번호가 곧 구역 ID가 됩니다. (0번칸 = 0번 구역)")]
     [SerializeField] private List<GameObject> zonePrefabs = new List<GameObject>();
 
-    private Dictionary<int, GameObject> activeZones = new Dictionary<int, GameObject>();
+    [SerializeField] private List<GameObject> onPlayerZone = new List<GameObject>();
+    [SerializeField] private Dictionary<int, GameObject> activeZones = new Dictionary<int, GameObject>();
     private int currentZoneId = -1;
 
     private void Awake()
@@ -175,6 +177,23 @@ public class ZoneManager : MonoBehaviour
             }
 
             activeZones.Add(zoneId, spawnedZone);
+        }
+    }
+
+    public void UpdateOnPlayerZone(GameObject playerZone, bool isEnter)
+    {
+        if(isEnter)
+        {
+            onPlayerZone.Add(playerZone);
+        }
+        else
+        {
+            if(onPlayerZone.Contains(playerZone))
+                onPlayerZone.Remove(playerZone);
+        }
+        if (onPlayerZone.Count > 0)
+        {
+            OnPlayerEnterZone(onPlayerZone.Last().GetComponent<Zone>());
         }
     }
 }

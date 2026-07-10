@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -49,6 +49,16 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     [Header("플레이어 콤보")]
     public int combo;
 
+    [Header("잉크 차징 속도")]
+    public float chargeSpeed;
+    public float specialChargeSpeed;
+
+    [Header("쿨타임")]
+    public float coolTime;
+    public float currentCoolTime;
+
+    private string particleName = "Particle_PlayerHit";
+
 
     private Rigidbody2D rb;
     private Animator playerAnim;
@@ -65,6 +75,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public bool IsInvincible => isInvincible;
     public bool IsBound => isBound;
     private Coroutine bindCoroutine;
+    private float originGravityScale;
+    private System.Collections.Generic.List<Collider2D> ignoredColliders = new System.Collections.Generic.List<Collider2D>();
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -77,6 +89,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            originGravityScale = rb.gravityScale;
         }
     }
     //상태 초기화
@@ -87,6 +100,26 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         specialInk = maxSpecialInk;
 
         isInvincible = false;
+    }
+
+    void Update()
+    {
+        if(!Player.instance.cursor.isMove)
+            ChargeInk();
+        if(!Player.instance.groundCursor.isMove)
+        {
+            if(Player.instance.isSkill && Player.instance.cursor.isMove)
+            {
+                return;
+            }
+            ChargeSpecialInk();
+        }
+        Player.instance.InkUIUpdate();
+        if(currentCoolTime  < coolTime)
+        {
+            CoolTimeUpdate();
+            UI.Instance.UpdateCoolTimeBar();
+        }
     }
 
     public bool CanMove => !isKnockbacked && !isStunned && !isPossessed && !isBound; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
@@ -120,6 +153,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         else
         {
             playerAnim.SetTrigger("Hit");
+            if(PoolingManager.Instance != null)
+            {
+                GameObject hitParticle = PoolingManager.Instance.Get(particleName, this.transform.position, this.transform.rotation);
+            }
         }
     }
 
@@ -132,6 +169,46 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         UI.Instance.UpdateHPBar();
     }
+
+    //잉크 충전
+    void ChargeInk()
+    {
+        if(ink > maxInk)
+        {
+            ink = maxInk;
+            return;
+        }
+        else if(ink < maxInk)
+        {
+            ink += Time.deltaTime * chargeSpeed;
+        }
+    }
+
+    void ChargeSpecialInk()
+    {
+        if(specialInk > maxSpecialInk)
+        {
+            specialInk = maxSpecialInk;
+            return;
+        }
+        else if(specialInk < maxSpecialInk)
+        {
+            specialInk += Time.deltaTime * specialChargeSpeed;
+        }
+    }
+
+    public void CoolTimeUpdate()
+    {
+        if(currentCoolTime >= coolTime)
+        {
+            currentCoolTime = coolTime;
+            return;
+        }
+        currentCoolTime += Time.deltaTime;
+    }
+
+    private Coroutine stunCoroutine;
+    private Coroutine knockbackCoroutine;
 
     // IHittable 구현 : 넉백
     public void TakeHit(Vector2 knockbackForce)
@@ -146,7 +223,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         if (gameObject.activeInHierarchy)
         {
-            StartCoroutine(KnockbackRoutine(knockbackForce));
+            if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
+            knockbackCoroutine = StartCoroutine(KnockbackRoutine(knockbackForce));
         }
     }
 
@@ -163,7 +241,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
         if (gameObject.activeInHierarchy)
         {
-            StartCoroutine(StunRoutine(duration));
+            if (stunCoroutine != null) StopCoroutine(stunCoroutine);
+            stunCoroutine = StartCoroutine(StunRoutine(duration));
         }
     }
     private IEnumerator KnockbackRoutine(Vector2 force) // 넉백
@@ -187,13 +266,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     private IEnumerator StunRoutine(float duration) // 스턴
     {
         isStunned = true;
-        Debug.Log($"[PlayerStatus] 패링 성공 {duration}초간 스턴");
         playerComp.CancleCursor();
 
         yield return new WaitForSeconds(duration);
 
         isStunned = false;
-        Debug.Log("[PlayerStatus] 플레이어 스턴 해제");
     }
     public void SetPossessed(bool value)    //빙의
     {
@@ -204,8 +281,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             rb.linearVelocity = Vector2.zero;
         }
-
-        Debug.Log(value ? "[PlayerStatus] 빙의 상태" : "[PlayerStatus] 빙의 해제");
     }
     public void ApplyBind(float duration) //속박
     {
@@ -236,7 +311,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             isBound = false;
             if (rb != null)
             {
-                rb.gravityScale = 1f;
+                rb.gravityScale = originGravityScale;
                 rb.linearVelocity = Vector2.zero;
             }
             if (playerComp != null)
@@ -267,7 +342,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         isBound = false;
         bindCoroutine = null;
-        rb.gravityScale = 1f;
+        rb.gravityScale = originGravityScale;
 
         rb.linearVelocity = Vector2.zero;
         playerComp.OnKnockbackEnd();
@@ -290,17 +365,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         rb.linearVelocity = Vector2.zero;
 
-        int playerLayer = LayerMask.NameToLayer("Player");
-        int groundLayer = LayerMask.NameToLayer("Ground");
-        Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, true);
-
         rb.AddForce(Vector2.up * forceY, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.15f);
         yield return new WaitUntil(() => rb.linearVelocityY <= 0f);
         yield return new WaitForFixedUpdate();
-
-        Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
 
         isKnockbacked = false;
         rb.linearVelocityX = 0f;
@@ -311,6 +380,52 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     {
         isInvincible = value;
         Debug.Log(value ? "[PlayerStatus] 무적 상태" : "[PlayerStatus] 무적 해제");
+
+        if (!value)
+        {
+            // 무적 해제 시, 무시했던 에너미 콜라이더들과의 충돌을 다시 활성화
+            Collider2D playerCollider = GetComponent<Collider2D>();
+            if (playerCollider != null)
+            {
+                foreach (var otherCol in ignoredColliders)
+                {
+                    if (otherCol != null)
+                    {
+                        Physics2D.IgnoreCollision(playerCollider, otherCol, false);
+                    }
+                }
+            }
+            ignoredColliders.Clear();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleEnemyCollisionIgnore(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        HandleEnemyCollisionIgnore(collision);
+    }
+
+    private void HandleEnemyCollisionIgnore(Collision2D collision)
+    {
+        if (collision == null || collision.gameObject == null) return;
+
+        // 플레이어가 무적 상태일 때, "Enemy" 태그를 가졌거나 EnemyStatus 컴포넌트가 있는 대상과의 충돌을 무시
+        if (isInvincible && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.GetComponent<EnemyStatus>() != null))
+        {
+            Collider2D playerCollider = GetComponent<Collider2D>();
+            if (playerCollider != null && collision.collider != null)
+            {
+                Physics2D.IgnoreCollision(playerCollider, collision.collider, true);
+                if (!ignoredColliders.Contains(collision.collider))
+                {
+                    ignoredColliders.Add(collision.collider);
+                }
+            }
+        }
     }
 
     public Gradient ChangeStance(Stance newStance)   //스탠스 체인지
@@ -338,5 +453,37 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     void Die()  //사망
     {
         Debug.Log("Die");
+    }
+
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // 다음 씬으로 넘어갈때 모든 상태이상 해제 
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        if (isPossessed)
+        {
+            SetPossessed(false);
+            Transform possessionCanvas = transform.Find("PossessionGaugeCanvas");
+            if (possessionCanvas != null)
+            {
+                possessionCanvas.gameObject.SetActive(false);
+            }
+        }
+
+        if (isStunned) isStunned = false;
+        if (isKnockbacked)
+        {
+            isKnockbacked = false;
+            if (playerComp != null) playerComp.OnKnockbackEnd();
+        }
+        if (isBound) ReleaseBind();
     }
 }

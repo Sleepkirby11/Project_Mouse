@@ -118,12 +118,12 @@ TextureImporter:
       name: Shield Raise Walk_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 20
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: Shield Raise Walk_1
       rect:
         serializedVersion: 2
-        x: 23
+        x: 22
         y: 0
-        width: 20
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: Shield Raise Walk_2
       rect:
         serializedVersion: 2
-        x: 45
+        x: 44
         y: 0
-        width: 20
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: Shield Raise Walk_3
       rect:
         serializedVersion: 2
-        x: 67
+        x: 66
         y: 0
-        width: 20
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,12 +206,12 @@ TextureImporter:
       name: Shield Raise Walk_4
       rect:
         serializedVersion: 2
-        x: 89
+        x: 88
         y: 0
-        width: 20
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,12 +228,12 @@ TextureImporter:
       name: Shield Raise Walk_5
       rect:
         serializedVersion: 2
-        x: 111
+        x: 110
         y: 0
-        width: 20
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ccb47a9dc11ffa54690312dd87a0e115
     internalID: 0
     vertices: []
     indices: 

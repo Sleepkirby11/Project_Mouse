@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using UnityEngine;
  * 공격패턴2. 레이저(Sonic) : 플레이어가 공격 범위 내에 접근하면 레이저 발사
  * 공격패턴3. 돌진(Dash) : 플레이어의 방향으로 돌진 (닿으면 대미지)
  * 공격패턴4. 물기둥(WaterSpout) : 플레이어 근처에 물기둥 생성 (닿으면 대미지 + 에어본)
- * 행동패턴1. 휴식(Rest) : 돌진 후 50% 확률로 휴식(restPoint로 돌아가서 대기)
+ * 행동패턴1. 휴식(Rest) : 돌진 후 restPoint로 돌아가서 대기
  * 
  * 1페이즈 : 할퀴기, 돌진 랜덤
  * 2페이즈 (HP50%) : 할퀴기, 레이저, 돌진(2연속) 랜덤
@@ -304,6 +304,10 @@ public class BossController : MonoBehaviour, IHitReaction
                 {
                     anim.SetTrigger(AnimClaw);
                 }
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossClaw);
+                }
             }
 
             rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, moveSpeed * 2f * Time.fixedDeltaTime));
@@ -317,6 +321,10 @@ public class BossController : MonoBehaviour, IHitReaction
         if (!attackStarted && anim != null)
         {
             anim.SetTrigger(AnimClaw);
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossClaw);
+            }
         }
 
         yield return new WaitForSeconds(GetAnimLength("Claw"));
@@ -346,6 +354,10 @@ public class BossController : MonoBehaviour, IHitReaction
         if (anim != null)
         {
             anim.SetTrigger(AnimDash);
+        }
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossDash);
         }
         if (dashHitbox != null)
         {
@@ -475,6 +487,11 @@ public class BossController : MonoBehaviour, IHitReaction
         if (laser != null)
         {
             laser.transform.localScale = Vector3.one;
+        }
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossLaser);
         }
 
         Vector2 dir = bossFlip.isFacingRight ? Vector2.right : Vector2.left;

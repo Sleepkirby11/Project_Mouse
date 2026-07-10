@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class RgbColorCycle : MonoBehaviour
 {
@@ -52,8 +52,6 @@ public class RgbColorCycle : MonoBehaviour
         {
             animator.SetTrigger(CastingTrigger);
         }
-
-        Debug.Log($"RGB Boss Element & Animation Changed : {next}");
     }
 
     public void EnterFinalPhase()
@@ -70,8 +68,6 @@ public class RgbColorCycle : MonoBehaviour
         {
             animator.SetTrigger(CastingTrigger);
         }
-
-        Debug.Log("발악 패턴 시작");
     }
 
     public void ExitFinalPhase()
@@ -103,12 +99,8 @@ public class RgbColorCycle : MonoBehaviour
     {
         if (animator == null || targetController == null) return;
 
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        float normalizedTime = stateInfo.normalizedTime;
-        int stateHash = stateInfo.shortNameHash;
-
         animator.runtimeAnimatorController = targetController;
-        animator.Play(stateHash, 0, normalizedTime);
+        animator.Play("Idle", 0, 0f);
     }
     #endregion
 }

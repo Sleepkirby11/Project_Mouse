@@ -53,9 +53,13 @@ MonoBehaviour:
   waveSpeed: 3
   waveAmount: 0.3
   arrivalDistance: 0.5
-  mapCenter: {x: 64, y: -8}
-  mapRange: {x: 10, y: 8}
+  mapCenter: {x: 461, y: 100}
+  mapRange: {x: 30, y: 10}
   spawnInvincibleTime: 1.5
+  roamDuration: 8
+  returnSpeed: 6
+  returnArrivalDistance: 0.3
+  fadeTime: 1
 --- !u!58 &4744815911619806977
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,6 +137,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 1
   dieAnimationLength: 0.5
+  element: 3
+  weaknessMultiplier: 1.5
+  resistMultiplier: 0.5
+  isBoss: 0
 --- !u!1 &5708413675073871191
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +217,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: -3647800588686652441, guid: f2e857ba881083347900bfd117aeae12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

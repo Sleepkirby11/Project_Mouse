@@ -4,8 +4,6 @@ using UnityEngine;
 /*
  근접 공격 스크립트
  - 공격 범위 안에 플레이어가 들어오면 공격
- - 공격 쿨타임 적용
- - 공격 판정은 Animation Event로 실행 예정
  */
 public class BasicEnemyAttack : MonoBehaviour
 {
@@ -20,6 +18,10 @@ public class BasicEnemyAttack : MonoBehaviour
     private bool canAttack = true;
     private EnemyStatus enemyStatus;
 
+    private Coroutine attackRoutineInstance;
+    private bool isAttacking = false;
+    public bool IsAttacking => isAttacking;
+
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -30,6 +32,13 @@ public class BasicEnemyAttack : MonoBehaviour
     {
         if (enemyStatus != null && enemyStatus.isStunned)
         {
+            if (isAttacking && attackRoutineInstance != null)
+            {
+                StopCoroutine(attackRoutineInstance);
+                attackRoutineInstance = null;
+                isAttacking = false;
+                canAttack = true; // 스턴으로 시전이 끊겼으므로 다음 기회에 바로 공격할 수 있도록 쿨타임 초기화
+            }
             return;
         }
         CheckAttackRange();
@@ -46,21 +55,30 @@ public class BasicEnemyAttack : MonoBehaviour
 
         if (hit != null)
         {
-            StartCoroutine(AttackRoutine());
+            attackRoutineInstance = StartCoroutine(AttackRoutine());
         }
     }
     // 애니메이션 완성 전 테스트 코드, 애니메이션 완성하면 지우고 아래 주석 해제
     private IEnumerator AttackRoutine()
     {
         canAttack = false;
+        isAttacking = true;
 
         if (anim != null)
-            {
-                anim.SetTrigger("Attack");
-            }
+        {
+            anim.SetTrigger("Attack");
+        }
 
-            Debug.Log("적 공격 시도");
-        yield return new WaitForSeconds(0.5f); //약간 딜레이
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.BasicEnemyAttack);
+        }
+
+        Debug.Log("적 공격 시도");
+        yield return new WaitForSeconds(1f); //선딜레이
+        
+        isAttacking = false; // 선딜레이가 끝나고 타격을 시도하므로 다시 움직일 수 있도록 함
+
         if (enemyStatus == null || !enemyStatus.isStunned)
         {
             AttackHit();
@@ -69,22 +87,9 @@ public class BasicEnemyAttack : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
 
         canAttack = true;
+        attackRoutineInstance = null;
     }
-    // 애니메이션 완성 시 AttackHit() 함수를 Animation Event로 호출하도록 변경
-    //private IEnumerator AttackRoutine()
-    //{
-    //    canAttack = false;
 
-    //    if (anim != null)
-    //    {
-    //        anim.SetTrigger("Attack");
-    //    }
-
-    //    yield return new WaitForSeconds(attackCooldown);
-
-    //    canAttack = true;
-    //}
-    // Animation Event로 호출할 함수
     public void AttackHit()
     {
         Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);

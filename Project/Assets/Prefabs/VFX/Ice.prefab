@@ -124,7 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f852edae9c6d1ea4da48557d87885b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 3
+  stunDuration: 0.2
+  knockbackForce: {x: 20, y: 3}
 --- !u!61 &6646825529022793070
 BoxCollider2D:
   m_ObjectHideFlags: 0

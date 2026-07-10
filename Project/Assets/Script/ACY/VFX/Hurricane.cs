@@ -46,7 +46,7 @@ public class Hurricane : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        // 최초 설정된 기본 이동 속도를 기억해 둡니다.
+        // 최초 설정된 기본 이동 속도를 기억
         originMoveSpeed = moveSpeed;
     }
 
@@ -54,7 +54,7 @@ public class Hurricane : MonoBehaviour
     {
         isDisposing = false;
         onHitPlayer = null;
-        // 오브젝트 풀에서 꺼낼 때 이동 속도를 초기 속도로 리셋합니다.
+        // 오브젝트 풀에서 꺼낼 때 이동 속도를 초기 속도로 리셋
         moveSpeed = originMoveSpeed;
 
         if (spriteRenderer != null)
@@ -71,7 +71,7 @@ public class Hurricane : MonoBehaviour
 
     private void Update()
     {
-        // 소용돌이가 반환 처리 중(isDisposing == true)이 아닐 때만 이동합니다.
+        // 소용돌이가 반환 처리 중이 아닐 때만 이동
         if (!isDisposing)
         {
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
@@ -102,7 +102,7 @@ public class Hurricane : MonoBehaviour
 
             case EnemyStatus.EnemyElement.Blue:
             default:
-                // 블루 이미지는 기본 화이트 컬러로 스프라이트 본연의 색을 표현합니다.
+                // 블루 이미지는 기본 화이트 컬러로 스프라이트 본연의 색을 표현
                 spriteRenderer.color = Color.white;
                 finalDamage = blueDamage;
                 break;
@@ -165,7 +165,7 @@ public class Hurricane : MonoBehaviour
         {
             elapsed += Time.deltaTime;
 
-            // 알파값을 1에서 0으로 서서히 보간 (Lerp)
+            // 알파값을 1에서 0으로 서서히 보간 
             float newAlpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
             spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, newAlpha);
 

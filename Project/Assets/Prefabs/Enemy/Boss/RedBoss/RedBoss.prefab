@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7047756458394531367}
   - component: {fileID: 6985218642751753356}
+  - component: {fileID: 3342772892629365417}
   - component: {fileID: 3689845271912533494}
   - component: {fileID: 5172886122121002780}
   - component: {fileID: 5189355176662487042}
@@ -98,6 +99,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &3342772892629365417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823950582210720561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311892d41189616429cc618af69976f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newBGM: {fileID: 8300000, guid: a9f87e053d57e5742b48bcb15516a31c, type: 3}
 --- !u!70 &3689845271912533494
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -155,9 +169,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   teleportInterval: 3
-  disappearVFX: {fileID: 0}
-  appearVFX: {fileID: 0}
+  disappearVFX: {fileID: 7323537915668664570, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
+  appearVFX: {fileID: 3268619075305744560, guid: 771cca234fa3d5e4080958e572a7f350, type: 3}
 --- !u!114 &5189355176662487042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,9 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 400
   dieAnimationLength: 0.8
-  element: 3
+  element: 0
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
@@ -196,10 +211,10 @@ MonoBehaviour:
   meteorWaveCount: 3
   meteorPerWave: 7
   waveInterval: 1.5
-  meteorCastTime: 2
-  meteorSpawnXRange: {x: -25, y: 25}
-  meteorSpawnYRange: {x: 23, y: 18}
-  meteorTargetY: -15
+  meteorCastTime: 1.5
+  meteorSpawnXRange: {x: 422, y: 460}
+  meteorSpawnYRange: {x: 16, y: 20}
+  meteorTargetY: -20
   stunDuration: 3
   teleportPoints:
   - {fileID: 0}
@@ -207,7 +222,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  cloneDisappearVFX: {fileID: 0}
+  - {fileID: 0}
+  cloneDisappearVFX: {fileID: 7323537915668664570, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
   cloneSpawnVFX: {fileID: 3268619075305744560, guid: 771cca234fa3d5e4080958e572a7f350, type: 3}
   laserCrossPrefab: {fileID: 2214707613065288430, guid: 39eb1a22691993f45bb0c0266a835624, type: 3}
   laserSpawnPoint: {fileID: 0}
@@ -673,7 +689,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 250
   m_Sprite: {fileID: -2195632313391920141, guid: d6633dd7a9649e046aa4424868e13355, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

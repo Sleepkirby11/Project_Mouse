@@ -70,13 +70,19 @@ public class JumpEnemyMove : MonoBehaviour
         FlipToTarget();
         UpdateAnimator();
 
-        // 준비 중이거나 점프 중이면 멈춤
-        if (attackScript != null && attackScript.IsAttackingOrReady)
+        // 준비 중(기 모으는 중)일 때만 X 속도를 0으로 만들어 멈춤
+        if (attackScript != null && attackScript.IsCharging)
         {
             if (rb != null)
             {
                 rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             }
+            return;
+        }
+
+        // 점프 중(비행 중)에는 물리 속도가 유지되도록 리턴
+        if (attackScript != null && attackScript.IsAttackingOrReady)
+        {
             return;
         }
 

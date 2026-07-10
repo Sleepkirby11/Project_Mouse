@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputScript : MonoBehaviour
 {
     private Player player;
+
 
     private void Awake()
     {
@@ -20,16 +23,22 @@ public class PlayerInputScript : MonoBehaviour
         {
             return;
         }
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
+        }
         //키 입력 시작
         if (context.started)
         {
             player.anim.SetBool("IsWalk", true);
-            player.inputVec.x = context.ReadValue<Vector2>().x * player.speed;
+            player.inputVec.x = context.ReadValue<Vector2>().x * player.status.speed;
 
             if (player.status.CanMove)
             {
                 player.rigid.linearVelocityX = player.inputVec.x;
-                player.SpriteFlip();
             }
         }
         //키 입력 종료
@@ -51,6 +60,14 @@ public class PlayerInputScript : MonoBehaviour
             return;
         }
 
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
+        }
+
         if (context.started)
         {
             if(player.rigid.linearVelocityY > -player.speed * 2)
@@ -65,6 +82,14 @@ public class PlayerInputScript : MonoBehaviour
         if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         if (context.started)
@@ -91,6 +116,14 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionInteract(InputAction.CallbackContext context)
     {
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
+        }
+
         if(context.started && player.interactable != null)
         {
             player.interactable.Interact();
@@ -103,6 +136,14 @@ public class PlayerInputScript : MonoBehaviour
         if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         if (context.started)
@@ -122,6 +163,13 @@ public class PlayerInputScript : MonoBehaviour
                 //normalized된 방향으로 AddForce
                 player.rigid.linearVelocity = Vector2.zero;
                 player.rigid.AddForce(dir.normalized * player.status.dashForce, ForceMode2D.Impulse);
+                
+                // 대시 효과음 재생
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.PlayerDash);
+                }
+
                 //키 입력 영향 임시 제한
                 player.isCanMove = false;
 
@@ -141,11 +189,19 @@ public class PlayerInputScript : MonoBehaviour
             return;
         }
 
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
+        }
+
         //스킬과 일반 공격 구분
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.cursorObject.GetComponent<TrailRenderer>();
-        if (context.started && player.status.ink > 0)
+        if (context.started && player.status.ink > 1)
         {
             //초기화
             player.cursorObject.transform.position = player.mouse.transform.position;
@@ -167,6 +223,14 @@ public class PlayerInputScript : MonoBehaviour
         if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
         }
 
         if (context.started)
@@ -198,6 +262,17 @@ public class PlayerInputScript : MonoBehaviour
         {
             return;
         }
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
+        }
+        if(player.status.currentCoolTime < player.status.coolTime)
+        {
+            return;
+        }
 
         if (context.started)
         {
@@ -216,11 +291,19 @@ public class PlayerInputScript : MonoBehaviour
             return;
         }
 
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
+        }
+
         //스킬과 일반 공격 구분
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.groundLine.GetComponent<TrailRenderer>();
-        if (context.started && player.status.ink > 0)
+        if (context.started && player.status.specialInk > 1)
         {
             //초기화
             player.groundLine.transform.position = player.mouse.transform.position;
@@ -233,6 +316,35 @@ public class PlayerInputScript : MonoBehaviour
         if (context.canceled && player.groundCursor.isMove)
         {
             player.ActiveAttack(player.groundCursor);
+        }
+    }
+
+    public void ActionCheatHeal(InputAction.CallbackContext context)
+    {
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
+        }
+        if(context.started)
+        {
+            player.status.Heal(100);
+            player.status.ink = player.status.maxInk;
+            player.status.specialInk = player.status.maxSpecialInk;
+        }
+    }
+
+    public void ActionMenu(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            player.settingPanel.SetActive(!player.settingPanel.activeSelf);
+            if(GameManager.instance != null)
+            {
+                GameManager.instance.PauseOnOff();
+            }
         }
     }
 }

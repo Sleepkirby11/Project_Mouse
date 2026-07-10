@@ -115,12 +115,12 @@ TextureImporter:
       name: Attack 2 Recover_0
       rect:
         serializedVersion: 2
-        x: 9
+        x: 0
         y: 0
-        width: 21
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 40
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -137,12 +137,12 @@ TextureImporter:
       name: Attack 2 Recover_1
       rect:
         serializedVersion: 2
-        x: 49
+        x: 40
         y: 0
-        width: 21
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 40
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -159,12 +159,12 @@ TextureImporter:
       name: Attack 2 Recover_2
       rect:
         serializedVersion: 2
-        x: 91
+        x: 80
         y: 0
-        width: 21
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 40
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -181,12 +181,12 @@ TextureImporter:
       name: Attack 2 Recover_3
       rect:
         serializedVersion: 2
-        x: 131
+        x: 120
         y: 0
-        width: 21
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 40
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -203,19 +203,19 @@ TextureImporter:
       name: Attack 2 Recover_4
       rect:
         serializedVersion: 2
-        x: 169
+        x: 160
         y: 0
-        width: 20
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 40
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b500426acfebe4af0800000000000000
+      spriteID: 07c8d0b55b5883b45b53a16d4c3da9c2
       internalID: -410180523715723173
       vertices: []
       indices: 
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 08e6db3fa6b986b4d8fac855414c150a
     internalID: 0
     vertices: []
     indices: 
