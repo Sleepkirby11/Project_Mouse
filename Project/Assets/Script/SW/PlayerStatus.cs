@@ -453,6 +453,9 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     void Die()  //사망
     {
         Debug.Log("Die");
+        Player.instance.inputVec = Vector2.zero;
+        AudioManager.instance.PlayBGM(false);
+        Player.instance.BlackBG.SetActive(true);
     }
 
     private void OnEnable()

@@ -113,5 +113,8 @@ MonoBehaviour:
   - name: Death
     clip: {fileID: 8300000, guid: a7a0b63b0024cc64fa4691b03e22202e, type: 3}
     volumeScale: 1
+  - name: BossHpZero
+    clip: {fileID: 8300000, guid: 453ad6d33ec0d2243a2fdd31fc0afdf1, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20

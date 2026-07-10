@@ -15,6 +15,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     [Header("사망 연출 설정")]
     [SerializeField] private float dieAnimationLength = 1f; // 사망 애니메이션 길이에 맞춰 설정 
     private Animator anim;
+    private bool isDeath;
+    private float slowMotionTimer;
 
     [Header("상태 이상")]
     public bool isStunned { get; private set; }
@@ -32,6 +34,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     public bool IsDead { get; private set; } // 사망 여부 플래그
 
     private string particleName = "Particle_Hit";
+    private string effectName = "Light_Death_Effect";
 
     private GameObject cachedPortalVisual;
     private PlayerStatus cachedPlayer;
@@ -46,6 +49,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         anim = GetComponentInChildren<Animator>();
         cachedPlayer = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
         currentHP = maxHP;
+        isDeath = false;
+        slowMotionTimer = 0.1f;
     }
     private IEnumerator Start()
     {
@@ -72,6 +77,25 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             }
         }
     }
+
+    void FixedUpdate()
+    {
+        //보스 사망 시 연출
+        if (isDeath)
+        {
+            if (slowMotionTimer == 0.1f)
+            {
+                AudioManager.instance.PlayBGM(false);
+                Time.timeScale = 0.1f;
+                GameObject effect = PoolingManager.Instance.Get(effectName, this.transform.position, this.transform.rotation);
+                effect.gameObject.transform.localScale = new Vector3(20, 20, 20);
+            }
+
+
+            DeathRoutine();
+        }
+    }
+
     public void SetElement(EnemyElement newElement)
     {
         element = newElement;
@@ -130,7 +154,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
                 return;
             }
         }
-            damage = ApplyElementalDamage(damage);
+        damage = ApplyElementalDamage(damage);
         CameraShake.instance.Impulse();
 
         // 피격 효과음 재생
@@ -138,15 +162,15 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         {
             AudioManager.instance.PlaySFX(AudioManager.SFX.EnemyHurt);
         }
-        if(PoolingManager.Instance != null)
+        if (PoolingManager.Instance != null)
         {
             GameObject hitParticle = PoolingManager.Instance.Get(particleName, this.transform.position, this.transform.rotation);
             var main = hitParticle.GetComponent<ParticleSystem>().main;
-            if(Player.instance != null)
+            if (Player.instance != null)
             {
                 Color currentColor;
                 currentColor = Color.white;
-                switch(Player.instance.status.currentStance)
+                switch (Player.instance.status.currentStance)
                 {
                     case PlayerStatus.Stance.White:
                         currentColor = Color.white;
@@ -194,7 +218,10 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
         if (currentHP <= 0)
         {
-            Die();
+            if (isBoss)
+                isDeath = true;
+            else
+                Die();
         }
     }
     private int ApplyElementalDamage(int damage)
@@ -265,7 +292,22 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
     #endregion
 
-    #region Death Sequence
+    #region Death Sequence 
+
+    private void DeathRoutine()
+    {
+        if (!GameManager.instance.isSetting)
+        {
+            slowMotionTimer -= Time.fixedDeltaTime;
+            if (slowMotionTimer <= 0)
+            {
+                isDeath = false;
+                Time.timeScale = 1f;
+                Die();
+                slowMotionTimer = 0.1f;
+            }
+        }
+    }
 
     private void Die()
     {
@@ -316,6 +358,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
         if (!isBoss)
         {
+            GameObject effect = PoolingManager.Instance.Get(effectName, this.transform.position, this.transform.rotation);
+            effect.gameObject.transform.localScale = new Vector3(5, 5, 5);
             if (TryGetComponent(out Collider2D col))
             {
                 col.enabled = false;

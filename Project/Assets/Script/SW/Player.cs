@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     [Header("캔버스")]
     public GameObject canvas;
     public GameObject settingPanel;
+    public GameObject BlackBG;
 
 
     //유니티 컴포넌트
