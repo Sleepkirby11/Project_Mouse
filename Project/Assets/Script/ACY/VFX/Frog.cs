@@ -1,22 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
     [Header("대미지 설정")]
     [SerializeField] private int damage = 1;
-    [SerializeField] private float hitboxActivateDelay = 0.5f;  // 침 공격 타이밍
-    [SerializeField] private float hitboxDuration = 0.3f;       // 판정 유지 시간
-    [SerializeField] private float animDuration = 2.0f;
-
 
     private Animator anim;
     private const string POOL_KEY = "GreenBossFrog";
-    private BoxCollider2D hitbox;
 
     private void Awake()
     {
-        hitbox = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
     }
 
@@ -37,29 +31,23 @@ public class Frog : MonoBehaviour
             anim.enabled = true;
         }
 
-        if (hitbox != null)
-        {
-            hitbox.enabled = false;
-        }
         StartCoroutine(FrogRoutine());
     }
 
     private IEnumerator FrogRoutine()
     {
-        // 공격 타이밍에 판정 ON
-        yield return new WaitForSeconds(hitboxActivateDelay);
-        if (hitbox != null)
+        float duration = 1.6f; // 기본 폴백값
+        if (anim != null && anim.runtimeAnimatorController != null)
         {
-            hitbox.enabled = true;
+            AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+            if (clips.Length > 0)
+            {
+                duration = clips[0].length;
+            }
         }
-        // 판정 유지
-        yield return new WaitForSeconds(hitboxDuration);
-        if (hitbox != null)
-        {
-            hitbox.enabled = false;
-        }
-        // 애니메이션 끝까지 대기
-        yield return new WaitForSeconds(animDuration - hitboxActivateDelay - hitboxDuration);
+
+        // 애니메이션 재생 시간 동안 대기한 후 풀로 반환
+        yield return new WaitForSeconds(duration);
 
         PoolingManager.Instance.Return(POOL_KEY, gameObject);
     }
