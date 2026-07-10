@@ -24,6 +24,7 @@ public class PlayerAnimTrigger : MonoBehaviour
         if(GameManager.instance != null)
         {
             status.Heal(100);
+            Player.instance.BlackBG.SetActive(false);
             GameManager.instance.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

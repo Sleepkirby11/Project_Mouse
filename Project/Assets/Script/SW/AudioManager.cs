@@ -49,7 +49,8 @@ public class AudioManager : MonoBehaviour
         RGB_explosion,
         RGB_Gear,
         RGB_Hurricane,
-        Death
+        Death,
+        BossHpZero
     }
 
     private void Awake()
@@ -150,6 +151,7 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeBGM(AudioClip newBGM)
     {
+        bgmClip = newBGM;
         bgmPlayer.Stop();
         bgmPlayer.clip = newBGM;
         PlayBGM(true);
