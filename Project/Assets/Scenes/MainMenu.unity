@@ -2697,6 +2697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingPanel: {fileID: 784186490}
   licensePanel: {fileID: 304016295}
+  mainMenuPanel: {fileID: 0}
 --- !u!4 &1881301656
 Transform:
   m_ObjectHideFlags: 0
