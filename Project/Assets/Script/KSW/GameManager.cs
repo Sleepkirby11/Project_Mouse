@@ -61,11 +61,11 @@ public class GameManager : MonoBehaviour
 
     public void PauseOnOff()
     {
-        if(Time.timeScale == 0f)
-            Time.timeScale = 1f;
-        else if(Time.timeScale == 1f)
-            Time.timeScale = 0f;
         isSetting = !isSetting;
+        if(!isSetting)
+            Time.timeScale = 1f;
+        else if(isSetting)
+            Time.timeScale = 0f;
         if(Player.instance != null)
             Player.instance.CloseSetting();
     }

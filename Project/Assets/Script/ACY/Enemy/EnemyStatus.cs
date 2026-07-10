@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Mono.Cecil.Cil;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -86,10 +87,11 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             if (slowMotionTimer == 0.1f)
             {
                 AudioManager.instance.PlayBGM(false);
-                Time.timeScale = 0.1f;
-                GameObject effect = PoolingManager.Instance.Get(effectName, this.transform.position, this.transform.rotation);
-                effect.gameObject.transform.localScale = new Vector3(20, 20, 20);
+                AudioManager.instance.PlaySFX(AudioManager.SFX.BossHpZero);
+                DeathParticle(20);
             }
+            if (!GameManager.instance.isSetting && Time.timeScale != 0.1f)
+                Time.timeScale = 0.1f;
 
 
             DeathRoutine();
@@ -309,6 +311,31 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         }
     }
 
+    private void DeathParticle(int amount)
+    {
+        GameObject effect = PoolingManager.Instance.Get(effectName, this.transform.position, this.transform.rotation);
+        effect.gameObject.transform.localScale = new Vector3(amount, amount, amount);
+
+        Color currentColor;
+        currentColor = Color.white;
+        switch (Player.instance.status.currentStance)
+        {
+            case PlayerStatus.Stance.White:
+                currentColor = Color.white;
+                break;
+            case PlayerStatus.Stance.Red:
+                currentColor = Color.red;
+                break;
+            case PlayerStatus.Stance.Green:
+                currentColor = Color.green;
+                break;
+            case PlayerStatus.Stance.Blue:
+                currentColor = Color.blue;
+                break;
+        }
+        effect.GetComponent<SpriteRenderer>().color = currentColor;
+    }
+
     private void Die()
     {
         // 정령(BossSpirit) 등 예외 오브젝트는 자폭 처리되므로 여기서 일반 사망 로직 진행 안 함
@@ -358,8 +385,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
         if (!isBoss)
         {
-            GameObject effect = PoolingManager.Instance.Get(effectName, this.transform.position, this.transform.rotation);
-            effect.gameObject.transform.localScale = new Vector3(5, 5, 5);
+            DeathParticle(5);
             if (TryGetComponent(out Collider2D col))
             {
                 col.enabled = false;
