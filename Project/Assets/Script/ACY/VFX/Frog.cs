@@ -18,8 +18,6 @@ public class Frog : MonoBehaviour
     {
         if (anim != null)
         {
-            anim.Play("Frog", 0, 0f); // 반환 시 애니메이션 처음으로 리셋
-            anim.Update(0f);
             anim.enabled = false;     // 애니메이터 비활성화
         }
     }
@@ -29,6 +27,8 @@ public class Frog : MonoBehaviour
         if (anim != null)
         {
             anim.enabled = true;
+            anim.Play("Frog", 0, 0f); // 활성화 시 애니메이션 처음으로 리셋
+            anim.Update(0f);
         }
 
         StartCoroutine(FrogRoutine());
