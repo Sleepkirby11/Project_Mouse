@@ -308,7 +308,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1662524474}
   m_Direction: 2
   m_Value: 0.9999999
-  m_Size: 0.09703722
+  m_Size: 0.09663781
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -767,8 +767,8 @@ MonoBehaviour:
     FX\nCopyright (c) RagnaPixel\nLicense: Spells FX by RagnaPixel\nSource/URL: (\uD574\uB2F9
     itch.io \uD398\uC774\uC9C0 \uCC38\uC870)\n\nUX Flat Icons [Free]\nCopyright (c)
     Heathen Engineering\nLicense: Standard Unity Asset Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/gui/icons/ux-flat-icons-free-202525\n\n[Music
-    & Sound]\nBGM Composition: exoticteve (Assisted by Suno AI)\n\nTracks: [\uD2B8\uB799\uBA85
-    1], [\uD2B8\uB799\uBA85 2]\n\nLicense: Suno AI Pro Commercial License\n\nSound
+    & Sound]\nBGM Composition: exoticteve (Assisted by Suno AI)\n\nTracks: [Blue],
+    [Green], [Red], [RGB]., [Tutorial]\n\nLicense: Suno AI Pro Commercial License\n\nSound
     Effects: 120,000+ Free Sound Effects for Download\nSource/URL: https://pixabay.com/sound-effects/\nLicense:
     Content License - Pixabay\nLicense: Content License - Pixabay"
   m_isRightToLeft: 0
