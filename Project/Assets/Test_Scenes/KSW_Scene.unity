@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &99140738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 666478932767545571, guid: cffedaf87fd2f7b4ca7ef664a3a350e5, type: 3}
+  m_PrefabInstance: {fileID: 4037026322319572912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &131847152
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,9 +159,9 @@ RectTransform:
   m_Father: {fileID: 1701616389}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &131847154
 MonoBehaviour:
@@ -302,8 +307,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1662524475}
   m_HandleRect: {fileID: 1662524474}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 0.9999999
+  m_Size: 0.09663781
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -532,6 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingPanel: {fileID: 0}
   licensePanel: {fileID: 0}
+  mainMenuPanel: {fileID: 0}
 --- !u!114 &348796134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,6 +643,7 @@ GameObject:
   - component: {fileID: 392884313}
   - component: {fileID: 392884315}
   - component: {fileID: 392884314}
+  - component: {fileID: 392884316}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -659,7 +666,7 @@ RectTransform:
   m_Father: {fileID: 884002649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -683,7 +690,71 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "This software uses the following open source software and third-party
+    assets:\n\nNecromancer(Free) \nCopyright (c) CreativeKind\nLicense: https://creativekind.itch.io/necromancer-free\nSource/URL:
+    https://creativekind.itch.io/necromancer-free\n\nHEROES FAMTASY - FREE GOBLIN\nCopyright
+    (c) AU_pixel\nLicense: https://au-pixel.itch.io/free-goblin?download\nSource/URL:
+    https://au-pixel.itch.io/free-goblin?download\n\nPlatformer Tileset - Pixelart
+    Snow Mountain\nCopyright (c) BigManJD\nLicense: Standard Unity Asset Store EULA\nSource/URL:
+    https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-snow-mountain-220095\n\nPlatformer
+    Tileset - Pixelart Fantasy\nCopyright (c) BigManJD\nLicense: Standard Unity Asset
+    Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-fantasy-284719\n\nPlatformer
+    Tileset - Pixelart Caves\nCopyright (c) BigManJD\nLicense: Standard Unity Asset
+    Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-caves-330017\n\nPlatformer
+    Tileset - Pixelart Grasslands\nCopyright (c) BigManJD\nLicense: Standard Unity
+    Asset Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-grasslands-248158\n\nFree
+    character - Satyr\nCopyright (c) LuckyLoops\nLicense: https://creativecommons.org/licenses/by/4.0/\nSource/URL:
+    https://lucky-loops.itch.io/character-satyr\n\nPixel Art VFX - Blood Mage - FREE
+    Version\nCopyright (c) Frostwindz\nLicense: (\uBCC4\uB3C4 \uBB38\uC11C \uCC38\uACE0)\nSource/URL:
+    https://frostwindz.itch.io/pixel-art-vfx-blood-mage-free-version\n\nTweety the
+    Cute Ghost\nCopyright (c) ashawe\nLicense: https://creativecommons.org/licenses/by/4.0/\nSource/URL:
+    https://ashawe.itch.io/cute-ghost-character\n\nWind - Pixel Art\nCopyright (c)
+    NYKNCK\nLicense: https://nyknck.itch.io/wind\nSource/URL: https://nyknck.itch.io/wind\n\nAcid
+    Spell Effect\nCopyright (c) pimen\nLicense: https://pimen.itch.io/acid-spell-effect\nSource/URL:
+    https://pimen.itch.io/acid-spell-effect\n\nDummy 2D Pixel art Mob\nCopyright
+    (c) Luke1z\nLicense: https://luke1z.itch.io/dummy\nSource/URL: https://luke1z.itch.io/dummy\n\nKnight
+    Hero Platformer Animation Pack\nCopyright (c) PixiVan\nLicense: https://pixivan.itch.io/knight-hero-platfor\nSource/URL:
+    https://pixivan.itch.io/knight-hero-platfor\n\nFrogs || Pixel Asset Pack\nCopyright
+    (c) Pop Shop Packs\nLicense: https://pop-shop-packs.itch.io/frogs-pixel-asset-pack\nSource/URL:
+    https://pop-shop-packs.itch.io/frogs-pixel-asset-pack\n\nPixel Art Effect - FX052\nCopyright
+    (c) NYKNCK\nLicense: https://nyknck.itch.io/pixelfx052\nSource/URL: https://nyknck.itch.io/pixelfx052\n\nTop
+    Down - Mobs - Bee\nCopyright (c) Admurin\nLicense: https://admurin.itch.io/top-down-mobs-bee\nSource/URL:
+    https://admurin.itch.io/top-down-mobs-bee\n\nSnare Flower Skill FX\nCopyright
+    (c) Otsoga\nLicense: (\uBCC4\uB3C4 txt \uD30C\uC77C)\nSource/URL: https://otsoga.itch.io/snare-flower-skill-fx\n\nFree
+    Pixel Animation Plant Monster Pack\nCopyright (c) BOB GAMES STUDIO\nLicense:
+    Free Pixel Animation Monsters & Plants Pack by BOB GAMES STUDIO\nSource/URL:
+    https://bob-games-studio.itch.io/free-pixel-animation-monsters-plants-pack\n\nNight
+    Harpy\nCopyright (c) Otosoga\nLicense: https://otsoga.itch.io/night-harpy\nSource/URL:
+    https://otsoga.itch.io/night-harpy\n\nLaser Beam Pixel Art FX\nCopyright (c)
+    Retsnail Assets\nLicense: https://retsnail-assets.itch.io/laserbeamfx\nSource/URL:
+    https://retsnail-assets.itch.io/laserbeamfx\n\nMagic Pack 8\nCopyright (c) ansimuz\nLicense:
+    (\uBCC4\uB3C4 pdf \uD30C\uC77C)\nSource/URL: https://ansimuz.itch.io/gothicvania-magic-pack-8\n\nMeteor
+    2 - Effect Pixel Art\nCopyright (c) sanctumpixel\nLicense: https://sanctumpixel.itch.io/meteor-2-effect-pixel-art\nSource/URL:
+    https://sanctumpixel.itch.io/meteor-2-effect-pixel-art\n\ncartoon-style sprite
+    sheets\nCopyright (c) picoplankton\nLicense: https://picoplankton.itch.io/bullets\nSource/URL:
+    https://picoplankton.itch.io/bullets\n\nWitches Pack\nCopyright (c) 9 E 0\nLicense:
+    https://9e0.itch.io/witches-pack\nSource/URL: https://9e0.itch.io/witches-pack\n\nForce
+    Shield 2D Effects Pack\nCopyright (c) 999overlap\nLicense: https://999overlap.itch.io/force-shield-2d-effects-pack\nSource/URL:
+    https://999overlap.itch.io/force-shield-2d-effects-pack\n\nPixel Art UI Essentials\nCopyright
+    (c) devnik\nLicense: Standard Unity Asset Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/gui/pixel-art-ui-essentials-329983\n\nPixel
+    art portal\nCopyright (c) f1xtach\nLicense: https://f1xtach.itch.io/pixel-art-portal\nSource/URL:
+    https://f1xtach.itch.io/pixel-art-portal\n\nRetro Impact Effect Pack 5\nCopyright
+    (c) BDragon1727\nLicense: https://bdragon1727.itch.io/retro-impact-effect-pack-5\nSource/URL:
+    https://bdragon1727.itch.io/retro-impact-effect-pack-5\n\nFree Effects Pack\nCopyright
+    (c) XYEzawr\nLicense: Free Pixel Effects Pack #7 - Fire aura by XYEzawr\nSource/URL:
+    (\uD574\uB2F9 itch.io \uD398\uC774\uC9C0 \uCC38\uC870)\n\nFrost Knight Animations\nCopyright
+    (c) Frostwindz\nLicense: Frostwindz Asset License Agreement\nSource/URL: (\uD574\uB2F9
+    itch.io \uD398\uC774\uC9C0 \uCC38\uC870)\n\nFree Effect and Bullet 16x16\nCopyright
+    (c) BDragon1727\nLicense: https://bdragon1727.itch.io/free-effect-and-bullet-16x16\nSource/URL:
+    https://bdragon1727.itch.io/free-effect-and-bullet-16x16\n\nLich\nCopyright (c)
+    CreativeKind\nLicense: Lich by CreativeKind\nSource/URL: https://creativekind.itch.io/lich\n\nSpells
+    FX\nCopyright (c) RagnaPixel\nLicense: Spells FX by RagnaPixel\nSource/URL: (\uD574\uB2F9
+    itch.io \uD398\uC774\uC9C0 \uCC38\uC870)\n\nUX Flat Icons [Free]\nCopyright (c)
+    Heathen Engineering\nLicense: Standard Unity Asset Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/gui/icons/ux-flat-icons-free-202525\n\n[Music
+    & Sound]\nBGM Composition: exoticteve (Assisted by Suno AI)\n\nTracks: [Blue],
+    [Green], [Red], [RGB]., [Tutorial]\n\nLicense: Suno AI Pro Commercial License\n\nSound
+    Effects: 120,000+ Free Sound Effects for Download\nSource/URL: https://pixabay.com/sound-effects/\nLicense:
+    Content License - Pixabay\nLicense: Content License - Pixabay"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -692,8 +763,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -710,15 +781,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -902,7 +973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &625233858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -976,6 +1047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingPanel: {fileID: 0}
   licensePanel: {fileID: 625233857}
+  mainMenuPanel: {fileID: 0}
 --- !u!1 &878607610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1158,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884002649}
+  - component: {fileID: 884002650}
+  - component: {fileID: 884002651}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1578,7 +1652,7 @@ RectTransform:
   m_Father: {fileID: 1791701613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1673,7 +1747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 884002649}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -2050,7 +2124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 8, y: 137}
+  m_AnchoredPosition: {x: 8, y: 2}
   m_SizeDelta: {x: 170, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2108238921
@@ -2067,6 +2141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingPanel: {fileID: 0}
   licensePanel: {fileID: 625233857}
+  mainMenuPanel: {fileID: 0}
 --- !u!114 &2108238922
 MonoBehaviour:
   m_ObjectHideFlags: 0

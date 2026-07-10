@@ -4,11 +4,16 @@ using UnityEngine.SceneManagement;
 public class GameStarting : MonoBehaviour
 {
     public GameObject settingPanel;
-    public GameObject licensePanel; 
+    public GameObject licensePanel;
+    public GameObject mainMenuPanel; 
 
-    // 게임 시작 버튼 누를 때 호출
     public void PlayGame()
     {
+        if (settingPanel != null) settingPanel.SetActive(false);
+        if (licensePanel != null) licensePanel.SetActive(false);
+
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
+
         SceneManager.LoadScene("Tutorial");
     }
 
@@ -32,13 +37,12 @@ public class GameStarting : MonoBehaviour
         if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
 
-    // [추가] 라이선스창 열기
+    // 라이선스창 열기/닫기
     public void OpenLicense()
     {
         if (licensePanel != null) licensePanel.SetActive(true);
     }
 
-    // [추가] 라이선스창 닫기
     public void CloseLicense()
     {
         if (licensePanel != null) licensePanel.SetActive(false);
