@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 4289222388334864009}
   - component: {fileID: 4616571461906526562}
   - component: {fileID: 8908762342438623157}
+  - component: {fileID: 2638395681064319133}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -179,6 +180,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2638395681064319133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973988003871605772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8248a1124183140a9bf4bcccca3b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossColor: 1
 --- !u!1 &3986874546270545098
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 550
-  dieAnimationLength: 1
+  dieAnimationLength: 1.1
   element: 1
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5

@@ -163,8 +163,6 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
                 }
                 currentColor.a = 0.25f;
                 main.startColor = currentColor;
-                Debug.Log(main.startColor.color.a);
-                Debug.Log(currentColor.a);
             }
         }
 

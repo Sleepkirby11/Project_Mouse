@@ -591,71 +591,644 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "This software uses the following open source software and third-party
-    assets:\n\nNecromancer(Free) \nCopyright (c) CreativeKind\nLicense: https://creativekind.itch.io/necromancer-free\nSource/URL:
-    https://creativekind.itch.io/necromancer-free\n\nHEROES FAMTASY - FREE GOBLIN\nCopyright
-    (c) AU_pixel\nLicense: https://au-pixel.itch.io/free-goblin?download\nSource/URL:
-    https://au-pixel.itch.io/free-goblin?download\n\nPlatformer Tileset - Pixelart
-    Snow Mountain\nCopyright (c) BigManJD\nLicense: Standard Unity Asset Store EULA\nSource/URL:
-    https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-snow-mountain-220095\n\nPlatformer
-    Tileset - Pixelart Fantasy\nCopyright (c) BigManJD\nLicense: Standard Unity Asset
-    Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-fantasy-284719\n\nPlatformer
-    Tileset - Pixelart Caves\nCopyright (c) BigManJD\nLicense: Standard Unity Asset
-    Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-caves-330017\n\nPlatformer
-    Tileset - Pixelart Grasslands\nCopyright (c) BigManJD\nLicense: Standard Unity
-    Asset Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-grasslands-248158\n\nFree
-    character - Satyr\nCopyright (c) LuckyLoops\nLicense: https://creativecommons.org/licenses/by/4.0/\nSource/URL:
-    https://lucky-loops.itch.io/character-satyr\n\nPixel Art VFX - Blood Mage - FREE
-    Version\nCopyright (c) Frostwindz\nLicense: (\uBCC4\uB3C4 \uBB38\uC11C \uCC38\uACE0)\nSource/URL:
-    https://frostwindz.itch.io/pixel-art-vfx-blood-mage-free-version\n\nTweety the
-    Cute Ghost\nCopyright (c) ashawe\nLicense: https://creativecommons.org/licenses/by/4.0/\nSource/URL:
-    https://ashawe.itch.io/cute-ghost-character\n\nWind - Pixel Art\nCopyright (c)
-    NYKNCK\nLicense: https://nyknck.itch.io/wind\nSource/URL: https://nyknck.itch.io/wind\n\nAcid
-    Spell Effect\nCopyright (c) pimen\nLicense: https://pimen.itch.io/acid-spell-effect\nSource/URL:
-    https://pimen.itch.io/acid-spell-effect\n\nDummy 2D Pixel art Mob\nCopyright
-    (c) Luke1z\nLicense: https://luke1z.itch.io/dummy\nSource/URL: https://luke1z.itch.io/dummy\n\nKnight
-    Hero Platformer Animation Pack\nCopyright (c) PixiVan\nLicense: https://pixivan.itch.io/knight-hero-platfor\nSource/URL:
-    https://pixivan.itch.io/knight-hero-platfor\n\nFrogs || Pixel Asset Pack\nCopyright
-    (c) Pop Shop Packs\nLicense: https://pop-shop-packs.itch.io/frogs-pixel-asset-pack\nSource/URL:
-    https://pop-shop-packs.itch.io/frogs-pixel-asset-pack\n\nPixel Art Effect - FX052\nCopyright
-    (c) NYKNCK\nLicense: https://nyknck.itch.io/pixelfx052\nSource/URL: https://nyknck.itch.io/pixelfx052\n\nTop
-    Down - Mobs - Bee\nCopyright (c) Admurin\nLicense: https://admurin.itch.io/top-down-mobs-bee\nSource/URL:
-    https://admurin.itch.io/top-down-mobs-bee\n\nSnare Flower Skill FX\nCopyright
-    (c) Otsoga\nLicense: (\uBCC4\uB3C4 txt \uD30C\uC77C)\nSource/URL: https://otsoga.itch.io/snare-flower-skill-fx\n\nFree
-    Pixel Animation Plant Monster Pack\nCopyright (c) BOB GAMES STUDIO\nLicense:
-    Free Pixel Animation Monsters & Plants Pack by BOB GAMES STUDIO\nSource/URL:
-    https://bob-games-studio.itch.io/free-pixel-animation-monsters-plants-pack\n\nNight
-    Harpy\nCopyright (c) Otosoga\nLicense: https://otsoga.itch.io/night-harpy\nSource/URL:
-    https://otsoga.itch.io/night-harpy\n\nLaser Beam Pixel Art FX\nCopyright (c)
-    Retsnail Assets\nLicense: https://retsnail-assets.itch.io/laserbeamfx\nSource/URL:
-    https://retsnail-assets.itch.io/laserbeamfx\n\nMagic Pack 8\nCopyright (c) ansimuz\nLicense:
-    (\uBCC4\uB3C4 pdf \uD30C\uC77C)\nSource/URL: https://ansimuz.itch.io/gothicvania-magic-pack-8\n\nMeteor
-    2 - Effect Pixel Art\nCopyright (c) sanctumpixel\nLicense: https://sanctumpixel.itch.io/meteor-2-effect-pixel-art\nSource/URL:
-    https://sanctumpixel.itch.io/meteor-2-effect-pixel-art\n\ncartoon-style sprite
-    sheets\nCopyright (c) picoplankton\nLicense: https://picoplankton.itch.io/bullets\nSource/URL:
-    https://picoplankton.itch.io/bullets\n\nWitches Pack\nCopyright (c) 9 E 0\nLicense:
-    https://9e0.itch.io/witches-pack\nSource/URL: https://9e0.itch.io/witches-pack\n\nForce
-    Shield 2D Effects Pack\nCopyright (c) 999overlap\nLicense: https://999overlap.itch.io/force-shield-2d-effects-pack\nSource/URL:
-    https://999overlap.itch.io/force-shield-2d-effects-pack\n\nPixel Art UI Essentials\nCopyright
-    (c) devnik\nLicense: Standard Unity Asset Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/gui/pixel-art-ui-essentials-329983\n\nPixel
-    art portal\nCopyright (c) f1xtach\nLicense: https://f1xtach.itch.io/pixel-art-portal\nSource/URL:
-    https://f1xtach.itch.io/pixel-art-portal\n\nRetro Impact Effect Pack 5\nCopyright
-    (c) BDragon1727\nLicense: https://bdragon1727.itch.io/retro-impact-effect-pack-5\nSource/URL:
-    https://bdragon1727.itch.io/retro-impact-effect-pack-5\n\nFree Effects Pack\nCopyright
-    (c) XYEzawr\nLicense: Free Pixel Effects Pack #7 - Fire aura by XYEzawr\nSource/URL:
-    (\uD574\uB2F9 itch.io \uD398\uC774\uC9C0 \uCC38\uC870)\n\nFrost Knight Animations\nCopyright
-    (c) Frostwindz\nLicense: Frostwindz Asset License Agreement\nSource/URL: (\uD574\uB2F9
-    itch.io \uD398\uC774\uC9C0 \uCC38\uC870)\n\nFree Effect and Bullet 16x16\nCopyright
-    (c) BDragon1727\nLicense: https://bdragon1727.itch.io/free-effect-and-bullet-16x16\nSource/URL:
-    https://bdragon1727.itch.io/free-effect-and-bullet-16x16\n\nLich\nCopyright (c)
-    CreativeKind\nLicense: Lich by CreativeKind\nSource/URL: https://creativekind.itch.io/lich\n\nSpells
-    FX\nCopyright (c) RagnaPixel\nLicense: Spells FX by RagnaPixel\nSource/URL: (\uD574\uB2F9
-    itch.io \uD398\uC774\uC9C0 \uCC38\uC870)\n\nUX Flat Icons [Free]\nCopyright (c)
-    Heathen Engineering\nLicense: Standard Unity Asset Store EULA\nSource/URL: https://assetstore.unity.com/packages/2d/gui/icons/ux-flat-icons-free-202525\n\n[Music
-    & Sound]\nBGM Composition: exoticteve (Assisted by Suno AI)\n\nTracks: [Blue],
-    [Green], [Red], [RGB]., [Tutorial]\n\nLicense: Suno AI Pro Commercial License\n\nSound
-    Effects: 120,000+ Free Sound Effects for Download\nSource/URL: https://pixabay.com/sound-effects/\nLicense:
-    Content License - Pixabay\nLicense: Content License - Pixabay\n"
+  m_text: 'This software uses the following open source software and third-party
+    assets:
+
+
+    Necromancer(Free)
+
+    
+
+    Copyright (c) CreativeKind
+
+    
+
+    License:
+    https://creativekind.itch.io/necromancer-free
+
+    
+
+    Source/URL: https://creativekind.itch.io/necromancer-free
+
+    
+
+    HEROES
+    FAMTASY - FREE GOBLIN
+
+    
+
+    Copyright (c) AU_pixel
+
+    
+
+    License:
+    https://au-pixel.itch.io/free-goblin?download
+
+    
+
+    Source/URL: https://au-pixel.itch.io/free-goblin?download
+
+    
+
+    Platformer
+    Tileset - Pixelart Snow Mountain
+
+    
+
+    Copyright (c) BigManJD
+
+    
+
+    License:
+    Standard Unity Asset Store EULA
+
+    
+
+    Source/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-snow-mountain-220095
+
+    
+
+    Platformer
+    Tileset - Pixelart Fantasy
+
+    
+
+    Copyright (c) BigManJD
+
+    
+
+    License:
+    Standard Unity Asset Store EULA
+
+    
+
+    Source/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-fantasy-284719
+
+    
+
+    Platformer
+    Tileset - Pixelart Caves
+
+    
+
+    Copyright (c) BigManJD
+
+    
+
+    License:
+    Standard Unity Asset Store EULA
+
+    
+
+    Source/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-caves-330017
+
+    
+
+    Platformer
+    Tileset - Pixelart Grasslands
+
+    
+
+    Copyright (c) BigManJD
+
+    
+
+    License:
+    Standard Unity Asset Store EULA
+
+    
+
+    Source/URL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-grasslands-248158
+
+    
+
+    Free
+    character - Satyr
+
+    
+
+    Copyright (c) LuckyLoops
+
+    
+
+    License:
+    https://creativecommons.org/licenses/by/4.0/
+
+    
+
+    Source/URL: https://lucky-loops.itch.io/character-satyr
+
+    
+
+    Pixel
+    Art VFX - Blood Mage - FREE Version
+
+    
+
+    Copyright (c) Frostwindz
+
+    
+
+    License:
+    https://docs.google.com/document/d/1Fof_nmunthXksubxZtXbNn2LJsgM9uNXn1TtBeRz4dA/edit?tab=t.0
+
+    
+
+    Source/URL:
+    https://frostwindz.itch.io/pixel-art-vfx-blood-mage-free-version
+
+    
+
+    Tweety
+    the Cute Ghost
+
+    
+
+    Copyright (c) ashawe
+
+    
+
+    License: https://creativecommons.org/licenses/by/4.0/?utm_source=
+
+    
+
+    Source/URL:
+    https://ashawe.itch.io/cute-ghost-character
+
+    
+
+    Wind - Pixel Art
+
+    
+
+    Copyright
+    (c) NYKNCK
+
+    
+
+    License: https://nyknck.itch.io/wind
+
+    
+
+    Source/URL:
+    https://nyknck.itch.io/wind
+
+    
+
+    Acid Spell Effect
+
+    
+
+    Copyright
+    (c) pimen
+
+    
+
+    License: https://pimen.itch.io/acid-spell-effect
+
+    
+
+    Source/URL:
+    https://pimen.itch.io/acid-spell-effect
+
+    
+
+    Dummy 2D Pixel art Mob
+
+    
+
+    Copyright
+    (c) Luke1z
+
+    
+
+    License: https://luke1z.itch.io/dummy
+
+    
+
+    Source/URL:
+    https://luke1z.itch.io/dummy
+
+    
+
+    Knight Hero Platformer Animation Pack
+
+    
+
+    Copyright
+    (c) PixiVan
+
+    
+
+    License: https://pixivan.itch.io/knight-hero-platfor
+
+    
+
+    Source/URL:
+    https://pixivan.itch.io/knight-hero-platfor
+
+    
+
+    Frogs || Pixel Asset
+    Pack
+
+    
+
+    Copyright (c) Pop Shop Packs
+
+    
+
+    License: https://pop-shop-packs.itch.io/frogs-pixel-asset-pack
+
+    
+
+    Source/URL:
+    https://pop-shop-packs.itch.io/frogs-pixel-asset-pack
+
+    
+
+    Pixel Art
+    Effect - FX052
+
+    
+
+    Copyright (c) NYKNCK
+
+    
+
+    License: https://nyknck.itch.io/pixelfx052
+
+    
+
+    Source/URL:
+    https://nyknck.itch.io/pixelfx052
+
+    
+
+    Top Down - Mobs - Bee
+
+    
+
+    Copyright
+    (c) Admurin
+
+    
+
+    License: https://admurin.itch.io/top-down-mobs-bee
+
+    
+
+    Source/URL:
+    https://admurin.itch.io/top-down-mobs-bee
+
+    
+
+    Snare Flower Skill FX
+
+    
+
+    Copyright
+    (c) Otsoga
+
+    
+
+    License: txt file
+
+    
+
+    Source/URL: https://otsoga.itch.io/snare-flower-skill-fx
+
+    
+
+    Free
+    Pixel Animation Plant Monster Pack
+
+    
+
+    Copyright (c) BOB GAMES STUDIO
+
+    
+
+    License:
+    Free Pixel Animation Monsters & Plants Pack by BOB GAMES STUDIO
+
+    
+
+    Source/URL:
+    https://bob-games-studio.itch.io/free-pixel-animation-monsters-plants-pack
+
+    
+
+    Night
+    Harpy
+
+    
+
+    Copyright (c) Otosoga
+
+    
+
+    License: https://otsoga.itch.io/night-harpy
+
+    
+
+    Source/URL:
+    https://otsoga.itch.io/night-harpy
+
+    
+
+    Laser Beam Pixel Art FX
+
+    
+
+    Copyright
+    (c) Retsnail Assets
+
+    
+
+    License: https://retsnail-assets.itch.io/laserbeamfx
+
+    
+
+    Source/URL:
+    https://retsnail-assets.itch.io/laserbeamfx
+
+    
+
+    Magic Pack 8
+
+    
+
+    Copyright
+    (c) ansimuz
+
+    
+
+    License: pdf file
+
+    
+
+    Source/URL: https://ansimuz.itch.io/gothicvania-magic-pack-8
+
+    
+
+    Meteor
+    2 - Effect Pixel Art
+
+    
+
+    Copyright (c) sanctumpixel
+
+    
+
+    License:
+    https://sanctumpixel.itch.io/meteor-2-effect-pixel-art
+
+    
+
+    Source/URL:
+    https://sanctumpixel.itch.io/meteor-2-effect-pixel-art
+
+    
+
+    cartoon-style
+    sprite sheets
+
+    
+
+    Copyright (c) picoplankton
+
+    
+
+    License: https://picoplankton.itch.io/bullets
+
+    
+
+    Source/URL:
+    https://picoplankton.itch.io/bullets
+
+    
+
+    Witches Pack
+
+    
+
+    Copyright
+    (c) 9 E 0
+
+    
+
+    License: https://9e0.itch.io/witches-pack
+
+    
+
+    Source/URL:
+    https://9e0.itch.io/witches-pack
+
+    
+
+    Force Shield 2D Effects Pack
+
+    
+
+    Copyright
+    (c) 999overlap
+
+    
+
+    License: https://999overlap.itch.io/force-shield-2d-effects-pack
+
+    
+
+    Source/URL:
+    https://999overlap.itch.io/force-shield-2d-effects-pack
+
+    
+
+    Pixel Art
+    UI Essentials
+
+    
+
+    Copyright (c) devnik
+
+    
+
+    License: Standard
+    Unity Asset Store EULA
+
+    
+
+    Source/URL: https://assetstore.unity.com/packages/2d/gui/pixel-art-ui-essentials-329983
+
+    
+
+    Pixel
+    art portal
+
+    
+
+    Copyright (c) f1xtach
+
+    
+
+    License: https://f1xtach.itch.io/pixel-art-portal
+
+    
+
+    Source/URL:
+    https://f1xtach.itch.io/pixel-art-portal
+
+    
+
+    Retro Impact Effect Pack
+    5
+
+    
+
+    Copyright (c) BDragon1727
+
+    
+
+    License: https://bdragon1727.itch.io/retro-impact-effect-pack-5
+
+    
+
+    Source/URL:
+    https://bdragon1727.itch.io/retro-impact-effect-pack-5
+
+    
+
+    Free Effects
+    Pack
+
+    
+
+    Copyright (c) XYEzawr
+
+    
+
+    License: Free Pixel Effects
+    Pack #7 - Fire aura by XYEzawr
+
+    
+
+    Source/URL: Free Pixel Effects Pack
+    #7 - Fire aura by XYEzawr
+
+    
+
+    Frost Knight Animations
+
+    
+
+    Copyright
+    (c) Frostwindz
+
+    
+
+    License: Frostwindz Asset License Agreement - Google
+    Docs
+
+    
+
+    Source/URL: Pixel Art VFX - Frost Knight - FREE Version by
+    Frostwindz
+
+    
+
+    Free Effect and Bullet 16x16
+
+    
+
+    Copyright (c)
+    BDragon1727
+
+    
+
+    License: https://bdragon1727.itch.io/free-effect-and-bullet-16x16
+
+    
+
+    Source/URL:
+    https://bdragon1727.itch.io/free-effect-and-bullet-16x16
+
+    
+
+    Lich
+
+    
+
+    Copyright
+    (c) CreativeKind
+
+    
+
+    License: Lich by CreativeKind
+
+    
+
+    Source/URL:
+    https://creativekind.itch.io/lich
+
+    
+
+    Spells FX
+
+    
+
+    Copyright
+    (c) RagnaPixel
+
+    
+
+    License: Spells FX by RagnaPixel
+
+    
+
+    Source/URL:
+    Spells FX by RagnaPixel
+
+    
+
+    UX Flat Icons [Free]
+
+    
+
+    Copyright
+    (c) Heathen Engineering
+
+    
+
+    License: Standard Unity Asset Store EULA
+
+    
+
+    Source/URL:
+    https://assetstore.unity.com/packages/2d/gui/icons/ux-flat-icons-free-202525
+
+    [Music
+    & Sound]
+
+    BGM Composition: exoticteve (Assisted by Suno AI)
+
+
+    Tracks:
+    [Blue], [Green], [Red], [RGB]., [Tutorial]
+
+
+    License: Suno AI Pro Commercial
+    License
+
+
+    Sound Effects: 120,000+ Free Sound Effects for Download
+
+    Source/URL:
+    https://pixabay.com/sound-effects/
+
+    License: Content License - Pixabay
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

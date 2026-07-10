@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 400
-  dieAnimationLength: 3
+  dieAnimationLength: 3.2
   element: 2
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
@@ -441,6 +441,7 @@ GameObject:
   - component: {fileID: 1708496520089781170}
   - component: {fileID: 5074773101802993387}
   - component: {fileID: 667937896825738163}
+  - component: {fileID: 515762310994985112}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -552,6 +553,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b6fd464343f1a45a1631ecc7a3529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &515762310994985112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6197072708963907057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8248a1124183140a9bf4bcccca3b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossColor: 2
 --- !u!1 &6857511399642638505
 GameObject:
   m_ObjectHideFlags: 0

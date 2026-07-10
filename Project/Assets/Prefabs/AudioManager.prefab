@@ -110,5 +110,8 @@ MonoBehaviour:
   - name: RGB_Hurricane
     clip: {fileID: 8300000, guid: 36c71a0e0c065d9409315c1304a1bb0a, type: 3}
     volumeScale: 1
+  - name: Death
+    clip: {fileID: 8300000, guid: a7a0b63b0024cc64fa4691b03e22202e, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20
