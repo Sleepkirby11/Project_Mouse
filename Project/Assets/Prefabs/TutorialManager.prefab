@@ -78,7 +78,7 @@ MonoBehaviour:
     condition: 5
     delayBeforeNext: 0.5
     closeOnComplete: 0
-  - stepName: "\uC0C9 \uBCC0\uACBD"
+  - stepName: "\uC2A4\uD0AC"
     dialogueText: "W\uB97C \uB20C\uB7EC \uC2A4\uD0AC \uC0AC\uC6A9\uC774 \uAC00\uB2A5\uD569\uB2C8\uB2E4"
     condition: 7
     delayBeforeNext: 0.5
