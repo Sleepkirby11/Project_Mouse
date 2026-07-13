@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e5b40793955a44f84b182236bd98fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmClip: {fileID: 8300000, guid: e615c007bc93d414ab1c0421a92e2f2d, type: 3}
+  bgmClip: {fileID: 8300000, guid: 8587ad89599261443a671b68b8f722ec, type: 3}
   bgmVolume: 100
   sfxClips:
   - name: Archer_Arrow
@@ -124,6 +124,9 @@ MonoBehaviour:
     volumeScale: 1
   - name: Rgb_Thunder
     clip: {fileID: 8300000, guid: 0d9533057808daa47bb2493783f4a208, type: 3}
+    volumeScale: 1
+  - name: MushRoom
+    clip: {fileID: 8300000, guid: ada02a901963715459554e77fff2a0c6, type: 3}
     volumeScale: 1
   sfxVolume: 100
   channels: 20

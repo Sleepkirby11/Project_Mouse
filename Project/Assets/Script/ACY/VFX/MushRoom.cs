@@ -27,6 +27,7 @@ public class Mushroom : MonoBehaviour, IDamageable
     private Color originalColor;
     private Coroutine lifeCoroutine;
     private PlayerStatus playerStatus;
+    private AudioSource audioSource;
     #endregion
 
     #region Unity Lifecycle
@@ -42,6 +43,11 @@ public class Mushroom : MonoBehaviour, IDamageable
         {
             originalColor = spriteRenderer.color;
         }
+
+        // 동적 AudioSource 추가
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
     }
 
     private void OnEnable()
@@ -53,6 +59,19 @@ public class Mushroom : MonoBehaviour, IDamageable
         if (animator != null) animator.enabled = true;
 
         lifeCoroutine = StartCoroutine(MushroomLifeRoutine());
+
+        // 오브젝트 풀 생성 시(초기화) 사운드 재생 방지
+        if (transform.parent != null && transform.parent.GetComponent<PoolingManager>() != null)
+        {
+            return;
+        }
+
+        PlayMushroomSound();
+    }
+
+    private void OnDisable()
+    {
+        StopMushroomSound();
     }
     #endregion
 
@@ -67,6 +86,8 @@ public class Mushroom : MonoBehaviour, IDamageable
         // 폭발 시작 (콜라이더 비활성화 및 폭발 애니메이션 재생)
         if (mushroomCollider != null) mushroomCollider.enabled = false;
         if (animator != null) animator.SetTrigger("Explode");
+
+        StopMushroomSound();
 
         // 이 후 폭발 및 이펙트 소멸 처리는 애니메이션 클립을 통해 호출
     }
@@ -129,6 +150,34 @@ public class Mushroom : MonoBehaviour, IDamageable
     }
     #endregion
 
+    #region Audio Management
+    private void PlayMushroomSound()
+    {
+        if (AudioManager.instance == null || audioSource == null) return;
+
+        int sfxIndex = (int)AudioManager.SFX.RGB_Mushroom;
+        if (AudioManager.instance.sfxClips == null || sfxIndex < 0 || sfxIndex >= AudioManager.instance.sfxClips.Length)
+        {
+            Debug.LogWarning($"[Mushroom] RGB_Mushroom SFX index {sfxIndex} is out of bounds. Please assign it in the AudioManager Inspector.");
+            return;
+        }
+
+        var sfxData = AudioManager.instance.sfxClips[sfxIndex];
+        audioSource.clip = sfxData.clip;
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : AudioManager.instance.sfxVolume;
+        audioSource.volume = globalVol * sfxData.volumeScale;
+        audioSource.Play();
+    }
+
+    private void StopMushroomSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+    }
+    #endregion
+
     #region IDamageable Implementation
     public void TakeDamage(int damage)
     {
@@ -138,6 +187,8 @@ public class Mushroom : MonoBehaviour, IDamageable
         if (playerStatus == null || playerStatus.currentStance != PlayerStatus.Stance.Red) return;
 
         destroyed = true;
+
+        StopMushroomSound();
 
         if (lifeCoroutine != null)
         {

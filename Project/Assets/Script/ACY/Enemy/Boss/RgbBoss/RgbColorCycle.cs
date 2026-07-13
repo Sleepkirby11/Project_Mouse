@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RgbColorCycle : MonoBehaviour
@@ -46,12 +47,7 @@ public class RgbColorCycle : MonoBehaviour
         while (next == current);
 
         enemyStatus.SetElement(next);
-        ApplyController(GetController(next));
-
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
+        ApplyController(GetController(next), "Casting");
     }
 
     public void EnterFinalPhase()
@@ -62,12 +58,7 @@ public class RgbColorCycle : MonoBehaviour
         isFinalPhase = true;
 
         enemyStatus.SetElement(EnemyStatus.EnemyElement.None);
-        ApplyController(GetController(EnemyStatus.EnemyElement.None));
-
-        if (animator != null)
-        {
-            animator.SetTrigger(CastingTrigger);
-        }
+        ApplyController(GetController(EnemyStatus.EnemyElement.None), "Casting");
     }
 
     public void ExitFinalPhase()
@@ -95,12 +86,12 @@ public class RgbColorCycle : MonoBehaviour
         };
     }
 
-    private void ApplyController(RuntimeAnimatorController targetController)
+    private void ApplyController(RuntimeAnimatorController targetController, string stateName = "Idle")
     {
         if (animator == null || targetController == null) return;
 
         animator.runtimeAnimatorController = targetController;
-        animator.Play("Idle", 0, 0f);
+        animator.Play(stateName, 0, 0f);
     }
     #endregion
 }

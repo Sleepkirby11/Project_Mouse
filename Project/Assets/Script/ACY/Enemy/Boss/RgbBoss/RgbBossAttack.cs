@@ -220,6 +220,15 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
             if (!isFinalPhaseActive)
             {
+                // 이전 공격 애니메이션이 완전히 끝나고 Idle 상태로 돌아올 때까지 대기
+                if (animator != null)
+                {
+                    while (animator.IsInTransition(0) || !animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+                    {
+                        yield return null;
+                    }
+                }
+
                 if (colorCycle != null)
                 {
                     colorCycle.ChangeElementRandom();
