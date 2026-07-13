@@ -78,6 +78,7 @@ public class UI : MonoBehaviour
     {
         // 씬이 전환되거나 플레이어 사망 후 재시작될 때 보스 HP 바 숨김
         HideBossHPBar();
+        HideDialogue(); // 씬 전환 시 대화창 자동 닫기
         RefreshPlayerReference();
     }
 
@@ -238,6 +239,21 @@ public class UI : MonoBehaviour
         isAction = true;
         talkIndex++;
     }
+
+    // Tutorial Manager 에서 대화창을 제어하기 위한 함수들
+    public void ShowDialogue(string text)
+    {
+        isAction = true;
+        if (talkPanel != null) talkPanel.SetActive(true);
+        if (talkText != null) talkText.text = text;
+    }
+
+    public void HideDialogue()
+    {
+        isAction = false;
+        if (talkPanel != null) talkPanel.SetActive(false);
+    }
+    
     
     // 설정창 열기/닫기
     public void OpenSetting()
