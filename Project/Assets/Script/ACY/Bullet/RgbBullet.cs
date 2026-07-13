@@ -214,25 +214,6 @@ public class RgbBullet : MonoBehaviour, IDamageable
         }
     }
 
-    private void Update()
-    {
-        if (!destroyed && playerStatus != null && playerStatus.HP <= 0)
-        {
-            destroyed = true;
-            StopBulletSound();
-            StopAllCoroutines();
-
-            if (PoolingManager.Instance != null && !string.IsNullOrEmpty(myPoolName))
-            {
-                PoolingManager.Instance.Return(myPoolName, gameObject);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
-    }
-
     #region Audio Management
     private void PlayBulletSound()
     {

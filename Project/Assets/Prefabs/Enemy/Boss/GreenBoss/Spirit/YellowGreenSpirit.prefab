@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6484352360653378161}
   - component: {fileID: 5607318985496072188}
-  - component: {fileID: 2405032275669912603}
   - component: {fileID: 298821516200967170}
   - component: {fileID: 3002680835481551813}
+  - component: {fileID: 7542212171557634606}
   m_Layer: 0
   m_Name: YellowGreenSpirit
   m_TagString: Untagged
@@ -60,42 +60,6 @@ MonoBehaviour:
   returnSpeed: 6
   returnArrivalDistance: 0.3
   fadeTime: 1
---- !u!58 &2405032275669912603
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5663733794253972570}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.17652082, y: -0.19728816}
-  m_Radius: 0.873809
 --- !u!50 &298821516200967170
 Rigidbody2D:
   serializedVersion: 5
@@ -143,6 +107,52 @@ MonoBehaviour:
   isBoss: 0
   bossName: 
   bossNameColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!61 &7542212171557634606
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5663733794253972570}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.21134758, y: 0.9802159}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.4226952, y: 1.6048915}
+  m_EdgeRadius: 0
 --- !u!1 &6234149662983438217
 GameObject:
   m_ObjectHideFlags: 0
