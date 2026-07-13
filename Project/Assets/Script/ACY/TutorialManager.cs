@@ -79,6 +79,11 @@ public class TutorialManager : MonoBehaviour
         isStepActive = false;
         isStepCompleted = false;
         currentStepIndex = -1;
+
+        if (scene.name == "Tutorial")
+        {
+            completedStepNames.Clear();
+        }
     }
 
     private void Start()

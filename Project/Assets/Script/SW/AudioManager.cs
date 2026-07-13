@@ -130,6 +130,28 @@ public class AudioManager : MonoBehaviour
             }
             sfxPlayers[i].volume = globalVol * scale;
         }
+
+        // 씬 내의 다른 모든 AudioSource 볼륨 업데이트
+        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        foreach (var source in allAudioSources)
+        {
+            if (source != bgmPlayer && System.Array.IndexOf(sfxPlayers, source) < 0)
+            {
+                if (source.clip != null)
+                {
+                    float scale = 1f;
+                    foreach (var sfxData in sfxClips)
+                    {
+                        if (sfxData.clip == source.clip)
+                        {
+                            scale = sfxData.volumeScale;
+                            break;
+                        }
+                    }
+                    source.volume = globalVol * scale;
+                }
+            }
+        }
     }
     public void PlaySFX(SFX sfx)
     {
@@ -226,6 +248,41 @@ public class AudioManager : MonoBehaviour
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             sfxPlayers[i].Stop();
+        }
+    }
+
+    public void PauseSFX()
+    {
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            if (sfxPlayers[i].isPlaying)
+                sfxPlayers[i].Pause();
+        }
+
+        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        foreach (var source in allAudioSources)
+        {
+            if (source != bgmPlayer && source.isPlaying)
+            {
+                source.Pause();
+            }
+        }
+    }
+
+    public void ResumeSFX()
+    {
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            sfxPlayers[i].UnPause();
+        }
+
+        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        foreach (var source in allAudioSources)
+        {
+            if (source != bgmPlayer)
+            {
+                source.UnPause();
+            }
         }
     }
 }

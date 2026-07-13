@@ -477,6 +477,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     // 다음 씬으로 넘어갈때 모든 상태이상 해제 
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
+        if (scene.name == "Tutorial")
+        {
+            ResetStatus();
+        }
+
         if (isPossessed)
         {
             SetPossessed(false);
@@ -494,5 +499,65 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             if (playerComp != null) playerComp.OnKnockbackEnd();
         }
         if (isBound) ReleaseBind();
+    }
+
+    public void ResetStatus()
+    {
+        hp = maxHp;
+        ink = maxInk;
+        specialInk = maxSpecialInk;
+        currentStance = Stance.White;
+        combo = 0;
+        currentCoolTime = coolTime;
+        isInvincible = false;
+        isKnockbacked = false;
+        isStunned = false;
+        isPossessed = false;
+        isBound = false;
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.gravityScale = originGravityScale;
+        }
+
+        if (playerComp != null)
+        {
+            playerComp.isSkill = false;
+            playerComp.CloseSetting();
+            if (playerComp.BlackBG != null)
+            {
+                playerComp.BlackBG.SetActive(false);
+            }
+
+            if (playerComp.cursorObject != null)
+            {
+                TrailRenderer trail = playerComp.cursorObject.GetComponent<TrailRenderer>();
+                if (trail != null)
+                {
+                    trail.Clear();
+                    trail.colorGradient = ChangeStance(currentStance);
+                }
+            }
+            if (playerComp.groundLine != null)
+            {
+                TrailRenderer groundTrail = playerComp.groundLine.GetComponent<TrailRenderer>();
+                if (groundTrail != null)
+                {
+                    groundTrail.Clear();
+                    groundTrail.colorGradient = ChangeStance(currentStance);
+                }
+            }
+            if (playerComp.particle != null)
+            {
+                var main = playerComp.particle.main;
+                main.startColor = ChangeStance(currentStance);
+            }
+        }
+
+        if (StatusImage.instance != null)
+        {
+            StatusImage.instance.ChangeImage((int)currentStance, false);
+        }
     }
 }
