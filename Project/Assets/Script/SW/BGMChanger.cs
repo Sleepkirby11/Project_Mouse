@@ -14,7 +14,10 @@ public class BGMChanger : MonoBehaviour
             }
             else
             {
-                AudioManager.instance.PlayBGM(true);
+                if (!AudioManager.instance.IsPlayingBGM())
+                {
+                    AudioManager.instance.PlayBGM(true);
+                }
             }
         }
     }
