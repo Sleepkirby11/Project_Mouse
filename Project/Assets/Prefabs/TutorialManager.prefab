@@ -74,7 +74,7 @@ MonoBehaviour:
     delayBeforeNext: 0.5
     closeOnComplete: 1
   - stepName: "\uC0C9 \uBCC0\uACBD"
-    dialogueText: "Tap\uC744 \uB20C\uB7EC \uC2A4\uD0E0\uC2A4 \uBCC0\uACBD\uC774 \uAC00\uB2A5\uD569\uB2C8\uB2E4"
+    dialogueText: "Tab\uC744 \uB20C\uB7EC \uC2A4\uD0E0\uC2A4 \uBCC0\uACBD\uC774 \uAC00\uB2A5\uD569\uB2C8\uB2E4"
     condition: 5
     delayBeforeNext: 0.5
     closeOnComplete: 0
