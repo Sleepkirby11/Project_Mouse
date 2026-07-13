@@ -103,7 +103,7 @@ MonoBehaviour:
     volumeScale: 1
   - name: RGB_Explosion
     clip: {fileID: 8300000, guid: 110d7830d4793bc438af8afbd4c6255d, type: 3}
-    volumeScale: 1
+    volumeScale: 0.7
   - name: RGB_Gear
     clip: {fileID: 8300000, guid: 350e855e3bd43e84d81bebe1069741ac, type: 3}
     volumeScale: 1
@@ -139,7 +139,7 @@ MonoBehaviour:
     volumeScale: 1
   - name: BlackHole
     clip: {fileID: 8300000, guid: eafb068d1e848c74db0bc554f9be1072, type: 3}
-    volumeScale: 1
+    volumeScale: 0.6
   - name: RedBossLast
     clip: {fileID: 8300000, guid: f2fb1bb865211cd4687127ff98177c4d, type: 3}
     volumeScale: 1
