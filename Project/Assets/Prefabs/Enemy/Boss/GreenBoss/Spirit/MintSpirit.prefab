@@ -166,7 +166,7 @@ MonoBehaviour:
   arrivalDistance: 0.5
   mapCenter: {x: 461, y: 100}
   mapRange: {x: 30, y: 10}
-  spawnInvincibleTime: 1.5
+  spawnInvincibleTime: 2
   roamDuration: 8
   returnSpeed: 6
   returnArrivalDistance: 0.3
@@ -246,12 +246,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52a39bb2cd5a7b48b98c7d81227a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 3
   dieAnimationLength: 0.5
   element: 3
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 0
+  bossName: 
+  bossNameColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!95 &5100797649037347613
 Animator:
   serializedVersion: 7
