@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e5b40793955a44f84b182236bd98fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmClip: {fileID: 8300000, guid: 8587ad89599261443a671b68b8f722ec, type: 3}
+  bgmClip: {fileID: 8300000, guid: e615c007bc93d414ab1c0421a92e2f2d, type: 3}
   bgmVolume: 100
   sfxClips:
   - name: Archer_Arrow
@@ -63,7 +63,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: e698b691a7b76ee4ba54dc54e1c76a40, type: 3}
     volumeScale: 1
   - name: Enemy_Hurt
-    clip: {fileID: 8300000, guid: ff4262ab8cc2d8744a0c555fde9bb825, type: 3}
+    clip: {fileID: 8300000, guid: 485a1858ca997e547a17ccd981894d0c, type: 3}
     volumeScale: 1
   - name: Green_Wind
     clip: {fileID: 8300000, guid: ebda76dd0c1aa2c41b0adbde53d07567, type: 3}
@@ -87,8 +87,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 0208b1060979cd745a0908b147bb727e, type: 3}
     volumeScale: 1
   - name: Player_Dash
-    clip: {fileID: 8300000, guid: 9c714c783d8a29143ae57dab9d16965f, type: 3}
-    volumeScale: 0.4
+    clip: {fileID: 8300000, guid: af843710d4be6a742bd3b09ce29764f7, type: 3}
+    volumeScale: 1
   - name: Player_Walk
     clip: {fileID: 8300000, guid: 4cb1ea08de557254981d237062fd83da, type: 3}
     volumeScale: 1
@@ -115,6 +115,12 @@ MonoBehaviour:
     volumeScale: 1
   - name: BossHpZero
     clip: {fileID: 8300000, guid: 453ad6d33ec0d2243a2fdd31fc0afdf1, type: 3}
+    volumeScale: 1
+  - name: PlayerHurt
+    clip: {fileID: 8300000, guid: c9bdb85163429fb4ba4284fb337d8afd, type: 3}
+    volumeScale: 1
+  - name: FlyingEnemyAttack
+    clip: {fileID: 8300000, guid: 9facf3848d235974ca2001146b07aea3, type: 3}
     volumeScale: 1
   sfxVolume: 100
   channels: 20
