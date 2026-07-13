@@ -1744,38 +1744,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
-      propertyPath: sfxClips.Array.size
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
-      propertyPath: sfxClips.Array.data[5].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 485a1858ca997e547a17ccd981894d0c, type: 3}
-    - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
-      propertyPath: sfxClips.Array.data[23].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: c9bdb85163429fb4ba4284fb337d8afd, type: 3}
-    - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
-      propertyPath: sfxClips.Array.data[23].name
-      value: PlayerHurt
-      objectReference: {fileID: 0}
-    - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
-      propertyPath: sfxClips.Array.data[24].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 9facf3848d235974ca2001146b07aea3, type: 3}
-    - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
-      propertyPath: sfxClips.Array.data[24].name
-      value: FlyingEnemyAttack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
-      propertyPath: sfxClips.Array.data[23].volumeScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8573964523268334344, guid: 3d3fbb5b2b0f7c34e989c05a0add17f5, type: 3}
-      propertyPath: sfxClips.Array.data[24].volumeScale
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

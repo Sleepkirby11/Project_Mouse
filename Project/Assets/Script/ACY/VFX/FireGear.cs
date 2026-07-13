@@ -25,6 +25,7 @@ public class FireGear : MonoBehaviour
     private float animLength;
     private PlayerStatus capturedPlayer;
     private Rigidbody2D capturedRb;
+    private AudioSource audioSource;
     #endregion
 
     #region Unity Lifecycle
@@ -39,6 +40,11 @@ public class FireGear : MonoBehaviour
                 break;
             }
         }
+
+        // 동적 AudioSource 추가
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
     }
 
     private void OnEnable()
@@ -49,11 +55,20 @@ public class FireGear : MonoBehaviour
             StopCoroutine(riseRoutine);
 
         riseRoutine = StartCoroutine(RiseRoutine());
+
+        // 오브젝트 풀 생성 시(초기화) 사운드 재생 방지
+        if (transform.parent != null && transform.parent.GetComponent<PoolingManager>() != null)
+        {
+            return;
+        }
+
+        PlayGearSound();
     }
 
     private void OnDisable()
     {
         ReleasePlayer();
+        StopGearSound();
 
         if (riseRoutine != null)
         {
@@ -165,6 +180,25 @@ public class FireGear : MonoBehaviour
         }
 
         grindRoutine = null;
+    }
+
+    private void PlayGearSound()
+    {
+        if (AudioManager.instance == null || audioSource == null) return;
+
+        var sfxData = AudioManager.instance.sfxClips[(int)AudioManager.SFX.RGB_Gear];
+        audioSource.clip = sfxData.clip;
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : AudioManager.instance.sfxVolume;
+        audioSource.volume = globalVol * sfxData.volumeScale;
+        audioSource.Play();
+    }
+
+    private void StopGearSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
     #endregion
 }
