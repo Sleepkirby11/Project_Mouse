@@ -69,10 +69,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ebda76dd0c1aa2c41b0adbde53d07567, type: 3}
     volumeScale: 1
   - name: RGB_Ice
-    clip: {fileID: 8300000, guid: 97867cc25f633c74a887fcde2456b96d, type: 3}
+    clip: {fileID: 8300000, guid: 4e60c0d55aae9ca48a2513205e70b1ab, type: 3}
     volumeScale: 1
   - name: RGB_IceHammer
-    clip: {fileID: 8300000, guid: d89b479041f3c574195fc32f33a89734, type: 3}
+    clip: {fileID: 8300000, guid: 91101b2508d53914a94a5b22e2c9cfc4, type: 3}
     volumeScale: 1
   - name: Jump_Jump
     clip: {fileID: 8300000, guid: e39c2c53e0fa60b43bc3f005ec786be9, type: 3}
@@ -102,13 +102,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: bfa1956b3cffb44408f1e482e8bc1849, type: 3}
     volumeScale: 1
   - name: RGB_Explosion
-    clip: {fileID: 8300000, guid: 8a82827e5625da344847bd40715388e5, type: 3}
+    clip: {fileID: 8300000, guid: 110d7830d4793bc438af8afbd4c6255d, type: 3}
     volumeScale: 1
   - name: RGB_Gear
-    clip: {fileID: 8300000, guid: dc93d183debe8f740aa0a76c580de200, type: 3}
+    clip: {fileID: 8300000, guid: 350e855e3bd43e84d81bebe1069741ac, type: 3}
     volumeScale: 1
   - name: RGB_Hurricane
-    clip: {fileID: 8300000, guid: 36c71a0e0c065d9409315c1304a1bb0a, type: 3}
+    clip: {fileID: 8300000, guid: 0fb8b4bacbe880441b35605818411bba, type: 3}
     volumeScale: 1
   - name: Death
     clip: {fileID: 8300000, guid: a7a0b63b0024cc64fa4691b03e22202e, type: 3}

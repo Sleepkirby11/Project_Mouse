@@ -52,6 +52,17 @@ public class IceHammer : MonoBehaviour, IDamageable
         }
         if (anim != null) anim.enabled = true;
         ResetAlpha();
+
+        // 오브젝트 풀 생성 시(초기화) 사운드 재생 방지
+        if (transform.parent != null && transform.parent.GetComponent<PoolingManager>() != null)
+        {
+            return;
+        }
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.IceHammer);
+        }
     }
     #endregion
 

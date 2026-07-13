@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class Hurricane : MonoBehaviour
@@ -36,6 +36,7 @@ public class Hurricane : MonoBehaviour
 
     // 원본 이동 속도 저장 (오브젝트 풀 반환 시 리셋용)
     private float originMoveSpeed;
+    private AudioSource audioSource;
     #endregion
 
     #region Public Fields & Actions
@@ -48,6 +49,11 @@ public class Hurricane : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         // 최초 설정된 기본 이동 속도를 기억
         originMoveSpeed = moveSpeed;
+
+        // 동적 AudioSource 추가
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
     }
 
     private void OnEnable()
@@ -67,6 +73,38 @@ public class Hurricane : MonoBehaviour
         if (returnRoutine != null) StopCoroutine(returnRoutine);
         // 지속 시간 만료 시 자동 페이드아웃 및 반환 루틴 시작
         returnRoutine = StartCoroutine(ReturnRoutine());
+
+        // 오브젝트 풀 생성 시(초기화) 사운드 재생 방지
+        if (transform.parent != null && transform.parent.GetComponent<PoolingManager>() != null)
+        {
+            return;
+        }
+
+        PlayHurricaneSound();
+    }
+
+    private void OnDisable()
+    {
+        StopHurricaneSound();
+    }
+
+    private void PlayHurricaneSound()
+    {
+        if (AudioManager.instance == null || audioSource == null) return;
+
+        var sfxData = AudioManager.instance.sfxClips[(int)AudioManager.SFX.RGB_Hurricane];
+        audioSource.clip = sfxData.clip;
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : AudioManager.instance.sfxVolume;
+        audioSource.volume = globalVol * sfxData.volumeScale;
+        audioSource.Play();
+    }
+
+    private void StopHurricaneSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 
     private void Update()
