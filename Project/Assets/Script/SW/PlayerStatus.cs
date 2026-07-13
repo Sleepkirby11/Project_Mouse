@@ -144,6 +144,12 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         playerAnim.SetBool("IsJump", false);
         playerAnim.SetBool("IsFalling", false);
 
+        // 플레이어 피격 효과음 재생
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.PlayerHurt);
+        }
+
         //플레이어의 체력에 따른 애니메이션 트리거 설정
         if (hp <= 0)
         {

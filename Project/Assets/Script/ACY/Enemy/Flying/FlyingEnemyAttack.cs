@@ -24,6 +24,10 @@ public class FlyingEnemyAttack : MonoBehaviour
     {
         isDiving = true;
         rb.linearVelocity = Vector2.down * diveSpeed;
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.FlyingEnemy_Attack);
+        }
     }
 
     public void CancelDive()

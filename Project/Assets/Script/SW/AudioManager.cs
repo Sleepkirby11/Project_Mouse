@@ -50,7 +50,9 @@ public class AudioManager : MonoBehaviour
         RGB_Gear,
         RGB_Hurricane,
         Death,
-        BossHpZero
+        BossHpZero,
+        PlayerHurt,
+        FlyingEnemy_Attack
     }
 
     private void Awake()
@@ -130,7 +132,7 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxClips == null || sfx < 0 || sfx >= sfxClips.Length)
         {
-            Debug.LogWarning($"[AudioManager] SFX index {sfx} is out of bounds of sfxClips (Length: {sfxClips?.Length ?? 0}). Please assign all 21 clips in the AudioManager Inspector.");
+            Debug.LogWarning($"[AudioManager] SFX index {sfx} is out of bounds of sfxClips (Length: {sfxClips?.Length ?? 0}). Please assign all {System.Enum.GetValues(typeof(SFX)).Length} clips in the AudioManager Inspector.");
             return;
         }
 
