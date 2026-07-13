@@ -137,5 +137,11 @@ MonoBehaviour:
   - name: PlayerJump
     clip: {fileID: 8300000, guid: b70fcc66701dc5547a1db70699e31297, type: 3}
     volumeScale: 1
+  - name: BlackHole
+    clip: {fileID: 8300000, guid: eafb068d1e848c74db0bc554f9be1072, type: 3}
+    volumeScale: 1
+  - name: BlackHoleExplosion
+    clip: {fileID: 8300000, guid: c92b8bff7cfa81c4382f85f88845b718, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20

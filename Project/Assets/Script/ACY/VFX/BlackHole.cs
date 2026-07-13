@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class BlackHole : MonoBehaviour
@@ -24,7 +24,20 @@ public class BlackHole : MonoBehaviour
     private Rigidbody2D playerRb;
     private string poolKey;
     private Coroutine explosionRoutine;
+    private AudioSource audioSource;
     #endregion
+
+    private void Awake()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
+    }
+
+    private void OnDisable()
+    {
+        StopBlackHoleSound();
+    }
 
     #region Initialization
     public void Initialize(string key, Transform targetPlayer)
@@ -40,6 +53,14 @@ public class BlackHole : MonoBehaviour
         // 오브젝트 풀에서 꺼낼 때 크기를 1로 초기화
         transform.localScale = Vector3.one;
         explosionRoutine = StartCoroutine(SpawnExplosionsRoutine());
+
+        // 오브젝트 풀 생성 시(초기화) 사운드 재생 방지
+        if (transform.parent != null && transform.parent.GetComponent<PoolingManager>() != null)
+        {
+            return;
+        }
+
+        PlayBlackHoleSound();
     }
     #endregion
 
@@ -108,7 +129,36 @@ public class BlackHole : MonoBehaviour
     public void ReturnToPool()
     {
         if (explosionRoutine != null) StopCoroutine(explosionRoutine);
+        StopBlackHoleSound();
         PoolingManager.Instance.Return(poolKey, gameObject);
+    }
+    #endregion
+
+    #region Audio Management
+    private void PlayBlackHoleSound()
+    {
+        if (AudioManager.instance == null || audioSource == null) return;
+
+        int sfxIndex = (int)AudioManager.SFX.RGB_BlackHole;
+        if (AudioManager.instance.sfxClips == null || sfxIndex < 0 || sfxIndex >= AudioManager.instance.sfxClips.Length)
+        {
+            Debug.LogWarning($"[BlackHole] RGB_BlackHole SFX index {sfxIndex} is out of bounds. Please assign it in the AudioManager Inspector.");
+            return;
+        }
+
+        var sfxData = AudioManager.instance.sfxClips[sfxIndex];
+        audioSource.clip = sfxData.clip;
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : AudioManager.instance.sfxVolume;
+        audioSource.volume = globalVol * sfxData.volumeScale;
+        audioSource.Play();
+    }
+
+    private void StopBlackHoleSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
     #endregion
 }

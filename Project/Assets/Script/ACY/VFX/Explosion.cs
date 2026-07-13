@@ -7,6 +7,9 @@ public class Explosion : MonoBehaviour
     [SerializeField] private string poolKey = "Explosion"; // 풀링 키
 
     private Collider2D damageCollider;
+    private AudioSource audioSource;
+    private static float lastPlayTime = 0f;
+    private const float SOUND_COOLDOWN = 0.15f;
 
     private void Awake()
     {
@@ -17,6 +20,10 @@ public class Explosion : MonoBehaviour
         {
             damageCollider.enabled = false;
         }
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
     }
 
     private void OnEnable()
@@ -25,6 +32,18 @@ public class Explosion : MonoBehaviour
         if (damageCollider != null)
         {
             damageCollider.enabled = false;
+        }
+
+        // 오브젝트 풀 생성 시(초기화) 사운드 재생 방지
+        if (transform.parent != null && transform.parent.GetComponent<PoolingManager>() != null)
+        {
+            return;
+        }
+
+        if (Time.time - lastPlayTime >= SOUND_COOLDOWN)
+        {
+            lastPlayTime = Time.time;
+            PlayExplosionSound();
         }
     }
 
@@ -66,4 +85,24 @@ public class Explosion : MonoBehaviour
             DisableHitbox();
         }
     }
+
+    #region Audio Management
+    private void PlayExplosionSound()
+    {
+        if (AudioManager.instance == null || audioSource == null) return;
+
+        int sfxIndex = (int)AudioManager.SFX.RGB_BlackHole_Explosion;
+        if (AudioManager.instance.sfxClips == null || sfxIndex < 0 || sfxIndex >= AudioManager.instance.sfxClips.Length)
+        {
+            return;
+        }
+
+        var sfxData = AudioManager.instance.sfxClips[sfxIndex];
+        audioSource.clip = sfxData.clip;
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : AudioManager.instance.sfxVolume;
+        audioSource.volume = globalVol * sfxData.volumeScale;
+        audioSource.pitch = UnityEngine.Random.Range(0.85f, 1.15f);
+        audioSource.Play();
+    }
+    #endregion
 }
