@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -238,6 +238,21 @@ public class UI : MonoBehaviour
         isAction = true;
         talkIndex++;
     }
+
+    // Tutorial Manager 에서 대화창을 제어하기 위한 함수들
+    public void ShowDialogue(string text)
+    {
+        isAction = true;
+        if (talkPanel != null) talkPanel.SetActive(true);
+        if (talkText != null) talkText.text = text;
+    }
+
+    public void HideDialogue()
+    {
+        isAction = false;
+        if (talkPanel != null) talkPanel.SetActive(false);
+    }
+    
     
     // 설정창 열기/닫기
     public void OpenSetting()

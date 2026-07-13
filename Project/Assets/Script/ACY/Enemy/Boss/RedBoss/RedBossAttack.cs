@@ -410,7 +410,8 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         }
         for (int i = 0; i < activeOrbs.Count; i++)
         {
-            if (activeOrbs[i] == null)
+            // 이미 반납된 오브젝트는 건너뜀
+            if (activeOrbs[i] == null || !activeOrbs[i].activeSelf)
             {
                 continue;
             }
