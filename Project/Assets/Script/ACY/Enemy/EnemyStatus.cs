@@ -31,6 +31,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
     [Header("보스 설정")]
     [SerializeField] private bool isBoss = false; // 보스인지 판별
+    [SerializeField] private string bossName; // 보스 이름 (미입력 시 속성에 따라 Red/Green/Blue Boss로 자동 설정)
+    [SerializeField] private Color bossNameColor = Color.clear; // 보스 이름 색상 (미지정시 속성에 맞는 기본 색상 설정)
 
     public bool IsDead { get; private set; } // 사망 여부 플래그
 
@@ -52,6 +54,47 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         currentHP = maxHP;
         isDeath = false;
         slowMotionTimer = 0.1f;
+
+        if (isBoss)
+        {
+            if (string.IsNullOrEmpty(bossName))
+            {
+                switch (element)
+                {
+                    case EnemyElement.Red:
+                        bossName = "Red Boss";
+                        break;
+                    case EnemyElement.Green:
+                        bossName = "Green Boss";
+                        break;
+                    case EnemyElement.Blue:
+                        bossName = "Blue Boss";
+                        break;
+                    default:
+                        bossName = gameObject.name;
+                        break;
+                }
+            }
+
+            if (bossNameColor == Color.clear)
+            {
+                switch (element)
+                {
+                    case EnemyElement.Red:
+                        bossNameColor = new Color(0.9f, 0.25f, 0.25f); // Soft Red
+                        break;
+                    case EnemyElement.Green:
+                        bossNameColor = new Color(0.25f, 0.85f, 0.35f); // Soft Green
+                        break;
+                    case EnemyElement.Blue:
+                        bossNameColor = new Color(0.25f, 0.55f, 0.95f); // Soft Blue
+                        break;
+                    default:
+                        bossNameColor = Color.white;
+                        break;
+                }
+            }
+        }
     }
     private IEnumerator Start()
     {
@@ -69,12 +112,12 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
             if (UI.Instance != null)
             {
-                Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}'가 활성화되었습니다. 보스 체력바를 활성화합니다. 비율: {GetHPRatio()}");
-                UI.Instance.ShowBossHPBar(GetHPRatio());
+                Debug.Log($"[EnemyStatus] 보스 '{bossName}'가 활성화되었습니다. 보스 체력바를 활성화합니다. 비율: {GetHPRatio()}");
+                UI.Instance.ShowBossHPBar(bossName, bossNameColor, GetHPRatio());
             }
             else
             {
-                Debug.LogError($"[EnemyStatus] 보스 '{gameObject.name}'가 활성화되었지만 UI.Instance가 null입니다!");
+                Debug.LogError($"[EnemyStatus] 보스 '{bossName}'가 활성화되었지만 UI.Instance가 null입니다!");
             }
         }
     }

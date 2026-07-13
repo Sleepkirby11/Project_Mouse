@@ -28,6 +28,7 @@ public class UI : MonoBehaviour
 
     [Header("보스 체력바 설정")]
     [SerializeField] private Slider bossHpSlider;
+    [SerializeField] private Text bossNameText;
 
     [Header("대화창")]
     public GameObject talkPanel;
@@ -118,7 +119,17 @@ public class UI : MonoBehaviour
     // 보스 체력바 활성화 및 초기 체력 설정
     public void ShowBossHPBar(float initialRatio)
     {
-        Debug.Log($"[UI] ShowBossHPBar 호출됨. 초기 비율: {initialRatio}");
+        ShowBossHPBar("Boss", Color.white, initialRatio);
+    }
+
+    public void ShowBossHPBar(string bossName, float initialRatio)
+    {
+        ShowBossHPBar(bossName, Color.white, initialRatio);
+    }
+
+    public void ShowBossHPBar(string bossName, Color textColor, float initialRatio)
+    {
+        Debug.Log($"[UI] ShowBossHPBar 호출됨. 이름: {bossName}, 색상: {textColor}, 초기 비율: {initialRatio}");
         if (bossHpSlider != null)
         {
             bossHpSlider.gameObject.SetActive(true);
@@ -128,6 +139,13 @@ public class UI : MonoBehaviour
         else
         {
             Debug.LogError("[UI] bossHpSlider가 null입니다! 인스펙터에서 UIManager (UI 스크립트)의 Boss HP Slider 필드에 EnemyHP 슬라이더를 할당해 주세요.");
+        }
+
+        if (bossNameText != null)
+        {
+            bossNameText.gameObject.SetActive(true);
+            bossNameText.text = bossName;
+            bossNameText.color = textColor;
         }
     }
 
@@ -165,6 +183,11 @@ public class UI : MonoBehaviour
         else
         {
             Debug.LogWarning("[UI] HideBossHPBar: bossHpSlider가 null입니다.");
+        }
+
+        if (bossNameText != null)
+        {
+            bossNameText.gameObject.SetActive(false);
         }
     }
 

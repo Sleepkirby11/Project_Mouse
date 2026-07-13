@@ -125,6 +125,7 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
+  bossName: CHROMA
 --- !u!114 &3560122471953931004
 MonoBehaviour:
   m_ObjectHideFlags: 0

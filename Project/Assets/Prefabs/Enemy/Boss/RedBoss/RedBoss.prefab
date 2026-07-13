@@ -191,6 +191,7 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
+  bossName: Red Boss
 --- !u!114 &7442515793938700868
 MonoBehaviour:
   m_ObjectHideFlags: 0
