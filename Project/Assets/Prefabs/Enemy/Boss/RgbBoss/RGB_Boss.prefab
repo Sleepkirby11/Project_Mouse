@@ -125,7 +125,8 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
-  bossName: CHROMA
+  bossName: ECLIPSE
+  bossNameColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &3560122471953931004
 MonoBehaviour:
   m_ObjectHideFlags: 0

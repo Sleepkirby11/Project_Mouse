@@ -269,11 +269,6 @@ public class TutorialManager : MonoBehaviour
                 return Player.instance.jumpCount == 0;
 
             case TutorialCondition.Attack:
-                if (playerInput != null)
-                {
-                    var attackAction = playerInput.actions.FindAction("Attack");
-                    if (attackAction != null && attackAction.triggered) return true;
-                }
                 // 일반 공격 드래그 시작 감지
                 if (Player.instance.cursor != null)
                 {
@@ -303,12 +298,6 @@ public class TutorialManager : MonoBehaviour
                 return stanceChanged;
 
             case TutorialCondition.MakeGround:
-                if (playerInput != null)
-                {
-                    // 현재 프로젝트의 InputActionAsset에서는 발판 그리기가 'Make'로 명명되어 있습니다.
-                    var makeAction = playerInput.actions.FindAction("Make") ?? playerInput.actions.FindAction("MakeGround");
-                    if (makeAction != null && makeAction.triggered) return true;
-                }
                 // 발판 그리기 드래그 시작 감지
                 if (Player.instance.groundCursor != null)
                 {

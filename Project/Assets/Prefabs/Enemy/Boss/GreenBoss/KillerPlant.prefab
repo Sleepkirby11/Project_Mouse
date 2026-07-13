@@ -175,12 +175,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangedRange: 6
   meleeRange: 3
-  walkSpeed: 2
-  runSpeed: 5
+  walkSpeed: 5
+  runSpeed: 10
   stopDistance: 1.2
-  runChance: 0.3
-  runDuration: 2
-  runCooldown: 5
+  runChance: 0.5
+  runDuration: 4
+  runCooldown: 2
   rangedAttackChance: 0.5
   playerTransform: {fileID: 0}
   isFacingRight: 1
@@ -204,6 +204,8 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 0
+  bossName: 
+  bossNameColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &7678791527145004352
 GameObject:
   m_ObjectHideFlags: 0

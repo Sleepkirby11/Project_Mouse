@@ -2136,6 +2136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3229323651635166413, guid: fd34c860c3de6474d9ecf18f035534e3, type: 3}
+      propertyPath: steps.Array.data[6].stepName
+      value: "\uC2A4\uD0AC"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
