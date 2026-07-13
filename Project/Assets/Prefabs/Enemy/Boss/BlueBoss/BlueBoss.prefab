@@ -277,6 +277,7 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
+  bossName: Blue Boss
 --- !u!114 &878273054086867009
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -400,6 +400,7 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 1
+  bossName: Green Boss
 --- !u!1 &6280919845566060893
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class LightningBolt : MonoBehaviour
@@ -24,6 +24,12 @@ public class LightningBolt : MonoBehaviour
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.RGB_Lightning);
+        }
+
         StartCoroutine(PlayAndReturn());
     }
 

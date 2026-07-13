@@ -52,7 +52,8 @@ public class AudioManager : MonoBehaviour
         Death,
         BossHpZero,
         PlayerHurt,
-        FlyingEnemy_Attack
+        FlyingEnemy_Attack,
+        RGB_Lightning
     }
 
     private void Awake()

@@ -122,5 +122,8 @@ MonoBehaviour:
   - name: FlyingEnemyAttack
     clip: {fileID: 8300000, guid: 9facf3848d235974ca2001146b07aea3, type: 3}
     volumeScale: 1
+  - name: Rgb_Thunder
+    clip: {fileID: 8300000, guid: 0d9533057808daa47bb2493783f4a208, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20
