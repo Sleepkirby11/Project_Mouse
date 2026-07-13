@@ -128,5 +128,8 @@ MonoBehaviour:
   - name: MushRoom
     clip: {fileID: 8300000, guid: ada02a901963715459554e77fff2a0c6, type: 3}
     volumeScale: 1
+  - name: PoisionArea
+    clip: {fileID: 8300000, guid: 46d8408363abd8948b2afe927f6c6847, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,12 +14,33 @@ public class PoisonArea : MonoBehaviour
 
     private List<PlayerStatus> playersInArea = new List<PlayerStatus>();
     private float tickTimer = 0f;
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
+    }
 
     private void OnEnable()
     {
         playersInArea.Clear();
         tickTimer = 0f;
         StartCoroutine(AutoReturnRoutine());
+
+        // 오브젝트 풀 생성 시(초기화) 사운드 재생 방지
+        if (transform.parent != null && transform.parent.GetComponent<PoolingManager>() != null)
+        {
+            return;
+        }
+
+        PlayPoisonAreaSound();
+    }
+
+    private void OnDisable()
+    {
+        StopPoisonAreaSound();
     }
 
     private void Update()
@@ -74,4 +95,32 @@ public class PoisonArea : MonoBehaviour
             }
         }
     }
+
+    #region Audio Management
+    private void PlayPoisonAreaSound()
+    {
+        if (AudioManager.instance == null || audioSource == null) return;
+
+        int sfxIndex = (int)AudioManager.SFX.RGB_PoisonArea;
+        if (AudioManager.instance.sfxClips == null || sfxIndex < 0 || sfxIndex >= AudioManager.instance.sfxClips.Length)
+        {
+            Debug.LogWarning($"[PoisonArea] RGB_PoisonArea SFX index {sfxIndex} is out of bounds. Please assign it in the AudioManager Inspector.");
+            return;
+        }
+
+        var sfxData = AudioManager.instance.sfxClips[sfxIndex];
+        audioSource.clip = sfxData.clip;
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : AudioManager.instance.sfxVolume;
+        audioSource.volume = globalVol * sfxData.volumeScale;
+        audioSource.Play();
+    }
+
+    private void StopPoisonAreaSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+    }
+    #endregion
 }
