@@ -53,7 +53,12 @@ public class AudioManager : MonoBehaviour
         BossHpZero,
         PlayerHurt,
         FlyingEnemy_Attack,
-        RGB_Lightning
+        RGB_Lightning,
+        RGB_Mushroom,
+        RGB_PoisonArea,
+        RGB_Bullet,
+        PlayerJump,
+        RGB_BlackHole
     }
 
     private void Awake()

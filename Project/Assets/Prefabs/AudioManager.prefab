@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e5b40793955a44f84b182236bd98fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmClip: {fileID: 8300000, guid: e615c007bc93d414ab1c0421a92e2f2d, type: 3}
+  bgmClip: {fileID: 8300000, guid: 8587ad89599261443a671b68b8f722ec, type: 3}
   bgmVolume: 100
   sfxClips:
   - name: Archer_Arrow
-    clip: {fileID: 8300000, guid: 38c8daa65b4e10e40b3d9c661d6fca29, type: 3}
+    clip: {fileID: 8300000, guid: 5a11bf93e7adfaf4aab85a9399acf44a, type: 3}
     volumeScale: 1
   - name: Basic_Attack
     clip: {fileID: 8300000, guid: 6bcde58ed053de24ba409cc0431d861c, type: 3}
@@ -124,6 +124,24 @@ MonoBehaviour:
     volumeScale: 1
   - name: Rgb_Thunder
     clip: {fileID: 8300000, guid: 0d9533057808daa47bb2493783f4a208, type: 3}
+    volumeScale: 1
+  - name: MushRoom
+    clip: {fileID: 8300000, guid: 398562e17d89bef4b8dad6c568e713b8, type: 3}
+    volumeScale: 1
+  - name: PoisionArea
+    clip: {fileID: 8300000, guid: 9f2a416eed768954c9f67a700f0cac2e, type: 3}
+    volumeScale: 1
+  - name: RgbBullet
+    clip: {fileID: 8300000, guid: 63a33eb5a18479b4fade1554611b8812, type: 3}
+    volumeScale: 1
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: b70fcc66701dc5547a1db70699e31297, type: 3}
+    volumeScale: 1
+  - name: BlackHole
+    clip: {fileID: 8300000, guid: eafb068d1e848c74db0bc554f9be1072, type: 3}
+    volumeScale: 1
+  - name: BlackHoleExplosion
+    clip: {fileID: 8300000, guid: c92b8bff7cfa81c4382f85f88845b718, type: 3}
     volumeScale: 1
   sfxVolume: 100
   channels: 20
