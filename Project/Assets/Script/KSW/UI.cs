@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -78,6 +78,7 @@ public class UI : MonoBehaviour
     {
         // 씬이 전환되거나 플레이어 사망 후 재시작될 때 보스 HP 바 숨김
         HideBossHPBar();
+        HideDialogue(); // 씬 전환 시 대화창 자동 닫기
         RefreshPlayerReference();
     }
 
