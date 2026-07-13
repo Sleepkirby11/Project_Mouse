@@ -321,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingPanel: {fileID: 4387790641447904282}
   licensePanel: {fileID: 4600076492350550988}
+  mainMenuPanel: {fileID: 0}
 --- !u!1 &706809845476533510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1240,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 864851642782984372}
   m_HandleRect: {fileID: 0}
