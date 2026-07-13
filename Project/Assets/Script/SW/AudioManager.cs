@@ -58,8 +58,7 @@ public class AudioManager : MonoBehaviour
         RGB_PoisonArea,
         RGB_Bullet,
         PlayerJump,
-        RGB_BlackHole,
-        RGB_BlackHole_Explosion
+        RGB_BlackHole
     }
 
     private void Awake()

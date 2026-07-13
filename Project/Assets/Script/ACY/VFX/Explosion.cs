@@ -91,7 +91,7 @@ public class Explosion : MonoBehaviour
     {
         if (AudioManager.instance == null || audioSource == null) return;
 
-        int sfxIndex = (int)AudioManager.SFX.RGB_BlackHole_Explosion;
+        int sfxIndex = (int)AudioManager.SFX.RGB_explosion;
         if (AudioManager.instance.sfxClips == null || sfxIndex < 0 || sfxIndex >= AudioManager.instance.sfxClips.Length)
         {
             return;
