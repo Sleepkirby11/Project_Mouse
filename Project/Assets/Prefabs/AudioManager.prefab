@@ -143,5 +143,8 @@ MonoBehaviour:
   - name: RedBossLast
     clip: {fileID: 8300000, guid: f2fb1bb865211cd4687127ff98177c4d, type: 3}
     volumeScale: 1
+  - name: BlueBossDie
+    clip: {fileID: 8300000, guid: 133cccf8878f9b54983416d6864cdb2b, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20

@@ -428,6 +428,15 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
                 }
             }
 
+            // 블루 보스 사망 효과음 재생
+            if (GetComponent<BossController>() != null)
+            {
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossDie);
+                }
+            }
+
             if (UI.Instance != null)
             {
                 UI.Instance.HideBossHPBar();
@@ -516,7 +525,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     {
         try
         {
-            foreach (var p in FindObjectsByType<T>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            foreach (var p in FindObjectsByType<T>(FindObjectsSortMode.None))
             {
                 if (p != null && p.gameObject != null)
                 {
