@@ -499,6 +499,19 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             if (playerComp != null) playerComp.OnKnockbackEnd();
         }
         if (isBound) ReleaseBind();
+
+        if (UI.Instance != null)
+        {
+            UI.Instance.UpdateHPBar();
+            UI.Instance.UpdateInkBar();
+            UI.Instance.UpdateSpedialInkBar();
+            UI.Instance.UpdateCoolTimeBar();
+        }
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayBGM(true);
+        }
     }
 
     public void ResetStatus()
@@ -558,6 +571,14 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         if (StatusImage.instance != null)
         {
             StatusImage.instance.ChangeImage((int)currentStance, false);
+        }
+
+        if (UI.Instance != null)
+        {
+            UI.Instance.UpdateHPBar();
+            UI.Instance.UpdateInkBar();
+            UI.Instance.UpdateSpedialInkBar();
+            UI.Instance.UpdateCoolTimeBar();
         }
     }
 }
