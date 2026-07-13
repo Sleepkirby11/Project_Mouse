@@ -382,6 +382,11 @@ public class Player : MonoBehaviour
             ActiveAttack(groundCursor);
         dashLine.enabled = false;
         isDashReady = false;
+
+        if (UI.Instance != null)
+        {
+            UI.Instance.ActivePal(false);
+        }
     }
 
     //Ink UI를 업데이트하는 함수

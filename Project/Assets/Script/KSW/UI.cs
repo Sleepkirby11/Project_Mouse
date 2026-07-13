@@ -85,10 +85,23 @@ public class UI : MonoBehaviour
 
     private void RefreshPlayerReference()
     {
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        if (playerObj != null)
+        PlayerStatus targetStatus = null;
+        if (Player.instance != null)
         {
-            playerStatus = playerObj.GetComponent<PlayerStatus>();
+            targetStatus = Player.instance.GetComponent<PlayerStatus>();
+        }
+        else
+        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
+            {
+                targetStatus = playerObj.GetComponent<PlayerStatus>();
+            }
+        }
+
+        if (targetStatus != null)
+        {
+            playerStatus = targetStatus;
             UpdateHPBar();
             UpdateCoolTimeBar();
             UpdateInkBar();

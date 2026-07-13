@@ -226,25 +226,46 @@ public class PlayerInputScript : MonoBehaviour
     //키 입력 종료 시 UI의 상태에 따른 스탠스 변환
     public void ActionStance(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (context.started)
         {
-            return;
-        }
-
-        if(GameManager.instance != null)
-        {
-            if(GameManager.instance.isSetting)
+            if (player.status.HP <= 0 || !player.status.CanMove)
             {
                 return;
             }
-        }
 
-        if (context.started)
-        {
+            if(GameManager.instance != null)
+            {
+                if(GameManager.instance.isSetting)
+                {
+                    return;
+                }
+            }
+
+            if (UI.Instance != null)
+            {
                 UI.Instance.ActivePal(true);
+            }
         }
         if (context.canceled)
         {
+            if (UI.Instance != null)
+            {
+                UI.Instance.ActivePal(false);
+            }
+
+            if (player.status.HP <= 0 || !player.status.CanMove)
+            {
+                return;
+            }
+
+            if(GameManager.instance != null)
+            {
+                if(GameManager.instance.isSetting)
+                {
+                    return;
+                }
+            }
+
             TrailRenderer trail = player.cursorObject.GetComponent<TrailRenderer>();
             TrailRenderer groundTrail = player.groundLine.GetComponent<TrailRenderer>();
 
@@ -257,7 +278,6 @@ public class PlayerInputScript : MonoBehaviour
             main.startColor = player.status.ChangeStance(player.status.currentStance);
 
             StatusImage.instance.ChangeImage((int)player.status.currentStance, player.isSkill);
-            UI.Instance.ActivePal(false);
         }
     }
 
