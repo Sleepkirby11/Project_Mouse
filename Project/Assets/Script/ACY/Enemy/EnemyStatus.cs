@@ -538,7 +538,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         }
     }
 
-    private void ClearBossProjectiles()
+    public void ClearBossProjectiles()
     {
         // Red Boss 패턴 제거
         SafeDeactivate<FireArrow>();

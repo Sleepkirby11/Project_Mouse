@@ -227,6 +227,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public bool IsPlayingBGM()
+    {
+        return bgmPlayer != null && bgmPlayer.isPlaying;
+    }
+
     public void PauseBGM()
     {
         if (bgmPlayer != null && bgmPlayer.isPlaying)

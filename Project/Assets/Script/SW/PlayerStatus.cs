@@ -462,6 +462,16 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         Player.instance.inputVec = Vector2.zero;
         AudioManager.instance.PlayBGM(false);
         Player.instance.BlackBG.SetActive(true);
+
+        // 플레이어 사망 시 활성화되어 있는 모든 보스 투사체 및 패턴 일괄 제거
+        EnemyStatus[] bosses = FindObjectsByType<EnemyStatus>(FindObjectsSortMode.None);
+        foreach (var boss in bosses)
+        {
+            if (boss != null)
+            {
+                boss.ClearBossProjectiles();
+            }
+        }
     }
 
     private void OnEnable()
