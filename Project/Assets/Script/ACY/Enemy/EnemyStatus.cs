@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Mono.Cecil.Cil;
 using Unity.VisualScripting;
@@ -59,39 +59,53 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         {
             if (string.IsNullOrEmpty(bossName))
             {
-                switch (element)
+                if (gameObject.name.ToUpper().Contains("RGB"))
                 {
-                    case EnemyElement.Red:
-                        bossName = "Red Boss";
-                        break;
-                    case EnemyElement.Green:
-                        bossName = "Green Boss";
-                        break;
-                    case EnemyElement.Blue:
-                        bossName = "Blue Boss";
-                        break;
-                    default:
-                        bossName = gameObject.name;
-                        break;
+                    bossName = "ECLIPSE";
+                }
+                else
+                {
+                    switch (element)
+                    {
+                        case EnemyElement.Red:
+                            bossName = "Red Boss";
+                            break;
+                        case EnemyElement.Green:
+                            bossName = "Green Boss";
+                            break;
+                        case EnemyElement.Blue:
+                            bossName = "Blue Boss";
+                            break;
+                        default:
+                            bossName = gameObject.name;
+                            break;
+                    }
                 }
             }
 
-            if (bossNameColor == Color.clear)
+            if (bossNameColor == Color.clear) // 텍스트 색을 따로 지정하지 않았을 시 기본값
             {
-                switch (element)
+                if (gameObject.name.ToUpper().Contains("RGB"))
                 {
-                    case EnemyElement.Red:
-                        bossNameColor = new Color(0.9f, 0.25f, 0.25f); // Soft Red
-                        break;
-                    case EnemyElement.Green:
-                        bossNameColor = new Color(0.25f, 0.85f, 0.35f); // Soft Green
-                        break;
-                    case EnemyElement.Blue:
-                        bossNameColor = new Color(0.25f, 0.55f, 0.95f); // Soft Blue
-                        break;
-                    default:
-                        bossNameColor = Color.white;
-                        break;
+                    bossNameColor = new Color(0.85f, 0.25f, 0.85f); // Soft Magenta
+                }
+                else
+                {
+                    switch (element)
+                    {
+                        case EnemyElement.Red:
+                            bossNameColor = new Color(0.9f, 0.25f, 0.25f); // Soft Red
+                            break;
+                        case EnemyElement.Green:
+                            bossNameColor = new Color(0.25f, 0.85f, 0.35f); // Soft Green
+                            break;
+                        case EnemyElement.Blue:
+                            bossNameColor = new Color(0.25f, 0.55f, 0.95f); // Soft Blue
+                            break;
+                        default:
+                            bossNameColor = Color.white;
+                            break;
+                    }
                 }
             }
         }
@@ -264,9 +278,17 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         if (currentHP <= 0)
         {
             if (isBoss)
-                isDeath = true;
+            {
+                if (!isDeath)
+                {
+                    isDeath = true;
+                    StartBossDeathSequence();
+                }
+            }
             else
+            {
                 Die();
+            }
         }
     }
     private int ApplyElementalDamage(int damage)
@@ -387,9 +409,11 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             return;
         }
 
-        IsDead = true; // 사망 상태 설정
-
-        OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
+        if (!isBoss)
+        {
+            IsDead = true; // 사망 상태 설정
+            OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
+        }
 
         if (isBoss)
         {
@@ -452,6 +476,68 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         }
 
         Destroy(gameObject, dieAnimationLength); // 애니메이션 대기 후 파괴
+    }
+
+    private void StartBossDeathSequence()
+    {
+        IsDead = true; // 즉시 사망 처리
+
+        // 사망 이벤트 즉시 발행 (보스 행동 정지 및 코루틴 정지)
+        OnEnemyDeath?.Invoke();
+
+        // 피격 판정 차단
+        if (TryGetComponent(out Collider2D col))
+        {
+            col.enabled = false;
+        }
+
+        // 물리 및 속도 초기화 (순간이동/이동 방지)
+        if (TryGetComponent(out Rigidbody2D rb))
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+
+        // 스크립트 모두 비활성화
+        MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour script in scripts)
+        {
+            if (script != null && script != this && !(script is BossDeathEvent))
+            {
+                script.enabled = false;
+            }
+        }
+
+        // 필드에 생성된 보스의 오브젝트들을 비활성화
+        ClearBossProjectiles();
+    }
+
+    private void ClearBossProjectiles()
+    {
+        // Red Boss 패턴 제거
+        foreach (var p in FindObjectsByType<FireArrow>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<MagicOrb>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<Meteor>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<LaserCross>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<RedBossClone>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+
+        // Green Boss 패턴 제거
+        foreach (var p in FindObjectsByType<Bird>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<Wind>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<Frog>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<FlowerTrap>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+
+        // Blue Boss 패턴 제거
+        foreach (var p in FindObjectsByType<BlueLaser>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<WaterSpout>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<BlueBossWarningLine>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+
+        // RGB Boss 패턴 제거
+        foreach (var p in FindObjectsByType<RgbBullet>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<LightningBolt>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<FireGear>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<Hurricane>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        foreach (var p in FindObjectsByType<Burst>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
     }
     private void CachePortal()
     {
