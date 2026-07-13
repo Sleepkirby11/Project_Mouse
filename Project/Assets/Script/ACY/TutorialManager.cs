@@ -37,6 +37,9 @@ public class TutorialManager : MonoBehaviour
     private bool isStepActive = false;
     private bool isStepCompleted = false;
 
+    // 완료된 튜토리얼 단계 이름을 기록하여 세션 동안 유지
+    private HashSet<string> completedStepNames = new HashSet<string>();
+
     // 조건 감지를 위한 상태 저장 변수들
     private PlayerInput playerInput;
     private PlayerStatus.Stance initialStance;
@@ -49,11 +52,33 @@ public class TutorialManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
+            // 이미 존재하는 인스턴스에 현재 씬의 튜토리얼 단계를 병합하고, 자신은 파괴함
+            Instance.MergeSteps(this.steps);
             Destroy(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        // 씬 전환 시 진행 중인 튜토리얼 코루틴 및 상태 리셋
+        StopAllCoroutines();
+        isStepActive = false;
+        isStepCompleted = false;
+        currentStepIndex = -1;
     }
 
     private void Start()
@@ -93,6 +118,64 @@ public class TutorialManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 다른 씬에서 튜토리얼 매니저의 단계들을 병합할 때 사용합니다.
+    /// </summary>
+    public void MergeSteps(List<TutorialStep> newSteps)
+    {
+        if (newSteps == null) return;
+        foreach (var newStep in newSteps)
+        {
+            if (newStep == null || string.IsNullOrEmpty(newStep.stepName)) continue;
+            if (!steps.Exists(s => s.stepName == newStep.stepName))
+            {
+                steps.Add(newStep);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 특정 이름의 튜토리얼이 이미 완료되었는지 확인합니다.
+    /// </summary>
+    public bool IsStepCompleted(string stepName)
+    {
+        if (string.IsNullOrEmpty(stepName)) return false;
+        return completedStepNames.Contains(stepName);
+    }
+
+    /// <summary>
+    /// 특정 인덱스의 튜토리얼이 이미 완료되었는지 확인합니다.
+    /// </summary>
+    public bool IsStepCompleted(int index)
+    {
+        if (index < 0 || index >= steps.Count) return false;
+        string name = steps[index].stepName;
+        return !string.IsNullOrEmpty(name) && completedStepNames.Contains(name);
+    }
+
+    /// <summary>
+    /// 특정 이름으로 튜토리얼 단계를 실행합니다.
+    /// </summary>
+    public void TriggerTutorialStep(string stepName)
+    {
+        if (string.IsNullOrEmpty(stepName)) return;
+
+        if (completedStepNames.Contains(stepName))
+        {
+            return;
+        }
+
+        int index = steps.FindIndex(s => s.stepName == stepName);
+        if (index >= 0)
+        {
+            TriggerTutorialStep(index);
+        }
+        else
+        {
+            Debug.LogWarning($"[TutorialManager] Step with name '{stepName}' not found.");
+        }
+    }
+
+    /// <summary>
     /// 특정 인덱스의 튜토리얼 단계를 강제로 실행합니다. (트리거 존 등에서 호출)
     /// </summary>
     public void TriggerTutorialStep(int stepIndex)
@@ -100,6 +183,13 @@ public class TutorialManager : MonoBehaviour
         if (stepIndex < 0 || stepIndex >= steps.Count)
         {
             Debug.LogWarning($"[TutorialManager] Invalid step index: {stepIndex}");
+            return;
+        }
+
+        // 이미 완료된 단계면 무시
+        string stepName = steps[stepIndex].stepName;
+        if (!string.IsNullOrEmpty(stepName) && completedStepNames.Contains(stepName))
+        {
             return;
         }
 
@@ -254,6 +344,12 @@ public class TutorialManager : MonoBehaviour
         Debug.Log($"[TutorialManager] Step {currentStepIndex} 조건 충족. 대기 시간: {step.delayBeforeNext}초");
 
         yield return new WaitForSeconds(step.delayBeforeNext);
+
+        // 완료 기록 추가
+        if (!string.IsNullOrEmpty(step.stepName))
+        {
+            completedStepNames.Add(step.stepName);
+        }
 
         if (step.closeOnComplete)
         {
