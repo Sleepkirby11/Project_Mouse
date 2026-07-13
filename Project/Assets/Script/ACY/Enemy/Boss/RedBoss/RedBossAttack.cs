@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -20,10 +20,10 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     [Header("공통")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform pivotPoint;
+    [SerializeField] private float attackCooldown = 3f;   // 공격 간격 
 
     [Header("화살 설정")]
     [SerializeField] private float angleSpread = 15f;     // 각도 차이
-    [SerializeField] private float attackCooldown = 3f;   // 공격 간격 
 
     private const string ARROW_KEY = "RedBossArrow";
 
@@ -740,8 +740,6 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         yield return FadeRoutine(1f, 0.5f);
         isInvincible = false;
-
-        ApplyStun(3f);
     }
 
     private IEnumerator FadeRoutine(float targetAlpha, float duration)
