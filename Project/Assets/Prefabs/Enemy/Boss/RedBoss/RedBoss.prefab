@@ -205,8 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 756666306752146170}
   pivotPoint: {fileID: 5443646332181764828}
+  attackCooldown: 1.5
   angleSpread: 15
-  attackCooldown: 3
   meteorCastSlider: {fileID: 780655685047742581}
   meteorWaveCount: 3
   meteorPerWave: 7

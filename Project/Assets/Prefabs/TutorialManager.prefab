@@ -68,7 +68,7 @@ MonoBehaviour:
     delayBeforeNext: 0.5
     closeOnComplete: 1
   - stepName: "\uBC1C\uD310"
-    dialogueText: "\uB9C8\uC6B0\uC2A4 \uC624\uB978\uCABD \uBC84\uD2BC\uC744 \uB4DC\uB798\uADF8\uD574
+    dialogueText: "\uB9C8\uC6B0\uC2A4 \uC624\uB978\uCABD \uBC84\uD2BC\uC744 \n\uB4DC\uB798\uADF8\uD574
       \uBC1C\uD310\uC744 \uB9CC\uB4DC\uC138\uC694"
     condition: 6
     delayBeforeNext: 0.5

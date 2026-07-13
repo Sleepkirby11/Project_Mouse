@@ -44,6 +44,10 @@ public class RedBossMove : MonoBehaviour
 
     private void Update()
     {
+        if (bossAttack != null && bossAttack.IsStunned)
+        {
+            return;
+        }
         FlipToTarget();
     }
 
