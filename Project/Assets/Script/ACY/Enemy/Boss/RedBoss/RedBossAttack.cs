@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -909,6 +909,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
     private IEnumerator LastStandAttackRoutine()
     {
+        // 발악 패턴 효과음 재생 (패턴 전체 중 딱 한번)
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.RedBoss_LastStand);
+        }
+
         // 지속 시간
         float duration = 4f;
         float timer = 0f;

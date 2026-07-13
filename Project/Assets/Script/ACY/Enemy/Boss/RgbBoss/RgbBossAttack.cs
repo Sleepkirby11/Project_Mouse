@@ -550,6 +550,11 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
         if (colorCycle != null) colorCycle.EnterFinalPhase();
 
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PauseBGM();
+        }
+
         SpawnBlackHoles();
 
         yield return new WaitForSeconds(finalPhaseDuration);
@@ -564,6 +569,11 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         if (colorCycle != null)
         {
             colorCycle.ExitFinalPhase();
+        }
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ResumeBGM();
         }
 
         yield return new WaitForSeconds(finalPhaseRestDuration);

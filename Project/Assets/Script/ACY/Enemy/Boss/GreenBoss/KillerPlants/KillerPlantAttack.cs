@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class KillerPlantAttack : MonoBehaviour, IHitReaction
@@ -207,6 +207,12 @@ public class KillerPlantAttack : MonoBehaviour, IHitReaction
         }
         actionRunning = false;
         StopAllCoroutines();
+
+        if (anim != null)
+        {
+            anim.ResetTrigger("Attack");
+            anim.ResetTrigger("Shoot");
+        }
     }
 
     #endregion

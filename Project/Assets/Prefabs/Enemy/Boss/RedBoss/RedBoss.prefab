@@ -170,7 +170,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  teleportInterval: 3
+  teleportInterval: 1.5
   disappearVFX: {fileID: 7323537915668664570, guid: 870b8c66dcab2944ab83d4500a54a0bd, type: 3}
   appearVFX: {fileID: 3268619075305744560, guid: 771cca234fa3d5e4080958e572a7f350, type: 3}
 --- !u!114 &5189355176662487042
@@ -192,6 +192,7 @@ MonoBehaviour:
   resistMultiplier: 0.5
   isBoss: 1
   bossName: Red Boss
+  bossNameColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &7442515793938700868
 MonoBehaviour:
   m_ObjectHideFlags: 0

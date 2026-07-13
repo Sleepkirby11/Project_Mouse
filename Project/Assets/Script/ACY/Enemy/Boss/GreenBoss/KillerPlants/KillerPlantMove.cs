@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public enum PlantIntent { Approach, InMeleeRange, InRangedRange }
 
@@ -144,8 +144,15 @@ public class KillerPlantMove : MonoBehaviour
     {
         if (rb == null) return;
 
-        // 공격 중이거나 공격 범위 진입, 정지 거리 도달 시 속도 0
-        if (isAttacking || intent == PlantIntent.InMeleeRange || intent == PlantIntent.InRangedRange || dist <= stopDistance)
+        bool isAnimatorAttacking = false;
+        if (anim != null)
+        {
+            AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+            isAnimatorAttacking = state.IsName("ATTACK") || state.IsName("SHOOT");
+        }
+
+        // 공격 중(스크립트 변수 및 애니메이터 상태 포함)이거나 공격 범위 진입, 정지 거리 도달 시 속도 0
+        if (isAttacking || isAnimatorAttacking || intent == PlantIntent.InMeleeRange || intent == PlantIntent.InRangedRange || dist <= stopDistance)
         {
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             return;

@@ -7,7 +7,6 @@ public class Explosion : MonoBehaviour
     [SerializeField] private string poolKey = "Explosion"; // 풀링 키
 
     private Collider2D damageCollider;
-    private AudioSource audioSource;
     private static float lastPlayTime = 0f;
     private const float SOUND_COOLDOWN = 0.15f;
 
@@ -20,10 +19,6 @@ public class Explosion : MonoBehaviour
         {
             damageCollider.enabled = false;
         }
-
-        audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.playOnAwake = false;
-        audioSource.loop = false;
     }
 
     private void OnEnable()
@@ -89,20 +84,8 @@ public class Explosion : MonoBehaviour
     #region Audio Management
     private void PlayExplosionSound()
     {
-        if (AudioManager.instance == null || audioSource == null) return;
-
-        int sfxIndex = (int)AudioManager.SFX.RGB_explosion;
-        if (AudioManager.instance.sfxClips == null || sfxIndex < 0 || sfxIndex >= AudioManager.instance.sfxClips.Length)
-        {
-            return;
-        }
-
-        var sfxData = AudioManager.instance.sfxClips[sfxIndex];
-        audioSource.clip = sfxData.clip;
-        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : AudioManager.instance.sfxVolume;
-        audioSource.volume = globalVol * sfxData.volumeScale;
-        audioSource.pitch = UnityEngine.Random.Range(0.85f, 1.15f);
-        audioSource.Play();
+        if (AudioManager.instance == null) return;
+        AudioManager.instance.PlaySFXPitched(AudioManager.SFX.RGB_explosion, 0.85f, 1.15f);
     }
     #endregion
 }
