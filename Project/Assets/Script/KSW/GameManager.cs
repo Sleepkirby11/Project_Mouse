@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -63,9 +63,21 @@ public class GameManager : MonoBehaviour
     {
         isSetting = !isSetting;
         if(!isSetting)
+        {
             Time.timeScale = 1f;
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.ResumeSFX();
+            }
+        }
         else if(isSetting)
+        {
             Time.timeScale = 0f;
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PauseSFX();
+            }
+        }
         if(Player.instance != null)
             Player.instance.CloseSetting();
     }

@@ -678,30 +678,94 @@ public class BossController : MonoBehaviour, IHitReaction
         Vector2[] targetPositions = new Vector2[dashCount];
         GameObject[] spawnedLines = new GameObject[dashCount];
 
-        // 랜덤 각도로 맵을 가로지르는 * 자 모양 경고선 생성
+        // 1. 임시 배열에 궤적 좌표들 생성
+        Vector2[] tempStart = new Vector2[dashCount];
+        Vector2[] tempTarget = new Vector2[dashCount];
+
+        Vector2 topLeft = new Vector2(minX, maxY);
+        Vector2 topRight = new Vector2(maxX, maxY);
+        Vector2 bottomLeft = new Vector2(minX, minY);
+        Vector2 bottomRight = new Vector2(maxX, minY);
+
         float baseAngleInterval = 180f / dashCount;
-        float randomAngleOffset = Random.Range(0f, 30f); // 매 패턴마다 회전 각도 다르게
+        float randomAngleOffset = Random.Range(0f, 30f);
         bool startFromLeft = Random.value > 0.5f;
 
         for (int i = 0; i < dashCount; i++)
         {
-            float finalAngle = (baseAngleInterval * i) + randomAngleOffset + Random.Range(-5f, 5f);
-            Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
-
-            startPositions[i] = mapCenter - dir * 25f;
-            targetPositions[i] = mapCenter + dir * 25f;
-
-            startPositions[i] = ClampToEdges(startPositions[i], minX, maxX, minY, maxY);
-            targetPositions[i] = ClampToEdges(targetPositions[i], minX, maxX, minY, maxY);
-
-            // 홀짝으로 교차 뒤집기
-            bool flip = startFromLeft ? (i % 2 == 0) : (i % 2 != 0);
-            if (flip)
+            if (i == 0) // 대각선 크로스 1: 좌하 ↔ 우상
             {
-                Vector2 temp = startPositions[i];
-                startPositions[i] = targetPositions[i];
-                targetPositions[i] = temp;
+                if (Random.value > 0.5f)
+                {
+                    tempStart[i] = bottomLeft;
+                    tempTarget[i] = topRight;
+                }
+                else
+                {
+                    tempStart[i] = topRight;
+                    tempTarget[i] = bottomLeft;
+                }
             }
+            else if (i == 1) // 대각선 크로스 2: 우하 ↔ 좌상
+            {
+                if (Random.value > 0.5f)
+                {
+                    tempStart[i] = bottomRight;
+                    tempTarget[i] = topLeft;
+                }
+                else
+                {
+                    tempStart[i] = topLeft;
+                    tempTarget[i] = bottomRight;
+                }
+            }
+            else // 기존 랜덤 횡단
+            {
+                float finalAngle = (baseAngleInterval * i) + randomAngleOffset + Random.Range(-5f, 5f);
+                Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
+
+                Vector2 s = mapCenter - dir * 25f;
+                Vector2 t = mapCenter + dir * 25f;
+
+                s = ClampToEdges(s, minX, maxX, minY, maxY);
+                t = ClampToEdges(t, minX, maxX, minY, maxY);
+
+                // 홀짝으로 교차 뒤집기
+                bool flip = startFromLeft ? (i % 2 == 0) : (i % 2 != 0);
+                if (flip)
+                {
+                    Vector2 tempVal = s;
+                    s = t;
+                    t = tempVal;
+                }
+
+                tempStart[i] = s;
+                tempTarget[i] = t;
+            }
+        }
+
+        // 2. 셔플 인덱스 생성 및 셔플 수행
+        List<int> dashOrder = new List<int>();
+        for (int i = 0; i < dashCount; i++) dashOrder.Add(i);
+
+        for (int k = dashOrder.Count - 1; k > 0; k--)
+        {
+            int r = Random.Range(0, k + 1);
+            int tmp = dashOrder[k];
+            dashOrder[k] = dashOrder[r];
+            dashOrder[r] = tmp;
+        }
+
+        // 3. 셔플된 순서대로 실제 startPositions와 targetPositions를 채움
+        for (int i = 0; i < dashCount; i++)
+        {
+            int sourceIdx = dashOrder[i];
+            startPositions[i] = tempStart[sourceIdx];
+            targetPositions[i] = tempTarget[sourceIdx];
+        }
+
+        for (int i = 0; i < dashCount; i++)
+        {
 
             // 경고선 배치
             Vector2 pathDir = (targetPositions[i] - startPositions[i]).normalized;
@@ -781,6 +845,9 @@ public class BossController : MonoBehaviour, IHitReaction
 
             yield return new WaitForSeconds(0.1f);
         }
+
+        // 발악 패턴 종료 후 안전하게 맵 중앙으로 순간이동하여 충돌 끼임 방지
+        rb.position = mapCenter;
 
         yield return FadeIn(0.15f);
         transform.rotation = Quaternion.identity;

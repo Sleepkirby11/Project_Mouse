@@ -337,7 +337,7 @@ MonoBehaviour:
   minY: 80
   maxY: 90
   shieldObject: {fileID: 1400492813834309669}
-  healPerReturnedSpirit: 1
+  healPerReturnedSpirit: 10
   castingDuration: 1
   spiritSpawnPoints:
   - {fileID: 9003603150043872871}
@@ -401,6 +401,7 @@ MonoBehaviour:
   resistMultiplier: 0.5
   isBoss: 1
   bossName: Green Boss
+  bossNameColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6280919845566060893
 GameObject:
   m_ObjectHideFlags: 0

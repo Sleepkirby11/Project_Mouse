@@ -88,7 +88,7 @@ MonoBehaviour:
     volumeScale: 1
   - name: Player_Dash
     clip: {fileID: 8300000, guid: af843710d4be6a742bd3b09ce29764f7, type: 3}
-    volumeScale: 1
+    volumeScale: 0.3
   - name: Player_Walk
     clip: {fileID: 8300000, guid: 4cb1ea08de557254981d237062fd83da, type: 3}
     volumeScale: 1

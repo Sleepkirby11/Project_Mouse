@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 
@@ -9,12 +9,12 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private UnityEvent onPlateReleased; // 발판에서 발 뗐을 때
     [SerializeField] private  float pressedDelay = 0.2f; // 발판이 눌리는 딜레이
 
-    private BoxCollider2D myCollider;
+    private Collider2D myCollider;
     private bool isPressed = false;
 
     private void Start()
     {
-        myCollider = GetComponent<BoxCollider2D>();
+        myCollider = GetComponent<Collider2D>();
 
         // 시작할 때는 트리거를 꺼서 밟고 올라설 수 있게 합니다.
         if (myCollider != null)

@@ -199,15 +199,7 @@ public class JumpEnemyMove : MonoBehaviour
         {
             return;
         }
-        anim.ResetTrigger("Hurt");
-        if (attackScript != null && attackScript.IsGrounded())
-        {
-            anim.SetTrigger("Hurt");
-        }
-        else
-        {
-            anim.SetTrigger("Hurt_Jump");
-        }
+        anim.SetTrigger("Hurt_Jump");
     }
 
     private void OnDrawGizmosSelected()
