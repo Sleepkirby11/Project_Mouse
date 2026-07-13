@@ -58,7 +58,8 @@ public class AudioManager : MonoBehaviour
         RGB_PoisonArea,
         RGB_Bullet,
         PlayerJump,
-        RGB_BlackHole
+        RGB_BlackHole,
+        RedBoss_LastStand
     }
 
     private void Awake()
@@ -150,8 +151,33 @@ public class AudioManager : MonoBehaviour
 
             channelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[sfx].clip;
+            sfxPlayers[loopIndex].pitch = 1f; // 피치 리셋
             float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
             sfxPlayers[loopIndex].volume = globalVol * sfxClips[sfx].volumeScale;
+            sfxPlayers[loopIndex].Play();
+            break;
+        }
+    }
+
+    public void PlaySFXPitched(SFX sfx, float minPitch, float maxPitch)
+    {
+        int sfxIndex = (int)sfx;
+        if (sfxClips == null || sfxIndex < 0 || sfxIndex >= sfxClips.Length)
+        {
+            return;
+        }
+
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            int loopIndex = (i + channelIndex) % sfxPlayers.Length;
+            if (sfxPlayers[loopIndex].isPlaying)
+                continue;
+
+            channelIndex = loopIndex;
+            sfxPlayers[loopIndex].clip = sfxClips[sfxIndex].clip;
+            sfxPlayers[loopIndex].pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+            float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
+            sfxPlayers[loopIndex].volume = globalVol * sfxClips[sfxIndex].volumeScale;
             sfxPlayers[loopIndex].Play();
             break;
         }
@@ -175,6 +201,22 @@ public class AudioManager : MonoBehaviour
         else
         {
             bgmPlayer.Stop();
+        }
+    }
+
+    public void PauseBGM()
+    {
+        if (bgmPlayer != null && bgmPlayer.isPlaying)
+        {
+            bgmPlayer.Pause();
+        }
+    }
+
+    public void ResumeBGM()
+    {
+        if (bgmPlayer != null)
+        {
+            bgmPlayer.UnPause();
         }
     }
 

@@ -140,8 +140,8 @@ MonoBehaviour:
   - name: BlackHole
     clip: {fileID: 8300000, guid: eafb068d1e848c74db0bc554f9be1072, type: 3}
     volumeScale: 1
-  - name: BlackHoleExplosion
-    clip: {fileID: 8300000, guid: c92b8bff7cfa81c4382f85f88845b718, type: 3}
+  - name: RedBossLast
+    clip: {fileID: 8300000, guid: f2fb1bb865211cd4687127ff98177c4d, type: 3}
     volumeScale: 1
   sfxVolume: 100
   channels: 20

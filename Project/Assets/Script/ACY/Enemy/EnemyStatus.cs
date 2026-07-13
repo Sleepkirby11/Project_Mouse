@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using Mono.Cecil.Cil;
 using Unity.VisualScripting;
@@ -512,32 +512,55 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         ClearBossProjectiles();
     }
 
+    private void SafeDeactivate<T>() where T : MonoBehaviour
+    {
+        try
+        {
+            foreach (var p in FindObjectsByType<T>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                if (p != null && p.gameObject != null)
+                {
+                    p.gameObject.SetActive(false);
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[EnemyStatus] Error clearing {typeof(T).Name}: {ex.Message}");
+        }
+    }
+
     private void ClearBossProjectiles()
     {
         // Red Boss 패턴 제거
-        foreach (var p in FindObjectsByType<FireArrow>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<MagicOrb>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<Meteor>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<LaserCross>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<RedBossClone>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        SafeDeactivate<FireArrow>();
+        SafeDeactivate<MagicOrb>();
+        SafeDeactivate<Meteor>();
+        SafeDeactivate<LaserCross>();
+        SafeDeactivate<RedBossClone>();
 
         // Green Boss 패턴 제거
-        foreach (var p in FindObjectsByType<Bird>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<Wind>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<Frog>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<FlowerTrap>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        SafeDeactivate<Bird>();
+        SafeDeactivate<Wind>();
+        SafeDeactivate<Frog>();
+        SafeDeactivate<FlowerTrap>();
 
         // Blue Boss 패턴 제거
-        foreach (var p in FindObjectsByType<BlueLaser>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<WaterSpout>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<BlueBossWarningLine>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        SafeDeactivate<BlueLaser>();
+        SafeDeactivate<WaterSpout>();
+        SafeDeactivate<BlueBossWarningLine>();
 
         // RGB Boss 패턴 제거
-        foreach (var p in FindObjectsByType<RgbBullet>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<LightningBolt>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<FireGear>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<Hurricane>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
-        foreach (var p in FindObjectsByType<Burst>(FindObjectsSortMode.None)) p.gameObject.SetActive(false);
+        SafeDeactivate<RgbBullet>();
+        SafeDeactivate<LightningBolt>();
+        SafeDeactivate<FireGear>();
+        SafeDeactivate<Hurricane>();
+        SafeDeactivate<Burst>();
+        SafeDeactivate<Mushroom>();
+        SafeDeactivate<PoisonArea>();
+        SafeDeactivate<IceHammer>();
+        SafeDeactivate<BlackHole>();
+        SafeDeactivate<Explosion>();
     }
     private void CachePortal()
     {
