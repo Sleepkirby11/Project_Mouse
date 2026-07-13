@@ -8,8 +8,14 @@ public class BGMChanger : MonoBehaviour
     {
         if (AudioManager.instance != null && newBGM != null)
         {
-            if(AudioManager.instance.bgmClip != newBGM)
+            if (AudioManager.instance.bgmClip != newBGM)
+            {
                 AudioManager.instance.ChangeBGM(newBGM);
+            }
+            else
+            {
+                AudioManager.instance.PlayBGM(true);
+            }
         }
     }
 }

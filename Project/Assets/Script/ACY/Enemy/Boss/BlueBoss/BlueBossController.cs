@@ -678,9 +678,11 @@ public class BossController : MonoBehaviour, IHitReaction
         Vector2[] targetPositions = new Vector2[dashCount];
         GameObject[] spawnedLines = new GameObject[dashCount];
 
-        // 1. 임시 배열에 궤적 좌표들 생성
-        Vector2[] tempStart = new Vector2[dashCount];
-        Vector2[] tempTarget = new Vector2[dashCount];
+        // 1. 좌우 교차 방향 배열 생성
+        List<Vector2> l2rStart = new List<Vector2>();
+        List<Vector2> l2rTarget = new List<Vector2>();
+        List<Vector2> r2lStart = new List<Vector2>();
+        List<Vector2> r2lTarget = new List<Vector2>();
 
         Vector2 topLeft = new Vector2(minX, maxY);
         Vector2 topRight = new Vector2(maxX, maxY);
@@ -689,79 +691,115 @@ public class BossController : MonoBehaviour, IHitReaction
 
         float baseAngleInterval = 180f / dashCount;
         float randomAngleOffset = Random.Range(0f, 30f);
-        bool startFromLeft = Random.value > 0.5f;
 
-        for (int i = 0; i < dashCount; i++)
+        // 대각선 크로스 1
+        if (Random.value > 0.5f)
         {
-            if (i == 0) // 대각선 크로스 1: 좌하 ↔ 우상
-            {
-                if (Random.value > 0.5f)
-                {
-                    tempStart[i] = bottomLeft;
-                    tempTarget[i] = topRight;
-                }
-                else
-                {
-                    tempStart[i] = topRight;
-                    tempTarget[i] = bottomLeft;
-                }
-            }
-            else if (i == 1) // 대각선 크로스 2: 우하 ↔ 좌상
-            {
-                if (Random.value > 0.5f)
-                {
-                    tempStart[i] = bottomRight;
-                    tempTarget[i] = topLeft;
-                }
-                else
-                {
-                    tempStart[i] = topLeft;
-                    tempTarget[i] = bottomRight;
-                }
-            }
-            else // 기존 랜덤 횡단
-            {
-                float finalAngle = (baseAngleInterval * i) + randomAngleOffset + Random.Range(-5f, 5f);
-                Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
-
-                Vector2 s = mapCenter - dir * 25f;
-                Vector2 t = mapCenter + dir * 25f;
-
-                s = ClampToEdges(s, minX, maxX, minY, maxY);
-                t = ClampToEdges(t, minX, maxX, minY, maxY);
-
-                // 홀짝으로 교차 뒤집기
-                bool flip = startFromLeft ? (i % 2 == 0) : (i % 2 != 0);
-                if (flip)
-                {
-                    Vector2 tempVal = s;
-                    s = t;
-                    t = tempVal;
-                }
-
-                tempStart[i] = s;
-                tempTarget[i] = t;
-            }
+            l2rStart.Add(bottomLeft);
+            l2rTarget.Add(topRight);
+        }
+        else
+        {
+            r2lStart.Add(topRight);
+            r2lTarget.Add(bottomLeft);
         }
 
-        // 2. 셔플 인덱스 생성 및 셔플 수행
-        List<int> dashOrder = new List<int>();
-        for (int i = 0; i < dashCount; i++) dashOrder.Add(i);
+        // 대각선 크로스 2
+        if (Random.value > 0.5f)
+        {
+            l2rStart.Add(topLeft);
+            l2rTarget.Add(bottomRight);
+        }
+        else
+        {
+            r2lStart.Add(bottomRight);
+            r2lTarget.Add(topLeft);
+        }
 
-        for (int k = dashOrder.Count - 1; k > 0; k--)
+        // 남은 슬롯을 랜덤 횡단으로 채움 (각 리스트가 2개가 될 때까지)
+        int randomCrossIndex = 2;
+        while (l2rStart.Count < 2 || r2lStart.Count < 2)
+        {
+            float finalAngle = (baseAngleInterval * randomCrossIndex) + randomAngleOffset + Random.Range(-5f, 5f);
+            Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
+
+            Vector2 s = mapCenter - dir * 25f;
+            Vector2 t = mapCenter + dir * 25f;
+
+            s = ClampToEdges(s, minX, maxX, minY, maxY);
+            t = ClampToEdges(t, minX, maxX, minY, maxY);
+
+            if (s.x < t.x)
+            {
+                if (l2rStart.Count < 2)
+                {
+                    l2rStart.Add(s);
+                    l2rTarget.Add(t);
+                }
+                else
+                {
+                    r2lStart.Add(t);
+                    r2lTarget.Add(s);
+                }
+            }
+            else if (s.x > t.x)
+            {
+                if (r2lStart.Count < 2)
+                {
+                    r2lStart.Add(s);
+                    r2lTarget.Add(t);
+                }
+                else
+                {
+                    l2rStart.Add(t);
+                    l2rTarget.Add(s);
+                }
+            }
+            randomCrossIndex++;
+        }
+
+        // 2. 각각의 방향 리스트 독립 셔플
+        for (int k = l2rStart.Count - 1; k > 0; k--)
         {
             int r = Random.Range(0, k + 1);
-            int tmp = dashOrder[k];
-            dashOrder[k] = dashOrder[r];
-            dashOrder[r] = tmp;
+            var tmpS = l2rStart[k];
+            var tmpT = l2rTarget[k];
+            l2rStart[k] = l2rStart[r];
+            l2rTarget[k] = l2rTarget[r];
+            l2rStart[r] = tmpS;
+            l2rTarget[r] = tmpT;
+        }
+        for (int k = r2lStart.Count - 1; k > 0; k--)
+        {
+            int r = Random.Range(0, k + 1);
+            var tmpS = r2lStart[k];
+            var tmpT = r2lTarget[k];
+            r2lStart[k] = r2lStart[r];
+            r2lTarget[k] = r2lTarget[r];
+            r2lStart[r] = tmpS;
+            r2lTarget[r] = tmpT;
         }
 
-        // 3. 셔플된 순서대로 실제 startPositions와 targetPositions를 채움
+        // 3. 교차로 채우기 (좌우좌우 또는 우좌우좌)
+        bool nextIsL2R = Random.value > 0.5f;
+        int l2rIdx = 0;
+        int r2lIdx = 0;
+
         for (int i = 0; i < dashCount; i++)
         {
-            int sourceIdx = dashOrder[i];
-            startPositions[i] = tempStart[sourceIdx];
-            targetPositions[i] = tempTarget[sourceIdx];
+            if (nextIsL2R)
+            {
+                startPositions[i] = l2rStart[l2rIdx];
+                targetPositions[i] = l2rTarget[l2rIdx];
+                l2rIdx++;
+            }
+            else
+            {
+                startPositions[i] = r2lStart[r2lIdx];
+                targetPositions[i] = r2lTarget[r2lIdx];
+                r2lIdx++;
+            }
+            nextIsL2R = !nextIsL2R;
         }
 
         for (int i = 0; i < dashCount; i++)

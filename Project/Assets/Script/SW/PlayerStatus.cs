@@ -507,6 +507,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             UI.Instance.UpdateSpedialInkBar();
             UI.Instance.UpdateCoolTimeBar();
         }
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayBGM(true);
+        }
     }
 
     public void ResetStatus()
