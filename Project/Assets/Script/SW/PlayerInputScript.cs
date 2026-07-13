@@ -104,6 +104,12 @@ public class PlayerInputScript : MonoBehaviour
 
                 player.JumpAnimUpdate(true);
                 player.jumpCount--;
+
+                // 점프 효과음 재생
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySFX(AudioManager.SFX.PlayerJump);
+                }
             }
         }
         if (context.canceled)

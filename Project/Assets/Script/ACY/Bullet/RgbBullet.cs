@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class RgbBullet : MonoBehaviour, IDamageable
@@ -26,6 +26,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
     private SpriteRenderer[] srs;
     private Collider2D bulletCollider;
     private bool destroyed = false;
+    private AudioSource audioSource;
 
     public System.Action onHitPlayer;
     private void Awake()
@@ -33,6 +34,10 @@ public class RgbBullet : MonoBehaviour, IDamageable
         playerStatus = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
         srs = GetComponentsInChildren<SpriteRenderer>();
         bulletCollider = GetComponent<Collider2D>();
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
 
         // 상성 공식 설정
         switch (myElement)
@@ -80,12 +85,16 @@ public class RgbBullet : MonoBehaviour, IDamageable
             float moveTime = 1.0f;
             float elapsed = 0f;
 
+            PlayBulletSound();
+
             while (elapsed < moveTime && !destroyed)
             {
                 transform.Translate(fixedDirection * moveSpeed * Time.deltaTime);
                 elapsed += Time.deltaTime;
                 yield return null;
             }
+
+            StopBulletSound();
 
             // --- 잠깐 경직 단계 ---
             if (i < maxAttackCount - 1 && !destroyed)
@@ -146,15 +155,22 @@ public class RgbBullet : MonoBehaviour, IDamageable
             }
 
             destroyed = true;
+            StopBulletSound();
             StopAllCoroutines();
             PoolingManager.Instance.Return(myPoolName, gameObject);
         }
+    }
+
+    private void OnDisable()
+    {
+        StopBulletSound();
     }
 
     private void StartFadeOut()
     {
         destroyed = true;
         if (bulletCollider != null) bulletCollider.enabled = false; // 추가 충돌 차단
+        StopBulletSound();
 
         StopAllCoroutines(); // 이동 관련 루틴 모두 정지
         StartCoroutine(FadeAndReturnRoutine()); // 제자리에 멈춰서 페이드아웃 시작
@@ -197,4 +213,32 @@ public class RgbBullet : MonoBehaviour, IDamageable
             sr.color = new Color(c.r, c.g, c.b, 1f);
         }
     }
+
+    #region Audio Management
+    private void PlayBulletSound()
+    {
+        if (AudioManager.instance == null || audioSource == null) return;
+
+        int sfxIndex = (int)AudioManager.SFX.RGB_Bullet;
+        if (AudioManager.instance.sfxClips == null || sfxIndex < 0 || sfxIndex >= AudioManager.instance.sfxClips.Length)
+        {
+            Debug.LogWarning($"[RgbBullet] RGB_Bullet SFX index {sfxIndex} is out of bounds. Please assign it in the AudioManager Inspector.");
+            return;
+        }
+
+        var sfxData = AudioManager.instance.sfxClips[sfxIndex];
+        audioSource.clip = sfxData.clip;
+        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : AudioManager.instance.sfxVolume;
+        audioSource.volume = globalVol * sfxData.volumeScale;
+        audioSource.Play();
+    }
+
+    private void StopBulletSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+    }
+    #endregion
 }

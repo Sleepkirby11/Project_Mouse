@@ -48,7 +48,7 @@ MonoBehaviour:
   bgmVolume: 100
   sfxClips:
   - name: Archer_Arrow
-    clip: {fileID: 8300000, guid: 38c8daa65b4e10e40b3d9c661d6fca29, type: 3}
+    clip: {fileID: 8300000, guid: 5a11bf93e7adfaf4aab85a9399acf44a, type: 3}
     volumeScale: 1
   - name: Basic_Attack
     clip: {fileID: 8300000, guid: 6bcde58ed053de24ba409cc0431d861c, type: 3}
@@ -126,10 +126,16 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 0d9533057808daa47bb2493783f4a208, type: 3}
     volumeScale: 1
   - name: MushRoom
-    clip: {fileID: 8300000, guid: ada02a901963715459554e77fff2a0c6, type: 3}
+    clip: {fileID: 8300000, guid: 398562e17d89bef4b8dad6c568e713b8, type: 3}
     volumeScale: 1
   - name: PoisionArea
-    clip: {fileID: 8300000, guid: 46d8408363abd8948b2afe927f6c6847, type: 3}
+    clip: {fileID: 8300000, guid: 9f2a416eed768954c9f67a700f0cac2e, type: 3}
+    volumeScale: 1
+  - name: RgbBullet
+    clip: {fileID: 8300000, guid: 63a33eb5a18479b4fade1554611b8812, type: 3}
+    volumeScale: 1
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: b70fcc66701dc5547a1db70699e31297, type: 3}
     volumeScale: 1
   sfxVolume: 100
   channels: 20
