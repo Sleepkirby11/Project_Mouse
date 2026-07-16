@@ -66,6 +66,8 @@ public class BasicEnemyMove : MonoBehaviour
     private void Start()
     {
         startPosition = myTransform.position;
+        // 최초 상태 설정 (애니메이터 파라미터 연동)
+        SetState(currentState);
         // 최초 배회 목표 지점 설정
         UpdatePatrolTarget();
         StartCoroutine(EnvironmentScanRoutine()); // 감지 코루틴 시작
