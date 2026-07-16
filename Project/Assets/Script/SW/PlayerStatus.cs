@@ -487,12 +487,19 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     // 다음 씬으로 넘어갈때 모든 상태이상 해제 
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
-        // 씬 로드 시 플레이어가 이전 위치(사망 위치 등)에서 낙하하거나 충돌하는 것을 방지하기 위해 물리 정지 및 임시 무적 적용
+        // 씬 로드 시 플레이어가 이전 위치(사망 위치 등)에서 낙하하거나 충돌하는 것을 방지하기 위해 물리 정지
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
         }
-        StartCoroutine(TempInvincibilityOnLoad());
+
+        // 사망 후 부활 시 체력 완전히 복구
+        if (hp <= 0)
+        {
+            hp = maxHp;
+        }
+
+        isInvincible = false;
 
         if (scene.name == "Tutorial")
         {
@@ -529,13 +536,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             AudioManager.instance.PlayBGM(true);
         }
-    }
-
-    private IEnumerator TempInvincibilityOnLoad()
-    {
-        SetInvincible(true);
-        yield return new WaitForSeconds(0.2f);
-        SetInvincible(false);
     }
 
     public void ResetStatus()
@@ -603,6 +603,13 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             UI.Instance.UpdateInkBar();
             UI.Instance.UpdateSpedialInkBar();
             UI.Instance.UpdateCoolTimeBar();
+        }
+
+        // 빙의 게이지 UI 비활성화
+        Transform possessionCanvas = transform.Find("PossessionGaugeCanvas");
+        if (possessionCanvas != null)
+        {
+            possessionCanvas.gameObject.SetActive(false);
         }
     }
 }
