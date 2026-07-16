@@ -113,6 +113,28 @@ public class BasicEnemyMove : MonoBehaviour
                 ChaseMovement();
                 break;
         }
+
+        // 실제 이동 속도에 따라 애니메이션 상태를 업데이트 (공중 플랫폼 아래 멈췄을 때 Idle 전환용)
+        UpdateAnimator();
+    }
+
+    private void UpdateAnimator()
+    {
+        if (animator == null) return;
+
+        // X축 속도가 어느 정도 있을 때만 걷기/달리기 애니메이션 재생
+        bool isMovingReal = rb != null && Mathf.Abs(rb.linearVelocity.x) > 0.1f;
+
+        if (currentState == EnemyState.Patrol)
+        {
+            animator.SetBool(IsMoving, isMovingReal);
+            animator.SetBool(IsChasing, false);
+        }
+        else if (currentState == EnemyState.Chase)
+        {
+            animator.SetBool(IsMoving, false);
+            animator.SetBool(IsChasing, isMovingReal);
+        }
     }
 
     #endregion
@@ -122,13 +144,7 @@ public class BasicEnemyMove : MonoBehaviour
     private void SetState(EnemyState newState)
     {
         currentState = newState;
-
-        bool isChasingState = newState == EnemyState.Chase;
-        if (animator != null)
-        {
-            animator.SetBool(IsMoving, !isChasingState);   // Patrol일 때만 IsMoving
-            animator.SetBool(IsChasing, isChasingState);    // Chase일 때만 IsChasing
-        }
+        UpdateAnimator();
     }
 
     private IEnumerator EnvironmentScanRoutine()

@@ -521,7 +521,11 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             return;
         }
         anim.SetBool("IsParrying", state == State.Parrying);
-        anim.SetBool("IsMoving", state == State.Tracking || state == State.Patrol);
+        
+        // 실제 이동 중일 때만 IsMoving을 true로 설정
+        bool isMoving = rb != null && Mathf.Abs(rb.linearVelocity.x) > 0.1f;
+        anim.SetBool("IsMoving", isMoving);
+
         if (rb != null)
         {
             anim.SetBool("IsFalling", rb.linearVelocity.y < -0.1f);
