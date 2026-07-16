@@ -105,6 +105,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     private SpriteRenderer sr;
     private Color originalColor;
     private Animator anim;
+    private RedBossMove bossMove;
 
     // 코루틴 추적 변수
     private Coroutine attackRoutine;
@@ -121,6 +122,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
+        bossMove = GetComponent<RedBossMove>();
 
         EnemyStatus status = GetComponent<EnemyStatus>();
         if (status != null)
@@ -154,6 +156,10 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     private void HandleDeath()
     {
         StopAllBossCoroutines();
+        if (bossMove != null)
+        {
+            bossMove.StopTeleport();
+        }
     }
 
     private void OnDestroy()
@@ -543,6 +549,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         RemoveClone();
 
         StopAllBossCoroutines();
+        
+        if (bossMove != null)
+        {
+            bossMove.StopTeleport();
+        }
+        
         stunRoutine = StartCoroutine(StunRoutine(duration));
     }
 
@@ -566,6 +578,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         }
 
         isStunned = false;
+
+        if (bossMove != null)
+        {
+            bossMove.StartTeleport();
+        }
 
         attackRoutine = StartCoroutine(AttackRoutine());
     }
@@ -819,6 +836,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         isEnraged = true;    // 분노 상태 
         isInvincible = true; // 무적
 
+        if (bossMove != null)
+        {
+            bossMove.StopTeleport();
+        }
+
         if (sr != null)
         {
             sr.color = originalColor; // 스턴 도중 전환 시 색상 복구
@@ -850,6 +872,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         isInvincible = false;
         isEnrageTransitioning = false;
 
+        if (bossMove != null)
+        {
+            bossMove.StartTeleport();
+        }
+
         attackRoutine = StartCoroutine(AttackRoutine()); // 공격 루틴 처음부터 다시 시작
     }
 
@@ -869,6 +896,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         isLastStandTransitioning = true;
         isLastStand = true;
         isInvincible = true;
+
+        if (bossMove != null)
+        {
+            bossMove.StopTeleport();
+        }
 
         if (sr != null)
         {
@@ -903,6 +935,11 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
         isLastStand = false; 
         isInvincible = false; 
+
+        if (bossMove != null)
+        {
+            bossMove.StartTeleport();
+        }
 
         attackRoutine = StartCoroutine(AttackRoutine());
     }

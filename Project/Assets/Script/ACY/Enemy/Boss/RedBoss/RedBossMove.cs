@@ -24,6 +24,9 @@ public class RedBossMove : MonoBehaviour
     private int currentPointIndex = -1;
     private RedBossAttack bossAttack;
 
+    private Coroutine teleportRoutine;
+    private Coroutine teleportSequenceRoutine;
+
     #endregion
 
     #region Unity Lifecycle
@@ -39,7 +42,7 @@ public class RedBossMove : MonoBehaviour
                 playerTransform = player.transform;
             }
         }
-        StartCoroutine(TeleportRoutine());
+        StartTeleport();
     }
 
     private void Update()
@@ -69,8 +72,10 @@ public class RedBossMove : MonoBehaviour
             {
                 yield break;
             }
-            // inline yield return for direct nested coroutine execution
-            yield return TeleportSequence();
+            
+            teleportSequenceRoutine = StartCoroutine(TeleportSequence());
+            yield return teleportSequenceRoutine;
+            teleportSequenceRoutine = null;
         }
     }
 
@@ -114,9 +119,33 @@ public class RedBossMove : MonoBehaviour
         SpawnVFX(appearVFX, transform.position);
     }
 
+    public void StartTeleport()
+    {
+        StopTeleport(); // 혹시 이미 돌고 있다면 안전하게 중지
+        teleportRoutine = StartCoroutine(TeleportRoutine());
+    }
+
+    public void StopTeleport()
+    {
+        if (teleportRoutine != null)
+        {
+            StopCoroutine(teleportRoutine);
+            teleportRoutine = null;
+        }
+        if (teleportSequenceRoutine != null)
+        {
+            StopCoroutine(teleportSequenceRoutine);
+            teleportSequenceRoutine = null;
+        }
+    }
+
     public void Teleport()
     {
-        StartCoroutine(TeleportSequence());
+        if (teleportSequenceRoutine != null)
+        {
+            StopCoroutine(teleportSequenceRoutine);
+        }
+        teleportSequenceRoutine = StartCoroutine(TeleportSequence());
     }
 
     #endregion
