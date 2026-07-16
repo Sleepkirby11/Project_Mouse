@@ -44,6 +44,17 @@ public class BasicEnemyAttack : MonoBehaviour
         CheckAttackRange();
     }
 
+    private void OnDisable()
+    {
+        if (isAttacking && attackRoutineInstance != null)
+        {
+            StopCoroutine(attackRoutineInstance);
+            attackRoutineInstance = null;
+            isAttacking = false;
+            canAttack = true;
+        }
+    }
+
     private void CheckAttackRange()
     {
         if (!canAttack)
