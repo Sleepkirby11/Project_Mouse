@@ -127,6 +127,9 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     private bool isInvincible = false;
     private List<BlackHole> activeBlackHoles = new List<BlackHole>();
 
+    private Coroutine attackCoroutine;
+    private Coroutine lightningCoroutine;
+
     private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
     private static readonly int CastingTrigger = Animator.StringToHash("Casting");
     private static readonly int LightningTrigger = Animator.StringToHash("LightningAttack");
@@ -154,7 +157,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         }
 
         StartCoroutine(RecordPlayerPosition());
-        StartCoroutine(AttackRoutine());
+        attackCoroutine = StartCoroutine(AttackRoutine());
     }
 
     private void HandleDeath()
@@ -485,7 +488,11 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
     public void SpawnLightning()
     {
-        StartCoroutine(SpawnLightningBurst());
+        if (lightningCoroutine != null)
+        {
+            StopCoroutine(lightningCoroutine);
+        }
+        lightningCoroutine = StartCoroutine(SpawnLightningBurst());
     }
 
     private string GetLightningPoolKey()
@@ -548,6 +555,17 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         isFinalPhaseActive = true;
         isInvincible = true;
 
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+        if (lightningCoroutine != null)
+        {
+            StopCoroutine(lightningCoroutine);
+            lightningCoroutine = null;
+        }
+
         if (colorCycle != null) colorCycle.EnterFinalPhase();
 
         if (AudioManager.instance != null)
@@ -579,6 +597,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         yield return new WaitForSeconds(finalPhaseRestDuration);
 
         isFinalPhaseActive = false;
+        attackCoroutine = StartCoroutine(AttackRoutine());
     }
 
     private void SpawnBlackHoles()

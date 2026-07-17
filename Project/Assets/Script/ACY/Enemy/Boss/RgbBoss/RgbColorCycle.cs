@@ -91,6 +91,7 @@ public class RgbColorCycle : MonoBehaviour
         if (animator == null || targetController == null) return;
 
         animator.runtimeAnimatorController = targetController;
+        animator.Update(0f);
         animator.Play(stateName, 0, 0f);
     }
     #endregion
