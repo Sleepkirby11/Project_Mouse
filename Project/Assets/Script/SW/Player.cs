@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -258,7 +258,7 @@ public class Player : MonoBehaviour
         {
             //스킬 | 커서 | 일반 공격 종류 걸러내기
             if (isSkill)
-                status.specialInk -= cursor.lastLength;
+                status.specialInk -= cursor.lastLength * 0.25f;
             else if (groundCursor.isMove)
                 status.specialInk -= cursor.lastLength;
             else

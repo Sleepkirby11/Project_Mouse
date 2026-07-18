@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolingManager : MonoBehaviour
@@ -43,6 +43,9 @@ public class PoolingManager : MonoBehaviour
     // 중복 Return 방지용
     private HashSet<GameObject> pooledObjects;
 
+    // 대여된(활성화된) 오브젝트 추적용 (GameObject, pool key)
+    private Dictionary<GameObject, string> activeObjects;
+
     #endregion
 
     #region Unity Lifecycle
@@ -62,6 +65,24 @@ public class PoolingManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        if (activeObjects != null)
+        {
+            activeObjects.Clear();
+        }
+    }
+
     #endregion
 
     #region Initialization & Pool Creation
@@ -71,6 +92,7 @@ public class PoolingManager : MonoBehaviour
         poolDict = new Dictionary<string, Queue<GameObject>>();
         prefabDict = new Dictionary<string, GameObject>();
         pooledObjects = new HashSet<GameObject>();
+        activeObjects = new Dictionary<GameObject, string>();
 
         if (pools == null) 
         {
@@ -172,6 +194,12 @@ public class PoolingManager : MonoBehaviour
 
             // 오브젝트 활성화
             obj.SetActive(true);
+
+            // 대여 상태 추적 추가
+            if (activeObjects != null)
+            {
+                activeObjects[obj] = key;
+            }
         }
 
         return obj;
@@ -206,6 +234,64 @@ public class PoolingManager : MonoBehaviour
 
         poolDict[key].Enqueue(obj);
         pooledObjects.Add(obj);
+
+        // 대여 상태 추적 해제
+        if (activeObjects != null)
+        {
+            activeObjects.Remove(obj);
+        }
+    }
+
+    private void CleanupNullActiveObjects()
+    {
+        if (activeObjects == null) return;
+
+        List<GameObject> nullKeys = null;
+        foreach (var kvp in activeObjects)
+        {
+            if (kvp.Key == null)
+            {
+                if (nullKeys == null) nullKeys = new List<GameObject>();
+                nullKeys.Add(kvp.Key);
+            }
+        }
+
+        if (nullKeys != null)
+        {
+            foreach (var key in nullKeys)
+            {
+                activeObjects.Remove(key);
+            }
+        }
+    }
+
+    public void ReturnActiveObjectsOfType<T>() where T : Component
+    {
+        if (activeObjects == null) return;
+
+        // 먼저 파괴된 오브젝트 정리
+        CleanupNullActiveObjects();
+
+        List<GameObject> toReturn = new List<GameObject>();
+        foreach (var kvp in activeObjects)
+        {
+            GameObject obj = kvp.Key;
+            if (obj != null && obj.activeSelf && obj.GetComponent<T>() != null)
+            {
+                toReturn.Add(obj);
+            }
+        }
+
+        foreach (var obj in toReturn)
+        {
+            if (obj != null)
+            {
+                if (activeObjects.TryGetValue(obj, out string key))
+                {
+                    Return(key, obj);
+                }
+            }
+        }
     }
 
     #endregion
