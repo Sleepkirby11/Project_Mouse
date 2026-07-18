@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameStarting : MonoBehaviour
 {
     public GameObject settingPanel;
     public GameObject licensePanel;
-    public GameObject mainMenuPanel; 
+    public GameObject mainMenuPanel;
+    public GameObject GuidePanel;
 
     public void PlayGame()
     {
@@ -13,6 +14,7 @@ public class GameStarting : MonoBehaviour
         if (licensePanel != null) licensePanel.SetActive(false);
 
         if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
+        if (GuidePanel != null) GuidePanel.SetActive(false);
 
         SceneManager.LoadScene("Tutorial");
     }
@@ -46,5 +48,15 @@ public class GameStarting : MonoBehaviour
     public void CloseLicense()
     {
         if (licensePanel != null) licensePanel.SetActive(false);
+    }
+
+    public void OpenGuide()
+    {
+        if (GuidePanel != null) GuidePanel.SetActive(true);
+    }
+
+    public void CloseGuide()
+    {
+        if (GuidePanel != null) GuidePanel.SetActive(false);
     }
 }

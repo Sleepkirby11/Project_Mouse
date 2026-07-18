@@ -402,7 +402,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
     private void Die()
     {
-        // 정령(BossSpirit) 등 예외 오브젝트는 자폭 처리되므로 여기서 일반 사망 로직 진행 안 함
+        // 정령 오브젝트는 자폭 처리되므로 여기서 일반 사망 로직 진행 안 함
         if (GetComponent<BossSpirit>() != null)
         {
             return;
@@ -416,7 +416,6 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
         if (isBoss)
         {
-            Debug.Log($"[EnemyStatus] 보스 '{gameObject.name}' 사망. 체력바를 비활성화합니다.");
 
             // 레드 보스 사망 효과음 재생
             if (GetComponent<RedBossAttack>() != null)
@@ -472,7 +471,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
                 rb.bodyType = RigidbodyType2D.Kinematic;
             }
 
-            // 본인을 제외한 모든 MonoBehaviour 스크립트 비활성화
+            // 본인을 제외한 모든 스크립트 비활성화
             MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
             foreach (MonoBehaviour script in scripts)
             {
@@ -520,16 +519,13 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         ClearBossProjectiles();
     }
 
-    private void SafeDeactivate<T>() where T : MonoBehaviour
+    private void SafeDeactivate<T>() where T : Component
     {
         try
         {
-            foreach (var p in FindObjectsByType<T>(FindObjectsSortMode.None))
+            if (PoolingManager.Instance != null)
             {
-                if (p != null && p.gameObject != null)
-                {
-                    p.gameObject.SetActive(false);
-                }
+                PoolingManager.Instance.ReturnActiveObjectsOfType<T>();
             }
         }
         catch (System.Exception ex)

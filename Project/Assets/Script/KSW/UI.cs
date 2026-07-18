@@ -304,6 +304,14 @@ public class UI : MonoBehaviour
         if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
 
+    public void ToggleSetting()
+    {
+        if (settingPanel == null) return;
+        bool nextState = !settingPanel.activeSelf;
+        settingPanel.SetActive(nextState);
+        if (GameManager.instance != null) GameManager.instance.PauseOnOff();
+    }
+
     // [추가] 라이선스창 열기
     public void OpenLicense()
     {

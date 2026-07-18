@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: 8153c99a7dd38e84d9b7301bd3a02616
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3297899063379603454
+    second: UI SIMPLE PIXEL UNSPLIT (1)_0
+  - first:
+      213: -5272733968055822978
+    second: UI SIMPLE PIXEL UNSPLIT (1)_1
+  - first:
+      213: 6674554890931074789
+    second: UI SIMPLE PIXEL UNSPLIT (1)_2
+  - first:
+      213: -1369214304824975897
+    second: UI SIMPLE PIXEL UNSPLIT (1)_3
+  - first:
+      213: 767489642687488670
+    second: UI SIMPLE PIXEL UNSPLIT (1)_4
+  - first:
+      213: -8332806801558786533
+    second: UI SIMPLE PIXEL UNSPLIT (1)_5
+  - first:
+      213: -1947372292324021878
+    second: UI SIMPLE PIXEL UNSPLIT (1)_6
+  - first:
+      213: -4064304862712840065
+    second: UI SIMPLE PIXEL UNSPLIT (1)_7
+  - first:
+      213: 6230324007189198692
+    second: UI SIMPLE PIXEL UNSPLIT (1)_8
+  - first:
+      213: 2192191730925437757
+    second: UI SIMPLE PIXEL UNSPLIT (1)_9
+  - first:
+      213: -797868493981049631
+    second: UI SIMPLE PIXEL UNSPLIT (1)_10
+  - first:
+      213: 154881424941999546
+    second: UI SIMPLE PIXEL UNSPLIT (1)_11
+  - first:
+      213: -6197199365467840789
+    second: UI SIMPLE PIXEL UNSPLIT (1)_12
+  - first:
+      213: -7876519999380860187
+    second: UI SIMPLE PIXEL UNSPLIT (1)_13
+  - first:
+      213: -3711349111894389432
+    second: UI SIMPLE PIXEL UNSPLIT (1)_14
+  - first:
+      213: 1105209787757642013
+    second: UI SIMPLE PIXEL UNSPLIT (1)_15
+  - first:
+      213: 2984197162041112634
+    second: UI SIMPLE PIXEL UNSPLIT (1)_16
+  - first:
+      213: -4800851742977638855
+    second: UI SIMPLE PIXEL UNSPLIT (1)_17
+  - first:
+      213: 6062439155464388033
+    second: UI SIMPLE PIXEL UNSPLIT (1)_18
+  - first:
+      213: -8776958028892850993
+    second: UI SIMPLE PIXEL UNSPLIT (1)_19
+  - first:
+      213: -5229985548746631811
+    second: UI SIMPLE PIXEL UNSPLIT (1)_20
+  - first:
+      213: -8465276843564124047
+    second: UI SIMPLE PIXEL UNSPLIT (1)_21
+  - first:
+      213: -1224238927348837971
+    second: UI SIMPLE PIXEL UNSPLIT (1)_22
+  - first:
+      213: 3514533467807487106
+    second: UI SIMPLE PIXEL UNSPLIT (1)_23
+  - first:
+      213: 812259342144825389
+    second: UI SIMPLE PIXEL UNSPLIT (1)_24
+  - first:
+      213: -4650222070495303638
+    second: UI SIMPLE PIXEL UNSPLIT (1)_25
+  - first:
+      213: -4501298348584477964
+    second: UI SIMPLE PIXEL UNSPLIT (1)_26
+  - first:
+      213: 9082296570250749737
+    second: UI SIMPLE PIXEL UNSPLIT (1)_27
+  - first:
+      213: 5308306948100120711
+    second: UI SIMPLE PIXEL UNSPLIT (1)_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 96
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_0
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 1283
+        width: 122
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: effa5d1a9bd74cd20800000000000000
+      internalID: 3297899063379603454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_1
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 1283
+        width: 122
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7595e6646c73d6b0800000000000000
+      internalID: -5272733968055822978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_2
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 1283
+        width: 122
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e6facb5f48c0ac50800000000000000
+      internalID: 6674554890931074789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_3
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 1267
+        width: 362
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ed168b18d29ffce0800000000000000
+      internalID: -1369214304824975897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_4
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 1267
+        width: 370
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e92ed2183cba6aa00800000000000000
+      internalID: 767489642687488670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_5
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 1119
+        width: 122
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1e2123fc5ceb5c80800000000000000
+      internalID: -8332806801558786533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_6
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 1119
+        width: 122
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a89a69eb73b89f4e0800000000000000
+      internalID: -1947372292324021878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_7
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 1119
+        width: 122
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f70cb1fc240b897c0800000000000000
+      internalID: -4064304862712840065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_8
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 1123
+        width: 362
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 467b914ccae867650800000000000000
+      internalID: 6230324007189198692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_9
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1115
+        width: 362
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d330c59b3ca3c6e10800000000000000
+      internalID: 2192191730925437757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_10
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 867
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ec98cef4d66de4f0800000000000000
+      internalID: -797868493981049631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_11
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 867
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab569fbd5df362200800000000000000
+      internalID: 154881424941999546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_12
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 867
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bee5303e2002ff9a0800000000000000
+      internalID: -6197199365467840789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_13
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 975
+        width: 362
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e2d4aacacaf0b290800000000000000
+      internalID: -7876519999380860187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_14
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 971
+        width: 358
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84dc21475a3ae7cc0800000000000000
+      internalID: -3711349111894389432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_15
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 703
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d114491427e765f00800000000000000
+      internalID: 1105209787757642013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_16
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 703
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a387037028ff96920800000000000000
+      internalID: 2984197162041112634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_17
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 703
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93eb08896c2ff5db0800000000000000
+      internalID: -4800851742977638855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_18
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 823
+        width: 362
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cdbfddaa4c122450800000000000000
+      internalID: 6062439155464388033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_19
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 831
+        width: 266
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc4345fcc2bf13680800000000000000
+      internalID: -8776958028892850993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_20
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 259
+        width: 370
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d75d7826adb5b67b0800000000000000
+      internalID: -5229985548746631811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_21
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 491
+        width: 150
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 178350ecf8b458a80800000000000000
+      internalID: -8465276843564124047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_22
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 51
+        width: 602
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da1da2f8e21a20fe0800000000000000
+      internalID: -1224238927348837971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_23
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 339
+        width: 150
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28413e3719126c030800000000000000
+      internalID: 3514533467807487106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_24
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 63
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d28e8027199b54b00800000000000000
+      internalID: 812259342144825389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_25
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 55
+        width: 146
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2822713aa7177fb0800000000000000
+      internalID: -4650222070495303638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_26
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 171
+        width: 382
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fad198300d2881c0800000000000000
+      internalID: -4501298348584477964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_27
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 107
+        width: 378
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9276b8e4c9cca0e70800000000000000
+      internalID: 9082296570250749737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI SIMPLE PIXEL UNSPLIT (1)_28
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 19
+        width: 42
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 780ee307b05eaa940800000000000000
+      internalID: 5308306948100120711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      UI SIMPLE PIXEL UNSPLIT (1)_0: 3297899063379603454
+      UI SIMPLE PIXEL UNSPLIT (1)_1: -5272733968055822978
+      UI SIMPLE PIXEL UNSPLIT (1)_10: -797868493981049631
+      UI SIMPLE PIXEL UNSPLIT (1)_11: 154881424941999546
+      UI SIMPLE PIXEL UNSPLIT (1)_12: -6197199365467840789
+      UI SIMPLE PIXEL UNSPLIT (1)_13: -7876519999380860187
+      UI SIMPLE PIXEL UNSPLIT (1)_14: -3711349111894389432
+      UI SIMPLE PIXEL UNSPLIT (1)_15: 1105209787757642013
+      UI SIMPLE PIXEL UNSPLIT (1)_16: 2984197162041112634
+      UI SIMPLE PIXEL UNSPLIT (1)_17: -4800851742977638855
+      UI SIMPLE PIXEL UNSPLIT (1)_18: 6062439155464388033
+      UI SIMPLE PIXEL UNSPLIT (1)_19: -8776958028892850993
+      UI SIMPLE PIXEL UNSPLIT (1)_2: 6674554890931074789
+      UI SIMPLE PIXEL UNSPLIT (1)_20: -5229985548746631811
+      UI SIMPLE PIXEL UNSPLIT (1)_21: -8465276843564124047
+      UI SIMPLE PIXEL UNSPLIT (1)_22: -1224238927348837971
+      UI SIMPLE PIXEL UNSPLIT (1)_23: 3514533467807487106
+      UI SIMPLE PIXEL UNSPLIT (1)_24: 812259342144825389
+      UI SIMPLE PIXEL UNSPLIT (1)_25: -4650222070495303638
+      UI SIMPLE PIXEL UNSPLIT (1)_26: -4501298348584477964
+      UI SIMPLE PIXEL UNSPLIT (1)_27: 9082296570250749737
+      UI SIMPLE PIXEL UNSPLIT (1)_28: 5308306948100120711
+      UI SIMPLE PIXEL UNSPLIT (1)_3: -1369214304824975897
+      UI SIMPLE PIXEL UNSPLIT (1)_4: 767489642687488670
+      UI SIMPLE PIXEL UNSPLIT (1)_5: -8332806801558786533
+      UI SIMPLE PIXEL UNSPLIT (1)_6: -1947372292324021878
+      UI SIMPLE PIXEL UNSPLIT (1)_7: -4064304862712840065
+      UI SIMPLE PIXEL UNSPLIT (1)_8: 6230324007189198692
+      UI SIMPLE PIXEL UNSPLIT (1)_9: 2192191730925437757
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
