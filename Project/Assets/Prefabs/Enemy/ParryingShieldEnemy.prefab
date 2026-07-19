@@ -160,6 +160,8 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 0
+  bossName: 
+  bossNameColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &9001307576677388265
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +238,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 250
+  m_SortingOrder: 256
   m_Sprite: {fileID: 4035959289877228764, guid: 30ad930b0d3d8de4ca644ad8ea35f675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

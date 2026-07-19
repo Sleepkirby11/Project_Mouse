@@ -166,6 +166,8 @@ MonoBehaviour:
   weaknessMultiplier: 1.5
   resistMultiplier: 0.5
   isBoss: 0
+  bossName: 
+  bossNameColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &7697180847478146246
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +180,7 @@ GameObject:
   - component: {fileID: 169541774767142881}
   - component: {fileID: 3538094871105754284}
   m_Layer: 7
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,7 +244,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 250
+  m_SortingOrder: 251
   m_Sprite: {fileID: -7950320164446702114, guid: ad9be702ca52e95498901036d439885e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -146,5 +146,8 @@ MonoBehaviour:
   - name: BlueBossDie
     clip: {fileID: 8300000, guid: 133cccf8878f9b54983416d6864cdb2b, type: 3}
     volumeScale: 1
+  - name: PressurePlate
+    clip: {fileID: 8300000, guid: 7ad2b65f407b90f479d21279b43ed907, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20
