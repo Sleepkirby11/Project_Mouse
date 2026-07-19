@@ -60,7 +60,8 @@ public class AudioManager : MonoBehaviour
         PlayerJump,
         RGB_BlackHole,
         RedBoss_LastStand,
-        BlueBossDie
+        BlueBossDie,
+        PressurePlatePress
     }
 
     private void Awake()

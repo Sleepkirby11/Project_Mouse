@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 
-/*
- 실제 투사체 방식 화살
- */
 public class Arrow : MonoBehaviour
 {
     [Header("설정")]
@@ -32,12 +29,9 @@ public class Arrow : MonoBehaviour
 
         Vector2 diff = target - start;
 
-        // 목표 위치까지 가는 초기 속도 계산
         velocity.x = diff.x / timeToTarget;
 
-        velocity.y =
-            (diff.y - (0.5f * gravity * timeToTarget * timeToTarget))
-            / timeToTarget;
+        velocity.y = (diff.y - (0.5f * gravity * timeToTarget * timeToTarget)) / timeToTarget;
 
         timer = 0f;
 

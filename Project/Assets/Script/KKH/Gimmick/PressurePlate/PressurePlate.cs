@@ -7,14 +7,26 @@ public class PressurePlate : MonoBehaviour
     [Header("연동할 장치 이벤트")]
     [SerializeField] private UnityEvent onPlatePressed;  // 발판 눌렸을 때
     [SerializeField] private UnityEvent onPlateReleased; // 발판에서 발 뗐을 때
-    [SerializeField] private  float pressedDelay = 0.2f; // 발판이 눌리는 딜레이
+    [SerializeField] private float pressedDelay = 0.2f; // 발판이 눌리는 딜레이
+
+    [Header("사운드 설정")]
+    [SerializeField] private bool useAudioManager = true;
+    [SerializeField] private AudioClip pressClip;
+    [SerializeField] private AudioClip releaseClip;
 
     private Collider2D myCollider;
     private bool isPressed = false;
+    private AudioSource localAudioSource;
 
     private void Start()
     {
         myCollider = GetComponent<Collider2D>();
+        localAudioSource = GetComponent<AudioSource>();
+        if (localAudioSource == null && (pressClip != null || releaseClip != null))
+        {
+            localAudioSource = gameObject.AddComponent<AudioSource>();
+            localAudioSource.playOnAwake = false;
+        }
 
         // 시작할 때는 트리거를 꺼서 밟고 올라설 수 있게 합니다.
         if (myCollider != null)
@@ -35,6 +47,7 @@ public class PressurePlate : MonoBehaviour
                 if (contact.normal.y < -0.7f)
                 {
                     isPressed = true;
+                    PlayPressSound();
                     StartCoroutine(PlateActivate());
                 }
             }
@@ -67,5 +80,17 @@ public class PressurePlate : MonoBehaviour
 
         Debug.Log("발판 해제!");
         onPlateReleased?.Invoke(); // 연결된 기믹 해제 (필요시 사용)
+    }
+
+    private void PlayPressSound()
+    {
+        if (useAudioManager && AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.PressurePlatePress);
+        }
+        else if (localAudioSource != null && pressClip != null)
+        {
+            localAudioSource.PlayOneShot(pressClip);
+        }
     }
 }

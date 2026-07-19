@@ -96,12 +96,7 @@ public class MagicOrb : MonoBehaviour
         float rad = orbitAngle * Mathf.Deg2Rad;
         float bob = Mathf.Sin(bobTimer) * bobAmount;
 
-        Vector3 offset = new Vector3
-        (
-            Mathf.Cos(rad) * orbitRadius,
-            Mathf.Sin(rad) * orbitRadius + bob,
-            0f
-        );
+        Vector3 offset = new Vector3(Mathf.Cos(rad) * orbitRadius, Mathf.Sin(rad) * orbitRadius + bob, 0f);
 
         transform.position = pivot.position + offset;
     }
