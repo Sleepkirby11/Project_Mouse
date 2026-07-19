@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -415,6 +415,15 @@ public class Player : MonoBehaviour
         inputVec = Vector2.zero;
         anim.SetBool("IsWalk", false);
         CancleCursor();
+        if (canvas != null)
+        {
+            GameStarting gameStarting = canvas.GetComponent<GameStarting>();
+            if (gameStarting != null)
+            {
+                if (gameStarting.licensePanel != null) gameStarting.licensePanel.SetActive(false);
+                if (gameStarting.GuidePanel != null) gameStarting.GuidePanel.SetActive(false);
+            }
+        }
     }
 
     //넉백 상태 종료 후 처리 함수

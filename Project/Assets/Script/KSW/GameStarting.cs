@@ -36,7 +36,30 @@ public class GameStarting : MonoBehaviour
     public void CloseSetting()
     {
         if (settingPanel != null) settingPanel.SetActive(false);
+        if (licensePanel != null) licensePanel.SetActive(false);
+        if (GuidePanel != null) GuidePanel.SetActive(false);
         if (GameManager.instance != null) GameManager.instance.PauseOnOff();
+    }
+
+    void Update()
+    {
+        if (Player.instance != null) return;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GuidePanel != null && GuidePanel.activeSelf)
+            {
+                CloseGuide();
+            }
+            else if (licensePanel != null && licensePanel.activeSelf)
+            {
+                CloseLicense();
+            }
+            else if (settingPanel != null && settingPanel.activeSelf)
+            {
+                CloseSetting();
+            }
+        }
     }
 
     // 라이선스창 열기/닫기

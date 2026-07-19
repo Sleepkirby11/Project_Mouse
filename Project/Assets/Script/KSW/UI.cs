@@ -301,6 +301,12 @@ public class UI : MonoBehaviour
     public void CloseSetting()
     {
         if (settingPanel != null) settingPanel.SetActive(false);
+        if (licensePanel != null) licensePanel.SetActive(false);
+        if (settingPanel != null && settingPanel.transform.parent != null)
+        {
+            Transform guideTransform = settingPanel.transform.parent.Find("GuidePanel");
+            if (guideTransform != null) guideTransform.gameObject.SetActive(false);
+        }
         if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
 
