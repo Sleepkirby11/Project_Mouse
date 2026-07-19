@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiritType: 0
-  moveSpeed: 4
+  moveSpeed: 6
   waveSpeed: 3
   waveAmount: 0.3
   arrivalDistance: 0.5
@@ -57,7 +57,7 @@ MonoBehaviour:
   mapRange: {x: 30, y: 10}
   spawnInvincibleTime: 2
   roamDuration: 8
-  returnSpeed: 6
+  returnSpeed: 12
   returnArrivalDistance: 0.3
   fadeTime: 1
 --- !u!50 &2603990775316465084
