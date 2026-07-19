@@ -232,6 +232,10 @@ public class MantisAttack : MonoBehaviour, IHitReaction
     // 칼날 발사 프레임 이벤트에서 호출
     public void OnRangedShoot()
     {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.MantisCut);
+        }
         FireProjectile();
     }
 

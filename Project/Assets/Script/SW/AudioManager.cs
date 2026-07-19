@@ -66,7 +66,8 @@ public class AudioManager : MonoBehaviour
         BlueBossDie,
         PressurePlatePress,
         MantisStab,
-        MantisSlam
+        MantisSlam,
+        MantisCut
     }
 
     private void Awake()
