@@ -366,6 +366,24 @@ public class PlayerInputScript : MonoBehaviour
     {
         if(context.started)
         {
+            if (player.canvas != null)
+            {
+                GameStarting gameStarting = player.canvas.GetComponent<GameStarting>();
+                if (gameStarting != null)
+                {
+                    if (gameStarting.GuidePanel != null && gameStarting.GuidePanel.activeSelf)
+                    {
+                        gameStarting.CloseGuide();
+                        return;
+                    }
+                    if (gameStarting.licensePanel != null && gameStarting.licensePanel.activeSelf)
+                    {
+                        gameStarting.CloseLicense();
+                        return;
+                    }
+                }
+            }
+
             player.settingPanel.SetActive(!player.settingPanel.activeSelf);
             if(GameManager.instance != null)
             {
