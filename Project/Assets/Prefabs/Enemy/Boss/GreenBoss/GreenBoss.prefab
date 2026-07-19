@@ -365,7 +365,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   finalEffectPrefab: {fileID: 4819108403631408140, guid: ffa440a0637c5d54abfc6b08286523e6, type: 3}
-  finalMonsterPrefab: {fileID: 3875869934082963179, guid: a1fd9e17d11c9ef41bb311a31b09180e, type: 3}
+  finalMonsterPrefab: {fileID: 8754160198424879582, guid: 2be6c96eed2cebb44a58a318528e4162, type: 3}
   effectOffset: 0.8
   fadeOutDuration: 1
 --- !u!114 &4624539507042879024
