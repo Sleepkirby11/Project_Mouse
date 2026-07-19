@@ -548,6 +548,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         SafeDeactivate<Wind>();
         SafeDeactivate<Frog>();
         SafeDeactivate<FlowerTrap>();
+        SafeDeactivate<MantisProjectile>();
 
         // Blue Boss 패턴 제거
         SafeDeactivate<BlueLaser>();

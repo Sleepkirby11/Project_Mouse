@@ -11,7 +11,7 @@ using UnityEngine;
  * 배리어가 있는 동안 보스는 체력 회복 + 무적
  * 정령을 모두 제거하거나 일정 시간이 지나면 배리어가 사라짐
  * 정령이 보스에게 돌아올때 남아있는 정령의 수만큼 체력 회복
- * 공격패턴3 : 체력이 10% 미만이 되면 소환수(KillerPlant)를 소환하며 자신은 투명화상태 
+ * 공격패턴3 : 체력이 10% 미만이 되면 소환수(Mantis)를 소환하며 자신은 투명화상태 
  */
 
 public class GreenBossAttack : MonoBehaviour, IHitReaction
@@ -84,7 +84,7 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     private bool isFinalPhase = false; // 마지막 패턴때 무적 플래그
     private SpriteRenderer sr;
     private EnemyStatus enemyStatus;
-    private EnemyStatus activeKpStatus;
+    private EnemyStatus activeMantisStatus;
 
     // 플레이어 감지 관련 변수
     private Transform playerTransform;
@@ -169,9 +169,9 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
             enemyStatus.OnEnemyDeath -= HandleDeath;
         }
 
-        if (activeKpStatus != null)
+        if (activeMantisStatus != null)
         {
-            activeKpStatus.OnEnemyDeath -= RevealBossAfterKP;
+            activeMantisStatus.OnEnemyDeath -= RevealBossAfterMantis;
         }
     }
 
@@ -566,19 +566,19 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
                 // 마법진 이펙트가 끝나는 타이밍에 소환수 소환
                 castingSpell.Init(() =>
                 {
-                    SpawnKillerPlant();
+                    SpawnMantis();
                 });
             }
             else
             {
                 // 마법진 스크립트가 없다면 즉시 소환
-                SpawnKillerPlant();
+                SpawnMantis();
             }
         }
         else
         {
             // 마법진 프리팹 자체가 없다면 즉시 소환
-            SpawnKillerPlant();
+            SpawnMantis();
         }
 
         // 보스 제거
@@ -587,31 +587,31 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         finalPhaseRoutine = null;
     }
 
-    private void SpawnKillerPlant()
+    private void SpawnMantis()
     {
         if (finalMonsterPrefab == null)
         {
             return;
         }
 
-        // 소환수(KillerPlant) 생성
-        GameObject spawnedKP = Instantiate(finalMonsterPrefab, transform.position, Quaternion.identity);
+        // 소환수(Mantis) 생성
+        GameObject spawnedMantis = Instantiate(finalMonsterPrefab, transform.position, Quaternion.identity);
 
         // 소환수의 EnemyStatus 보스 복귀 함수 연결
-        if (spawnedKP.TryGetComponent(out EnemyStatus kpStatus))
+        if (spawnedMantis.TryGetComponent(out EnemyStatus mantisStatus))
         {
-            activeKpStatus = kpStatus;
-            activeKpStatus.OnEnemyDeath += RevealBossAfterKP;
+            activeMantisStatus = mantisStatus;
+            activeMantisStatus.OnEnemyDeath += RevealBossAfterMantis;
         }
     }
 
     // 보스 복귀 함수
-    public void RevealBossAfterKP()
+    public void RevealBossAfterMantis()
     {
-        if (activeKpStatus != null)
+        if (activeMantisStatus != null)
         {
-            activeKpStatus.OnEnemyDeath -= RevealBossAfterKP;
-            activeKpStatus = null;
+            activeMantisStatus.OnEnemyDeath -= RevealBossAfterMantis;
+            activeMantisStatus = null;
         }
 
         gameObject.SetActive(true);

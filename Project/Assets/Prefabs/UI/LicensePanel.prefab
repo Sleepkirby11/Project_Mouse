@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 80}
+  m_AnchoredPosition: {x: 800, y: 950}
   m_SizeDelta: {x: 170, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1983609082788335128
@@ -211,7 +211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Close
+  m_Text: Back
 --- !u!1 &2415243045223529750
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4108117265830210310}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.108
+  m_Size: 0.10909091
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -593,7 +593,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 10000}
+  m_SizeDelta: {x: 0, y: 9900}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6439900933974039178
 GameObject:
@@ -717,7 +717,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5940338735155958196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.892}
+  m_AnchorMin: {x: 0, y: 0.8909091}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -848,18 +848,17 @@ MonoBehaviour:
     https://luke1z.itch.io/dummy\r\n\r\nKnight Hero Platformer Animation Pack\r\nCopyright
     \xA9 PixiVan\r\nLicense: Author License\r\nURL: https://pixivan.itch.io/knight-hero-platfor\r\n\r\nFrogs
     || Pixel Asset Pack\r\nCopyright \xA9 Pop Shop Packs\r\nLicense: Author License\r\nURL:
-    https://pop-shop-packs.itch.io/frogs-pixel-asset-pack\r\n\r\nTop Down - Mobs
-    - Bee\r\nCopyright \xA9 Admurin\r\nLicense: Author License\r\nURL: https://admurin.itch.io/top-down-mobs-bee\r\n\r\nFree
-    Pixel Animation Plant Monster Pack\r\nCopyright \xA9 BOB GAMES STUDIO\r\nLicense:
-    Pending License Verification\r\nURL: https://bob-games-studio.itch.io/free-pixel-animation-monsters-plants-pack\r\n\r\nNight
+    https://pop-shop-packs.itch.io\r\n\r\nTop Down - Mobs - Bee\r\nCopyright \xA9
+    Admurin\r\nLicense: Author License\r\nURL: https://admurin.itch.io\r\n\r\nBosses
+    - Mantis\nCopyright \xA9 Admurin\nLicense: Author License\nURL: https://admurin.itch.io\r\n\r\nNight
     Harpy\r\nCopyright \xA9 Otsoga\r\nLicense: Author License\r\nURL: https://otsoga.itch.io/night-harpy\r\n\r\nMagic
     Pack 8\r\nCopyright \xA9 Ansimuz\r\nLicense: Author License (Included PDF)\r\nURL:
     https://ansimuz.itch.io/gothicvania-magic-pack-8\r\n\r\nRPG Bow Assets\r\nCopyright
     \xA9 NexisGames\r\nLicense: Creative Commons Attribution 4.0 International (CC
-    BY 4.0)\r\nRequired Attribution: NexisGames\r\nURL: https://nexisgames.itch.io/rpg-bow-assets\r\n\r\nWitches
-    Pack\r\nCopyright \xA9 9E0\r\nLicense: Author License\r\nURL: https://9e0.itch.io/witches-pack\r\n\r\nPixel
-    Art Portal\r\nCopyright \xA9 f1xtach\r\nLicense: Author License (Commercial Use
-    Confirmed by Author Comment)\r\nURL: https://f1xtach.itch.io/pixel-art-portal\r\n\r\n--------------------------------------------------\r\n\u25A0
+    BY 4.0)\r\nURL: https://nexisgames.itch.io/rpg-bow-assets\r\n\r\nWitches Pack\r\nCopyright
+    \xA9 9E0\r\nLicense: Author License\r\nURL: https://9e0.itch.io/witches-pack\r\n\r\nPixel
+    Art Portal\r\nCopyright \xA9 f1xtach\r\nLicense: Author Permission (Commercial
+    Use Confirmed)\r\nURL: https://f1xtach.itch.io/pixel-art-portal\r\n\r\n--------------------------------------------------\r\n\u25A0
     PIXEL ART VFX\r\n--------------------------------------------------\r\n\r\nPixel
     Art VFX - Blood Mage - FREE Version\r\nCopyright \xA9 Frostwindz\r\nLicense:
     Frostwindz Asset License Agreement\r\nURL: https://frostwindz.itch.io/pixel-art-vfx-blood-mage-free-version\r\n\r\nFrost
@@ -890,20 +889,21 @@ MonoBehaviour:
     Flat Icons [Free]\r\nCopyright \xA9 Heathen Engineering\r\nLicense: Unity Asset
     Store Standard License\r\nURL: https://assetstore.unity.com/packages/2d/gui/icons/ux-flat-icons-free-202525\r\n\r\nx12y12pxMaruMinyaHangul\r\nCopyright
     \xA9 Lee Minseo / The x12y12pxMaruMinya Project Authors\r\nLicense: SIL Open
-    Font License 1.1\r\nURL: https://quiple.dev/font/maruminya-hangul\r\n\r\n--------------------------------------------------\r\n\u25A0
+    Font License 1.1\r\nURL: https://quiple.dev/font/maruminya-hangul\r\n\nLiberation
+    Sans\nCopyright \xA9 Red Hat, Inc.\nLicense: SIL Open Font License 1.1\nURL:
+    https://github.com/liberationfonts/liberation-fonts\n\r\n--------------------------------------------------\r\n\u25A0
     AUDIO\r\n--------------------------------------------------\r\n\r\nBGM\r\nComposer:
     exoticteve (Assisted by Suno AI)\r\n\r\nTracks:\r\n- Tutorial\r\n- Blue\r\n-
-    Green\r\n- Red\r\n- RGB\r\n\r\nLicense:\r\nSuno AI Pro Commercial License\r\n\r\nSound
+    Green\r\n- Red\r\n- RGB\r\n\r\nLicense: Suno AI Pro Commercial License\r\n\r\nSound
     Effects\r\nSource: Pixabay Sound Effects\r\nLicense: Pixabay Content License\r\nURL:
     https://pixabay.com/sound-effects/\r\n\r\n--------------------------------------------------\r\n\u25A0
-    NOTES\r\n--------------------------------------------------\r\n\r\nThe following
-    assets require special attention:\r\n\r\n\u2022 NYKNCK assets require attribution:\r\n 
-    @nyk_nck\r\n\r\n\u2022 Spells FX (Raphael Hatencia) is licensed under\r\n  Creative
-    Commons Attribution 4.0 International (CC BY 4.0),\r\n  which requires attribution.\r\n\r\n\u2022
-    Retro Impact Effect Pack 5 and\r\n  Free Effect and Bullet 16x16\r\n  require
-    a contribution for commercial use.\r\n  (License condition has been fulfilled.)\r\n\r\n\u2022
-    Free Pixel Animation Plant Monster Pack\r\n  does not currently provide explicit
-    license terms.\r\n  Commercial license confirmation is pending."
+    ATTRIBUTION\r\n--------------------------------------------------\r\n\r\nThe
+    following assets require attribution:\r\n\r\n\u2022 Wind - Pixel Art\r\n\u2022
+    Pixel Art Effect - FX052\r\nCredit: @nyk_nck\r\n\r\n\u2022 RPG Bow Assets\r\nAuthor:
+    NexisGames\r\nLicensed under Creative Commons Attribution 4.0 International (CC
+    BY 4.0)\nRequired Attribution: NexisGames\r\n\r\n\u2022 Spells FX\r\nAuthor:
+    Raphael Hatencia\r\nLicensed under Creative Commons Attribution 4.0 International
+    (CC BY 4.0)\nRequired Attribution: Raphael Hatencia"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -25,6 +25,9 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
+    private int lastPlayFrame;
+    private int[] sfxPlayCountsInFrame;
+
     //효과음 추가 시 순서대로 입력할 것
     public enum SFX
     {
@@ -61,7 +64,10 @@ public class AudioManager : MonoBehaviour
         RGB_BlackHole,
         RedBoss_LastStand,
         BlueBossDie,
-        PressurePlatePress
+        PressurePlatePress,
+        MantisStab,
+        MantisSlam,
+        MantisCut
     }
 
     private void Awake()
@@ -159,11 +165,41 @@ public class AudioManager : MonoBehaviour
         PlaySFX_Int((int)sfx);
     }
 
+    private bool CheckFrameLimit(int sfx)
+    {
+        if (sfxClips == null) return false;
+        
+        if (sfxPlayCountsInFrame == null || sfxPlayCountsInFrame.Length != sfxClips.Length)
+        {
+            sfxPlayCountsInFrame = new int[sfxClips.Length];
+        }
+
+        int currentFrame = Time.frameCount;
+        if (currentFrame != lastPlayFrame)
+        {
+            lastPlayFrame = currentFrame;
+            System.Array.Clear(sfxPlayCountsInFrame, 0, sfxPlayCountsInFrame.Length);
+        }
+
+        if (sfxPlayCountsInFrame[sfx] >= 2)
+        {
+            return false; // 한 프레임에 동일 효과음 최대 2개 제한 초과
+        }
+
+        sfxPlayCountsInFrame[sfx]++;
+        return true;
+    }
+
     public void PlaySFX_Int(int sfx)
     {
         if (sfxClips == null || sfx < 0 || sfx >= sfxClips.Length)
         {
             Debug.LogWarning($"[AudioManager] SFX index {sfx} is out of bounds of sfxClips (Length: {sfxClips?.Length ?? 0}). Please assign all {System.Enum.GetValues(typeof(SFX)).Length} clips in the AudioManager Inspector.");
+            return;
+        }
+
+        if (!CheckFrameLimit(sfx))
+        {
             return;
         }
 
@@ -187,6 +223,11 @@ public class AudioManager : MonoBehaviour
     {
         int sfxIndex = (int)sfx;
         if (sfxClips == null || sfxIndex < 0 || sfxIndex >= sfxClips.Length)
+        {
+            return;
+        }
+
+        if (!CheckFrameLimit(sfxIndex))
         {
             return;
         }
