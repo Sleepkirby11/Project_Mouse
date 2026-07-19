@@ -3315,34 +3315,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LicensePanel
       objectReference: {fileID: 0}
-    - target: {fileID: 2639025927560089817, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5541136259295451163, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5541136259295451163, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5541136259295451163, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6634155420990299414, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6634155420990299414, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6634155420990299414, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8023755700173164504, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
