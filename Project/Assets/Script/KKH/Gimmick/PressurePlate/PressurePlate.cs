@@ -8,6 +8,7 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private UnityEvent onPlatePressed;  // 발판 눌렸을 때
     [SerializeField] private UnityEvent onPlateReleased; // 발판에서 발 뗐을 때
     [SerializeField] private float pressedDelay = 0.2f; // 발판이 눌리는 딜레이
+    [SerializeField] private bool isOneTimeUse = true;   // 일회용 여부 (true면 다시 복구되지 않고 유지됨)
 
     [Header("사운드 설정")]
     [SerializeField] private bool useAudioManager = true;
@@ -58,6 +59,8 @@ public class PressurePlate : MonoBehaviour
     // 트리거가 켜졌을 때 (눌려 들어간 상태일 때) 플레이어가 나갔는지 감시
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (isOneTimeUse) return; // 일회용인 경우 작동 해제하지 않음
+
         if (other.CompareTag("Player") && isPressed)
         {
             PlateDeactivate();
