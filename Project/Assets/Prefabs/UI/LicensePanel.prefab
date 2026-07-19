@@ -854,8 +854,8 @@ MonoBehaviour:
     Harpy\r\nCopyright \xA9 Otsoga\r\nLicense: Author License\r\nURL: https://otsoga.itch.io/night-harpy\r\n\r\nMagic
     Pack 8\r\nCopyright \xA9 Ansimuz\r\nLicense: Author License (Included PDF)\r\nURL:
     https://ansimuz.itch.io/gothicvania-magic-pack-8\r\n\r\nRPG Bow Assets\r\nCopyright
-    \xA9 NexisGames\r\nLicense: Creative Commons Attribution 4.0 International (CC
-    BY 4.0)\r\nURL: https://nexisgames.itch.io/rpg-bow-assets\r\n\r\nWitches Pack\r\nCopyright
+    \xA9 Nexis\r\nLicense: Creative Commons Attribution 4.0 International (CC BY
+    4.0)\r\nURL: https://nexisgames.itch.io/rpg-bow-assets\r\n\r\nWitches Pack\r\nCopyright
     \xA9 9E0\r\nLicense: Author License\r\nURL: https://9e0.itch.io/witches-pack\r\n\r\nPixel
     Art Portal\r\nCopyright \xA9 f1xtach\r\nLicense: Author Permission (Commercial
     Use Confirmed)\r\nURL: https://f1xtach.itch.io/pixel-art-portal\r\n\r\n--------------------------------------------------\r\n\u25A0
@@ -900,10 +900,10 @@ MonoBehaviour:
     ATTRIBUTION\r\n--------------------------------------------------\r\n\r\nThe
     following assets require attribution:\r\n\r\n\u2022 Wind - Pixel Art\r\n\u2022
     Pixel Art Effect - FX052\r\nCredit: @nyk_nck\r\n\r\n\u2022 RPG Bow Assets\r\nAuthor:
-    NexisGames\r\nLicensed under Creative Commons Attribution 4.0 International (CC
-    BY 4.0)\nRequired Attribution: NexisGames\r\n\r\n\u2022 Spells FX\r\nAuthor:
-    Raphael Hatencia\r\nLicensed under Creative Commons Attribution 4.0 International
-    (CC BY 4.0)\nRequired Attribution: Raphael Hatencia"
+    Nexis\r\nLicensed under Creative Commons Attribution 4.0 International (CC BY
+    4.0)\nRequired Attribution: Nexis\r\n\r\n\u2022 Spells FX\r\nAuthor: Raphael
+    Hatencia\r\nLicensed under Creative Commons Attribution 4.0 International (CC
+    BY 4.0)\nRequired Attribution: Raphael Hatencia"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
