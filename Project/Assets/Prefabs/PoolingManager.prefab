@@ -159,3 +159,6 @@ MonoBehaviour:
   - key: Particle_BossDeath
     prefab: {fileID: 6623993348973278131, guid: 7feb45b1150bd6242afdc978e07f5d57, type: 3}
     initialSize: 1
+  - key: Effect_Press
+    prefab: {fileID: 8460648947790225254, guid: 95733ca8cb515cc4184afdaef1bcc741, type: 3}
+    initialSize: 1

@@ -16,6 +16,8 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private AudioClip releaseClip;
 
     private Collider2D myCollider;
+    Animator anim;
+    private string effectKey = "Effect_Press";
     private bool isPressed = false;
     private AudioSource localAudioSource;
 
@@ -23,6 +25,7 @@ public class PressurePlate : MonoBehaviour
     {
         myCollider = GetComponent<Collider2D>();
         localAudioSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
         if (localAudioSource == null && (pressClip != null || releaseClip != null))
         {
             localAudioSource = gameObject.AddComponent<AudioSource>();
@@ -71,6 +74,11 @@ public class PressurePlate : MonoBehaviour
     {
         yield return new WaitForSeconds(pressedDelay);
         myCollider.isTrigger = true; // 트리거 활성화 (푹 가라앉는 느낌 유도)
+        anim.SetBool("isPressed", true);
+        if(PoolingManager.Instance != null)
+        {
+            GameObject effect = PoolingManager.Instance.Get(effectKey, this.transform.position, this.transform.rotation);
+        }
 
         Debug.Log("발판 작동!");
         onPlatePressed?.Invoke(); // 연결된 기믹 작동
@@ -80,6 +88,7 @@ public class PressurePlate : MonoBehaviour
     {
         isPressed = false;
         myCollider.isTrigger = false; // 다시 단단한 바닥으로 복구
+        anim.SetBool("isPressed", false);
 
         Debug.Log("발판 해제!");
         onPlateReleased?.Invoke(); // 연결된 기믹 해제 (필요시 사용)
