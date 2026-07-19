@@ -251,7 +251,7 @@ public class BossController : MonoBehaviour, IHitReaction
             rb.linearVelocity = Vector2.zero;
         }
 
-        // 3번 반복 (총 9번 돌진)
+        // 3번 반복 (총 12번 돌진)
         for (int i = 0; i < 3; i++)
         {
             if (isDead)
@@ -259,7 +259,8 @@ public class BossController : MonoBehaviour, IHitReaction
                 yield break;
             }
 
-            yield return PatternEnrageDesperation();
+            bool isLast = (i == 2);
+            yield return PatternEnrageDesperation(isLast);
 
             // 세트 사이의 짧은 휴식 타임 (조율 가능)
             yield return new WaitForSeconds(1.0f);
@@ -618,7 +619,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
     #region Pattern: Phase 3 Enrage (발악)
 
-    private IEnumerator PatternEnrageDesperation()
+    private IEnumerator PatternEnrageDesperation(bool isLast)
     {
         if (player == null || mapBoundaryColliders == null || mapBoundaryColliders.Length == 0 || rb == null)
         {
@@ -678,128 +679,60 @@ public class BossController : MonoBehaviour, IHitReaction
         Vector2[] targetPositions = new Vector2[dashCount];
         GameObject[] spawnedLines = new GameObject[dashCount];
 
-        // 1. 좌우 교차 방향 배열 생성
-        List<Vector2> l2rStart = new List<Vector2>();
-        List<Vector2> l2rTarget = new List<Vector2>();
-        List<Vector2> r2lStart = new List<Vector2>();
-        List<Vector2> r2lTarget = new List<Vector2>();
-
-        Vector2 topLeft = new Vector2(minX, maxY);
-        Vector2 topRight = new Vector2(maxX, maxY);
-        Vector2 bottomLeft = new Vector2(minX, minY);
-        Vector2 bottomRight = new Vector2(maxX, minY);
+        // 1. 촘촘한 * (애스터리스크) 모양의 교차 경로 생성 (45도 간격)
+        List<int> dashIndices = new List<int> { 0, 1, 2, 3 };
+        for (int k = dashIndices.Count - 1; k > 0; k--)
+        {
+            int r = Random.Range(0, k + 1);
+            int tmp = dashIndices[k];
+            dashIndices[k] = dashIndices[r];
+            dashIndices[r] = tmp;
+        }
 
         float baseAngleInterval = 180f / dashCount;
-        float randomAngleOffset = Random.Range(0f, 30f);
+        float randomAngleOffset = Random.Range(0f, 25f);
 
-        // 대각선 크로스 1
-        if (Random.value > 0.5f)
+        for (int i = 0; i < dashCount; i++)
         {
-            l2rStart.Add(bottomLeft);
-            l2rTarget.Add(topRight);
-        }
-        else
-        {
-            r2lStart.Add(topRight);
-            r2lTarget.Add(bottomLeft);
-        }
-
-        // 대각선 크로스 2
-        if (Random.value > 0.5f)
-        {
-            l2rStart.Add(topLeft);
-            l2rTarget.Add(bottomRight);
-        }
-        else
-        {
-            r2lStart.Add(bottomRight);
-            r2lTarget.Add(topLeft);
-        }
-
-        // 남은 슬롯을 랜덤 횡단으로 채움 (각 리스트가 2개가 될 때까지)
-        int randomCrossIndex = 2;
-        while (l2rStart.Count < 2 || r2lStart.Count < 2)
-        {
-            float finalAngle = (baseAngleInterval * randomCrossIndex) + randomAngleOffset + Random.Range(-5f, 5f);
+            float finalAngle = (baseAngleInterval * i) + randomAngleOffset + Random.Range(-3f, 3f);
             Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
 
-            Vector2 s = mapCenter - dir * 25f;
-            Vector2 t = mapCenter + dir * 25f;
+            // 센터를 관통하는 무한 선을 맵 경계에 투영
+            Vector2 s = mapCenter - dir * 35f;
+            Vector2 t = mapCenter + dir * 35f;
 
             s = ClampToEdges(s, minX, maxX, minY, maxY);
             t = ClampToEdges(t, minX, maxX, minY, maxY);
 
-            if (s.x < t.x)
+            int targetIdx = dashIndices[i];
+
+            // 홀짝 인덱스에 따라 방향을 반전시켜 교차 효과 극대화
+            if (targetIdx % 2 == 0)
             {
-                if (l2rStart.Count < 2)
+                if (Mathf.Abs(dir.x) < 0.1f) // 수직에 가까운 경우 y축 기준 정렬
                 {
-                    l2rStart.Add(s);
-                    l2rTarget.Add(t);
+                    if (s.y < t.y) { startPositions[targetIdx] = s; targetPositions[targetIdx] = t; }
+                    else { startPositions[targetIdx] = t; targetPositions[targetIdx] = s; }
                 }
                 else
                 {
-                    r2lStart.Add(t);
-                    r2lTarget.Add(s);
+                    if (s.x < t.x) { startPositions[targetIdx] = s; targetPositions[targetIdx] = t; }
+                    else { startPositions[targetIdx] = t; targetPositions[targetIdx] = s; }
                 }
-            }
-            else if (s.x > t.x)
-            {
-                if (r2lStart.Count < 2)
-                {
-                    r2lStart.Add(s);
-                    r2lTarget.Add(t);
-                }
-                else
-                {
-                    l2rStart.Add(t);
-                    l2rTarget.Add(s);
-                }
-            }
-            randomCrossIndex++;
-        }
-
-        // 2. 각각의 방향 리스트 독립 셔플
-        for (int k = l2rStart.Count - 1; k > 0; k--)
-        {
-            int r = Random.Range(0, k + 1);
-            var tmpS = l2rStart[k];
-            var tmpT = l2rTarget[k];
-            l2rStart[k] = l2rStart[r];
-            l2rTarget[k] = l2rTarget[r];
-            l2rStart[r] = tmpS;
-            l2rTarget[r] = tmpT;
-        }
-        for (int k = r2lStart.Count - 1; k > 0; k--)
-        {
-            int r = Random.Range(0, k + 1);
-            var tmpS = r2lStart[k];
-            var tmpT = r2lTarget[k];
-            r2lStart[k] = r2lStart[r];
-            r2lTarget[k] = r2lTarget[r];
-            r2lStart[r] = tmpS;
-            r2lTarget[r] = tmpT;
-        }
-
-        // 3. 교차로 채우기 (좌우좌우 또는 우좌우좌)
-        bool nextIsL2R = Random.value > 0.5f;
-        int l2rIdx = 0;
-        int r2lIdx = 0;
-
-        for (int i = 0; i < dashCount; i++)
-        {
-            if (nextIsL2R)
-            {
-                startPositions[i] = l2rStart[l2rIdx];
-                targetPositions[i] = l2rTarget[l2rIdx];
-                l2rIdx++;
             }
             else
             {
-                startPositions[i] = r2lStart[r2lIdx];
-                targetPositions[i] = r2lTarget[r2lIdx];
-                r2lIdx++;
+                if (Mathf.Abs(dir.x) < 0.1f)
+                {
+                    if (s.y > t.y) { startPositions[targetIdx] = s; targetPositions[targetIdx] = t; }
+                    else { startPositions[targetIdx] = t; targetPositions[targetIdx] = s; }
+                }
+                else
+                {
+                    if (s.x > t.x) { startPositions[targetIdx] = s; targetPositions[targetIdx] = t; }
+                    else { startPositions[targetIdx] = t; targetPositions[targetIdx] = s; }
+                }
             }
-            nextIsL2R = !nextIsL2R;
         }
 
         for (int i = 0; i < dashCount; i++)
@@ -887,7 +820,10 @@ public class BossController : MonoBehaviour, IHitReaction
         // 발악 패턴 종료 후 안전하게 맵 중앙으로 순간이동하여 충돌 끼임 방지
         rb.position = mapCenter;
 
-        yield return FadeIn(0.15f);
+        if (isLast)
+        {
+            yield return FadeIn(0.15f);
+        }
         transform.rotation = Quaternion.identity;
         if (dashHitbox != null)
         {
@@ -902,7 +838,10 @@ public class BossController : MonoBehaviour, IHitReaction
             bossFlip.facingMode = BlueBossFlip.FacingMode.Player;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        if (isLast)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     private Vector2 ClampToEdges(Vector2 point, float minX, float maxX, float minY, float maxY)
