@@ -3311,9 +3311,126 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1881301655}
+    - target: {fileID: 1536733195932228252, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 9900
+      objectReference: {fileID: 0}
     - target: {fileID: 2639025927560089817, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
       propertyPath: m_Name
       value: LicensePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2639025927560089817, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737965650843216834, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737965650843216834, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737965650843216834, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120392799810683786, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_text
+      value: "This software uses the following third-party assets and open source
+        resources.\r\nAll copyrights belong to their respective owners.\r\n\r\n--------------------------------------------------\r\n\u25A0
+        2D GRAPHICS & SPRITES\r\n--------------------------------------------------\r\n\r\nNecromancer
+        (Free)\r\nCopyright \xA9 CreativeKind\r\nLicense: Author License\r\nURL:
+        https://creativekind.itch.io/necromancer-free\r\n\r\nLich\r\nCopyright \xA9
+        CreativeKind\r\nLicense: Author License\r\nURL: https://creativekind.itch.io/lich\r\n\r\nHEROES
+        FANTASY - FREE GOBLIN\r\nCopyright \xA9 AU_pixel\r\nLicense: Author License\r\nURL:
+        https://au-pixel.itch.io/free-goblin\r\n\r\nPlatformer Tileset - Pixelart
+        Snow Mountain\r\nCopyright \xA9 BigManJD\r\nLicense: Unity Asset Store Standard
+        License\r\nURL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-snow-mountain-220095\r\n\r\nPlatformer
+        Tileset - Pixelart Fantasy\r\nCopyright \xA9 BigManJD\r\nLicense: Unity Asset
+        Store Standard License\r\nURL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-fantasy-284719\r\n\r\nPlatformer
+        Tileset - Pixelart Caves\r\nCopyright \xA9 BigManJD\r\nLicense: Unity Asset
+        Store Standard License\r\nURL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-caves-330017\r\n\r\nPlatformer
+        Tileset - Pixelart Grasslands\r\nCopyright \xA9 BigManJD\r\nLicense: Unity
+        Asset Store Standard License\r\nURL: https://assetstore.unity.com/packages/2d/environments/platformer-tileset-pixelart-grasslands-248158\r\n\r\nFree
+        Character - Satyr\r\nCopyright \xA9 LuckyLoops\r\nLicense: Creative Commons
+        Attribution 4.0 International (CC BY 4.0)\r\nURL: https://lucky-loops.itch.io/character-satyr\r\n\r\nTweety
+        the Cute Ghost\r\nCopyright \xA9 ashawe\r\nLicense: Creative Commons Attribution
+        4.0 International (CC BY 4.0)\r\nURL: https://ashawe.itch.io/cute-ghost-character\r\n\r\nDummy
+        2D Pixel Art Mob\r\nCopyright \xA9 Luke1z\r\nLicense: Author License\r\nURL:
+        https://luke1z.itch.io/dummy\r\n\r\nKnight Hero Platformer Animation Pack\r\nCopyright
+        \xA9 PixiVan\r\nLicense: Author License\r\nURL: https://pixivan.itch.io/knight-hero-platfor\r\n\r\nFrogs
+        || Pixel Asset Pack\r\nCopyright \xA9 Pop Shop Packs\r\nLicense: Author License\r\nURL:
+        https://pop-shop-packs.itch.io\r\n\r\nTop Down - Mobs - Bee\r\nCopyright
+        \xA9 Admurin\r\nLicense: Author License\r\nURL: https://admurin.itch.io\r\n\r\nBosses
+        - Mantis\nCopyright \xA9 Admurin\nLicense: Author License\nURL: https://admurin.itch.io\r\n\r\nNight
+        Harpy\r\nCopyright \xA9 Otsoga\r\nLicense: Author License\r\nURL: https://otsoga.itch.io/night-harpy\r\n\r\nMagic
+        Pack 8\r\nCopyright \xA9 Ansimuz\r\nLicense: Author License (Included PDF)\r\nURL:
+        https://ansimuz.itch.io/gothicvania-magic-pack-8\r\n\r\nRPG Bow Assets\r\nCopyright
+        \xA9 NexisGames\r\nLicense: Creative Commons Attribution 4.0 International
+        (CC BY 4.0)\r\nURL: https://nexisgames.itch.io/rpg-bow-assets\r\n\r\nWitches
+        Pack\r\nCopyright \xA9 9E0\r\nLicense: Author License\r\nURL: https://9e0.itch.io/witches-pack\r\n\r\nPixel
+        Art Portal\r\nCopyright \xA9 f1xtach\r\nLicense: Author Permission (Commercial
+        Use Confirmed)\r\nURL: https://f1xtach.itch.io/pixel-art-portal\r\n\r\n--------------------------------------------------\r\n\u25A0
+        PIXEL ART VFX\r\n--------------------------------------------------\r\n\r\nPixel
+        Art VFX - Blood Mage - FREE Version\r\nCopyright \xA9 Frostwindz\r\nLicense:
+        Frostwindz Asset License Agreement\r\nURL: https://frostwindz.itch.io/pixel-art-vfx-blood-mage-free-version\r\n\r\nFrost
+        Knight Animations\r\nCopyright \xA9 Frostwindz\r\nLicense: Frostwindz Asset
+        License Agreement\r\nURL: https://frostwindz.itch.io/pixel-art-vfx-frost-knight-free-version\r\n\r\nWind
+        - Pixel Art\r\nCopyright \xA9 NYKNCK\r\nLicense: Author License\r\nRequired
+        Attribution: @nyk_nck\r\nURL: https://nyknck.itch.io/wind\r\n\r\nPixel Art
+        Effect - FX052\r\nCopyright \xA9 NYKNCK\r\nLicense: Author License\r\nRequired
+        Attribution: @nyk_nck\r\nURL: https://nyknck.itch.io/pixelfx052\r\n\r\nAcid
+        Spell Effect\r\nCopyright \xA9 pimen\r\nLicense: Author License\r\nURL: https://pimen.itch.io/acid-spell-effect\r\n\r\nSnare
+        Flower Skill FX\r\nCopyright \xA9 Otsoga\r\nLicense: Author License\r\nURL:
+        https://otsoga.itch.io/snare-flower-skill-fx\r\n\r\nLaser Beam Pixel Art
+        FX\r\nCopyright \xA9 Retsnail Assets\r\nLicense: Author License\r\nURL: https://retsnail-assets.itch.io/laserbeamfx\r\n\r\nMeteor
+        2 - Effect Pixel Art\r\nCopyright \xA9 sanctumpixel\r\nLicense: Author License\r\nURL:
+        https://sanctumpixel.itch.io/meteor-2-effect-pixel-art\r\n\r\nForce Shield
+        2D Effects Pack\r\nCopyright \xA9 999overlap\r\nLicense: Author License\r\nURL:
+        https://999overlap.itch.io/force-shield-2d-effects-pack\r\n\r\nRetro Impact
+        Effect Pack 5\r\nCopyright \xA9 BDragon1727\r\nLicense: Author License (Commercial
+        Use Requires Contribution)\r\nURL: https://bdragon1727.itch.io/retro-impact-effect-pack-5\r\n\r\nFree
+        Effect and Bullet 16x16\r\nCopyright \xA9 BDragon1727\r\nLicense: Author
+        License (Commercial Use Requires Contribution)\r\nURL: https://bdragon1727.itch.io/free-effect-and-bullet-16x16\r\n\r\nFree
+        Effects Pack\r\nCopyright \xA9 XYEzawr\r\nLicense: Author License\r\nURL:
+        https://xyezawr.itch.io/free-pixel-effects-pack-7-fire-aura\r\n\r\nSpells
+        FX\r\nCopyright \xA9 Raphael Hatencia\r\nLicense: Creative Commons Attribution
+        4.0 International (CC BY 4.0)\r\nRequired Attribution: Raphael Hatencia\r\nURL:
+        https://ragnapixel.itch.io/spells-fx\r\n\r\n--------------------------------------------------\r\n\u25A0
+        UI & FONTS\r\n--------------------------------------------------\r\n\r\nPixel
+        Art UI Essentials\r\nCopyright \xA9 devnik\r\nLicense: Unity Asset Store
+        Standard License\r\nURL: https://assetstore.unity.com/packages/2d/gui/pixel-art-ui-essentials-329983\r\n\r\nUX
+        Flat Icons [Free]\r\nCopyright \xA9 Heathen Engineering\r\nLicense: Unity
+        Asset Store Standard License\r\nURL: https://assetstore.unity.com/packages/2d/gui/icons/ux-flat-icons-free-202525\r\n\r\nx12y12pxMaruMinyaHangul\r\nCopyright
+        \xA9 Lee Minseo / The x12y12pxMaruMinya Project Authors\r\nLicense: SIL Open
+        Font License 1.1\r\nURL: https://quiple.dev/font/maruminya-hangul\r\n\nLiberation
+        Sans\nCopyright \xA9 Red Hat, Inc.\nLicense: SIL Open Font License 1.1\nURL:
+        https://github.com/liberationfonts/liberation-fonts\n\r\n--------------------------------------------------\r\n\u25A0
+        AUDIO\r\n--------------------------------------------------\r\n\r\nBGM\r\nComposer:
+        exoticteve (Assisted by Suno AI)\r\n\r\nTracks:\r\n- Tutorial\r\n- Blue\r\n-
+        Green\r\n- Red\r\n- RGB\r\n\r\nLicense: Suno AI Pro Commercial License\r\n\r\nSound
+        Effects\r\nSource: Pixabay Sound Effects\r\nLicense: Pixabay Content License\r\nURL:
+        https://pixabay.com/sound-effects/\r\n\r\n--------------------------------------------------\r\n\u25A0
+        ATTRIBUTION\r\n--------------------------------------------------\r\n\r\nThe
+        following assets require attribution:\r\n\r\n\u2022 Wind - Pixel Art\r\n\u2022
+        Pixel Art Effect - FX052\r\nCredit: @nyk_nck\r\n\r\n\u2022 RPG Bow Assets\r\nAuthor:
+        NexisGames\r\nLicensed under Creative Commons Attribution 4.0 International
+        (CC BY 4.0)\nRequired Attribution: NexisGames\r\n\r\n\u2022 Spells FX\r\nAuthor:
+        Raphael Hatencia\r\nLicensed under Creative Commons Attribution 4.0 International
+        (CC BY 4.0)\nRequired Attribution: Raphael Hatencia"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108117265830210310, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108117265830210310, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108117265830210310, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8023755700173164504, guid: 54f9b8bc396478849bec268402a38ab6, type: 3}
       propertyPath: m_Pivot.x

@@ -90,8 +90,8 @@ MonoBehaviour:
   - key: FlowerTrap
     prefab: {fileID: 8522541369801760802, guid: dd2fa82868fb53341be9317068664858, type: 3}
     initialSize: 5
-  - key: KillerPlantBullet
-    prefab: {fileID: 3739273753223816140, guid: 3ca2e0ac1e4212b4889002884040db14, type: 3}
+  - key: MantisProjectile
+    prefab: {fileID: 33712235082767019, guid: a7ade87fc2181f34fba9239d41dc3f92, type: 3}
     initialSize: 5
   - key: BlueLaser
     prefab: {fileID: 8016788000148958878, guid: cde4eaf95c94b494085bc5269d47c423, type: 3}

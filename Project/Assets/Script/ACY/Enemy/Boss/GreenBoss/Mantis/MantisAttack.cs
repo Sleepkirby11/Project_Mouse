@@ -134,6 +134,11 @@ public class MantisAttack : MonoBehaviour, IHitReaction
     // Slam 타격 프레임 이벤트에서 호출
     public void OnSlamHit()
     {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.MantisSlam);
+        }
+
         if (player == null) return;
 
         float dist = Vector2.Distance(transform.position, player.position);
@@ -146,6 +151,11 @@ public class MantisAttack : MonoBehaviour, IHitReaction
     // Stab 타격 프레임 이벤트에서 호출 (연타형 공격이므로 매 프레임 호출 가능)
     public void OnStabHit()
     {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.MantisStab);
+        }
+
         if (player == null) return;
 
         float dist = Vector2.Distance(transform.position, player.position);

@@ -1950,14 +1950,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoolingManager
       objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[15].key
-      value: MantisProjectile
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514653046451890726, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
-      propertyPath: pools.Array.data[15].prefab
-      value: 
-      objectReference: {fileID: 33712235082767019, guid: a7ade87fc2181f34fba9239d41dc3f92, type: 3}
     - target: {fileID: 6906194015661884017, guid: 6ac5383bf4c163f4b9aab2d35b584bd5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
