@@ -155,5 +155,8 @@ MonoBehaviour:
   - name: MantisSlam
     clip: {fileID: 8300000, guid: a781d02c6138e2b44b296c0b564c082a, type: 3}
     volumeScale: 1
+  - name: MantisCut
+    clip: {fileID: 8300000, guid: f2608b9fd8468cd408ca0c814185cfff, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20
