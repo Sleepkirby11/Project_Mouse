@@ -1,6 +1,14 @@
 using System.Collections;
 using UnityEngine;
-
+/*
+ * 원거리 범위 내에 들어오면 칼날 발사
+ * 칼날은 플레이어 방향으로 일직선으로 발사됨
+ * 근접 범위 내에 들어오면 근접 공격
+ * 근접 공격 1 : 내려찍기 (Slam)
+ * 근접 공격 2 : 연속 찌르기 (Stab)
+ * 연속찌르기는 쿨타임이 존재하며 쿨타임이 끝나면 연속찌르기 우선 발동
+ * 플레이어의 무적을 무시하며 다단히트 효과
+ */
 public class MantisAttack : MonoBehaviour, IHitReaction
 {
     #region Settings & Variables
@@ -174,7 +182,6 @@ public class MantisAttack : MonoBehaviour, IHitReaction
         }
     }
 
-    // 씬 애니메이션 이벤트 통합 지원 (호환용)
     public void OnMeleeHit()
     {
         if (stabCooldownTimer > 0f && (stabCooldownTimer >= stabCooldown - 0.5f))
@@ -243,7 +250,6 @@ public class MantisAttack : MonoBehaviour, IHitReaction
     {
         if (player == null || firePoint == null) return;
 
-        // 플레이어 방향 2D 벡터 산출 (대각선 발사 지원)
         Vector2 targetDir = (player.position - firePoint.position).normalized;
 
         GameObject obj = PoolingManager.Instance.Get(projectilePoolKey, firePoint.position, Quaternion.identity);
