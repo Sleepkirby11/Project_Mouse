@@ -652,11 +652,10 @@ public class BossController : MonoBehaviour, IHitReaction
             yield break;
         }
 
-        float margin = 1.0f;
-        float minX = mapBounds.min.x + margin;
-        float maxX = mapBounds.max.x - margin;
-        float minY = mapBounds.min.y + margin;
-        float maxY = mapBounds.max.y - margin;
+        float actualMinX = mapBounds.min.x;
+        float actualMaxX = mapBounds.max.x;
+        float actualMinY = mapBounds.min.y;
+        float actualMaxY = mapBounds.max.y;
         Vector2 mapCenter = mapBounds.center; // 중심점이 될 곳
 
         SpriteRenderer bossSprite = GetComponentInChildren<SpriteRenderer>();
@@ -697,12 +696,17 @@ public class BossController : MonoBehaviour, IHitReaction
             float finalAngle = (baseAngleInterval * i) + randomAngleOffset + Random.Range(-3f, 3f);
             Vector2 dir = new Vector2(Mathf.Cos(finalAngle * Mathf.Deg2Rad), Mathf.Sin(finalAngle * Mathf.Deg2Rad));
 
-            // 센터를 관통하는 무한 선을 맵 경계에 투영
-            Vector2 s = mapCenter - dir * 35f;
-            Vector2 t = mapCenter + dir * 35f;
+            // 센터를 관통하는 무한 선을 맵의 실제 경계선(마진 0)에 정확히 투영
+            float tPos = GetRayIntersectionDistance(mapCenter, dir, actualMinX, actualMaxX, actualMinY, actualMaxY);
+            float tNeg = GetRayIntersectionDistance(mapCenter, -dir, actualMinX, actualMaxX, actualMinY, actualMaxY);
 
-            s = ClampToEdges(s, minX, maxX, minY, maxY);
-            t = ClampToEdges(t, minX, maxX, minY, maxY);
+            Vector2 sWall = mapCenter - dir * tNeg;
+            Vector2 tWall = mapCenter + dir * tPos;
+
+            // 벽에 파묻혀 물리 엔진 오류가 나지 않도록 보스 반경만큼 안쪽으로 최소 마진(오프셋) 적용
+            float bossOffset = 0.7f; 
+            Vector2 s = sWall + dir * bossOffset;
+            Vector2 t = tWall - dir * bossOffset;
 
             int targetIdx = dashIndices[i];
 
@@ -844,11 +848,30 @@ public class BossController : MonoBehaviour, IHitReaction
         }
     }
 
-    private Vector2 ClampToEdges(Vector2 point, float minX, float maxX, float minY, float maxY)
+    private float GetRayIntersectionDistance(Vector2 center, Vector2 dir, float minX, float maxX, float minY, float maxY)
     {
-        point.x = Mathf.Clamp(point.x, minX, maxX);
-        point.y = Mathf.Clamp(point.y, minY, maxY);
-        return point;
+        float tMaxX = float.PositiveInfinity;
+        float tMaxY = float.PositiveInfinity;
+
+        if (dir.x > 0.0001f)
+        {
+            tMaxX = (maxX - center.x) / dir.x;
+        }
+        else if (dir.x < -0.0001f)
+        {
+            tMaxX = (minX - center.x) / dir.x;
+        }
+
+        if (dir.y > 0.0001f)
+        {
+            tMaxY = (maxY - center.y) / dir.y;
+        }
+        else if (dir.y < -0.0001f)
+        {
+            tMaxY = (minY - center.y) / dir.y;
+        }
+
+        return Mathf.Min(tMaxX, tMaxY);
     }
 
     private IEnumerator FadeOut(float duration)
