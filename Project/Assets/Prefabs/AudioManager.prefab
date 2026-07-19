@@ -149,5 +149,11 @@ MonoBehaviour:
   - name: PressurePlate
     clip: {fileID: 8300000, guid: 7ad2b65f407b90f479d21279b43ed907, type: 3}
     volumeScale: 1
+  - name: MantisStab
+    clip: {fileID: 8300000, guid: 08053cf85ad69304196ba324edf79218, type: 3}
+    volumeScale: 1
+  - name: MantisSlam
+    clip: {fileID: 8300000, guid: a781d02c6138e2b44b296c0b564c082a, type: 3}
+    volumeScale: 1
   sfxVolume: 100
   channels: 20

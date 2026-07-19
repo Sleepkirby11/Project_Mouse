@@ -441,7 +441,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4108117265830210310}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.108
+  m_Size: 0.10909091
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -593,7 +593,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 9700}
+  m_SizeDelta: {x: 0, y: 9900}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6439900933974039178
 GameObject:
@@ -630,9 +630,9 @@ RectTransform:
   m_Father: {fileID: 6263806077486166900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7510794808987192658
 CanvasRenderer:
@@ -717,8 +717,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5940338735155958196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.8886598}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.8909091}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -848,9 +848,9 @@ MonoBehaviour:
     https://luke1z.itch.io/dummy\r\n\r\nKnight Hero Platformer Animation Pack\r\nCopyright
     \xA9 PixiVan\r\nLicense: Author License\r\nURL: https://pixivan.itch.io/knight-hero-platfor\r\n\r\nFrogs
     || Pixel Asset Pack\r\nCopyright \xA9 Pop Shop Packs\r\nLicense: Author License\r\nURL:
-    https://pop-shop-packs.itch.io/frogs-pixel-asset-pack\r\n\r\nTop Down - Mobs
-    - Bee\r\nCopyright \xA9 Admurin\r\nLicense: Author License\r\nURL: https://admurin.itch.io/top-down-mobs-bee\r\n\r\nBosses
-    - Mantis\nCopyright \xA9 Admurin\nLicense: Author License\nURL: https://admurin.itch.io/bosses-mantis\r\n\r\nNight
+    https://pop-shop-packs.itch.io\r\n\r\nTop Down - Mobs - Bee\r\nCopyright \xA9
+    Admurin\r\nLicense: Author License\r\nURL: https://admurin.itch.io\r\n\r\nBosses
+    - Mantis\nCopyright \xA9 Admurin\nLicense: Author License\nURL: https://admurin.itch.io\r\n\r\nNight
     Harpy\r\nCopyright \xA9 Otsoga\r\nLicense: Author License\r\nURL: https://otsoga.itch.io/night-harpy\r\n\r\nMagic
     Pack 8\r\nCopyright \xA9 Ansimuz\r\nLicense: Author License (Included PDF)\r\nURL:
     https://ansimuz.itch.io/gothicvania-magic-pack-8\r\n\r\nRPG Bow Assets\r\nCopyright
@@ -889,18 +889,21 @@ MonoBehaviour:
     Flat Icons [Free]\r\nCopyright \xA9 Heathen Engineering\r\nLicense: Unity Asset
     Store Standard License\r\nURL: https://assetstore.unity.com/packages/2d/gui/icons/ux-flat-icons-free-202525\r\n\r\nx12y12pxMaruMinyaHangul\r\nCopyright
     \xA9 Lee Minseo / The x12y12pxMaruMinya Project Authors\r\nLicense: SIL Open
-    Font License 1.1\r\nURL: https://quiple.dev/font/maruminya-hangul\r\n\r\n--------------------------------------------------\r\n\u25A0
+    Font License 1.1\r\nURL: https://quiple.dev/font/maruminya-hangul\r\n\nLiberation
+    Sans\nCopyright \xA9 Red Hat, Inc.\nLicense: SIL Open Font License 1.1\nURL:
+    https://github.com/liberationfonts/liberation-fonts\n\r\n--------------------------------------------------\r\n\u25A0
     AUDIO\r\n--------------------------------------------------\r\n\r\nBGM\r\nComposer:
     exoticteve (Assisted by Suno AI)\r\n\r\nTracks:\r\n- Tutorial\r\n- Blue\r\n-
-    Green\r\n- Red\r\n- RGB\r\n\r\nLicense:\r\nSuno AI Pro Commercial License\r\n\r\nSound
+    Green\r\n- Red\r\n- RGB\r\n\r\nLicense: Suno AI Pro Commercial License\r\n\r\nSound
     Effects\r\nSource: Pixabay Sound Effects\r\nLicense: Pixabay Content License\r\nURL:
     https://pixabay.com/sound-effects/\r\n\r\n--------------------------------------------------\r\n\u25A0
     ATTRIBUTION\r\n--------------------------------------------------\r\n\r\nThe
     following assets require attribution:\r\n\r\n\u2022 Wind - Pixel Art\r\n\u2022
-    Pixel Art Effect - FX052\r\nAuthor: @nyk_nck\r\n\r\n\u2022 RPG Bow Assets\r\nAuthor:
+    Pixel Art Effect - FX052\r\nCredit: @nyk_nck\r\n\r\n\u2022 RPG Bow Assets\r\nAuthor:
     NexisGames\r\nLicensed under Creative Commons Attribution 4.0 International (CC
-    BY 4.0)\r\n\r\n\u2022 Spells FX\r\nAuthor: Raphael Hatencia\r\nLicensed under
-    Creative Commons Attribution 4.0 International (CC BY 4.0)"
+    BY 4.0)\nRequired Attribution: NexisGames\r\n\r\n\u2022 Spells FX\r\nAuthor:
+    Raphael Hatencia\r\nLicensed under Creative Commons Attribution 4.0 International
+    (CC BY 4.0)\nRequired Attribution: Raphael Hatencia"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
