@@ -461,6 +461,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         Debug.Log("Die");
         Player.instance.inputVec = Vector2.zero;
         AudioManager.instance.PlayBGM(false);
+        Player.instance.SpriteOrder(5000);
         Player.instance.BlackBG.SetActive(true);
 
         // 플레이어 사망 시 활성화되어 있는 모든 보스 투사체 및 패턴 일괄 제거

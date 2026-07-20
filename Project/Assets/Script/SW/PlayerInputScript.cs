@@ -207,7 +207,7 @@ public class PlayerInputScript : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.cursorObject.GetComponent<TrailRenderer>();
-        if (context.started && player.status.ink > 1)
+        if (context.started && player.status.ink > 5)
         {
             //초기화
             player.cursorObject.transform.position = player.mouse.transform.position;
@@ -334,7 +334,7 @@ public class PlayerInputScript : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.groundLine.GetComponent<TrailRenderer>();
-        if (context.started && player.status.specialInk > 1)
+        if (context.started && player.status.specialInk > 3)
         {
             //초기화
             player.groundLine.transform.position = player.mouse.transform.position;

@@ -27,11 +27,11 @@ public class Player : MonoBehaviour
 
     [Header("공격")]
     public GameObject cursorObject;
-    [HideInInspector] public Cursor cursor;
+    [HideInInspector] public Paint cursor;
 
     [Header("발판")]
     public GameObject groundLine;
-    [HideInInspector] public Cursor groundCursor;
+    [HideInInspector] public Paint groundCursor;
 
     [Header("공격 표시 커서")]
     public GameObject attackCursor;
@@ -119,8 +119,8 @@ public class Player : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         attackCursor.GetComponent<AttackCursor>().target = transform;
-        cursor = cursorObject.GetComponent<Cursor>();
-        groundCursor = groundLine.GetComponent<Cursor>();
+        cursor = cursorObject.GetComponent<Paint>();
+        groundCursor = groundLine.GetComponent<Paint>();
     }
 
     //초기화
@@ -189,6 +189,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    //스프라이트 Order 변경
+    public void SpriteOrder(int order)
+    {
+        sprite.sortingOrder = order;
+    }
+
     //Dash 방향 미리보기 표시
     public void DashLine()
     {
@@ -251,8 +257,9 @@ public class Player : MonoBehaviour
         }
     }
 
+
     //잉크 소모량 계산 및 공격 발동
-    void Attack(Cursor cursor)
+    void Attack(Paint cursor)
     {
         if (cursor.isMove && usedInk != cursor.lastLength)
         {
@@ -298,7 +305,7 @@ public class Player : MonoBehaviour
     }
 
     //공격 발동
-    public void ActiveAttack(Cursor cursor)
+    public void ActiveAttack(Paint cursor)
     {
         bool isGroundCursor = false;
         if (cursor.gameObject.CompareTag("Ground"))
@@ -332,7 +339,7 @@ public class Player : MonoBehaviour
     }
 
     //공격 | 스킬의 대미지 계산 함수
-    void DamageCalculate(Cursor cursor)
+    void DamageCalculate(Paint cursor)
     {
         float nowDamage = status.damage;
         float calculateNum = 1f;
