@@ -335,7 +335,7 @@ public class Player : MonoBehaviour
     void DamageCalculate(Cursor cursor)
     {
         float nowDamage = status.damage;
-        float calculateNum = 0;
+        float calculateNum = 1f;
         float inkBonus;
         if (isSkill)
         {
