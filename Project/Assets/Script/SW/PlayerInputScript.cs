@@ -302,6 +302,11 @@ public class PlayerInputScript : MonoBehaviour
 
         if (context.started)
         {
+            if ((player.cursor != null && player.cursor.isMove) || (player.groundCursor != null && player.groundCursor.isMove))
+            {
+                return;
+            }
+
             if (!player.isSkill)
                 player.SkillBool(true);
             else
