@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 /*
- * Cursor: 마우스를 따라 Trail을 생성하고 collider를 입히는 과정
+ * Paint: 마우스를 따라 Trail을 생성하고 collider를 입히는 과정
  * trail의 width가 0.25f이면 그리는 중
  * lifeTime이 0이 아니면 공격 실행
  * 공격 실행 시 SetColliderPointsFromTrail()로 Collider를 Trail에 입힘
  */
 
-public class Cursor : MonoBehaviour
+public class Paint : MonoBehaviour
 {
     GameObject player;
     
@@ -34,7 +34,7 @@ public class Cursor : MonoBehaviour
     public float trailLength;
     public float lastLength;
 
-    private Vector3[] trailPositions = new Vector3[100];
+    private Vector3[] trailPositions = new Vector3[2000];
 
     //마우스 좌표 저장
     public Transform mouse;

@@ -570,6 +570,7 @@ MonoBehaviour:
   attackCursor: {fileID: 0}
   canvas: {fileID: 0}
   settingPanel: {fileID: 0}
+  BlackBG: {fileID: 0}
   rigid: {fileID: 0}
   anim: {fileID: 0}
   particle: {fileID: 0}
@@ -598,7 +599,7 @@ MonoBehaviour:
   hp: 100
   maxInk: 15
   ink: 0
-  maxSpecialInk: 5
+  maxSpecialInk: 7.5
   specialInk: 0
   speed: 10
   damage: 10
@@ -727,9 +728,9 @@ MonoBehaviour:
   currentStance: 3
   combo: 0
   chargeSpeed: 5
-  specialChargeSpeed: 2.5
-  coolTime: 3
-  currentCoolTime: 3
+  specialChargeSpeed: 1
+  coolTime: 2
+  currentCoolTime: 2
 --- !u!114 &59548725156804224
 MonoBehaviour:
   m_ObjectHideFlags: 0

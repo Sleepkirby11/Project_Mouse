@@ -73,8 +73,8 @@ MonoBehaviour:
   greenLightningPoolKey: GreenLightning
   blueLightningPoolKey: BlueLightning
   lightningCount: 2
-  lightningInterval: 0.4
-  posRecordInterval: 0.8
+  lightningInterval: 0.6
+  posRecordInterval: 0.6
   firePoint: {fileID: 2730079636554140121}
   bulletFirePoint: {fileID: 8501819645430792203}
   hammerOffsetX: -5
