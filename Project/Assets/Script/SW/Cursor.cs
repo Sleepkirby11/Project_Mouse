@@ -151,8 +151,8 @@ public class Cursor : MonoBehaviour
             damageable.TakeDamage(damage);
             if(isSkill)
             {
-                if(playerStatus.currentStance == PlayerStatus.Stance.Green) playerStatus.Heal(2);
-                if(playerStatus.currentStance == PlayerStatus.Stance.Blue && stunnable != null) stunnable.ApplyStun(5); 
+                if(playerStatus.currentStance == PlayerStatus.Stance.Green) playerStatus.Heal(5);
+                if(playerStatus.currentStance == PlayerStatus.Stance.Blue && stunnable != null) stunnable.ApplyStun(3); 
             }
         }
     }
