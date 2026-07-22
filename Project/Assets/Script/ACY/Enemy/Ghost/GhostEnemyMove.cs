@@ -375,6 +375,11 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             retreatDirection = -chargeDirection;
         }
 
+        if (retreatDirection == Vector2.zero)
+        {
+            retreatDirection = Vector2.left;
+        }
+
         retreatTimer = retreatDuration;
         currentState = GhostState.Retreat;
     }
