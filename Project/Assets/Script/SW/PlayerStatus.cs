@@ -74,6 +74,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public bool IsKnockbacked => isKnockbacked;
     public bool IsInvincible => isInvincible;
     public bool IsBound => isBound;
+    public bool IsStunned => isStunned;
     private Coroutine bindCoroutine;
     private float originGravityScale;
     private System.Collections.Generic.List<Collider2D> ignoredColliders = new System.Collections.Generic.List<Collider2D>();
