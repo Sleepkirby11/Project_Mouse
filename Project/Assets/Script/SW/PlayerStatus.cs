@@ -57,6 +57,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public float coolTime;
     public float currentCoolTime;
 
+    [Header("잉크 최소 요구량")]
+    public int minInk;
+    public int minSpecialInk;
+
     private string particleName = "Particle_PlayerHit";
 
 

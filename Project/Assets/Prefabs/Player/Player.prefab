@@ -731,6 +731,8 @@ MonoBehaviour:
   specialChargeSpeed: 1
   coolTime: 2
   currentCoolTime: 2
+  minInk: 5
+  minSpecialInk: 3
 --- !u!114 &59548725156804224
 MonoBehaviour:
   m_ObjectHideFlags: 0

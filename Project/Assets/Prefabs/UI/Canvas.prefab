@@ -2397,6 +2397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 875154847216086592}
   - component: {fileID: 2896684379947270531}
+  - component: {fileID: 4077987611758713007}
   m_Layer: 5
   m_Name: specialInk
   m_TagString: Untagged
@@ -2476,6 +2477,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4077987611758713007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757684192341947166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de0aa02b5d5481498f0a7995773c673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  defaultColor: {r: 0.5137255, g: 0.9607843, b: 1, a: 1}
+  nextColor: {r: 1, g: 0.5137255, b: 0.52299696, a: 1}
+  ink: {fileID: 2699158366076760868}
 --- !u!1 &4914181544491790915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,6 +2503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8008626018680129636}
   - component: {fileID: 7490069689673584805}
+  - component: {fileID: 7449060352204041843}
   m_Layer: 5
   m_Name: Ink
   m_TagString: Untagged
@@ -2565,6 +2583,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7449060352204041843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4914181544491790915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de0aa02b5d5481498f0a7995773c673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  defaultColor: {r: 0, g: 0, b: 1, a: 1}
+  nextColor: {r: 1, g: 0, b: 0, a: 1}
+  ink: {fileID: 965532986257053352}
 --- !u!1 &4924650093678213205
 GameObject:
   m_ObjectHideFlags: 0
