@@ -29,6 +29,7 @@ public class GhostEnemyAttack : MonoBehaviour
     public Slider possessionSlider;          // 게이지 슬라이더
 
     private GhostEnemyMove ghostMove; 
+    private Rigidbody2D ghostRb;
 
     private Transform possessedPlayer;
     private Rigidbody2D playerRb;
@@ -50,6 +51,7 @@ public class GhostEnemyAttack : MonoBehaviour
     {
         ghostMove = GetComponent<GhostEnemyMove>();
         enemyStatus = GetComponent<EnemyStatus>();
+        ghostRb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -82,6 +84,15 @@ public class GhostEnemyAttack : MonoBehaviour
         if (!isPossessing)
         {
             return;
+        }
+
+        if (possessedPlayer != null)
+        {
+            transform.position = possessedPlayer.position;
+            if (ghostRb != null)
+            {
+                ghostRb.position = possessedPlayer.position;
+            }
         }
 
         ForceMovePlayer(); // 플레이어 강제 이동
@@ -198,6 +209,11 @@ public class GhostEnemyAttack : MonoBehaviour
     private void ForceMovePlayer()
     {
         if (playerRb == null)
+        {
+            return;
+        }
+
+        if (playerStatus != null && (playerStatus.IsKnockbacked || playerStatus.IsStunned || playerStatus.IsBound))
         {
             return;
         }
