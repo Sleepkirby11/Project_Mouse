@@ -350,22 +350,7 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
-    public void ActionCheatHeal(InputAction.CallbackContext context)
-    {
-        if(GameManager.instance != null)
-        {
-            if(GameManager.instance.isSetting)
-            {
-                return;
-            }
-        }
-        if(context.started)
-        {
-            player.status.Heal(100);
-            player.status.ink = player.status.maxInk;
-            player.status.specialInk = player.status.maxSpecialInk;
-        }
-    }
+
 
     public void ActionMenu(InputAction.CallbackContext context)
     {

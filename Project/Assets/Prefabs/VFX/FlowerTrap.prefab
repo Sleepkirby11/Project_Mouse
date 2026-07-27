@@ -164,6 +164,6 @@ MonoBehaviour:
   lockIconPoolKey: FlowerLockIcon
   lockIconOffset: {x: 0, y: 2}
   grownOffsetY: 0.7
-  dotDamage: 1
+  dotDamage: 2
   dotInterval: 0.5
   flowerIdleTimeout: 5

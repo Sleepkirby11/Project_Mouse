@@ -84,7 +84,7 @@ MonoBehaviour:
   readyDuration: 0.6
   directHitDamage: 1
   directHitRadius: 0.6
-  shockwaveDamage: 2
+  shockwaveDamage: 5
   shockwaveBoxSize: {x: 4, y: 0.6}
   shockwaveBoxOffset: {x: 0, y: -0.4}
   playerLayer:

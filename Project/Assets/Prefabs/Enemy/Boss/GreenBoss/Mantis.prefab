@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slamDamage: 5
-  stabDamage: 1
+  stabDamage: 2
   stabCooldown: 5
   meleeRate: 1.5
   projectilePoolKey: MantisProjectile

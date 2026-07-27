@@ -84,13 +84,13 @@ MonoBehaviour:
     m_Bits: 64
   parryDuration: 1
   parryInterval: 1.8
-  contactDamage: 1
+  contactDamage: 2
   contactKnockbackX: 6
   contactKnockbackY: 5
   contactCooldown: 0.5
   counterDashForce: 22
   counterDashTime: 0.6
-  counterDamage: 3
+  counterDamage: 5
   counterLaunchY: 18
   counterStunTime: 1
   counterRecoverTime: 1.3

@@ -49,10 +49,10 @@ MonoBehaviour:
   duration: 3
   moveSpeed: 5
   fadeDuration: 0.5
-  blueDamage: 3
+  blueDamage: 5
   launchForceY: 15
-  greenDamage: 3
-  redDamage: 5
+  greenDamage: 5
+  redDamage: 10
   poolKey: Hurricane
 --- !u!60 &2856481361812297965
 PolygonCollider2D:

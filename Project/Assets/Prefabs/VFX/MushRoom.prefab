@@ -204,4 +204,4 @@ MonoBehaviour:
   fadeDuration: 0.5
   poisonAreaOffsetY: -1
   explosionRadius: 1.5
-  explosionDamage: 3
+  explosionDamage: 5
