@@ -153,6 +153,7 @@ MonoBehaviour:
   - {fileID: 6726105636291395821, guid: ea3b79e4709adf54c85d28ddfe5a1b3c, type: 3}
   - {fileID: 6726105636291395821, guid: 930707bff2da1484cb07662dda1a370a, type: 3}
   - {fileID: 3911106931617480762, guid: 388840835a4393e4c80dd1c26530f28d, type: 3}
+  onPlayerZone: []
 --- !u!4 &97741520
 Transform:
   m_ObjectHideFlags: 0
@@ -451,7 +452,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: d2448bcf6666e194799dd62b6ea60625, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
