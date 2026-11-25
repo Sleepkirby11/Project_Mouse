@@ -39,6 +39,20 @@ public class UI : MonoBehaviour
 
     [Header("팔레트")]
     public GameObject pal;
+    private Image[] palSliceImages;
+    private RectTransform[] palSliceRects;
+    private Material[] palSliceMaterials;
+    private float[] palSliceWeights;
+    private int selectedPalIndex = -1;
+    private const float PalSelectedScale = 1.12f;
+    private const float PalUnselectedScale = 0.94f;
+    private static readonly Color PalSelectedColor = new Color(1f, 1f, 1f, 1f);
+    private static readonly Color PalUnselectedColor = new Color(0.62f, 0.62f, 0.62f, 0.32f);
+    private static readonly int PropColorTop = Shader.PropertyToID("_ColorTop");
+    private static readonly int PropColorBottom = Shader.PropertyToID("_ColorBottom");
+    private static readonly int PropRimColor = Shader.PropertyToID("_RimColor");
+    private static readonly int PropSelectWeight = Shader.PropertyToID("_SelectWeight");
+    private static readonly int PropSliceBounds = Shader.PropertyToID("_SliceBounds");
 
     [Header("설정 패널")]
     public GameObject settingPanel;
@@ -73,6 +87,11 @@ public class UI : MonoBehaviour
     void Start()
     {
         RefreshPlayerReference();
+    }
+
+    void Update()
+    {
+        UpdatePalVisuals();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -222,12 +241,22 @@ public class UI : MonoBehaviour
 
     public void ActivePal(bool isActive)
     {
+        if (pal == null) return;
         pal.SetActive(isActive);
+
+        if (isActive)
+        {
+            if (playerStatus == null) RefreshPlayerReference();
+            int currentIdx = playerStatus != null ? (int)playerStatus.currentStance : 0;
+            SelectPalVisual(currentIdx, immediate: true);
+        }
     }
 
     public void ChangeStance(int amount)
     {
+        if (playerStatus == null) RefreshPlayerReference();
         if (playerStatus == null) return;
+
         Debug.Log("체인지");
         switch (amount)
         {
@@ -243,6 +272,172 @@ public class UI : MonoBehaviour
             case 3:
                 playerStatus.currentStance = PlayerStatus.Stance.Green;
                 break;
+        }
+
+        SelectPalVisual(amount, immediate: false);
+    }
+
+    private void EnsurePalSliceCache()
+    {
+        if (pal == null || palSliceImages != null) return;
+
+        Image frameImg = pal.GetComponent<Image>();
+        if (frameImg != null)
+        {
+            frameImg.color = new Color(0.24f, 0.25f, 0.30f, 0.78f);
+        }
+
+        string[] sliceNames = { "White", "Red", "Blue", "Green" };
+        Color[] topColors =
+        {
+            new Color(0.97f, 0.98f, 1f, 1f),
+            new Color(1f, 0.38f, 0.44f, 1f),
+            new Color(0.27f, 0.78f, 1f, 1f),
+            new Color(0.32f, 0.92f, 0.62f, 1f)
+        };
+        Color[] bottomColors =
+        {
+            new Color(0.75f, 0.80f, 0.88f, 1f),
+            new Color(0.66f, 0.10f, 0.20f, 1f),
+            new Color(0.11f, 0.31f, 0.78f, 1f),
+            new Color(0.08f, 0.52f, 0.35f, 1f)
+        };
+        Color[] rimColors =
+        {
+            Color.white,
+            new Color(1f, 0.72f, 0.76f, 1f),
+            new Color(0.74f, 0.94f, 1f, 1f),
+            new Color(0.74f, 1f, 0.88f, 1f)
+        };
+
+        Shader sliceShader = Resources.Load<Shader>("Shaders/PaletteSlice");
+        if (sliceShader == null)
+        {
+            sliceShader = Shader.Find("UI/PaletteSlice");
+        }
+
+        palSliceImages = new Image[sliceNames.Length];
+        palSliceRects = new RectTransform[sliceNames.Length];
+        palSliceMaterials = new Material[sliceNames.Length];
+        palSliceWeights = new float[sliceNames.Length];
+
+        for (int i = 0; i < sliceNames.Length; i++)
+        {
+            Transform child = pal.transform.Find(sliceNames[i]);
+            if (child == null) continue;
+
+            Image img = child.GetComponent<Image>();
+            RectTransform rt = child as RectTransform;
+            palSliceImages[i] = img;
+            palSliceRects[i] = rt;
+
+            if (img != null && sliceShader != null)
+            {
+                Material mat = new Material(sliceShader)
+                {
+                    name = $"PaletteSliceMat_{sliceNames[i]}",
+                    hideFlags = HideFlags.HideAndDontSave
+                };
+                mat.SetColor(PropColorTop, topColors[i]);
+                mat.SetColor(PropColorBottom, bottomColors[i]);
+                mat.SetColor(PropRimColor, rimColors[i]);
+                mat.SetFloat(PropSelectWeight, 0f);
+                if (rt != null)
+                {
+                    Rect r = rt.rect;
+                    mat.SetVector(PropSliceBounds, new Vector4(
+                        r.xMin,
+                        r.yMin,
+                        r.width > 0f ? 1f / r.width : 1f,
+                        r.height > 0f ? 1f / r.height : 1f));
+                }
+
+                img.material = mat;
+                palSliceMaterials[i] = mat;
+            }
+        }
+    }
+
+    private void SelectPalVisual(int index, bool immediate)
+    {
+        EnsurePalSliceCache();
+        selectedPalIndex = index;
+
+        if (palSliceRects == null) return;
+
+        // 선택된 바깥쪽 색상이 다른 바깥쪽 조각 위로 올라오게 하되, 중앙 White 원은 항상 최상위 유지
+        if (index > 0 && index < palSliceRects.Length && palSliceRects[index] != null)
+        {
+            palSliceRects[index].SetAsLastSibling();
+        }
+        if (palSliceRects[0] != null)
+        {
+            palSliceRects[0].SetAsLastSibling();
+        }
+
+        if (immediate)
+        {
+            ApplyPalVisualStep(1f);
+        }
+    }
+
+    private void UpdatePalVisuals()
+    {
+        if (pal == null || !pal.activeInHierarchy || selectedPalIndex < 0) return;
+        EnsurePalSliceCache();
+        float lerpT = Mathf.Clamp01(Time.unscaledDeltaTime * 18f);
+        ApplyPalVisualStep(lerpT);
+    }
+
+    private void ApplyPalVisualStep(float lerpT)
+    {
+        if (palSliceImages == null || palSliceRects == null) return;
+
+        for (int i = 0; i < palSliceImages.Length; i++)
+        {
+            bool isSelected = i == selectedPalIndex;
+            float targetWeight = isSelected ? 1f : 0f;
+            Vector3 targetScale = Vector3.one * (isSelected ? PalSelectedScale : PalUnselectedScale);
+
+            if (palSliceWeights != null)
+            {
+                palSliceWeights[i] = lerpT >= 1f
+                    ? targetWeight
+                    : Mathf.Lerp(palSliceWeights[i], targetWeight, lerpT);
+            }
+
+            bool hasShaderMat = palSliceMaterials != null && palSliceMaterials[i] != null;
+            if (hasShaderMat)
+            {
+                palSliceMaterials[i].SetFloat(PropSelectWeight, palSliceWeights[i]);
+                if (palSliceRects[i] != null)
+                {
+                    Rect r = palSliceRects[i].rect;
+                    palSliceMaterials[i].SetVector(PropSliceBounds, new Vector4(
+                        r.xMin,
+                        r.yMin,
+                        r.width > 0f ? 1f / r.width : 1f,
+                        r.height > 0f ? 1f / r.height : 1f));
+                }
+            }
+
+            if (palSliceImages[i] != null)
+            {
+                Color targetColor = hasShaderMat
+                    ? new Color(1f, 1f, 1f, isSelected ? 1f : 0.44f)
+                    : (isSelected ? PalSelectedColor : PalUnselectedColor);
+
+                palSliceImages[i].color = lerpT >= 1f
+                    ? targetColor
+                    : Color.Lerp(palSliceImages[i].color, targetColor, lerpT);
+            }
+
+            if (palSliceRects[i] != null)
+            {
+                palSliceRects[i].localScale = lerpT >= 1f
+                    ? targetScale
+                    : Vector3.Lerp(palSliceRects[i].localScale, targetScale, lerpT);
+            }
         }
     }
 
