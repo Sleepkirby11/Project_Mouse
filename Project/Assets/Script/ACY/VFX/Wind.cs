@@ -8,10 +8,23 @@ public class Wind : MonoBehaviour
 
     private const string POOL_KEY = "BossWindBlast";
     private float currentLifeTime;
+    private BossProjectileTrail trailVfx;
+
+    private void Awake()
+    {
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.IceWind, 99);
+    }
 
     private void OnEnable()
     {
         currentLifeTime = lifeTime;
+
+        if (transform.parent != null && transform.parent.GetComponent<PoolingManager>() != null)
+        {
+            return;
+        }
+
+        trailVfx?.SetActive(true, true, clearBefore: true);
     }
 
     private void Update()

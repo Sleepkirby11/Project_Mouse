@@ -76,6 +76,7 @@ public class BossController : MonoBehaviour, IHitReaction
     private Coroutine waterSpoutLoop;
     private Coroutine currentLoop;
     private Coroutine deathRoutine;
+    private BossProjectileTrail dashTrail;
 
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
     private static readonly int AnimSonic = Animator.StringToHash("Sonic");
@@ -96,6 +97,7 @@ public class BossController : MonoBehaviour, IHitReaction
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         enemyStatus = GetComponent<EnemyStatus>();
+        dashTrail = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.BlueDash, 99);
 
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
@@ -372,6 +374,8 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
         }
+        dashTrail?.SetActive(true, true, clearBefore: true);
+        dashTrail?.EmitBurst(16);
 
         while (!isDead && remainedDistance > 0f)
         {
@@ -427,6 +431,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             dashHitbox.enabled = false;
         }
+        dashTrail?.SetActive(false, false);
         if (anim != null)
         {
             anim.SetTrigger(AnimDashEnd);
@@ -676,6 +681,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             dashHitbox.enabled = false;
         }
+        dashTrail?.SetActive(false, false);
         rb.linearVelocity = Vector2.zero;
 
         yield return FadeOut(0.4f);
@@ -806,6 +812,9 @@ public class BossController : MonoBehaviour, IHitReaction
             // 출발 시 해당 경고선 끄기
             if (spawnedLines[i] != null) spawnedLines[i].SetActive(false);
 
+            dashTrail?.SetActive(true, true, clearBefore: true);
+            dashTrail?.EmitBurst(18);
+
             // 전력 질주 속도
             float enrageDashSpeed = dashSpeed * 3.5f;
 
@@ -817,6 +826,7 @@ public class BossController : MonoBehaviour, IHitReaction
             }
 
             rb.MovePosition(targetPositions[i]); // 끝점 안착
+            dashTrail?.SetActive(false, false);
 
             if (bossSprite != null)
             {
@@ -831,6 +841,7 @@ public class BossController : MonoBehaviour, IHitReaction
         }
 
         // 발악 패턴 종료 후 안전하게 맵 중앙으로 순간이동하여 충돌 끼임 방지
+        dashTrail?.Clear();
         rb.position = mapCenter;
 
         if (isLast)
@@ -842,6 +853,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             dashHitbox.enabled = false;
         }
+        dashTrail?.SetActive(false, false);
         if (anim != null)
         {
             anim.SetTrigger(AnimDashEnd);
@@ -960,6 +972,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             dashHitbox.enabled = false;
         }
+        dashTrail?.SetActive(false, false);
 
         deathRoutine = StartCoroutine(DeathFallRoutine());
     }

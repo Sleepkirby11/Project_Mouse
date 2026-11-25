@@ -27,10 +27,13 @@ public class MagicOrb : MonoBehaviour
     private float launchTimer = 0f;
 
     private Collider2D col;
+    private BossProjectileTrail trailVfx;
+    private Vector3 lastPivotPosition;
 
     private void Awake()
     {
         col = GetComponent<Collider2D>();
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.MagicOrb, 99);
     }
 
     // 소환 및 공전 초기화
@@ -48,8 +51,14 @@ public class MagicOrb : MonoBehaviour
             col.enabled = true;
         }
 
-        // 초기 위치 세팅
+        if (pivot != null)
+        {
+            lastPivotPosition = pivot.position;
+        }
+
+        // 초기 위치 세팅 (공전 중에는 텔레포트 잔상 방지를 위해 리본 트레일 비활성 + 스파크만 유지)
         UpdateOrbitPosition();
+        trailVfx?.SetActive(false, true, clearBefore: true);
     }
 
     public void Launch(Vector3 playerPosition)
@@ -58,6 +67,8 @@ public class MagicOrb : MonoBehaviour
         launchTimer = 0f;
 
         launchDirection = (playerPosition - transform.position).normalized;
+        trailVfx?.SetActive(true, true, clearBefore: true);
+        trailVfx?.EmitBurst(12);
     }
 
     private void Update()
@@ -93,12 +104,20 @@ public class MagicOrb : MonoBehaviour
             return;
         }
 
+        bool pivotTeleported = (pivot.position - lastPivotPosition).sqrMagnitude > 2.25f;
+        lastPivotPosition = pivot.position;
+
         float rad = orbitAngle * Mathf.Deg2Rad;
         float bob = Mathf.Sin(bobTimer) * bobAmount;
 
         Vector3 offset = new Vector3(Mathf.Cos(rad) * orbitRadius, Mathf.Sin(rad) * orbitRadius + bob, 0f);
 
         transform.position = pivot.position + offset;
+
+        if (pivotTeleported)
+        {
+            trailVfx?.SetActive(false, true, clearBefore: true);
+        }
     }
 
     private void MoveStraight()

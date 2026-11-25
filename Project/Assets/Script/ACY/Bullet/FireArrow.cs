@@ -32,6 +32,7 @@ public class FireArrow : MonoBehaviour, IDamageable
     private bool isIndestructible = false; // 공격 파괴 불가능 여부
 
     private const string POOL_KEY = "RedBossArrow";
+    private BossProjectileTrail trailVfx;
 
     #endregion
 
@@ -42,6 +43,7 @@ public class FireArrow : MonoBehaviour, IDamageable
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         col = GetComponent<Collider2D>();
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.FireArrow, 99);
     }
 
     private void OnEnable()
@@ -131,6 +133,9 @@ public class FireArrow : MonoBehaviour, IDamageable
             target = null;
             transform.rotation = Quaternion.Euler(0f, 0f, angleOffset);
         }
+
+        trailVfx?.SetActive(true, true, clearBefore: true);
+        trailVfx?.EmitBurst(6);
     }
 
     #endregion

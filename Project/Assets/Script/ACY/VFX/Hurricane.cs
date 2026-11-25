@@ -37,6 +37,7 @@ public class Hurricane : MonoBehaviour
     // 원본 이동 속도 저장 (오브젝트 풀 반환 시 리셋용)
     private float originMoveSpeed;
     private AudioSource audioSource;
+    private BossProjectileTrail trailVfx;
     #endregion
 
     #region Public Fields & Actions
@@ -54,6 +55,8 @@ public class Hurricane : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.loop = true;
+
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.ElementalBlue, 99);
     }
 
     private void OnEnable()
@@ -123,6 +126,13 @@ public class Hurricane : MonoBehaviour
         currentElement = bossElement;
         moveDirection = dir.normalized;
 
+        if (trailVfx != null)
+        {
+            trailVfx.Configure(BossProjectileTrail.StyleFromElement(bossElement), 99);
+            trailVfx.SetActive(true, true, clearBefore: true);
+            trailVfx.EmitBurst(12);
+        }
+
         if (spriteRenderer == null) return;
 
         // 보스의 현재 속성에 따라 색상 및 데미지 차등 적용
@@ -189,6 +199,7 @@ public class Hurricane : MonoBehaviour
         isDisposing = true;
 
         moveSpeed = 0f;
+        trailVfx?.SetActive(false, false);
 
         if (spriteRenderer == null)
         {

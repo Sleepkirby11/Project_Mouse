@@ -10,10 +10,12 @@ public class LightningBolt : MonoBehaviour
     private string poolName;
     private EnemyStatus.EnemyElement currentElement;
     private Animator animator;
+    private BossProjectileTrail trailVfx;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.ElementalBlue, 102);
     }
 
     public void Initialize(string pool, Vector2 dir, EnemyStatus.EnemyElement element)
@@ -24,6 +26,13 @@ public class LightningBolt : MonoBehaviour
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+        if (trailVfx != null)
+        {
+            trailVfx.Configure(BossProjectileTrail.StyleFromElement(element), 102);
+            trailVfx.SetActive(false, true, clearBefore: true);
+            trailVfx.EmitBurst(18);
+        }
 
         if (AudioManager.instance != null)
         {

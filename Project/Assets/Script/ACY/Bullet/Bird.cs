@@ -18,6 +18,12 @@ public class Bird : MonoBehaviour
 
     private bool isFlying = false; // 경고가 끝나고 날아가고 있는지 여부
     private Coroutine attackRoutine;
+    private BossProjectileTrail trailVfx;
+
+    private void Awake()
+    {
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.GreenBird, 99);
+    }
 
     private void OnDisable()
     {
@@ -26,6 +32,7 @@ public class Bird : MonoBehaviour
             StopCoroutine(attackRoutine);
             attackRoutine = null;
         }
+        trailVfx?.Clear();
     }
 
     public void Init(float customWarningTime, float customSpeed = -1f)
@@ -38,6 +45,7 @@ public class Bird : MonoBehaviour
         warningTime = customWarningTime;
 
         isFlying = false;
+        trailVfx?.Clear();
 
         if (warningLine != null)
         {
@@ -72,6 +80,8 @@ public class Bird : MonoBehaviour
         }
 
         isFlying = true;
+        trailVfx?.SetActive(true, true, clearBefore: true);
+        trailVfx?.EmitBurst(10);
     }
 
     private void SetWarningAlpha(float alpha)

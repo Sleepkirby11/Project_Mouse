@@ -15,12 +15,21 @@ public class Meteor : MonoBehaviour
     private bool isFalling;
 
     private const string METEOR_KEY = "RedBossMeteor";
+    private BossProjectileTrail trailVfx;
+
+    private void Awake()
+    {
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.Meteor, 99);
+    }
 
     public void Init(Vector3 targetPos)
     {
         this.targetPos = targetPos;
         fallSpeed = Random.Range(minfallSpeed, maxfallSpeed);
         isFalling = true;
+
+        trailVfx?.SetActive(true, true, clearBefore: true);
+        trailVfx?.EmitBurst(10);
     }
 
     private void Update()
