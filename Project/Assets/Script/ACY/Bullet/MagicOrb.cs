@@ -148,6 +148,10 @@ public class MagicOrb : MonoBehaviour
 
     private void ReturnToPool()
     {
+        if (isLaunched)
+        {
+            DisappearVfxHelper.Spawn(DisappearVfxHelper.Style.MagicOrbDissipate, transform.position);
+        }
         if (col != null)
         {
             col.enabled = false;
