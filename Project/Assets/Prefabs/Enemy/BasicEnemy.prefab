@@ -156,6 +156,10 @@ MonoBehaviour:
   isBoss: 0
   bossName: 
   bossNameColor: {r: 0, g: 0, b: 0, a: 0}
+  overrideCutsceneTiming: 0
+  cutscenePanToBossDuration: 0.6
+  cutsceneHoldOnBossDuration: 1.1
+  cutscenePanToPlayerDuration: 0.6
 --- !u!61 &3298864769083811923
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,7 +194,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.008592606, y: -0.5695112}
+  m_Offset: {x: 0.008592606, y: -0.55063313}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -200,7 +204,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.7418709, y: 1.6296172}
+  m_Size: {x: 1.7418709, y: 1.5918611}
   m_EdgeRadius: 0
 --- !u!1 &7128169409195291579
 GameObject:

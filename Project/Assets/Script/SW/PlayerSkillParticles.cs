@@ -35,11 +35,11 @@ public class PlayerSkillParticles : MonoBehaviour
 
         ApplyColors(stance);
 
-        if (!auraParticle.isPlaying)
+        if (!auraParticle.isEmitting)
         {
             auraParticle.Play(false);
         }
-        if (sparkParticle != null && !sparkParticle.isPlaying)
+        if (sparkParticle != null && !sparkParticle.isEmitting)
         {
             sparkParticle.Play(false);
         }
