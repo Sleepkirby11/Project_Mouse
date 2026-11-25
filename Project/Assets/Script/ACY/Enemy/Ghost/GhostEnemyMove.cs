@@ -86,6 +86,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     private bool hasDetectedPlayer = false;
     private bool isDead = false;
     private EnemyStatus enemyStatus;
+    private PlayerStatus cachedPlayerStatus;
 
     #endregion
 
@@ -133,7 +134,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             return;
         }
 
-        if (!hasDetectedPlayer)
+        if (!hasDetectedPlayer && !BossIntroCutscene.IsPlaying)
         {
             CheckPlayerDetection();
         }
@@ -242,7 +243,7 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             rb.linearVelocity = Vector2.zero;
         }
 
-        if (cooldownTimer <= 0f && distanceToPlayer <= chargeAttackRange)
+        if (cooldownTimer <= 0f && distanceToPlayer <= chargeAttackRange && !IsPlayerAlreadyPossessed(target))
         {
             StartChargeReady();
         }
@@ -263,6 +264,13 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
     // 돌진 준비 이동 (정지 상태에서 서서히 반투명해짐)
     private void ChargeReadyMove()
     {
+        if (IsPlayerAlreadyPossessed())
+        {
+            cooldownTimer = Mathf.Max(cooldownTimer, 0.5f);
+            StartSlowChase();
+            return;
+        }
+
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
@@ -415,18 +423,39 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             return;
         }
 
+        if (IsPlayerAlreadyPossessed(collision.transform))
+        {
+            return;
+        }
+
         player = collision.transform;
 
-        StartPossessing();
-
-        if (ghostEnemyAttack != null)
+        if (ghostEnemyAttack != null && ghostEnemyAttack.StartPossession(player))
         {
-            ghostEnemyAttack.StartPossession(player);
+            StartPossessing();
         }
         else
         {
             EndPossessionAndRetreat();
         }
+    }
+
+    private bool IsPlayerAlreadyPossessed(Transform candidate = null)
+    {
+        if (cachedPlayerStatus == null)
+        {
+            Transform target = candidate != null ? candidate : (playerTransform != null ? playerTransform : player);
+            if (target != null)
+            {
+                cachedPlayerStatus = target.GetComponent<PlayerStatus>();
+            }
+            if (cachedPlayerStatus == null && Player.instance != null)
+            {
+                cachedPlayerStatus = Player.instance.status;
+            }
+        }
+
+        return cachedPlayerStatus != null && cachedPlayerStatus.IsPossessed;
     }
 
     #endregion
@@ -506,6 +535,64 @@ public class GhostEnemyMove : MonoBehaviour, IHitReaction
             rb.linearVelocity = Vector2.zero;
         }
         SetTransparent(false);
+    }
+
+    /// <summary>
+    /// 보스방 진입 시 플레이어를 추적 중이던 유령이 보스전까지 난입하지 않도록 빙의를 풀고 서서히 소멸시킵니다.
+    /// </summary>
+    public void DismissIfChasing()
+    {
+        if (isDead) return;
+        if (!hasDetectedPlayer && currentState == GhostState.Patrol) return;
+
+        if (ghostEnemyAttack != null && ghostEnemyAttack.IsPossessing)
+        {
+            ghostEnemyAttack.EndPossession();
+        }
+
+        isDead = true;
+        StopAllCoroutines();
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        if (ghostCollider != null)
+        {
+            ghostCollider.enabled = false;
+        }
+
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(FadeOutAndDisableRoutine(0.35f));
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private System.Collections.IEnumerator FadeOutAndDisableRoutine(float duration)
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = true;
+            float startAlpha = spriteRenderer.color.a;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                SetAlpha(Mathf.Lerp(startAlpha, 0f, t));
+                yield return null;
+            }
+
+            SetAlpha(0f);
+        }
+
+        gameObject.SetActive(false);
     }
 
     private void SetAlpha(float alpha)

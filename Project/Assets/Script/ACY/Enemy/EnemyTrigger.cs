@@ -51,6 +51,11 @@ public class EnemyTrigger : MonoBehaviour
     {
         EnemyStatus boss = FindBossInEnemies();
 
+        if (boss != null)
+        {
+            DismissChasingGhostsForBossFight();
+        }
+
         if (playBossCutscene && boss != null)
         {
             // 보스방 문 닫기 등 트리거 이벤트 선반영
@@ -73,6 +78,23 @@ public class EnemyTrigger : MonoBehaviour
         }
 
         OnTriggerActivated?.Invoke();
+    }
+
+    private void DismissChasingGhostsForBossFight()
+    {
+        GhostEnemyMove[] ghosts = FindObjectsByType<GhostEnemyMove>(FindObjectsSortMode.None);
+        for (int i = 0; i < ghosts.Length; i++)
+        {
+            GhostEnemyMove ghost = ghosts[i];
+            if (ghost == null) continue;
+
+            if (enemies != null && System.Array.IndexOf(enemies, ghost.gameObject) >= 0)
+            {
+                continue;
+            }
+
+            ghost.DismissIfChasing();
+        }
     }
 
     private EnemyStatus FindBossInEnemies()

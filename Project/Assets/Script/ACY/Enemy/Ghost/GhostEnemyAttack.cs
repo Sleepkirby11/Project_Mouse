@@ -102,16 +102,22 @@ public class GhostEnemyAttack : MonoBehaviour
 
     #region Possession Setup & Control
 
-    public void StartPossession(Transform player)
+    public bool StartPossession(Transform player)
     {
         if (enemyStatus != null && enemyStatus.isStunned)
         {
-            return;
+            return false;
         }
 
         if (player == null)
         {
-            return;
+            return false;
+        }
+
+        PlayerStatus targetStatus = player.GetComponent<PlayerStatus>();
+        if (targetStatus == null || targetStatus.IsPossessed)
+        {
+            return false;
         }
 
         if (possessionCoroutine != null)
@@ -121,12 +127,7 @@ public class GhostEnemyAttack : MonoBehaviour
 
         possessedPlayer = player;
         playerRb = possessedPlayer.GetComponent<Rigidbody2D>();
-        playerStatus = possessedPlayer.GetComponent<PlayerStatus>();
-
-        if (playerStatus == null)
-        {
-            return;
-        }
+        playerStatus = targetStatus;
 
         FindPossessionUI();
         isPossessing = true;
@@ -147,6 +148,7 @@ public class GhostEnemyAttack : MonoBehaviour
         UpdateGauge();
 
         possessionCoroutine = StartCoroutine(PossessionRoutine());
+        return true;
     }
     private void FindPossessionUI()
     {
@@ -230,7 +232,9 @@ public class GhostEnemyAttack : MonoBehaviour
         playerRb.linearVelocity = new Vector2(forceMoveDirection.x * possessionMoveSpeed, playerRb.linearVelocity.y);
     }
 
-    private void EndPossession() // 빙의 종료
+    public bool IsPossessing => isPossessing;
+
+    public void EndPossession() // 빙의 종료
     {
         if (!isPossessing) 
         {
