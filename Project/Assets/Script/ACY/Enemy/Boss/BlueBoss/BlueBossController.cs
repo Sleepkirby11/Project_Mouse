@@ -77,6 +77,7 @@ public class BossController : MonoBehaviour, IHitReaction
     private Coroutine currentLoop;
     private Coroutine deathRoutine;
     private BossProjectileTrail dashTrail;
+    private readonly List<BlueBossWarningLine> activeWarningLines = new List<BlueBossWarningLine>();
 
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
     private static readonly int AnimSonic = Animator.StringToHash("Sonic");
@@ -691,7 +692,7 @@ public class BossController : MonoBehaviour, IHitReaction
         int dashCount = 4; //선 개수
         Vector2[] startPositions = new Vector2[dashCount];
         Vector2[] targetPositions = new Vector2[dashCount];
-        GameObject[] spawnedLines = new GameObject[dashCount];
+        BlueBossWarningLine[] spawnedWarnings = new BlueBossWarningLine[dashCount];
 
         // 1. 촘촘한 * (애스터리스크) 모양의 교차 경로 생성 (45도 간격)
         List<int> dashIndices = new List<int> { 0, 1, 2, 3 };
@@ -754,26 +755,35 @@ public class BossController : MonoBehaviour, IHitReaction
             }
         }
 
+        bool simulatedFacingRight = bossFlip != null ? bossFlip.isFacingRight : transform.localScale.x >= 0f;
+        float maxWarningSafetyDuration = Mathf.Max(dashWarningDuration * 4f, dashCount * warningInterval + 6f);
+
         for (int i = 0; i < dashCount; i++)
         {
-
-            // 경고선 배치
+            // 경고 파티클 배치 (실제 dashHitbox 투영 두께와 중심 오프셋 일치)
             Vector2 pathDir = (targetPositions[i] - startPositions[i]).normalized;
             float distance = Vector2.Distance(startPositions[i], targetPositions[i]);
             float angle = Mathf.Atan2(pathDir.y, pathDir.x) * Mathf.Rad2Deg;
             Quaternion lineRotation = Quaternion.Euler(0, 0, angle);
 
-            Vector2 centerPos = (startPositions[i] + targetPositions[i]) * 0.5f;
+            if (pathDir.x > 0.0001f) simulatedFacingRight = true;
+            else if (pathDir.x < -0.0001f) simulatedFacingRight = false;
+
+            ComputeDashHitboxSweep(pathDir, simulatedFacingRight ? 1f : -1f, out float hitboxThickness, out float normalOffset);
+            Vector2 pathNormal = new Vector2(-pathDir.y, pathDir.x);
+            Vector2 centerPos = ((startPositions[i] + targetPositions[i]) * 0.5f) + (pathNormal * normalOffset);
+
             GameObject line = PoolingManager.Instance.Get(warningLinePoolKey, centerPos, lineRotation);
 
             if (line != null)
             {
-                line.transform.localScale = new Vector3(distance, 1f, 1f);
-                spawnedLines[i] = line;
+                line.transform.localScale = Vector3.one;
 
                 if (line.TryGetComponent(out BlueBossWarningLine warningLineScript))
                 {
-                    warningLineScript.ActivateWarning(dashWarningDuration * 2.5f, warningLinePoolKey);
+                    spawnedWarnings[i] = warningLineScript;
+                    activeWarningLines.Add(warningLineScript);
+                    warningLineScript.ActivateWarning(distance, hitboxThickness, maxWarningSafetyDuration, warningLinePoolKey);
                 }
             }
 
@@ -793,24 +803,32 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             if (isDead) yield break;
 
-            // 보스 순간이동 및 등장
-            rb.position = startPositions[i];
-            yield return FadeIn(0.1f);
-            if (dashHitbox != null)
-            {
-                dashHitbox.enabled = true; // 이때 충돌 판정 켬
-            }
-
-            // 보스 방향 및 룩 설정
-            Vector2 dashDir = (targetPositions[i] - rb.position).normalized;
+            Vector2 dashDir = (targetPositions[i] - startPositions[i]).normalized;
             if (bossFlip != null)
             {
                 bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
                 bossFlip.moveDirection = dashDir;
             }
 
-            // 출발 시 해당 경고선 끄기
-            if (spawnedLines[i] != null) spawnedLines[i].SetActive(false);
+            // 보스 순간이동 및 등장
+            rb.position = startPositions[i];
+            if (spawnedWarnings[i] != null)
+            {
+                spawnedWarnings[i].TriggerLockOnPulse();
+            }
+            yield return FadeIn(0.1f);
+            if (dashHitbox != null)
+            {
+                dashHitbox.enabled = true; // 이때 충돌 판정 켬
+            }
+
+            // 출발 시 해당 경고 파티클 종료
+            if (spawnedWarnings[i] != null)
+            {
+                activeWarningLines.Remove(spawnedWarnings[i]);
+                spawnedWarnings[i].DismissWarning();
+                spawnedWarnings[i] = null;
+            }
 
             dashTrail?.SetActive(true, true, clearBefore: true);
             dashTrail?.EmitBurst(18);
@@ -895,6 +913,131 @@ public class BossController : MonoBehaviour, IHitReaction
         return Mathf.Min(tMaxX, tMaxY);
     }
 
+    private void ComputeDashHitboxSweep(Vector2 pathDir, float predictedFacingSign, out float thickness, out float normalOffset)
+    {
+        thickness = 1f;
+        normalOffset = 0f;
+
+        if (dashHitbox == null)
+        {
+            return;
+        }
+
+        Vector2 normalizedDir = pathDir.sqrMagnitude > 0.0001f ? pathDir.normalized : Vector2.right;
+        Vector2 pathNormal = new Vector2(-normalizedDir.y, normalizedDir.x);
+
+        Vector3 rootLossy = transform.lossyScale;
+        float scaleX = Mathf.Abs(rootLossy.x) * (predictedFacingSign >= 0f ? 1f : -1f);
+        float scaleY = rootLossy.y;
+
+        bool hasSample = false;
+        float minProj = float.PositiveInfinity;
+        float maxProj = float.NegativeInfinity;
+
+        void AccumulateBossLocalPoint(Vector2 bossLocalPt)
+        {
+            Vector2 worldOffset = new Vector2(bossLocalPt.x * scaleX, bossLocalPt.y * scaleY);
+            float proj = Vector2.Dot(worldOffset, pathNormal);
+            if (!hasSample)
+            {
+                hasSample = true;
+                minProj = proj;
+                maxProj = proj;
+            }
+            else
+            {
+                if (proj < minProj) minProj = proj;
+                if (proj > maxProj) maxProj = proj;
+            }
+        }
+
+        Vector2 ColliderLocalToBossLocal(Vector2 colliderLocalPt)
+        {
+            if (dashHitbox.transform == transform)
+            {
+                return colliderLocalPt;
+            }
+            Vector3 worldPt = dashHitbox.transform.TransformPoint(colliderLocalPt);
+            Vector3 bossLocal = transform.InverseTransformPoint(worldPt);
+            return new Vector2(bossLocal.x, bossLocal.y);
+        }
+
+        if (dashHitbox is PolygonCollider2D poly)
+        {
+            Vector2 polyOffset = poly.offset;
+            for (int p = 0; p < poly.pathCount; p++)
+            {
+                Vector2[] pts = poly.GetPath(p);
+                for (int k = 0; k < pts.Length; k++)
+                {
+                    AccumulateBossLocalPoint(ColliderLocalToBossLocal(pts[k] + polyOffset));
+                }
+            }
+        }
+        else if (dashHitbox is BoxCollider2D box)
+        {
+            Vector2 half = box.size * 0.5f;
+            Vector2 c = box.offset;
+            AccumulateBossLocalPoint(ColliderLocalToBossLocal(c + new Vector2(-half.x, -half.y)));
+            AccumulateBossLocalPoint(ColliderLocalToBossLocal(c + new Vector2(half.x, -half.y)));
+            AccumulateBossLocalPoint(ColliderLocalToBossLocal(c + new Vector2(half.x, half.y)));
+            AccumulateBossLocalPoint(ColliderLocalToBossLocal(c + new Vector2(-half.x, half.y)));
+        }
+        else if (dashHitbox is CircleCollider2D circle)
+        {
+            Vector2 bossLocalCenter = ColliderLocalToBossLocal(circle.offset);
+            Vector2 worldCenterOffset = new Vector2(bossLocalCenter.x * scaleX, bossLocalCenter.y * scaleY);
+            float centerProj = Vector2.Dot(worldCenterOffset, pathNormal);
+            Vector3 colLossy = dashHitbox.transform.lossyScale;
+            float radiusScale = Mathf.Max(Mathf.Abs(colLossy.x), Mathf.Abs(colLossy.y));
+            float worldRadius = circle.radius * radiusScale;
+            minProj = centerProj - worldRadius;
+            maxProj = centerProj + worldRadius;
+            hasSample = true;
+        }
+        else
+        {
+            Bounds b = dashHitbox.bounds;
+            if (b.size.sqrMagnitude > 0.0001f)
+            {
+                Vector2 c = (Vector2)b.center - (Vector2)transform.position;
+                Vector2 ext = b.extents;
+                Vector2[] corners =
+                {
+                    c + new Vector2(-ext.x, -ext.y),
+                    c + new Vector2(ext.x, -ext.y),
+                    c + new Vector2(ext.x, ext.y),
+                    c + new Vector2(-ext.x, ext.y)
+                };
+                for (int k = 0; k < corners.Length; k++)
+                {
+                    float proj = Vector2.Dot(corners[k], pathNormal);
+                    if (!hasSample) { hasSample = true; minProj = proj; maxProj = proj; }
+                    else { if (proj < minProj) minProj = proj; if (proj > maxProj) maxProj = proj; }
+                }
+            }
+        }
+
+        if (hasSample)
+        {
+            thickness = Mathf.Max(0.1f, maxProj - minProj);
+            normalOffset = (minProj + maxProj) * 0.5f;
+        }
+    }
+
+    private void ClearActiveWarningLines()
+    {
+        for (int i = activeWarningLines.Count - 1; i >= 0; i--)
+        {
+            BlueBossWarningLine warning = activeWarningLines[i];
+            if (warning != null)
+            {
+                warning.DismissWarning(immediate: true);
+            }
+        }
+        activeWarningLines.Clear();
+    }
+
     private IEnumerator FadeOut(float duration)
     {
         SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
@@ -953,6 +1096,11 @@ public class BossController : MonoBehaviour, IHitReaction
 
     #region Death & Utilities
 
+    private void OnDisable()
+    {
+        ClearActiveWarningLines();
+    }
+
     private void OnDeath()
     {
         if (isDead)
@@ -963,6 +1111,7 @@ public class BossController : MonoBehaviour, IHitReaction
         isDead = true;
 
         StopAllBossCoroutines();
+        ClearActiveWarningLines();
 
         if (clawHitbox != null)
         {
