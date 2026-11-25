@@ -212,30 +212,48 @@ public class BossIntroCutscene : MonoBehaviour
             : originPos;
         float targetZoom = Mathf.Min(prevOrthoSize, bossZoomOrthoSize);
 
+        bool useCustomTiming = boss != null && boss.OverrideCutsceneTiming;
+        float panToBoss = Mathf.Max(0f, useCustomTiming ? boss.CutscenePanToBossDuration : panToBossDuration);
+        float holdOnBoss = Mathf.Max(0f, useCustomTiming ? boss.CutsceneHoldOnBossDuration : holdOnBossDuration);
+        float panToPlayer = Mathf.Max(0f, useCustomTiming ? boss.CutscenePanToPlayerDuration : panToPlayerDuration);
+
         // Phase 1: 보스로 카메라 팬 + 줌인 + 레터박스 인
         float elapsed = 0f;
-        while (elapsed < panToBossDuration && !skipRequested)
+        if (panToBoss > 0f)
         {
-            CheckKeyboardSkip(elapsed);
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / panToBossDuration);
-            float ease = EaseInOutCubic(t);
-
-            SetLetterboxProgress(EaseOutCubic(t));
-
-            if (camTargetObj != null)
+            while (elapsed < panToBoss && !skipRequested)
             {
-                camTargetObj.transform.position = Vector3.Lerp(originPos, bossFocusPos, ease);
-            }
+                CheckKeyboardSkip(elapsed);
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / panToBoss);
+                float ease = EaseInOutCubic(t);
 
+                SetLetterboxProgress(EaseOutCubic(t));
+
+                if (camTargetObj != null)
+                {
+                    camTargetObj.transform.position = Vector3.Lerp(originPos, bossFocusPos, ease);
+                }
+
+                if (vcam != null)
+                {
+                    var lens = vcam.Lens;
+                    lens.OrthographicSize = Mathf.Lerp(prevOrthoSize, targetZoom, ease);
+                    vcam.Lens = lens;
+                }
+
+                yield return null;
+            }
+        }
+        else if (!skipRequested)
+        {
+            if (camTargetObj != null) camTargetObj.transform.position = bossFocusPos;
             if (vcam != null)
             {
                 var lens = vcam.Lens;
-                lens.OrthographicSize = Mathf.Lerp(prevOrthoSize, targetZoom, ease);
+                lens.OrthographicSize = targetZoom;
                 vcam.Lens = lens;
             }
-
-            yield return null;
         }
 
         // Phase 2: 보스 포커스 + 임팩트 쉐이크 + 보스 타이틀 배너
@@ -250,44 +268,47 @@ public class BossIntroCutscene : MonoBehaviour
 
             elapsed = 0f;
             float holdZoomEnd = Mathf.Max(4f, targetZoom - 0.5f);
-            while (elapsed < holdOnBossDuration && !skipRequested)
+            if (holdOnBoss > 0f)
             {
-                CheckKeyboardSkip(elapsed + panToBossDuration);
-                elapsed += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsed / holdOnBossDuration);
-
-                if (boss != null && camTargetObj != null)
+                while (elapsed < holdOnBoss && !skipRequested)
                 {
-                    camTargetObj.transform.position = boss.transform.position + new Vector3(0f, bossFocusYOffset, 0f);
+                    CheckKeyboardSkip(elapsed + panToBoss);
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / holdOnBoss);
+
+                    if (boss != null && camTargetObj != null)
+                    {
+                        camTargetObj.transform.position = boss.transform.position + new Vector3(0f, bossFocusYOffset, 0f);
+                    }
+
+                    if (vcam != null)
+                    {
+                        var lens = vcam.Lens;
+                        lens.OrthographicSize = Mathf.Lerp(targetZoom, holdZoomEnd, t);
+                        vcam.Lens = lens;
+                    }
+
+                    // 배너 페이드 인 (0 ~ 0.22s) 및 유지
+                    float bannerAlpha = Mathf.Clamp01(elapsed / 0.22f);
+                    SetBannerProgress(EaseOutCubic(bannerAlpha));
+
+                    yield return null;
                 }
-
-                if (vcam != null)
-                {
-                    var lens = vcam.Lens;
-                    lens.OrthographicSize = Mathf.Lerp(targetZoom, holdZoomEnd, t);
-                    vcam.Lens = lens;
-                }
-
-                // 배너 페이드 인 (0 ~ 0.25s) 및 유지
-                float bannerAlpha = Mathf.Clamp01(elapsed / 0.22f);
-                SetBannerProgress(EaseOutCubic(bannerAlpha));
-
-                yield return null;
             }
         }
 
         // Phase 3: 배너 & 레터박스 아웃 + 플레이어로 복귀
-        if (!skipRequested)
+        if (!skipRequested && panToPlayer > 0f)
         {
             Vector3 returnStartPos = camTargetObj != null ? camTargetObj.transform.position : bossFocusPos;
             float returnStartZoom = vcam != null ? vcam.Lens.OrthographicSize : targetZoom;
 
             elapsed = 0f;
-            while (elapsed < panToPlayerDuration && !skipRequested)
+            while (elapsed < panToPlayer && !skipRequested)
             {
-                CheckKeyboardSkip(elapsed + panToBossDuration + holdOnBossDuration);
+                CheckKeyboardSkip(elapsed + panToBoss + holdOnBoss);
                 elapsed += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsed / panToPlayerDuration);
+                float t = Mathf.Clamp01(elapsed / panToPlayer);
                 float ease = EaseInOutCubic(t);
 
                 SetLetterboxProgress(1f - EaseInOutCubic(t));
