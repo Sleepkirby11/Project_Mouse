@@ -142,8 +142,6 @@ MonoBehaviour:
   - {fileID: 1192057597000589929}
   - {fileID: 2511147669104551955}
   laserRenderers:
-  - {fileID: 2575403754705213566}
-  - {fileID: 7264741007795350107}
   - {fileID: 8776882425045399622}
   - {fileID: 712725683699678089}
   audioSource: {fileID: 0}
