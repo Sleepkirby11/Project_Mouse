@@ -109,6 +109,8 @@ public class PlayerInputScript : MonoBehaviour
                 if (AudioManager.instance != null)
                 {
                     AudioManager.instance.PlaySFX(AudioManager.SFX.PlayerJump);
+                    GameObject particle = ParticleManager.Instance.Get("Player_Jump", transform.position, Quaternion.identity);
+                    particle.transform.position = transform.position - new Vector3(0, 0.5f, 0);
                 }
             }
         }
@@ -181,6 +183,7 @@ public class PlayerInputScript : MonoBehaviour
 
                 player.SpriteFlip();
                 player.JumpAnimUpdate(true);
+                player.dashParticle.SetActive(true);
 
                 player.jumpCount--;
             }

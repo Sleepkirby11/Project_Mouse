@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
 
     //대시 준비 여부
     [HideInInspector] public bool isDashReady;
+    public GameObject dashParticle;
 
     private bool isChargeInk;
     private bool isChargeSpecial;
@@ -242,6 +243,7 @@ public class Player : MonoBehaviour
                 isCanMove = true;
                 JumpAnimUpdate(false);
                 anim.SetBool("IsFalling", false);
+                DashParticleEnd();
                 return;
             }
             else if (jumpCount == 2) //Falling 상태 중 점프 카운트 조정
@@ -502,6 +504,7 @@ public class Player : MonoBehaviour
                 {
                     anim.SetBool("IsFalling", false);
                     anim.SetBool("IsJump", false);
+                    DashParticleEnd();
 
                     //이동 가능 + input 값 이어서 받기
                     if (!status.IsKnockbacked)
@@ -517,6 +520,12 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    void DashParticleEnd()
+    {
+        var main = dashParticle.GetComponent<ParticleSystem>().main;
+        main.loop = false;
     }
 
     //레버 상호작용 감지

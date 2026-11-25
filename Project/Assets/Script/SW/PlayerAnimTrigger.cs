@@ -34,5 +34,13 @@ public class PlayerAnimTrigger : MonoBehaviour
             Player.instance.anim.SetTrigger("Hit");
         }
     }
+    public void SpawnParticle(string key)   //파티클 생성
+    {
+        GameObject particle = ParticleManager.Instance.Get(key, transform.position, Quaternion.identity);
+        
+        if(key == "Player_Walk")
+            particle.transform.position = transform.position - new Vector3(0, 0.5f, 0);
+
+    }
 
 }
