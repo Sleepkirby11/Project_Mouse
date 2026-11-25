@@ -58,6 +58,12 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
     private GameObject cachedPortalVisual;
     private PlayerStatus cachedPlayer;
+    private MonsterShockParticles shockParticles;
+    private Coroutine stunCoroutine;
+    private Animator[] cachedAnimators;
+    private float[] savedAnimatorSpeeds;
+    private ParryingShieldEnemy parryingShieldEnemy;
+    private int lastBlockedFrame = -1;
     public EnemyElement CurrentElement => element;
 
     #endregion
@@ -67,6 +73,15 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        cachedAnimators = GetComponentsInChildren<Animator>(true);
+        savedAnimatorSpeeds = new float[cachedAnimators.Length];
+        for (int i = 0; i < cachedAnimators.Length; i++)
+        {
+            savedAnimatorSpeeds[i] = cachedAnimators[i] != null && cachedAnimators[i].speed > 0f
+                ? cachedAnimators[i].speed
+                : 1f;
+        }
+        parryingShieldEnemy = GetComponent<ParryingShieldEnemy>();
         cachedPlayer = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
         currentHP = maxHP;
         isDeath = false;
@@ -227,6 +242,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
             if (blocked)
             {
+                lastBlockedFrame = Time.frameCount;
                 return;
             }
         }
@@ -362,16 +378,76 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             return;
         }
 
-        StartCoroutine(StunRoutine(duration));
+        // 패링 성공/카운터 중이거나 직전 프레임에 공격을 막아낸 경우 스턴 무시
+        if (lastBlockedFrame == Time.frameCount ||
+            (parryingShieldEnemy != null && parryingShieldEnemy.IsStunImmune))
+        {
+            return;
+        }
+
+        stunCoroutine = StartCoroutine(StunRoutine(duration));
     }
 
     private IEnumerator StunRoutine(float duration)
     {
         isStunned = true;
+        SetAnimatorsPaused(true);
+
+        if (shockParticles == null)
+        {
+            shockParticles = MonsterShockParticles.GetOrCreate(this);
+        }
+        shockParticles?.PlayShock();
 
         yield return new WaitForSeconds(duration);
 
         isStunned = false;
+        stunCoroutine = null;
+        SetAnimatorsPaused(false);
+        shockParticles?.StopShock(clearImmediately: false);
+    }
+
+    private void ClearStunState(bool clearVfxImmediately)
+    {
+        if (stunCoroutine != null)
+        {
+            StopCoroutine(stunCoroutine);
+            stunCoroutine = null;
+        }
+        isStunned = false;
+        SetAnimatorsPaused(false);
+        shockParticles?.StopShock(clearImmediately: clearVfxImmediately);
+    }
+
+    private void SetAnimatorsPaused(bool paused)
+    {
+        if (cachedAnimators == null) return;
+
+        for (int i = 0; i < cachedAnimators.Length; i++)
+        {
+            Animator animator = cachedAnimators[i];
+            if (animator == null) continue;
+
+            if (paused)
+            {
+                if (animator.speed > 0f)
+                {
+                    savedAnimatorSpeeds[i] = animator.speed;
+                }
+                animator.speed = 0f;
+            }
+            else
+            {
+                animator.speed = savedAnimatorSpeeds != null && i < savedAnimatorSpeeds.Length && savedAnimatorSpeeds[i] > 0f
+                    ? savedAnimatorSpeeds[i]
+                    : 1f;
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        ClearStunState(clearVfxImmediately: true);
     }
 
     #endregion
@@ -428,6 +504,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
         if (!isBoss)
         {
+            ClearStunState(clearVfxImmediately: true);
             IsDead = true; // 사망 상태 설정
             OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
         }
