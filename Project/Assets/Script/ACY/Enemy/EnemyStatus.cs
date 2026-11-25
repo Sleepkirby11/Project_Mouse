@@ -33,10 +33,24 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     [SerializeField] private string bossName; // 보스 이름 (미입력 시 속성에 따라 Red/Green/Blue Boss로 자동 설정)
     [SerializeField] private Color bossNameColor = Color.clear; // 보스 이름 색상 (미지정시 속성에 맞는 기본 색상 설정)
 
+    [Header("보스 컷씬 타이밍")]
+    [Tooltip("체크하면 기본 컷씬 시간(0.6 / 1.1 / 0.6초) 대신 이 보스 전용 컷씬 시간을 사용합니다.")]
+    [SerializeField] private bool overrideCutsceneTiming = false;
+    [Tooltip("플레이어에서 보스 위치로 카메라가 이동하며 줌인하는 시간(초)")]
+    [SerializeField] private float cutscenePanToBossDuration = 0.6f;
+    [Tooltip("보스 포커스 및 보스 이름 배너를 화면에 유지하는 시간(초)")]
+    [SerializeField] private float cutsceneHoldOnBossDuration = 1.1f;
+    [Tooltip("보스에서 플레이어 위치로 카메라가 복귀하며 레터박스가 닫히는 시간(초)")]
+    [SerializeField] private float cutscenePanToPlayerDuration = 0.6f;
+
     public bool IsDead { get; private set; } // 사망 여부 플래그
     public bool IsBoss => isBoss;
     public string BossName => bossName;
     public Color BossNameColor => bossNameColor;
+    public bool OverrideCutsceneTiming => overrideCutsceneTiming;
+    public float CutscenePanToBossDuration => cutscenePanToBossDuration;
+    public float CutsceneHoldOnBossDuration => cutsceneHoldOnBossDuration;
+    public float CutscenePanToPlayerDuration => cutscenePanToPlayerDuration;
     public bool SuppressAutoBossBarOnStart { get; set; }
 
     private string particleName = "Particle_Hit";
