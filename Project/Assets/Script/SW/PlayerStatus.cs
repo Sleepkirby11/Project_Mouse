@@ -591,11 +591,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
                     groundTrail.colorGradient = ChangeStance(currentStance);
                 }
             }
-            if (playerComp.particle != null)
-            {
-                var main = playerComp.particle.main;
-                main.startColor = ChangeStance(currentStance);
-            }
+            playerComp.ResetSkillParticle();
         }
 
         if (StatusImage.instance != null)

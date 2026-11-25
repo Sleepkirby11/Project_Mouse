@@ -271,11 +271,10 @@ public class PlayerInputScript : MonoBehaviour
 
             trail.Clear();
             groundTrail.Clear();
-            var main = player.particle.main;
 
             trail.colorGradient = player.status.ChangeStance(player.status.currentStance);
             groundTrail.colorGradient = player.status.ChangeStance(player.status.currentStance);
-            main.startColor = player.status.ChangeStance(player.status.currentStance);
+            player.RefreshSkillParticle(playActivationBurst: player.isSkill);
 
             StatusImage.instance.ChangeImage((int)player.status.currentStance, player.isSkill);
         }

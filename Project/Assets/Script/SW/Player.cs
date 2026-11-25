@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     SpriteRenderer sprite;
     LineRenderer dashLine;
     [HideInInspector] public ParticleSystem particle;
+    private PlayerSkillParticles skillParticles;
     private PlayerInput playerInput;
 
     //이동값 변수
@@ -117,6 +118,13 @@ public class Player : MonoBehaviour
         dashLine = GetComponentInChildren<LineRenderer>();
         particle = GetComponentInChildren<ParticleSystem>();
         playerInput = GetComponent<PlayerInput>();
+
+        skillParticles = GetComponent<PlayerSkillParticles>();
+        if (skillParticles == null)
+        {
+            skillParticles = gameObject.AddComponent<PlayerSkillParticles>();
+        }
+        skillParticles.Initialize(particle);
 
         attackCursor.GetComponent<AttackCursor>().target = transform;
         cursor = cursorObject.GetComponent<Paint>();
@@ -292,16 +300,20 @@ public class Player : MonoBehaviour
     //매개변수 상태에 따른 particle, isSkill 변환
     public void SkillBool(bool Skill)
     {
-        var main = particle.main;
         isSkill = Skill;
-        if (Skill)
-        {
-            main.startLifetime = 0.25f;
-        }
-        else
-        {
-            main.startLifetime = 0;
-        }
+        RefreshSkillParticle(playActivationBurst: Skill);
+    }
+
+    public void RefreshSkillParticle(bool playActivationBurst = false)
+    {
+        if (skillParticles == null || status == null) return;
+        skillParticles.Refresh(isSkill, status.currentStance, playActivationBurst);
+    }
+
+    public void ResetSkillParticle()
+    {
+        if (skillParticles == null) return;
+        skillParticles.ResetParticles();
     }
 
     //공격 발동
