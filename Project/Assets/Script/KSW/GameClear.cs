@@ -7,7 +7,14 @@ public class GameClear : MonoBehaviour
 
     public void GoToTitle()
     {
-        SceneManager.LoadScene(titleSceneName);
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.LoadScene(titleSceneName);
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync(titleSceneName);
+        }
     }
 
     public void QuitGame()

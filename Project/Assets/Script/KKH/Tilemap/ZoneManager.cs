@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,7 +17,11 @@ public class ZoneManager : MonoBehaviour
 
     [SerializeField] private List<GameObject> onPlayerZone = new List<GameObject>();
     [SerializeField] private Dictionary<int, GameObject> activeZones = new Dictionary<int, GameObject>();
+    private readonly Dictionary<int, GameObject> cachedZones = new Dictionary<int, GameObject>();
+    private readonly HashSet<int> loadingZones = new HashSet<int>();
+    private readonly HashSet<int> desiredZones = new HashSet<int>();
     private int currentZoneId = -1;
+    private int sceneGeneration = 0;
 
     private void Awake()
     {
@@ -56,50 +61,80 @@ public class ZoneManager : MonoBehaviour
 
     private void InitFirstZone()
     {
-        if (zonePrefabs == null || zonePrefabs.Count == 0) return;
+        StopAllCoroutines();
+        sceneGeneration++;
 
+        onPlayerZone.Clear();
         activeZones.Clear();
+        cachedZones.Clear();
+        loadingZones.Clear();
+        desiredZones.Clear();
         currentZoneId = -1;
 
+        if (zonePrefabs == null || zonePrefabs.Count == 0) return;
+
         int firstZoneId = 0;
-        LoadZonePrefab(firstZoneId);
+        desiredZones.Add(firstZoneId);
+        StartCoroutine(InitAndSpawnFirstZoneRoutine(firstZoneId, sceneGeneration));
+    }
 
-        if (activeZones.TryGetValue(firstZoneId, out GameObject startZoneObj))
+    private IEnumerator InitAndSpawnFirstZoneRoutine(int firstZoneId, int generation)
+    {
+        if (playerObject == null)
         {
-            Zone startZone = startZoneObj.GetComponent<Zone>();
+            playerObject = Player.instance != null ? Player.instance.gameObject : GameObject.FindWithTag("Player");
+        }
 
-            if (startZone != null)
+        Rigidbody2D playerRb = null;
+        bool prevSimulated = true;
+        if (playerObject != null)
+        {
+            playerRb = playerObject.GetComponent<Rigidbody2D>();
+            if (playerRb != null)
             {
-                if (playerObject == null)
-                {
-                    playerObject = GameObject.FindWithTag("Player");
-                }
-
-                if (playerObject != null)
-                {
-                    StartCoroutine(SpawnProcessRoutine(startZone));
-                }
+                prevSimulated = playerRb.simulated;
+                playerRb.linearVelocity = Vector2.zero;
+                playerRb.simulated = false;
             }
         }
-    }
 
-    private System.Collections.IEnumerator SpawnProcessRoutine(Zone startZone)
-    {
-        yield return null;
+        yield return StartCoroutine(LoadZonePrefabAsync(firstZoneId, generation));
 
-        if (startZone != null && startZone.spawnPoint != null && playerObject != null)
+        if (generation != sceneGeneration)
+            yield break;
+
+        if (activeZones.TryGetValue(firstZoneId, out GameObject startZoneObj) && startZoneObj != null)
         {
-            Vector3 spawnPosition = startZone.spawnPoint.position;
+            Zone startZone = startZoneObj.GetComponent<Zone>();
+            if (startZone != null && startZone.spawnPoint != null && playerObject != null)
+            {
+                yield return StartCoroutine(SafeTeleport(playerObject.transform, startZone.spawnPoint.position));
 
-            yield return StartCoroutine(SafeTeleport(playerObject.transform, spawnPosition));
+                if (generation != sceneGeneration)
+                    yield break;
 
-            OnPlayerEnterZone(startZone);
+                if (playerRb != null)
+                {
+                    playerRb.simulated = prevSimulated;
+                }
+
+                OnPlayerEnterZone(startZone);
+                yield break;
+            }
+        }
+
+        if (playerRb != null)
+        {
+            playerRb.simulated = prevSimulated;
         }
     }
 
-    private System.Collections.IEnumerator SafeTeleport(Transform target, Vector3 destination)
+    private IEnumerator SafeTeleport(Transform target, Vector3 destination)
     {
         yield return new WaitForEndOfFrame();
+
+        if (target == null)
+            yield break;
 
         Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -110,8 +145,6 @@ public class ZoneManager : MonoBehaviour
         target.position = destination;
 
         yield return null;
-
-        
     }
 
     public void OnPlayerEnterZone(Zone enteredZone)
@@ -129,71 +162,134 @@ public class ZoneManager : MonoBehaviour
         // 필터 및 로드 처리가 정상적으로 승인되어 현재 구역 상태가 전환되었음을 알리는 확정 로그입니다.
         Debug.Log($"[ZoneManager] 현재 활성화된 구역이 {currentZoneId}번 구역으로 성공적으로 갱신되었습니다.");
 
-        HashSet<int> zonesToKeep = new HashSet<int> { currentZoneId };
+        desiredZones.Clear();
+        desiredZones.Add(currentZoneId);
         foreach (int neighborId in enteredZone.connectedZoneIds)
         {
-            zonesToKeep.Add(neighborId);
+            desiredZones.Add(neighborId);
         }
 
-        List<int> zonesToRemove = new List<int>();
+        List<int> zonesToDeactivate = new List<int>();
         foreach (int activeId in activeZones.Keys)
         {
-            if (!zonesToKeep.Contains(activeId))
+            if (!desiredZones.Contains(activeId))
             {
-                Destroy(activeZones[activeId]);
-                zonesToRemove.Add(activeId);
+                if (activeZones[activeId] != null)
+                {
+                    activeZones[activeId].SetActive(false);
+                }
+                zonesToDeactivate.Add(activeId);
             }
         }
 
-        foreach (int removeId in zonesToRemove)
+        foreach (int removeId in zonesToDeactivate)
         {
             activeZones.Remove(removeId);
         }
 
-        foreach (int keepId in zonesToKeep)
+        int gen = sceneGeneration;
+        foreach (int keepId in desiredZones)
         {
-            if (!activeZones.ContainsKey(keepId))
+            if (activeZones.ContainsKey(keepId))
+                continue;
+
+            if (cachedZones.TryGetValue(keepId, out GameObject cachedZone) && cachedZone != null)
             {
-                LoadZonePrefab(keepId);
+                cachedZone.SetActive(true);
+                activeZones[keepId] = cachedZone;
+            }
+            else if (!loadingZones.Contains(keepId))
+            {
+                StartCoroutine(LoadZonePrefabAsync(keepId, gen));
             }
         }
     }
 
-    private void LoadZonePrefab(int zoneId)
+    private IEnumerator LoadZonePrefabAsync(int zoneId, int generation)
     {
-        if (zoneId < 0 || zoneId >= zonePrefabs.Count) return;
+        if (zonePrefabs == null || zoneId < 0 || zoneId >= zonePrefabs.Count)
+            yield break;
+
+        if (cachedZones.TryGetValue(zoneId, out GameObject existing) && existing != null)
+        {
+            if (desiredZones.Contains(zoneId))
+            {
+                existing.SetActive(true);
+                activeZones[zoneId] = existing;
+            }
+            yield break;
+        }
 
         GameObject zonePrefab = zonePrefabs[zoneId];
+        if (zonePrefab == null)
+            yield break;
 
-        if (zonePrefab != null)
+        loadingZones.Add(zoneId);
+        AsyncInstantiateOperation<GameObject> op = Object.InstantiateAsync(
+            zonePrefab,
+            zonePrefab.transform.position,
+            zonePrefab.transform.rotation
+        );
+
+        while (!op.isDone)
         {
-            GameObject spawnedZone = Instantiate(zonePrefab, zonePrefab.transform.position, zonePrefab.transform.rotation);
+            yield return null;
+        }
 
-            Zone zoneScript = spawnedZone.GetComponent<Zone>();
-            if (zoneScript != null)
-            {
-                zoneScript.zoneId = zoneId;
-                Debug.Log($"[ZoneManager] 하이어라키에 고유 ID {zoneId}번 구역 프리팹 인스턴스가 로드되었습니다.");
-            }
+        loadingZones.Remove(zoneId);
 
-            activeZones.Add(zoneId, spawnedZone);
+        GameObject spawnedZone = (op.Result != null && op.Result.Length > 0) ? op.Result[0] : null;
+        if (spawnedZone == null)
+            yield break;
+
+        // 비동기 로드 도중 씬이 전환되었다면 즉시 폐기
+        if (generation != sceneGeneration)
+        {
+            Destroy(spawnedZone);
+            yield break;
+        }
+
+        Zone zoneScript = spawnedZone.GetComponent<Zone>();
+        if (zoneScript != null)
+        {
+            zoneScript.zoneId = zoneId;
+            Debug.Log($"[ZoneManager] 하이어라키에 고유 ID {zoneId}번 구역 프리팹 인스턴스가 비동기 로드되었습니다.");
+        }
+
+        cachedZones[zoneId] = spawnedZone;
+
+        if (desiredZones.Contains(zoneId))
+        {
+            spawnedZone.SetActive(true);
+            activeZones[zoneId] = spawnedZone;
+        }
+        else
+        {
+            spawnedZone.SetActive(false);
         }
     }
 
     public void UpdateOnPlayerZone(GameObject playerZone, bool isEnter)
     {
-        if(isEnter)
+        onPlayerZone.RemoveAll(z => z == null || !z.activeInHierarchy);
+
+        if (isEnter)
         {
-            onPlayerZone.Add(playerZone);
+            if (playerZone != null && !onPlayerZone.Contains(playerZone))
+                onPlayerZone.Add(playerZone);
         }
         else
         {
-            if(onPlayerZone.Contains(playerZone))
-                onPlayerZone.Remove(playerZone);
+            onPlayerZone.Remove(playerZone);
         }
+
         if (onPlayerZone.Count > 0)
         {
-            OnPlayerEnterZone(onPlayerZone.Last().GetComponent<Zone>());
+            Zone targetZone = onPlayerZone.Last().GetComponent<Zone>();
+            if (targetZone != null)
+            {
+                OnPlayerEnterZone(targetZone);
+            }
         }
     }
 }

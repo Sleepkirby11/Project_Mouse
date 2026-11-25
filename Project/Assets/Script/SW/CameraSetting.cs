@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Cinemachine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class CameraSetting : MonoBehaviour
 {
@@ -17,15 +18,34 @@ public class CameraSetting : MonoBehaviour
         cameraConfiner = GetComponent<CinemachineConfiner2D>();
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        colliders.Clear();
+        if (cameraConfiner != null)
+        {
+            cameraConfiner.BoundingShape2D = null;
+        }
+    }
 
     public void ChangeCameraConfiner()
     {
-        if(colliders.Count == 0)
+        colliders.RemoveAll(c => c == null);
+        if (colliders.Count == 0)
         {
             return;
         }
 
-        if(cameraConfiner.BoundingShape2D != colliders.Last())
+        if (cameraConfiner.BoundingShape2D != colliders.Last())
             cameraConfiner.BoundingShape2D = colliders.Last();
     }
 }

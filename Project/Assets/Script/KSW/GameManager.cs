@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     Dictionary<int, string[]> talkData;
 
     public bool isSetting;
+    private bool isLoadingScene;
 
 
     void Awake()
@@ -55,8 +56,30 @@ public class GameManager : MonoBehaviour
     
     public void LoadScene(string index)
     {
-        SceneManager.LoadScene(index);
-        CameraSetting.instance.colliders.Clear();
+        if (isLoadingScene || string.IsNullOrEmpty(index))
+            return;
+
+        StartCoroutine(LoadSceneAsyncRoutine(index));
+    }
+
+    private IEnumerator LoadSceneAsyncRoutine(string sceneName)
+    {
+        isLoadingScene = true;
+        Time.timeScale = 1f;
+        isSetting = false;
+
+        if (CameraSetting.instance != null)
+        {
+            CameraSetting.instance.colliders.Clear();
+        }
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+        while (op != null && !op.isDone)
+        {
+            yield return null;
+        }
+
+        isLoadingScene = false;
     }
 
     public void PauseOnOff()

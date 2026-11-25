@@ -32,10 +32,24 @@ public class SceneTransitionTrigger : MonoBehaviour
     {
         isTransitioning = true;
 
-
         yield return new WaitForSeconds(transitionDelay);
 
-        SceneManager.LoadScene(nextSceneName);
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.LoadScene(nextSceneName);
+            yield break;
+        }
+
+        if (CameraSetting.instance != null)
+        {
+            CameraSetting.instance.colliders.Clear();
+        }
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(nextSceneName);
+        while (op != null && !op.isDone)
+        {
+            yield return null;
+        }
     }
 
     private void OnDrawGizmos()
