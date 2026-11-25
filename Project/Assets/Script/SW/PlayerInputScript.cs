@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -183,7 +184,13 @@ public class PlayerInputScript : MonoBehaviour
 
                 player.SpriteFlip();
                 player.JumpAnimUpdate(true);
-                player.dashParticle.SetActive(true);
+                if(!player.dashParticle.activeSelf)
+                    player.dashParticle.SetActive(true);
+                else
+                {
+                    player.dashParticle.SetActive(false);
+                    player.dashParticle.SetActive(true);
+                }
 
                 player.jumpCount--;
             }
