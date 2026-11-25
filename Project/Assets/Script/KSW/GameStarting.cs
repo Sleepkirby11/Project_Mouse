@@ -16,7 +16,14 @@ public class GameStarting : MonoBehaviour
         if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
         if (GuidePanel != null) GuidePanel.SetActive(false);
 
-        SceneManager.LoadScene("Tutorial");
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.LoadScene("Tutorial");
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Tutorial");
+        }
     }
 
     // 종료 버튼 누를 때 호출

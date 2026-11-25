@@ -111,7 +111,14 @@ public class UI : MonoBehaviour
     // 게임 시작 버튼 누를 때 호출
     public void StartGame()
     {
-        SceneManager.LoadScene("Tutorial");
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.LoadScene("Tutorial");
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Tutorial");
+        }
     }
 
     //설정 메뉴 추가 예정

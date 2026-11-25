@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,9 +37,11 @@ public class PoolingManager : MonoBehaviour
     #region Settings & Variables
 
     [SerializeField] private List<Pool> pools;
+    [SerializeField] private int prewarmPerFrame = 8;
 
     private Dictionary<string, Queue<GameObject>> poolDict;
     private Dictionary<string, GameObject> prefabDict;
+    private Coroutine prewarmCoroutine;
 
     // 중복 Return 방지용
     private HashSet<GameObject> pooledObjects;
@@ -65,6 +68,11 @@ public class PoolingManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        StartPrewarm();
+    }
+
     private void OnEnable()
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
@@ -81,6 +89,13 @@ public class PoolingManager : MonoBehaviour
         {
             activeObjects.Clear();
         }
+
+        if (pooledObjects != null)
+        {
+            pooledObjects.RemoveWhere(obj => obj == null);
+        }
+
+        StartPrewarm();
     }
 
     #endregion
@@ -119,11 +134,11 @@ public class PoolingManager : MonoBehaviour
                 continue;
             }
 
-            CreatePool(pool.key, pool.prefab, pool.initialSize);
+            RegisterPool(pool.key, pool.prefab);
         }
     }
 
-    private void CreatePool(string key, GameObject prefab, int size)
+    private void RegisterPool(string key, GameObject prefab)
     {
         if (poolDict.ContainsKey(key))
         {
@@ -131,22 +146,55 @@ public class PoolingManager : MonoBehaviour
             return;
         }
 
-        Queue<GameObject> queue = new Queue<GameObject>();
-
         prefabDict.Add(key, prefab);
+        poolDict.Add(key, new Queue<GameObject>());
+    }
 
-        for (int i = 0; i < size; i++)
+    private void StartPrewarm()
+    {
+        if (_instance != this || pools == null || poolDict == null)
+            return;
+
+        if (prewarmCoroutine != null)
         {
-            GameObject obj = Instantiate(prefab, transform);
-            if (obj != null)
+            StopCoroutine(prewarmCoroutine);
+        }
+        prewarmCoroutine = StartCoroutine(PrewarmPoolsRoutine());
+    }
+
+    private IEnumerator PrewarmPoolsRoutine()
+    {
+        int createdThisFrame = 0;
+        int batchLimit = Mathf.Max(1, prewarmPerFrame);
+
+        foreach (var pool in pools)
+        {
+            if (pool == null || string.IsNullOrWhiteSpace(pool.key) || pool.prefab == null)
+                continue;
+
+            if (!poolDict.TryGetValue(pool.key, out Queue<GameObject> queue))
+                continue;
+
+            while (queue.Count < pool.initialSize)
             {
-                obj.SetActive(false);
-                queue.Enqueue(obj);
-                pooledObjects.Add(obj);
+                GameObject obj = Instantiate(pool.prefab, transform);
+                if (obj != null)
+                {
+                    obj.SetActive(false);
+                    queue.Enqueue(obj);
+                    pooledObjects.Add(obj);
+                }
+
+                createdThisFrame++;
+                if (createdThisFrame >= batchLimit)
+                {
+                    createdThisFrame = 0;
+                    yield return null;
+                }
             }
         }
 
-        poolDict.Add(key, queue);
+        prewarmCoroutine = null;
     }
 
     #endregion
