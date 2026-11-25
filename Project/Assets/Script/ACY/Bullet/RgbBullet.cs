@@ -27,6 +27,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
     private Collider2D bulletCollider;
     private bool destroyed = false;
     private AudioSource audioSource;
+    private BossProjectileTrail trailVfx;
 
     public System.Action onHitPlayer;
     private void Awake()
@@ -34,6 +35,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
         playerStatus = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
         srs = GetComponentsInChildren<SpriteRenderer>();
         bulletCollider = GetComponent<Collider2D>();
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.StyleFromElement(myElement), 99);
 
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
@@ -65,6 +67,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
 
         if (bulletCollider != null) bulletCollider.enabled = true; // 콜라이더 복구
         ResetAlpha(); // 알파값 복구
+        trailVfx?.SetActive(true, true, clearBefore: true);
 
         StartCoroutine(BulletMovementRoutine());
     }
@@ -86,6 +89,8 @@ public class RgbBullet : MonoBehaviour, IDamageable
             float elapsed = 0f;
 
             PlayBulletSound();
+            trailVfx?.SetActive(true, true, clearBefore: true);
+            trailVfx?.EmitBurst(10);
 
             while (elapsed < moveTime && !destroyed)
             {
@@ -95,6 +100,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
             }
 
             StopBulletSound();
+            trailVfx?.SetActive(false, true);
 
             // --- 잠깐 경직 단계 ---
             if (i < maxAttackCount - 1 && !destroyed)
@@ -171,6 +177,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
         destroyed = true;
         if (bulletCollider != null) bulletCollider.enabled = false; // 추가 충돌 차단
         StopBulletSound();
+        trailVfx?.SetActive(false, false);
 
         StopAllCoroutines(); // 이동 관련 루틴 모두 정지
         StartCoroutine(FadeAndReturnRoutine()); // 제자리에 멈춰서 페이드아웃 시작

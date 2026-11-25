@@ -13,6 +13,7 @@ public class MantisProjectile : MonoBehaviour
     private Animator anim;    
     private float timer;
     private bool isDestroying;  // 중복 충돌 및 중복 소멸 방지
+    private BossProjectileTrail trailVfx;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class MantisProjectile : MonoBehaviour
         col = GetComponent<Collider2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
+        trailVfx = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.MantisSlash, 99);
     }
 
     void OnEnable()
@@ -35,6 +37,7 @@ public class MantisProjectile : MonoBehaviour
         rb.linearVelocity = Vector2.zero; // 물리 상태 초기화
         rb.angularVelocity = 0f;
         transform.rotation = Quaternion.identity; // 회전 상태 초기화
+        trailVfx?.Clear();
     }
 
     void Update()
@@ -58,6 +61,9 @@ public class MantisProjectile : MonoBehaviour
         // 투사체가 날아가는 방향으로 회전 처리 (우향 기준 스프라이트)
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        trailVfx?.SetActive(true, true, clearBefore: true);
+        trailVfx?.EmitBurst(8);
     }
 
     void OnTriggerEnter2D(Collider2D other)
