@@ -118,9 +118,29 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
     #region Unity Lifecycle
 
+    private static readonly Color MeteorCastStartColor = new Color(0.90f, 0.18f, 0.24f, 1f);
+    private static readonly Color MeteorCastEndColor = new Color(1f, 0.72f, 0.18f, 1f);
+
     private void Awake()
     {
+        StyleMeteorCastGauge();
+        WorldGaugeStyler.KeepUnflipped(meteorCastSlider, transform);
         HideCastUI();
+    }
+
+    private void LateUpdate()
+    {
+        WorldGaugeStyler.KeepUnflipped(meteorCastSlider, transform);
+    }
+
+    private void StyleMeteorCastGauge()
+    {
+        if (meteorCastSlider == null) return;
+        WorldGaugeStyler.StyleWorldGauge(
+            meteorCastSlider,
+            null,
+            MeteorCastStartColor,
+            new Color(0.95f, 0.35f, 0.25f, 0.90f));
     }
 
     public void HideCastUI()
@@ -527,9 +547,12 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
             yield break;
         }
 
+        StyleMeteorCastGauge();
+        WorldGaugeStyler.KeepUnflipped(meteorCastSlider, transform);
         meteorCastSlider.gameObject.SetActive(true);
         meteorCastSlider.maxValue = meteorCastTime;
         meteorCastSlider.value = 0f;
+        WorldGaugeStyler.UpdateWorldGaugeColor(meteorCastSlider, MeteorCastStartColor, MeteorCastEndColor);
 
         float timer = 0f;
 
@@ -537,6 +560,7 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         {
             timer += Time.deltaTime;
             meteorCastSlider.value = timer;
+            WorldGaugeStyler.UpdateWorldGaugeColor(meteorCastSlider, MeteorCastStartColor, MeteorCastEndColor);
             yield return null;
         }
 
