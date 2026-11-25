@@ -70,7 +70,7 @@ public class LaserCross : MonoBehaviour
 
     #endregion
 
-    #region Laser Initialization
+    #region Laser Initializationrp
 
     public void Init(float warningTime, float laserDuration, bool enraged = false)
     {

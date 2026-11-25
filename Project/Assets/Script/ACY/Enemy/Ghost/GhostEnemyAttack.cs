@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -170,6 +170,15 @@ public class GhostEnemyAttack : MonoBehaviour
             possessionSlider = possessionGaugeObject.GetComponentInChildren<Slider>(true);
         }
 
+        if (possessionSlider != null)
+        {
+            WorldGaugeStyler.StyleWorldGauge(
+                possessionSlider,
+                null,
+                PossessionStartColor,
+                new Color(0.75f, 0.35f, 0.95f, 0.90f));
+        }
+
         if (possessionSlider == null)
         {
             Debug.LogWarning("[GhostEnemyAttack] PossessionGaugeCanvas의 자식에서 Slider(GaugeBar) 컴포넌트를 찾을 수 없습니다.");
@@ -278,6 +287,9 @@ public class GhostEnemyAttack : MonoBehaviour
         }
     }
 
+    private static readonly Color PossessionStartColor = new Color(0.48f, 0.18f, 0.88f, 1f);
+    private static readonly Color PossessionEndColor = new Color(1f, 0.36f, 0.68f, 1f);
+
     private void SetGauge(bool value)
     {
         if (possessionGaugeObject != null)
@@ -287,8 +299,14 @@ public class GhostEnemyAttack : MonoBehaviour
 
         if (possessionSlider != null)
         {
+            WorldGaugeStyler.StyleWorldGauge(
+                possessionSlider,
+                null,
+                PossessionStartColor,
+                new Color(0.75f, 0.35f, 0.95f, 0.90f));
             possessionSlider.maxValue = possessionDuration;
             possessionSlider.value = possessionTimer;
+            WorldGaugeStyler.UpdateWorldGaugeColor(possessionSlider, PossessionStartColor, PossessionEndColor);
         }
     }
 
@@ -297,6 +315,7 @@ public class GhostEnemyAttack : MonoBehaviour
         if (possessionSlider != null)
         {
             possessionSlider.value = possessionTimer;
+            WorldGaugeStyler.UpdateWorldGaugeColor(possessionSlider, PossessionStartColor, PossessionEndColor);
         }
     }
 
