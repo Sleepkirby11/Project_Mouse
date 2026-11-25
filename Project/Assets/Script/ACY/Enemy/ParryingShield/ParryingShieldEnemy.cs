@@ -64,6 +64,8 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     private Vector2 patrolOrigin; // 배회 시작 위치
     private float patrolDir = 1f; // 배회 방향 (1: 오른쪽, -1: 왼쪽)
 
+    public bool IsStunImmune => state == State.Parrying || state == State.Countering;
+
     // 접촉 공격 쿨다운
     private float lastContactTime = -99f;
 
@@ -75,6 +77,12 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     // 코루틴 추적
     private Coroutine counterRoutine;
+
+    // 스턴 중 플레이어 물리 충돌 무시용 캐시
+    private Collider2D[] enemyColliders;
+    private Collider2D[] cachedPlayerColliders;
+    private PlayerStatus cachedPlayerStatus;
+    private bool wasPlayerCollisionIgnored;
 
     #endregion
 
@@ -90,6 +98,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         }
         anim = GetComponentInChildren<Animator>();
         enemyStatus = GetComponent<EnemyStatus>();
+        enemyColliders = GetComponentsInChildren<Collider2D>(true);
 
         // 패링 타이머 캐싱
         parryWait = new WaitForSeconds(parryDuration);
@@ -120,6 +129,8 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
     {
         if (enemyStatus != null && enemyStatus.isStunned)
         {
+            SetPlayerCollisionIgnored(true);
+            wasPlayerCollisionIgnored = true;
             if (rb != null)
             {
                 rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -130,6 +141,12 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
             }
             UpdateAnimator(); // 스턴 중에도 애니메이터 상태 업데이트 (패링 자세 풀림 반영 등)
             return;
+        }
+
+        if (wasPlayerCollisionIgnored)
+        {
+            SetPlayerCollisionIgnored(false);
+            wasPlayerCollisionIgnored = false;
         }
 
         FlipToTarget();
@@ -529,6 +546,63 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         if (rb != null)
         {
             anim.SetBool("IsFalling", rb.linearVelocity.y < -0.1f);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (wasPlayerCollisionIgnored)
+        {
+            SetPlayerCollisionIgnored(false);
+            wasPlayerCollisionIgnored = false;
+        }
+    }
+
+    private void SetPlayerCollisionIgnored(bool ignore)
+    {
+        if (!ignore && cachedPlayerStatus != null && cachedPlayerStatus.IsInvincible)
+        {
+            return;
+        }
+
+        if (enemyColliders == null || enemyColliders.Length == 0)
+        {
+            enemyColliders = GetComponentsInChildren<Collider2D>(true);
+        }
+
+        if (cachedPlayerColliders == null || cachedPlayerColliders.Length == 0)
+        {
+            Transform pTf = playerTransform;
+            if (pTf == null)
+            {
+                GameObject playerObj = GameObject.FindWithTag("Player");
+                if (playerObj != null)
+                {
+                    pTf = playerObj.transform;
+                    playerTransform = pTf;
+                }
+            }
+            if (pTf != null)
+            {
+                cachedPlayerColliders = pTf.GetComponentsInChildren<Collider2D>(true);
+                cachedPlayerStatus = pTf.GetComponent<PlayerStatus>();
+            }
+        }
+
+        if (enemyColliders == null || cachedPlayerColliders == null) return;
+
+        for (int i = 0; i < enemyColliders.Length; i++)
+        {
+            Collider2D enemyCol = enemyColliders[i];
+            if (enemyCol == null || enemyCol.isTrigger) continue;
+
+            for (int j = 0; j < cachedPlayerColliders.Length; j++)
+            {
+                Collider2D playerCol = cachedPlayerColliders[j];
+                if (playerCol == null || playerCol.isTrigger) continue;
+
+                Physics2D.IgnoreCollision(enemyCol, playerCol, ignore);
+            }
         }
     }
 
