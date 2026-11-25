@@ -82,6 +82,8 @@ MonoBehaviour:
   jumpHeight: 4
   jumpDuration: 0.7
   readyDuration: 0.6
+  maxJumpUpHeight: 12
+  maxAttackVerticalRange: 14
   directHitDamage: 1
   directHitRadius: 0.6
   shockwaveDamage: 5
@@ -136,6 +138,10 @@ MonoBehaviour:
   isBoss: 0
   bossName: 
   bossNameColor: {r: 0, g: 0, b: 0, a: 0}
+  overrideCutsceneTiming: 0
+  cutscenePanToBossDuration: 0.6
+  cutsceneHoldOnBossDuration: 1.1
+  cutscenePanToPlayerDuration: 0.6
 --- !u!61 &9124705101422008266
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -19,6 +19,10 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
     [SerializeField] private float jumpDuration = 1f;      // 점프 소요 시간
     [SerializeField] private float readyDuration = 0.6f;   // 빨갛게 기 모으는 시간
 
+    [Header("점프 높이 제한")]
+    [SerializeField] private float maxJumpUpHeight = 5f;
+    [SerializeField] private float maxAttackVerticalRange = 6f;
+
     [Header("접촉 공격 설정")]
     [SerializeField] private int directHitDamage = 1;      // 몸통박치기 대미지
     [SerializeField] private float directHitRadius = 0.6f; // 몸통박치기 판정 범위
@@ -98,6 +102,12 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
         }
 
         float distanceToPlayer = Mathf.Abs(player.position.x - transform.position.x);
+        float verticalOffset = player.position.y - transform.position.y;
+
+        if (maxAttackVerticalRange > 0f && verticalOffset > maxAttackVerticalRange)
+        {
+            return;
+        }
 
         // 사거리 이내 진입 && 쿨타임 만료 시 공격 시작
         if (distanceToPlayer <= attackRange && Time.time - lastAttackTime >= attackCooldown)
@@ -126,7 +136,7 @@ public class JumpEnemyAttack : MonoBehaviour, IHitReaction
 
         // 물리 점프 속도 및 중력 계산
         float T = jumpDuration;
-        float dy = targetPos.y - startPos.y;
+        float dy = Mathf.Min(targetPos.y - startPos.y, Mathf.Max(0f, maxJumpUpHeight));
         float dx = targetPos.x - startPos.x;
 
         // 9.81f 대신 Physics2D.gravity.y 크기 사용 (음수일 수 있으므로 절대값 처리)
