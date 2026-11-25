@@ -39,6 +39,7 @@ public class UI : MonoBehaviour
 
     [Header("팔레트")]
     public GameObject pal;
+    [SerializeField, Range(0.25f, 1f)] private float palWheelScale = 0.45f;
     private Image[] palSliceImages;
     private RectTransform[] palSliceRects;
     private Material[] palSliceMaterials;
@@ -242,14 +243,61 @@ public class UI : MonoBehaviour
     public void ActivePal(bool isActive)
     {
         if (pal == null) return;
-        pal.SetActive(isActive);
 
         if (isActive)
         {
+            PositionPalAtMouse();
+            pal.SetActive(true);
             if (playerStatus == null) RefreshPlayerReference();
-            int currentIdx = playerStatus != null ? (int)playerStatus.currentStance : 0;
-            SelectPalVisual(currentIdx, immediate: true);
+            if (playerStatus != null)
+            {
+                playerStatus.currentStance = PlayerStatus.Stance.White;
+            }
+            SelectPalVisual(0, immediate: true);
         }
+        else
+        {
+            pal.SetActive(false);
+        }
+    }
+
+    private void PositionPalAtMouse()
+    {
+        RectTransform palRect = pal.GetComponent<RectTransform>();
+        if (palRect == null) return;
+
+        palRect.localScale = Vector3.one * palWheelScale;
+
+        RectTransform parentRect = palRect.parent as RectTransform;
+        if (parentRect == null) return;
+
+        Canvas rootCanvas = pal.GetComponentInParent<Canvas>();
+        Camera uiCamera = (rootCanvas != null && rootCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
+            ? rootCanvas.worldCamera
+            : null;
+
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, Input.mousePosition, uiCamera, out Vector2 localPoint))
+        {
+            return;
+        }
+
+        // 휠이 화면 밖으로 잘리지 않도록 부모 영역 안에 클램프
+        float margin = 16f;
+        float halfW = (palRect.rect.width * palWheelScale * 0.5f) + margin;
+        float halfH = (palRect.rect.height * palWheelScale * 0.5f) + margin;
+        Rect bounds = parentRect.rect;
+
+        if (bounds.width > halfW * 2f)
+        {
+            localPoint.x = Mathf.Clamp(localPoint.x, bounds.xMin + halfW, bounds.xMax - halfW);
+        }
+        if (bounds.height > halfH * 2f)
+        {
+            localPoint.y = Mathf.Clamp(localPoint.y, bounds.yMin + halfH, bounds.yMax - halfH);
+        }
+
+        Vector3 localPos = palRect.localPosition;
+        palRect.localPosition = new Vector3(localPoint.x, localPoint.y, localPos.z);
     }
 
     public void ChangeStance(int amount)
