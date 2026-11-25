@@ -122,7 +122,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
     private void Update()
     {
-        if (isDead || isPhase3)
+        if (BossIntroCutscene.IsPlaying || isDead || isPhase3)
         {
             return;
         }
@@ -196,6 +196,10 @@ public class BossController : MonoBehaviour, IHitReaction
     {
         while (!isDead && !isPhase2)
         {
+            while (BossIntroCutscene.IsPlaying)
+            {
+                yield return null;
+            }
             int roll = Random.Range(0, 2); 
 
             if (roll == 0)
@@ -532,6 +536,11 @@ public class BossController : MonoBehaviour, IHitReaction
     {
         while (!isDead)
         {
+            while (BossIntroCutscene.IsPlaying)
+            {
+                yield return null;
+            }
+
             if (player == null)
             {
                 yield return new WaitForSeconds(waterSpoutInterval);

@@ -133,6 +133,11 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     private void Update()
     {
+        if (BossIntroCutscene.IsPlaying)
+        {
+            return;
+        }
+
         if (currentPushCooldown > 0f)
         {
             currentPushCooldown -= Time.deltaTime;
@@ -215,6 +220,11 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         while (true)
         {
+            while (BossIntroCutscene.IsPlaying)
+            {
+                yield return null;
+            }
+
             float centerY = Random.Range(minY + birdGap, maxY - birdGap);
 
             for (int i = 0; i < 3; i++)
@@ -430,7 +440,17 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         while (true)
         {
+            while (BossIntroCutscene.IsPlaying)
+            {
+                yield return null;
+            }
+
             yield return new WaitForSeconds(frogPatternInterval);
+
+            if (BossIntroCutscene.IsPlaying)
+            {
+                continue;
+            }
 
             if (playerTransform == null)
             {
@@ -471,7 +491,17 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
     {
         while (true)
         {
+            while (BossIntroCutscene.IsPlaying)
+            {
+                yield return null;
+            }
+
             yield return new WaitForSeconds(flowerPatternInterval);
+
+            if (BossIntroCutscene.IsPlaying)
+            {
+                continue;
+            }
 
             List<float> spawnXList = GetSpawnXPositions();
 

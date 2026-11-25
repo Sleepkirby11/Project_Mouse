@@ -118,6 +118,19 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
     #region Unity Lifecycle
 
+    private void Awake()
+    {
+        HideCastUI();
+    }
+
+    public void HideCastUI()
+    {
+        if (meteorCastSlider != null)
+        {
+            meteorCastSlider.gameObject.SetActive(false);
+        }
+    }
+
     private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
@@ -213,6 +226,10 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
     {
         while (true)
         {
+            while (BossIntroCutscene.IsPlaying)
+            {
+                yield return null;
+            }
             if (isLastStand) yield break;
             // 공격 간격 대기
             yield return new WaitForSeconds(attackCooldown);

@@ -136,6 +136,15 @@ public class UI : MonoBehaviour
         if (hpSlider != null && playerStatus != null) hpSlider.value = playerStatus.HP / playerStatus.MaxHP;
     }
 
+    public Font GetUIFont()
+    {
+        if (bossNameText != null && bossNameText.font != null)
+            return bossNameText.font;
+        if (talkText != null && talkText.font != null)
+            return talkText.font;
+        return null;
+    }
+
     // 보스 체력바 활성화 및 초기 체력 설정
     public void ShowBossHPBar(float initialRatio)
     {
