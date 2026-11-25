@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5372984818383490697
 Transform:
   m_ObjectHideFlags: 0
@@ -127,6 +127,10 @@ MonoBehaviour:
   isBoss: 1
   bossName: ECLIPSE
   bossNameColor: {r: 0, g: 0, b: 0, a: 0}
+  overrideCutsceneTiming: 0
+  cutscenePanToBossDuration: 0.6
+  cutsceneHoldOnBossDuration: 1.1
+  cutscenePanToPlayerDuration: 0.6
 --- !u!114 &3560122471953931004
 MonoBehaviour:
   m_ObjectHideFlags: 0

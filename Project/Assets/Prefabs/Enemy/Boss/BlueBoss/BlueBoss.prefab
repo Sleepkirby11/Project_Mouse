@@ -66,7 +66,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.005659595, y: -0.29641232}
+  m_Offset: {x: 0.00565958, y: -0.29390794}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5297445, y: 0.1045503}
+  m_Size: {x: 0.5297445, y: 0.09954159}
   m_EdgeRadius: 0
 --- !u!1 &1629685381488659163
 GameObject:
@@ -99,7 +99,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3059026989955239514
 Transform:
   m_ObjectHideFlags: 0
@@ -279,6 +279,10 @@ MonoBehaviour:
   isBoss: 1
   bossName: Blue Boss
   bossNameColor: {r: 0, g: 0, b: 0, a: 0}
+  overrideCutsceneTiming: 0
+  cutscenePanToBossDuration: 0.6
+  cutsceneHoldOnBossDuration: 1.1
+  cutscenePanToPlayerDuration: 0.6
 --- !u!114 &878273054086867009
 MonoBehaviour:
   m_ObjectHideFlags: 0
