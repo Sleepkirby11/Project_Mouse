@@ -72,6 +72,9 @@ public class Player : MonoBehaviour
     private float footstepTimer;
     [SerializeField] private float footstepInterval = 0.35f;
 
+    //가이드라인
+    public GameObject guideLine;
+
     //마우스
     [HideInInspector] public Transform mouse;
     Vector2 mouseDist;

@@ -390,4 +390,11 @@ public class PlayerInputScript : MonoBehaviour
             }
         }
     }
+    public void ActionGuideLine(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            player.guideLine.SetActive(player.guideLine.activeSelf ? false : true);
+        }
+    }
 }

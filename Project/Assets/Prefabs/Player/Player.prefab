@@ -308,7 +308,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 59548725156804224}
         m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
-        m_MethodName: ActionCheatHeal
+        m_MethodName: ActionGuideLine
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -582,6 +582,7 @@ MonoBehaviour:
   isDashReady: 0
   dashParticle: {fileID: 1435115281295810545}
   footstepInterval: 0.35
+  guideLine: {fileID: 762404715192824671}
   mouse: {fileID: 0}
   maxDist: 7.5
   isSkill: 0
