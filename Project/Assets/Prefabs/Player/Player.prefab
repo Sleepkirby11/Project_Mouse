@@ -580,7 +580,7 @@ MonoBehaviour:
   isCanMove: 0
   jumpCount: 0
   isDashReady: 0
-  dashParticle: {fileID: 0}
+  dashParticle: {fileID: 1435115281295810545}
   footstepInterval: 0.35
   mouse: {fileID: 0}
   maxDist: 7.5
@@ -6134,6 +6134,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 147c6ed54ab33224f86fb8f606e0f106, type: 3}
+--- !u!1 &1435115281295810545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4118098414111236787, guid: 147c6ed54ab33224f86fb8f606e0f106, type: 3}
+  m_PrefabInstance: {fileID: 3084087298483830082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5583691748379850450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7471932483472837520, guid: 147c6ed54ab33224f86fb8f606e0f106, type: 3}
