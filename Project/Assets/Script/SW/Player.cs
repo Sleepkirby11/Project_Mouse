@@ -226,13 +226,13 @@ public class Player : MonoBehaviour
     {
         if (status.IsBound) return;
         if (!status.CanMove) return;
-        //낙하중 + BoxCast로 착지 판정 검사
 
+        bool isGround = Physics2D.BoxCast
+            (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground", "PlayerGround"));
+
+        //낙하중 + BoxCast로 착지 판정 검사
         if (rigid.linearVelocityY <= 0)
         {
-            bool isGround;
-            isGround = Physics2D.BoxCast
-                (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground", "PlayerGround"));
             if (isGround)
             {
                 //이동 가능 + input 값 이어서 받기
@@ -248,10 +248,19 @@ public class Player : MonoBehaviour
             {
                 jumpCount = 1;
                 JumpAnimUpdate(true);
+                if (!anim.GetBool("IsJump"))
+                {
+                    anim.SetBool("IsFalling", true);
+                }
                 return;
             }
 
             JumpAnimUpdate(false);
+            anim.SetBool("IsFalling", true);
+        }
+        else if (!isGround && !anim.GetBool("IsJump"))
+        {
+            // 피격 등으로 IsJump가 꺼진 채 상승 중일 때도 히트 모션 종료 직후 바로 PlayerDown으로 연결
             anim.SetBool("IsFalling", true);
         }
     }
