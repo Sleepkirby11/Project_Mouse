@@ -946,57 +946,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582552717}
   m_CullTransparentMesh: 1
---- !u!1 &630254636
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 630254638}
-  - component: {fileID: 630254637}
-  m_Layer: 0
-  m_Name: WorldParticleManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &630254637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630254636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb25d6cfe3eb25141b3f2324cb0445ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pools:
-  - key: Player_Walk
-    prefab: {fileID: 1187248124742602902, guid: ec8a09690a2280748be03267709f8a0c, type: 3}
-    initialSize: 1
-  - key: Player_Jump
-    prefab: {fileID: 1187248124742602902, guid: 3caea8e42d560ca448725c21d8a62a15, type: 3}
-    initialSize: 1
---- !u!4 &630254638
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630254636}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &670817066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2810,6 +2759,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105988676}
   m_CullTransparentMesh: 1
+--- !u!1001 &1287753655428348932
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088148563623218338, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205959999707368172, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
+      propertyPath: m_Name
+      value: WorldParticleManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7867366666b71d34e945fe39067c81e2, type: 3}
 --- !u!1001 &1454113355401151986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2942,4 +2948,4 @@ SceneRoots:
   - {fileID: 1999636006}
   - {fileID: 1454113355401151986}
   - {fileID: 1627810722}
-  - {fileID: 630254638}
+  - {fileID: 1287753655428348932}

@@ -1,4 +1,5 @@
 using System.Collections;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -526,6 +527,10 @@ public class Player : MonoBehaviour
     {
         var main = dashParticle.GetComponent<ParticleSystem>().main;
         main.loop = false;
+        if(dashParticle.GetComponentInChildren<TrailRenderer>()is TrailRenderer trail)
+        {
+            trail.gameObject.SetActive(false);
+        }
     }
 
     //레버 상호작용 감지

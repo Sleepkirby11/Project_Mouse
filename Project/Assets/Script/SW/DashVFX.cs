@@ -35,6 +35,7 @@ public class DashVFX : MonoBehaviour
         {
             parentRb = GetComponentInParent<Rigidbody2D>();
         }
+        dashTrail.gameObject.SetActive(true);
 
         lastWorldPosition = transform.position;
         hasLastPosition = true;
