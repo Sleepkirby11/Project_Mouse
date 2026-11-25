@@ -48,6 +48,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
     [Header("물기둥 패턴 설정")]
     public string waterSpoutPoolKey = "WaterSpout";
+    [SerializeField] private float waterSpoutInitialDelay = 3.5f; // 전투 시작 후 첫 물기둥까지 대기 시간
     [SerializeField] private float waterSpoutInterval = 3f;  // 생성 주기
     [SerializeField] private float waterSpoutSpread = 3f;
     [SerializeField] private float waterSpoutYOffset = 0f; // 오프셋
@@ -540,6 +541,16 @@ public class BossController : MonoBehaviour, IHitReaction
 
     private IEnumerator WaterSpoutLoop()
     {
+        while (BossIntroCutscene.IsPlaying)
+        {
+            yield return null;
+        }
+
+        if (waterSpoutInitialDelay > 0f)
+        {
+            yield return new WaitForSeconds(waterSpoutInitialDelay);
+        }
+
         while (!isDead)
         {
             while (BossIntroCutscene.IsPlaying)
