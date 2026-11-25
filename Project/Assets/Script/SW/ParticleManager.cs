@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ParticleManager : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class ParticleManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                Debug.LogError("ParticleManager가 씬에 존재하지 않습니다.");
+                Debug.LogError("[ParticleManager] ParticleManager가 씬에 존재하지 않습니다.");
             }
 
             return _instance;
@@ -31,14 +33,65 @@ public class ParticleManager : MonoBehaviour
         public int initialSize = 10;
     }
 
+    /// <summary>
+    /// 원샷 파티클 재생이 끝나면 자동으로 ParticleManager 풀에 반납하는 내부 훅 컴포넌트
+    /// </summary>
+    private class PooledParticleHook : MonoBehaviour
+    {
+        private ParticleManager owner;
+        private string poolKey;
+        private ParticleSystem rootParticle;
+
+        public void Bind(ParticleManager manager, string key)
+        {
+            owner = manager;
+            poolKey = key;
+
+            if (rootParticle == null)
+            {
+                rootParticle = GetComponent<ParticleSystem>();
+            }
+
+            if (rootParticle != null && !rootParticle.main.loop)
+            {
+                var main = rootParticle.main;
+                main.stopAction = ParticleSystemStopAction.Callback;
+            }
+        }
+
+        public void PlayFresh()
+        {
+            if (rootParticle == null)
+            {
+                rootParticle = GetComponent<ParticleSystem>();
+            }
+
+            if (rootParticle != null)
+            {
+                rootParticle.Clear(true);
+                rootParticle.Play(true);
+            }
+        }
+
+        private void OnParticleSystemStopped()
+        {
+            if (owner != null && !string.IsNullOrEmpty(poolKey))
+            {
+                owner.Return(poolKey, gameObject);
+            }
+        }
+    }
+
     #endregion
 
     #region Settings & Variables
 
     [SerializeField] private List<ParticlePool> pools;
+    [SerializeField] private int prewarmPerFrame = 8;
 
     private Dictionary<string, Queue<GameObject>> poolDict;
     private Dictionary<string, GameObject> prefabDict;
+    private Coroutine prewarmCoroutine;
 
     // 중복 Return 방지용
     private HashSet<GameObject> pooledObjects;
@@ -55,6 +108,13 @@ public class ParticleManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+
+            // 다른 매니저(예: PoolingManager)의 자식으로 붙어있더라도 독립 루트로 분리
+            if (transform.parent != null)
+            {
+                transform.SetParent(null, false);
+            }
+
             DontDestroyOnLoad(gameObject);
 
             InitializePools();
@@ -65,22 +125,45 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        StartPrewarm();
+    }
+
     private void OnEnable()
     {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    private void OnDestroy()
     {
-        if (activeObjects != null)
+        if (_instance == this)
         {
-            activeObjects.Clear();
+            _instance = null;
         }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (_instance != this)
+        {
+            return;
+        }
+
+        // 씬 전환 시 재생 중이던 파티클을 모두 안전하게 회수
+        ReturnAllActiveObjects();
+
+        if (pooledObjects != null)
+        {
+            pooledObjects.RemoveWhere(obj => obj == null);
+        }
+
+        StartPrewarm();
     }
 
     #endregion
@@ -94,7 +177,7 @@ public class ParticleManager : MonoBehaviour
         pooledObjects = new HashSet<GameObject>();
         activeObjects = new Dictionary<GameObject, string>();
 
-        if (pools == null) 
+        if (pools == null)
         {
             return;
         }
@@ -119,11 +202,11 @@ public class ParticleManager : MonoBehaviour
                 continue;
             }
 
-            CreatePool(pool.key, pool.prefab, pool.initialSize);
+            RegisterPool(pool.key, pool.prefab);
         }
     }
 
-    private void CreatePool(string key, GameObject prefab, int size)
+    private void RegisterPool(string key, GameObject prefab)
     {
         if (poolDict.ContainsKey(key))
         {
@@ -131,22 +214,81 @@ public class ParticleManager : MonoBehaviour
             return;
         }
 
-        Queue<GameObject> queue = new Queue<GameObject>();
-
         prefabDict.Add(key, prefab);
+        poolDict.Add(key, new Queue<GameObject>());
+    }
 
-        for (int i = 0; i < size; i++)
+    private void StartPrewarm()
+    {
+        if (_instance != this || pools == null || poolDict == null)
         {
-            GameObject obj = Instantiate(prefab, transform);
-            if (obj != null)
+            return;
+        }
+
+        if (prewarmCoroutine != null)
+        {
+            StopCoroutine(prewarmCoroutine);
+        }
+
+        prewarmCoroutine = StartCoroutine(PrewarmPoolsRoutine());
+    }
+
+    private IEnumerator PrewarmPoolsRoutine()
+    {
+        int createdThisFrame = 0;
+        int batchLimit = Mathf.Max(1, prewarmPerFrame);
+
+        foreach (var pool in pools)
+        {
+            if (pool == null || string.IsNullOrWhiteSpace(pool.key) || pool.prefab == null)
             {
-                obj.SetActive(false);
-                queue.Enqueue(obj);
-                pooledObjects.Add(obj);
+                continue;
+            }
+
+            if (!poolDict.TryGetValue(pool.key, out Queue<GameObject> queue))
+            {
+                continue;
+            }
+
+            while (queue.Count < pool.initialSize)
+            {
+                GameObject obj = CreatePooledInstance(pool.key, pool.prefab);
+                if (obj != null)
+                {
+                    queue.Enqueue(obj);
+                    pooledObjects.Add(obj);
+                }
+
+                createdThisFrame++;
+                if (createdThisFrame >= batchLimit)
+                {
+                    createdThisFrame = 0;
+                    yield return null;
+                }
             }
         }
 
-        poolDict.Add(key, queue);
+        prewarmCoroutine = null;
+    }
+
+    private GameObject CreatePooledInstance(string key, GameObject prefab)
+    {
+        GameObject obj = Instantiate(prefab, transform);
+        if (obj == null)
+        {
+            return null;
+        }
+
+        obj.SetActive(false);
+
+        PooledParticleHook hook = obj.GetComponent<PooledParticleHook>();
+        if (hook == null)
+        {
+            hook = obj.AddComponent<PooledParticleHook>();
+        }
+        hook.Bind(this, key);
+
+        return obj;
     }
 
     #endregion
@@ -162,9 +304,16 @@ public class ParticleManager : MonoBehaviour
         }
 
         Queue<GameObject> queue = poolDict[key];
+        GameObject obj = null;
+
+        // 파괴된 null 오브젝트가 큐에 섞여있더라도 건너뛰고 유효한 오브젝트 획득
+        while (queue.Count > 0 && obj == null)
+        {
+            obj = queue.Dequeue();
+        }
 
         // 자동 확장 (풀이 비어있을 때 새로 인스턴스화)
-        if (queue.Count == 0)
+        if (obj == null)
         {
             if (!prefabDict.TryGetValue(key, out GameObject prefab) || prefab == null)
             {
@@ -172,34 +321,38 @@ public class ParticleManager : MonoBehaviour
                 return null;
             }
 
-            GameObject newObj = Instantiate(prefab, transform);
-            if (newObj != null)
+            obj = CreatePooledInstance(key, prefab);
+            if (obj == null)
             {
-                newObj.SetActive(false);
-                queue.Enqueue(newObj);
-                pooledObjects.Add(newObj);
+                return null;
             }
         }
 
-        GameObject obj = queue.Dequeue();
-        if (obj != null)
+        pooledObjects.Remove(obj);
+
+        // 씬 루트로 분리하지 않고 항상 ParticleManager 본인의 자식으로 유지
+        if (obj.transform.parent != transform)
         {
-            pooledObjects.Remove(obj);
+            obj.transform.SetParent(transform, false);
+        }
 
-            // Pool 부모에서 분리
-            obj.transform.SetParent(null, false);
+        // 월드 위치/회전 설정
+        obj.transform.SetPositionAndRotation(position, rotation);
 
-            // 위치 설정
-            obj.transform.SetPositionAndRotation(position, rotation);
+        // 오브젝트 활성화 및 파티클 재시작
+        obj.SetActive(true);
 
-            // 오브젝트 활성화
-            obj.SetActive(true);
+        PooledParticleHook hook = obj.GetComponent<PooledParticleHook>();
+        if (hook != null)
+        {
+            hook.Bind(this, key);
+            hook.PlayFresh();
+        }
 
-            // 대여 상태 추적 추가
-            if (activeObjects != null)
-            {
-                activeObjects[obj] = key;
-            }
+        // 대여 상태 추적 추가
+        if (activeObjects != null)
+        {
+            activeObjects[obj] = key;
         }
 
         return obj;
@@ -223,13 +376,12 @@ public class ParticleManager : MonoBehaviour
         // 중복 반납 방지
         if (pooledObjects.Contains(obj))
         {
-            Debug.LogWarning($"[ParticleManager] 이미 반납된 오브젝트입니다. ({obj.name})");
             return;
         }
 
         obj.SetActive(false);
 
-        // Pool 밑으로 자식화하여 정리
+        // ParticleManager 본인의 자식 개체로 정리
         obj.transform.SetParent(transform, false);
 
         poolDict[key].Enqueue(obj);
@@ -242,16 +394,43 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
+    public void ReturnAllActiveObjects()
+    {
+        if (activeObjects == null || activeObjects.Count == 0)
+        {
+            return;
+        }
+
+        CleanupNullActiveObjects();
+
+        List<KeyValuePair<GameObject, string>> snapshot = new List<KeyValuePair<GameObject, string>>(activeObjects);
+        foreach (var kvp in snapshot)
+        {
+            if (kvp.Key != null)
+            {
+                Return(kvp.Value, kvp.Key);
+            }
+        }
+
+        activeObjects.Clear();
+    }
+
     private void CleanupNullActiveObjects()
     {
-        if (activeObjects == null) return;
+        if (activeObjects == null)
+        {
+            return;
+        }
 
         List<GameObject> nullKeys = null;
         foreach (var kvp in activeObjects)
         {
             if (kvp.Key == null)
             {
-                if (nullKeys == null) nullKeys = new List<GameObject>();
+                if (nullKeys == null)
+                {
+                    nullKeys = new List<GameObject>();
+                }
                 nullKeys.Add(kvp.Key);
             }
         }
@@ -267,7 +446,10 @@ public class ParticleManager : MonoBehaviour
 
     public void ReturnActiveObjectsOfType<T>() where T : Component
     {
-        if (activeObjects == null) return;
+        if (activeObjects == null)
+        {
+            return;
+        }
 
         // 먼저 파괴된 오브젝트 정리
         CleanupNullActiveObjects();
@@ -284,12 +466,9 @@ public class ParticleManager : MonoBehaviour
 
         foreach (var obj in toReturn)
         {
-            if (obj != null)
+            if (obj != null && activeObjects.TryGetValue(obj, out string key))
             {
-                if (activeObjects.TryGetValue(obj, out string key))
-                {
-                    Return(key, obj);
-                }
+                Return(key, obj);
             }
         }
     }

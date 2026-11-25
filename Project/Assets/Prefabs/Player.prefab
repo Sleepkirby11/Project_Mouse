@@ -420,6 +420,7 @@ MonoBehaviour:
   attackCursor: {fileID: 0}
   canvas: {fileID: 0}
   settingPanel: {fileID: 0}
+  BlackBG: {fileID: 0}
   rigid: {fileID: 0}
   anim: {fileID: 0}
   particle: {fileID: 0}
@@ -428,6 +429,8 @@ MonoBehaviour:
   isCanMove: 0
   jumpCount: 0
   isDashReady: 0
+  dashParticle: {fileID: 0}
+  footstepInterval: 0.35
   mouse: {fileID: 0}
   maxDist: 7.5
   isSkill: 0
@@ -443,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf6016f245b8b841ba38078f57bbe61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 50
   hp: 0
   maxInk: 5
   ink: 0
@@ -579,6 +582,8 @@ MonoBehaviour:
   specialChargeSpeed: 0
   coolTime: 3
   currentCoolTime: 3
+  minInk: 0
+  minSpecialInk: 0
 --- !u!1 &4407140826386702890
 GameObject:
   m_ObjectHideFlags: 0
