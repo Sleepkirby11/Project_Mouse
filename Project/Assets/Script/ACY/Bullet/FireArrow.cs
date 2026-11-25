@@ -199,6 +199,8 @@ public class FireArrow : MonoBehaviour, IDamageable
             col.enabled = false;
         }
 
+        DisappearVfxHelper.Spawn(DisappearVfxHelper.Style.FireArrowBreak, transform.position);
+
         if (PoolingManager.Instance != null)
         {
             PoolingManager.Instance.Return(POOL_KEY, gameObject);

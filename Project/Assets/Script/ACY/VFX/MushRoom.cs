@@ -201,6 +201,7 @@ public class Mushroom : MonoBehaviour, IDamageable
         // 애니메이터 비활성화하여 폭발 애니메이션 재생 차단
         if (animator != null) animator.enabled = false;
 
+        DisappearVfxHelper.Spawn(DisappearVfxHelper.Style.MushroomBurnByRed, transform.position);
         StartCoroutine(FadeAndReturnRoutine());
     }
     #endregion

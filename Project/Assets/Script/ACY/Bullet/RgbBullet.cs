@@ -111,7 +111,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
 
         if (!destroyed)
         {
-            StartFadeOut();
+            StartFadeOut(byCounter: false);
         }
     }
 
@@ -138,7 +138,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
 
         if (isWeaknessHit)
         {
-            StartFadeOut();
+            StartFadeOut(byCounter: true);
         }
     }
 
@@ -162,6 +162,7 @@ public class RgbBullet : MonoBehaviour, IDamageable
 
             destroyed = true;
             StopBulletSound();
+            DisappearVfxHelper.Spawn(ResolveDisappearStyle(byCounter: false), transform.position);
             StopAllCoroutines();
             PoolingManager.Instance.Return(myPoolName, gameObject);
         }
@@ -172,15 +173,38 @@ public class RgbBullet : MonoBehaviour, IDamageable
         StopBulletSound();
     }
 
-    private void StartFadeOut()
+    private void StartFadeOut(bool byCounter)
     {
         destroyed = true;
         if (bulletCollider != null) bulletCollider.enabled = false; // 추가 충돌 차단
         StopBulletSound();
         trailVfx?.SetActive(false, false);
+        DisappearVfxHelper.Spawn(ResolveDisappearStyle(byCounter), transform.position);
 
         StopAllCoroutines(); // 이동 관련 루틴 모두 정지
         StartCoroutine(FadeAndReturnRoutine()); // 제자리에 멈춰서 페이드아웃 시작
+    }
+
+    private DisappearVfxHelper.Style ResolveDisappearStyle(bool byCounter)
+    {
+        if (byCounter)
+        {
+            return myElement switch
+            {
+                EnemyStatus.EnemyElement.Red => DisappearVfxHelper.Style.RgbRedCounteredByBlue,
+                EnemyStatus.EnemyElement.Blue => DisappearVfxHelper.Style.RgbBlueCounteredByGreen,
+                EnemyStatus.EnemyElement.Green => DisappearVfxHelper.Style.RgbGreenCounteredByRed,
+                _ => DisappearVfxHelper.Style.RgbExpireRed
+            };
+        }
+
+        return myElement switch
+        {
+            EnemyStatus.EnemyElement.Red => DisappearVfxHelper.Style.RgbExpireRed,
+            EnemyStatus.EnemyElement.Blue => DisappearVfxHelper.Style.RgbExpireBlue,
+            EnemyStatus.EnemyElement.Green => DisappearVfxHelper.Style.RgbExpireGreen,
+            _ => DisappearVfxHelper.Style.RgbExpireRed
+        };
     }
 
     // 망치 스크립트 스타일의 페이드아웃 루틴

@@ -37,7 +37,7 @@ public class IceHammer : MonoBehaviour, IDamageable
         srs = GetComponentsInChildren<SpriteRenderer>();
         if (hammerHitbox == null)
         {
-            hammerHitbox = GetComponent<Collider2D>();
+            hammerHitbox = GetComponentInChildren<Collider2D>();
         }
     }
 
@@ -81,11 +81,13 @@ public class IceHammer : MonoBehaviour, IDamageable
 
         destroyed = true;
 
+        Vector3 shatterPos = ResolveHammerVisualCenter();
         DisableHitbox();
         if (anim != null)
         {
             anim.enabled = false; // 파괴 시 애니메이션 재생 즉시 중단
         }
+        DisappearVfxHelper.Spawn(DisappearVfxHelper.Style.IceHammerShatterByGreen, shatterPos);
         StartCoroutine(FadeAndReturnRoutine());
     }
     #endregion
@@ -166,6 +168,25 @@ public class IceHammer : MonoBehaviour, IDamageable
 
         // 완전히 페이드아웃되면 오브젝트 풀에 반환
         PoolingManager.Instance.Return(poolKey, gameObject);
+    }
+
+    private Vector3 ResolveHammerVisualCenter()
+    {
+        if (hammerHitbox != null && hammerHitbox.enabled)
+        {
+            return hammerHitbox.bounds.center;
+        }
+        if (srs != null)
+        {
+            for (int i = 0; i < srs.Length; i++)
+            {
+                if (srs[i] != null && srs[i].enabled)
+                {
+                    return srs[i].bounds.center;
+                }
+            }
+        }
+        return transform.position;
     }
 
     private void ResetAlpha()
