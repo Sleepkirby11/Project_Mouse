@@ -20,8 +20,39 @@ public class RgbBossMove : MonoBehaviour
 
     void Update()
     {
+        if (BossIntroCutscene.IsPlaying)
+        {
+            return;
+        }
+
         FlipToTarget();
     }
+
+    public void FacePlayer(Transform target = null)
+    {
+        if (target != null)
+        {
+            playerTransform = target;
+        }
+        else if (playerTransform == null)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                playerTransform = player.transform;
+            }
+        }
+
+        if (playerTransform != null)
+        {
+            FlipToTarget();
+        }
+        else if (isFacingRight)
+        {
+            Flip();
+        }
+    }
+
     private void FlipToTarget()
     {
         if (playerTransform == null)

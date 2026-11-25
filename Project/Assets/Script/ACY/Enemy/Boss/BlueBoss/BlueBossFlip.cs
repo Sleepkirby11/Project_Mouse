@@ -25,7 +25,45 @@ public class BlueBossFlip : MonoBehaviour
 
     void Update()
     {
+        if (BossIntroCutscene.IsPlaying)
+        {
+            return;
+        }
+
         FlipToTarget();
+    }
+
+    public void FacePlayer(Transform target = null)
+    {
+        if (target != null)
+        {
+            playerTransform = target;
+        }
+        else if (playerTransform == null)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                playerTransform = player.transform;
+            }
+        }
+
+        if (playerTransform != null)
+        {
+            float direction = playerTransform.position.x - transform.position.x;
+            if (direction > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if (direction < 0 && isFacingRight)
+            {
+                Flip();
+            }
+        }
+        else if (isFacingRight)
+        {
+            Flip();
+        }
     }
 
     private void FlipToTarget()

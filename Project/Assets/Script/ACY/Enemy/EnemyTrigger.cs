@@ -12,8 +12,28 @@ public class EnemyTrigger : MonoBehaviour
 
     [SerializeField] private float activateDelay = 0f;
 
+    [Header("보스 컷씬")]
+    [SerializeField] private bool playBossCutscene = true;
 
     private bool activated;
+
+    private void Awake()
+    {
+        if (!playBossCutscene || activated || enemies == null)
+            return;
+
+        if (FindBossInEnemies() == null)
+            return;
+
+        // 프리팹 수정 등으로 보스가 활성 상태로 저장되어도 트리거 진입 전에는 비활성 유지
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null && enemies[i].activeSelf)
+            {
+                enemies[i].SetActive(false);
+            }
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -29,6 +49,20 @@ public class EnemyTrigger : MonoBehaviour
 
     private IEnumerator ActivateRoutine()
     {
+        EnemyStatus boss = FindBossInEnemies();
+
+        if (playBossCutscene && boss != null)
+        {
+            // 보스방 문 닫기 등 트리거 이벤트 선반영
+            OnTriggerActivated?.Invoke();
+
+            if (activateDelay > 0)
+                yield return new WaitForSeconds(activateDelay);
+
+            BossIntroCutscene.Play(boss, enemies);
+            yield break;
+        }
+
         if (activateDelay > 0)
             yield return new WaitForSeconds(activateDelay);
 
@@ -39,5 +73,22 @@ public class EnemyTrigger : MonoBehaviour
         }
 
         OnTriggerActivated?.Invoke();
+    }
+
+    private EnemyStatus FindBossInEnemies()
+    {
+        if (enemies == null) return null;
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] == null) continue;
+            EnemyStatus status = enemies[i].GetComponent<EnemyStatus>();
+            if (status != null && status.IsBoss)
+            {
+                return status;
+            }
+        }
+
+        return null;
     }
 }

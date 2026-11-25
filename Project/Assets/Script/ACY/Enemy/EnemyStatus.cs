@@ -34,6 +34,10 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     [SerializeField] private Color bossNameColor = Color.clear; // 보스 이름 색상 (미지정시 속성에 맞는 기본 색상 설정)
 
     public bool IsDead { get; private set; } // 사망 여부 플래그
+    public bool IsBoss => isBoss;
+    public string BossName => bossName;
+    public Color BossNameColor => bossNameColor;
+    public bool SuppressAutoBossBarOnStart { get; set; }
 
     private string particleName = "Particle_Hit";
     private string effectName = "Light_Death_Effect";
@@ -123,12 +127,12 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
                 yield return null;
             }
 
-            if (UI.Instance != null)
+            if (UI.Instance != null && !SuppressAutoBossBarOnStart)
             {
                 Debug.Log($"[EnemyStatus] 보스 '{bossName}'가 활성화되었습니다. 보스 체력바를 활성화합니다. 비율: {GetHPRatio()}");
                 UI.Instance.ShowBossHPBar(bossName, bossNameColor, GetHPRatio());
             }
-            else
+            else if (UI.Instance == null)
             {
                 Debug.LogError($"[EnemyStatus] 보스 '{bossName}'가 활성화되었지만 UI.Instance가 null입니다!");
             }

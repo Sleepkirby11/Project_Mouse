@@ -175,6 +175,11 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
     private void Update()
     {
+        if (BossIntroCutscene.IsPlaying)
+        {
+            return;
+        }
+
         // 체력이 10% 이하이고, 아직 발악 패턴에 진입하지 않았다면 실행
         if (!isFinalPhaseTriggered && enemyStatus.GetHPRatio() <= 0.1f)
         {
@@ -200,10 +205,19 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     #region Attack Loop & Selection
     private IEnumerator AttackRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        while (BossIntroCutscene.IsPlaying || (colorCycle != null && colorCycle.IsTransitioningOrPending))
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(colorCycle != null && colorCycle.UsedIntroTransition ? 0.8f : 2f);
 
         while (true)
         {
+            while (BossIntroCutscene.IsPlaying)
+            {
+                yield return null;
+            }
             if (isFinalPhaseActive)
             {
                 yield return null;
@@ -451,6 +465,9 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
     public void SpawnBossBullet()
     {
+        if (BossIntroCutscene.IsPlaying || !enabled)
+            return;
+
         if (player == null || bulletFirePoint == null)
             return;
 
@@ -488,6 +505,9 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
     public void SpawnLightning()
     {
+        if (BossIntroCutscene.IsPlaying || !enabled)
+            return;
+
         if (lightningCoroutine != null)
         {
             StopCoroutine(lightningCoroutine);

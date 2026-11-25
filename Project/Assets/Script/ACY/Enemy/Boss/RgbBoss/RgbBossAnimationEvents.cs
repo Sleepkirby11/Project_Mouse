@@ -11,10 +11,16 @@ public class RgbBossAnimationEvents : MonoBehaviour
 
     public void SpawnLightning()
     {
+        if (BossIntroCutscene.IsPlaying || bossAttack == null || !bossAttack.enabled)
+            return;
+
         bossAttack.SpawnLightning();
     }
     public void SpawnBossBullet()
     {
+        if (BossIntroCutscene.IsPlaying || bossAttack == null || !bossAttack.enabled)
+            return;
+
         bossAttack.SpawnBossBullet();
     }
 }

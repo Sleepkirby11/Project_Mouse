@@ -47,6 +47,11 @@ public class RedBossMove : MonoBehaviour
 
     private void Update()
     {
+        if (BossIntroCutscene.IsPlaying)
+        {
+            return;
+        }
+
         if (bossAttack != null && bossAttack.IsStunned)
         {
             return;
@@ -62,7 +67,17 @@ public class RedBossMove : MonoBehaviour
     {
         while (this != null && gameObject != null)
         {
+            while (BossIntroCutscene.IsPlaying)
+            {
+                yield return null;
+            }
+
             yield return new WaitForSeconds(teleportInterval);
+
+            if (BossIntroCutscene.IsPlaying)
+            {
+                continue;
+            }
 
             if (bossAttack != null && (bossAttack.IsStunned || bossAttack.IsInvincible))
             {
@@ -151,6 +166,31 @@ public class RedBossMove : MonoBehaviour
     #endregion
 
     #region Direction & Flips
+
+    public void FacePlayer(Transform target = null)
+    {
+        if (target != null)
+        {
+            playerTransform = target;
+        }
+        else if (playerTransform == null)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                playerTransform = player.transform;
+            }
+        }
+
+        if (playerTransform != null)
+        {
+            FlipToTarget();
+        }
+        else if (isFacingRight)
+        {
+            Flip();
+        }
+    }
 
     private void FlipToTarget()
     {
