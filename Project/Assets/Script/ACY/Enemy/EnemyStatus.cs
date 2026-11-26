@@ -65,6 +65,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     private ParryingShieldEnemy parryingShieldEnemy;
     private int lastBlockedFrame = -1;
     public EnemyElement CurrentElement => element;
+    public bool WasBlockedThisFrame => lastBlockedFrame == Time.frameCount;
 
     #endregion
 
