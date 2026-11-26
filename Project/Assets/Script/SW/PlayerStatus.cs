@@ -753,6 +753,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     void Die()  //사망
     {
         Debug.Log("Die");
+        ClearAttachedLockIcons();
         Player.instance.inputVec = Vector2.zero;
         AudioManager.instance.PlayBGM(false);
         Player.instance.SpriteOrder(5000);
@@ -767,6 +768,28 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
                 boss.ClearBossProjectiles();
             }
         }
+        ClearAttachedLockIcons();
+    }
+
+    private void ClearAttachedLockIcons()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = transform.GetChild(i);
+            if (child == null) continue;
+            if (!child.name.StartsWith("Lock", System.StringComparison.Ordinal)) continue;
+
+            if (PoolingManager.Instance != null)
+            {
+                child.SetParent(PoolingManager.Instance.transform);
+                PoolingManager.Instance.Return("FlowerLockIcon", child.gameObject);
+            }
+            else
+            {
+                child.SetParent(null);
+                child.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void OnEnable()
@@ -778,6 +801,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         ClearStunState(clearShockImmediately: true);
+        ClearAttachedLockIcons();
         ResumePlayerAnim();
     }
 
@@ -820,6 +844,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             if (playerComp != null) playerComp.OnKnockbackEnd();
         }
         if (isBound) ReleaseBind();
+        ClearAttachedLockIcons();
 
         if (UI.Instance != null)
         {
@@ -849,6 +874,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isPossessed = false;
         isBound = false;
         ClearStunState(clearShockImmediately: true);
+        ClearAttachedLockIcons();
         ResumePlayerAnim();
 
         if (rb != null)

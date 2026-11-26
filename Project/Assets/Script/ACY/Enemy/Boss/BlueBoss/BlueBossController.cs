@@ -79,6 +79,7 @@ public class BossController : MonoBehaviour, IHitReaction
     private Coroutine deathRoutine;
     private BlueBossDashParticles dashVfx;
     private readonly List<BlueBossWarningLine> activeWarningLines = new List<BlueBossWarningLine>();
+    private readonly List<GameObject> activeDashPhantoms = new List<GameObject>();
 
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
     private static readonly int AnimSonic = Animator.StringToHash("Sonic");
@@ -88,6 +89,18 @@ public class BossController : MonoBehaviour, IHitReaction
     private static readonly int AnimRestStart = Animator.StringToHash("RestStart");
     private static readonly int AnimRest = Animator.StringToHash("Rest");
     private static readonly int AnimRest2 = Animator.StringToHash("Rest2");
+
+    private struct EnrageDashPhantom
+    {
+        public GameObject root;
+        public Rigidbody2D rb;
+        public SpriteRenderer spriteRenderer;
+        public Collider2D hitbox;
+        public BlueBossDashParticles vfx;
+        public Vector2 targetPosition;
+        public Vector2 dashDir;
+        public bool arrived;
+    }
 
     #endregion
 
@@ -766,7 +779,8 @@ public class BossController : MonoBehaviour, IHitReaction
             }
         }
 
-        bool simulatedFacingRight = bossFlip != null ? bossFlip.isFacingRight : transform.localScale.x >= 0f;
+        bool currentFacingRight = bossFlip != null ? bossFlip.isFacingRight : transform.localScale.x >= 0f;
+        bool[] dashFacesRight = new bool[dashCount];
         float maxWarningSafetyDuration = Mathf.Max(dashWarningDuration * 4f, dashCount * warningInterval + 6f);
 
         for (int i = 0; i < dashCount; i++)
@@ -777,10 +791,10 @@ public class BossController : MonoBehaviour, IHitReaction
             float angle = Mathf.Atan2(pathDir.y, pathDir.x) * Mathf.Rad2Deg;
             Quaternion lineRotation = Quaternion.Euler(0, 0, angle);
 
-            if (pathDir.x > 0.0001f) simulatedFacingRight = true;
-            else if (pathDir.x < -0.0001f) simulatedFacingRight = false;
+            bool faceRight = Mathf.Abs(pathDir.x) > 0.0001f ? pathDir.x > 0f : currentFacingRight;
+            dashFacesRight[i] = faceRight;
 
-            ComputeDashHitboxSweep(pathDir, simulatedFacingRight ? 1f : -1f, out float hitboxThickness, out float normalOffset);
+            ComputeDashHitboxSweep(pathDir, faceRight ? 1f : -1f, out float hitboxThickness, out float normalOffset);
             Vector2 pathNormal = new Vector2(-pathDir.y, pathDir.x);
             Vector2 centerPos = ((startPositions[i] + targetPositions[i]) * 0.5f) + (pathNormal * normalOffset);
 
@@ -804,69 +818,157 @@ public class BossController : MonoBehaviour, IHitReaction
         // 모든 선이 선명해질 때까지 잠시 대기
         yield return new WaitForSeconds(0.4f);
 
-        // 순간이동 및 돌진 실행
+        if (isDead) yield break;
+
+        // 모든 궤적에서 동시 돌진 준비: 애니메이션 + 록온 펄스 + 클론 배치
         if (anim != null)
         {
             anim.SetTrigger(AnimDash);
         }
 
+        Vector2 primaryDashDir = (targetPositions[0] - startPositions[0]).normalized;
+        if (bossFlip != null)
+        {
+            bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
+            bossFlip.moveDirection = primaryDashDir;
+        }
+        rb.position = startPositions[0];
+
+        List<EnrageDashPhantom> phantoms = new List<EnrageDashPhantom>(dashCount - 1);
+        for (int i = 1; i < dashCount; i++)
+        {
+            Vector2 dir = (targetPositions[i] - startPositions[i]).normalized;
+            EnrageDashPhantom phantom = CreateEnrageDashPhantom(i, startPositions[i], targetPositions[i], dir, dashFacesRight[i], bossSprite);
+            phantoms.Add(phantom);
+        }
+
         for (int i = 0; i < dashCount; i++)
         {
-            if (isDead) yield break;
-
-            Vector2 dashDir = (targetPositions[i] - startPositions[i]).normalized;
-            if (bossFlip != null)
-            {
-                bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
-                bossFlip.moveDirection = dashDir;
-            }
-
-            // 보스 순간이동 및 등장
-            rb.position = startPositions[i];
             if (spawnedWarnings[i] != null)
             {
                 spawnedWarnings[i].TriggerLockOnPulse();
             }
-            yield return FadeIn(0.1f);
-            if (dashHitbox != null)
-            {
-                dashHitbox.enabled = true; // 이때 충돌 판정 켬
-            }
+        }
 
-            // 출발 시 해당 경고 파티클 종료
+        yield return FadeBossAndPhantomsAlpha(bossSprite, phantoms, 0f, 1f, 0.1f);
+
+        if (isDead)
+        {
+            ClearActiveDashPhantoms();
+            yield break;
+        }
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.SFX.BlueBossDash);
+        }
+
+        if (dashHitbox != null)
+        {
+            dashHitbox.enabled = true;
+        }
+        for (int p = 0; p < phantoms.Count; p++)
+        {
+            if (phantoms[p].hitbox != null)
+            {
+                phantoms[p].hitbox.enabled = true;
+            }
+        }
+
+        // 출발과 동시에 모든 궤적의 경고 파티클 종료 및 모든 돌진 파티클 시작
+        for (int i = 0; i < dashCount; i++)
+        {
             if (spawnedWarnings[i] != null)
             {
                 activeWarningLines.Remove(spawnedWarnings[i]);
                 spawnedWarnings[i].DismissWarning();
                 spawnedWarnings[i] = null;
             }
-
-            dashVfx?.StartDash(dashDir, isEnrage: true);
-
-            // 전력 질주 속도
-            float enrageDashSpeed = dashSpeed * 3.5f;
-
-            // 통과 처리
-            while (Vector2.Distance(rb.position, targetPositions[i]) > 0.2f)
-            {
-                rb.MovePosition(Vector2.MoveTowards(rb.position, targetPositions[i], enrageDashSpeed * Time.fixedDeltaTime));
-                yield return new WaitForFixedUpdate();
-            }
-
-            rb.MovePosition(targetPositions[i]); // 끝점 안착
-            dashVfx?.StopDash(clearImmediately: false);
-
-            if (bossSprite != null)
-            {
-                yield return FadeOut(0.15f);
-            }
-            if (dashHitbox != null)
-            {
-                dashHitbox.enabled = false;
-            }
-
-            yield return new WaitForSeconds(0.1f);
         }
+
+        dashVfx?.StartDash(primaryDashDir, isEnrage: true);
+        for (int p = 0; p < phantoms.Count; p++)
+        {
+            phantoms[p].vfx?.StartDash(phantoms[p].dashDir, isEnrage: true);
+        }
+
+        // 전력 질주 속도
+        float enrageDashSpeed = dashSpeed * 3.5f;
+        bool bossArrived = false;
+
+        while (!isDead)
+        {
+            float step = enrageDashSpeed * Time.fixedDeltaTime;
+
+            if (!bossArrived)
+            {
+                if (Vector2.Distance(rb.position, targetPositions[0]) <= 0.2f)
+                {
+                    rb.MovePosition(targetPositions[0]);
+                    bossArrived = true;
+                    dashVfx?.StopDash(clearImmediately: false);
+                    if (dashHitbox != null)
+                    {
+                        dashHitbox.enabled = false;
+                    }
+                }
+                else
+                {
+                    rb.MovePosition(Vector2.MoveTowards(rb.position, targetPositions[0], step));
+                }
+            }
+
+            bool allPhantomsArrived = true;
+            for (int p = 0; p < phantoms.Count; p++)
+            {
+                EnrageDashPhantom phantom = phantoms[p];
+                if (phantom.arrived || phantom.rb == null)
+                {
+                    continue;
+                }
+
+                if (Vector2.Distance(phantom.rb.position, phantom.targetPosition) <= 0.2f)
+                {
+                    phantom.rb.MovePosition(phantom.targetPosition);
+                    phantom.arrived = true;
+                    phantom.vfx?.StopDash(clearImmediately: false);
+                    if (phantom.hitbox != null)
+                    {
+                        phantom.hitbox.enabled = false;
+                    }
+                    phantoms[p] = phantom;
+                }
+                else
+                {
+                    phantom.rb.MovePosition(Vector2.MoveTowards(phantom.rb.position, phantom.targetPosition, step));
+                    allPhantomsArrived = false;
+                }
+            }
+
+            if (bossArrived && allPhantomsArrived)
+            {
+                break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        if (dashHitbox != null)
+        {
+            dashHitbox.enabled = false;
+        }
+        for (int p = 0; p < phantoms.Count; p++)
+        {
+            if (phantoms[p].hitbox != null)
+            {
+                phantoms[p].hitbox.enabled = false;
+            }
+            phantoms[p].vfx?.StopDash(clearImmediately: false);
+        }
+
+        yield return FadeBossAndPhantomsAlpha(bossSprite, phantoms, 1f, 0f, 0.15f);
+        ClearActiveDashPhantoms();
+        yield return new WaitForSeconds(0.1f);
 
         // 발악 패턴 종료 후 안전하게 맵 중앙으로 순간이동하여 충돌 끼임 방지
         dashVfx?.StopDash(clearImmediately: true);
@@ -1035,6 +1137,142 @@ public class BossController : MonoBehaviour, IHitReaction
         }
     }
 
+    private EnrageDashPhantom CreateEnrageDashPhantom(
+        int index,
+        Vector2 startPos,
+        Vector2 targetPos,
+        Vector2 dashDir,
+        bool faceRight,
+        SpriteRenderer sourceSprite)
+    {
+        GameObject root = new GameObject($"BlueBossDashPhantom_{index}");
+        root.transform.position = new Vector3(startPos.x, startPos.y, transform.position.z);
+
+        Vector3 bossScale = transform.localScale;
+        float absX = Mathf.Abs(bossScale.x);
+        root.transform.localScale = new Vector3(faceRight ? absX : -absX, bossScale.y, bossScale.z);
+
+        Rigidbody2D phantomRb = root.AddComponent<Rigidbody2D>();
+        phantomRb.bodyType = RigidbodyType2D.Kinematic;
+        phantomRb.gravityScale = 0f;
+        phantomRb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        phantomRb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        phantomRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        SpriteRenderer phantomSr = null;
+        if (sourceSprite != null)
+        {
+            GameObject spriteChild = new GameObject("Sprite");
+            spriteChild.transform.SetParent(root.transform, false);
+            spriteChild.transform.localPosition = sourceSprite.transform.localPosition;
+            spriteChild.transform.localRotation = sourceSprite.transform.localRotation;
+            spriteChild.transform.localScale = sourceSprite.transform.localScale;
+
+            phantomSr = spriteChild.AddComponent<SpriteRenderer>();
+            phantomSr.sprite = sourceSprite.sprite;
+            phantomSr.sharedMaterial = sourceSprite.sharedMaterial;
+            phantomSr.sortingLayerID = sourceSprite.sortingLayerID;
+            phantomSr.sortingOrder = sourceSprite.sortingOrder - 1;
+            phantomSr.flipX = sourceSprite.flipX;
+            phantomSr.flipY = sourceSprite.flipY;
+            Color c = sourceSprite.color;
+            c.a = 0f;
+            phantomSr.color = c;
+
+            if (anim != null && anim.runtimeAnimatorController != null)
+            {
+                Animator phantomAnim = spriteChild.AddComponent<Animator>();
+                phantomAnim.runtimeAnimatorController = anim.runtimeAnimatorController;
+                phantomAnim.updateMode = anim.updateMode;
+                phantomAnim.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+                phantomAnim.Play("Dash", 0, 0f);
+                phantomAnim.Update(0f);
+            }
+        }
+
+        Collider2D phantomHitbox = null;
+        if (dashHitbox != null)
+        {
+            GameObject hitboxGo = Instantiate(dashHitbox.gameObject, root.transform, false);
+            hitboxGo.name = "DashHitBox";
+            hitboxGo.transform.localPosition = dashHitbox.transform.localPosition;
+            hitboxGo.transform.localRotation = dashHitbox.transform.localRotation;
+            hitboxGo.transform.localScale = dashHitbox.transform.localScale;
+            phantomHitbox = hitboxGo.GetComponent<Collider2D>();
+            if (phantomHitbox != null)
+            {
+                phantomHitbox.enabled = false;
+            }
+        }
+
+        BlueBossDashParticles phantomVfx = BlueBossDashParticles.Attach(root);
+        activeDashPhantoms.Add(root);
+
+        return new EnrageDashPhantom
+        {
+            root = root,
+            rb = phantomRb,
+            spriteRenderer = phantomSr,
+            hitbox = phantomHitbox,
+            vfx = phantomVfx,
+            targetPosition = targetPos,
+            dashDir = dashDir,
+            arrived = false
+        };
+    }
+
+    private static IEnumerator FadeBossAndPhantomsAlpha(
+        SpriteRenderer bossSprite,
+        List<EnrageDashPhantom> phantoms,
+        float fromAlpha,
+        float toAlpha,
+        float duration)
+    {
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float a = Mathf.Lerp(fromAlpha, toAlpha, t / duration);
+            SetAlphaOnBossAndPhantoms(bossSprite, phantoms, a);
+            yield return null;
+        }
+        SetAlphaOnBossAndPhantoms(bossSprite, phantoms, toAlpha);
+    }
+
+    private static void SetAlphaOnBossAndPhantoms(
+        SpriteRenderer bossSprite,
+        List<EnrageDashPhantom> phantoms,
+        float alpha)
+    {
+        if (bossSprite != null)
+        {
+            Color c = bossSprite.color;
+            c.a = alpha;
+            bossSprite.color = c;
+        }
+
+        for (int i = 0; i < phantoms.Count; i++)
+        {
+            SpriteRenderer sr = phantoms[i].spriteRenderer;
+            if (sr == null) continue;
+            Color c = sr.color;
+            c.a = alpha;
+            sr.color = c;
+        }
+    }
+
+    private void ClearActiveDashPhantoms()
+    {
+        for (int i = activeDashPhantoms.Count - 1; i >= 0; i--)
+        {
+            if (activeDashPhantoms[i] != null)
+            {
+                Destroy(activeDashPhantoms[i]);
+            }
+        }
+        activeDashPhantoms.Clear();
+    }
+
     private void ClearActiveWarningLines()
     {
         for (int i = activeWarningLines.Count - 1; i >= 0; i--)
@@ -1109,6 +1347,7 @@ public class BossController : MonoBehaviour, IHitReaction
     private void OnDisable()
     {
         ClearActiveWarningLines();
+        ClearActiveDashPhantoms();
         dashVfx?.StopDash(clearImmediately: true);
     }
 
@@ -1123,6 +1362,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
         StopAllBossCoroutines();
         ClearActiveWarningLines();
+        ClearActiveDashPhantoms();
 
         if (clawHitbox != null)
         {

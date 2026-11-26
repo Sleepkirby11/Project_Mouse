@@ -37,6 +37,8 @@ public class FlowerTrap : MonoBehaviour
     private bool isDetecting = false;
     private bool isReturning = false;
     private GameObject lockIconInstance;
+    private GameObject pendingReturnLockIcon;
+    private Coroutine hideLockCoroutine;
     private PlayerStatus boundPlayer;
 
     // 애니메이션 State 
@@ -62,14 +64,19 @@ public class FlowerTrap : MonoBehaviour
         isDetecting = false;
         isReturning = false;
         boundPlayer = null;
-
-        if (lockIconInstance != null)
-        {
-            lockIconInstance.SetActive(false);
-            lockIconInstance = null;
-        }
+        ReturnAllLockIconsImmediate();
 
         StartCoroutine(BloomSequence());
+    }
+
+    private void OnDisable()
+    {
+        if (boundPlayer != null)
+        {
+            boundPlayer.ReleaseBind();
+            boundPlayer = null;
+        }
+        ReturnAllLockIconsImmediate();
     }
 
     private IEnumerator VanishSequence(bool isFlower = false)
@@ -159,14 +166,30 @@ public class FlowerTrap : MonoBehaviour
             dotRoutine = StartCoroutine(DotRoutine(damageable, playerAnim));
         }
 
-        yield return new WaitForSeconds(bindDuration);
+        float elapsed = 0f;
+        while (elapsed < bindDuration)
+        {
+            if (boundPlayer != null && boundPlayer.HP <= 0)
+            {
+                break;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
 
         if (dotRoutine != null)
         {
             StopCoroutine(dotRoutine);
         }
 
-        HideLockIcon();
+        bool playerDied = boundPlayer != null && boundPlayer.HP <= 0;
+        if (playerDied)
+        {
+            boundPlayer.ReleaseBind();
+        }
+        boundPlayer = null;
+
+        HideLockIcon(immediate: playerDied);
 
         anim.Play(S_VANISH);
         yield return new WaitForSeconds(GetClipLength(S_VANISH));
@@ -179,6 +202,10 @@ public class FlowerTrap : MonoBehaviour
         {
             yield return new WaitForSeconds(dotInterval);
 
+            if (boundPlayer != null && boundPlayer.HP <= 0)
+            {
+                yield break;
+            }
             damageable.TakeDamage(dotDamage);
         }
     }
@@ -211,6 +238,8 @@ public class FlowerTrap : MonoBehaviour
 
     private void ShowLockIcon(Transform playerTransform)
     {
+        ReturnAllLockIconsImmediate();
+
         Vector3 spawnPos = playerTransform.position + (Vector3)lockIconOffset;
         lockIconInstance = PoolingManager.Instance.Get(lockIconPoolKey, spawnPos, Quaternion.identity);
 
@@ -219,6 +248,7 @@ public class FlowerTrap : MonoBehaviour
             return;
         }
         lockIconInstance.transform.SetParent(playerTransform);
+        lockIconInstance.transform.localRotation = Quaternion.identity;
 
         Animator lockAnim = lockIconInstance.GetComponent<Animator>();
         if (lockAnim != null)
@@ -227,10 +257,20 @@ public class FlowerTrap : MonoBehaviour
         }
     }
 
-    private void HideLockIcon()
+    private void HideLockIcon(bool immediate = false)
     {
         if (lockIconInstance == null)
         {
+            if (immediate)
+            {
+                ReturnAllLockIconsImmediate();
+            }
+            return;
+        }
+
+        if (immediate || !gameObject.activeInHierarchy)
+        {
+            ReturnAllLockIconsImmediate();
             return;
         }
 
@@ -238,11 +278,15 @@ public class FlowerTrap : MonoBehaviour
         if (lockAnim != null)
         {
             lockAnim.Play(S_LOCKOFF);
-            StartCoroutine(ReturnLockIconDelayed(GetClipLength(S_LOCKOFF)));
+            if (hideLockCoroutine != null)
+            {
+                StopCoroutine(hideLockCoroutine);
+            }
+            hideLockCoroutine = StartCoroutine(ReturnLockIconDelayed(GetClipLength(S_LOCKOFF)));
         }
         else
         {
-            PoolingManager.Instance.Return(lockIconPoolKey, lockIconInstance);
+            ReturnSingleLockIcon(lockIconInstance);
             lockIconInstance = null;
         }
     }
@@ -251,13 +295,49 @@ public class FlowerTrap : MonoBehaviour
     {
         GameObject icon = lockIconInstance;
         lockIconInstance = null;
+        pendingReturnLockIcon = icon;
 
         yield return new WaitForSeconds(delay);
 
-        if (icon != null)
+        hideLockCoroutine = null;
+        pendingReturnLockIcon = null;
+        ReturnSingleLockIcon(icon);
+    }
+
+    private void ReturnAllLockIconsImmediate()
+    {
+        if (hideLockCoroutine != null)
+        {
+            StopCoroutine(hideLockCoroutine);
+            hideLockCoroutine = null;
+        }
+
+        if (lockIconInstance != null)
+        {
+            ReturnSingleLockIcon(lockIconInstance);
+            lockIconInstance = null;
+        }
+
+        if (pendingReturnLockIcon != null)
+        {
+            ReturnSingleLockIcon(pendingReturnLockIcon);
+            pendingReturnLockIcon = null;
+        }
+    }
+
+    private void ReturnSingleLockIcon(GameObject icon)
+    {
+        if (icon == null) return;
+
+        if (PoolingManager.Instance != null)
         {
             icon.transform.SetParent(PoolingManager.Instance.transform);
             PoolingManager.Instance.Return(lockIconPoolKey, icon);
+        }
+        else
+        {
+            icon.transform.SetParent(null);
+            icon.SetActive(false);
         }
     }
 
@@ -274,19 +354,21 @@ public class FlowerTrap : MonoBehaviour
             boundPlayer.ReleaseBind();
             boundPlayer = null;
         }
-        HideLockIcon();
 
         bool isFlower = isDetecting;
         isDetecting = false;
 
         StopAllCoroutines();
+        hideLockCoroutine = null;
 
         if (gameObject.activeInHierarchy)
         {
+            HideLockIcon(immediate: false);
             StartCoroutine(VanishSequence(isFlower));
         }
         else
         {
+            ReturnAllLockIconsImmediate();
             ReturnToPool();
         }
     }
@@ -294,9 +376,11 @@ public class FlowerTrap : MonoBehaviour
     private void ReturnToPool()
     {
         StopAllCoroutines();
+        hideLockCoroutine = null;
         isDetecting = false;
         isReturning = false;
         boundPlayer = null;
+        ReturnAllLockIconsImmediate();
         if (PoolingManager.Instance != null)
         {
             PoolingManager.Instance.Return(myPoolKey, gameObject);
