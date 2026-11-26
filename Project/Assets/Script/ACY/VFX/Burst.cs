@@ -30,10 +30,20 @@ public class Burst : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            PlayerStatus pStatus = collision.GetComponent<PlayerStatus>();
+            bool playerHitEffective = pStatus == null || (!pStatus.IsInvincible && pStatus.HP > 0);
+            Bounds playerBounds = collision.bounds;
+
             IDamageable damageable = collision.GetComponent<IDamageable>();
             if (damageable != null)
             {
                 damageable.TakeDamage(explosionDamage);
+            }
+
+            if (playerHitEffective)
+            {
+                float radius = Mathf.Max(playerBounds.extents.x, playerBounds.extents.y);
+                SkillHitParticles.SpawnRedPowerHit(playerBounds.center, radius);
             }
         }
     }

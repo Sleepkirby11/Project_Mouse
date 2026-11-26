@@ -80,6 +80,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public bool IsBound => isBound;
     public bool IsStunned => isStunned;
     private Coroutine bindCoroutine;
+    private MonsterShockParticles shockParticles;
     private float originGravityScale;
     private System.Collections.Generic.List<Collider2D> ignoredColliders = new System.Collections.Generic.List<Collider2D>();
     void Awake()
@@ -279,9 +280,17 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isStunned = true;
         playerComp.CancleCursor();
 
+        if (shockParticles == null)
+        {
+            shockParticles = MonsterShockParticles.GetOrCreate(this);
+        }
+        shockParticles?.PlayShock();
+
         yield return new WaitForSeconds(duration);
 
         isStunned = false;
+        stunCoroutine = null;
+        shockParticles?.StopShock(clearImmediately: false);
     }
     public void SetPossessed(bool value)    //빙의
     {
@@ -488,6 +497,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     private void OnDisable()
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        shockParticles?.StopShock(clearImmediately: true);
     }
 
     // 다음 씬으로 넘어갈때 모든 상태이상 해제 
@@ -557,6 +567,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isStunned = false;
         isPossessed = false;
         isBound = false;
+        shockParticles?.StopShock(clearImmediately: true);
 
         if (rb != null)
         {

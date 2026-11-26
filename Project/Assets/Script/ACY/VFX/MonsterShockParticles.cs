@@ -12,7 +12,7 @@ public class MonsterShockParticles : MonoBehaviour
     private ParticleSystem ringPS;
     private bool configured;
 
-    private EnemyStatus ownerEnemy;
+    private Component ownerComponent;
     private Collider2D cachedCollider;
     private SpriteRenderer cachedSpriteRenderer;
     private float cachedRadius = 0.6f;
@@ -24,35 +24,37 @@ public class MonsterShockParticles : MonoBehaviour
     private static Material sharedSparkMat;
     private static Material sharedRingMat;
 
-    public static MonsterShockParticles GetOrCreate(EnemyStatus enemy)
-    {
-        if (enemy == null) return null;
+    public static MonsterShockParticles GetOrCreate(EnemyStatus enemy) => GetOrCreate((Component)enemy);
 
-        Transform existing = enemy.transform.Find(ChildObjectName);
+    public static MonsterShockParticles GetOrCreate(Component owner)
+    {
+        if (owner == null) return null;
+
+        Transform existing = owner.transform.Find(ChildObjectName);
         if (existing != null)
         {
             MonsterShockParticles existingComp = existing.GetComponent<MonsterShockParticles>();
             if (existingComp != null)
             {
-                existingComp.Initialize(enemy);
+                existingComp.Initialize(owner);
                 return existingComp;
             }
         }
 
         GameObject go = new GameObject(ChildObjectName);
-        go.transform.SetParent(enemy.transform, false);
+        go.transform.SetParent(owner.transform, false);
         MonsterShockParticles comp = go.AddComponent<MonsterShockParticles>();
-        comp.Initialize(enemy);
+        comp.Initialize(owner);
         return comp;
     }
 
-    public void Initialize(EnemyStatus enemy)
+    public void Initialize(Component owner)
     {
-        ownerEnemy = enemy;
-        if (enemy != null)
+        ownerComponent = owner;
+        if (owner != null)
         {
-            cachedCollider = enemy.GetComponent<Collider2D>();
-            cachedSpriteRenderer = enemy.GetComponentInChildren<SpriteRenderer>();
+            cachedCollider = owner.GetComponent<Collider2D>();
+            cachedSpriteRenderer = owner.GetComponentInChildren<SpriteRenderer>();
         }
 
         if (!configured)
@@ -98,7 +100,7 @@ public class MonsterShockParticles : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (ownerEnemy == null) return;
+        if (ownerComponent == null) return;
         if ((boltPS != null && boltPS.isPlaying) ||
             (sparkPS != null && sparkPS.isPlaying) ||
             (ringPS != null && ringPS.isPlaying))
@@ -109,9 +111,9 @@ public class MonsterShockParticles : MonoBehaviour
 
     private void SyncTransformAndSorting()
     {
-        if (ownerEnemy == null) return;
+        if (ownerComponent == null) return;
 
-        Bounds b = ResolveEnemyBounds();
+        Bounds b = ResolveOwnerBounds();
         transform.position = b.center;
 
         float extent = Mathf.Max(b.extents.x, b.extents.y);
@@ -119,7 +121,7 @@ public class MonsterShockParticles : MonoBehaviour
         cachedRadius = radius;
 
         // 부모 스케일이 음수(좌우 반전)거나 커도 파티클 크기가 왜곡되지 않도록 월드 기준 단위 스케일 보정
-        Vector3 parentLossy = ownerEnemy.transform.lossyScale;
+        Vector3 parentLossy = ownerComponent.transform.lossyScale;
         transform.localScale = new Vector3(
             Mathf.Abs(parentLossy.x) > 0.001f ? 1f / parentLossy.x : 1f,
             Mathf.Abs(parentLossy.y) > 0.001f ? 1f / parentLossy.y : 1f,
@@ -146,7 +148,7 @@ public class MonsterShockParticles : MonoBehaviour
         }
     }
 
-    private Bounds ResolveEnemyBounds()
+    private Bounds ResolveOwnerBounds()
     {
         if (cachedCollider != null && cachedCollider.enabled)
         {
@@ -156,7 +158,7 @@ public class MonsterShockParticles : MonoBehaviour
         {
             return cachedSpriteRenderer.bounds;
         }
-        return new Bounds(ownerEnemy.transform.position + Vector3.up * 0.5f, Vector3.one);
+        return new Bounds(ownerComponent.transform.position + Vector3.up * 0.5f, Vector3.one);
     }
 
     private void Configure()
