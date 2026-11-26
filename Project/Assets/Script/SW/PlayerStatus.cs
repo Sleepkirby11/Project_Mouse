@@ -494,6 +494,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         }
 
         isBound = true;
+        if (playerComp != null)
+        {
+            playerComp.CancleCursor();
+        }
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0f;
 

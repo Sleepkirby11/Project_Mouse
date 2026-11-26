@@ -142,28 +142,21 @@ public class PlayerInputScript : MonoBehaviour
     //대시 키 받아오기
     public void ActionDash(InputAction.CallbackContext context)
     {
-        if (player.status.HP <= 0 || !player.status.CanMove)
+        if (context.canceled)
         {
-            return;
-        }
+            bool wasDashReady = player.isDashReady;
+            player.isDashReady = false;
+            player.DashLine();
 
-        if(GameManager.instance != null)
-        {
-            if(GameManager.instance.isSetting)
+            if (!wasDashReady || player.status.HP <= 0 || !player.status.CanMove)
             {
                 return;
             }
-        }
+            if (GameManager.instance != null && GameManager.instance.isSetting)
+            {
+                return;
+            }
 
-        if (context.started)
-        {
-            player.isDashReady = true;
-        }
-
-        if (context.canceled)
-        {
-            player.isDashReady = false;
-            player.DashLine();
             if (player.jumpCount == 1)
             {
                 //마우스 방향 구하기
@@ -194,6 +187,25 @@ public class PlayerInputScript : MonoBehaviour
 
                 player.jumpCount--;
             }
+            return;
+        }
+
+        if (player.status.HP <= 0 || !player.status.CanMove)
+        {
+            return;
+        }
+
+        if(GameManager.instance != null)
+        {
+            if(GameManager.instance.isSetting)
+            {
+                return;
+            }
+        }
+
+        if (context.started)
+        {
+            player.isDashReady = true;
         }
     }
 
