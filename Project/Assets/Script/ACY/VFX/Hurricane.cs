@@ -165,15 +165,26 @@ public class Hurricane : MonoBehaviour
         if (isDisposing) return;
         if (!collision.CompareTag("Player")) return;
 
+        PlayerStatus playerStatus = collision.GetComponent<PlayerStatus>();
+        bool playerHitEffective = playerStatus == null || (!playerStatus.IsInvincible && playerStatus.HP > 0);
+        Bounds playerBounds = collision.bounds;
+
         IDamageable damageable = collision.GetComponent<IDamageable>();
         damageable?.TakeDamage(finalDamage);
 
-        onHitPlayer?.Invoke();
-
-        if (currentElement == EnemyStatus.EnemyElement.Blue)
+        if (playerHitEffective)
         {
-            if (collision.TryGetComponent(out PlayerStatus playerStatus))
-                playerStatus.LaunchByWater(launchForceY);
+            if (currentElement == EnemyStatus.EnemyElement.Red)
+            {
+                float radius = Mathf.Max(playerBounds.extents.x, playerBounds.extents.y);
+                SkillHitParticles.SpawnRedPowerHit(playerBounds.center, radius);
+            }
+            onHitPlayer?.Invoke();
+        }
+
+        if (currentElement == EnemyStatus.EnemyElement.Blue && playerStatus != null)
+        {
+            playerStatus.LaunchByWater(launchForceY);
         }
 
         StartCoroutine(FadeOutAndReturnRoutine());

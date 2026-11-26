@@ -46,10 +46,22 @@ public class LightningBolt : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            PlayerStatus pStatus = other.GetComponent<PlayerStatus>();
+            bool playerHitEffective = pStatus == null || (!pStatus.IsInvincible && pStatus.HP > 0);
+            Bounds playerBounds = other.bounds;
+
             IDamageable damageable = other.GetComponent<IDamageable>();
             damageable?.TakeDamage(damage);
 
-            onHitPlayer?.Invoke();
+            if (playerHitEffective)
+            {
+                if (currentElement == EnemyStatus.EnemyElement.Red)
+                {
+                    float radius = Mathf.Max(playerBounds.extents.x, playerBounds.extents.y);
+                    SkillHitParticles.SpawnRedPowerHit(playerBounds.center, radius);
+                }
+                onHitPlayer?.Invoke();
+            }
 
             if (currentElement == EnemyStatus.EnemyElement.Blue)
             {

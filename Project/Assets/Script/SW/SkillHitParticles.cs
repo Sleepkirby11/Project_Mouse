@@ -165,10 +165,11 @@ public static class SkillHitParticles
             mainPs.Play(false);
             mainPs.Emit(16);
 
-            // 2. 플레이어 주변 피회복 '+' 십자 픽셀 파티클
+            // 2. 회복 대상 주변 피회복 '+' 십자 픽셀 파티클
             if (playerTransform != null)
             {
-                subPs.transform.position = playerTransform.position + Vector3.up * 0.3f;
+                Vector3 healCenter = ResolveTargetCenter(playerTransform);
+                subPs.transform.position = healCenter;
                 ConfigureBurstPs(
                     subPs,
                     plusMat,
@@ -192,7 +193,7 @@ public static class SkillHitParticles
                 );
 
                 // 회복 링 펄스
-                ringPs.transform.position = playerTransform.position + Vector3.up * 0.2f;
+                ringPs.transform.position = healCenter;
                 ConfigureBurstPs(
                     ringPs,
                     ringMat,
@@ -221,6 +222,16 @@ public static class SkillHitParticles
             }
 
             routine = StartCoroutine(GreenDrainRoutine(targetCenter, playerTransform));
+        }
+
+        private static Vector3 ResolveTargetCenter(Transform target)
+        {
+            if (target == null) return Vector3.zero;
+            if (target.TryGetComponent<Collider2D>(out var col) && col.enabled)
+            {
+                return col.bounds.center;
+            }
+            return target.position + Vector3.up * 0.3f;
         }
 
         public void ForceReturnNow()
@@ -266,7 +277,7 @@ public static class SkillHitParticles
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / travelDuration);
                 float eased = t * t * (3f - 2f * t);
-                Vector3 targetPos = playerTransform != null ? playerTransform.position + Vector3.up * 0.3f : startCenter;
+                Vector3 targetPos = playerTransform != null ? ResolveTargetCenter(playerTransform) : startCenter;
 
                 for (int i = 0; i < orbCount; i++)
                 {
@@ -280,10 +291,10 @@ public static class SkillHitParticles
                 yield return null;
             }
 
-            // 흡수 오브가 플레이어에 도착하는 시점에 추가 '+' 회복 버스트
+            // 흡수 오브가 대상에 도착하는 시점에 추가 '+' 회복 버스트
             if (playerTransform != null && subPs != null)
             {
-                subPs.transform.position = playerTransform.position + Vector3.up * 0.3f;
+                subPs.transform.position = ResolveTargetCenter(playerTransform);
                 subPs.Emit(6);
             }
 

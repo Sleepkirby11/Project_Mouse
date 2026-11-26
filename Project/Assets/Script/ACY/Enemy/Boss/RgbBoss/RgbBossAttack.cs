@@ -449,7 +449,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
             hurricane.Initialize(enemyStatus.CurrentElement, spawnDirection);
 
             if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
-                hurricane.onHitPlayer = () => enemyStatus.Heal(healAmount);
+                hurricane.onHitPlayer = HandleGreenLifeDrainHit;
             else
                 hurricane.onHitPlayer = null;
         }
@@ -496,7 +496,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                 bullet.Initialize(player, targetPoolKey);
 
                 if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
-                    bullet.onHitPlayer = () => enemyStatus.Heal(healAmount);
+                    bullet.onHitPlayer = HandleGreenLifeDrainHit;
                 else
                     bullet.onHitPlayer = null;
             }
@@ -549,13 +549,33 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                     bolt.Initialize(poolKey, dir, enemyStatus.CurrentElement);
 
                     if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
-                        bolt.onHitPlayer = () => enemyStatus.Heal(healAmount);
+                        bolt.onHitPlayer = HandleGreenLifeDrainHit;
                     else
                         bolt.onHitPlayer = null;
                 }
             }
 
             yield return new WaitForSeconds(lightningInterval);
+        }
+    }
+
+    private void HandleGreenLifeDrainHit()
+    {
+        if (enemyStatus != null)
+        {
+            enemyStatus.Heal(healAmount);
+        }
+
+        if (player != null)
+        {
+            Vector3 drainPos = player.position + Vector3.up * 0.3f;
+            float drainRadius = 0.6f;
+            if (player.TryGetComponent<Collider2D>(out var playerCol) && playerCol.enabled)
+            {
+                drainPos = playerCol.bounds.center;
+                drainRadius = Mathf.Max(playerCol.bounds.extents.x, playerCol.bounds.extents.y);
+            }
+            SkillHitParticles.SpawnGreenHealHit(drainPos, drainRadius, transform);
         }
     }
 

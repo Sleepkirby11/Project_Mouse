@@ -148,10 +148,22 @@ public class RgbBullet : MonoBehaviour, IDamageable
 
         if (collision.CompareTag("Player"))
         {
+            PlayerStatus pStatus = collision.GetComponent<PlayerStatus>();
+            bool playerHitEffective = pStatus == null || (!pStatus.IsInvincible && pStatus.HP > 0);
+            Bounds playerBounds = collision.bounds;
+
             IDamageable damageable = collision.GetComponent<IDamageable>();
             damageable?.TakeDamage(bulletDamage);
 
-            onHitPlayer?.Invoke();
+            if (playerHitEffective)
+            {
+                if (myElement == EnemyStatus.EnemyElement.Red)
+                {
+                    float radius = Mathf.Max(playerBounds.extents.x, playerBounds.extents.y);
+                    SkillHitParticles.SpawnRedPowerHit(playerBounds.center, radius);
+                }
+                onHitPlayer?.Invoke();
+            }
 
             // 블루 - 스턴
             if (myElement == EnemyStatus.EnemyElement.Blue)
