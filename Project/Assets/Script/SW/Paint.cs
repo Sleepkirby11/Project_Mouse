@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -27,6 +27,11 @@ public class Paint : MonoBehaviour
 
     TrailRenderer trail;
     EdgeCollider2D col;
+    PaintVFX paintVFX;
+
+    //VFX 상태 추적용
+    bool wasMoving;
+    float initialLifeTime;
 
     //Trail의 정점 변수
     List<Vector2> points = new List<Vector2>();
@@ -47,6 +52,7 @@ public class Paint : MonoBehaviour
     {
         trail = GetComponent<TrailRenderer>();
         col = GetComponent<EdgeCollider2D>();
+        paintVFX = GetComponent<PaintVFX>();
         player = GameObject.FindWithTag("Player");
         playerScript = player.gameObject.GetComponent<Player>();
         playerStatus = player.gameObject.GetComponent<PlayerStatus>();
@@ -58,16 +64,35 @@ public class Paint : MonoBehaviour
         //endWidth는 항상 startWidth와 동일시
         trail.endWidth = trail.startWidth;
 
+        //그리기 시작 감지
+        if (isMove && !wasMoving)
+        {
+            wasMoving = true;
+            paintVFX?.OnDrawStart(mouse != null ? mouse.position : transform.position);
+        }
+        else if (!isMove && wasMoving)
+        {
+            wasMoving = false;
+        }
+
         //지속 시간에 따른 trail의 크기 변화 및 collider의 enabled 여부
         if (lifeTime > 0)
         {
             lifeTime -= Time.deltaTime;
-            trail.startWidth = lifeTime * 2;
+            if (paintVFX != null)
+            {
+                paintVFX.OnLifeTimeUpdate(lifeTime, initialLifeTime);
+            }
+            else
+            {
+                trail.startWidth = lifeTime * 2;
+            }
         }
         else if (lifeTime < 0)
         {
             lifeTime = 0;
             trail.startWidth = 0;
+            paintVFX?.OnFinish();
         }
         else
         {
@@ -78,6 +103,7 @@ public class Paint : MonoBehaviour
         if (isMove)
         {
             transform.position = mouse.transform.position;
+            paintVFX?.OnDrawStep(transform.position);
             // 트레일의 정점 개수 업데이트 확인
             if(positionCount != trail.positionCount)
             {
@@ -138,6 +164,8 @@ public class Paint : MonoBehaviour
         if (positionCount >= 2)
         {
             col.enabled = true;
+            initialLifeTime = lifeTime > 0f ? lifeTime : 0.5f;
+            paintVFX?.OnActivate(trailPositions, positionCount, initialLifeTime, isSkill);
         }
     }
 

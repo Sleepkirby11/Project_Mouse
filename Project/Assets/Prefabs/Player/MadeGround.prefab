@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4858286660504194405}
   - component: {fileID: 5356656391656475969}
   - component: {fileID: 2522850743236883010}
+  - component: {fileID: 7194028561349021872}
   m_Layer: 14
   m_Name: MadeGround
   m_TagString: Ground
@@ -58,7 +59,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e5f9b2d40a3c58169b7d2f0e4c6a8132, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,7 +133,7 @@ TrailRenderer:
     numCornerVertices: 0
     numCapVertices: 1
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -203,3 +204,38 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+
+--- !u!114 &7194028561349021872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5008746764441576614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b3e91a5d4248f091a6e2b4d8c3f501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixelMaterial: {fileID: 2100000, guid: 5212007a303eb174e949ec1ae8968d88, type: 2}
+  drawDropDistance: 0.45
+  drawingWidth: 0.25
+  attackBaseWidth: 0.72
+  attackSpreadBoost: 1.28
+  attackSpreadDuration: 0.08
+  stainExtraDuration: 0.38
+  stainSortingOrder: 2
+  maxStainPool: 6
+  splatterDensityPerUnit: 2.6
+  maxSplatterCount: 42
+  groundBaseWidth: 0.42
+  solidifyRatio: 0.16
+  vaporizeStartRatio: 0.56
+  vaporEmitRate: 55
+  enableGroundShading: 1
+  groundHighlightOffset: 0.11
+  groundShadowOffset: -0.11
+  groundHighlightWidthRatio: 0.34
+  groundShadowWidthRatio: 1.08
+  groundHighlightTint: 0.72
+  groundShadowDarken: 0.62

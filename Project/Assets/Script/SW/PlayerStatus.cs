@@ -864,6 +864,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             AudioManager.instance.PlayBGM(true);
         }
+        
     }
 
     public void ResetStatus()
