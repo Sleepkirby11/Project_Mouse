@@ -148,11 +148,32 @@ public class Paint : MonoBehaviour
 
         if (damageable != null && !collision.gameObject.CompareTag("Player"))
         {
+            Bounds targetBounds = collision.bounds;
+            Vector3 targetCenter = targetBounds.center;
+            float targetRadius = Mathf.Max(targetBounds.extents.x, targetBounds.extents.y);
+
             damageable.TakeDamage(damage);
-            if(isSkill)
+            if (isSkill && playerStatus != null)
             {
-                if(playerStatus.currentStance == PlayerStatus.Stance.Green) playerStatus.Heal(2);
-                if(playerStatus.currentStance == PlayerStatus.Stance.Blue && stunnable != null) stunnable.ApplyStun(3); 
+                EnemyStatus enemyStatus = collision.gameObject.GetComponent<EnemyStatus>();
+                bool hitBlocked = enemyStatus != null && enemyStatus.WasBlockedThisFrame;
+
+                if (!hitBlocked)
+                {
+                    if (playerStatus.currentStance == PlayerStatus.Stance.Red)
+                    {
+                        SkillHitParticles.SpawnRedPowerHit(targetCenter, targetRadius);
+                    }
+                    else if (playerStatus.currentStance == PlayerStatus.Stance.Green)
+                    {
+                        playerStatus.Heal(2);
+                        SkillHitParticles.SpawnGreenHealHit(targetCenter, targetRadius, player != null ? player.transform : null);
+                    }
+                    else if (playerStatus.currentStance == PlayerStatus.Stance.Blue && stunnable != null)
+                    {
+                        stunnable.ApplyStun(3);
+                    }
+                }
             }
         }
     }
