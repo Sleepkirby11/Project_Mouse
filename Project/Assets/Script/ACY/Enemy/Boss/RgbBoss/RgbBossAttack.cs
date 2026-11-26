@@ -109,6 +109,10 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     [SerializeField] private string hurricanePoolKey = "Hurricane";
     [SerializeField] private string fireGearPoolKey = "FireGear";
     [SerializeField] private string iceHammerPoolKey = "IceHammer";
+
+    [Header("생성 경고 설정")]
+    [SerializeField] private float hurricaneWarningDuration = 0.7f;
+    [SerializeField] private float iceHammerWarningDuration = 0.75f;
     #endregion
 
     #region Private Fields
@@ -126,6 +130,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     private bool isFinalPhaseTriggered = false;
     private bool isInvincible = false;
     private List<BlackHole> activeBlackHoles = new List<BlackHole>();
+    private readonly List<RgbSpawnTelegraph> activeTelegraphs = new List<RgbSpawnTelegraph>();
 
     private Coroutine attackCoroutine;
     private Coroutine lightningCoroutine;
@@ -162,7 +167,13 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
 
     private void HandleDeath()
     {
+        ClearActiveTelegraphs();
         StopAllCoroutines();
+    }
+
+    private void OnDisable()
+    {
+        ClearActiveTelegraphs();
     }
 
     private void OnDestroy()
@@ -304,12 +315,10 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
                 yield return new WaitForSeconds(3f);
                 break;
             case BossAttackType.IceHammer:
-                SpawnIceHammer();
-                yield return new WaitForSeconds(3f);
+                yield return StartCoroutine(SpawnIceHammerWithWarning());
                 break;
             case BossAttackType.Hurricane:
-                SpawnHurricane();
-                yield return new WaitForSeconds(3f);
+                yield return StartCoroutine(SpawnHurricaneWithWarning());
                 break;
             case BossAttackType.Bullet:
                 ShootBullet();
@@ -391,13 +400,42 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     #endregion
 
     #region Blue Pattern (IceHammer)
+    private IEnumerator SpawnIceHammerWithWarning()
+    {
+        if (!TryGetIceHammerSpawnPosition(out Vector3 spawnPos))
+        {
+            yield break;
+        }
+
+        if (iceHammerWarningDuration > 0f)
+        {
+            RgbSpawnTelegraph telegraph = RgbSpawnTelegraph.SpawnIceHammerTelegraph(
+                spawnPos,
+                iceHammerWarningDuration,
+                UnregisterTelegraph);
+            activeTelegraphs.Add(telegraph);
+            yield return new WaitForSeconds(iceHammerWarningDuration);
+        }
+
+        SpawnIceHammerAt(spawnPos);
+        yield return new WaitForSeconds(Mathf.Max(0.5f, 3f - iceHammerWarningDuration));
+    }
+
     public void SpawnIceHammer()
     {
+        if (TryGetIceHammerSpawnPosition(out Vector3 spawnPos))
+        {
+            SpawnIceHammerAt(spawnPos);
+        }
+    }
+
+    private bool TryGetIceHammerSpawnPosition(out Vector3 spawnPos)
+    {
+        spawnPos = Vector3.zero;
         if (player == null)
-            return;
+            return false;
 
         Vector3 rayStart = player.position + new Vector3(hammerOffsetX, 5f, 0f);
-
         RaycastHit2D hit = Physics2D.Raycast(
             rayStart,
             Vector2.down,
@@ -405,12 +443,14 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
             groundLayer);
 
         if (hit.collider == null)
-        {
-            return;
-        }
+            return false;
 
-        Vector3 spawnPos = (Vector3)hit.point + new Vector3(0f, hammerOffsetY, 0f);
+        spawnPos = (Vector3)hit.point + new Vector3(0f, hammerOffsetY, 0f);
+        return true;
+    }
 
+    private void SpawnIceHammerAt(Vector3 spawnPos)
+    {
         PoolingManager.Instance.Get(
             iceHammerPoolKey,
             spawnPos,
@@ -419,25 +459,57 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     #endregion
 
     #region Common Pattern (Hurricane, Bullet, Lightning)
+    private IEnumerator SpawnHurricaneWithWarning()
+    {
+        Vector3 spawnDirection = bossMove != null && bossMove.isFacingRight ? Vector3.right : Vector3.left;
+        Vector3 spawnPos = ComputeHurricaneSpawnPosition(spawnDirection);
+        EnemyStatus.EnemyElement spawnElement = enemyStatus != null
+            ? enemyStatus.CurrentElement
+            : EnemyStatus.EnemyElement.Blue;
+
+        if (hurricaneWarningDuration > 0f)
+        {
+            RgbSpawnTelegraph telegraph = RgbSpawnTelegraph.SpawnHurricaneTelegraph(
+                spawnPos,
+                spawnElement,
+                hurricaneWarningDuration,
+                UnregisterTelegraph);
+            activeTelegraphs.Add(telegraph);
+            yield return new WaitForSeconds(hurricaneWarningDuration);
+        }
+
+        SpawnHurricaneAt(spawnPos, spawnDirection, spawnElement);
+        yield return new WaitForSeconds(Mathf.Max(0.5f, 3f - hurricaneWarningDuration));
+    }
+
     private void SpawnHurricane()
     {
-        Vector3 spawnDirection = bossMove.isFacingRight ? Vector3.right : Vector3.left;
+        Vector3 spawnDirection = bossMove != null && bossMove.isFacingRight ? Vector3.right : Vector3.left;
+        Vector3 spawnPos = ComputeHurricaneSpawnPosition(spawnDirection);
+        EnemyStatus.EnemyElement spawnElement = enemyStatus != null
+            ? enemyStatus.CurrentElement
+            : EnemyStatus.EnemyElement.Blue;
 
+        SpawnHurricaneAt(spawnPos, spawnDirection, spawnElement);
+    }
+
+    private Vector3 ComputeHurricaneSpawnPosition(Vector3 spawnDirection)
+    {
         Vector3 rayStart = transform.position + (spawnDirection * spawnOffsetX) + Vector3.up * 5f;
         RaycastHit2D hit = Physics2D.Raycast(rayStart, Vector2.down, 50f, groundLayer);
 
-        Vector3 spawnPos;
         if (hit.collider != null)
         {
-            spawnPos = (Vector3)hit.point + new Vector3(0f, hurricaneOffsetY, 0f);
-        }
-        else
-        {
-            spawnPos = transform.position +
-                          (spawnDirection * spawnOffsetX) +
-                          (Vector3.up * spawnOffsetY);
+            return (Vector3)hit.point + new Vector3(0f, hurricaneOffsetY, 0f);
         }
 
+        return transform.position +
+               (spawnDirection * spawnOffsetX) +
+               (Vector3.up * spawnOffsetY);
+    }
+
+    private void SpawnHurricaneAt(Vector3 spawnPos, Vector3 spawnDirection, EnemyStatus.EnemyElement spawnElement)
+    {
         GameObject hurricaneObj = PoolingManager.Instance.Get(
             hurricanePoolKey,
             spawnPos,
@@ -446,13 +518,30 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
         if (hurricaneObj != null)
         {
             Hurricane hurricane = hurricaneObj.GetComponent<Hurricane>();
-            hurricane.Initialize(enemyStatus.CurrentElement, spawnDirection);
+            hurricane.Initialize(spawnElement, spawnDirection);
 
-            if (enemyStatus.CurrentElement == EnemyStatus.EnemyElement.Green)
+            if (spawnElement == EnemyStatus.EnemyElement.Green)
                 hurricane.onHitPlayer = HandleGreenLifeDrainHit;
             else
                 hurricane.onHitPlayer = null;
         }
+    }
+
+    private void UnregisterTelegraph(RgbSpawnTelegraph telegraph)
+    {
+        activeTelegraphs.Remove(telegraph);
+    }
+
+    private void ClearActiveTelegraphs()
+    {
+        for (int i = activeTelegraphs.Count - 1; i >= 0; i--)
+        {
+            if (activeTelegraphs[i] != null)
+            {
+                activeTelegraphs[i].CancelAndDestroy();
+            }
+        }
+        activeTelegraphs.Clear();
     }
 
     public void ShootBullet()
@@ -594,6 +683,7 @@ public class RgbBossAttack : MonoBehaviour, IHitReaction
     {
         isFinalPhaseActive = true;
         isInvincible = true;
+        ClearActiveTelegraphs();
 
         if (attackCoroutine != null)
         {
