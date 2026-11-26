@@ -15,6 +15,11 @@ public class EnemyTrigger : MonoBehaviour
     [Header("보스 컷씬")]
     [SerializeField] private bool playBossCutscene = true;
 
+    [Header("적 등장 연출")]
+    [SerializeField] private bool useSpawnParticles = true;
+    [SerializeField] private float spawnTelegraphDuration = 0.42f;
+    [SerializeField] private float spawnStaggerDelay = 0f;
+
     private bool activated;
 
     private void Awake()
@@ -71,13 +76,47 @@ public class EnemyTrigger : MonoBehaviour
         if (activateDelay > 0)
             yield return new WaitForSeconds(activateDelay);
 
-        foreach (GameObject enemy in enemies)
+        OnTriggerActivated?.Invoke();
+
+        if (enemies == null || enemies.Length == 0)
+            yield break;
+
+        for (int i = 0; i < enemies.Length; i++)
         {
-            if (enemy != null)
-                enemy.SetActive(true);
+            GameObject enemy = enemies[i];
+            if (enemy == null)
+                continue;
+
+            ActivateEnemyWithEffect(enemy);
+
+            if (useSpawnParticles && spawnStaggerDelay > 0f && i < enemies.Length - 1)
+            {
+                yield return new WaitForSeconds(spawnStaggerDelay);
+            }
+        }
+    }
+
+    private void ActivateEnemyWithEffect(GameObject enemy)
+    {
+        if (!useSpawnParticles)
+        {
+            enemy.SetActive(true);
+            return;
         }
 
-        OnTriggerActivated?.Invoke();
+        if (enemy.activeSelf)
+        {
+            EnemySpawnParticles.PlayMaterializeBurst(enemy);
+            return;
+        }
+
+        EnemySpawnParticles.PlaySpawnSequence(enemy, spawnTelegraphDuration, () =>
+        {
+            if (enemy != null)
+            {
+                enemy.SetActive(true);
+            }
+        });
     }
 
     private void DismissChasingGhostsForBossFight()

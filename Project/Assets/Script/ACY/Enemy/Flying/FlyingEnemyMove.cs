@@ -42,7 +42,7 @@ public class FlyingEnemyMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         FlyingAttack = GetComponent<FlyingEnemyAttack>();
         anim = GetComponentInChildren<Animator>();
-        originPos = rb.position;
+        originPos = transform.position;
         enemyStatus = GetComponent<EnemyStatus>();
 
         // 물리 설정 최적화
@@ -50,7 +50,9 @@ public class FlyingEnemyMove : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 
         rb.freezeRotation = true; // 회전 방지
 
-        prevX = originPos.x + Mathf.Cos(0) * patrolRange;  //방향 계산
+        // Cos(PI/2) == 0 이므로 배치된 스폰 위치(originPos)에서 즉시 순간이동하지 않고 자연스럽게 배회 시작
+        patrolTimer = Mathf.PI * 0.5f;
+        prevX = originPos.x;
         playerFilter.useLayerMask = true;
         playerFilter.layerMask = playerLayer;
     }
