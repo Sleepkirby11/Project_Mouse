@@ -224,6 +224,92 @@ public static class SkillHitParticles
             routine = StartCoroutine(GreenDrainRoutine(targetCenter, playerTransform));
         }
 
+        public void PlaySpiritHealBurst(Vector3 bossCenter, float bossRadius, Color spiritAccent)
+        {
+            EnsureBuilt();
+            StopRunning();
+
+            float scale = Mathf.Clamp(bossRadius * 0.85f, 0.8f, 2.0f);
+            transform.position = bossCenter;
+
+            // 1. 나비가 흡수되며 흩어지는 정령 가루 스파크
+            ConfigureBurstPs(
+                mainPs,
+                diamondMat,
+                sortingOrder: 261,
+                minLife: 0.28f, maxLife: 0.54f,
+                minSpeed: 1.6f * scale, maxSpeed: 4.4f * scale,
+                minSize: 0.18f, maxSize: 0.36f,
+                radius: 0.45f * scale,
+                gravity: -0.15f,
+                upwardVel: 0.65f,
+                noiseStr: 0.95f,
+                randomRot: true,
+                colorA: Color.Lerp(spiritAccent, Color.white, 0.45f),
+                colorB: spiritAccent,
+                endColor: new Color(0.06f, 0.48f, 0.20f, 0f),
+                sizeCurve: new AnimationCurve(
+                    new Keyframe(0f, 0.7f),
+                    new Keyframe(0.25f, 1.15f),
+                    new Keyframe(1f, 0f)
+                )
+            );
+
+            // 2. 보스 몸체 주변으로 피어오르는 '+' 회복 십자 파티클
+            ConfigureBurstPs(
+                subPs,
+                plusMat,
+                sortingOrder: 262,
+                minLife: 0.40f, maxLife: 0.68f,
+                minSpeed: 0.35f, maxSpeed: 1.1f,
+                minSize: 0.30f, maxSize: 0.48f,
+                radius: 0.65f * scale,
+                gravity: -0.18f,
+                upwardVel: 0.9f,
+                noiseStr: 0.35f,
+                randomRot: false,
+                colorA: new Color(0.90f, 1f, 0.90f, 1f),
+                colorB: new Color(0.22f, 0.96f, 0.46f, 1f),
+                endColor: new Color(0.08f, 0.60f, 0.24f, 0f),
+                sizeCurve: new AnimationCurve(
+                    new Keyframe(0f, 0.65f),
+                    new Keyframe(0.28f, 1.1f),
+                    new Keyframe(1f, 0.3f)
+                )
+            );
+
+            // 3. 회복 파동 링
+            ConfigureBurstPs(
+                ringPs,
+                ringMat,
+                sortingOrder: 260,
+                minLife: 0.28f, maxLife: 0.38f,
+                minSpeed: 0f, maxSpeed: 0f,
+                minSize: 1.2f * scale, maxSize: 1.6f * scale,
+                radius: 0.02f,
+                gravity: 0f,
+                upwardVel: 0f,
+                noiseStr: 0f,
+                randomRot: true,
+                colorA: Color.Lerp(spiritAccent, Color.white, 0.35f),
+                colorB: new Color(0.20f, 0.95f, 0.44f, 0.9f),
+                endColor: new Color(0.06f, 0.55f, 0.24f, 0f),
+                sizeCurve: new AnimationCurve(
+                    new Keyframe(0f, 0.4f),
+                    new Keyframe(1f, 1.5f)
+                )
+            );
+
+            mainPs.Play(false);
+            mainPs.Emit(20);
+            subPs.Play(false);
+            subPs.Emit(9);
+            ringPs.Play(false);
+            ringPs.Emit(2);
+
+            routine = StartCoroutine(ReturnAfterDelay(0.75f));
+        }
+
         private static Vector3 ResolveTargetCenter(Transform target)
         {
             if (target == null) return Vector3.zero;
@@ -548,6 +634,17 @@ public static class SkillHitParticles
         inst.gameObject.SetActive(true);
         activeInstances.Add(inst);
         inst.PlayGreenHealHit(targetCenter, targetRadius, playerTransform);
+    }
+
+    public static void SpawnSpiritHealBurst(Vector3 bossCenter, float bossRadius, Color spiritAccent)
+    {
+        EnsureHostAndAssets();
+        EffectInstance inst = AcquireInstance();
+        if (inst == null) return;
+
+        inst.gameObject.SetActive(true);
+        activeInstances.Add(inst);
+        inst.PlaySpiritHealBurst(bossCenter, bossRadius, spiritAccent);
     }
 
     private static void EnsureHostAndAssets()

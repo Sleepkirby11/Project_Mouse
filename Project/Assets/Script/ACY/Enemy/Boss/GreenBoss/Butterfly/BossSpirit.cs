@@ -179,7 +179,7 @@ public class BossSpirit : MonoBehaviour, IHitReaction
         if (Vector3.Distance(transform.position, bossTransform.position) <= returnArrivalDistance)
         {
             // 보스에게 귀환 보고
-            bossAttack?.OnSpiritReturned();
+            bossAttack?.OnSpiritReturned(spiritType);
 
             if (myPoolKey != null && PoolingManager.Instance != null)
             {

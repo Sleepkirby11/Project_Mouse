@@ -373,11 +373,18 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
 
     public void OnSpiritReturned()
     {
+        OnSpiritReturned(BossSpirit.SpiritType.Green);
+    }
+
+    public void OnSpiritReturned(BossSpirit.SpiritType spiritType)
+    {
         // 귀환한 정령 수 비례 회복
         if (enemyStatus != null)
         {
             enemyStatus.Heal(healPerReturnedSpirit);
         }
+
+        PlaySpiritHealParticles(spiritType);
 
         activeSpiritsCount--;
 
@@ -393,6 +400,35 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
                 bossAnim.SetTrigger("Idle"); // Idle 복귀
             }
         }
+    }
+
+    private void PlaySpiritHealParticles(BossSpirit.SpiritType spiritType)
+    {
+        Vector3 bossCenter = transform.position;
+        float bossRadius = 1.0f;
+
+        if (TryGetComponent<Collider2D>(out var col) && col.enabled)
+        {
+            bossCenter = col.bounds.center;
+            bossRadius = Mathf.Max(col.bounds.extents.x, col.bounds.extents.y);
+        }
+        else if (sr != null)
+        {
+            bossCenter = sr.bounds.center;
+            bossRadius = Mathf.Max(sr.bounds.extents.x, sr.bounds.extents.y);
+        }
+
+        // 콜라이더 상단/머리 쪽으로 쏠리지 않도록 보스 몸통 중심으로 보정
+        bossCenter += Vector3.down * Mathf.Clamp(bossRadius * 0.45f, 0.35f, 0.9f);
+
+        Color accent = spiritType switch
+        {
+            BossSpirit.SpiritType.Mint => new Color(0.38f, 1f, 0.78f, 1f),
+            BossSpirit.SpiritType.YellowGreen => new Color(0.76f, 1f, 0.42f, 1f),
+            _ => new Color(0.22f, 0.94f, 0.44f, 1f)
+        };
+
+        SkillHitParticles.SpawnSpiritHealBurst(bossCenter, bossRadius, accent);
     }
 
     // 정령이 죽었을 때 정령 스크립트에서 호출해 줄 콜백 함수
