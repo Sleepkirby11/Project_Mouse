@@ -9,6 +9,7 @@ public class CameraSetting : MonoBehaviour
     public static CameraSetting instance { get; private set; }
     public List<BoxCollider2D> colliders = new List<BoxCollider2D>();
     CinemachineConfiner2D cameraConfiner;
+    CinemachineCamera cinemachineCamera;
 
     void Awake()
     {
@@ -16,6 +17,11 @@ public class CameraSetting : MonoBehaviour
             instance = this;
 
         cameraConfiner = GetComponent<CinemachineConfiner2D>();
+        cinemachineCamera = GetComponent<CinemachineCamera>();
+        if (cinemachineCamera == null)
+        {
+            cinemachineCamera = GetComponentInChildren<CinemachineCamera>();
+        }
     }
 
     private void OnEnable()
@@ -34,6 +40,38 @@ public class CameraSetting : MonoBehaviour
         if (cameraConfiner != null)
         {
             cameraConfiner.BoundingShape2D = null;
+            cameraConfiner.InvalidateBoundingShapeCache();
+        }
+
+        if (cinemachineCamera != null)
+        {
+            cinemachineCamera.PreviousStateIsValid = false;
+        }
+    }
+
+    public void SnapToTarget(Transform target, Vector3 positionDelta)
+    {
+        if (cinemachineCamera == null)
+        {
+            cinemachineCamera = GetComponent<CinemachineCamera>();
+            if (cinemachineCamera == null)
+            {
+                cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
+            }
+        }
+
+        if (cinemachineCamera != null)
+        {
+            if (target != null)
+            {
+                cinemachineCamera.OnTargetObjectWarped(target, positionDelta);
+            }
+            cinemachineCamera.PreviousStateIsValid = false;
+        }
+
+        if (cameraConfiner != null)
+        {
+            cameraConfiner.InvalidateBoundingShapeCache();
         }
     }
 

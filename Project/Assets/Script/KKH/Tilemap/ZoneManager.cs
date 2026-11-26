@@ -142,7 +142,13 @@ public class ZoneManager : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
         }
 
+        Vector3 prevPosition = target.position;
         target.position = destination;
+
+        if (CameraSetting.instance != null)
+        {
+            CameraSetting.instance.SnapToTarget(target, destination - prevPosition);
+        }
 
         yield return null;
     }

@@ -66,5 +66,7 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj",
     },
-    "dotnet.defaultSolution": "Project.sln"
+    "dotnet.defaultSolution": "Project.sln",
+    "antigravity.agent.autoExpandThinking": true,
+    "antigravity.chat.showThinking": true
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5537591855352190611}
   - component: {fileID: 8292202735491047017}
   - component: {fileID: 3601384600695390484}
+  - component: {fileID: 7194028561349021871}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Cursor
@@ -203,3 +204,31 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+
+--- !u!114 &7194028561349021871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129140456250158127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b3e91a5d4248f091a6e2b4d8c3f501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixelMaterial: {fileID: 2100000, guid: 5212007a303eb174e949ec1ae8968d88, type: 2}
+  drawDropDistance: 0.45
+  drawingWidth: 0.25
+  attackBaseWidth: 0.72
+  attackSpreadBoost: 1.28
+  attackSpreadDuration: 0.08
+  stainExtraDuration: 0.38
+  stainSortingOrder: 2
+  maxStainPool: 6
+  splatterDensityPerUnit: 2.6
+  maxSplatterCount: 42
+  groundBaseWidth: 0.42
+  solidifyRatio: 0.16
+  vaporizeStartRatio: 0.56
+  vaporEmitRate: 55
