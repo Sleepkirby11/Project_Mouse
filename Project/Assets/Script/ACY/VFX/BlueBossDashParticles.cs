@@ -101,6 +101,19 @@ public class BlueBossDashParticles : MonoBehaviour
         isDashing = true;
     }
 
+    /// <summary>
+    /// 루프 방출을 켜지 않고 현재 보스/분신 위치에 1회성 빙결 파편·미스트·충격 링 버스트만 재생합니다.
+    /// </summary>
+    public void EmitBurstPulse(int shardCount = 16, int mistCount = 18, int ringCount = 1)
+    {
+        EnsureCreated();
+        SyncTransforms();
+
+        if (shardPS != null && shardCount > 0) shardPS.Emit(shardCount);
+        if (mistPS != null && mistCount > 0) mistPS.Emit(mistCount);
+        if (ringPS != null && ringCount > 0) ringPS.Emit(ringCount);
+    }
+
     public void UpdateDirection(Vector2 dashDirection)
     {
         if (dashDirection.sqrMagnitude > 0.0001f)
