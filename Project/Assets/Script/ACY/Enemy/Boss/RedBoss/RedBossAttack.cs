@@ -1004,8 +1004,8 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
         // 회오리 현재 각도
         float currentSpiralAngle = 0f;
 
-        // 회전할 각도 (클수록 빠름)
-        float rotateSpeedPerShot = 15f;
+        // 회전할 각도 (90도의 약수인 15도를 피해서 매 바퀴 각도가 틀어지도록 설정)
+        float rotateSpeedPerShot = 14f;
 
         // 뻗어나갈 줄기 수
         int streamCount = 4;
@@ -1023,15 +1023,15 @@ public class RedBossAttack : MonoBehaviour, IStunnable, IHitReaction
 
             if (spawnTimer >= spawnInterval)
             {
-                spawnTimer = 0f;
+                spawnTimer -= spawnInterval;
 
                 currentSpiralAngle += rotateSpeedPerShot;
 
+                Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
                 for (int i = 0; i < streamCount; i++)
                 {
                     float finalAngle = (i * angleStep) + currentSpiralAngle;
 
-                    Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
                     GameObject obj = PoolingManager.Instance.Get(ARROW_KEY, spawnPos, Quaternion.identity);
                     if (obj != null)
                     {
