@@ -56,7 +56,7 @@ MonoBehaviour:
   healAmount: 5
   spawnOffsetY: -5
   spawnOffsetX: 1.5
-  hurricaneOffsetY: 3
+  hurricaneOffsetY: 2.75
   redBulletPoolKey: RedBullet
   greenBulletPoolKey: GreenBullet
   blueBulletPoolKey: BlueBullet
