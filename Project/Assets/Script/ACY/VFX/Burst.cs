@@ -37,6 +37,10 @@ public class Burst : MonoBehaviour
             IDamageable damageable = collision.GetComponent<IDamageable>();
             if (damageable != null)
             {
+                if (playerHitEffective && pStatus != null)
+                {
+                    pStatus.SuppressNextHitParticle();
+                }
                 damageable.TakeDamage(explosionDamage);
             }
 

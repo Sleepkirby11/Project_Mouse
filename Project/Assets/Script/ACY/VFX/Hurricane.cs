@@ -170,6 +170,10 @@ public class Hurricane : MonoBehaviour
         Bounds playerBounds = collision.bounds;
 
         IDamageable damageable = collision.GetComponent<IDamageable>();
+        if (playerHitEffective && currentElement == EnemyStatus.EnemyElement.Red && playerStatus != null)
+        {
+            playerStatus.SuppressNextHitParticle();
+        }
         damageable?.TakeDamage(finalDamage);
 
         if (playerHitEffective)

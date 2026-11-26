@@ -51,6 +51,10 @@ public class LightningBolt : MonoBehaviour
             Bounds playerBounds = other.bounds;
 
             IDamageable damageable = other.GetComponent<IDamageable>();
+            if (playerHitEffective && currentElement == EnemyStatus.EnemyElement.Red && pStatus != null)
+            {
+                pStatus.SuppressNextHitParticle();
+            }
             damageable?.TakeDamage(damage);
 
             if (playerHitEffective)

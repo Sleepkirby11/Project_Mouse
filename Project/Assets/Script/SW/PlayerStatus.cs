@@ -61,9 +61,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public int minInk;
     public int minSpecialInk;
 
-    private string particleName = "Particle_PlayerHit";
-
-
     private Rigidbody2D rb;
     private Animator playerAnim;
     private SpriteRenderer sprite;
@@ -88,6 +85,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     private float originGravityScale;
     private float savedControlAnimSpeed = 1f;
     private bool isControlAnimPaused;
+    private int suppressHitParticleFrame = -1;
     private System.Collections.Generic.List<Collider2D> ignoredColliders = new System.Collections.Generic.List<Collider2D>();
     void Awake()
     {
@@ -136,9 +134,17 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
     public bool CanMove => !isKnockbacked && !isStunned && !isPossessed && !isBound; // 넉백 또는 스턴 상태가 아닐 때 이동 가능
 
+    public void SuppressNextHitParticle()
+    {
+        suppressHitParticleFrame = Time.frameCount;
+    }
+
     // IDamageable 인터페이스 구현을 통한 대미지 처리
     public void TakeDamage(int damage)
     {
+        bool suppressHitParticle = suppressHitParticleFrame == Time.frameCount;
+        suppressHitParticleFrame = -1;
+
         if (hp <= 0 || isInvincible) return;
 
         hp -= damage;
@@ -188,9 +194,9 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
                 hitWhileBoundCoroutine = StartCoroutine(PlayHitWhileBoundRoutine());
             }
             playerAnim.SetTrigger("Hit");
-            if(PoolingManager.Instance != null)
+            if (!suppressHitParticle)
             {
-                GameObject hitParticle = PoolingManager.Instance.Get(particleName, this.transform.position, this.transform.rotation);
+                PlayerHitParticles.Play(transform, sprite);
             }
         }
     }
