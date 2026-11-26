@@ -115,8 +115,8 @@ public class RedBossMove : MonoBehaviour
             AudioManager.instance.PlaySFX(AudioManager.SFX.RedBossTP);
         }
 
-        // 사라지는 이펙트 재생
-        SpawnVFX(disappearVFX, transform.position);
+        // 사라지는 이펙트 재생 (몸체 중심 기준)
+        RedBossTeleportParticles.PlayDisappear(this);
 
         // 잠깐 대기 (이펙트 연출 시간)
         yield return new WaitForSeconds(0.2f);
@@ -126,12 +126,12 @@ public class RedBossMove : MonoBehaviour
             bossAttack.SwapCloneAndBoss(oldIndex, newIndex);
         }
 
-        // 보스 이동
+        // 보스 이동 및 방향 갱신 후 등장 이펙트 재생 (몸체 중심 기준)
         currentPointIndex = newIndex;
         transform.position = teleportPoints[currentPointIndex].position;
+        FlipToTarget();
 
-        // 등장 이펙트 재생
-        SpawnVFX(appearVFX, transform.position);
+        RedBossTeleportParticles.PlayAppear(this);
     }
 
     public void StartTeleport()
@@ -251,30 +251,6 @@ public class RedBossMove : MonoBehaviour
         }
 
         return candidates[Random.Range(0, candidates.Count)];
-    }
-
-    private void SpawnVFX(GameObject vfxPrefab, Vector3 position)
-    {
-        if (vfxPrefab == null)
-        {
-            return;
-        }
-
-        GameObject vfx = Instantiate(vfxPrefab, position, Quaternion.identity);
-        if (vfx != null)
-        {
-            ParticleSystem ps = vfx.GetComponent<ParticleSystem>();
-            if (ps != null)
-            {
-                ps.Play();
-                // 파티클 재생 끝나면 자동 제거
-                Destroy(vfx, ps.main.duration + ps.main.startLifetime.constantMax);
-            }
-            else
-            {
-                Destroy(vfx, 1.5f); // 파티클이 없으면 기본 1.5초 후 제거
-            }
-        }
     }
 
     #endregion

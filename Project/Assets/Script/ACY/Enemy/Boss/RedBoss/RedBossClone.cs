@@ -10,10 +10,6 @@ public class RedBossClone : MonoBehaviour, IDamageable
     private Transform playerTransform;
     public bool isFacingRight = true;
 
-    [Header("파티클")]
-    private GameObject spawnVFX;
-    private GameObject disappearVFX;
-
     private const string CLONE_KEY = "RedBossClone";
 
     private bool isDead;
@@ -47,9 +43,6 @@ public class RedBossClone : MonoBehaviour, IDamageable
     {
         owner = boss;
 
-        spawnVFX = spawnEffect;
-        disappearVFX = disappearEffect;
-
         isDead = false;
 
         if (playerTransform == null)
@@ -61,10 +54,10 @@ public class RedBossClone : MonoBehaviour, IDamageable
             }
         }
         gameObject.SetActive(true);
-
-        // 생성 이펙트 재생
-        PlayVFX(spawnVFX);
         FlipToTarget();
+
+        // 생성 이펙트 재생 (몸체 중심 기준)
+        RedBossTeleportParticles.PlayAppear(this);
         if (animator != null)
         {
             animator.SetBool(CastTrigger, false); // 초기화
@@ -116,8 +109,8 @@ public class RedBossClone : MonoBehaviour, IDamageable
         }
 
         isDead = true;
-        // 제거 이펙트 재생
-        PlayVFX(disappearVFX);
+        // 제거 이펙트 재생 (몸체 중심 기준)
+        RedBossTeleportParticles.PlayDisappear(this);
 
         if (owner != null)
         {
@@ -166,33 +159,6 @@ public class RedBossClone : MonoBehaviour, IDamageable
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-    }
-
-    #endregion
-
-    #region VFX Utilities
-
-    private void PlayVFX(GameObject vfxPrefab)
-    {
-        if (vfxPrefab == null)
-        {
-            return;
-        }
-
-        GameObject vfx = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
-        if (vfx != null)
-        {
-            ParticleSystem ps = vfx.GetComponentInChildren<ParticleSystem>();
-            if (ps != null)
-            {
-                ps.Play();
-                Destroy(vfx, ps.main.duration + ps.main.startLifetime.constantMax);
-            }
-            else
-            {
-                Destroy(vfx, 1.5f);
-            }
-        }
     }
 
     #endregion
