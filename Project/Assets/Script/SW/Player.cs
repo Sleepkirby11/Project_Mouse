@@ -226,14 +226,32 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool IsGrounded()
+    {
+        if (col == null) return false;
+        return Physics2D.BoxCast
+            (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground", "PlayerGround"));
+    }
+
     //착지 판정 검사
     void GroundCheck()
     {
-        if (status.IsBound) return;
-        if (!status.CanMove) return;
+        if (status.IsBound || status.IsStunned || status.IsPossessed) return;
 
-        bool isGround = Physics2D.BoxCast
-            (transform.position, col.size, 0f, Vector2.down, 0.25f, LayerMask.GetMask("Ground", "PlayerGround"));
+        bool isGround = IsGrounded();
+
+        if (!status.CanMove)
+        {
+            if (isGround)
+            {
+                anim.SetBool("IsFalling", false);
+            }
+            else if (!anim.GetBool("IsJump"))
+            {
+                anim.SetBool("IsFalling", true);
+            }
+            return;
+        }
 
         //낙하중 + BoxCast로 착지 판정 검사
         if (rigid.linearVelocityY <= 0)
@@ -253,11 +271,8 @@ public class Player : MonoBehaviour
             else if (jumpCount == 2) //Falling 상태 중 점프 카운트 조정
             {
                 jumpCount = 1;
-                JumpAnimUpdate(true);
-                if (!anim.GetBool("IsJump"))
-                {
-                    anim.SetBool("IsFalling", true);
-                }
+                JumpAnimUpdate(false);
+                anim.SetBool("IsFalling", true);
                 return;
             }
 

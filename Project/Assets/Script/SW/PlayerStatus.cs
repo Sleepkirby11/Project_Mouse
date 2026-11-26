@@ -80,8 +80,14 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public bool IsBound => isBound;
     public bool IsStunned => isStunned;
     private Coroutine bindCoroutine;
+    private Coroutine hitWhileBoundCoroutine;
+    private Coroutine stunInvincibleCoroutine;
+    private Coroutine invincibleFallbackCoroutine;
+    private Coroutine shockVfxCoroutine;
     private MonsterShockParticles shockParticles;
     private float originGravityScale;
+    private float savedControlAnimSpeed = 1f;
+    private bool isControlAnimPaused;
     private System.Collections.Generic.List<Collider2D> ignoredColliders = new System.Collections.Generic.List<Collider2D>();
     void Awake()
     {
@@ -159,11 +165,28 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         //플레이어의 체력에 따른 애니메이션 트리거 설정
         if (hp <= 0)
         {
+            if (isBound)
+            {
+                ReleaseBind();
+            }
+            if (isStunned)
+            {
+                ClearStunState(clearShockImmediately: true);
+            }
+            ResumePlayerAnim();
             playerAnim.SetTrigger("Dead");
             Die();
         }
         else
         {
+            if (isBound)
+            {
+                if (hitWhileBoundCoroutine != null)
+                {
+                    StopCoroutine(hitWhileBoundCoroutine);
+                }
+                hitWhileBoundCoroutine = StartCoroutine(PlayHitWhileBoundRoutine());
+            }
             playerAnim.SetTrigger("Hit");
             if(PoolingManager.Instance != null)
             {
@@ -254,6 +277,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         if (gameObject.activeInHierarchy)
         {
             if (stunCoroutine != null) StopCoroutine(stunCoroutine);
+            if (stunInvincibleCoroutine != null)
+            {
+                StopCoroutine(stunInvincibleCoroutine);
+                stunInvincibleCoroutine = null;
+            }
             stunCoroutine = StartCoroutine(StunRoutine(duration));
         }
     }
@@ -280,6 +308,19 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isStunned = true;
         playerComp.CancleCursor();
 
+        if (isInvincible)
+        {
+            stunInvincibleCoroutine = StartCoroutine(ClearInvincibleAfterHitDelay(0.583f));
+        }
+
+        // 고블린 등 몬스터와 동일하게 피격(Hurt) 포즈 프레임에 고정
+        FreezeOnHurtFrame();
+
+        if (shockVfxCoroutine != null)
+        {
+            StopCoroutine(shockVfxCoroutine);
+            shockVfxCoroutine = null;
+        }
         if (shockParticles == null)
         {
             shockParticles = MonsterShockParticles.GetOrCreate(this);
@@ -290,7 +331,94 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
 
         isStunned = false;
         stunCoroutine = null;
+        if (stunInvincibleCoroutine != null)
+        {
+            StopCoroutine(stunInvincibleCoroutine);
+            stunInvincibleCoroutine = null;
+            if (isInvincible)
+            {
+                SetInvincible(false);
+            }
+        }
         shockParticles?.StopShock(clearImmediately: false);
+
+        if (!isBound)
+        {
+            ResumePlayerAnim();
+            SyncAnimParamsAfterControlLoss();
+            ExitHurtStateIfNeeded();
+        }
+    }
+
+    private IEnumerator ClearInvincibleAfterHitDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        stunInvincibleCoroutine = null;
+        if (isInvincible && hp > 0)
+        {
+            SetInvincible(false);
+        }
+    }
+
+    /// <summary>
+    /// 스턴 상태 이상 없이 피격 연출용 감전(스턴) 파티클만 일정 시간 재생합니다.
+    /// </summary>
+    public void PlayShockVfx(float duration = 0.55f)
+    {
+        if (hp <= 0 || !gameObject.activeInHierarchy) return;
+
+        if (shockParticles == null)
+        {
+            shockParticles = MonsterShockParticles.GetOrCreate(this);
+        }
+        shockParticles?.PlayShock();
+
+        if (shockVfxCoroutine != null)
+        {
+            StopCoroutine(shockVfxCoroutine);
+        }
+        shockVfxCoroutine = StartCoroutine(StopShockVfxAfterDelay(duration));
+    }
+
+    private IEnumerator StopShockVfxAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        shockVfxCoroutine = null;
+        if (!isStunned)
+        {
+            shockParticles?.StopShock(clearImmediately: false);
+        }
+    }
+
+    private void ClearStunState(bool clearShockImmediately)
+    {
+        if (stunCoroutine != null)
+        {
+            StopCoroutine(stunCoroutine);
+            stunCoroutine = null;
+        }
+        if (stunInvincibleCoroutine != null)
+        {
+            StopCoroutine(stunInvincibleCoroutine);
+            stunInvincibleCoroutine = null;
+            if (isInvincible)
+            {
+                SetInvincible(false);
+            }
+        }
+        if (shockVfxCoroutine != null)
+        {
+            StopCoroutine(shockVfxCoroutine);
+            shockVfxCoroutine = null;
+        }
+        isStunned = false;
+        shockParticles?.StopShock(clearImmediately: clearShockImmediately);
+        if (!isBound)
+        {
+            ResumePlayerAnim();
+            SyncAnimParamsAfterControlLoss();
+            ExitHurtStateIfNeeded();
+        }
     }
     public void SetPossessed(bool value)    //빙의
     {
@@ -325,6 +453,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             StopCoroutine(bindCoroutine);
             bindCoroutine = null;
         }
+        if (hitWhileBoundCoroutine != null)
+        {
+            StopCoroutine(hitWhileBoundCoroutine);
+            hitWhileBoundCoroutine = null;
+        }
 
         if (isBound)
         {
@@ -334,43 +467,163 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
                 rb.gravityScale = originGravityScale;
                 rb.linearVelocity = Vector2.zero;
             }
-            if (playerComp != null)
+            if (playerComp != null && hp > 0)
             {
                 playerComp.OnKnockbackEnd();
             }
-            if (playerAnim != null)
+            if (!isStunned)
             {
-                playerAnim.SetBool("IsJump", false);
-                playerAnim.SetBool("IsFalling", true);
+                ResumePlayerAnim();
+                SyncAnimParamsAfterControlLoss();
+                if (!isInvincible)
+                {
+                    ExitHurtStateIfNeeded();
+                }
             }
+        }
+        else if (!isStunned)
+        {
+            ResumePlayerAnim();
         }
     }
     private IEnumerator BindRoutine(float duration)
     {
+        if (isStunned)
+        {
+            ClearStunState(clearShockImmediately: true);
+        }
+
         isBound = true;
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0f;
 
-        if (playerAnim != null)
-        {
-            playerAnim.SetBool("IsWalk", false);
-            playerAnim.SetBool("IsJump", false);
-            playerAnim.SetBool("IsFalling", false);
-        }
+        // Idle로 되돌리지 않고 현재 모션 프레임에서 즉시 정지
+        PausePlayerAnim();
 
         yield return new WaitForSeconds(duration);
 
         isBound = false;
         bindCoroutine = null;
+        if (hitWhileBoundCoroutine != null)
+        {
+            StopCoroutine(hitWhileBoundCoroutine);
+            hitWhileBoundCoroutine = null;
+        }
         rb.gravityScale = originGravityScale;
 
         rb.linearVelocity = Vector2.zero;
-        playerComp.OnKnockbackEnd();
-
-        if (playerAnim != null)
+        if (playerComp != null && hp > 0)
         {
-            playerAnim.SetBool("IsJump", false);
-            playerAnim.SetBool("IsFalling", true); 
+            playerComp.OnKnockbackEnd();
+        }
+
+        if (!isStunned)
+        {
+            ResumePlayerAnim();
+            SyncAnimParamsAfterControlLoss();
+            if (!isInvincible)
+            {
+                ExitHurtStateIfNeeded();
+            }
+        }
+    }
+
+    private void FreezeOnHurtFrame()
+    {
+        if (playerAnim == null) return;
+        ResumePlayerAnim();
+        playerAnim.ResetTrigger("Hit");
+        playerAnim.SetBool("IsWalk", false);
+        playerAnim.SetBool("IsJump", false);
+        playerAnim.SetBool("IsFalling", false);
+        playerAnim.Play("PlayerHit", 0, 0.35f);
+        playerAnim.Update(0f);
+        PausePlayerAnim();
+    }
+
+    private void PausePlayerAnim()
+    {
+        if (playerAnim == null) return;
+        if (!isControlAnimPaused)
+        {
+            savedControlAnimSpeed = playerAnim.speed > 0f ? playerAnim.speed : 1f;
+            isControlAnimPaused = true;
+        }
+        playerAnim.speed = 0f;
+    }
+
+    private void ResumePlayerAnim()
+    {
+        if (playerAnim == null) return;
+        if (isControlAnimPaused)
+        {
+            playerAnim.speed = savedControlAnimSpeed > 0f ? savedControlAnimSpeed : 1f;
+            isControlAnimPaused = false;
+        }
+        else if (playerAnim.speed <= 0f)
+        {
+            playerAnim.speed = 1f;
+        }
+    }
+
+    private void ExitHurtStateIfNeeded()
+    {
+        if (playerAnim == null || hp <= 0) return;
+        if (playerAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerHit"))
+        {
+            bool isGrounded = playerComp != null && playerComp.IsGrounded();
+            if (!isGrounded)
+            {
+                playerAnim.Play("PlayerDown", 0, 0f);
+            }
+            else if (playerComp != null && Mathf.Abs(playerComp.inputVec.x) > 0.01f)
+            {
+                playerAnim.Play("PlayerWalk", 0, 0f);
+            }
+            else
+            {
+                playerAnim.Play("PlayerIdle", 0, 0f);
+            }
+            playerAnim.Update(0f);
+        }
+    }
+
+    private void SyncAnimParamsAfterControlLoss()
+    {
+        if (playerAnim == null || hp <= 0) return;
+
+        bool isGrounded = playerComp != null && playerComp.IsGrounded();
+        bool isMoving = playerComp != null && Mathf.Abs(playerComp.inputVec.x) > 0.01f;
+        playerAnim.SetBool("IsWalk", isMoving);
+        playerAnim.SetBool("IsJump", false);
+        playerAnim.SetBool("IsFalling", !isGrounded);
+    }
+
+    private IEnumerator PlayHitWhileBoundRoutine()
+    {
+        ResumePlayerAnim();
+        yield return null;
+
+        float elapsed = 0f;
+        const float maxWait = 0.72f;
+        while (elapsed < maxWait && isBound && hp > 0 && playerAnim != null)
+        {
+            if (!isInvincible)
+            {
+                break;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        hitWhileBoundCoroutine = null;
+        if (isBound && hp > 0)
+        {
+            if (isInvincible)
+            {
+                SetInvincible(false);
+            }
+            FreezeOnHurtFrame();
         }
     }
     public void LaunchByWater(float forceY) // 물기둥
@@ -401,7 +654,20 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isInvincible = value;
         Debug.Log(value ? "[PlayerStatus] 무적 상태" : "[PlayerStatus] 무적 해제");
 
-        if (!value)
+        if (invincibleFallbackCoroutine != null)
+        {
+            StopCoroutine(invincibleFallbackCoroutine);
+            invincibleFallbackCoroutine = null;
+        }
+
+        if (value)
+        {
+            if (gameObject.activeInHierarchy)
+            {
+                invincibleFallbackCoroutine = StartCoroutine(InvincibleSafetyFallbackRoutine(0.75f));
+            }
+        }
+        else
         {
             // 무적 해제 시, 무시했던 에너미 콜라이더들과의 충돌을 다시 활성화
             Collider2D playerCollider = GetComponent<Collider2D>();
@@ -416,6 +682,16 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
                 }
             }
             ignoredColliders.Clear();
+        }
+    }
+
+    private IEnumerator InvincibleSafetyFallbackRoutine(float maxDuration)
+    {
+        yield return new WaitForSeconds(maxDuration);
+        invincibleFallbackCoroutine = null;
+        if (isInvincible)
+        {
+            SetInvincible(false);
         }
     }
 
@@ -497,7 +773,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     private void OnDisable()
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
-        shockParticles?.StopShock(clearImmediately: true);
+        ClearStunState(clearShockImmediately: true);
+        ResumePlayerAnim();
     }
 
     // 다음 씬으로 넘어갈때 모든 상태이상 해제 
@@ -532,7 +809,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             }
         }
 
-        if (isStunned) isStunned = false;
+        if (isStunned) ClearStunState(clearShockImmediately: true);
         if (isKnockbacked)
         {
             isKnockbacked = false;
@@ -567,7 +844,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         isStunned = false;
         isPossessed = false;
         isBound = false;
-        shockParticles?.StopShock(clearImmediately: true);
+        ClearStunState(clearShockImmediately: true);
+        ResumePlayerAnim();
 
         if (rb != null)
         {
