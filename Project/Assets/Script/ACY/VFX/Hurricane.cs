@@ -179,6 +179,10 @@ public class Hurricane : MonoBehaviour
                 float radius = Mathf.Max(playerBounds.extents.x, playerBounds.extents.y);
                 SkillHitParticles.SpawnRedPowerHit(playerBounds.center, radius);
             }
+            else if (currentElement == EnemyStatus.EnemyElement.Blue && playerStatus != null)
+            {
+                playerStatus.PlayShockVfx();
+            }
             onHitPlayer?.Invoke();
         }
 
