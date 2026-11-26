@@ -153,6 +153,10 @@ public class RgbBullet : MonoBehaviour, IDamageable
             Bounds playerBounds = collision.bounds;
 
             IDamageable damageable = collision.GetComponent<IDamageable>();
+            if (playerHitEffective && myElement == EnemyStatus.EnemyElement.Red && pStatus != null)
+            {
+                pStatus.SuppressNextHitParticle();
+            }
             damageable?.TakeDamage(bulletDamage);
 
             if (playerHitEffective)
