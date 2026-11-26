@@ -77,7 +77,7 @@ public class BossController : MonoBehaviour, IHitReaction
     private Coroutine waterSpoutLoop;
     private Coroutine currentLoop;
     private Coroutine deathRoutine;
-    private BossProjectileTrail dashTrail;
+    private BlueBossDashParticles dashVfx;
     private readonly List<BlueBossWarningLine> activeWarningLines = new List<BlueBossWarningLine>();
 
     private static readonly int AnimClaw = Animator.StringToHash("Claw");
@@ -99,7 +99,7 @@ public class BossController : MonoBehaviour, IHitReaction
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         enemyStatus = GetComponent<EnemyStatus>();
-        dashTrail = BossProjectileTrail.Attach(gameObject, BossProjectileTrail.TrailStyle.BlueDash, 99);
+        dashVfx = BlueBossDashParticles.Attach(gameObject);
 
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
@@ -376,8 +376,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             bossFlip.facingMode = BlueBossFlip.FacingMode.Movement;
         }
-        dashTrail?.SetActive(true, true, clearBefore: true);
-        dashTrail?.EmitBurst(16);
+        dashVfx?.StartDash(dashDir, isEnrage: false);
 
         while (!isDead && remainedDistance > 0f)
         {
@@ -413,6 +412,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
                     // 끼임 방지
                     rb.position = hit.point + hit.normal * 0.1f;
+                    dashVfx?.OnWallBounce(hit.point, hit.normal, dashDir);
                     break; // 다른 충돌체 검사 중단
                 }
             }
@@ -433,7 +433,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             dashHitbox.enabled = false;
         }
-        dashTrail?.SetActive(false, false);
+        dashVfx?.StopDash(clearImmediately: false);
         if (anim != null)
         {
             anim.SetTrigger(AnimDashEnd);
@@ -693,7 +693,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             dashHitbox.enabled = false;
         }
-        dashTrail?.SetActive(false, false);
+        dashVfx?.StopDash(clearImmediately: true);
         rb.linearVelocity = Vector2.zero;
 
         yield return FadeOut(0.4f);
@@ -841,8 +841,7 @@ public class BossController : MonoBehaviour, IHitReaction
                 spawnedWarnings[i] = null;
             }
 
-            dashTrail?.SetActive(true, true, clearBefore: true);
-            dashTrail?.EmitBurst(18);
+            dashVfx?.StartDash(dashDir, isEnrage: true);
 
             // 전력 질주 속도
             float enrageDashSpeed = dashSpeed * 3.5f;
@@ -855,7 +854,7 @@ public class BossController : MonoBehaviour, IHitReaction
             }
 
             rb.MovePosition(targetPositions[i]); // 끝점 안착
-            dashTrail?.SetActive(false, false);
+            dashVfx?.StopDash(clearImmediately: false);
 
             if (bossSprite != null)
             {
@@ -870,7 +869,7 @@ public class BossController : MonoBehaviour, IHitReaction
         }
 
         // 발악 패턴 종료 후 안전하게 맵 중앙으로 순간이동하여 충돌 끼임 방지
-        dashTrail?.Clear();
+        dashVfx?.StopDash(clearImmediately: true);
         rb.position = mapCenter;
 
         if (isLast)
@@ -882,7 +881,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             dashHitbox.enabled = false;
         }
-        dashTrail?.SetActive(false, false);
+        dashVfx?.StopDash(clearImmediately: false);
         if (anim != null)
         {
             anim.SetTrigger(AnimDashEnd);
@@ -1110,6 +1109,7 @@ public class BossController : MonoBehaviour, IHitReaction
     private void OnDisable()
     {
         ClearActiveWarningLines();
+        dashVfx?.StopDash(clearImmediately: true);
     }
 
     private void OnDeath()
@@ -1132,7 +1132,7 @@ public class BossController : MonoBehaviour, IHitReaction
         {
             dashHitbox.enabled = false;
         }
-        dashTrail?.SetActive(false, false);
+        dashVfx?.StopDash(clearImmediately: false);
 
         deathRoutine = StartCoroutine(DeathFallRoutine());
     }
