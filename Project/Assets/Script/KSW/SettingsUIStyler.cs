@@ -449,6 +449,27 @@ public class SettingsUIStyler : MonoBehaviour
                 boardImg.color = Color.white;
                 boardImg.type = Image.Type.Sliced;
             }
+
+            Transform stanceCardTf = boardTf.Find("StanceCard");
+            Transform controlsCardTf = boardTf.Find("ControlsCard");
+            if (stanceCardTf != null && controlsCardTf != null)
+            {
+                Image stanceCardImg = stanceCardTf.GetComponent<Image>();
+                Image controlsCardImg = controlsCardTf.GetComponent<Image>();
+                if (stanceCardImg != null && controlsCardImg != null)
+                {
+                    stanceCardImg.sprite = controlsCardImg.sprite;
+                    stanceCardImg.type = controlsCardImg.type;
+                    stanceCardImg.color = controlsCardImg.color;
+                }
+
+                Transform stanceHeaderTf = stanceCardTf.Find("StanceHeader");
+                if (stanceHeaderTf != null)
+                {
+                    TMP_Text shTmp = stanceHeaderTf.GetComponent<TMP_Text>();
+                    if (shTmp != null) shTmp.color = new Color(0.30f, 0.16f, 0.12f, 1f);
+                }
+            }
         }
 
         Transform titleTf = guidePanel.transform.Find("Title_Text");
