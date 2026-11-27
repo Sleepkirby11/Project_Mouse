@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -3203,6 +3203,16 @@ PrefabInstance:
     - target: {fileID: 2300845589775398768, guid: 72075b627d744da47b61ee34f2976944, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771042495004674765, guid: 72075b627d744da47b61ee34f2976944, type: 3}
+      propertyPath: m_text
+      value: "A, D, \u2190, \u2192  :  Move\nS  :  Fast Fall\nW  :  Skill\nR  : 
+        Toggle Attack Range\nTab  :  Change Stance\nSpace  :  Jump\nLeft Ctrl  : 
+        Dash\nLeft Drag  :  Attack\nRight Drag  :  Make Ground"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771042495004674765, guid: 72075b627d744da47b61ee34f2976944, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4279508787
       objectReference: {fileID: 0}
     - target: {fileID: 6169891459480838287, guid: 72075b627d744da47b61ee34f2976944, type: 3}
       propertyPath: m_Name
