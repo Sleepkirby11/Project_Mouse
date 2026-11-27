@@ -26,6 +26,12 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
+    [Header("#UI")]
+    public AudioClip uiClickClip;
+    [Range(0f, 1f)] public float uiClickVolumeScale = 1f;
+    AudioSource uiPlayer;
+    private static AudioClip sharedDefaultUiClickClip;
+
     private int lastPlayFrame;
     private int[] sfxPlayCountsInFrame;
     private Dictionary<AudioClip, float> clipVolumeScaleMap;
@@ -138,6 +144,20 @@ public class AudioManager : MonoBehaviour
             sfxPlayers[i].playOnAwake = false;
             sfxPlayers[i].volume = initSfxVol;
         }
+
+        // UI 버튼 전용 플레이어 초기화 (일시정지 PauseSFX의 영향을 받지 않고 SFX 볼륨만 따름)
+        CreateUiPlayer(initSfxVol);
+    }
+
+    private void CreateUiPlayer(float initialVolume)
+    {
+        if (uiPlayer != null) return;
+        GameObject uiObject = new GameObject("UiPlayer");
+        uiObject.transform.parent = transform;
+        uiPlayer = uiObject.AddComponent<AudioSource>();
+        uiPlayer.playOnAwake = false;
+        uiPlayer.ignoreListenerPause = true;
+        uiPlayer.volume = initialVolume;
     }
 
     private float GetGlobalBgmVolume()
@@ -177,7 +197,7 @@ public class AudioManager : MonoBehaviour
         for (int i = 0; i < allAudioSources.Length; i++)
         {
             AudioSource source = allAudioSources[i];
-            if (source == null || source == bgmPlayer) continue;
+            if (source == null || source == bgmPlayer || source == uiPlayer) continue;
             if (sfxPlayers != null && System.Array.IndexOf(sfxPlayers, source) >= 0) continue;
             cachedExternalSources.Add(source);
         }
@@ -191,6 +211,11 @@ public class AudioManager : MonoBehaviour
         }
 
         float globalVol = GetGlobalSfxVolume();
+
+        if (uiPlayer != null)
+        {
+            uiPlayer.volume = globalVol;
+        }
 
         if (sfxPlayers != null)
         {
@@ -221,6 +246,60 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(SFX sfx)
     {
         PlaySFX_Int((int)sfx);
+    }
+
+    public void PlayUIClick()
+    {
+        float globalVol = GetGlobalSfxVolume();
+        if (globalVol <= 0.0001f)
+        {
+            return;
+        }
+
+        if (uiPlayer == null)
+        {
+            CreateUiPlayer(globalVol);
+        }
+
+        AudioClip clip = uiClickClip != null ? uiClickClip : GetOrCreateDefaultUiClickClip();
+        if (clip == null)
+        {
+            return;
+        }
+
+        uiPlayer.volume = globalVol;
+        uiPlayer.PlayOneShot(clip, Mathf.Clamp01(uiClickVolumeScale));
+    }
+
+    private static AudioClip GetOrCreateDefaultUiClickClip()
+    {
+        if (sharedDefaultUiClickClip != null)
+        {
+            return sharedDefaultUiClickClip;
+        }
+
+        const int sampleRate = 44100;
+        const float duration = 0.048f;
+        int sampleCount = Mathf.RoundToInt(sampleRate * duration);
+        float[] samples = new float[sampleCount];
+
+        // 부드러운 목탁/픽셀 UI 클릭감 (짧은 하향 피치 팝 + 감쇠)
+        float phase = 0f;
+        for (int i = 0; i < sampleCount; i++)
+        {
+            float t = i / (float)sampleRate;
+            float norm = i / (float)sampleCount;
+            float env = Mathf.Sin(Mathf.Min(1f, norm * 14f) * Mathf.PI * 0.5f) * Mathf.Exp(-norm * 7.5f);
+            float freq = Mathf.Lerp(1180f, 520f, Mathf.Sqrt(norm));
+            phase += 2f * Mathf.PI * freq / sampleRate;
+            float wave = Mathf.Sin(phase) * 0.72f + Mathf.Sin(phase * 1.98f) * 0.28f;
+            samples[i] = wave * env * 0.55f;
+        }
+
+        sharedDefaultUiClickClip = AudioClip.Create("DefaultUIClick", sampleCount, 1, sampleRate, false);
+        sharedDefaultUiClickClip.SetData(samples, 0);
+        sharedDefaultUiClickClip.hideFlags = HideFlags.HideAndDontSave;
+        return sharedDefaultUiClickClip;
     }
 
     private bool CheckFrameLimit(int sfx)

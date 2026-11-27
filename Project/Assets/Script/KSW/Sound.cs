@@ -123,7 +123,7 @@ public class SoundControl : MonoBehaviour
             lastNonZeroVolume = value;
         }
 
-        if (GameManager.instance != null && AudioManager.instance != null)
+        if (GameManager.instance != null)
         {
             if (soundType == SoundType.BGM)
             {
@@ -132,6 +132,18 @@ public class SoundControl : MonoBehaviour
             else if (soundType == SoundType.SFX)
             {
                 GameManager.instance.sfxVolume = volumeSlider.value;
+            }
+        }
+
+        if (AudioManager.instance != null)
+        {
+            if (soundType == SoundType.BGM)
+            {
+                AudioManager.instance.bgmVolume = volumeSlider.value;
+            }
+            else if (soundType == SoundType.SFX)
+            {
+                AudioManager.instance.sfxVolume = volumeSlider.value;
             }
             AudioManager.instance.UpdateSound();
         }

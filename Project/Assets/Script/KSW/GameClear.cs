@@ -258,6 +258,7 @@ public class GameClear : MonoBehaviour
         {
             btn.gameObject.AddComponent<EndingButtonFeedback>();
         }
+        SettingsUIStyler.AttachButtonClickSound(btn);
     }
 
     private IEnumerator PlayEndingSequence()

@@ -663,6 +663,7 @@ public class BossIntroCutscene : MonoBehaviour
         colors.pressedColor = new Color(0.42f, 0.42f, 0.5f, 1f);
         skipButton.colors = colors;
         skipButton.onClick.AddListener(RequestSkip);
+        SettingsUIStyler.AttachButtonClickSound(skipButton);
 
         GameObject skipTextObj = new GameObject("Label");
         skipTextObj.transform.SetParent(skipButtonObj.transform, false);
