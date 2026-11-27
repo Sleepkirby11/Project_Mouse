@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,10 @@ public class AudioManager : MonoBehaviour
 
     private int lastPlayFrame;
     private int[] sfxPlayCountsInFrame;
+    private Dictionary<AudioClip, float> clipVolumeScaleMap;
+    private readonly List<AudioSource> cachedExternalSources = new List<AudioSource>();
+    private float lastExternalScanTime = -10f;
+    private const float ExternalScanCooldown = 0.5f;
 
     //효과음 추가 시 순서대로 입력할 것
     public enum SFX
@@ -76,26 +81,48 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         Init();
 
         PlayBGM(true);
     }
 
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
 
 
     void Init()
     {
+        clipVolumeScaleMap = new Dictionary<AudioClip, float>();
+        if (sfxClips != null)
+        {
+            for (int i = 0; i < sfxClips.Length; i++)
+            {
+                if (sfxClips[i].clip != null && !clipVolumeScaleMap.ContainsKey(sfxClips[i].clip))
+                {
+                    clipVolumeScaleMap.Add(sfxClips[i].clip, sfxClips[i].volumeScale);
+                }
+            }
+        }
+
         //배경음 플레이어 초기화
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
-        if (GameManager.instance != null)
-            bgmPlayer.volume = GameManager.instance.bgmVolume;
-        else
-            bgmPlayer.volume = bgmVolume;
+        bgmPlayer.volume = GetGlobalBgmVolume();
         bgmPlayer.clip = bgmClip;
 
         //효과음 플레이어 초기화
@@ -103,60 +130,91 @@ public class AudioManager : MonoBehaviour
         sfxObject.transform.parent = transform;
         sfxPlayers = new AudioSource[channels];
 
+        float initSfxVol = GetGlobalSfxVolume();
+
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
-            if (GameManager.instance != null)
-                sfxPlayers[i].volume = GameManager.instance.sfxVolume;
-            else
-                sfxPlayers[i].volume = sfxVolume;
+            sfxPlayers[i].volume = initSfxVol;
         }
     }
-    public void UpdateSound()
-    {
-        if (GameManager.instance != null)
-            bgmPlayer.volume = GameManager.instance.bgmVolume;
-        else
-            bgmPlayer.volume = bgmVolume;
 
-        float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
-        for (int i = 0; i < sfxPlayers.Length; i++)
+    private float GetGlobalBgmVolume()
+    {
+        return GameManager.instance != null
+            ? Mathf.Clamp01(GameManager.instance.bgmVolume)
+            : Mathf.Clamp01(bgmVolume);
+    }
+
+    private float GetGlobalSfxVolume()
+    {
+        return GameManager.instance != null
+            ? Mathf.Clamp01(GameManager.instance.sfxVolume)
+            : Mathf.Clamp01(sfxVolume);
+    }
+
+    private float GetClipVolumeScale(AudioClip clip)
+    {
+        if (clip != null && clipVolumeScaleMap != null && clipVolumeScaleMap.TryGetValue(clip, out float scale))
         {
-            float scale = 1f;
-            if (sfxPlayers[i].isPlaying && sfxPlayers[i].clip != null)
-            {
-                foreach (var sfxData in sfxClips)
-                {
-                    if (sfxData.clip == sfxPlayers[i].clip)
-                    {
-                        scale = sfxData.volumeScale;
-                        break;
-                    }
-                }
-            }
-            sfxPlayers[i].volume = globalVol * scale;
+            return scale;
+        }
+        return 1f;
+    }
+
+    private void RefreshExternalAudioSources(bool force)
+    {
+        if (!force && (Time.unscaledTime - lastExternalScanTime) < ExternalScanCooldown)
+        {
+            return;
         }
 
-        // 씬 내의 다른 모든 AudioSource 볼륨 업데이트
+        lastExternalScanTime = Time.unscaledTime;
+        cachedExternalSources.Clear();
+
         AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-        foreach (var source in allAudioSources)
+        for (int i = 0; i < allAudioSources.Length; i++)
         {
-            if (source != bgmPlayer && System.Array.IndexOf(sfxPlayers, source) < 0)
+            AudioSource source = allAudioSources[i];
+            if (source == null || source == bgmPlayer) continue;
+            if (sfxPlayers != null && System.Array.IndexOf(sfxPlayers, source) >= 0) continue;
+            cachedExternalSources.Add(source);
+        }
+    }
+
+    public void UpdateSound()
+    {
+        if (bgmPlayer != null)
+        {
+            bgmPlayer.volume = GetGlobalBgmVolume();
+        }
+
+        float globalVol = GetGlobalSfxVolume();
+
+        if (sfxPlayers != null)
+        {
+            for (int i = 0; i < sfxPlayers.Length; i++)
             {
-                if (source.clip != null)
-                {
-                    float scale = 1f;
-                    foreach (var sfxData in sfxClips)
-                    {
-                        if (sfxData.clip == source.clip)
-                        {
-                            scale = sfxData.volumeScale;
-                            break;
-                        }
-                    }
-                    source.volume = globalVol * scale;
-                }
+                if (sfxPlayers[i] == null) continue;
+                float scale = sfxPlayers[i].isPlaying ? GetClipVolumeScale(sfxPlayers[i].clip) : 1f;
+                sfxPlayers[i].volume = globalVol * scale;
+            }
+        }
+
+        // 슬라이더 드래그 중 매 프레임 씬 전체를 재탐색하지 않도록 쿨다운 캐싱 사용
+        RefreshExternalAudioSources(force: false);
+        for (int i = cachedExternalSources.Count - 1; i >= 0; i--)
+        {
+            AudioSource source = cachedExternalSources[i];
+            if (source == null)
+            {
+                cachedExternalSources.RemoveAt(i);
+                continue;
+            }
+            if (source.clip != null)
+            {
+                source.volume = globalVol * GetClipVolumeScale(source.clip);
             }
         }
     }
@@ -212,7 +270,7 @@ public class AudioManager : MonoBehaviour
             channelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[sfx].clip;
             sfxPlayers[loopIndex].pitch = 1f; // 피치 리셋
-            float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
+            float globalVol = GetGlobalSfxVolume();
             sfxPlayers[loopIndex].volume = globalVol * sfxClips[sfx].volumeScale;
             sfxPlayers[loopIndex].Play();
             break;
@@ -241,7 +299,7 @@ public class AudioManager : MonoBehaviour
             channelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[sfxIndex].clip;
             sfxPlayers[loopIndex].pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-            float globalVol = GameManager.instance != null ? GameManager.instance.sfxVolume : sfxVolume;
+            float globalVol = GetGlobalSfxVolume();
             sfxPlayers[loopIndex].volume = globalVol * sfxClips[sfxIndex].volumeScale;
             sfxPlayers[loopIndex].Play();
             break;
@@ -300,16 +358,25 @@ public class AudioManager : MonoBehaviour
 
     public void PauseSFX()
     {
-        for (int i = 0; i < sfxPlayers.Length; i++)
+        if (sfxPlayers != null)
         {
-            if (sfxPlayers[i].isPlaying)
-                sfxPlayers[i].Pause();
+            for (int i = 0; i < sfxPlayers.Length; i++)
+            {
+                if (sfxPlayers[i] != null && sfxPlayers[i].isPlaying)
+                    sfxPlayers[i].Pause();
+            }
         }
 
-        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-        foreach (var source in allAudioSources)
+        RefreshExternalAudioSources(force: true);
+        for (int i = cachedExternalSources.Count - 1; i >= 0; i--)
         {
-            if (source != bgmPlayer && source.isPlaying)
+            AudioSource source = cachedExternalSources[i];
+            if (source == null)
+            {
+                cachedExternalSources.RemoveAt(i);
+                continue;
+            }
+            if (source.isPlaying)
             {
                 source.Pause();
             }
@@ -318,18 +385,24 @@ public class AudioManager : MonoBehaviour
 
     public void ResumeSFX()
     {
-        for (int i = 0; i < sfxPlayers.Length; i++)
+        if (sfxPlayers != null)
         {
-            sfxPlayers[i].UnPause();
+            for (int i = 0; i < sfxPlayers.Length; i++)
+            {
+                if (sfxPlayers[i] != null)
+                    sfxPlayers[i].UnPause();
+            }
         }
 
-        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-        foreach (var source in allAudioSources)
+        for (int i = cachedExternalSources.Count - 1; i >= 0; i--)
         {
-            if (source != bgmPlayer)
+            AudioSource source = cachedExternalSources[i];
+            if (source == null)
             {
-                source.UnPause();
+                cachedExternalSources.RemoveAt(i);
+                continue;
             }
+            source.UnPause();
         }
     }
 }

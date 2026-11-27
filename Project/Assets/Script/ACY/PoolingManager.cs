@@ -7,6 +7,7 @@ public class PoolingManager : MonoBehaviour
     #region Singleton
 
     private static PoolingManager _instance;
+    public static bool HasInstance => _instance != null;
     public static PoolingManager Instance
     {
         get
@@ -81,6 +82,14 @@ public class PoolingManager : MonoBehaviour
     private void OnDisable()
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            _instance = null;
+        }
     }
 
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
@@ -217,9 +226,16 @@ public class PoolingManager : MonoBehaviour
         }
 
         Queue<GameObject> queue = poolDict[key];
+        GameObject obj = null;
+
+        // 파괴된 null 오브젝트가 큐에 섞여있더라도 건너뛰고 유효한 오브젝트 획득
+        while (queue.Count > 0 && obj == null)
+        {
+            obj = queue.Dequeue();
+        }
 
         // 자동 확장 (풀이 비어있을 때 새로 인스턴스화)
-        if (queue.Count == 0)
+        if (obj == null)
         {
             if (!prefabDict.TryGetValue(key, out GameObject prefab) || prefab == null)
             {
@@ -227,34 +243,29 @@ public class PoolingManager : MonoBehaviour
                 return null;
             }
 
-            GameObject newObj = Instantiate(prefab, transform);
-            if (newObj != null)
+            obj = Instantiate(prefab, transform);
+            if (obj == null)
             {
-                newObj.SetActive(false);
-                queue.Enqueue(newObj);
-                pooledObjects.Add(newObj);
+                return null;
             }
+            obj.SetActive(false);
         }
 
-        GameObject obj = queue.Dequeue();
-        if (obj != null)
+        pooledObjects.Remove(obj);
+
+        // Pool 부모에서 분리
+        obj.transform.SetParent(null, false);
+
+        // 위치 설정
+        obj.transform.SetPositionAndRotation(position, rotation);
+
+        // 오브젝트 활성화
+        obj.SetActive(true);
+
+        // 대여 상태 추적 추가
+        if (activeObjects != null)
         {
-            pooledObjects.Remove(obj);
-
-            // Pool 부모에서 분리
-            obj.transform.SetParent(null, false);
-
-            // 위치 설정
-            obj.transform.SetPositionAndRotation(position, rotation);
-
-            // 오브젝트 활성화
-            obj.SetActive(true);
-
-            // 대여 상태 추적 추가
-            if (activeObjects != null)
-            {
-                activeObjects[obj] = key;
-            }
+            activeObjects[obj] = key;
         }
 
         return obj;
@@ -278,23 +289,42 @@ public class PoolingManager : MonoBehaviour
         // 중복 반납 방지
         if (pooledObjects.Contains(obj))
         {
-            Debug.LogWarning($"[PoolingManager] 이미 반납된 오브젝트입니다. ({obj.name})");
             return;
         }
 
-        obj.SetActive(false);
-
-        // Pool 밑으로 자식화하여 정리
-        obj.transform.SetParent(transform, false);
-
-        poolDict[key].Enqueue(obj);
         pooledObjects.Add(obj);
+        poolDict[key].Enqueue(obj);
 
         // 대여 상태 추적 해제
         if (activeObjects != null)
         {
             activeObjects.Remove(obj);
         }
+
+        // Pool 밑으로 자식화하여 씬 전환 파괴 방지 및 비활성화
+        obj.transform.SetParent(transform, false);
+        obj.SetActive(false);
+    }
+
+    public void ReturnAllActiveObjects()
+    {
+        if (activeObjects == null || activeObjects.Count == 0)
+        {
+            return;
+        }
+
+        CleanupNullActiveObjects();
+
+        List<KeyValuePair<GameObject, string>> snapshot = new List<KeyValuePair<GameObject, string>>(activeObjects);
+        foreach (var kvp in snapshot)
+        {
+            if (kvp.Key != null)
+            {
+                Return(kvp.Value, kvp.Key);
+            }
+        }
+
+        activeObjects.Clear();
     }
 
     private void CleanupNullActiveObjects()

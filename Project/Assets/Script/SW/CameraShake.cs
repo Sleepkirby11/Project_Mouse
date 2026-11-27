@@ -13,6 +13,14 @@ public class CameraShake : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
     public void Impulse()
     {
         if(impulseSource != null)

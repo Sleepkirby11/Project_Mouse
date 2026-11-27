@@ -10,6 +10,10 @@ public class GameStarting : MonoBehaviour
 
     void Awake()
     {
+        if (GameManager.IsNonGameplayScene(gameObject.scene.name))
+        {
+            GameManager.CleanupGameplaySession();
+        }
         SettingsUIStyler.EnsureStyled(settingPanel, GuidePanel, licensePanel);
     }
 

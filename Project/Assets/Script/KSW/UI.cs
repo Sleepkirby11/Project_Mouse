@@ -85,6 +85,26 @@ public class UI : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+
+        if (palSliceMaterials != null)
+        {
+            for (int i = 0; i < palSliceMaterials.Length; i++)
+            {
+                if (palSliceMaterials[i] != null)
+                {
+                    Destroy(palSliceMaterials[i]);
+                    palSliceMaterials[i] = null;
+                }
+            }
+        }
+    }
+
     void Start()
     {
         RefreshPlayerReference();

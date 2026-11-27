@@ -109,12 +109,26 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
+            if (PoolingManager.HasInstance)
+            {
+                PoolingManager.Instance.ReturnAllActiveObjects();
+            }
+
+            if (IsNonGameplayScene(sceneName))
+            {
+                CleanupGameplaySession();
+            }
+
             op.allowSceneActivation = true;
 
             while (!op.isDone)
             {
                 yield return null;
             }
+        }
+        else if (IsNonGameplayScene(sceneName))
+        {
+            CleanupGameplaySession();
         }
 
         // 어두운 화면 뒤에서 ZoneManager의 첫 구역 로드 및 카메라 스냅이 끝날 때까지 짧게 대기
@@ -226,6 +240,61 @@ public class GameManager : MonoBehaviour
         }
         if(Player.instance != null)
             Player.instance.CloseSetting();
+    }
+
+    public static bool IsNonGameplayScene(string sceneName)
+    {
+        return sceneName == "MainMenu" || sceneName == "GameClear";
+    }
+
+    /// <summary>
+    /// 타이틀 또는 엔딩 씬으로 전환 시 인게임 DontDestroyOnLoad 오브젝트들을 정리합니다.
+    /// </summary>
+    public static void CleanupGameplaySession()
+    {
+        Time.timeScale = 1f;
+        if (instance != null)
+        {
+            instance.isSetting = false;
+        }
+
+        if (Player.instance != null)
+        {
+            Player p = Player.instance;
+            DeactivateAndDestroy(p.cursorObject);
+            DeactivateAndDestroy(p.groundLine);
+            DeactivateAndDestroy(p.attackCursor);
+            DeactivateAndDestroy(p.cam);
+            DeactivateAndDestroy(p.canvas);
+            DeactivateAndDestroy(p.gameObject);
+        }
+
+        if (UI.Instance != null)
+        {
+            DeactivateAndDestroy(UI.Instance.gameObject);
+        }
+
+        if (CameraSetting.instance != null)
+        {
+            DeactivateAndDestroy(CameraSetting.instance.gameObject);
+        }
+
+        if (TutorialManager.Instance != null)
+        {
+            DeactivateAndDestroy(TutorialManager.Instance.gameObject);
+        }
+
+        if (ZoneManager.Instance != null)
+        {
+            ZoneManager.Instance.ClearSessionZones();
+        }
+    }
+
+    private static void DeactivateAndDestroy(GameObject target)
+    {
+        if (target == null) return;
+        target.SetActive(false);
+        Destroy(target);
     }
 
 }

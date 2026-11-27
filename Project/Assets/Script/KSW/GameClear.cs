@@ -63,33 +63,47 @@ public class GameClear : MonoBehaviour
     private readonly List<AmbientMote> ambientMotes = new List<AmbientMote>();
     private Vector2 buttonsTargetAnchoredPos;
     private Vector2 thankYouTargetAnchoredPos;
+    private Coroutine activeScrimCoroutine;
     private bool sequenceFinished;
     private bool skipRequested;
     private bool isExitingScene;
 
     private void Awake()
     {
-        Time.timeScale = 1f;
+        GameManager.CleanupGameplaySession();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
         Canvas rootCanvas = GetComponentInParent<Canvas>();
-        if (rootCanvas != null && rootCanvas.sortingOrder < 100)
+        int baseOrder = 100;
+        if (rootCanvas != null)
         {
-            rootCanvas.sortingOrder = 100;
+            if (rootCanvas.sortingOrder < 100)
+            {
+                rootCanvas.sortingOrder = 100;
+            }
+            baseOrder = rootCanvas.sortingOrder;
         }
 
-        if (UI.Instance != null)
-        {
-            UI.Instance.HideBossHPBar();
-            UI.Instance.HideDialogue();
-            UI.Instance.ActivePal(false);
-        }
+        IsolateLayerCanvas(backgroundTransform, baseOrder - 2);
+        IsolateLayerCanvas(motesContainer, baseOrder - 1);
 
         CacheInitialPositions();
         PrepareInitialVisualState();
         AttachButtonFeedback();
         SpawnAmbientMotes();
+    }
+
+    private static void IsolateLayerCanvas(RectTransform layerRect, int sortingOrder)
+    {
+        if (layerRect == null) return;
+        Canvas subCanvas = layerRect.GetComponent<Canvas>();
+        if (subCanvas == null)
+        {
+            subCanvas = layerRect.gameObject.AddComponent<Canvas>();
+        }
+        subCanvas.overrideSorting = true;
+        subCanvas.sortingOrder = sortingOrder;
     }
 
     private void Start()
@@ -273,7 +287,7 @@ public class GameClear : MonoBehaviour
 
         if (!skipRequested)
         {
-            StartCoroutine(FadeScrim(scrimStartAlpha, scrimDawnAlpha, chromaFadeOut + betweenBeatPause + 0.35f));
+            StartScrimFade(scrimStartAlpha, scrimDawnAlpha, chromaFadeOut + betweenBeatPause + 0.35f);
             yield return AnimateGroupFade(
                 chromaGroup,
                 fromAlpha: 1f,
@@ -303,7 +317,7 @@ public class GameClear : MonoBehaviour
 
         if (!skipRequested)
         {
-            StartCoroutine(FadeScrim(scrimDawnAlpha, 0f, thankYouFadeOut + 0.25f));
+            StartScrimFade(scrimDawnAlpha, 0f, thankYouFadeOut + 0.25f);
             yield return AnimateThankYouFade(1f, 0f, thankYouFadeOut, 0f, 10f);
         }
 
@@ -429,9 +443,22 @@ public class GameClear : MonoBehaviour
         }
     }
 
+    private void StartScrimFade(float fromAlpha, float toAlpha, float duration)
+    {
+        if (activeScrimCoroutine != null)
+        {
+            StopCoroutine(activeScrimCoroutine);
+        }
+        activeScrimCoroutine = StartCoroutine(FadeScrim(fromAlpha, toAlpha, duration));
+    }
+
     private IEnumerator FadeScrim(float fromAlpha, float toAlpha, float duration)
     {
-        if (cinematicScrim == null) yield break;
+        if (cinematicScrim == null)
+        {
+            activeScrimCoroutine = null;
+            yield break;
+        }
 
         float elapsed = 0f;
         Color baseColor = cinematicScrim.color;
@@ -445,8 +472,12 @@ public class GameClear : MonoBehaviour
             yield return null;
         }
 
-        baseColor.a = toAlpha;
-        cinematicScrim.color = baseColor;
+        if (!skipRequested)
+        {
+            baseColor.a = toAlpha;
+            cinematicScrim.color = baseColor;
+        }
+        activeScrimCoroutine = null;
     }
 
     private IEnumerator AnimateButtonsReveal(float duration)
@@ -479,6 +510,12 @@ public class GameClear : MonoBehaviour
 
     private void ApplyFinalRestingAtmosphere()
     {
+        if (activeScrimCoroutine != null)
+        {
+            StopCoroutine(activeScrimCoroutine);
+            activeScrimCoroutine = null;
+        }
+
         SetGroupState(chromaGroup, 0f, false);
         SetGroupState(thankYouGroup, 0f, false);
 
