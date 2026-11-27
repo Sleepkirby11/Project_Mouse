@@ -731,7 +731,11 @@ public class BossController : MonoBehaviour, IHitReaction
             yield break;
         }
 
-        yield return new WaitForSeconds(0.25f);
+        // 흩어진 이후에는 분신 스프라이트를 숨겨 돌진 전/중에 파란 분신이 보이지 않게 처리
+        yield return FadeBossAndPhantomsAlpha(null, phantoms, toVisible: false, duration: 0.15f);
+        HidePhantomSprites(phantoms);
+
+        yield return new WaitForSeconds(0.10f);
 
         // 4. 양쪽에 퍼진 상태에서 발악 패턴(총 setCount 세트) 실행
         for (int setIdx = 0; setIdx < setCount; setIdx++)
@@ -858,7 +862,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
             if (isFollowUpSet)
             {
-                yield return FadeBossAndPhantomsAlpha(bossSprite, phantoms, toVisible: true, duration: 0.14f);
+                yield return FadeBossAndPhantomsAlpha(bossSprite, phantoms, toVisible: true, duration: 0.14f, includePhantoms: false);
                 yield return new WaitForSeconds(0.14f);
             }
             else
@@ -1248,16 +1252,20 @@ public class BossController : MonoBehaviour, IHitReaction
         SpriteRenderer bossSprite,
         List<EnrageDashPhantom> phantoms,
         bool toVisible,
-        float duration)
+        float duration,
+        bool includePhantoms = true)
     {
         float bossStart = bossSprite != null ? bossSprite.color.a : (toVisible ? 0f : 1f);
         float bossTarget = toVisible ? 1f : 0f;
 
-        float[] phantomStarts = new float[phantoms.Count];
+        float[] phantomStarts = includePhantoms && phantoms != null ? new float[phantoms.Count] : null;
         float phantomTarget = toVisible ? PhantomTintColor.a : 0f;
-        for (int p = 0; p < phantoms.Count; p++)
+        if (phantomStarts != null)
         {
-            phantomStarts[p] = phantoms[p].spriteRenderer != null ? phantoms[p].spriteRenderer.color.a : (toVisible ? 0f : PhantomTintColor.a);
+            for (int p = 0; p < phantoms.Count; p++)
+            {
+                phantomStarts[p] = phantoms[p].spriteRenderer != null ? phantoms[p].spriteRenderer.color.a : (toVisible ? 0f : PhantomTintColor.a);
+            }
         }
 
         float elapsed = 0f;
@@ -1274,13 +1282,16 @@ public class BossController : MonoBehaviour, IHitReaction
                 bossSprite.color = c;
             }
 
-            for (int p = 0; p < phantoms.Count; p++)
+            if (phantomStarts != null)
             {
-                SpriteRenderer sr = phantoms[p].spriteRenderer;
-                if (sr == null) continue;
-                Color c = sr.color;
-                c.a = Mathf.Lerp(phantomStarts[p], phantomTarget, t);
-                sr.color = c;
+                for (int p = 0; p < phantoms.Count; p++)
+                {
+                    SpriteRenderer sr = phantoms[p].spriteRenderer;
+                    if (sr == null) continue;
+                    Color c = sr.color;
+                    c.a = Mathf.Lerp(phantomStarts[p], phantomTarget, t);
+                    sr.color = c;
+                }
             }
 
             yield return null;
@@ -1292,13 +1303,30 @@ public class BossController : MonoBehaviour, IHitReaction
             c.a = bossTarget;
             bossSprite.color = c;
         }
+        if (phantomStarts != null)
+        {
+            for (int p = 0; p < phantoms.Count; p++)
+            {
+                SpriteRenderer sr = phantoms[p].spriteRenderer;
+                if (sr == null) continue;
+                Color c = sr.color;
+                c.a = phantomTarget;
+                sr.color = c;
+            }
+        }
+    }
+
+    private static void HidePhantomSprites(List<EnrageDashPhantom> phantoms)
+    {
+        if (phantoms == null) return;
         for (int p = 0; p < phantoms.Count; p++)
         {
             SpriteRenderer sr = phantoms[p].spriteRenderer;
             if (sr == null) continue;
             Color c = sr.color;
-            c.a = phantomTarget;
+            c.a = 0f;
             sr.color = c;
+            sr.enabled = false;
         }
     }
 
@@ -1425,7 +1453,7 @@ public class BossController : MonoBehaviour, IHitReaction
 
                 if ((fadePhantomsIn || fadePhantomsOut) && phantoms[p].spriteRenderer != null)
                 {
-                    float targetAlpha = fadePhantomsIn ? PhantomTintColor.a : 0.2f;
+                    float targetAlpha = fadePhantomsIn ? PhantomTintColor.a : 0f;
                     float alphaT = fadePhantomsIn ? Mathf.Clamp01(t / 0.35f) : t;
                     Color c = phantoms[p].spriteRenderer.color;
                     c.a = Mathf.Lerp(startAlphas[p], targetAlpha, alphaT);

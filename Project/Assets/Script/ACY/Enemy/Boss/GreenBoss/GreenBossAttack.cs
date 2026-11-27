@@ -300,11 +300,10 @@ public class GreenBossAttack : MonoBehaviour, IHitReaction
         // 넉백이 어느 정도 적용된 직후 스턴
         yield return new WaitForSeconds(0.1f);
 
-        // 스턴
-        IStunnable stunnable = status.GetComponent<IStunnable>();
-        if (stunnable != null)
+        // 스턴 (바람 패턴은 스턴 파티클 미표시)
+        if (status != null)
         {
-            stunnable.ApplyStun(lockDuration);
+            status.ApplyStun(lockDuration, playShockVfx: false);
         }
 
         isPushing = false;

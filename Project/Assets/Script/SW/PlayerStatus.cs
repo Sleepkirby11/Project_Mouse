@@ -272,6 +272,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     //IStunnable 구현 : 일정 시간 조작 불가(스턴) 
     public void ApplyStun(float duration)
     {
+        ApplyStun(duration, playShockVfx: true);
+    }
+
+    public void ApplyStun(float duration, bool playShockVfx)
+    {
         if (hp <= 0)
         {
             return;
@@ -288,7 +293,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
                 StopCoroutine(stunInvincibleCoroutine);
                 stunInvincibleCoroutine = null;
             }
-            stunCoroutine = StartCoroutine(StunRoutine(duration));
+            stunCoroutine = StartCoroutine(StunRoutine(duration, playShockVfx));
         }
     }
     private IEnumerator KnockbackRoutine(Vector2 force) // 넉백
@@ -309,7 +314,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         playerComp.OnKnockbackEnd();
     }
 
-    private IEnumerator StunRoutine(float duration) // 스턴
+    private IEnumerator StunRoutine(float duration, bool playShockVfx) // 스턴
     {
         isStunned = true;
         playerComp.CancleCursor();
@@ -327,11 +332,18 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             StopCoroutine(shockVfxCoroutine);
             shockVfxCoroutine = null;
         }
-        if (shockParticles == null)
+        if (playShockVfx)
         {
-            shockParticles = MonsterShockParticles.GetOrCreate(this);
+            if (shockParticles == null)
+            {
+                shockParticles = MonsterShockParticles.GetOrCreate(this);
+            }
+            shockParticles?.PlayShock();
         }
-        shockParticles?.PlayShock();
+        else
+        {
+            shockParticles?.StopShock(clearImmediately: true);
+        }
 
         yield return new WaitForSeconds(duration);
 
@@ -785,7 +797,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             if (child == null) continue;
             if (!child.name.StartsWith("Lock", System.StringComparison.Ordinal)) continue;
 
-            if (PoolingManager.Instance != null)
+            if (PoolingManager.HasInstance)
             {
                 child.SetParent(PoolingManager.Instance.transform);
                 PoolingManager.Instance.Return("FlowerLockIcon", child.gameObject);

@@ -136,6 +136,14 @@ public class Player : MonoBehaviour
         groundCursor = groundLine.GetComponent<Paint>();
     }
 
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
     //초기화
     private void Start()
     {

@@ -128,9 +128,10 @@ public class InkCursorGauge : MonoBehaviour
 
         if (!blocked)
         {
-            bool leftHeld = (Mouse.current != null ? Mouse.current.leftButton.isPressed : Input.GetMouseButton(0))
+            bool pointerOverUI = PlayerInputScript.IsPointerOverInteractiveUI();
+            bool leftHeld = (!pointerOverUI && (Mouse.current != null ? Mouse.current.leftButton.isPressed : Input.GetMouseButton(0)))
                 || (player.cursor != null && player.cursor.isMove);
-            bool rightHeld = (Mouse.current != null ? Mouse.current.rightButton.isPressed : Input.GetMouseButton(1))
+            bool rightHeld = (!pointerOverUI && (Mouse.current != null ? Mouse.current.rightButton.isPressed : Input.GetMouseButton(1)))
                 || (player.groundCursor != null && player.groundCursor.isMove);
 
             // 발판(우클릭) 또는 스킬 모드 공격(좌클릭 + isSkill)은 specialInk 사용

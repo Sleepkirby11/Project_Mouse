@@ -23,6 +23,7 @@ public class ZoneManager : MonoBehaviour
     private int currentZoneId = -1;
     private int sceneGeneration = 0;
     private bool isInitializingFirstZone = false;
+    private bool hasSceneZoneDataThisLoad = false;
     public bool IsInitializingFirstZone => isInitializingFirstZone;
 
     private void Awake()
@@ -30,6 +31,7 @@ public class ZoneManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            hasSceneZoneDataThisLoad = true;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -37,6 +39,14 @@ public class ZoneManager : MonoBehaviour
             Instance.UpdateSceneData(this.zonePrefabs);
             Destroy(gameObject);
             return;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
         }
     }
 
@@ -58,11 +68,35 @@ public class ZoneManager : MonoBehaviour
     public void UpdateSceneData(List<GameObject> newPrefabs)
     {
         this.zonePrefabs = new List<GameObject>(newPrefabs);
+        hasSceneZoneDataThisLoad = true;
         Debug.Log($"[ZoneManager] 새로운 씬의 맵 데이터 {zonePrefabs.Count}개를 갱신했습니다.");
+    }
+
+    public void ClearSessionZones()
+    {
+        StopAllCoroutines();
+        sceneGeneration++;
+        hasSceneZoneDataThisLoad = false;
+
+        if (zonePrefabs != null) zonePrefabs.Clear();
+        onPlayerZone.Clear();
+        activeZones.Clear();
+        cachedZones.Clear();
+        loadingZones.Clear();
+        desiredZones.Clear();
+        currentZoneId = -1;
+        isInitializingFirstZone = false;
     }
 
     private void InitFirstZone()
     {
+        if (!hasSceneZoneDataThisLoad)
+        {
+            ClearSessionZones();
+            return;
+        }
+
+        hasSceneZoneDataThisLoad = false;
         StopAllCoroutines();
         sceneGeneration++;
 

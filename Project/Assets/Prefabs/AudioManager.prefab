@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmClip: {fileID: 8300000, guid: 8587ad89599261443a671b68b8f722ec, type: 3}
-  bgmVolume: 100
+  bgmVolume: 1
   sfxClips:
   - name: Archer_Arrow
     clip: {fileID: 8300000, guid: 5a11bf93e7adfaf4aab85a9399acf44a, type: 3}
@@ -158,5 +158,5 @@ MonoBehaviour:
   - name: MantisCut
     clip: {fileID: 8300000, guid: f2608b9fd8468cd408ca0c814185cfff, type: 3}
     volumeScale: 1
-  sfxVolume: 100
+  sfxVolume: 1
   channels: 20

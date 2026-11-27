@@ -1,12 +1,53 @@
+using System.Collections.Generic;
 using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerInputScript : MonoBehaviour
 {
     private Player player;
+    private static EventSystem cachedEventSystem;
+    private static PointerEventData cachedPointerData;
+    private static readonly List<RaycastResult> uiRaycastResults = new List<RaycastResult>();
+
+    public static bool IsPointerOverInteractiveUI()
+    {
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem == null)
+        {
+            return false;
+        }
+
+        if (cachedPointerData == null || cachedEventSystem != eventSystem)
+        {
+            cachedEventSystem = eventSystem;
+            cachedPointerData = new PointerEventData(eventSystem);
+        }
+
+        cachedPointerData.Reset();
+        cachedPointerData.position = Mouse.current != null
+            ? Mouse.current.position.ReadValue()
+            : (Vector2)Input.mousePosition;
+
+        uiRaycastResults.Clear();
+        eventSystem.RaycastAll(cachedPointerData, uiRaycastResults);
+        if (uiRaycastResults.Count == 0)
+        {
+            return false;
+        }
+
+        GameObject topHit = uiRaycastResults[0].gameObject;
+        if (topHit == null)
+        {
+            return false;
+        }
+
+        return ExecuteEvents.GetEventHandler<IPointerClickHandler>(topHit) != null
+            || ExecuteEvents.GetEventHandler<IPointerDownHandler>(topHit) != null;
+    }
 
 
     private void Awake()
@@ -229,7 +270,7 @@ public class PlayerInputScript : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.cursorObject.GetComponent<TrailRenderer>();
-        if (context.started && player.status.ink > 5)
+        if (context.started && !IsPointerOverInteractiveUI() && player.status.ink > 5)
         {
             //초기화
             player.cursorObject.transform.position = player.mouse.transform.position;
@@ -355,7 +396,7 @@ public class PlayerInputScript : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.groundLine.GetComponent<TrailRenderer>();
-        if (context.started && player.status.specialInk > 3)
+        if (context.started && !IsPointerOverInteractiveUI() && player.status.specialInk > 3)
         {
             //초기화
             player.groundLine.transform.position = player.mouse.transform.position;

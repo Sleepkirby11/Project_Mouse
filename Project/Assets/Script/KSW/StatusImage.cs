@@ -16,6 +16,14 @@ public class StatusImage : MonoBehaviour
         image = GetComponent<Image>();
     }
 
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
     public void ChangeImage(int index, bool isSkill)
     {
         if(isSkill)
