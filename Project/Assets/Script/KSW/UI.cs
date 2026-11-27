@@ -553,6 +553,7 @@ public class UI : MonoBehaviour
     // 설정창 열기/닫기
     public void OpenSetting()
     {
+        SettingsUIStyler.EnsureStyled(settingPanel, null, licensePanel);
         if (settingPanel != null) settingPanel.SetActive(true);
         if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
@@ -572,6 +573,7 @@ public class UI : MonoBehaviour
     public void ToggleSetting()
     {
         if (settingPanel == null) return;
+        SettingsUIStyler.EnsureStyled(settingPanel, null, licensePanel);
         bool nextState = !settingPanel.activeSelf;
         settingPanel.SetActive(nextState);
         if (GameManager.instance != null) GameManager.instance.PauseOnOff();
@@ -580,6 +582,7 @@ public class UI : MonoBehaviour
     // [추가] 라이선스창 열기
     public void OpenLicense()
     {
+        SettingsUIStyler.StyleLicensePanel(licensePanel);
         if (licensePanel != null) licensePanel.SetActive(true);
     }
 

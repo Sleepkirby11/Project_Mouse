@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI; // 슬라이더와 이미지를 쓰기 위해 필요
+using UnityEngine.UI;
 
 public class SoundControl : MonoBehaviour
 {
@@ -16,33 +16,113 @@ public class SoundControl : MonoBehaviour
     public Sprite soundOnSprite;
     public Sprite soundMuteSprite;
 
+    private float lastNonZeroVolume = 0.7f;
+    private bool listenerBound;
+
+    void Awake()
+    {
+        EnsureParentSettingPanelStyled();
+        BindControls();
+    }
+
+    void OnEnable()
+    {
+        EnsureParentSettingPanelStyled();
+        BindControls();
+        SyncFromGameManager();
+    }
+
     void Start()
     {
-        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
-        if (soundType == SoundType.BGM)
+        EnsureParentSettingPanelStyled();
+        BindControls();
+        SyncFromGameManager();
+    }
+
+    private void EnsureParentSettingPanelStyled()
+    {
+        Transform cur = transform;
+        while (cur != null)
         {
-            volumeSlider.value = GameManager.instance.bgmVolume;
-        }
-        else if (soundType == SoundType.SFX)
-        {
-            volumeSlider.value = GameManager.instance.sfxVolume;
-        }
-        if (GameManager.instance != null)
-        {
-            if (soundType == SoundType.BGM)
+            if (cur.name == "settingPanel")
             {
-                OnVolumeChanged(GameManager.instance.bgmVolume);
+                SettingsUIStyler.EnsureStyled(cur.gameObject);
+                break;
             }
-            else if (soundType == SoundType.SFX)
+            cur = cur.parent;
+        }
+    }
+
+    private void BindControls()
+    {
+        if (listenerBound) return;
+
+        if (volumeSlider != null)
+        {
+            volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
+            volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        }
+
+        if (volumeIcon != null)
+        {
+            volumeIcon.color = Color.white;
+            Button iconBtn = volumeIcon.GetComponent<Button>();
+            if (iconBtn != null)
             {
-                OnVolumeChanged(GameManager.instance.sfxVolume);
+                iconBtn.onClick.RemoveListener(ToggleMute);
+                iconBtn.onClick.AddListener(ToggleMute);
             }
         }
 
+        listenerBound = true;
+    }
+
+    private void SyncFromGameManager()
+    {
+        if (volumeSlider == null) return;
+
+        if (GameManager.instance != null)
+        {
+            float targetVol = (soundType == SoundType.BGM)
+                ? GameManager.instance.bgmVolume
+                : GameManager.instance.sfxVolume;
+
+            if (targetVol > 0.01f)
+            {
+                lastNonZeroVolume = targetVol;
+            }
+
+            volumeSlider.SetValueWithoutNotify(targetVol);
+            OnVolumeChanged(targetVol);
+        }
+        else
+        {
+            RefreshVisuals();
+        }
+    }
+
+    public void ToggleMute()
+    {
+        if (volumeSlider == null) return;
+
+        if (volumeSlider.value > 0.005f)
+        {
+            lastNonZeroVolume = volumeSlider.value;
+            volumeSlider.value = 0f;
+        }
+        else
+        {
+            volumeSlider.value = Mathf.Clamp01(lastNonZeroVolume > 0.05f ? lastNonZeroVolume : 0.7f);
+        }
     }
 
     void OnVolumeChanged(float value)
     {
+        if (value > 0.01f)
+        {
+            lastNonZeroVolume = value;
+        }
+
         if (GameManager.instance != null && AudioManager.instance != null)
         {
             if (soundType == SoundType.BGM)
@@ -56,13 +136,50 @@ public class SoundControl : MonoBehaviour
             AudioManager.instance.UpdateSound();
         }
 
-        if (value <= 0)
+        RefreshVisuals();
+    }
+
+    public void RefreshVisuals()
+    {
+        float value = volumeSlider != null ? volumeSlider.value : 0f;
+        bool isMuted = value <= 0.001f;
+
+        if (volumeIcon != null)
         {
-            volumeIcon.sprite = soundMuteSprite;
+            volumeIcon.color = Color.white;
+            if (isMuted && soundMuteSprite != null)
+            {
+                volumeIcon.sprite = soundMuteSprite;
+            }
+            else if (!isMuted && soundOnSprite != null)
+            {
+                volumeIcon.sprite = soundOnSprite;
+            }
         }
-        else
+
+        if (volumeSlider != null && volumeSlider.fillRect != null)
         {
-            volumeIcon.sprite = soundOnSprite;
+            Image fillImg = volumeSlider.fillRect.GetComponent<Image>();
+            if (fillImg != null)
+            {
+                fillImg.color = new Color(0.85f, 0.54f, 0.24f, 1f);
+            }
+        }
+
+        Transform pctTf = transform.Find("VolumeValueText");
+        if (pctTf == null && transform.parent != null)
+        {
+            pctTf = transform.parent.Find("VolumeValueText");
+        }
+        if (pctTf != null)
+        {
+            Text pctText = pctTf.GetComponent<Text>();
+            if (pctText != null)
+            {
+                int pct = Mathf.RoundToInt(Mathf.Clamp01(value) * 100f);
+                pctText.text = $"{pct}%";
+                pctText.color = new Color(0.38f, 0.23f, 0.18f, 1f);
+            }
         }
     }
 }

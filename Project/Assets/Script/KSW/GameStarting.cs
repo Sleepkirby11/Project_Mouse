@@ -8,6 +8,11 @@ public class GameStarting : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject GuidePanel;
 
+    void Awake()
+    {
+        SettingsUIStyler.EnsureStyled(settingPanel, GuidePanel, licensePanel);
+    }
+
     public void PlayGame()
     {
         if (settingPanel != null) settingPanel.SetActive(false);
@@ -36,6 +41,7 @@ public class GameStarting : MonoBehaviour
     // 설정창 열기/닫기
     public void OpenSetting()
     {
+        SettingsUIStyler.EnsureStyled(settingPanel, GuidePanel, licensePanel);
         if (settingPanel != null) settingPanel.SetActive(true);
         if (GameManager.instance != null) GameManager.instance.PauseOnOff();
     }
@@ -72,6 +78,7 @@ public class GameStarting : MonoBehaviour
     // 라이선스창 열기/닫기
     public void OpenLicense()
     {
+        SettingsUIStyler.StyleLicensePanel(licensePanel);
         if (licensePanel != null) licensePanel.SetActive(true);
     }
 
@@ -82,6 +89,7 @@ public class GameStarting : MonoBehaviour
 
     public void OpenGuide()
     {
+        SettingsUIStyler.StyleGuidePanel(GuidePanel);
         if (GuidePanel != null) GuidePanel.SetActive(true);
     }
 
