@@ -11,15 +11,18 @@ public class ConfinerZone : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && CameraSetting.instance != null && col != null)
         {
-            CameraSetting.instance.colliders.Add(col);
+            if (!CameraSetting.instance.colliders.Contains(col))
+            {
+                CameraSetting.instance.colliders.Add(col);
+            }
             CameraSetting.instance.ChangeCameraConfiner();
         }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && CameraSetting.instance != null && col != null)
         {
             if (CameraSetting.instance.colliders.Contains(col))
             {
