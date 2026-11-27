@@ -127,6 +127,8 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     private void Update()
     {
+        CancelParryIfFalling();
+
         if (enemyStatus != null && enemyStatus.isStunned)
         {
             SetPlayerCollisionIgnored(true);
@@ -258,8 +260,8 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             yield return parryIntervalWait;
 
-            // 플레이어를 추적 중일 때만 패링 시도
-            if (target != null && state == State.Tracking)
+            // 플레이어를 추적 중이고 낙하 중이 아닐 때만 패링 시도
+            if (target != null && state == State.Tracking && !IsFalling())
             {
                 if (enemyStatus != null && enemyStatus.isStunned)
                 {
@@ -268,9 +270,20 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
                 state = State.Parrying;
                 if (rb != null)
                 {
-                    rb.linearVelocity = Vector2.zero;
+                    rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
                 }
-                yield return parryWait;
+
+                float elapsed = 0f;
+                while (elapsed < parryDuration && state == State.Parrying)
+                {
+                    if (IsFalling())
+                    {
+                        state = target != null ? State.Tracking : State.Patrol;
+                        break;
+                    }
+                    elapsed += Time.deltaTime;
+                    yield return null;
+                }
 
                 // 카운터가 발동되지 않았다면 추적으로 복귀
                 if (state == State.Parrying)
@@ -287,7 +300,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
         {
             return false;
         }
-        if (state != State.Parrying || target == null)
+        if (IsFalling() || state != State.Parrying || target == null)
         {
             return false;
         }
@@ -527,6 +540,19 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
     #region Utility Methods
 
+    private bool IsFalling()
+    {
+        return rb != null && rb.linearVelocity.y < -0.1f;
+    }
+
+    private void CancelParryIfFalling()
+    {
+        if (state == State.Parrying && IsFalling())
+        {
+            state = target != null ? State.Tracking : State.Patrol;
+        }
+    }
+
     private void UpdateAnimator()
     {
         if (anim == null)
@@ -545,7 +571,7 @@ public class ParryingShieldEnemy : MonoBehaviour, IHitReaction
 
         if (rb != null)
         {
-            anim.SetBool("IsFalling", rb.linearVelocity.y < -0.1f);
+            anim.SetBool("IsFalling", IsFalling());
         }
     }
 
