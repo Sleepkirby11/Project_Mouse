@@ -90,15 +90,21 @@ public class SettingsUIStyler : MonoBehaviour
 
     private static void StyleMainMenuButtons(Transform menuTf)
     {
-        Transform exitTf = menuTf.Find("Exit");
-        if (exitTf == null) return;
-        Text txt = exitTf.GetComponentInChildren<Text>(true);
+        StyleMainMenuLabel(menuTf.Find("Start"), new Color(0.08f, 0.18f, 0.10f, 0.92f));
+        StyleMainMenuLabel(menuTf.Find("Setting"), new Color(0.08f, 0.12f, 0.22f, 0.92f));
+        StyleMainMenuLabel(menuTf.Find("Exit"), new Color(0.22f, 0.08f, 0.08f, 0.92f));
+    }
+
+    private static void StyleMainMenuLabel(Transform btnTf, Color outlineColor)
+    {
+        if (btnTf == null) return;
+        Text txt = btnTf.GetComponentInChildren<Text>(true);
         if (txt == null) return;
 
         Outline outline = txt.GetComponent<Outline>();
         if (outline == null) outline = txt.gameObject.AddComponent<Outline>();
         outline.enabled = true;
-        outline.effectColor = new Color(0.24f, 0.10f, 0.09f, 0.9f);
+        outline.effectColor = outlineColor;
         outline.effectDistance = new Vector2(1.5f, -1.5f);
     }
 
