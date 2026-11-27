@@ -102,7 +102,8 @@ public class PressurePlate : MonoBehaviour
         }
         else if (localAudioSource != null && pressClip != null)
         {
-            localAudioSource.PlayOneShot(pressClip);
+            float sfxVol = GameManager.instance != null ? Mathf.Clamp01(GameManager.instance.sfxVolume) : 1f;
+            localAudioSource.PlayOneShot(pressClip, sfxVol);
         }
     }
 }

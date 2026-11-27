@@ -160,3 +160,5 @@ MonoBehaviour:
     volumeScale: 1
   sfxVolume: 1
   channels: 20
+  uiClickClip: {fileID: 8300000, guid: 209e74fb677df524fbc43af18dae2e10, type: 3}
+  uiClickVolumeScale: 1

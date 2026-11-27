@@ -86,6 +86,29 @@ public class SettingsUIStyler : MonoBehaviour
                 StyleMainMenuButtons(menuTf);
             }
         }
+
+        if (settingPanel != null) AttachButtonClickSounds(settingPanel.transform.root);
+        else if (guidePanel != null) AttachButtonClickSounds(guidePanel.transform.root);
+        else if (licensePanel != null) AttachButtonClickSounds(licensePanel.transform.root);
+    }
+
+    public static void AttachButtonClickSounds(Transform root)
+    {
+        if (root == null) return;
+        Button[] buttons = root.GetComponentsInChildren<Button>(true);
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            AttachButtonClickSound(buttons[i]);
+        }
+    }
+
+    public static void AttachButtonClickSound(Button btn)
+    {
+        if (btn == null) return;
+        if (btn.GetComponent<UIButtonSound>() == null)
+        {
+            btn.gameObject.AddComponent<UIButtonSound>();
+        }
     }
 
     private static void StyleMainMenuButtons(Transform menuTf)
@@ -885,5 +908,35 @@ public class SettingsUIStyler : MonoBehaviour
         }
 
         return txt;
+    }
+}
+
+public class UIButtonSound : MonoBehaviour
+{
+    private Button cachedButton;
+
+    private void Awake()
+    {
+        cachedButton = GetComponent<Button>();
+        if (cachedButton != null)
+        {
+            cachedButton.onClick.AddListener(PlayClickSound);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (cachedButton != null)
+        {
+            cachedButton.onClick.RemoveListener(PlayClickSound);
+        }
+    }
+
+    private static void PlayClickSound()
+    {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayUIClick();
+        }
     }
 }
