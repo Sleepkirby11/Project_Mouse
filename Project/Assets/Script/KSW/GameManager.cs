@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,11 +18,20 @@ public class GameManager : MonoBehaviour
     public float bgmVolume;
     public float sfxVolume;
 
+    [Header("씬 전환 연출")]
+    [SerializeField] private float fadeOutDuration = 0.24f;
+    [SerializeField] private float fadeInDuration = 0.28f;
+    [SerializeField] private Color transitionColor = new Color(0.04f, 0.03f, 0.05f, 1f);
+
     //대화 데이터 관리 인스펙터 연결 잊지 말것
     Dictionary<int, string[]> talkData;
 
     public bool isSetting;
     private bool isLoadingScene;
+    public bool IsTransitioning => isLoadingScene;
+
+    private Canvas transitionCanvas;
+    private Image transitionCurtain;
 
 
     void Awake()
@@ -65,6 +75,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator LoadSceneAsyncRoutine(string sceneName)
     {
         isLoadingScene = true;
+        EnsureTransitionOverlay();
+
         Time.timeScale = 1f;
         isSetting = false;
 
@@ -73,13 +85,124 @@ public class GameManager : MonoBehaviour
             CameraSetting.instance.colliders.Clear();
         }
 
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-        while (op != null && !op.isDone)
+        if (transitionCurtain != null)
         {
+            transitionCurtain.raycastTarget = true;
+        }
+
+        ThreadPriority previousPriority = Application.backgroundLoadingPriority;
+        Application.backgroundLoadingPriority = ThreadPriority.High;
+
+        // 페이드 아웃과 동시에 다음 씬 백그라운드 비동기 로딩을 미리 시작해 전환 렉 최소화
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+        if (op != null)
+        {
+            op.allowSceneActivation = false;
+        }
+
+        yield return FadeCurtainRoutine(0f, 1f, fadeOutDuration);
+
+        if (op != null)
+        {
+            while (op.progress < 0.9f)
+            {
+                yield return null;
+            }
+
+            op.allowSceneActivation = true;
+
+            while (!op.isDone)
+            {
+                yield return null;
+            }
+        }
+
+        // 어두운 화면 뒤에서 ZoneManager의 첫 구역 로드 및 카메라 스냅이 끝날 때까지 짧게 대기
+        float settleElapsed = 0f;
+        while (ZoneManager.Instance != null && ZoneManager.Instance.IsInitializingFirstZone && settleElapsed < 0.5f)
+        {
+            settleElapsed += Time.unscaledDeltaTime;
             yield return null;
         }
 
+        // 첫 프레임 렌더링 안정화 대기
+        yield return null;
+
+        Application.backgroundLoadingPriority = previousPriority;
+
+        if (transitionCurtain != null)
+        {
+            transitionCurtain.raycastTarget = false;
+        }
+
         isLoadingScene = false;
+        yield return FadeCurtainRoutine(1f, 0f, fadeInDuration);
+    }
+
+    private void EnsureTransitionOverlay()
+    {
+        if (transitionCurtain != null) return;
+
+        GameObject canvasObj = new GameObject("SceneTransitionCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+        canvasObj.transform.SetParent(transform, false);
+
+        transitionCanvas = canvasObj.GetComponent<Canvas>();
+        transitionCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        transitionCanvas.sortingOrder = 9999;
+
+        CanvasScaler scaler = canvasObj.GetComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920f, 1080f);
+
+        GameObject curtainObj = new GameObject("FadeCurtain", typeof(RectTransform), typeof(Image));
+        curtainObj.transform.SetParent(canvasObj.transform, false);
+
+        RectTransform rt = curtainObj.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+
+        transitionCurtain = curtainObj.GetComponent<Image>();
+        transitionCurtain.color = new Color(transitionColor.r, transitionColor.g, transitionColor.b, 0f);
+        transitionCurtain.raycastTarget = false;
+    }
+
+    private IEnumerator FadeCurtainRoutine(float fromAlpha, float toAlpha, float duration)
+    {
+        if (transitionCurtain == null) yield break;
+
+        if (transitionCanvas != null)
+        {
+            transitionCanvas.gameObject.SetActive(true);
+        }
+
+        if (duration <= 0.001f)
+        {
+            transitionCurtain.color = new Color(transitionColor.r, transitionColor.g, transitionColor.b, toAlpha);
+            if (toAlpha <= 0f && transitionCanvas != null)
+            {
+                transitionCanvas.gameObject.SetActive(false);
+            }
+            yield break;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            float eased = t * t * (3f - 2f * t);
+            float alpha = Mathf.Lerp(fromAlpha, toAlpha, eased);
+            transitionCurtain.color = new Color(transitionColor.r, transitionColor.g, transitionColor.b, alpha);
+            yield return null;
+        }
+
+        transitionCurtain.color = new Color(transitionColor.r, transitionColor.g, transitionColor.b, toAlpha);
+        if (toAlpha <= 0f && transitionCanvas != null)
+        {
+            transitionCanvas.gameObject.SetActive(false);
+        }
     }
 
     public void PauseOnOff()

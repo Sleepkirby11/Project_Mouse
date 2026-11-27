@@ -235,8 +235,15 @@ public class ParticleManager : MonoBehaviour
 
     private IEnumerator PrewarmPoolsRoutine()
     {
+        // 씬 전환 및 첫 프레임 안정화 직후부터 프레임당 소량만 분산 생성해 씬 이동 렉 완화
+        yield return null;
+        while (GameManager.instance != null && GameManager.instance.IsTransitioning)
+        {
+            yield return null;
+        }
+
         int createdThisFrame = 0;
-        int batchLimit = Mathf.Max(1, prewarmPerFrame);
+        int batchLimit = Mathf.Min(Mathf.Max(1, prewarmPerFrame), 2);
 
         foreach (var pool in pools)
         {
