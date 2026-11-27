@@ -22,6 +22,8 @@ public class ZoneManager : MonoBehaviour
     private readonly HashSet<int> desiredZones = new HashSet<int>();
     private int currentZoneId = -1;
     private int sceneGeneration = 0;
+    private bool isInitializingFirstZone = false;
+    public bool IsInitializingFirstZone => isInitializingFirstZone;
 
     private void Awake()
     {
@@ -70,16 +72,20 @@ public class ZoneManager : MonoBehaviour
         loadingZones.Clear();
         desiredZones.Clear();
         currentZoneId = -1;
+        isInitializingFirstZone = false;
 
         if (zonePrefabs == null || zonePrefabs.Count == 0) return;
 
         int firstZoneId = 0;
         desiredZones.Add(firstZoneId);
+        isInitializingFirstZone = true;
         StartCoroutine(InitAndSpawnFirstZoneRoutine(firstZoneId, sceneGeneration));
     }
 
     private IEnumerator InitAndSpawnFirstZoneRoutine(int firstZoneId, int generation)
     {
+        isInitializingFirstZone = true;
+
         if (playerObject == null)
         {
             playerObject = Player.instance != null ? Player.instance.gameObject : GameObject.FindWithTag("Player");
@@ -101,7 +107,10 @@ public class ZoneManager : MonoBehaviour
         yield return StartCoroutine(LoadZonePrefabAsync(firstZoneId, generation));
 
         if (generation != sceneGeneration)
+        {
+            isInitializingFirstZone = false;
             yield break;
+        }
 
         if (activeZones.TryGetValue(firstZoneId, out GameObject startZoneObj) && startZoneObj != null)
         {
@@ -111,7 +120,10 @@ public class ZoneManager : MonoBehaviour
                 yield return StartCoroutine(SafeTeleport(playerObject.transform, startZone.spawnPoint.position));
 
                 if (generation != sceneGeneration)
+                {
+                    isInitializingFirstZone = false;
                     yield break;
+                }
 
                 if (playerRb != null)
                 {
@@ -119,6 +131,7 @@ public class ZoneManager : MonoBehaviour
                 }
 
                 OnPlayerEnterZone(startZone);
+                isInitializingFirstZone = false;
                 yield break;
             }
         }
@@ -127,6 +140,8 @@ public class ZoneManager : MonoBehaviour
         {
             playerRb.simulated = prevSimulated;
         }
+
+        isInitializingFirstZone = false;
     }
 
     private IEnumerator SafeTeleport(Transform target, Vector3 destination)
