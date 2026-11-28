@@ -83,6 +83,14 @@ public class CameraSetting : MonoBehaviour
         }
     }
 
+    public void InvalidateConfinerCache()
+    {
+        if (cameraConfiner != null)
+        {
+            cameraConfiner.InvalidateBoundingShapeCache();
+        }
+    }
+
     public void ChangeCameraConfiner()
     {
         colliders.RemoveAll(c => c == null);

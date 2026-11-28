@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SoundControl : MonoBehaviour
 {
@@ -185,12 +186,22 @@ public class SoundControl : MonoBehaviour
         }
         if (pctTf != null)
         {
-            Text pctText = pctTf.GetComponent<Text>();
-            if (pctText != null)
+            int pct = Mathf.RoundToInt(Mathf.Clamp01(value) * 100f);
+            Color pctColor = new Color(0.38f, 0.23f, 0.18f, 1f);
+            TMP_Text pctTmp = pctTf.GetComponent<TMP_Text>();
+            if (pctTmp != null)
             {
-                int pct = Mathf.RoundToInt(Mathf.Clamp01(value) * 100f);
-                pctText.text = $"{pct}%";
-                pctText.color = new Color(0.38f, 0.23f, 0.18f, 1f);
+                pctTmp.text = $"{pct}%";
+                pctTmp.color = pctColor;
+            }
+            else
+            {
+                Text pctText = pctTf.GetComponent<Text>();
+                if (pctText != null)
+                {
+                    pctText.text = $"{pct}%";
+                    pctText.color = pctColor;
+                }
             }
         }
     }
