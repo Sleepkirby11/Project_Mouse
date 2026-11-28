@@ -171,6 +171,12 @@ public class Paint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // 발판(groundLine: isTrigger == false 또는 Ground 태그)은 공격 판정 및 히트 연출을 발생시키지 않음
+        if ((col != null && !col.isTrigger) || gameObject.CompareTag("Ground"))
+        {
+            return;
+        }
+
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
         IStunnable stunnable = collision.gameObject.GetComponent<IStunnable>();
 
