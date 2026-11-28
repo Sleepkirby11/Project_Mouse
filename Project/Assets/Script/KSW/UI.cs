@@ -29,6 +29,7 @@ public class UI : MonoBehaviour
     [Header("보스 체력바 설정")]
     [SerializeField] private Slider bossHpSlider;
     [SerializeField] private Text bossNameText;
+    private BossUIStyler bossUIStyler;
 
     [Header("대화창")]
     public GameObject talkPanel;
@@ -107,6 +108,7 @@ public class UI : MonoBehaviour
 
     void Start()
     {
+        EnsureBossUIStyler();
         RefreshPlayerReference();
     }
 
@@ -185,6 +187,15 @@ public class UI : MonoBehaviour
         return null;
     }
 
+    private BossUIStyler EnsureBossUIStyler()
+    {
+        if (bossUIStyler == null && bossHpSlider != null)
+        {
+            bossUIStyler = BossUIStyler.AttachOrGet(bossHpSlider, bossNameText);
+        }
+        return bossUIStyler;
+    }
+
     // 보스 체력바 활성화 및 초기 체력 설정
     public void ShowBossHPBar(float initialRatio)
     {
@@ -199,6 +210,14 @@ public class UI : MonoBehaviour
     public void ShowBossHPBar(string bossName, Color textColor, float initialRatio)
     {
         Debug.Log($"[UI] ShowBossHPBar 호출됨. 이름: {bossName}, 색상: {textColor}, 초기 비율: {initialRatio}");
+        BossUIStyler styler = EnsureBossUIStyler();
+        if (styler != null)
+        {
+            styler.Show(bossName, textColor, initialRatio);
+            Debug.Log($"[UI] bossHpSlider가 이제 활성화되었습니다. 값: {bossHpSlider.value}");
+            return;
+        }
+
         if (bossHpSlider != null)
         {
             bossHpSlider.gameObject.SetActive(true);
@@ -224,7 +243,15 @@ public class UI : MonoBehaviour
         Debug.Log($"[UI] UpdateBossHPBar 호출됨: {currentHP}/{maxHP}");
         if (bossHpSlider != null && maxHP > 0)
         {
-            bossHpSlider.value = currentHP / maxHP;
+            BossUIStyler styler = EnsureBossUIStyler();
+            if (styler != null)
+            {
+                styler.UpdateHP(currentHP, maxHP);
+            }
+            else
+            {
+                bossHpSlider.value = currentHP / maxHP;
+            }
         }
         else if (bossHpSlider == null)
         {
@@ -244,6 +271,14 @@ public class UI : MonoBehaviour
     public void HideBossHPBar()
     {
         Debug.Log("[UI] HideBossHPBar 호출됨.");
+        BossUIStyler styler = EnsureBossUIStyler();
+        if (styler != null)
+        {
+            styler.Hide();
+            Debug.Log("[UI] bossHpSlider가 비활성화되었습니다.");
+            return;
+        }
+
         if (bossHpSlider != null)
         {
             bossHpSlider.gameObject.SetActive(false);
