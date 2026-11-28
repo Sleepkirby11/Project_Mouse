@@ -21,6 +21,29 @@ public class EnemyTrigger : MonoBehaviour
     [SerializeField] private float spawnStaggerDelay = 0f;
 
     private bool activated;
+    public bool IsActivated => activated;
+
+    public bool HasBoss() => FindBossInEnemies() != null;
+
+    public void SetActivatedFromSave(bool value)
+    {
+        activated = value;
+    }
+
+    public void EnsureAliveEnemiesActive()
+    {
+        if (enemies == null) return;
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] == null) continue;
+            EnemyStatus status = enemies[i].GetComponent<EnemyStatus>();
+            if (status != null && status.IsDead) continue;
+            if (!enemies[i].activeSelf)
+            {
+                enemies[i].SetActive(true);
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -49,7 +72,59 @@ public class EnemyTrigger : MonoBehaviour
             return;
 
         activated = true;
+
+        EnemyStatus boss = FindBossInEnemies();
+        if (boss != null)
+        {
+            Vector3 restartPos = CalculateBossTriggerFrontPosition(other);
+            SaveManager.NotifyBossFightStarted(this, restartPos);
+        }
+        else
+        {
+            SaveManager.MarkDirty();
+        }
+
         StartCoroutine(ActivateRoutine());
+    }
+
+    private Vector3 CalculateBossTriggerFrontPosition(Collider2D playerCollider)
+    {
+        Vector3 playerPos = playerCollider.transform.position;
+        BoxCollider2D triggerBox = GetComponent<BoxCollider2D>();
+        if (triggerBox == null)
+        {
+            return playerPos;
+        }
+
+        Bounds b = triggerBox.bounds;
+        bool enteredFromLeft = playerPos.x <= b.center.x;
+        float frontX = enteredFromLeft ? (b.min.x - 1.8f) : (b.max.x + 1.8f);
+
+        Player playerComp = playerCollider.GetComponent<Player>();
+        float halfHeight = playerComp != null ? playerComp.ColliderHalfHeight : 0.9f;
+
+        Vector2 rayOrigin = new Vector2(frontX, playerPos.y + 2.5f);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 15f, LayerMask.GetMask("Ground"));
+        if (hit.collider != null)
+        {
+            return new Vector3(frontX, hit.point.y + halfHeight + 0.05f, playerPos.z);
+        }
+
+        if (playerComp != null && playerComp.HasLastGroundedPosition)
+        {
+            Vector3 groundedPos = playerComp.LastGroundedPosition;
+            if (enteredFromLeft && groundedPos.x >= b.min.x - 0.5f)
+            {
+                groundedPos.x = frontX;
+            }
+            else if (!enteredFromLeft && groundedPos.x <= b.max.x + 0.5f)
+            {
+                groundedPos.x = frontX;
+            }
+            return groundedPos;
+        }
+
+        return new Vector3(frontX, playerPos.y, playerPos.z);
     }
 
     private IEnumerator ActivateRoutine()

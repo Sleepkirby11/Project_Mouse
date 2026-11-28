@@ -70,6 +70,7 @@ public class GameClear : MonoBehaviour
 
     private void Awake()
     {
+        SaveManager.ClearSaveData();
         GameManager.CleanupGameplaySession();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

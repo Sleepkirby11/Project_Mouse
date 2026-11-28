@@ -86,6 +86,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     private float savedControlAnimSpeed = 1f;
     private bool isControlAnimPaused;
     private int suppressHitParticleFrame = -1;
+    private bool hasRestoredFromSave = false;
     private System.Collections.Generic.List<Collider2D> ignoredColliders = new System.Collections.Generic.List<Collider2D>();
     void Awake()
     {
@@ -105,9 +106,12 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     //상태 초기화
     void Start()
     {
-        hp = maxHp;
-        ink = maxInk;
-        specialInk = maxSpecialInk;
+        if (!hasRestoredFromSave)
+        {
+            hp = maxHp;
+            ink = maxInk;
+            specialInk = maxSpecialInk;
+        }
 
         isInvincible = false;
     }
@@ -154,6 +158,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         {
             UI.Instance.UpdateHPBar();
         }
+        SaveManager.MarkDirty();
 
         //점프 애니메이션 실행 이전 Invincible 활성화
         SetInvincible(true);
@@ -209,6 +214,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
         if(hp >= maxHp) hp = maxHp;
 
         UI.Instance.UpdateHPBar();
+        SaveManager.MarkDirty();
     }
 
     //잉크 충전
@@ -872,15 +878,86 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
             UI.Instance.UpdateCoolTimeBar();
         }
 
-        if (AudioManager.instance != null)
+        if (!SaveManager.IsBootstrappingSession && AudioManager.instance != null)
         {
             AudioManager.instance.PlayBGM(true);
         }
         
     }
 
+    public void RestoreFromSave(int savedHp, float savedInk, float savedSpecialInk, float savedCoolTime, Stance savedStance, int savedCombo)
+    {
+        hasRestoredFromSave = true;
+        hp = Mathf.Clamp(savedHp, 1, Mathf.Max(1, maxHp));
+        ink = Mathf.Clamp(savedInk, 0f, maxInk);
+        specialInk = Mathf.Clamp(savedSpecialInk, 0f, maxSpecialInk);
+        currentCoolTime = Mathf.Clamp(savedCoolTime, 0f, coolTime);
+        currentStance = System.Enum.IsDefined(typeof(Stance), savedStance) ? savedStance : Stance.White;
+        combo = Mathf.Max(0, savedCombo);
+
+        isInvincible = false;
+        isKnockbacked = false;
+        isStunned = false;
+        isPossessed = false;
+        isBound = false;
+        ClearStunState(clearShockImmediately: true);
+        ClearAttachedLockIcons();
+        ResumePlayerAnim();
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.gravityScale = originGravityScale;
+        }
+
+        if (playerComp != null)
+        {
+            playerComp.isSkill = false;
+            playerComp.isDashReady = false;
+            playerComp.DashLine();
+            if (playerComp.BlackBG != null)
+            {
+                playerComp.BlackBG.SetActive(false);
+            }
+
+            if (playerComp.cursorObject != null)
+            {
+                TrailRenderer trail = playerComp.cursorObject.GetComponent<TrailRenderer>();
+                if (trail != null)
+                {
+                    trail.Clear();
+                    trail.colorGradient = ChangeStance(currentStance);
+                }
+            }
+            if (playerComp.groundLine != null)
+            {
+                TrailRenderer groundTrail = playerComp.groundLine.GetComponent<TrailRenderer>();
+                if (groundTrail != null)
+                {
+                    groundTrail.Clear();
+                    groundTrail.colorGradient = ChangeStance(currentStance);
+                }
+            }
+            playerComp.ResetSkillParticle();
+        }
+
+        if (StatusImage.instance != null)
+        {
+            StatusImage.instance.ChangeImage((int)currentStance, false);
+        }
+
+        if (UI.Instance != null)
+        {
+            UI.Instance.SnapHPBarImmediate();
+            UI.Instance.UpdateInkBar();
+            UI.Instance.UpdateSpedialInkBar();
+            UI.Instance.UpdateCoolTimeBar();
+        }
+    }
+
     public void ResetStatus()
     {
+        hasRestoredFromSave = false;
         hp = maxHp;
         ink = maxInk;
         specialInk = maxSpecialInk;

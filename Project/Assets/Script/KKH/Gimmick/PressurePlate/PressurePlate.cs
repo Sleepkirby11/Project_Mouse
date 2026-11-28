@@ -19,23 +19,44 @@ public class PressurePlate : MonoBehaviour
     Animator anim;
     private string effectKey = "Effect_Press";
     private bool isPressed = false;
+    public bool IsPressed => isPressed;
     private AudioSource localAudioSource;
 
     private void Start()
     {
-        myCollider = GetComponent<Collider2D>();
-        localAudioSource = GetComponent<AudioSource>();
-        anim = GetComponent<Animator>();
+        if (myCollider == null) myCollider = GetComponent<Collider2D>();
+        if (localAudioSource == null) localAudioSource = GetComponent<AudioSource>();
+        if (anim == null) anim = GetComponent<Animator>();
         if (localAudioSource == null && (pressClip != null || releaseClip != null))
         {
             localAudioSource = gameObject.AddComponent<AudioSource>();
             localAudioSource.playOnAwake = false;
         }
 
-        // 시작할 때는 트리거를 꺼서 밟고 올라설 수 있게 합니다.
+        // 세이브 복원으로 이미 눌린 상태가 아니라면, 시작 시 트리거를 꺼서 밟고 올라설 수 있게 함
         if (myCollider != null)
         {
-            myCollider.isTrigger = false;
+            myCollider.isTrigger = isPressed;
+        }
+        if (anim != null && isPressed)
+        {
+            anim.SetBool("isPressed", true);
+        }
+    }
+
+    public void RestorePressedState(bool pressed)
+    {
+        isPressed = pressed;
+        if (myCollider == null) myCollider = GetComponent<Collider2D>();
+        if (anim == null) anim = GetComponent<Animator>();
+
+        if (myCollider != null)
+        {
+            myCollider.isTrigger = pressed;
+        }
+        if (anim != null)
+        {
+            anim.SetBool("isPressed", pressed);
         }
     }
 
@@ -81,6 +102,7 @@ public class PressurePlate : MonoBehaviour
         }
 
         Debug.Log("발판 작동!");
+        SaveManager.NotifyPressurePlateChanged(this, true);
         onPlatePressed?.Invoke(); // 연결된 기믹 작동
     }
 
@@ -91,6 +113,7 @@ public class PressurePlate : MonoBehaviour
         anim.SetBool("isPressed", false);
 
         Debug.Log("발판 해제!");
+        SaveManager.NotifyPressurePlateChanged(this, false);
         onPlateReleased?.Invoke(); // 연결된 기믹 해제 (필요시 사용)
     }
 

@@ -12,6 +12,7 @@ public class Wall : MonoBehaviour
     public void Collapse()
     {
         Debug.Log($"{gameObject.name} 벽이 파괴되었습니다.");
+        SaveManager.NotifyWallCollapsed(this);
 
         if (barrierVfx == null)
         {
@@ -34,6 +35,7 @@ public class Wall : MonoBehaviour
 
         // 오브젝트를 다시 활성화합니다.
         gameObject.SetActive(true);
+        SaveManager.NotifyWallRebuilt(this);
         if (barrierVfx == null)
         {
             barrierVfx = MagicBarrierVFX.Attach(gameObject);

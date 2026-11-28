@@ -64,7 +64,12 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     private float[] savedAnimatorSpeeds;
     private ParryingShieldEnemy parryingShieldEnemy;
     private int lastBlockedFrame = -1;
+    private bool hasRestoredHP = false;
+    private bool hasAwoken = false;
     public EnemyElement CurrentElement => element;
+    public int CurrentHP => currentHP;
+    public int MaxHP => maxHP;
+    public bool HasAwoken => hasAwoken;
     public bool WasBlockedThisFrame => lastBlockedFrame == Time.frameCount;
 
     #endregion
@@ -73,6 +78,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
 
     private void Awake()
     {
+        hasAwoken = true;
         anim = GetComponentInChildren<Animator>();
         cachedAnimators = GetComponentsInChildren<Animator>(true);
         savedAnimatorSpeeds = new float[cachedAnimators.Length];
@@ -84,7 +90,10 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         }
         parryingShieldEnemy = GetComponent<ParryingShieldEnemy>();
         cachedPlayer = GameObject.FindWithTag("Player")?.GetComponent<PlayerStatus>();
-        currentHP = maxHP;
+        if (!hasRestoredHP)
+        {
+            currentHP = maxHP;
+        }
         isDeath = false;
         slowMotionTimer = 0.1f;
 
@@ -206,6 +215,20 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         return (float)currentHP / maxHP;
     }
 
+    public void RestoreFromSave(int savedHp, bool isActive, bool hasPos, Vector3 pos)
+    {
+        hasRestoredHP = true;
+        currentHP = Mathf.Clamp(savedHp, 1, Mathf.Max(1, maxHP));
+        if (hasPos)
+        {
+            transform.position = pos;
+        }
+        if (gameObject.activeSelf != isActive)
+        {
+            gameObject.SetActive(isActive);
+        }
+    }
+
     // 애니메이터에 특정 파라미터가 등록되어 있는지 체크하는 안전 장치 함수
     private bool HasParameter(string paramName)
     {
@@ -297,6 +320,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         }
 
         currentHP -= damage;
+        SaveManager.MarkDirty();
         Debug.Log($"{gameObject.name}이 피해를 {damage}만큼 입음. 남은 HP : {currentHP}/{maxHP}");
 
         if (isBoss && UI.Instance != null)
@@ -361,6 +385,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             return; // 이미 죽은 적은 회복 불가
         }
         currentHP = Mathf.Min(currentHP + amount, maxHP);
+        SaveManager.MarkDirty();
 
         if (isBoss && UI.Instance != null)
         {
@@ -508,6 +533,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
         {
             ClearStunState(clearVfxImmediately: true);
             IsDead = true; // 사망 상태 설정
+            SaveManager.NotifyEnemyDied(this);
             OnEnemyDeath?.Invoke(); // 사망 이벤트 발행
         }
 
@@ -654,6 +680,7 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
     private void StartBossDeathSequence()
     {
         IsDead = true; // 즉시 사망 처리
+        SaveManager.NotifyBossDefeated(this);
 
         // 사망 이벤트 즉시 발행 (보스 행동 정지 및 코루틴 정지)
         OnEnemyDeath?.Invoke();

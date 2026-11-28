@@ -152,11 +152,12 @@ public class SettingsUIStyler : MonoBehaviour
     private static void StyleMainMenuButtons(Transform menuTf)
     {
         StyleMainMenuLabel(menuTf.Find("Start"), new Color(0.08f, 0.18f, 0.10f, 0.92f));
+        StyleMainMenuLabel(menuTf.Find("Continue"), new Color(0.08f, 0.18f, 0.10f, 0.92f));
         StyleMainMenuLabel(menuTf.Find("Setting"), new Color(0.08f, 0.12f, 0.22f, 0.92f));
         StyleMainMenuLabel(menuTf.Find("Exit"), new Color(0.22f, 0.08f, 0.08f, 0.92f));
     }
 
-    private static void StyleMainMenuLabel(Transform btnTf, Color outlineColor)
+    private static void StyleMainMenuLabel(Transform btnTf, Color outlineColor, bool useOutline = true)
     {
         if (btnTf == null) return;
         Text txt = btnTf.GetComponentInChildren<Text>(true);
@@ -172,16 +173,23 @@ public class SettingsUIStyler : MonoBehaviour
                 tmpFont,
                 txt.fontSize > 0 ? txt.fontSize : 30f,
                 txt.color,
-                useOutline: true,
+                useOutline: useOutline,
                 outlineColor);
             return;
         }
 
         Outline outline = txt.GetComponent<Outline>();
-        if (outline == null) outline = txt.gameObject.AddComponent<Outline>();
-        outline.enabled = true;
-        outline.effectColor = outlineColor;
-        outline.effectDistance = new Vector2(1.5f, -1.5f);
+        if (useOutline)
+        {
+            if (outline == null) outline = txt.gameObject.AddComponent<Outline>();
+            outline.enabled = true;
+            outline.effectColor = outlineColor;
+            outline.effectDistance = new Vector2(1.5f, -1.5f);
+        }
+        else if (outline != null)
+        {
+            outline.enabled = false;
+        }
     }
 
     private void Awake()
@@ -888,7 +896,7 @@ public class SettingsUIStyler : MonoBehaviour
         img.raycastTarget = false;
     }
 
-    private static Sprite GetParchmentFrameSprite()
+    public static Sprite GetParchmentFrameSprite()
     {
         if (s_cachedParchmentFrame == null)
         {
@@ -897,7 +905,7 @@ public class SettingsUIStyler : MonoBehaviour
         return s_cachedParchmentFrame;
     }
 
-    private static Sprite GetButtonSprite(Transform frameTf)
+    public static Sprite GetButtonSprite(Transform frameTf)
     {
         if (s_cachedButtonSprite == null)
         {
@@ -921,7 +929,7 @@ public class SettingsUIStyler : MonoBehaviour
         return s_cachedButtonSprite;
     }
 
-    private static Sprite FindSpriteByName(string spriteName)
+    public static Sprite FindSpriteByName(string spriteName)
     {
         Sprite[] sprites = Resources.FindObjectsOfTypeAll<Sprite>();
         for (int i = 0; i < sprites.Length; i++)

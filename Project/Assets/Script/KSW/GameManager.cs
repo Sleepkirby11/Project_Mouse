@@ -69,7 +69,96 @@ public class GameManager : MonoBehaviour
         if (isLoadingScene || string.IsNullOrEmpty(index))
             return;
 
+        SaveManager.OnSceneTransitionRequested(index);
         StartCoroutine(LoadSceneAsyncRoutine(index));
+    }
+
+    public void LoadContinueScene(SaveData saveData)
+    {
+        if (isLoadingScene || saveData == null || string.IsNullOrEmpty(saveData.sceneName))
+            return;
+
+        StartCoroutine(LoadContinueSceneRoutine(saveData));
+    }
+
+    private IEnumerator LoadContinueSceneRoutine(SaveData saveData)
+    {
+        isLoadingScene = true;
+        EnsureTransitionOverlay();
+
+        Time.timeScale = 1f;
+        isSetting = false;
+
+        if (CameraSetting.instance != null)
+        {
+            CameraSetting.instance.colliders.Clear();
+        }
+
+        if (transitionCurtain != null)
+        {
+            transitionCurtain.raycastTarget = true;
+        }
+
+        ThreadPriority previousPriority = Application.backgroundLoadingPriority;
+        Application.backgroundLoadingPriority = ThreadPriority.High;
+
+        yield return FadeCurtainRoutine(0f, 1f, fadeOutDuration);
+
+        // Tutorial 씬에만 존재하는 DontDestroyOnLoad 세션 오브젝트(Player, Canvas, UIManager 등)를 먼저 부트스트랩
+        if (Player.instance == null && saveData.sceneName != "Tutorial")
+        {
+            SaveManager.IsBootstrappingSession = true;
+            AsyncOperation bootstrapOp = SceneManager.LoadSceneAsync("Tutorial");
+            if (bootstrapOp != null)
+            {
+                while (!bootstrapOp.isDone)
+                {
+                    yield return null;
+                }
+            }
+            yield return null;
+            SaveManager.IsBootstrappingSession = false;
+        }
+
+        AsyncOperation targetOp = SceneManager.LoadSceneAsync(saveData.sceneName);
+        if (targetOp != null)
+        {
+            targetOp.allowSceneActivation = false;
+            while (targetOp.progress < 0.9f)
+            {
+                yield return null;
+            }
+
+            if (PoolingManager.HasInstance)
+            {
+                PoolingManager.Instance.ReturnAllActiveObjects();
+            }
+
+            targetOp.allowSceneActivation = true;
+            while (!targetOp.isDone)
+            {
+                yield return null;
+            }
+        }
+
+        float settleElapsed = 0f;
+        while (ZoneManager.Instance != null && ZoneManager.Instance.IsInitializingFirstZone && settleElapsed < 5f)
+        {
+            settleElapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        yield return null;
+
+        Application.backgroundLoadingPriority = previousPriority;
+
+        if (transitionCurtain != null)
+        {
+            transitionCurtain.raycastTarget = false;
+        }
+
+        isLoadingScene = false;
+        yield return FadeCurtainRoutine(1f, 0f, fadeInDuration);
     }
 
     private IEnumerator LoadSceneAsyncRoutine(string sceneName)
@@ -133,7 +222,7 @@ public class GameManager : MonoBehaviour
 
         // 어두운 화면 뒤에서 ZoneManager의 첫 구역 로드 및 카메라 스냅이 끝날 때까지 짧게 대기
         float settleElapsed = 0f;
-        while (ZoneManager.Instance != null && ZoneManager.Instance.IsInitializingFirstZone && settleElapsed < 0.5f)
+        while (ZoneManager.Instance != null && ZoneManager.Instance.IsInitializingFirstZone && settleElapsed < 5f)
         {
             settleElapsed += Time.unscaledDeltaTime;
             yield return null;

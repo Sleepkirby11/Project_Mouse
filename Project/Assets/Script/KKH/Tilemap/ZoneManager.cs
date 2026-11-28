@@ -25,6 +25,8 @@ public class ZoneManager : MonoBehaviour
     private bool isInitializingFirstZone = false;
     private bool hasSceneZoneDataThisLoad = false;
     public bool IsInitializingFirstZone => isInitializingFirstZone;
+    public int CurrentZoneId => currentZoneId;
+    public IReadOnlyDictionary<int, GameObject> CachedZones => cachedZones;
 
     private void Awake()
     {
@@ -90,6 +92,12 @@ public class ZoneManager : MonoBehaviour
 
     private void InitFirstZone()
     {
+        if (SaveManager.IsBootstrappingSession)
+        {
+            hasSceneZoneDataThisLoad = false;
+            return;
+        }
+
         if (!hasSceneZoneDataThisLoad)
         {
             ClearSessionZones();
@@ -110,10 +118,148 @@ public class ZoneManager : MonoBehaviour
 
         if (zonePrefabs == null || zonePrefabs.Count == 0) return;
 
+        if (SaveManager.HasPendingContinue &&
+            SaveManager.PendingContinueData != null &&
+            SaveManager.PendingContinueData.sceneName == SceneManager.GetActiveScene().name)
+        {
+            isInitializingFirstZone = true;
+            StartCoroutine(InitContinueZoneRoutine(SaveManager.PendingContinueData, sceneGeneration));
+            return;
+        }
+
         int firstZoneId = 0;
         desiredZones.Add(firstZoneId);
         isInitializingFirstZone = true;
         StartCoroutine(InitAndSpawnFirstZoneRoutine(firstZoneId, sceneGeneration));
+    }
+
+    private IEnumerator InitContinueZoneRoutine(SaveData saveData, int generation)
+    {
+        isInitializingFirstZone = true;
+
+        if (playerObject == null)
+        {
+            playerObject = Player.instance != null ? Player.instance.gameObject : GameObject.FindWithTag("Player");
+        }
+
+        Rigidbody2D playerRb = null;
+        bool prevSimulated = true;
+        if (playerObject != null)
+        {
+            playerRb = playerObject.GetComponent<Rigidbody2D>();
+            if (playerRb != null)
+            {
+                prevSimulated = playerRb.simulated;
+                playerRb.linearVelocity = Vector2.zero;
+                playerRb.simulated = false;
+            }
+        }
+
+        int targetZoneId = Mathf.Clamp(saveData.zoneId, 0, zonePrefabs.Count - 1);
+        desiredZones.Add(targetZoneId);
+        yield return StartCoroutine(LoadZonePrefabAsync(targetZoneId, generation));
+
+        if (generation != sceneGeneration)
+        {
+            isInitializingFirstZone = false;
+            yield break;
+        }
+
+        Zone targetZone = null;
+        if (activeZones.TryGetValue(targetZoneId, out GameObject targetZoneObj) && targetZoneObj != null)
+        {
+            targetZone = targetZoneObj.GetComponent<Zone>();
+            if (targetZone != null && targetZone.connectedZoneIds != null)
+            {
+                foreach (int neighborId in targetZone.connectedZoneIds)
+                {
+                    if (neighborId < 0 || neighborId >= zonePrefabs.Count) continue;
+                    desiredZones.Add(neighborId);
+                    if (!activeZones.ContainsKey(neighborId) && !loadingZones.Contains(neighborId))
+                    {
+                        StartCoroutine(LoadZonePrefabAsync(neighborId, generation));
+                    }
+                }
+            }
+        }
+
+        while (loadingZones.Count > 0 && generation == sceneGeneration)
+        {
+            yield return null;
+        }
+
+        if (generation != sceneGeneration)
+        {
+            isInitializingFirstZone = false;
+            yield break;
+        }
+
+        // Start() 생명주기가 끝난 뒤에 플레이어 상태와 튜토리얼 진행도를 복원
+        yield return null;
+
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.RestoreCompletedSteps(saveData.completedTutorialSteps);
+        }
+
+        if (playerObject != null)
+        {
+            Player playerComp = playerObject.GetComponent<Player>();
+            if (playerComp != null)
+            {
+                playerComp.isCanMove = true;
+                playerComp.inputVec = Vector2.zero;
+                playerComp.SetFacingRight(saveData.facingRight);
+                if (playerComp.BlackBG != null)
+                {
+                    playerComp.BlackBG.SetActive(false);
+                }
+            }
+
+            PlayerStatus status = playerObject.GetComponent<PlayerStatus>();
+            if (status != null)
+            {
+                status.RestoreFromSave(
+                    saveData.hp,
+                    saveData.ink,
+                    saveData.specialInk,
+                    saveData.currentCoolTime,
+                    (PlayerStatus.Stance)saveData.currentStance,
+                    saveData.combo);
+            }
+
+            Vector3 targetPos = new Vector3(saveData.posX, saveData.posY, saveData.posZ);
+            yield return StartCoroutine(SafeTeleport(playerObject.transform, targetPos));
+
+            if (generation != sceneGeneration)
+            {
+                isInitializingFirstZone = false;
+                yield break;
+            }
+        }
+
+        if (playerRb != null)
+        {
+            playerRb.simulated = prevSimulated;
+        }
+
+        Physics2D.SyncTransforms();
+        yield return new WaitForFixedUpdate();
+
+        if (targetZone != null && currentZoneId == -1)
+        {
+            OnPlayerEnterZone(targetZone);
+        }
+
+        if (CameraSetting.instance != null && playerObject != null)
+        {
+            CameraSetting.instance.ChangeCameraConfiner();
+            CameraSetting.instance.SnapToTarget(playerObject.transform, Vector3.zero);
+        }
+
+        SaveManager.ClearPendingContinue();
+        SaveManager.SaveCurrentState();
+        isInitializingFirstZone = false;
     }
 
     private IEnumerator InitAndSpawnFirstZoneRoutine(int firstZoneId, int generation)
@@ -213,6 +359,7 @@ public class ZoneManager : MonoBehaviour
         if (currentZoneId == enteredZone.zoneId) return;
 
         currentZoneId = enteredZone.zoneId;
+        SaveManager.MarkDirty();
 
         // 필터 및 로드 처리가 정상적으로 승인되어 현재 구역 상태가 전환되었음을 알리는 확정 로그입니다.
         Debug.Log($"[ZoneManager] 현재 활성화된 구역이 {currentZoneId}번 구역으로 성공적으로 갱신되었습니다.");
@@ -310,6 +457,8 @@ public class ZoneManager : MonoBehaviour
             zoneScript.zoneId = zoneId;
             Debug.Log($"[ZoneManager] 하이어라키에 고유 ID {zoneId}번 구역 프리팹 인스턴스가 비동기 로드되었습니다.");
         }
+
+        SaveManager.RegisterAndApplyZoneState(zoneId, spawnedZone);
 
         cachedZones[zoneId] = spawnedZone;
 
