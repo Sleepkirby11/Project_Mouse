@@ -10,6 +10,44 @@ using TMPro;
 public class SettingsUIStyler : MonoBehaviour
 {
     private static Font s_cachedPixelFont;
+    private static TMP_FontAsset s_cachedPixelTmpFont;
+    private static Sprite s_cachedParchmentFrame;
+    private static Sprite s_cachedButtonSprite;
+
+    private Image fullscreenCheckmarkImage;
+    private Image fullscreenBoxImage;
+    private TMP_Text resolutionValueText;
+    private DisplaySettingsManager subscribedManager;
+
+    public static TMP_FontAsset GetPixelTmpFont(Transform searchRoot = null)
+    {
+        if (s_cachedPixelTmpFont != null) return s_cachedPixelTmpFont;
+
+        TMP_FontAsset[] allTmpFonts = Resources.FindObjectsOfTypeAll<TMP_FontAsset>();
+        for (int i = 0; i < allTmpFonts.Length; i++)
+        {
+            TMP_FontAsset f = allTmpFonts[i];
+            if (f != null && f.name.IndexOf("MaruMinya", System.StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                s_cachedPixelTmpFont = f;
+                return s_cachedPixelTmpFont;
+            }
+        }
+
+        Font pixelFont = GetPixelFont(searchRoot);
+        if (pixelFont != null)
+        {
+            s_cachedPixelTmpFont = TMP_FontAsset.CreateFontAsset(pixelFont);
+            if (s_cachedPixelTmpFont != null)
+            {
+                s_cachedPixelTmpFont.name = "MaruMinyaRuntimeSDF";
+                return s_cachedPixelTmpFont;
+            }
+        }
+
+        s_cachedPixelTmpFont = TMP_Settings.defaultFontAsset;
+        return s_cachedPixelTmpFont;
+    }
 
     public static Font GetPixelFont(Transform searchRoot = null)
     {
@@ -124,6 +162,21 @@ public class SettingsUIStyler : MonoBehaviour
         Text txt = btnTf.GetComponentInChildren<Text>(true);
         if (txt == null) return;
 
+        TMP_FontAsset tmpFont = GetPixelTmpFont(btnTf.root);
+        if (tmpFont != null)
+        {
+            ReplaceButtonTextWithTmp(
+                btnTf,
+                txt,
+                txt.text,
+                tmpFont,
+                txt.fontSize > 0 ? txt.fontSize : 30f,
+                txt.color,
+                useOutline: true,
+                outlineColor);
+            return;
+        }
+
         Outline outline = txt.GetComponent<Outline>();
         if (outline == null) outline = txt.gameObject.AddComponent<Outline>();
         outline.enabled = true;
@@ -138,7 +191,37 @@ public class SettingsUIStyler : MonoBehaviour
 
     private void OnEnable()
     {
+        SubscribeDisplayEvents();
         ApplyStyle();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeDisplayEvents();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeDisplayEvents();
+    }
+
+    private void SubscribeDisplayEvents()
+    {
+        if (subscribedManager != null) return;
+        DisplaySettingsManager mgr = DisplaySettingsManager.Instance;
+        if (mgr != null)
+        {
+            mgr.OnDisplaySettingsChanged -= RefreshDisplayControls;
+            mgr.OnDisplaySettingsChanged += RefreshDisplayControls;
+            subscribedManager = mgr;
+        }
+    }
+
+    private void UnsubscribeDisplayEvents()
+    {
+        if (subscribedManager == null) return;
+        subscribedManager.OnDisplaySettingsChanged -= RefreshDisplayControls;
+        subscribedManager = null;
     }
 
     public void ApplyStyle()
@@ -152,7 +235,7 @@ public class SettingsUIStyler : MonoBehaviour
             backdropImg.color = new Color(0.06f, 0.05f, 0.05f, 0.68f);
         }
 
-        // 2. Main Modal Frame ("Scroll View" - 684 x 612 stone & parchment board)
+        // 2. Main Modal Frame ("Scroll View" - 684 x 760 parchment board)
         Transform frameTf = transform.Find("Scroll View");
         if (frameTf == null) return;
 
@@ -163,7 +246,7 @@ public class SettingsUIStyler : MonoBehaviour
             windowRect.anchorMax = new Vector2(0.5f, 0.5f);
             windowRect.pivot = new Vector2(0.5f, 0.5f);
             windowRect.anchoredPosition = Vector2.zero;
-            windowRect.sizeDelta = new Vector2(684f, 612f);
+            windowRect.sizeDelta = new Vector2(684f, 750f);
             windowRect.localScale = Vector3.one;
         }
 
@@ -182,8 +265,18 @@ public class SettingsUIStyler : MonoBehaviour
         Image frameImg = frameTf.GetComponent<Image>();
         if (frameImg != null)
         {
+            Sprite parchmentFrame = GetParchmentFrameSprite();
+            if (parchmentFrame != null)
+            {
+                frameImg.sprite = parchmentFrame;
+                frameImg.type = Image.Type.Sliced;
+                frameImg.pixelsPerUnitMultiplier = 1f;
+            }
+            else
+            {
+                frameImg.type = Image.Type.Simple;
+            }
             frameImg.color = Color.white;
-            frameImg.type = Image.Type.Simple;
         }
 
         // Clean up any old artificial labels if present
@@ -195,26 +288,37 @@ public class SettingsUIStyler : MonoBehaviour
         }
 
         // 3. Simple "SETTINGS" title in dark warm ink on the top of the parchment
-        Text titleLabel = EnsureLabel(
+        TMP_FontAsset tmpFont = GetPixelTmpFont(transform.root);
+        TMP_Text titleLabel = EnsureTmpLabel(
             frameTf,
             "HeaderTitle",
             "SETTINGS",
-            pixelFont,
-            34,
+            tmpFont,
+            34f,
             new Color(0.22f, 0.12f, 0.10f, 1f),
             new Vector2(0.5f, 0.5f),
-            new Vector2(0f, 242f),
+            new Vector2(0f, 316f),
             new Vector2(360f, 48f),
-            useOutline: false,
-            outlineColor: Color.clear);
-        if (titleLabel != null) titleLabel.alignment = TextAnchor.MiddleCenter;
+            TextAlignmentOptions.Center);
+
+        EnsureDividerRule(frameTf, "HeaderRuleTop", 272f);
 
         // 4. Audio Control Rows (BGM & SFX)
         StyleAudioRow(frameTf.Find("BGM"), isBgm: true, pixelFont);
         StyleAudioRow(frameTf.Find("SFX"), isBgm: false, pixelFont);
 
-        // 5. Action Buttons Layout
+        EnsureDividerRule(frameTf, "DisplayDivider", 58f);
+
+        // 5. Display Control Rows (Fullscreen & Resolution)
+        StyleDisplayRows(frameTf, pixelFont);
+
+        EnsureDividerRule(frameTf, "ButtonsDivider", -98f);
+
+        // 6. Action Buttons Layout
         LayoutActionButtons(frameTf, pixelFont);
+
+        SubscribeDisplayEvents();
+        RefreshDisplayControls();
     }
 
     private void StyleAudioRow(Transform rowTf, bool isBgm, Font pixelFont)
@@ -227,7 +331,7 @@ public class SettingsUIStyler : MonoBehaviour
             rowRect.anchorMin = new Vector2(0.5f, 0.5f);
             rowRect.anchorMax = new Vector2(0.5f, 0.5f);
             rowRect.pivot = new Vector2(0.5f, 0.5f);
-            rowRect.anchoredPosition = new Vector2(0f, isBgm ? 128f : 22f);
+            rowRect.anchoredPosition = new Vector2(0f, isBgm ? 214f : 118f);
             rowRect.sizeDelta = new Vector2(480f, 84f);
         }
 
@@ -340,41 +444,495 @@ public class SettingsUIStyler : MonoBehaviour
         }
 
         // Clean, natural "BGM" or "SFX" label in dark ink well above the slider
+        TMP_FontAsset tmpFont = GetPixelTmpFont(rowTf.root);
         string titleStr = isBgm ? "BGM" : "SFX";
-        Text titleLabel = EnsureLabel(
+        EnsureTmpLabel(
             rowTf,
             "ChannelTitle",
             titleStr,
-            pixelFont,
-            24,
+            tmpFont,
+            24f,
             new Color(0.24f, 0.13f, 0.11f, 1f),
             new Vector2(0.5f, 0.5f),
             new Vector2(-73f, 26f),
             new Vector2(120f, 28f),
-            useOutline: false,
-            outlineColor: Color.clear);
-        if (titleLabel != null) titleLabel.alignment = TextAnchor.MiddleLeft;
+            TextAlignmentOptions.MidlineLeft);
 
         // Clean volume percentage in warm brown ink well above the slider right edge
-        Text pctLabel = EnsureLabel(
+        EnsureTmpLabel(
             rowTf,
             "VolumeValueText",
             "100%",
-            pixelFont,
-            22,
+            tmpFont,
+            22f,
             new Color(0.38f, 0.23f, 0.18f, 1f),
             new Vector2(0.5f, 0.5f),
             new Vector2(182f, 26f),
             new Vector2(110f, 28f),
-            useOutline: false,
-            outlineColor: Color.clear);
-        if (pctLabel != null) pctLabel.alignment = TextAnchor.MiddleRight;
+            TextAlignmentOptions.MidlineRight);
 
         SoundControl sc = rowTf.GetComponentInChildren<SoundControl>(true);
         if (sc != null)
         {
             sc.RefreshVisuals();
         }
+    }
+
+    private void StyleDisplayRows(Transform frameTf, Font pixelFont)
+    {
+        TMP_FontAsset tmpFont = GetPixelTmpFont(frameTf.root);
+        Sprite insetSprite = DisplaySettingsManager.GetInsetBoxSprite();
+        Sprite buttonSprite = GetButtonSprite(frameTf);
+
+        // Fullscreen Row
+        RectTransform fsRow = EnsureRowContainer(frameTf, "FullscreenRow", new Vector2(0f, 14f), new Vector2(480f, 48f));
+        EnsureTmpLabel(
+            fsRow,
+            "FullscreenLabel",
+            "Fullscreen",
+            tmpFont,
+            24f,
+            new Color(0.24f, 0.13f, 0.11f, 1f),
+            new Vector2(0.5f, 0.5f),
+            new Vector2(-113f, 0f),
+            new Vector2(240f, 36f),
+            TextAlignmentOptions.MidlineLeft);
+
+        Button fsToggleBtn = EnsureDisplayButton(
+            fsRow,
+            "FullscreenToggle",
+            new Vector2(217f, 0f),
+            new Vector2(40f, 40f),
+            insetSprite != null ? insetSprite : buttonSprite,
+            Color.white);
+        if (fsToggleBtn != null)
+        {
+            fullscreenBoxImage = fsToggleBtn.GetComponent<Image>();
+            fsToggleBtn.onClick.RemoveAllListeners();
+            fsToggleBtn.onClick.AddListener(OnClickToggleFullscreen);
+
+            Transform checkTf = fsToggleBtn.transform.Find("Checkmark");
+            GameObject checkGo;
+            if (checkTf == null)
+            {
+                checkGo = new GameObject("Checkmark", typeof(RectTransform), typeof(Image));
+                checkGo.layer = fsToggleBtn.gameObject.layer;
+                checkGo.transform.SetParent(fsToggleBtn.transform, false);
+            }
+            else
+            {
+                checkGo = checkTf.gameObject;
+            }
+
+            RectTransform checkRt = checkGo.GetComponent<RectTransform>();
+            checkRt.anchorMin = new Vector2(0.5f, 0.5f);
+            checkRt.anchorMax = new Vector2(0.5f, 0.5f);
+            checkRt.pivot = new Vector2(0.5f, 0.5f);
+            checkRt.anchoredPosition = Vector2.zero;
+            checkRt.sizeDelta = new Vector2(30f, 26f);
+
+            fullscreenCheckmarkImage = checkGo.GetComponent<Image>();
+            fullscreenCheckmarkImage.sprite = DisplaySettingsManager.GetCheckmarkSprite();
+            fullscreenCheckmarkImage.color = Color.white;
+            fullscreenCheckmarkImage.preserveAspect = true;
+            fullscreenCheckmarkImage.raycastTarget = false;
+        }
+
+        // Resolution Row
+        RectTransform resRow = EnsureRowContainer(frameTf, "ResolutionRow", new Vector2(0f, -46f), new Vector2(480f, 48f));
+        EnsureTmpLabel(
+            resRow,
+            "ResolutionLabel",
+            "Resolution",
+            tmpFont,
+            24f,
+            new Color(0.24f, 0.13f, 0.11f, 1f),
+            new Vector2(0.5f, 0.5f),
+            new Vector2(-138f, 0f),
+            new Vector2(190f, 36f),
+            TextAlignmentOptions.MidlineLeft);
+
+        Button prevBtn = EnsureDisplayButton(
+            resRow,
+            "ResolutionPrev",
+            new Vector2(-4f, 0f),
+            new Vector2(38f, 38f),
+            buttonSprite,
+            Color.white);
+        if (prevBtn != null)
+        {
+            EnsureTmpButtonLabel(prevBtn.transform, "<", tmpFont, 22f);
+            prevBtn.onClick.RemoveAllListeners();
+            prevBtn.onClick.AddListener(OnClickPrevResolution);
+        }
+
+        Button valueBoxBtn = EnsureDisplayButton(
+            resRow,
+            "ResolutionValueBox",
+            new Vector2(107f, 0f),
+            new Vector2(172f, 38f),
+            insetSprite != null ? insetSprite : buttonSprite,
+            Color.white);
+        if (valueBoxBtn != null)
+        {
+            resolutionValueText = EnsureTmpButtonLabel(valueBoxBtn.transform, "1920 x 1080", tmpFont, 20f);
+            valueBoxBtn.onClick.RemoveAllListeners();
+            valueBoxBtn.onClick.AddListener(OnClickNextResolution);
+        }
+
+        Button nextBtn = EnsureDisplayButton(
+            resRow,
+            "ResolutionNext",
+            new Vector2(218f, 0f),
+            new Vector2(38f, 38f),
+            buttonSprite,
+            Color.white);
+        if (nextBtn != null)
+        {
+            EnsureTmpButtonLabel(nextBtn.transform, ">", tmpFont, 22f);
+            nextBtn.onClick.RemoveAllListeners();
+            nextBtn.onClick.AddListener(OnClickNextResolution);
+        }
+    }
+
+    private void OnClickToggleFullscreen()
+    {
+        DisplaySettingsManager.Instance.ToggleFullscreen();
+        ClearEventSelection();
+    }
+
+    private void OnClickPrevResolution()
+    {
+        DisplaySettingsManager.Instance.StepResolution(-1);
+        ClearEventSelection();
+    }
+
+    private void OnClickNextResolution()
+    {
+        DisplaySettingsManager.Instance.StepResolution(1);
+        ClearEventSelection();
+    }
+
+    private static void ClearEventSelection()
+    {
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
+
+    public void RefreshDisplayControls()
+    {
+        DisplaySettingsManager mgr = DisplaySettingsManager.Instance;
+        if (mgr == null) return;
+
+        bool isFs = mgr.IsFullscreen;
+        if (fullscreenCheckmarkImage != null)
+        {
+            fullscreenCheckmarkImage.enabled = isFs;
+        }
+        if (fullscreenBoxImage != null)
+        {
+            fullscreenBoxImage.color = isFs
+                ? Color.white
+                : new Color(0.94f, 0.89f, 0.82f, 1f);
+        }
+
+        if (resolutionValueText != null)
+        {
+            resolutionValueText.text = mgr.SelectedResolution.Label;
+        }
+    }
+
+    private static RectTransform EnsureRowContainer(Transform parent, string name, Vector2 anchoredPos, Vector2 size)
+    {
+        Transform child = parent.Find(name);
+        GameObject go;
+        if (child == null)
+        {
+            go = new GameObject(name, typeof(RectTransform));
+            go.layer = parent.gameObject.layer;
+            go.transform.SetParent(parent, false);
+        }
+        else
+        {
+            go = child.gameObject;
+        }
+
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0.5f, 0.5f);
+        rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = anchoredPos;
+        rt.sizeDelta = size;
+        return rt;
+    }
+
+    private static Button EnsureDisplayButton(
+        Transform parent,
+        string name,
+        Vector2 anchoredPos,
+        Vector2 size,
+        Sprite sprite,
+        Color baseColor)
+    {
+        Transform child = parent.Find(name);
+        GameObject go;
+        if (child == null)
+        {
+            go = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
+            go.layer = parent.gameObject.layer;
+            go.transform.SetParent(parent, false);
+        }
+        else
+        {
+            go = child.gameObject;
+        }
+
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0.5f, 0.5f);
+        rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = anchoredPos;
+        rt.sizeDelta = size;
+
+        Image img = go.GetComponent<Image>();
+        if (img != null)
+        {
+            if (sprite != null)
+            {
+                img.sprite = sprite;
+                img.type = Image.Type.Sliced;
+                img.pixelsPerUnitMultiplier = 1f;
+            }
+            img.color = baseColor;
+        }
+
+        Button btn = go.GetComponent<Button>();
+        if (btn != null)
+        {
+            btn.targetGraphic = img;
+            btn.navigation = new Navigation { mode = Navigation.Mode.None };
+            AttachButtonClickSound(btn);
+        }
+
+        return btn;
+    }
+
+    private static TMP_Text EnsureTmpButtonLabel(Transform btnTf, string text, TMP_FontAsset font, float fontSize)
+    {
+        Transform child = btnTf.Find("TMPLabel");
+        GameObject go;
+        if (child == null)
+        {
+            go = new GameObject("TMPLabel", typeof(RectTransform), typeof(TextMeshProUGUI));
+            go.layer = btnTf.gameObject.layer;
+            go.transform.SetParent(btnTf, false);
+        }
+        else
+        {
+            go = child.gameObject;
+        }
+
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+
+        TextMeshProUGUI tmp = go.GetComponent<TextMeshProUGUI>();
+        if (font != null) tmp.font = font;
+        tmp.text = text;
+        tmp.fontSize = fontSize;
+        tmp.fontStyle = FontStyles.Normal;
+        tmp.color = new Color(0.22f, 0.12f, 0.10f, 1f);
+        tmp.alignment = TextAlignmentOptions.Center;
+        tmp.textWrappingMode = TextWrappingModes.NoWrap;
+        tmp.overflowMode = TextOverflowModes.Overflow;
+        tmp.raycastTarget = false;
+        return tmp;
+    }
+
+    private static TMP_Text EnsureTmpLabel(
+        Transform parent,
+        string name,
+        string content,
+        TMP_FontAsset font,
+        float fontSize,
+        Color color,
+        Vector2 anchor,
+        Vector2 anchoredPos,
+        Vector2 sizeDelta,
+        TextAlignmentOptions alignment)
+    {
+        Transform child = parent.Find(name);
+        GameObject go;
+        if (child == null)
+        {
+            go = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI));
+            go.layer = parent.gameObject.layer;
+            go.transform.SetParent(parent, false);
+        }
+        else
+        {
+            go = child.gameObject;
+        }
+
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = anchor;
+        rt.anchorMax = anchor;
+        rt.pivot = anchor;
+        rt.anchoredPosition = anchoredPos;
+        rt.sizeDelta = sizeDelta;
+
+        TextMeshProUGUI tmp = go.GetComponent<TextMeshProUGUI>();
+        if (tmp == null)
+        {
+            Text legacy = go.GetComponent<Text>();
+            if (legacy != null)
+            {
+                legacy.enabled = false;
+                legacy.raycastTarget = false;
+            }
+            return EnsureTmpLabel(parent, name + "_TMP", content, font, fontSize, color, anchor, anchoredPos, sizeDelta, alignment);
+        }
+
+        if (font != null) tmp.font = font;
+        tmp.text = content;
+        tmp.fontSize = fontSize;
+        tmp.fontStyle = FontStyles.Normal;
+        tmp.color = color;
+        tmp.alignment = alignment;
+        tmp.textWrappingMode = TextWrappingModes.NoWrap;
+        tmp.overflowMode = TextOverflowModes.Overflow;
+        tmp.raycastTarget = false;
+        return tmp;
+    }
+
+    private static void ReplaceButtonTextWithTmp(
+        Transform btnTf,
+        Text legacyTxt,
+        string labelText,
+        TMP_FontAsset font,
+        float fontSize,
+        Color color,
+        bool useOutline,
+        Color outlineColor)
+    {
+        if (legacyTxt != null)
+        {
+            legacyTxt.enabled = false;
+            legacyTxt.raycastTarget = false;
+        }
+
+        Transform child = btnTf.Find("TMPLabel");
+        GameObject go;
+        if (child == null)
+        {
+            go = new GameObject("TMPLabel", typeof(RectTransform), typeof(TextMeshProUGUI));
+            go.layer = btnTf.gameObject.layer;
+            go.transform.SetParent(btnTf, false);
+        }
+        else
+        {
+            go = child.gameObject;
+        }
+
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+
+        TextMeshProUGUI tmp = go.GetComponent<TextMeshProUGUI>();
+        if (font != null) tmp.font = font;
+        tmp.text = labelText;
+        tmp.fontSize = fontSize;
+        tmp.fontStyle = FontStyles.Normal;
+        tmp.color = color;
+        tmp.alignment = TextAlignmentOptions.Center;
+        tmp.textWrappingMode = TextWrappingModes.NoWrap;
+        tmp.overflowMode = TextOverflowModes.Overflow;
+        tmp.raycastTarget = false;
+
+        if (useOutline)
+        {
+            tmp.outlineColor = outlineColor;
+            tmp.outlineWidth = 0.16f;
+        }
+        else
+        {
+            tmp.outlineWidth = 0f;
+        }
+    }
+
+    private static void EnsureDividerRule(Transform parent, string name, float posY)
+    {
+        Transform ruleTf = parent.Find(name);
+        GameObject ruleGo = ruleTf != null ? ruleTf.gameObject : new GameObject(name, typeof(RectTransform), typeof(Image));
+        if (ruleTf == null)
+        {
+            ruleGo.layer = parent.gameObject.layer;
+            ruleGo.transform.SetParent(parent, false);
+        }
+
+        RectTransform rt = ruleGo.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0.5f, 0.5f);
+        rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = new Vector2(0f, posY);
+        rt.sizeDelta = new Vector2(500f, 3f);
+
+        Image img = ruleGo.GetComponent<Image>();
+        img.color = new Color(0.49f, 0.32f, 0.21f, 0.55f);
+        img.raycastTarget = false;
+    }
+
+    private static Sprite GetParchmentFrameSprite()
+    {
+        if (s_cachedParchmentFrame == null)
+        {
+            s_cachedParchmentFrame = FindSpriteByName("Chroma_ParchmentFrame");
+        }
+        return s_cachedParchmentFrame;
+    }
+
+    private static Sprite GetButtonSprite(Transform frameTf)
+    {
+        if (s_cachedButtonSprite == null)
+        {
+            s_cachedButtonSprite = FindSpriteByName("Chroma_Button");
+        }
+        if (s_cachedButtonSprite == null && frameTf != null)
+        {
+            string[] btnNames = { "Close", "Back", "License", "Guide" };
+            for (int i = 0; i < btnNames.Length; i++)
+            {
+                Transform t = frameTf.Find(btnNames[i]);
+                if (t == null) continue;
+                Image img = t.GetComponent<Image>();
+                if (img != null && img.sprite != null)
+                {
+                    s_cachedButtonSprite = img.sprite;
+                    break;
+                }
+            }
+        }
+        return s_cachedButtonSprite;
+    }
+
+    private static Sprite FindSpriteByName(string spriteName)
+    {
+        Sprite[] sprites = Resources.FindObjectsOfTypeAll<Sprite>();
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            Sprite s = sprites[i];
+            if (s != null && s.name == spriteName)
+            {
+                return s;
+            }
+        }
+        return null;
     }
 
     private void LayoutActionButtons(Transform frameTf, Font pixelFont)
@@ -392,23 +950,23 @@ public class SettingsUIStyler : MonoBehaviour
 
         if (hasGuide && hasLicense && hasClose && hasQuit)
         {
-            StyleActionButton(guideBtn, "Guide", new Vector2(-125f, 162f), new Vector2(224f, 64f), pixelFont, isDanger: false);
-            StyleActionButton(licenseBtn, "License", new Vector2(125f, 162f), new Vector2(224f, 64f), pixelFont, isDanger: false);
-            StyleActionButton(closeBtn, "Back", new Vector2(-125f, 78f), new Vector2(224f, 64f), pixelFont, isDanger: false);
-            StyleActionButton(quitBtn, "Quit", new Vector2(125f, 78f), new Vector2(224f, 64f), pixelFont, isDanger: true);
+            StyleActionButton(guideBtn, "Guide", new Vector2(-125f, 178f), new Vector2(224f, 64f), pixelFont, isDanger: false);
+            StyleActionButton(licenseBtn, "License", new Vector2(125f, 178f), new Vector2(224f, 64f), pixelFont, isDanger: false);
+            StyleActionButton(closeBtn, "Back", new Vector2(-125f, 94f), new Vector2(224f, 64f), pixelFont, isDanger: false);
+            StyleActionButton(quitBtn, "Quit", new Vector2(125f, 94f), new Vector2(224f, 64f), pixelFont, isDanger: true);
         }
         else if (hasGuide && hasLicense && hasClose)
         {
-            StyleActionButton(guideBtn, "Guide", new Vector2(-125f, 162f), new Vector2(224f, 64f), pixelFont, isDanger: false);
-            StyleActionButton(licenseBtn, "License", new Vector2(125f, 162f), new Vector2(224f, 64f), pixelFont, isDanger: false);
-            StyleActionButton(closeBtn, "Close", new Vector2(0f, 78f), new Vector2(474f, 64f), pixelFont, isDanger: false);
+            StyleActionButton(guideBtn, "Guide", new Vector2(-125f, 178f), new Vector2(224f, 64f), pixelFont, isDanger: false);
+            StyleActionButton(licenseBtn, "License", new Vector2(125f, 178f), new Vector2(224f, 64f), pixelFont, isDanger: false);
+            StyleActionButton(closeBtn, "Close", new Vector2(0f, 94f), new Vector2(474f, 64f), pixelFont, isDanger: false);
         }
         else
         {
             if (licenseBtn != null)
-                StyleActionButton(licenseBtn, "License", new Vector2(-125f, 120f), new Vector2(224f, 64f), pixelFont, isDanger: false);
+                StyleActionButton(licenseBtn, "License", new Vector2(-125f, 136f), new Vector2(224f, 64f), pixelFont, isDanger: false);
             if (closeBtn != null)
-                StyleActionButton(closeBtn, "Close", new Vector2(125f, 120f), new Vector2(224f, 64f), pixelFont, isDanger: false);
+                StyleActionButton(closeBtn, "Close", new Vector2(125f, 136f), new Vector2(224f, 64f), pixelFont, isDanger: false);
         }
     }
 
@@ -437,14 +995,24 @@ public class SettingsUIStyler : MonoBehaviour
         Text txt = btnTf.GetComponentInChildren<Text>(true);
         if (txt != null)
         {
+            TMP_FontAsset tmpFont = GetPixelTmpFont(btnTf.root);
+            Color textColor = isDanger
+                ? new Color(0.98f, 0.92f, 0.88f, 1f)
+                : new Color(0.22f, 0.12f, 0.10f, 1f);
+            Color outlineColor = new Color(0.24f, 0.10f, 0.09f, 0.9f);
+
+            if (tmpFont != null)
+            {
+                ReplaceButtonTextWithTmp(btnTf, txt, labelText, tmpFont, 26f, textColor, isDanger, outlineColor);
+                return;
+            }
+
             if (pixelFont != null) txt.font = pixelFont;
             txt.text = labelText;
             txt.fontSize = 26;
             txt.fontStyle = FontStyle.Bold;
             txt.alignment = TextAnchor.MiddleCenter;
-            txt.color = isDanger
-                ? new Color(0.98f, 0.92f, 0.88f, 1f)
-                : new Color(0.22f, 0.12f, 0.10f, 1f);
+            txt.color = textColor;
             txt.horizontalOverflow = HorizontalWrapMode.Overflow;
             txt.verticalOverflow = VerticalWrapMode.Overflow;
 
@@ -453,7 +1021,7 @@ public class SettingsUIStyler : MonoBehaviour
             {
                 if (outline == null) outline = txt.gameObject.AddComponent<Outline>();
                 outline.enabled = true;
-                outline.effectColor = new Color(0.24f, 0.10f, 0.09f, 0.9f);
+                outline.effectColor = outlineColor;
                 outline.effectDistance = new Vector2(1.5f, -1.5f);
             }
             else if (outline != null)
@@ -626,19 +1194,18 @@ public class SettingsUIStyler : MonoBehaviour
                 scrollBg.type = Image.Type.Sliced;
             }
 
-            Text titleLabel = EnsureLabel(
+            TMP_FontAsset tmpFont = GetPixelTmpFont(licensePanel.transform.root);
+            EnsureTmpLabel(
                 scrollTf,
                 "HeaderTitle",
                 "LICENSE",
-                pixelFont,
-                34,
+                tmpFont,
+                34f,
                 new Color(0.22f, 0.12f, 0.10f, 1f),
                 new Vector2(0.5f, 0.5f),
                 new Vector2(0f, 336f),
                 new Vector2(400f, 48f),
-                useOutline: false,
-                outlineColor: Color.clear);
-            if (titleLabel != null) titleLabel.alignment = TextAnchor.MiddleCenter;
+                TextAlignmentOptions.Center);
 
             Transform ruleTf = scrollTf.Find("HeaderRule");
             GameObject ruleGo = ruleTf != null ? ruleTf.gameObject : new GameObject("HeaderRule", typeof(RectTransform), typeof(Image));
@@ -837,77 +1404,26 @@ public class SettingsUIStyler : MonoBehaviour
         Text txt = btnTf.GetComponentInChildren<Text>(true);
         if (txt != null)
         {
+            TMP_FontAsset tmpFont = GetPixelTmpFont(btnTf.root);
+            Color textColor = new Color(0.22f, 0.12f, 0.10f, 1f);
+            if (tmpFont != null)
+            {
+                ReplaceButtonTextWithTmp(btnTf, txt, labelText, tmpFont, 26f, textColor, useOutline: false, Color.clear);
+                return;
+            }
+
             if (pixelFont != null) txt.font = pixelFont;
             txt.text = labelText;
             txt.fontSize = 26;
             txt.fontStyle = FontStyle.Bold;
             txt.alignment = TextAnchor.MiddleCenter;
-            txt.color = new Color(0.22f, 0.12f, 0.10f, 1f);
+            txt.color = textColor;
             txt.horizontalOverflow = HorizontalWrapMode.Overflow;
             txt.verticalOverflow = VerticalWrapMode.Overflow;
 
             Outline outline = txt.GetComponent<Outline>();
             if (outline != null) outline.enabled = false;
         }
-    }
-
-    private static Text EnsureLabel(
-        Transform parent,
-        string name,
-        string content,
-        Font font,
-        int fontSize,
-        Color color,
-        Vector2 anchor,
-        Vector2 anchoredPos,
-        Vector2 sizeDelta,
-        bool useOutline,
-        Color outlineColor)
-    {
-        Transform child = parent.Find(name);
-        GameObject go;
-        if (child == null)
-        {
-            go = new GameObject(name, typeof(RectTransform), typeof(Text));
-            go.layer = parent.gameObject.layer;
-            go.transform.SetParent(parent, false);
-        }
-        else
-        {
-            go = child.gameObject;
-        }
-
-        RectTransform rt = go.GetComponent<RectTransform>();
-        rt.anchorMin = anchor;
-        rt.anchorMax = anchor;
-        rt.pivot = anchor;
-        rt.anchoredPosition = anchoredPos;
-        rt.sizeDelta = sizeDelta;
-
-        Text txt = go.GetComponent<Text>();
-        if (font != null) txt.font = font;
-        txt.text = content;
-        txt.fontSize = fontSize;
-        txt.fontStyle = FontStyle.Bold;
-        txt.color = color;
-        txt.horizontalOverflow = HorizontalWrapMode.Overflow;
-        txt.verticalOverflow = VerticalWrapMode.Overflow;
-        txt.raycastTarget = false;
-
-        Outline outline = go.GetComponent<Outline>();
-        if (useOutline)
-        {
-            if (outline == null) outline = go.AddComponent<Outline>();
-            outline.enabled = true;
-            outline.effectColor = outlineColor;
-            outline.effectDistance = new Vector2(2f, -2f);
-        }
-        else if (outline != null)
-        {
-            outline.enabled = false;
-        }
-
-        return txt;
     }
 }
 
