@@ -30,6 +30,7 @@ public class UI : MonoBehaviour
     [SerializeField] private Slider bossHpSlider;
     [SerializeField] private Text bossNameText;
     private BossUIStyler bossUIStyler;
+    private PlayerHudStyler playerHudStyler;
 
     [Header("대화창")]
     public GameObject talkPanel;
@@ -109,6 +110,7 @@ public class UI : MonoBehaviour
     void Start()
     {
         EnsureBossUIStyler();
+        EnsurePlayerHudStyler();
         RefreshPlayerReference();
     }
 
@@ -144,6 +146,11 @@ public class UI : MonoBehaviour
         if (targetStatus != null)
         {
             playerStatus = targetStatus;
+            EnsurePlayerHudStyler();
+            if (playerHudStyler != null && playerStatus.MaxHP > 0)
+            {
+                playerHudStyler.SetHPImmediate(playerStatus.HP / playerStatus.MaxHP);
+            }
             UpdateHPBar();
             UpdateCoolTimeBar();
             UpdateInkBar();
@@ -175,7 +182,21 @@ public class UI : MonoBehaviour
     //플레이어 체력 상태 업데이트
     public void UpdateHPBar()
     {
-        if (hpSlider != null && playerStatus != null) hpSlider.value = playerStatus.HP / playerStatus.MaxHP;
+        if (hpSlider != null && playerStatus != null)
+        {
+            float ratio = playerStatus.MaxHP > 0 ? playerStatus.HP / playerStatus.MaxHP : 0f;
+            hpSlider.value = ratio;
+            EnsurePlayerHudStyler()?.NotifyHPChanged(ratio);
+        }
+    }
+
+    private PlayerHudStyler EnsurePlayerHudStyler()
+    {
+        if (playerHudStyler == null && hpSlider != null)
+        {
+            playerHudStyler = PlayerHudStyler.AttachAndStyle(hpSlider, inkSlider, specialInkSlider, coolTimeSlider);
+        }
+        return playerHudStyler;
     }
 
     public Font GetUIFont()

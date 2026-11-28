@@ -2,42 +2,39 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Hand-pixeled Boss HP bar & Name controller.
-/// Uses the game's midnight-indigo & silver-slate pixel aesthetic with a borderless ink scrim +
-/// tapered pixel underline for the boss name, compact prism crest, hit flash, and delayed damage trail.
+/// Minimal pixel-art Boss HP bar & Name controller.
+/// Matches the player's clean dark-outlined pixel bars with a floating boss title,
+/// subtle tapered pixel underline, hit flash, and delayed damage trail.
 /// </summary>
 public class BossUIStyler : MonoBehaviour
 {
     private const float BarWidth = 660f;
-    private const float BarHeight = 34f;
-    private const float BarPosY = -46f;
+    private const float BarHeight = 26f;
+    private const float BarPosY = -54f;
 
-    private const float PlateHeight = 36f;
-    private const float PlatePosY = -8f;
-    private const float PlateMinWidth = 260f;
-    private const float PlateMaxWidth = 560f;
-    private const float PlateHorizontalPadding = 128f;
-
-    private const float CrestSize = 44f;
-    private const float CrestPosX = -4f;
+    private const float NamePosY = -16f;
+    private const float NameHeight = 30f;
+    private const float UnderlinePosY = -40f;
+    private const float UnderlineHeight = 12f;
+    private const float UnderlineMinWidth = 220f;
+    private const float UnderlineMaxWidth = 520f;
+    private const float UnderlinePadding = 96f;
 
     private const float TrailHoldDuration = 0.18f;
     private const float TrailDrainSpeed = 0.85f;
     private const float HitFlashDuration = 0.09f;
 
     private static readonly Color DefaultCrimson = new Color(0.88f, 0.22f, 0.26f, 1f);
-    private static readonly Color DefaultIvoryText = new Color(0.95f, 0.94f, 0.98f, 1f);
-    private static readonly Color TrailColor = new Color(0.94f, 0.91f, 0.98f, 0.86f);
-    private static readonly Color TextOutlineColor = new Color(0.04f, 0.03f, 0.08f, 0.96f);
+    private static readonly Color DefaultIvoryText = new Color(0.96f, 0.95f, 0.98f, 1f);
+    private static readonly Color TrailColor = new Color(0.95f, 0.93f, 0.98f, 0.88f);
+    private static readonly Color TextOutlineColor = new Color(0.08f, 0.07f, 0.11f, 0.96f);
 
     private Slider bossSlider;
     private Text bossNameText;
-    private Image namePlateImage;
+    private Image underlineImage;
     private Image barFillImage;
     private Image damageTrailImage;
     private RectTransform damageTrailRect;
-    private Image crestImage;
-    private Image gemImage;
 
     private Color activeFillColor = DefaultCrimson;
     private float currentRatio = 1f;
@@ -93,11 +90,6 @@ public class BossUIStyler : MonoBehaviour
             barFillImage.color = activeFillColor;
         }
 
-        if (gemImage != null)
-        {
-            gemImage.color = Color.Lerp(baseColor, Color.white, 0.16f);
-        }
-
         ApplyTrailAnchor(trailRatio);
 
         if (bossNameText != null)
@@ -106,15 +98,15 @@ public class BossUIStyler : MonoBehaviour
             bossNameText.text = bossName;
             bossNameText.color = isNeutral
                 ? DefaultIvoryText
-                : Color.Lerp(baseColor, Color.white, 0.34f);
+                : Color.Lerp(baseColor, Color.white, 0.28f);
 
             UpdateNamePlateLayout();
         }
 
-        if (namePlateImage != null)
+        if (underlineImage != null)
         {
-            namePlateImage.color = Color.white;
-            namePlateImage.gameObject.SetActive(true);
+            underlineImage.color = Color.white;
+            underlineImage.gameObject.SetActive(true);
         }
     }
 
@@ -149,9 +141,9 @@ public class BossUIStyler : MonoBehaviour
         {
             bossNameText.gameObject.SetActive(false);
         }
-        if (namePlateImage != null)
+        if (underlineImage != null)
         {
-            namePlateImage.gameObject.SetActive(false);
+            underlineImage.gameObject.SetActive(false);
         }
         hitFlashTimer = 0f;
     }
@@ -224,8 +216,8 @@ public class BossUIStyler : MonoBehaviour
             {
                 faRt.anchorMin = Vector2.zero;
                 faRt.anchorMax = Vector2.one;
-                faRt.offsetMin = new Vector2(20f, 8f);
-                faRt.offsetMax = new Vector2(-20f, -8f);
+                faRt.offsetMin = new Vector2(2f, 2f);
+                faRt.offsetMax = new Vector2(-2f, -2f);
             }
 
             Transform fillTf = fillAreaTf.Find("Fill");
@@ -252,47 +244,10 @@ public class BossUIStyler : MonoBehaviour
             EnsureDamageTrail(fillAreaTf, fillTf);
         }
 
-        Transform crestTf = bossSlider.transform.Find("Crest");
-        if (crestTf != null)
+        Transform legacyCrest = bossSlider.transform.Find("Crest");
+        if (legacyCrest != null)
         {
-            RectTransform crestRt = crestTf as RectTransform;
-            if (crestRt != null)
-            {
-                crestRt.anchorMin = new Vector2(0f, 0.5f);
-                crestRt.anchorMax = new Vector2(0f, 0.5f);
-                crestRt.pivot = new Vector2(0.5f, 0.5f);
-                crestRt.anchoredPosition = new Vector2(CrestPosX, 0f);
-                crestRt.sizeDelta = new Vector2(CrestSize, CrestSize);
-                crestRt.localScale = Vector3.one;
-            }
-
-            crestImage = crestTf.GetComponent<Image>();
-            if (crestImage != null)
-            {
-                crestImage.color = Color.white;
-                crestImage.type = Image.Type.Simple;
-                crestImage.raycastTarget = false;
-            }
-
-            Transform gemTf = crestTf.Find("Gem");
-            if (gemTf != null)
-            {
-                RectTransform gemRt = gemTf as RectTransform;
-                if (gemRt != null)
-                {
-                    gemRt.anchorMin = Vector2.zero;
-                    gemRt.anchorMax = Vector2.one;
-                    gemRt.offsetMin = Vector2.zero;
-                    gemRt.offsetMax = Vector2.zero;
-                }
-
-                gemImage = gemTf.GetComponent<Image>();
-                if (gemImage != null)
-                {
-                    gemImage.type = Image.Type.Simple;
-                    gemImage.raycastTarget = false;
-                }
-            }
+            legacyCrest.gameObject.SetActive(false);
         }
     }
 
@@ -345,13 +300,13 @@ public class BossUIStyler : MonoBehaviour
             Transform plateTf = canvasTf.Find("BossNamePlate");
             if (plateTf != null)
             {
-                namePlateImage = plateTf.GetComponent<Image>();
-                if (namePlateImage != null)
+                underlineImage = plateTf.GetComponent<Image>();
+                if (underlineImage != null)
                 {
-                    namePlateImage.color = Color.white;
-                    namePlateImage.type = Image.Type.Sliced;
-                    namePlateImage.pixelsPerUnitMultiplier = 1f;
-                    namePlateImage.raycastTarget = false;
+                    underlineImage.color = Color.white;
+                    underlineImage.type = Image.Type.Sliced;
+                    underlineImage.pixelsPerUnitMultiplier = 1f;
+                    underlineImage.raycastTarget = false;
                 }
             }
         }
@@ -376,45 +331,28 @@ public class BossUIStyler : MonoBehaviour
         outline.effectDistance = new Vector2(2f, -2f);
 
         UpdateNamePlateLayout();
-
-        if (bossSlider != null && namePlateImage != null && namePlateImage.transform.parent == bossSlider.transform.parent)
-        {
-            int barIdx = bossSlider.transform.GetSiblingIndex();
-            if (namePlateImage.transform.GetSiblingIndex() < barIdx)
-            {
-                namePlateImage.transform.SetSiblingIndex(barIdx);
-            }
-            if (bossNameText.transform.parent == namePlateImage.transform.parent)
-            {
-                int plateIdx = namePlateImage.transform.GetSiblingIndex();
-                if (bossNameText.transform.GetSiblingIndex() < plateIdx)
-                {
-                    bossNameText.transform.SetSiblingIndex(plateIdx);
-                }
-            }
-        }
     }
 
     private void UpdateNamePlateLayout()
     {
         if (bossNameText == null) return;
 
-        float width = PlateMinWidth;
+        float width = UnderlineMinWidth;
         float preferred = bossNameText.preferredWidth;
         if (preferred > 0f)
         {
-            width = Mathf.Clamp(preferred + PlateHorizontalPadding, PlateMinWidth, PlateMaxWidth);
+            width = Mathf.Clamp(preferred + UnderlinePadding, UnderlineMinWidth, UnderlineMaxWidth);
             width = Mathf.Ceil(width / 4f) * 4f;
         }
 
-        if (namePlateImage != null)
+        if (underlineImage != null)
         {
-            RectTransform plateRt = namePlateImage.rectTransform;
+            RectTransform plateRt = underlineImage.rectTransform;
             plateRt.anchorMin = new Vector2(0.5f, 1f);
             plateRt.anchorMax = new Vector2(0.5f, 1f);
             plateRt.pivot = new Vector2(0.5f, 1f);
-            plateRt.anchoredPosition = new Vector2(0f, PlatePosY);
-            plateRt.sizeDelta = new Vector2(width, PlateHeight);
+            plateRt.anchoredPosition = new Vector2(0f, UnderlinePosY);
+            plateRt.sizeDelta = new Vector2(width, UnderlineHeight);
             plateRt.localScale = Vector3.one;
         }
 
@@ -422,8 +360,8 @@ public class BossUIStyler : MonoBehaviour
         textRt.anchorMin = new Vector2(0.5f, 1f);
         textRt.anchorMax = new Vector2(0.5f, 1f);
         textRt.pivot = new Vector2(0.5f, 1f);
-        textRt.anchoredPosition = new Vector2(0f, PlatePosY);
-        textRt.sizeDelta = new Vector2(width - 40f, PlateHeight - 6f);
+        textRt.anchoredPosition = new Vector2(0f, NamePosY);
+        textRt.sizeDelta = new Vector2(width, NameHeight);
         textRt.localScale = Vector3.one;
     }
 
