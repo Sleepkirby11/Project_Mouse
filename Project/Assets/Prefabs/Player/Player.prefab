@@ -736,6 +736,9 @@ MonoBehaviour:
   currentCoolTime: 2
   minInk: 5
   minSpecialInk: 3
+  drawInkCostMultiplier: 0.5
+  leftClickInkCostRatio: 0.125
+  rightClickInkCostRatio: 0.33
 --- !u!114 &59548725156804224
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -329,13 +329,15 @@ public class Player : MonoBehaviour
     {
         if (cursor.isMove && usedInk != cursor.lastLength)
         {
+            float costScale = status.drawInkCostMultiplier;
+
             //스킬 | 커서 | 일반 공격 종류 걸러내기
             if (isSkill)
-                status.specialInk -= cursor.lastLength * 0.25f;
+                status.specialInk -= cursor.lastLength * 0.25f * costScale;
             else if (groundCursor.isMove)
-                status.specialInk -= cursor.lastLength;
+                status.specialInk -= cursor.lastLength * costScale;
             else
-                status.ink -= cursor.lastLength;
+                status.ink -= cursor.lastLength * costScale;
             InkUIUpdate();
             usedInk = 0;
             cursor.lastLength = 0;
