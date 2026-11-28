@@ -165,6 +165,36 @@ public class TutorialManager : MonoBehaviour
         return !string.IsNullOrEmpty(name) && completedStepNames.Contains(name);
     }
 
+    public List<string> GetCompletedStepNames()
+    {
+        return new List<string>(completedStepNames);
+    }
+
+    public void RestoreCompletedSteps(List<string> savedSteps)
+    {
+        StopAllCoroutines();
+        isStepActive = false;
+        isStepCompleted = false;
+        currentStepIndex = -1;
+        completedStepNames.Clear();
+
+        if (savedSteps != null)
+        {
+            for (int i = 0; i < savedSteps.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(savedSteps[i]))
+                {
+                    completedStepNames.Add(savedSteps[i]);
+                }
+            }
+        }
+
+        if (UI.Instance != null)
+        {
+            UI.Instance.HideDialogue();
+        }
+    }
+
     /// <summary>
     /// 특정 이름으로 튜토리얼 단계를 실행합니다.
     /// </summary>
@@ -351,6 +381,7 @@ public class TutorialManager : MonoBehaviour
         if (!string.IsNullOrEmpty(step.stepName))
         {
             completedStepNames.Add(step.stepName);
+            SaveManager.MarkDirty();
         }
 
         if (step.closeOnComplete)

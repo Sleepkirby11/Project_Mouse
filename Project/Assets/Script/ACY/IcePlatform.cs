@@ -37,6 +37,7 @@ public class IcePlatform : MonoBehaviour
     private IEnumerator ShakeAndFall()
     {
         isTriggered = true;
+        SaveManager.NotifyObjectDestroyed(this);
         float elapsed = 0.0f;
 
         // 흔들리는 단계

@@ -190,6 +190,17 @@ public class UI : MonoBehaviour
         }
     }
 
+    public void SnapHPBarImmediate()
+    {
+        if (playerStatus == null) RefreshPlayerReference();
+        if (hpSlider != null && playerStatus != null)
+        {
+            float ratio = playerStatus.MaxHP > 0 ? playerStatus.HP / playerStatus.MaxHP : 0f;
+            hpSlider.value = ratio;
+            EnsurePlayerHudStyler()?.SetHPImmediate(ratio);
+        }
+    }
+
     private PlayerHudStyler EnsurePlayerHudStyler()
     {
         if (playerHudStyler == null && hpSlider != null)

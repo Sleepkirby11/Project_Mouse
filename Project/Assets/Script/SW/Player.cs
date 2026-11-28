@@ -83,6 +83,11 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public IInteractable interactable;
 
+    public bool IsFacingRight => sprite == null || !sprite.flipX;
+    public Vector3 LastGroundedPosition { get; private set; }
+    public bool HasLastGroundedPosition { get; private set; }
+    public float ColliderHalfHeight => col != null ? (col.size.y * 0.5f * Mathf.Abs(transform.lossyScale.y)) : 0.9f;
+
     float usedInk;
 
     //씬 이동 시 초기화 방지
@@ -153,11 +158,18 @@ public class Player : MonoBehaviour
 
         isSkill = false;
         isDashReady = false;
+        LastGroundedPosition = transform.position;
+        HasLastGroundedPosition = true;
     }
 
 
     private void FixedUpdate()
     {
+        if (IsGrounded() && !BossIntroCutscene.IsPlaying)
+        {
+            LastGroundedPosition = transform.position;
+            HasLastGroundedPosition = true;
+        }
 
         //linearVelocity 기반 이동
         if (isCanMove && status.CanMove) //status 스크립트에서 움직임 가능 여부 받아오게 수정
@@ -194,6 +206,14 @@ public class Player : MonoBehaviour
         else
         {
             footstepTimer = footstepInterval;
+        }
+    }
+
+    public void SetFacingRight(bool facingRight)
+    {
+        if (sprite != null)
+        {
+            sprite.flipX = !facingRight;
         }
     }
 

@@ -55,9 +55,20 @@ public class PlayerInputScript : MonoBehaviour
         player = GetComponent<Player>();
     }
 
+    private bool EnsurePlayerReady()
+    {
+        if (player == null)
+        {
+            player = GetComponent<Player>();
+        }
+        return player != null && player.status != null;
+    }
+
     //플레이어 이동
     public void ActionMove(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady()) return;
+
         //이동 키 변화 감지 시 true
         player.isCanMove = true;
         //사망 시에는 입력 무시
@@ -94,6 +105,8 @@ public class PlayerInputScript : MonoBehaviour
     //플레이어 급강하
     public void ActionDown(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady()) return;
+
         //이동 키 변화 감지 시 true
         player.isCanMove = true;
         //이동 제한 조건식
@@ -120,6 +133,8 @@ public class PlayerInputScript : MonoBehaviour
     //플레이어 점프
     public void ActionJump(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady()) return;
+
         //점프 제한 조건식
         if (player.status.HP <= 0 || !player.status.CanMove)
         {
@@ -166,6 +181,8 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionInteract(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady()) return;
+
         if(GameManager.instance != null)
         {
             if(GameManager.instance.isSetting)
@@ -183,6 +200,8 @@ public class PlayerInputScript : MonoBehaviour
     //대시 키 받아오기
     public void ActionDash(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady()) return;
+
         if (context.canceled)
         {
             bool wasDashReady = player.isDashReady;
@@ -253,6 +272,11 @@ public class PlayerInputScript : MonoBehaviour
     //공격 키 받아오기
     public void ActionAttack(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady() || player.cursorObject == null || player.cursor == null)
+        {
+            return;
+        }
+
         if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
@@ -289,6 +313,8 @@ public class PlayerInputScript : MonoBehaviour
     //키 입력 종료 시 UI의 상태에 따른 스탠스 변환
     public void ActionStance(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady()) return;
+
         if (context.started)
         {
             if (player.status.HP <= 0 || !player.status.CanMove)
@@ -346,6 +372,8 @@ public class PlayerInputScript : MonoBehaviour
     //원 버튼으로 On/Off
     public void ActionSkill(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady()) return;
+
         if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
@@ -379,6 +407,11 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionMakeGround(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady() || player.groundLine == null || player.groundCursor == null)
+        {
+            return;
+        }
+
         if (player.status.HP <= 0 || !player.status.CanMove)
         {
             return;
@@ -416,6 +449,8 @@ public class PlayerInputScript : MonoBehaviour
 
     public void ActionMenu(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady()) return;
+
         if(context.started)
         {
             if (player.canvas != null)
@@ -445,6 +480,8 @@ public class PlayerInputScript : MonoBehaviour
     }
     public void ActionGuideLine(InputAction.CallbackContext context)
     {
+        if (!EnsurePlayerReady() || player.guideLine == null) return;
+
         if(context.started)
         {
             player.guideLine.SetActive(player.guideLine.activeSelf ? false : true);

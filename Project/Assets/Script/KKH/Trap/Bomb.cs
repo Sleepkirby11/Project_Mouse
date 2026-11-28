@@ -52,6 +52,7 @@ public class Bomb : MonoBehaviour, IDamageable
     private IEnumerator ExplosionSequence()
     {
         isExploded = true;
+        SaveManager.NotifyObjectDestroyed(this);
         yield return new WaitForSeconds(explosionDelay);
         Explode();
     }

@@ -94,7 +94,10 @@ public class AudioManager : MonoBehaviour
 
         Init();
 
-        PlayBGM(true);
+        if (!SaveManager.IsBootstrappingSession)
+        {
+            PlayBGM(true);
+        }
     }
 
     private void OnDestroy()
