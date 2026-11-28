@@ -61,6 +61,20 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IHittable, IStunnable, I
     public int minInk;
     public int minSpecialInk;
 
+    [Header("잉크 소모 설정")]
+    [Tooltip("선을 그릴 때 이동 거리당 잉크 소모 배율 (기본 0.5 = 기존의 1/2)")]
+    public float drawInkCostMultiplier = 0.5f;
+    [Tooltip("좌클릭 시작 시 한 번에 소모하는 잉크 비율 (기본 0.125 = 전체의 1/8)")]
+    [Range(0f, 1f)]
+    public float leftClickInkCostRatio = 0.125f;
+    [Tooltip("우클릭 시작 시 한 번에 소모하는 특수 잉크 비율 (기본 0.5 = 전체의 1/2)")]
+    [Range(0f, 1f)]
+    public float rightClickInkCostRatio = 0.5f;
+
+    public float LeftClickInkCost => maxInk * leftClickInkCostRatio;
+    public float LeftClickSkillInkCost => maxSpecialInk * leftClickInkCostRatio;
+    public float RightClickInkCost => maxSpecialInk * rightClickInkCostRatio;
+
     private Rigidbody2D rb;
     private Animator playerAnim;
     private SpriteRenderer sprite;

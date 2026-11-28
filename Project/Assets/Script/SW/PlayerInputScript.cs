@@ -294,15 +294,32 @@ public class PlayerInputScript : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.cursorObject.GetComponent<TrailRenderer>();
-        if (context.started && !IsPointerOverInteractiveUI() && player.status.ink > 5)
+        if (context.started && !IsPointerOverInteractiveUI())
         {
-            //초기화
-            player.cursorObject.transform.position = player.mouse.transform.position;
-            trail.startWidth = 0.25f;
-            player.cursor.mouse = player.mouse;
-            trail.Clear();
-            player.cursor.isMove = true;
-            player.cursor.lifeTime = 0;
+            bool canStart = player.isSkill
+                ? (player.status.specialInk > 3 && player.status.specialInk >= player.status.LeftClickSkillInkCost)
+                : (player.status.ink > 5 && player.status.ink >= player.status.LeftClickInkCost);
+
+            if (canStart)
+            {
+                if (player.isSkill)
+                {
+                    player.status.specialInk = Mathf.Max(0f, player.status.specialInk - player.status.LeftClickSkillInkCost);
+                }
+                else
+                {
+                    player.status.ink = Mathf.Max(0f, player.status.ink - player.status.LeftClickInkCost);
+                }
+                player.InkUIUpdate();
+
+                //초기화
+                player.cursorObject.transform.position = player.mouse.transform.position;
+                trail.startWidth = 0.25f;
+                player.cursor.mouse = player.mouse;
+                trail.Clear();
+                player.cursor.isMove = true;
+                player.cursor.lifeTime = 0;
+            }
         }
         if (context.canceled && player.cursor.isMove)
         {
@@ -429,8 +446,13 @@ public class PlayerInputScript : MonoBehaviour
         //각각 키 입력 변화 시 오브젝트 스크립트 + trail 호출
         //스킬 오브젝트 Component 호출
         TrailRenderer trail = player.groundLine.GetComponent<TrailRenderer>();
-        if (context.started && !IsPointerOverInteractiveUI() && player.status.specialInk > 3)
+        if (context.started && !IsPointerOverInteractiveUI()
+            && player.status.specialInk > 3
+            && player.status.specialInk >= player.status.RightClickInkCost)
         {
+            player.status.specialInk = Mathf.Max(0f, player.status.specialInk - player.status.RightClickInkCost);
+            player.InkUIUpdate();
+
             //초기화
             player.groundLine.transform.position = player.mouse.transform.position;
             trail.startWidth = 0.25f;
