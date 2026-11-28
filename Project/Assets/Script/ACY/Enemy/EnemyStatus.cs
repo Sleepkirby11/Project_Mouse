@@ -283,7 +283,8 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             }
         }
 
-        if (anim != null)
+        bool willSurvive = currentHP - damage > 0;
+        if (anim != null && willSurvive)
         {
             if (HasParameter("Hurt"))
             {
@@ -541,11 +542,17 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             }
         }
 
+        bool waitForDeathClip = false;
         if (anim != null)
         {
             if (HasParameter("Death"))
             {
+                if (HasParameter("Hurt"))
+                {
+                    anim.ResetTrigger("Hurt");
+                }
                 anim.SetTrigger("Death");
+                waitForDeathClip = true;
             }
             else
             {
@@ -578,7 +585,70 @@ public class EnemyStatus : MonoBehaviour, IDamageable, IStunnable
             }
         }
 
-        Destroy(gameObject, dieAnimationLength); // 애니메이션 대기 후 파괴
+        if (waitForDeathClip)
+        {
+            StartCoroutine(DestroyAfterDeathAnimationRoutine());
+        }
+        else
+        {
+            Destroy(gameObject, dieAnimationLength); // 페이드 아웃 대기 후 파괴
+        }
+    }
+
+    private IEnumerator DestroyAfterDeathAnimationRoutine()
+    {
+        if (anim == null)
+        {
+            Destroy(gameObject, dieAnimationLength);
+            yield break;
+        }
+
+        int initialStateHash = anim.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        bool enteredDeathState = false;
+        int deathStateHash = 0;
+        float elapsed = 0f;
+        float entryTimeout = Mathf.Max(dieAnimationLength, 0.1f);
+        float maxFallbackTimeout = Mathf.Max(entryTimeout, 5f);
+
+        while (true)
+        {
+            yield return null;
+            elapsed += Time.deltaTime;
+
+            if (anim == null)
+            {
+                break;
+            }
+
+            AnimatorStateInfo current = anim.GetCurrentAnimatorStateInfo(0);
+            bool inTransition = anim.IsInTransition(0);
+
+            if (!enteredDeathState)
+            {
+                if (!inTransition && current.fullPathHash != initialStateHash)
+                {
+                    enteredDeathState = true;
+                    deathStateHash = current.fullPathHash;
+                    if (current.normalizedTime >= 1f)
+                    {
+                        break;
+                    }
+                }
+                else if (elapsed >= entryTimeout)
+                {
+                    break;
+                }
+            }
+            else
+            {
+                if (inTransition || current.fullPathHash != deathStateHash || current.normalizedTime >= 1f || elapsed >= maxFallbackTimeout)
+                {
+                    break;
+                }
+            }
+        }
+
+        Destroy(gameObject);
     }
 
     private void StartBossDeathSequence()
